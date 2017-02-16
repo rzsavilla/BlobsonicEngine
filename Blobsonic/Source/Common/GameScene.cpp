@@ -187,6 +187,11 @@ void GameScene::update(float dt)
 		m_vModels.erase(m_vModels.begin() + viDelete[i]);
 	}
 
+	//Update Physicals
+	for (auto phycicalsIt = m_vPhysicals.begin(); phycicalsIt != m_vPhysicals.end(); ++phycicalsIt) {
+		(*phycicalsIt).second.update(dt);
+	}
+
 	//Update Robot
 	for (auto robotIt = m_vRobots.begin(); robotIt != m_vRobots.end(); ++robotIt) {
 		(*robotIt).second.update(dt);
@@ -220,6 +225,18 @@ void GameScene::draw()
 		updateLights((*robotIt).second.getShader());
 		//Draw model
 		(*robotIt).second.draw();
+	}
+
+	for(auto physicalsIt = m_vPhysicals.begin(); physicalsIt != m_vPhysicals.end(); ++physicalsIt)
+	{
+		//set the sahder for the physics object
+		(*physicalsIt).second.m_RenderModel.getShader()->use();
+		//pass data to the camera
+		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
+		//update the lights with unifroms
+		updateLights((*physicalsIt).second.m_RenderModel.getShader());
+		//Draw model
+		(*physicalsIt).second.m_RenderModel.draw();
 	}
 	gl::Disable(gl::DEPTH_TEST);
 }

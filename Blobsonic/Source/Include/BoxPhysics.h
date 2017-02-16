@@ -3,17 +3,18 @@
 
 #include "Model.h"
 
-class BoxPhysics
+class BoxPhysics : 
 {
 public:
 	BoxPhysics(); // <! Default Constructor for a box/cube physics
 	BoxPhysics(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
 
+	Model m_RenderModel; // <! The rendered object
 
-	void draw();/*!< Draws the contents of this object */
+	void update(const float dt);	//!< Update Box
 
 private:
-	Model m_RenderModel; // <! The rendered object
+	
 
 
 };

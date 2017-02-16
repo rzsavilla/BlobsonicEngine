@@ -7,9 +7,14 @@ BoxPhysics::BoxPhysics()
 
 BoxPhysics::BoxPhysics(Model model)
 {
+	m_RenderModel = model;
 }
 
-void BoxPhysics::draw()
+void BoxPhysics::update(const float dt)
 {
-	m_RenderModel.draw();
+
+
+
+
 }
+
