@@ -138,7 +138,7 @@ void SceneComponent::init()
 	m_uiActiveScene = 0;
 	m_scenes.clear();
 	m_res = ResourceManager();
-	std::string sFile = "Source\\Resources\\scenes\\test.xml";
+	std::string sFile = "Source\\Resources\\scenes\\Physics Test.xml";
 	SceneLoader sceneLoader(sFile, &m_res, &m_scenes);
 
 	if (m_scenes.empty()) {
