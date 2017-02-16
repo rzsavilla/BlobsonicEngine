@@ -1,7 +1,7 @@
 #ifndef BOXPHYSICS_H
 #define BOXPHYSICS_H
 
-#define GRAVITYCOEFFICENT -9.81 // ms/s
+#define GRAVITYCOEFFICENT -9.81 // m/s/s
 
 //Chris O'Neill
 
@@ -21,9 +21,10 @@ public:
 
 private:
 
-	float m_fMass = 10; //<! Mass of object in kg's
-	float m_fForce;	//<! Force of object in newtons
-
+	float m_fMass; //<! Mass of object in kg's
+	glm::vec3 m_fForce;	//<! Force of object in newtons
+	glm::vec3 m_fVelocity; //<! Vel of object in m/s
+	glm::vec3 m_vAcceleration; //<! Accel of object in m/s/s
 
 };
 
