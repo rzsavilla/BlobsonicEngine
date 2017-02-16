@@ -33,6 +33,10 @@ private:
 	glm::vec3 m_fVelocity; //<! Vel of object in m/s
 	glm::vec3 m_vAcceleration; //<! Accel of object in m/s/s
 
+	glm::vec3 m_vCenter; //<! Center of cube used for collision
+	glm::vec3 m_vExtends; //<! Half size of cube
+
+
 	
 };
 

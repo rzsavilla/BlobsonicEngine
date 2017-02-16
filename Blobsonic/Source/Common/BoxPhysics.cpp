@@ -20,10 +20,12 @@ BoxPhysics::BoxPhysics(Model model)
 	m_RenderModel = model;
 	//initliaise variables
 	m_vPosition = m_RenderModel.getPosition();
+	m_vScale = m_RenderModel.getScale();
 	m_fMass = 10;
 	m_fForce = glm::vec3(0.0f, 0.0f, 0.0f);
 	m_fVelocity = glm::vec3(0.0f, 00.0f, 0.0f);
 	m_vAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+
 }
 
 void BoxPhysics::update(const float dt)
@@ -65,7 +67,9 @@ void BoxPhysics::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
 
 void BoxPhysics::CollideWithBox(BoxPhysics & other)
 {
-
+	m_vCenter = m_vPosition;
+	m_vExtends = m_vScale / 2.0f;
+	
 
 
 }

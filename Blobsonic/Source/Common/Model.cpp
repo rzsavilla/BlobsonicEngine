@@ -167,6 +167,11 @@ glm::vec3 Model::getPosition()
 	return m_vPosition;
 }
 
+glm::vec3 Model::getScale()
+{
+	return m_vScale;
+}
+
 glm::mat4 Model::getTransform()
 {
 	glm::mat4 translate,rotate,s, o, originMinus;
