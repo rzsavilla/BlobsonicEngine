@@ -50,6 +50,7 @@
     <ClInclude Include="Source\Include\Model.h" />
     <ClInclude Include="Source\Include\MyRobot.h" />
     <ClInclude Include="Source\Include\MyTimer.h" />
+    <ClInclude Include="Source\Include\ObjectComponent.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
     <ClInclude Include="Source\Include\QuatCamera.h" />
     <ClInclude Include="Source\Include\Render.h" />
@@ -86,6 +87,7 @@
     <ClCompile Include="Source\Common\Model.cpp" />
     <ClCompile Include="Source\Common\MyRobot.cpp" />
     <ClCompile Include="Source\Common\MyTimer.cpp" />
+    <ClCompile Include="Source\Common\ObjectComponent.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
