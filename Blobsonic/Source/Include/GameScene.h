@@ -55,5 +55,6 @@ public:
 	void initScene();							//!< Initialize scene
 	void handleInput(GLFWwindow* window);		//!< Handle user inputs
 	void update(float dt);						//!< Update scene
+	void checkForCollision(float dt);			//!<Check through objects for collision
 	void draw();								//!< Draw scene
 };

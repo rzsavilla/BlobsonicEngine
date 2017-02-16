@@ -203,6 +203,24 @@ void GameScene::update(float dt)
 	m_PickupCounterText->setString("Collected:" + std::to_string(m_iCollected) + "/" + std::to_string(m_iTotalPickups));
 }
 
+void GameScene::checkForCollision(float dt)
+{
+	for (int i = 0; i != m_vPhysicals.size(); i++)
+	{
+		for (int x = 0; x != m_vPhysicals.size(); x++)
+		{
+			if (x != i)
+			{
+				m_vPhysicals[i].second.CollideWithBox(m_vPhysicals[x].second);
+			}
+			
+		}
+		
+	}
+
+
+}
+
 void GameScene::draw()
 {
 	gl::Enable(gl::DEPTH_TEST);

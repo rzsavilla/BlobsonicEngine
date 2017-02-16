@@ -23,6 +23,7 @@ public:
 	void init();							//!< Initialize component
 	void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
 	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
+	void CollideWithBox(BoxPhysics &other);			//<!Checks for collision with anotehr box
 
 
 private:

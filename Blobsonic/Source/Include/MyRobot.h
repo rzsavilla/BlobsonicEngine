@@ -40,8 +40,6 @@ private:
 	float m_fMoveSpeed;			//!< How quickly the robot moves towards its heading
 	float m_fAnimationSpeed;	//!< Animation speed
 
-	glm::mat4 m_orientationMatrix;	//!<Robots orientation matrix
-	glm::mat4 m_translateMatrix;	//!< Robots translation matrix
 	glm::vec3 m_Velocity;			//!< Robots current velocity
 
 	std::shared_ptr<GLSLProgram> m_ptrShader;	//!< Pointer to shader

@@ -65,5 +65,8 @@ void BoxPhysics::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
 
 void BoxPhysics::CollideWithBox(BoxPhysics & other)
 {
+
+
+
 }
 
