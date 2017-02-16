@@ -9,7 +9,7 @@
 #include "Transformable.h"
 
 
-class BoxPhysics : public Transformable
+class BoxPhysics : public Transformable , Component
 {
 public:
 	BoxPhysics(); // <! Default Constructor for a box/cube physics
@@ -17,7 +17,13 @@ public:
 
 	Model m_RenderModel; // <! The rendered object
 
-	void update(const float dt);	//!< Update Box
+	void update(float dt);	//!< Update Box
+
+	//Component Functions
+	void init();							//!< Initialize component
+	void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
+	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
+
 
 private:
 
@@ -26,6 +32,7 @@ private:
 	glm::vec3 m_fVelocity; //<! Vel of object in m/s
 	glm::vec3 m_vAcceleration; //<! Accel of object in m/s/s
 
+	
 };
 
 

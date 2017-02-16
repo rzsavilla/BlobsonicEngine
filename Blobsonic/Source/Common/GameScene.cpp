@@ -83,7 +83,9 @@ void GameScene::addRobot(std::pair<std::string, MyRobot> robot)
 
 void GameScene::addPhysical(std::pair<std::string, Model> model)
 {
+
 	m_vPhysicals.push_back(model);
+	
 }
 
 void GameScene::initScene()
