@@ -200,6 +200,68 @@ std::pair<std::string, Model> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	return std::pair<std::string, Model>(sID,model);
 }
 
+std::pair<std::string, Model> SceneLoader::loadPhysicsObject(tinyxml2::XMLElement * e)
+{
+	using namespace tinyxml2;
+
+	char* cData = "";			//Temporary storage for element data
+
+	if (m_bDebug) std::cout << "\nLoading Model \n  ";
+
+	Model model;
+	std::string sID;
+	//Look at Model Element
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
+		const char* childValue = modelChild->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sID = std::string(cData, strlen(cData));
+			}
+		}
+		else if (strcmp(childValue, "Mesh") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model.setMesh(m_res->getMesh(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model.setShader(m_res->getShader(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Texture") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model.setTexture(m_res->getTexture(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Position") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			model.setPosition(v);
+
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Scale") == 0) {
+			//Set model scale
+			glm::vec3 v = parseVec3(modelChild);
+			model.setScale(v);
+			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Origin") == 0) {
+			//Set model origin
+			glm::vec3 v = parseVec3(modelChild);
+			model.setOrigin(v);
+			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Material") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model.setMaterial(m_res->getMaterial(std::string(cData, strlen(cData))));
+			}
+
+		}
+	}
+	return std::pair<std::string, Model>(sID, model);
+}
+
+
 std::pair<std::string, Light> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -394,6 +456,9 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			}
 			else if (strcmp(element->Value(), "Robot") == 0) {
 				gameScene->addRobot(loadRobot(element));
+			}
+			else if (strcmp(element->Value(), "Physics") == 0) {
+				gameScene->addModel(loadModel(element));
 			}
 		}
 		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));

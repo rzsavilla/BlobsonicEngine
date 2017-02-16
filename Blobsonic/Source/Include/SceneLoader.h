@@ -37,6 +37,7 @@ private:
 	std::pair<std::string, Light> loadLight(tinyxml2::XMLElement* e);			//!< Parse and create light
 	std::pair<std::string, QuatCamera> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
 	std::pair<std::string, MyRobot> loadRobot(tinyxml2::XMLElement* e);			//!< Parse and create robot
+	std::pair<std::string, Model> SceneLoader::loadPhysicsObject(tinyxml2::XMLElement * e); //!< parse and create a phyical object
 
 	void readScene(tinyxml2::XMLNode* node);									//!< Parse a scene
 	void readResources(tinyxml2::XMLNode* node);								//!< Parse resources

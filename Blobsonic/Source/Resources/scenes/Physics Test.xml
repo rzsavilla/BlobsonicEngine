@@ -120,7 +120,7 @@
 		</Origin>
 	</Model>	
 	
-	<Model> <ID>GravityText_model</ID>
+	<Physics> <ID>GravityText_model</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
@@ -140,7 +140,9 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-	</Model>	
+		<Type>Box</Type>
+
+	</Physics>	
 
 
 	
