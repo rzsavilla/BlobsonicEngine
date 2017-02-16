@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\Bitmap.h" />
+    <ClInclude Include="Source\Include\BoxPhysics.h" />
     <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
     <ClInclude Include="Source\Include\Drawable.h" />
@@ -66,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Bitmap.cpp" />
+    <ClCompile Include="Source\Common\BoxPhysics.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Component.cpp" />
     <ClCompile Include="Source\Common\Engine.cpp" />

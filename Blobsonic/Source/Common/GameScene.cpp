@@ -81,6 +81,11 @@ void GameScene::addRobot(std::pair<std::string, MyRobot> robot)
 	m_vRobots.push_back(robot);
 }
 
+void GameScene::addPhysical(std::pair<std::string, Model> model)
+{
+	m_vPhysicals.push_back(model);
+}
+
 void GameScene::initScene()
 {
 	m_iKey_W = 0, m_iKey_S = 0, m_iKey_A = 0, m_iKey_D = 0;

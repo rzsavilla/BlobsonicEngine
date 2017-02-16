@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{6c771203-9eb6-4b39-8b95-6cedf891cd72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{d2cc714f-e36f-4f98-bf05-bc8d17cb2349}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -143,6 +149,9 @@
     <ClInclude Include="Source\Include\Transformable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\BoxPhysics.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Bitmap.cpp">
@@ -240,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Transformable.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\BoxPhysics.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

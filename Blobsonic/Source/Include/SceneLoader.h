@@ -18,15 +18,15 @@
 #include "Model.h"
 #include "GameScene.h"
 
+
 #include "tinyxml2.h"
 
 class SceneLoader {
 private:
 	ResourceManager* m_res;											//!< Pointer to Resource manager where loaded resources will be stored
 	std::vector<std::pair<std::string,std::shared_ptr<Scene>>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
-	std::vector<std::pair<std::string,Model>> m_vModels;			//!< Store Models
-	std::vector<std::pair<std::string,Light>> m_vLights;			//!< Store Lights
-	std::vector<std::pair<std::string, QuatCamera>> m_vCamera;		//!< Store Cameras
+	
+
 
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
 	void loadTexture(tinyxml2::XMLElement* e);			//!< Parse file to load texture

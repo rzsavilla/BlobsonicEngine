@@ -258,6 +258,8 @@ std::pair<std::string, Model> SceneLoader::loadPhysicsObject(tinyxml2::XMLElemen
 
 		}
 	}
+	
+
 	return std::pair<std::string, Model>(sID, model);
 }
 
@@ -458,7 +460,7 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 				gameScene->addRobot(loadRobot(element));
 			}
 			else if (strcmp(element->Value(), "Physics") == 0) {
-				gameScene->addModel(loadModel(element));
+				gameScene->addPhysical(loadModel(element));
 			}
 		}
 		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));
