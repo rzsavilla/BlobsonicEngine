@@ -27,9 +27,7 @@ namespace OC {
 		void sendLocalMsg(std::shared_ptr<Message> msg);
 		void setGlobalMsg(std::shared_ptr<Message> msg);
 
-		virtual void handleGlobalMessages() = 0;
-
-		virtual void handleLocalMessages() = 0;
+		virtual void handleMessage(std::shared_ptr<Message> msg) = 0;
 
 		virtual void update(float dt) = 0;
 
