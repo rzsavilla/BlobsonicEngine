@@ -49,7 +49,7 @@ void BoxPhysics::update(const float dt)
 	//
 	//std::cout << "Update physics box : " << m_vPosition.y << " " << m_fVelocity.y << " " << m_vPosition.y << std::endl;
 
-	//m_RenderModel.setPosition(m_vPosition);
+	m_RenderModel.setPosition(m_vPosition);
 
 }
 
@@ -79,27 +79,27 @@ void BoxPhysics::CollideWithBox(BoxPhysics* other)
 	glm::vec3 earlyOutDist(m_vCenter - other->m_vCenter); // distance between center of 2 boxs 
 	float magEarlyDist = sqrt(((earlyOutDist.x * earlyOutDist.x) + (earlyOutDist.y * earlyOutDist.y) + (earlyOutDist.z * earlyOutDist.z))); // get magnitude of dist
 	float roughSize = m_vExtends.x + m_vExtends.y + m_vExtends.z; // create a rough size from the scale of the box
-	std::cout <<"Rough Size : " << roughSize << " magEarlyDist : " << magEarlyDist << std::endl;
-	if (magEarlyDist > roughSize * 10.0f) // if further than 10 times the rouch size of the box away
+	
+	if (magEarlyDist > roughSize * 5.0f) // if further than 10 times the rouch size of the box away
 	{
-		
+		std::cout << "Early out" << std::endl;
 		return; // escape collision test before any intensive testing begins
 	}
 	else
 	{
-
-
-
-
-
-
-
-
+		// begin collison check!!!!
 
 
 
 
 	}
 
+}
+
+void BoxPhysics::movementForTesting(float x, float y, float z)
+{
+	m_vPosition.x += x;
+	m_vPosition.y += y;
+	m_vPosition.z += z;
 }
 

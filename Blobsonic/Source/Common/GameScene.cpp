@@ -116,6 +116,11 @@ void GameScene::handleInput(GLFWwindow* window)
 	m_iKey_A = glfwGetKey(window, GLFW_KEY_A);
 	m_iKey_D = glfwGetKey(window, GLFW_KEY_D);
 
+	m_iKey_Up = glfwGetKey(window, GLFW_KEY_UP);
+	m_iKey_Down = glfwGetKey(window, GLFW_KEY_DOWN);
+	m_iKey_Left = glfwGetKey(window, GLFW_KEY_LEFT);
+	m_iKey_Right = glfwGetKey(window, GLFW_KEY_RIGHT);
+
 	m_iKey_Q = glfwGetKey(window, GLFW_KEY_Q);
 	m_iKey_E = glfwGetKey(window, GLFW_KEY_E);
 	m_iKey_R = glfwGetKey(window, GLFW_KEY_R);
@@ -134,23 +139,37 @@ void GameScene::handleInput(GLFWwindow* window)
 
 void GameScene::update(float dt)
 {
-	//Robot movement
-	if (m_iKey_W) m_vRobots.begin()->second.moveForward();
-	else if (m_iKey_S) m_vRobots.begin()->second.moveBackward();
-	if (m_iKey_A) m_vRobots.begin()->second.turnLeft();
-	else if (m_iKey_D) m_vRobots.begin()->second.turnRight();
-	//std::cout << m_vRobots.begin()->second.getPosition().x << " " << m_vRobots.begin()->second.getPosition().z << "\n";
-	//Switch Camera
-	if (m_camSwitchDelay.getElapsed() > 0.2f) {
-		if (m_iKey_Q) {
-			prevCamera();
-			m_camSwitchDelay.reset();
-		}
-		else if (m_iKey_E) { 
-			nextCamera(); 
-			m_camSwitchDelay.reset();
-		}
-	}
+
+
+	//move white box
+	if (m_iKey_W) m_vPhysicals[0].second.movementForTesting(0.0f,1.0f,0.0f);
+	else if(m_iKey_S)m_vPhysicals[0].second.movementForTesting(0.0f, -1.0f, 0.0f);
+	if (m_iKey_A) m_vPhysicals[0].second.movementForTesting(-1.0f, 0.0f, 0.0f);
+	else if (m_iKey_D)m_vPhysicals[0].second.movementForTesting(1.0f, 0.0f, 0.0f);
+
+	//move red box
+	if (m_iKey_Up) m_vPhysicals[1].second.movementForTesting(0.0f, 1.0f, 0.0f);
+	else if (m_iKey_Down)m_vPhysicals[1].second.movementForTesting(0.0f, -1.0f, 0.0f);
+	if (m_iKey_Left) m_vPhysicals[1].second.movementForTesting(-1.0f, 0.0f, 0.0f);
+	else if (m_iKey_Right)m_vPhysicals[1].second.movementForTesting(1.0f, 0.0f, 0.0f);
+
+	////Robot movement
+	//if (m_iKey_W) m_vRobots.begin()->second.moveForward();
+	//else if (m_iKey_S) m_vRobots.begin()->second.moveBackward();
+	//if (m_iKey_A) m_vRobots.begin()->second.turnLeft();
+	//else if (m_iKey_D) m_vRobots.begin()->second.turnRight();
+	////std::cout << m_vRobots.begin()->second.getPosition().x << " " << m_vRobots.begin()->second.getPosition().z << "\n";
+	////Switch Camera
+	//if (m_camSwitchDelay.getElapsed() > 0.2f) {
+	//	if (m_iKey_Q) {
+	//		prevCamera();
+	//		m_camSwitchDelay.reset();
+	//	}
+	//	else if (m_iKey_E) { 
+	//		nextCamera(); 
+	//		m_camSwitchDelay.reset();
+	//	}
+	//}
 
 	//Reload Scene
 	if (m_iKey_R) m_ptrMessages->push_back(std::make_shared<SceneMessage::Reload>());
