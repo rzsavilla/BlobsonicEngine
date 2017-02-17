@@ -190,6 +190,7 @@ void GameScene::update(float dt)
 	}
 
 	//Update Physicals
+	checkForCollision(dt);
 	for (auto phycicalsIt = m_vPhysicals.begin(); phycicalsIt != m_vPhysicals.end(); ++phycicalsIt) {
 		(*phycicalsIt).second.update(dt);
 	}
@@ -211,13 +212,12 @@ void GameScene::checkForCollision(float dt)
 		{
 			if (x != i)
 			{
-				m_vPhysicals[i].second.CollideWithBox(m_vPhysicals[x].second);
+				m_vPhysicals[i].second.CollideWithBox(&m_vPhysicals[x].second);
 			}
 			
 		}
 		
 	}
-
 
 }
 
