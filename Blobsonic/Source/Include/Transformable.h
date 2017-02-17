@@ -17,7 +17,7 @@ protected:
 	glm::vec3 m_vRotation;			//!< Objects rotation x,y,z
 	glm::vec3 m_vOrigin;			//!< Objects origin x,y,z
 	glm::vec3 m_vScale;				//!< Objects scale facto x,y,z Default value at 1.0f
-	glm::mat4 m_rotationMatrix;		//!< Rotation matrix
+	glm::mat3 m_rotationMatrix;		//!< Rotation matrix
 	bool m_bUpdated;				//!< Flag, member variable has been changed
 public:
 	Transformable();				//!< Default Contstructor

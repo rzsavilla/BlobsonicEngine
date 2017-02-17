@@ -44,6 +44,9 @@ private:
 	glm::vec3 obb2LocalPoints[8];
 	glm::vec3 obb1Normals[6];
 	glm::vec3 obb2Normals[6];
+	glm::vec3 separetedAxis[6];
+	bool testAxis[6];
+	
 
 	
 };

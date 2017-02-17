@@ -231,12 +231,13 @@ void GameScene::checkForCollision(float dt)
 		{
 			if (x != i)
 			{
-				m_vPhysicals[i].second.CollideWithBox(&m_vPhysicals[x].second);
+				
 			}
 			
 		}
 		
 	}
+	m_vPhysicals[0].second.CollideWithBox(&m_vPhysicals[1].second);
 
 }
 
