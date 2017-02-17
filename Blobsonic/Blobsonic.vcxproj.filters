@@ -19,6 +19,18 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{d2cc714f-e36f-4f98-bf05-bc8d17cb2349}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{403e3c20-75b5-4be1-958a-7d883ac2d01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Components">
+      <UniqueIdentifier>{79c29cea-29c2-449e-8918-c86b9b521a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{3b6e529e-97fb-4724-8c29-665336f33ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Components">
+      <UniqueIdentifier>{8a1a234f-6431-42af-941c-042876951977}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -63,9 +75,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\ft2build.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\GameScene.h">
@@ -152,8 +161,11 @@
     <ClInclude Include="Source\Include\BoxPhysics.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Include\ObjectComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +179,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -256,8 +265,11 @@
     <ClCompile Include="Source\Common\BoxPhysics.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Common\ObjectComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
