@@ -39,6 +39,9 @@ private:
 	glm::vec3 m_vExtends; //<! Half size of cube
 
 
+	//Collision detection variables
+
+
 	
 };
 
