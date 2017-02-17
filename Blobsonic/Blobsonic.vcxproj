@@ -48,6 +48,7 @@
     <ClInclude Include="Source\Include\Mesh.h" />
     <ClInclude Include="Source\Include\Message.h" />
     <ClInclude Include="Source\Include\Model.h" />
+    <ClInclude Include="Source\Include\Movable.h" />
     <ClInclude Include="Source\Include\MyRobot.h" />
     <ClInclude Include="Source\Include\MyTimer.h" />
     <ClInclude Include="Source\Include\ObjectComponent.h" />
@@ -85,6 +86,7 @@
     <ClCompile Include="Source\Common\Mesh.cpp" />
     <ClCompile Include="Source\Common\Message.cpp" />
     <ClCompile Include="Source\Common\Model.cpp" />
+    <ClCompile Include="Source\Common\Movable.cpp" />
     <ClCompile Include="Source\Common\MyRobot.cpp" />
     <ClCompile Include="Source\Common\MyTimer.cpp" />
     <ClCompile Include="Source\Common\ObjectComponent.cpp" />
