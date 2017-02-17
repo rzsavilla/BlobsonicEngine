@@ -18,6 +18,10 @@
 #include "Text.h"
 #include "BoxPhysics.h"
 
+#include "Actor.h"
+
+#include "Movable.h"
+
 class GameScene :public Scene {
 private:
 	std::vector<std::pair<std::string, Model>> m_vModels;		//!< Store Models with id
@@ -43,6 +47,10 @@ private:
 	std::shared_ptr<Text> m_PickupCounterText;	//!< Text object for
 	int m_iTotalPickups;		//!< Total number of pickups when scene is initialized
 	int m_iCollected;			//!< Tracks the number of pickups collected in the scene
+
+
+	//===============TEST========================
+	OC::GameObject actor;
 public:
 	GameScene();		//!< Default Constructor
 

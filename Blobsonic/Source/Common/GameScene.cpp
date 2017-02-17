@@ -58,7 +58,7 @@ bool GameScene::collision(MyRobot * robot, Model * model)
 
 GameScene::GameScene()
 {
-
+	actor.attachComponent(std::make_unique<OC::Movable>());
 }
 
 void GameScene::addModel(std::pair<std::string, Model> model)
@@ -139,8 +139,10 @@ void GameScene::handleInput(GLFWwindow* window)
 
 void GameScene::update(float dt)
 {
-
-
+	actor.sendLocalMessage(std::make_shared<M_Movable::SetVel>(glm::vec3(0.0f, 1.0f, 2.0f)));
+	
+	actor.update(dt);
+	
 	//move white box
 	if (m_iKey_W) m_vPhysicals[0].second.movementForTesting(0.0f,1.0f,0.0f);
 	else if(m_iKey_S)m_vPhysicals[0].second.movementForTesting(0.0f, -1.0f, 0.0f);
