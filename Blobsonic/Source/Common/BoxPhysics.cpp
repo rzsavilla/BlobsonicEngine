@@ -49,7 +49,7 @@ void BoxPhysics::update(const float dt)
 	//
 	//std::cout << "Update physics box : " << m_vPosition.y << " " << m_fVelocity.y << " " << m_vPosition.y << std::endl;
 
-	//m_RenderModel.setPosition(m_vPosition);
+	m_RenderModel.setPosition(m_vPosition);
 
 }
 
@@ -101,5 +101,12 @@ void BoxPhysics::CollideWithBox(BoxPhysics* other)
 
 	}
 
+}
+
+void BoxPhysics::movementForTesting(float x, float y, float z)
+{
+	m_vPosition.x += x;
+	m_vPosition.y += y;
+	m_vPosition.z += z;
 }
 

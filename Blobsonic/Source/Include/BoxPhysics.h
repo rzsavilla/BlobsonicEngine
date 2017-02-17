@@ -25,6 +25,8 @@ public:
 	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
 	void CollideWithBox(BoxPhysics* other);			//<!Checks for collision with anotehr box
 
+	void movementForTesting(float x, float y, float z);
+
 
 private:
 
