@@ -155,9 +155,6 @@
     <ClInclude Include="Source\Include\tinyxml2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\BoxPhysics.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\GameObject.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
@@ -172,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="Source\Include\Actor.h">
       <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\OBB.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\AABB.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -268,9 +271,6 @@
     <ClCompile Include="Source\Common\Transformable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\BoxPhysics.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\GameObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
@@ -282,6 +282,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Actor.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\OBB.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\AABB.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

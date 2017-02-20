@@ -1,14 +1,14 @@
 #include <stdafx.h>
-#include "BoxPhysics.h"
+#include "OBB.h"
 #include <iostream>
 
 
-BoxPhysics::BoxPhysics()
+OBB::OBB()
 {
 	
 }
 
-BoxPhysics::BoxPhysics(Model model)
+OBB::OBB(Model model)
 {
 	m_RenderModel = model;
 	//initliaise variables
@@ -22,7 +22,7 @@ BoxPhysics::BoxPhysics(Model model)
 
 }
 
-void BoxPhysics::update(const float dt)
+void OBB::update(const float dt)
 {
 
 	//m_vAcceleration.y = GRAVITYCOEFFICENT;
@@ -47,19 +47,19 @@ void BoxPhysics::update(const float dt)
 
 }
 
-void BoxPhysics::init()
+void OBB::init()
 {
 }
 
-void BoxPhysics::handleMessage(std::shared_ptr<Message> msg)
+void OBB::handleMessage(std::shared_ptr<Message> msg)
 {
 }
 
-void BoxPhysics::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
+void OBB::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
 {
 }
 
-void BoxPhysics::CollideWithBox(BoxPhysics* other)
+void OBB::CollideWithBox(OBB* other)
 {
 
 	
@@ -214,7 +214,7 @@ void BoxPhysics::CollideWithBox(BoxPhysics* other)
 
 }
 
-void BoxPhysics::movementForTesting(float x, float y, float z)
+void OBB::movementForTesting(float x, float y, float z)
 {
 	m_vPosition.x += x;
 	m_vPosition.y += y;

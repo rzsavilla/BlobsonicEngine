@@ -1,5 +1,5 @@
-#ifndef BOXPHYSICS_H
-#define BOXPHYSICS_H
+#ifndef OBB_H
+#define OBB_H
 
 #define GRAVITYCOEFFICENT -9.81 // m/s/s
 
@@ -9,11 +9,11 @@
 #include "Transformable.h"
 
 
-class BoxPhysics : public Transformable , Component
+class OBB : public Transformable , Component
 {
 public:
-	BoxPhysics(); // <! Default Constructor for a box/cube physics
-	BoxPhysics(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
+	OBB(); // <! Default Constructor for a box/cube physics
+	OBB(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
 
 	Model m_RenderModel; // <! The rendered object
 
@@ -23,7 +23,7 @@ public:
 	void init();							//!< Initialize component
 	void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
 	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
-	void CollideWithBox(BoxPhysics* other);			//<!Checks for collision with anotehr box
+	void CollideWithBox(OBB* other);			//<!Checks for collision with anotehr box
 
 	void movementForTesting(float x, float y, float z);
 
