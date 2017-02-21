@@ -21,7 +21,6 @@ AABB::AABB(Model model)
 
 void AABB::update(const float dt)
 {
-	m_vCenter = m_vPosition + m_vScale / 2.0f;
 	m_RenderModel.setPosition(m_vPosition);
 }
 

@@ -6,16 +6,14 @@
 //Chris O'Neill
 
 #include "Model.h"
-#include "Transformable.h"
+#include "Physical.h"
 
 
-class AABB : public Transformable, Component
+class AABB : public Physical, Component
 {
 public:
 	AABB(); // <! Default Constructor for a box/cube physics
 	AABB(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
-
-	
 
 	void update(float dt);	//!< Update Box
 
@@ -26,7 +24,7 @@ public:
 	void CollideWithBox(AABB* other);			//<!Checks for collision with anotehr box
 
 	void movementForTesting(float x, float y, float z);
-	Model m_RenderModel; // <! The rendered object for testing
+	Model m_RenderModel; // <! The rendered object for testing (Delete later)
 
 private:
 
@@ -34,8 +32,6 @@ private:
 
 	glm::vec3 obb1LocalPoints[8];
 	glm::vec3 obb2LocalPoints[8];
-
-	glm::vec3 m_vCenter; //<! Center of cube used for collision
 
 
 	float m_fMinX; //!< min value on the x axis

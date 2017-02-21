@@ -6,10 +6,10 @@
 //Chris O'Neill
 
 #include "Model.h"
-#include "Transformable.h"
+#include "Physical.h"
 
 
-class OBB : public Transformable , Component
+class OBB : public Physical , Component
 {
 public:
 	OBB(); // <! Default Constructor for a box/cube physics
@@ -29,15 +29,6 @@ public:
 
 
 private:
-
-	float m_fMass; //<! Mass of object in kg's
-	glm::vec3 m_fForce;	//<! Force of object in newtons
-	glm::vec3 m_fVelocity; //<! Vel of object in m/s
-	glm::vec3 m_vAcceleration; //<! Accel of object in m/s/s
-
-	glm::vec3 m_vCenter; //<! Center of cube used for collision
-	glm::vec3 m_vExtends; //<! Half size of cube
-
 
 	//Collision detection variables
 	glm::vec3 obb1LocalPoints[8];
