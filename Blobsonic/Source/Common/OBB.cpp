@@ -42,7 +42,8 @@ void OBB::update(const float dt)
 	//m_fVelocity = v;
 	//
 	//std::cout << "Update physics box : " << m_vPosition.y << " " << m_fVelocity.y << " " << m_vPosition.y << std::endl;
-
+	
+	m_vCenter = m_vPosition + m_vScale / 2.0f;
 	m_RenderModel.setPosition(m_vPosition);
 
 }
@@ -65,7 +66,7 @@ void OBB::CollideWithBox(OBB* other)
 	
 
 	//setup data for the OBB's
-	m_vCenter = m_vPosition;
+	m_vCenter = m_vPosition + m_vScale / 2.0f;
 	m_vExtends = m_vScale / 2.0f;
 
 	other->m_vCenter = other->m_vPosition;
@@ -142,21 +143,22 @@ void OBB::CollideWithBox(OBB* other)
 		obb2Normals[4] = other->m_rotationMatrix * glm::vec3(0, 1, 0); // Top face
 		obb2Normals[5] = other->m_rotationMatrix * glm::vec3(0, -1, 0); // bottom face
 		
-		//values for min other->and max
-		float obb1Min = 999999999999999999999.0f;
-		float obb1Max = -999999999999999999999.0f;
-		float obb2Min = 999999999999999999999.0f;
-		float obb2Max = -999999999999999999999.0f;
-
+		
 
 		//project 3 axis 
-		for (int axisTest = 0; axisTest < 3; axisTest++)
+		for (int axisTest = 0; axisTest < 6; axisTest++)
 		{
+			//values for min other->and max
+			float obb1Min = 999999999999999999999.0f;
+			float obb1Max = -999999999999999999999.0f;
+			float obb2Min = 999999999999999999999.0f;
+			float obb2Max = -999999999999999999999.0f;
+
 			
 			// check all vertecies on box 1
 			for (int box1Vertex = 0; box1Vertex < 8; box1Vertex++)
 			{
-				float fDotProduct = glm::dot(obb1Normals[axisTest*2], obb1LocalPoints[box1Vertex]);
+				float fDotProduct = glm::dot(obb1Normals[axisTest], obb1LocalPoints[box1Vertex]);
 				if (fDotProduct < obb1Min)
 				{
 					obb1Min = fDotProduct;
@@ -171,7 +173,7 @@ void OBB::CollideWithBox(OBB* other)
 			// check all vertecies on box 2
 			for (int box2Vertex = 0; box2Vertex < 8; box2Vertex++)
 			{
-				float fDotProduct = glm::dot(obb1Normals[axisTest*2], obb2LocalPoints[box2Vertex]);
+				float fDotProduct = glm::dot(obb1Normals[axisTest], obb2LocalPoints[box2Vertex]);
 				if (fDotProduct < obb2Min)
 				{
 					obb2Min = fDotProduct;

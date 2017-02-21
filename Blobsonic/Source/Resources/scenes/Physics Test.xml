@@ -129,7 +129,7 @@
 		<Texture>red_texture</Texture>
 		<Position>
 			<X>0.0f</X>
-			<Y>1.0f</Y>
+			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Scale>
