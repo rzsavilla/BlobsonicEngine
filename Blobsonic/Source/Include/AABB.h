@@ -1,8 +1,6 @@
 #ifndef AABB_H
 #define AABB_H
 
-#define GRAVITYCOEFFICENT -9.81 // m/s/s
-
 //Chris O'Neill
 
 #include "Model.h"

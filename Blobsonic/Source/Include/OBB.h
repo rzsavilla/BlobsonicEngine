@@ -1,8 +1,6 @@
 #ifndef OBB_H
 #define OBB_H
 
-#define GRAVITYCOEFFICENT -9.81 // m/s/s
-
 //Chris O'Neill
 
 #include "Model.h"

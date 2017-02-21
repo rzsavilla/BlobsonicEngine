@@ -32,6 +32,7 @@
     <ClInclude Include="Source\Include\AABB.h" />
     <ClInclude Include="Source\Include\Actor.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
+    <ClInclude Include="Source\Include\Capsule.h" />
     <ClInclude Include="Source\Include\OBB.h" />
     <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Source\Include\Scene.h" />
     <ClInclude Include="Source\Include\SceneComponent.h" />
     <ClInclude Include="Source\Include\SceneLoader.h" />
+    <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
@@ -74,6 +76,7 @@
     <ClCompile Include="Source\Common\AABB.cpp" />
     <ClCompile Include="Source\Common\Actor.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
+    <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Component.cpp" />
@@ -103,6 +106,7 @@
     <ClCompile Include="Source\Common\Scene.cpp" />
     <ClCompile Include="Source\Common\SceneComponent.cpp" />
     <ClCompile Include="Source\Common\SceneLoader.cpp" />
+    <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />
