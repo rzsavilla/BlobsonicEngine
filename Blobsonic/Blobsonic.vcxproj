@@ -29,12 +29,8 @@
     <None Include="Source\Resources\shader\text.vert" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="Editor.h" />
-=======
     <ClInclude Include="Source\Include\AABB.h" />
     <ClInclude Include="Source\Include\Actor.h" />
->>>>>>> 404299d6a7d52aff1b86b8de95839e15cd0d73f3
     <ClInclude Include="Source\Include\Bitmap.h" />
     <ClInclude Include="Source\Include\Capsule.h" />
     <ClInclude Include="Source\Include\OBB.h" />
@@ -77,12 +73,8 @@
     <ClInclude Include="Source\Include\Transformable.h" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClCompile Include="Editor.cpp" />
-=======
     <ClCompile Include="Source\Common\AABB.cpp" />
     <ClCompile Include="Source\Common\Actor.cpp" />
->>>>>>> 404299d6a7d52aff1b86b8de95839e15cd0d73f3
     <ClCompile Include="Source\Common\Bitmap.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
@@ -206,7 +198,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>nana.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
