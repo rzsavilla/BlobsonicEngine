@@ -29,9 +29,15 @@
     <None Include="Source\Resources\shader\text.vert" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="Editor.h" />
+=======
+    <ClInclude Include="Source\Include\AABB.h" />
+    <ClInclude Include="Source\Include\Actor.h" />
+>>>>>>> 404299d6a7d52aff1b86b8de95839e15cd0d73f3
     <ClInclude Include="Source\Include\Bitmap.h" />
-    <ClInclude Include="Source\Include\BoxPhysics.h" />
+    <ClInclude Include="Source\Include\Capsule.h" />
+    <ClInclude Include="Source\Include\OBB.h" />
     <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
     <ClInclude Include="Source\Include\Drawable.h" />
@@ -49,9 +55,11 @@
     <ClInclude Include="Source\Include\Mesh.h" />
     <ClInclude Include="Source\Include\Message.h" />
     <ClInclude Include="Source\Include\Model.h" />
+    <ClInclude Include="Source\Include\Movable.h" />
     <ClInclude Include="Source\Include\MyRobot.h" />
     <ClInclude Include="Source\Include\MyTimer.h" />
     <ClInclude Include="Source\Include\ObjectComponent.h" />
+    <ClInclude Include="Source\Include\Physical.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
     <ClInclude Include="Source\Include\QuatCamera.h" />
     <ClInclude Include="Source\Include\Render.h" />
@@ -59,6 +67,7 @@
     <ClInclude Include="Source\Include\Scene.h" />
     <ClInclude Include="Source\Include\SceneComponent.h" />
     <ClInclude Include="Source\Include\SceneLoader.h" />
+    <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
@@ -68,9 +77,15 @@
     <ClInclude Include="Source\Include\Transformable.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Editor.cpp" />
+=======
+    <ClCompile Include="Source\Common\AABB.cpp" />
+    <ClCompile Include="Source\Common\Actor.cpp" />
+>>>>>>> 404299d6a7d52aff1b86b8de95839e15cd0d73f3
     <ClCompile Include="Source\Common\Bitmap.cpp" />
-    <ClCompile Include="Source\Common\BoxPhysics.cpp" />
+    <ClCompile Include="Source\Common\Capsule.cpp" />
+    <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Component.cpp" />
     <ClCompile Include="Source\Common\Engine.cpp" />
@@ -87,9 +102,11 @@
     <ClCompile Include="Source\Common\Mesh.cpp" />
     <ClCompile Include="Source\Common\Message.cpp" />
     <ClCompile Include="Source\Common\Model.cpp" />
+    <ClCompile Include="Source\Common\Movable.cpp" />
     <ClCompile Include="Source\Common\MyRobot.cpp" />
     <ClCompile Include="Source\Common\MyTimer.cpp" />
     <ClCompile Include="Source\Common\ObjectComponent.cpp" />
+    <ClCompile Include="Source\Common\Physical.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
@@ -97,6 +114,7 @@
     <ClCompile Include="Source\Common\Scene.cpp" />
     <ClCompile Include="Source\Common\SceneComponent.cpp" />
     <ClCompile Include="Source\Common\SceneLoader.cpp" />
+    <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />

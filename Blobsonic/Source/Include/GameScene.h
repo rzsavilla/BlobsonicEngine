@@ -16,7 +16,8 @@
 #include "Component.h"
 #include "MyTimer.h"
 #include "Text.h"
-#include "BoxPhysics.h"
+#include "OBB.h"
+#include "AABB.h"
 
 class GameScene :public Scene {
 private:
@@ -24,7 +25,7 @@ private:
 	std::vector<std::pair<std::string, Light>> m_vLights;		//!< Store Lights with id
 	std::vector<std::pair<std::string, QuatCamera>> m_vCamera;	//!< Store Cameras with id
 	std::vector<std::pair<std::string, MyRobot>> m_vRobots;		//!< Store Robots with id
-	std::vector<std::pair<std::string, BoxPhysics>> m_vPhysicals;    //!< Store Physics
+	std::vector<std::pair<std::string, OBB>> m_vPhysicals;    //!< Store Physics
 
 	void updateCamera(std::shared_ptr<GLSLProgram> shader, QuatCamera cam);		//!< Passes camera uniforms to shader program
 	void updateLights(std::shared_ptr<GLSLProgram> shader);						//!< Passes lights uniforms  to shader program
@@ -55,5 +56,6 @@ public:
 	void initScene();							//!< Initialize scene
 	void handleInput(GLFWwindow* window);		//!< Handle user inputs
 	void update(float dt);						//!< Update scene
+	void checkForCollision(float dt);			//!<Check through objects for collision
 	void draw();								//!< Draw scene
 };

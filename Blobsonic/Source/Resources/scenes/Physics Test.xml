@@ -76,27 +76,6 @@
 </Scene>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
-	<Model> <ID>room_model</ID>
-		<Mesh>room_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>room_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
 	
 	<Model> <ID>startLight_model</ID>
 		<Mesh>cube_mesh</Mesh>
@@ -120,15 +99,15 @@
 		</Origin>
 	</Model>	
 	
-	<Physics> <ID>GravityText_model</ID>
+	<Physics> <ID>GravityTest_model</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>white_texture</Texture>
 		<Position>
-			<X>1.0f</X>
-			<Y>20.0f</Y>
-			<Z>1.0f</Z>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
 		</Position>
 		<Scale>
 			<X>5.0f</X>
@@ -143,7 +122,29 @@
 		<Type>Box</Type>
 
 	</Physics>	
+	<Physics> <ID>GravityTest_model2</ID>
+		<Mesh>cube_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>5.0f</X>
+			<Y>5.0f</Y>
+			<Z>5.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		<Type>Box</Type>
 
+	</Physics>	
 
 	
 	<Light> <ID>start_light</ID>

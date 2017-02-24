@@ -25,6 +25,10 @@ protected:
 	int m_iKey_S;		//!< Key press
 	int m_iKey_A;		//!< Key press
 	int m_iKey_D;		//!< Key press
+	int m_iKey_Up;		//!< Key press
+	int m_iKey_Down;		//!< Key press
+	int m_iKey_Left;		//!< Key press
+	int m_iKey_Right;		//!< Key press
 	int m_iKey_Escape;	//!< Key press
 	int m_iKey_Space;	//!< Key press
 	int m_iKey_Q;		//!< Key press

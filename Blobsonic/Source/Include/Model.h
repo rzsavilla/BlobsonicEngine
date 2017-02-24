@@ -51,6 +51,7 @@ public:
 	void setOrigin(glm::vec3 newOrigin);		/*!< Set models origin*/
 
 	glm::vec3 getPosition();					//!< Returns models position
+	glm::vec3 getScale();
 	glm::mat4 getTransform();					//!< Returns model transformation matrix ;
 
 

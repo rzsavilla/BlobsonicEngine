@@ -1,10 +1,13 @@
 #include <stdafx.h>
 #include "Transformable.h"
-//
-//Transformable::Transformable()
-//{
-//	m_rotationMatrix = glm::mat4(1.0f);
-//}
+
+Transformable::Transformable()
+{
+	m_rotationMatrix = glm::mat3(
+								 1.0f,0.0f,0.0f,
+								 0.0f,1.0f,0.0f,
+								 0.0f,0.0f,1.0f  );
+}
 
 //void Transformable::init()
 //{

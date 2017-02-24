@@ -20,13 +20,7 @@ void SplashScene::handleInput(GLFWwindow * window)
 
 void SplashScene::update(float dt)
 {
-	if (timer.getElapsed() > 3.0f) {
-		//Create message to switch scenes
-		m_ptrMessages->push_back(std::make_shared<SceneMessage::GameScene>());
-	}
-	else {
-
-	}
+	m_ptrMessages->push_back(std::make_shared<SceneMessage::GameScene>());
 }
 
 void SplashScene::draw()
