@@ -155,6 +155,9 @@
     <ClInclude Include="Source\Include\ObjectComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Bitmap.cpp">
@@ -257,6 +260,9 @@
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\ObjectComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

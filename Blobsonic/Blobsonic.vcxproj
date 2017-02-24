@@ -29,6 +29,7 @@
     <None Include="Source\Resources\shader\text.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Editor.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
     <ClInclude Include="Source\Include\BoxPhysics.h" />
     <ClInclude Include="Source\Include\Button.h" />
@@ -67,6 +68,7 @@
     <ClInclude Include="Source\Include\Transformable.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
     <ClCompile Include="Source\Common\BoxPhysics.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
@@ -186,7 +188,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>nana.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
