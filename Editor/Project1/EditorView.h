@@ -16,19 +16,15 @@ using namespace std;
 using namespace nana;
 
 #pragma once
-class EditorView : public form
+class EditorView
 {
-	place place_{ *this };
-	menubar menubar_{ *this };
-	textbox textbox_{ *this };
-
 public:
 	EditorView();
 	~EditorView();
-	textbox& get_tb();
+	void Init();
 
 private:
-	string _m_pick_file(bool is_open) const;
-	bool _m_ask_save();
-	void _m_make_menus();
+	void ev_makeMenu();
+
+
 };

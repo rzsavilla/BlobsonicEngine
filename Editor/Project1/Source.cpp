@@ -1,4 +1,4 @@
-//Include nana/gui.hpp header file to enable Nana C++ Library
+﻿//Include nana/gui.hpp header file to enable Nana C++ Library
 //for the program.
 #include <iostream>
 #include <fstream>
@@ -14,12 +14,20 @@ using namespace std;
 
 #include <nana/gui/wvl.hpp>
 #include <nana/gui/widgets/button.hpp>
+#include <nana/gui/widgets/listbox.hpp>
+
+#include <nana/gui/widgets/panel.hpp>
+#include <nana/gui/widgets/form.hpp>
+#include <nana/gui/widgets/label.hpp>
+#include <nana/gui/drawing.hpp>
+#include <nana/gui/widgets/group.hpp>
 
 using namespace nana;
 
 #include "EditorView.h"
 #include "EditorData.h"
 #include "EditorController.h"
+
 
 int main() {
 	EditorView* eView;
@@ -29,12 +37,33 @@ int main() {
 	eView = new EditorView();
 	eData = new EditorData();
 	eController = new EditorController();
+	eView->Init();
 
-	eView->show();
-	exec(2, 2, [&eView]() {
-
-	});
 }
+
+/*
+int main()
+{
+using namespace nana;
+
+form fm;
+place plc(fm);
+plc.div("<abc>");
+button a(fm), b(fm);
+plc["abc"] << a << b;
+plc.collocate();
+fm.show();
+
+a.events().click([&plc]
+{
+plc.modify("abc", "margin=10 vert<efg>"); //modify the field 'abc' and add a new child field 'efg'.
+plc.collocate();
+});
+
+exec();
+}
+
+*/
 
 /*
 class notepad_form : public form {
