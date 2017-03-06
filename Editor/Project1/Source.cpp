@@ -30,14 +30,9 @@ using namespace nana;
 
 
 int main() {
-	EditorView* eView;
-	EditorData* eData;
+	
 	EditorController* eController;
-
-	eView = new EditorView();
-	eData = new EditorData();
 	eController = new EditorController();
-	eView->Init();
 
 }
 
