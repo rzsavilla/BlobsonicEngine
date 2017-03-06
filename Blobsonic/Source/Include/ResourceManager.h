@@ -12,6 +12,7 @@
 #include "QuatCamera.h"
 #include "Material.h"
 #include "GLSLProgram.h"
+#include "UI.h"
 
 class ResourceManager {
 private:
@@ -19,6 +20,8 @@ private:
 	std::vector<std::pair<std::string, Texture*>> m_vTextures;		//!< Stores textures
 	std::vector<std::pair<std::string, Material>> m_vMaterials;		//!< Stores materials
 	std::vector<std::pair<std::string, std::shared_ptr<GLSLProgram>>> m_vShaders;		//!<Stores shaders
+	std::vector<std::pair<std::string, UI>> m_UI;
+
 public:
 	ResourceManager();	//!< Default constructor
 

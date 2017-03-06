@@ -48,7 +48,7 @@ protected:
 	/*! Pointer to resource manager
 		Allows scenes to access loaded resources
 	*/
-	ResourceManager* m_ptrResources;						
+	ResourceManager* m_ptrResources;	
 public:
 	~Scene() {};	//!< Destructor
 	/**

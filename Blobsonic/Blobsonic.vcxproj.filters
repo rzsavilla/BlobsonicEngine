@@ -185,6 +185,9 @@
     <ClInclude Include="Source\Include\Capsule.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Bitmap.cpp">
@@ -306,6 +309,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Capsule.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
