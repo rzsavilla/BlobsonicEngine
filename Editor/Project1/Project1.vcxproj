@@ -120,12 +120,14 @@
     <ClCompile Include="EditorController.cpp" />
     <ClCompile Include="EditorData.cpp" />
     <ClCompile Include="EditorView.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EditorController.h" />
     <ClInclude Include="EditorData.h" />
     <ClInclude Include="EditorView.h" />
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
