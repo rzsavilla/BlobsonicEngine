@@ -19,7 +19,7 @@ using namespace nana;
 class EditorView
 {
 public:
-	EditorView();
+	EditorView(std::vector<std::pair<std::string, Scene>> m_vScene);
 	~EditorView();
 	void Init();
 

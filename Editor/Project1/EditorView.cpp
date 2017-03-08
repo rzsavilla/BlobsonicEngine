@@ -19,9 +19,11 @@ using namespace std;
 #include <nana/gui/widgets/group.hpp>
 #include <nana/gui/widgets/label.hpp>
 
+#include "Scene.h"
+
 using namespace nana;
 
-EditorView::EditorView(){
+EditorView::EditorView(std::vector<std::pair<std::string, Scene>> m_vScene){
 }
 
 EditorView::~EditorView(){

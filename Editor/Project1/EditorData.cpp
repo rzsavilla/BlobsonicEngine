@@ -1,8 +1,9 @@
 #include "EditorData.h"
+#include "Scene.h"
+#include <thread>
 
 
-
-EditorData::EditorData()
+EditorData::EditorData(std::vector<std::pair<std::string, Scene>> m_vScene)
 {
 }
 
