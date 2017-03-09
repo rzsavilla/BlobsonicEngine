@@ -187,7 +187,7 @@
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>1000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>0.5f</RotSpeed>
+		<RotSpeed>100f</RotSpeed>
 	</Camera>
 	
 </Scene>

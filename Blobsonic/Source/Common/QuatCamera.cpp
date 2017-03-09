@@ -135,8 +135,8 @@ glm::quat fromAxisAngle(glm::vec3 axis, float angle)
 /////////////////////////////////////////////////////////////////////////////////////////////
 void QuatCamera::rotate(const float yaw, const float pitch)
 {
-	glm::quat xPitch = fromAxisAngle(WORLDX, pitch);
-	glm::quat yYaw = fromAxisAngle(WORLDY, yaw);
+	glm::quat xPitch = fromAxisAngle(WORLDX, pitch/10);
+	glm::quat yYaw = fromAxisAngle(WORLDY, yaw/10);
 
 	_orientation = xPitch * _orientation * yYaw;
 
@@ -193,6 +193,8 @@ void QuatCamera::updateView()
 	_view[3][1] = -glm::dot(_yaxis, _position); //Translation y
 	_view[3][2] = -glm::dot(_zaxis, _position); //Translation z
 	m_bHasTarget = false;
+
+	//std::cout << 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -207,7 +209,7 @@ void QuatCamera::roll(const float z)
 	but, of course, should update the camera 'orientation' with
 	a roll
 	*/
-	glm::quat zRoll = (fromAxisAngle(WORLDZ, z));
+	glm::quat zRoll = (fromAxisAngle(WORLDZ, z/10));
 	_orientation = _orientation * zRoll;
 	_orientation = glm::normalize(_orientation);
 	updateView();

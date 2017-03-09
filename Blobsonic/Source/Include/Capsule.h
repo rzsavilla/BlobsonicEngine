@@ -1,7 +1,6 @@
 #ifndef CAPSULE_H
 #define CAPSULE_H
 
-
 //Chris O'Neill
 
 #include "Model.h"
