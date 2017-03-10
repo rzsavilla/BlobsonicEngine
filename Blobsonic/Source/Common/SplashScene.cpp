@@ -1,5 +1,6 @@
 #include <stdafx.h>
 #include "SplashScene.h"
+#include "SceneMessages.h"
 
 SplashScene::SplashScene()
 {

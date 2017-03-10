@@ -1,5 +1,6 @@
 #include <stdafx.h>
 #include "GameScene.h"
+#include "SceneMessages.h"
 
 void GameScene::updateCamera(std::shared_ptr<GLSLProgram> shader, QuatCamera cam)
 {

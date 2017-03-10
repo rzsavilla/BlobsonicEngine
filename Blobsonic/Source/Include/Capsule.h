@@ -7,7 +7,7 @@
 #include "Physical.h"
 
 
-class Capsule : public Physical, Component
+class Capsule : public Physical
 {
 public:
 	Capsule(); // <! Default Constructor for a box/cube physics

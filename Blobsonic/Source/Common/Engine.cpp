@@ -1,100 +1,180 @@
 #include <stdafx.h>
 #include "Engine.h"
-#include "MyTimer.h"
+#include "Model.h"
+#include "Transformable.h"
+#include "Camera.h"
+#include "Render.h"
+#include "EngineMessages.h"
 
-Engine::Engine()
+#include "InputMessages.h"
+
+void Engine::Engine::loop()
 {
+	double dFPSLimit = 1.0 / 60.0;
 
-}
-
-void Engine::handleMessages()
-{
-	//Iterate through components
-	for (auto it = m_ptrComponents.begin(); it != m_ptrComponents.end(); ++it) {
-
-		//Send messages to components
-		for (int i = 0; i < m_vMessages.size(); i++) {
-			(*it)->handleMessage(m_vMessages.at(i)); //Components will handle the messages
-		}
-	}
-
-	//Engine reads messages
-	std::string s;
-	for (int i = 0; i < m_vMessages.size(); i++) {
-		s = m_vMessages.at(i)->sID;
-		if (s == "Scene_Exit") {
-			m_bRunning = false;
-		}
-	}
-
-	m_vMessages.clear();		//Remove all messages
-}
-
-Engine::~Engine()
-{
-
-}
-
-std::shared_ptr<Engine>& Engine::getInstance()
-{
-	static std::shared_ptr<Engine> instance = nullptr;
-
-	if (!instance)
-	{
-		if (!instance) {
-			instance.reset(new Engine());
-		}
-	}
-
-	return instance;
-}
-
-void Engine::init()
-{
-	m_bRunning = true;
-
-	//Initialize attached components
-	for (auto it = m_ptrComponents.begin(); it != m_ptrComponents.end(); ++it) {
-			(*it)->init();
-	}
-
-	handleMessages();
-}
-
-void Engine::run()
-{
-	//Timestep
-	MyTimer dtTimer;
-	float currentTime = 0.0f;
-	float fOldTime = 0.0f;
-
-	//Frame counter
-	MyTimer fpsTimer;
-	int iTotalFrames = 0;
-
+	double dPrevTime = glfwGetTime();
+	double dTimer = dPrevTime;
+	double dt = 0.0;
+	double dCurrentTime = 0;
+	int iFrames = 0;
+	int iUpdates = 0;
 	while (m_bRunning) {
-		currentTime = dtTimer.getElapsed();
-		float dt = currentTime - fOldTime;
-		fOldTime = currentTime;
+		//Calculate delta time
+		dCurrentTime = glfwGetTime();
+		dt += (dCurrentTime - dPrevTime) / dFPSLimit;
+		dPrevTime = dCurrentTime;
 
-		handleMessages();	//Pass messages to components
-		//Update components
-		for (auto it = m_ptrComponents.begin(); it != m_ptrComponents.end(); ++it) {
-			(*it)->update(dt);
+		//Limit update
+		while (dt >= 1.0) {
+			update((float)dt);
+			iUpdates++;
+			dt--;
 		}
+
+		//Render
+		render();
+		iFrames++;	//Count frames
+
+		glfwSwapInterval(1);		//VSYNC
+		glfwSwapBuffers(m_window);
+
 		glfwPollEvents();
 
-		//When 1 second has passed
-		if (fpsTimer.getElapsed() > 1.0f) {	
-			//Pass frames to components
-			m_vMessages.push_back(std::make_shared<EngineMessage::FrameCount>(iTotalFrames));
-			//std::cout << iTotalFrames << "\n";
-			iTotalFrames = 0;	//Reset frame count
-			fpsTimer.reset();
+		MessageHandler::getInstance()->notify();
+
+		//Reset every second
+		if (glfwGetTime() - dTimer > 1.0) {
+			//std::cout << "FPS:" << iFrames << "\n";
+			dTimer++;
+			iUpdates = 0;
+			iFrames = 0;
 		}
-		else {
-			//Count frame
-			iTotalFrames++;
+	}
+
+	////Close window and terminate GLFW
+	glfwTerminate();
+}
+
+void Engine::Engine::update(float dt)
+{
+	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+		if (it->first != typeid(System::Render)) {	//Do not process render systems
+			//--System process entities--//
+
+		}
+	}
+
+	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+		if (it->first != typeid(System::Render)) {	//Do not process render systems
+			//Update Systems
+			(*it).second->update(dt);
+		}
+	}
+}
+
+void Engine::Engine::render()
+{
+	//Clear Screen
+	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
+	gl::ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	//Render systems process
+	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+		if (it->first == typeid(System::Render)) {	//Only process render systems
+			//Render entities
+
+		}
+	}
+}
+
+Engine::Engine::Engine()
+
+{
+	m_bRunning = false;
+}
+
+void Engine::Engine::init(int width, int height)
+{
+	m_State = EngineState::Splash;
+
+	MessageHandler::getInstance()->attachReceiver(this);
+
+	m_iWindowWidth = width;
+	m_iWindowHeight = height;
+	m_sWindowTitle = "Enter the Infinite";
+	//----------------------------GLWF---------------------//
+	//Initialize GLFW 
+	if (!glfwInit()) exit(EXIT_FAILURE);
+
+	// Select OpenGL 4.3 with a forward compatible core profile.
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, FALSE);
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, TRUE);
+	glfwWindowHint(GLFW_DEPTH_BITS, 32);		//Enable Depth buffer
+
+												//Open Window
+	m_window = glfwCreateWindow(m_iWindowWidth, m_iWindowHeight, m_sWindowTitle.c_str(), NULL, NULL);
+
+	glfwMakeContextCurrent(m_window);
+	glfwSetKeyCallback(m_window, key_callback);
+
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	//Tell systems a window has been set
+	MessageHandler::getInstance()->sendMessage(std::make_shared<EngineMessage::SetWindow>(m_window));
+
+	if (m_window == NULL) {
+		std::cout << "Failed to load window\n";
+		system("pause");
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+	glfwMakeContextCurrent(m_window);
+	//Load OpenGL functions
+	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
+	if (!didLoad) {
+		//Clean up and abort
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+
+	gl::Enable(gl::DEPTH_TEST);
+	gl::Enable(gl::CULL_FACE);
+	gl::CullFace(gl::BACK);
+}
+
+void Engine::Engine::run()
+{
+	//Start Game loop
+	m_bRunning = true;
+	this->loop();
+}
+
+void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
+{
+	for (int i = 0; i < msgs->size(); i++) {
+		std::string s = msgs->at(i)->sID;
+
+		if (s == "Input_KeyPress") {
+			//Get data key data from message
+			auto data = static_cast<InputMessage::KeyPress*>(msgs->at(i).get());
+			if (data->m_iAction == GLFW_PRESS || data->m_iAction == GLFW_REPEAT) {	//Key is pressed
+				switch (data->m_iKey)
+				{
+				case GLFW_KEY_ESCAPE:
+					m_bRunning = false;	//End game loop
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		else if (s == "SwitchState") {
+			auto data = static_cast<EngineMessage::SwitchState*>(msgs->at(i).get());
+			m_State = EngineState(data->m_iState);
 		}
 	}
 }

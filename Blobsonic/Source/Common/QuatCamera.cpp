@@ -116,18 +116,18 @@ void QuatCamera::setNearAndFarPlanes(float nearPlane, float farPlane)
 //This is to construct the rotation quaternion
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-glm::quat fromAxisAngle(glm::vec3 axis, float angle)
-{
-	glm::quat rotation;
-
-	float r = (angle);
-
-	rotation.w = cos(angle / 2);
-	rotation.x = sin(angle / 2) * axis.x;
-	rotation.y = sin(angle / 2) * axis.y;
-	rotation.z = sin(angle / 2) * axis.z;
-	return rotation;
-}
+//glm::quat fromAxisAngle(glm::vec3 axis, float angle)
+//{
+//	glm::quat rotation;
+//
+//	float r = (angle);
+//
+//	rotation.w = cos(angle / 2);
+//	rotation.x = sin(angle / 2) * axis.x;
+//	rotation.y = sin(angle / 2) * axis.y;
+//	rotation.z = sin(angle / 2) * axis.z;
+//	return rotation;
+//}
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Rotate the camera
@@ -135,14 +135,14 @@ glm::quat fromAxisAngle(glm::vec3 axis, float angle)
 /////////////////////////////////////////////////////////////////////////////////////////////
 void QuatCamera::rotate(const float yaw, const float pitch)
 {
-	glm::quat xPitch = fromAxisAngle(WORLDX, pitch/10);
+	/*glm::quat xPitch = fromAxisAngle(WORLDX, pitch/10);
 	glm::quat yYaw = fromAxisAngle(WORLDY, yaw/10);
 
 	_orientation = xPitch * _orientation * yYaw;
 
 	_orientation = glm::normalize(_orientation);
 
-	updateView();
+	updateView();*/
 }
 
 
@@ -151,11 +151,11 @@ void QuatCamera::rotate(const float yaw, const float pitch)
 /////////////////////////////////////////////////////////////////////////////////////////////
 void QuatCamera::pan(const float x, const float y)
 {
-	_position += _xaxis * x;
-	_position += _yaxis * -y;
+	//_position += _xaxis * x;
+	//_position += _yaxis * -y;
 
-	//Now call update()
-	updateView();
+	////Now call update()
+	//updateView();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,9 +163,9 @@ void QuatCamera::pan(const float x, const float y)
 /////////////////////////////////////////////////////////////////////////////////////////////
 void QuatCamera::zoom(const float z)
 {
-	_position -= _zaxis * z;
-	//Now call updateView()
-	updateView();
+	//_position -= _zaxis * z;
+	////Now call updateView()
+	//updateView();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -209,10 +209,10 @@ void QuatCamera::roll(const float z)
 	but, of course, should update the camera 'orientation' with
 	a roll
 	*/
-	glm::quat zRoll = (fromAxisAngle(WORLDZ, z/10));
-	_orientation = _orientation * zRoll;
-	_orientation = glm::normalize(_orientation);
-	updateView();
+	//glm::quat zRoll = (fromAxisAngle(WORLDZ, z/10));
+	//_orientation = _orientation * zRoll;
+	//_orientation = glm::normalize(_orientation);
+	//updateView();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,25 +221,25 @@ void QuatCamera::roll(const float z)
 void QuatCamera::reset(void)
 {
 	//Initialise camera axes
-	_xaxis = WORLDX;
-	_yaxis = WORLDY;
-	_zaxis = WORLDZ;
+	//_xaxis = WORLDX;
+	//_yaxis = WORLDY;
+	//_zaxis = WORLDZ;
 
-	//Initialise camera position 
-	_position = glm::vec3(0.0f, 0.0f, 20.0f);
+	////Initialise camera position 
+	//_position = glm::vec3(0.0f, 0.0f, 20.0f);
 
-	//Initialise the orientation
-	_orientation = glm::quat(1.0, 0.0, 0.0, 0.0);
+	////Initialise the orientation
+	//_orientation = glm::quat(1.0, 0.0, 0.0, 0.0);
 
-	//Initialise camera perspective parameters
-	_fieldOfView = glm::radians(50.0f);
-	_nearPlane = 0.01f;
-	_farPlane = 1000.0f;
-	_aspectRatio = 4.0f / 3.0f;
+	////Initialise camera perspective parameters
+	//_fieldOfView = glm::radians(50.0f);
+	//_nearPlane = 0.01f;
+	//_farPlane = 1000.0f;
+	//_aspectRatio = 4.0f / 3.0f;
 
-	_projection = glm::perspective(_fieldOfView, _aspectRatio, _nearPlane, _farPlane);
+	//_projection = glm::perspective(_fieldOfView, _aspectRatio, _nearPlane, _farPlane);
 
-	updateView();
+	//updateView();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,9 +247,8 @@ void QuatCamera::reset(void)
 /////////////////////////////////////////////////////////////////////////////////////////////
 glm::mat4 QuatCamera::view()
 {
-
-	this->updateView();
-	return _view;
+	/*this->updateView();
+	return _view;*/
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

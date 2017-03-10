@@ -10,7 +10,7 @@
 #include "Transformable.h"
 
 
-class Physical : public Transformable, Component
+class Physical : public Transformable
 {
 public:
 	

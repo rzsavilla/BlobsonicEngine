@@ -8,7 +8,7 @@
 #include "Physical.h"
 
 
-class Sphere : public Physical, Component
+class Sphere : public Physical
 {
 public:
 	Sphere(); // <! Default Constructor for a box/cube physics

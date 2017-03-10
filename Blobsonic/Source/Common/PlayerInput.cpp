@@ -1,6 +1,6 @@
 #include <stdafx.h>
 #include "PlayerInput.h"
-
+/*
 void PlayerInput::handleKeyPress(KeyEvent* e)
 {
 	int ei= (unsigned int)e->iKey;
@@ -41,3 +41,4 @@ void PlayerInput::update(float dt)
 {
 
 }
+*/

@@ -63,7 +63,7 @@ void SceneComponent::init()
 
 		m_bWindowLoaded = true;
 		//Pass GLFW window pointer to components
-		m_ptrLocalMessages->push_back(std::make_shared<SetWindow>(m_ptrWindow));
+		//m_ptrLocalMessages->push_back(std::make_shared<SetWindow>(m_ptrWindow));
 
 		//////Freetype /////////
 		/*
@@ -152,7 +152,7 @@ void SceneComponent::init()
 	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
 		(*it).second->setCharacters(&m_Characters);		//Allows scene to create Text
 		(*it).second->setResources(&m_res);				//Access to resources
-		(*it).second->setMessages(m_ptrLocalMessages);	//Allow scene to create messages for components
+		//(*it).second->setMessages(m_ptrLocalMessages);	//Allow scene to create messages for components
 		(*it).second->initScene();
 	}
 	m_bReload = false;
@@ -175,8 +175,8 @@ void SceneComponent::handleMessage(std::shared_ptr<Message> msg)
 		m_bReload = true;
 	}
 	else if (msg->sID == "Engine_FrameCount") {
-		int i = static_cast<EngineMessage::FrameCount*>(msg.get())->iFrames;	//get data from message
-		m_FPSText->setString("FPS:" + std::to_string(i));
+		//int i = static_cast<EngineMessage::FrameCount*>(msg.get())->iFrames;	//get data from message
+		//m_FPSText->setString("FPS:" + std::to_string(i));
 	}
 	else if (msg->sID == "Scene_Game") {
 		//Look for game scene index
@@ -197,14 +197,14 @@ void SceneComponent::update(float dt)
 	//Create draw message for render component
 	if (!m_bReload) {
 		//Update active scene
-		m_scenes.at(m_uiActiveScene).second->update(dt);
+		//m_scenes.at(m_uiActiveScene).second->update(dt);
 		//Draw message for active scene
-		m_ptrLocalMessages->push_back(std::make_shared<RenderComponent::Draw>(m_scenes.at(m_uiActiveScene).second));
+		//m_ptrLocalMessages->push_back(std::make_shared<RenderComponent::Draw>(m_scenes.at(m_uiActiveScene).second));
 		//Draw message for texts
 		for (auto it = m_vTexts.begin(); it != m_vTexts.end(); ++it) {
 			//m_ptrLocalMessages->push_back(std::make_shared<RenderComponent::Draw>((*it).second));
 		}
-		m_ptrLocalMessages->push_back(std::make_shared<RenderComponent::Draw>(m_FPSText));
+		//m_ptrLocalMessages->push_back(std::make_shared<RenderComponent::Draw>(m_FPSText));
 	}
 	else {
 		init();	//Reload scenes

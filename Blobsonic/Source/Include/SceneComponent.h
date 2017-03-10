@@ -15,7 +15,7 @@ https://learnopengl.com/#!In-Practice/Text-Rendering
 #include "Component.h"
 #include "Text.h"
 
-class SceneComponent: public Component {
+class SceneComponent: public Component::Component {
 private:
 	GLFWwindow *m_ptrWindow;			//!< Game window
 	ResourceManager m_res;				//!< Stores all game resources

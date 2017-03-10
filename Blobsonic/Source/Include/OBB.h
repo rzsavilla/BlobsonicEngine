@@ -7,7 +7,7 @@
 #include "Physical.h"
 
 
-class OBB : public Physical , Component
+class OBB : public Physical
 {
 public:
 	OBB(); // <! Default Constructor for a box/cube physics

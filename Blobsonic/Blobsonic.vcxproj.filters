@@ -22,14 +22,56 @@
     <Filter Include="Header Files\GameObject">
       <UniqueIdentifier>{403e3c20-75b5-4be1-958a-7d883ac2d01a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObject\Components">
-      <UniqueIdentifier>{79c29cea-29c2-449e-8918-c86b9b521a8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{3b6e529e-97fb-4724-8c29-665336f33ade}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GameObject\Components">
       <UniqueIdentifier>{8a1a234f-6431-42af-941c-042876951977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{95186cc3-86aa-4dd8-9596-e4766c4144f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Handler">
+      <UniqueIdentifier>{f7ab8cba-959c-4fce-af94-59f82e894bcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\System">
+      <UniqueIdentifier>{11a948d2-71dc-4054-a291-49878e2098c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\System\Controller">
+      <UniqueIdentifier>{3916b8ed-5f83-45e1-b5d1-0dc3060a95ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{b425dff6-28fd-4c45-9893-e4f27681348a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Component">
+      <UniqueIdentifier>{536f81b5-392d-40ce-b5dd-31b109d1fa46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\System">
+      <UniqueIdentifier>{bc1d7956-1575-4406-9166-851fef073223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\System\Contoller">
+      <UniqueIdentifier>{ba2f99ec-ffac-476a-8b32-58397d9967e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Messages">
+      <UniqueIdentifier>{bbe272f5-f5e9-49cb-865f-ea538f4e2364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Res">
+      <UniqueIdentifier>{ce8bed7f-fbd4-4790-be36-432b52cbc09b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Res">
+      <UniqueIdentifier>{f7c2da59-7224-4db1-910f-bc9c63f569d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object">
+      <UniqueIdentifier>{5ea9b166-c1e0-4a74-a3d4-3b64e722b358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Entity">
+      <UniqueIdentifier>{f6fca48d-8f32-4492-9cfb-8f9355cbea80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Entity\Components">
+      <UniqueIdentifier>{79c29cea-29c2-449e-8918-c86b9b521a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Messages">
+      <UniqueIdentifier>{7c8212ae-f7a8-4fd2-9334-0c97dfa7ca46}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,13 +107,7 @@
     <ClInclude Include="Source\Include\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\Drawable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\ft2build.h">
@@ -104,9 +140,6 @@
     <ClInclude Include="Source\Include\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\Message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -120,12 +153,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\QuatCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Scene.h">
@@ -162,10 +189,7 @@
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Movable.h">
-      <Filter>Header Files\GameObject\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Actor.h">
-      <Filter>Header Files\GameObject</Filter>
+      <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\OBB.h">
       <Filter>Header Files\Physics</Filter>
@@ -188,20 +212,71 @@
     <ClInclude Include="Source\Include\UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Component.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\System.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Message.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\MessageHandler.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\MessageReceiver.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\CameraMessages.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Camera.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Engine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Entity.h">
+      <Filter>Header Files\Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\EntityManager.h">
+      <Filter>Header Files\Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\EngineMessages.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\InputMessages.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\CameraSystem.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\PlayerController.h">
+      <Filter>Header Files\Engine\System\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Player.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\TransformableComponent.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\ModelComponent.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\ResourceManager.h">
+      <Filter>Header Files\Engine\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\SceneMessages.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Render.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\RenderMessages.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\Bitmap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\GameScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -223,16 +298,7 @@
     <ClCompile Include="Source\Common\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Model.cpp">
@@ -271,12 +337,6 @@
     <ClCompile Include="Source\Common\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -288,9 +348,6 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Movable.cpp">
       <Filter>Source Files\GameObject\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Actor.cpp">
-      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\OBB.cpp">
       <Filter>Source Files\Physics</Filter>
@@ -312,6 +369,33 @@
     </ClCompile>
     <ClCompile Include="Source\Common\UI.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Mesh.cpp">
+      <Filter>Source Files\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Texture.cpp">
+      <Filter>Source Files\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Text.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Bitmap.cpp">
+      <Filter>Source Files\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\main.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\MessageHandler.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\CameraSystem.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

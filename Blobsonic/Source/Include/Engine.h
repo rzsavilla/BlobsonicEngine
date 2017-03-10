@@ -1,52 +1,64 @@
-/*
-//Singleton using smartpointer implementation guide
-http://silviuardelean.ro/2012/06/05/few-singleton-approaches/
-
-//Component based engine design
-http://www.randygaul.net/2013/05/20/component-based-engine-design/
-*/
-
-/**
-* @class	Engine
-* @brief	Stores engine components
-* Only a single Engine instance can exist (Singleton).
-* The Engine has components that are attached to it when running the Engine updates all of its components
-* and stores a list of messages that each component has a pointer to allowing them to create messages of 
-* their own in order to communicate with all the other components attached to the Engine
-*/
-
 #pragma once
 
 #include <stdafx.h>
 #include <memory>
-#include <mutex>
-#include "Render.h"
-#include "SceneLoader.h"
+#include "EntityManager.h"
+#include "ResourceManager.h"
+#include "MessageHandler.h"
+#include "InputMessages.h"
+#include "System.h"
 
-class Engine {
-private:
-	//////Singleton///////
-	Engine();		//!< Private Constructor
-	static bool m_bInstance;						//!< Instance flag
-	static std::shared_ptr<Engine>& m_ptrInstance;	//!< Pointer to instance
-	/////Component Functions/Variables///////
-	std::vector<std::unique_ptr<Component>> m_ptrComponents;	//!< Stores all components object has.
-	std::vector<std::shared_ptr<Message>> m_vMessages;			//!< Stores all messages created by components
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	MessageHandler::getInstance()->sendMessage(std::make_shared<InputMessage::KeyPress>(key, action));
+}
 
-	void handleMessages();	//!< Passes messages to all engine components
-	bool m_bRunning;		//!< Flag for if engine is running
-public:
-	
-	//////Singleton///////
-	~Engine();		//!< Destructor
-	static std::shared_ptr<Engine>& getInstance();	//!< Returns pointer to engine instance
+namespace Engine {
+	class Engine : public MessageReceiver {
+	private:
+		//! Stores ptr to engine system
+		std::map<std::type_index, std::shared_ptr<System::System>> m_ptrSystems;
+		bool m_bRunning;	//!< Flag to start and end game loop
 
-	//! Attaches a component
-	void attachComponent(std::unique_ptr<Component> newComponent) {
-		m_ptrComponents.push_back(std::move(newComponent));
-		m_ptrComponents.back()->setLocalMsgPtr(&m_vMessages);
-	}
+		ResourceManager m_resourceManager;
+		//EntityManager m_entityManager;
 
-	void init();		//!< Initialize engine
-	void run();			//!< Starts the engine loop
-};
+	private:	//Scenes
+		enum EngineState {
+			Splash,
+			Main,
+			Game,
+		};
+
+	private:	//GLFW
+		int m_iWindowWidth;
+		int m_iWindowHeight;
+		std::string m_sWindowTitle;
+		GLFWwindow* m_window;		//!< GLFW Window
+	private:
+		EngineState m_State;
+		bool m_bIsInitialized;
+
+		void loop();			//!< Game Loop
+		void update(float dt);	//!< System updates
+		void render();			//!< System draw calls
+	public:
+		Engine();		//!< Default constructor
+
+		template<typename T, typename... Args>
+		void attachSystem(Args &&...args) {
+			m_ptrSystems[typeid(T)] = std::make_shared<T>(std::forward<Args>(args)...);
+		}
+
+		template<typename T>
+		void detachSystem() {
+			m_ptrSystems.erase(typeid(T));
+		}
+
+		void init(int width, int height); //!< Initialize Engine
+		void run();						//!< Start Game loop
+
+										//---Message Receiver--//
+		void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
+	};
+}
