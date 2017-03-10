@@ -43,6 +43,11 @@ void Sphere::CollideWithSphere(Sphere* other)
 
 }
 
+void Sphere::CollideWithOBB(OBB * other)
+{
+
+}
+
 void Sphere::movementForTesting(float x, float y, float z)
 {
 	m_vPosition.x += x;

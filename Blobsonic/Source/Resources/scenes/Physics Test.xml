@@ -8,6 +8,11 @@
 	<Mesh> <ID>room_mesh</ID>
 		<File>Source\Resources\models\room.obj</File>
 	</Mesh>
+
+	<Mesh> <ID>sphere_mesh</ID>
+		<File>Source\Resources\models\sphere.obj</File>
+	</Mesh>
+	
 	
 	<Texture> <ID>room_texture</ID>
 		<File>Source\Resources\textures\room.png</File>
@@ -99,7 +104,7 @@
 		</Origin>
 	</Model>	
 	
-	<Physics> <ID>GravityTest_model</ID>
+	<Physics> <ID>OBB</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
@@ -122,8 +127,9 @@
 		<Type>Box</Type>
 
 	</Physics>	
-	<Physics> <ID>GravityTest_model2</ID>
-		<Mesh>cube_mesh</Mesh>
+	<Physics> 
+		<ID>Sphere</ID>
+		<Mesh>sphere_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
@@ -178,11 +184,12 @@
 			<Y>40.0f</Y>
 			<Z>-40.0f</Z>
 		</Position>
-		<Orientation>
+		
+		<View>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
-		</Orientation>
+		</View>
 		<FOV>45.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>1000.0f</FarPlane>

@@ -70,6 +70,7 @@ private:
 	//Camera position vector and Quaternoin to represent camera orientation
 	glm::vec3 _position;
 	glm::quat _orientation;
+	
 
 	glm::mat4 _view;
 	glm::mat4 _projection;
