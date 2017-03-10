@@ -16,6 +16,16 @@
 #include "Text.h"
 
 /* Abstract Scene class*/
+
+
+//class Scene {
+//private:
+//
+//public:
+//	Scene();
+//
+//};
+
 class Scene: public Drawable
 {
 protected:

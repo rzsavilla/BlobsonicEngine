@@ -81,6 +81,7 @@
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
     <ClInclude Include="Source\Include\System.h" />
+    <ClInclude Include="Source\Include\TestScene.h" />
     <ClInclude Include="Source\Include\Text.h" />
     <ClInclude Include="Source\Include\Texture.h" />
     <ClInclude Include="Source\Include\tinyxml2.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
     <ClCompile Include="Source\Common\UI.cpp" />
+    <ClCompile Include="Source\Include\TestScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5189E8BA-F4EE-426F-AA59-E3CA4757AD1F}</ProjectGuid>

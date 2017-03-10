@@ -73,6 +73,9 @@
     <Filter Include="Source Files\Engine\Messages">
       <UniqueIdentifier>{7c8212ae-f7a8-4fd2-9334-0c97dfa7ca46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Scenes">
+      <UniqueIdentifier>{23d5f0be-204a-4da5-a29e-9d5da9604d69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -153,9 +156,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\QuatCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\SceneComponent.h">
@@ -275,6 +275,12 @@
     <ClInclude Include="Source\Include\RenderMessages.h">
       <Filter>Header Files\Engine\Messages</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\TestScene.h">
+      <Filter>Header Files\Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Scene.h">
+      <Filter>Header Files\Engine\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -314,9 +320,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\QuatCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\ResourceManager.cpp">
@@ -396,6 +399,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\CameraSystem.cpp">
       <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Render.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Include\TestScene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

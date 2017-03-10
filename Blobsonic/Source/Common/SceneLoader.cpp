@@ -436,34 +436,35 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	}
 	using namespace tinyxml2;
 	std::string sID;
-	if (str == "Game") {
-		std::shared_ptr<GameScene> gameScene = std::make_unique<GameScene>();	//Create scene
 
-		if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
-		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
-		{
-			if (strcmp(element->Value(), "ID") == 0) {
-				if (readElementText(element, c)) {
-					sID = std::string(c, strlen(c));		//ID
-				}
-			}
-			else if (strcmp(element->Value(), "Model") == 0) {
-				gameScene->addModel(loadModel(element));
-			}
-			else if (strcmp(element->Value(), "Light") == 0) {
-				gameScene->addLight(loadLight(element));
-			}
-			else if (strcmp(element->Value(), "Camera") == 0) {
-				gameScene->addCamera(loadCamera(element));
-			}
-			else if (strcmp(element->Value(), "Robot") == 0) {
-				gameScene->addRobot(loadRobot(element));
-			}
-			else if (strcmp(element->Value(), "Physics") == 0) {
-				gameScene->addPhysical(loadModel(element));
-			}
-		}
-		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));
+	if (str == "Game") {
+		//std::shared_ptr<GameScene> gameScene = std::make_unique<GameScene>();	//Create scene
+
+		//if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
+		//for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+		//{
+		//	if (strcmp(element->Value(), "ID") == 0) {
+		//		if (readElementText(element, c)) {
+		//			sID = std::string(c, strlen(c));		//ID
+		//		}
+		//	}
+		//	else if (strcmp(element->Value(), "Model") == 0) {
+		//		gameScene->addModel(loadModel(element));
+		//	}
+		//	else if (strcmp(element->Value(), "Light") == 0) {
+		//		gameScene->addLight(loadLight(element));
+		//	}
+		//	else if (strcmp(element->Value(), "Camera") == 0) {
+		//		gameScene->addCamera(loadCamera(element));
+		//	}
+		//	else if (strcmp(element->Value(), "Robot") == 0) {
+		//		gameScene->addRobot(loadRobot(element));
+		//	}
+		//	else if (strcmp(element->Value(), "Physics") == 0) {
+		//		gameScene->addPhysical(loadModel(element));
+		//	}
+		//}
+		//m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));
 	}
 	else if (str == "Splash") {
 		std::shared_ptr<SplashScene> splashScene = std::make_unique<SplashScene>();

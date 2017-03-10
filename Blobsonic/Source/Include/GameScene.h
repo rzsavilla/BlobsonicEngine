@@ -19,6 +19,7 @@
 #include "OBB.h"
 #include "AABB.h"
 
+/*
 class GameScene :public Scene {
 private:
 	std::vector<std::pair<std::string, Model>> m_vModels;		//!< Store Models with id
@@ -59,3 +60,5 @@ public:
 	void checkForCollision(float dt);			//!<Check through objects for collision
 	void draw();								//!< Draw scene
 };
+
+*/

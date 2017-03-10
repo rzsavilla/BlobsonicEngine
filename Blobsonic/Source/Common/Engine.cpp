@@ -35,7 +35,7 @@ void Engine::Engine::loop()
 		render();
 		iFrames++;	//Count frames
 
-		glfwSwapInterval(1);		//VSYNC
+		glfwSwapInterval(0);		//VSYNC
 		glfwSwapBuffers(m_window);
 
 		glfwPollEvents();
@@ -44,7 +44,7 @@ void Engine::Engine::loop()
 
 		//Reset every second
 		if (glfwGetTime() - dTimer > 1.0) {
-			//std::cout << "FPS:" << iFrames << "\n";
+			std::cout << "FPS:" << iFrames << "\n";
 			dTimer++;
 			iUpdates = 0;
 			iFrames = 0;
@@ -101,7 +101,7 @@ void Engine::Engine::init(int width, int height)
 
 	m_iWindowWidth = width;
 	m_iWindowHeight = height;
-	m_sWindowTitle = "Enter the Infinite";
+	m_sWindowTitle = "Game Engine";
 	//----------------------------GLWF---------------------//
 	//Initialize GLFW 
 	if (!glfwInit()) exit(EXIT_FAILURE);
