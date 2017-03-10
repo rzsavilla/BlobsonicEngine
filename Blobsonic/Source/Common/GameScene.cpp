@@ -99,12 +99,22 @@ void GameScene::addPhysical(std::pair<std::string, Model> model)
 	
 }
 
+void GameScene::addButton(std::pair<std::string, Button> button)
+{
+	m_vButton.push_back(button);
+}
+
 void GameScene::initScene()
 {
 	m_iKey_W = 0, m_iKey_S = 0, m_iKey_A = 0, m_iKey_D = 0;
 	m_dMouseX = 0.0, m_dMouseY = 0.0;
 	m_dPrevMouseX = 0.0, m_dPrevMouseY = 0.0;
 	m_uiCameraActive = 0;
+
+	// Button initalizer
+	addButton(std::pair<std::string, Button>("MyButton", m_ptrResources->getMesh("cube_mesh")));
+	m_vButton.begin()->second.setShader(m_ptrResources->getShader("button_shader"));
+	m_vButton.begin()->second.setMaterial(m_ptrResources->getMaterial("default_material"));
 
 	//Create Text
 	m_PickupCounterText = std::make_shared<Text>("", m_ptrCharacters, 1.0f, 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.5f);
@@ -276,7 +286,7 @@ void GameScene::draw()
 
 	for(auto physicalsIt = m_vOBB.begin(); physicalsIt != m_vOBB.end(); ++physicalsIt)
 	{
-		//set the sahder for the physics object
+		//set the shader for the physics object
 		(*physicalsIt).second.m_RenderModel.getShader()->use();
 		//pass data to the camera
 		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
@@ -287,7 +297,7 @@ void GameScene::draw()
 	}
 	for (auto physicalsIt = m_vAABB.begin(); physicalsIt != m_vAABB.end(); ++physicalsIt)
 	{
-		//set the sahder for the physics object
+		//set the shader for the physics object
 		(*physicalsIt).second.m_RenderModel.getShader()->use();
 		//pass data to the camera
 		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
@@ -299,7 +309,7 @@ void GameScene::draw()
 
 	for (auto physicalsIt = m_vSphere.begin(); physicalsIt != m_vSphere.end(); ++physicalsIt)
 	{
-		//set the sahder for the physics object
+		//set the shader for the physics object
 		(*physicalsIt).second.m_RenderModel.getShader()->use();
 		//pass data to the camera
 		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
@@ -308,5 +318,19 @@ void GameScene::draw()
 		//Draw model
 		(*physicalsIt).second.m_RenderModel.draw();
 	}
+
+	// Button drawing
+	
+	for (auto buttonIt = m_vButton.begin(); buttonIt != m_vButton.end(); ++buttonIt) {
+		(*buttonIt).second.getShader()->use();
+		//Pass camera uniforms to shader (For active camera)
+		updateCamera((*buttonIt).second.getShader(), m_vCamera.at(m_uiCameraActive).second);
+		//Pass light uniforms to shaders
+		updateLights((*buttonIt).second.getShader());
+		//Draw model
+		(*buttonIt).second.draw();
+		
+	}
+	
 	gl::Disable(gl::DEPTH_TEST);
 }

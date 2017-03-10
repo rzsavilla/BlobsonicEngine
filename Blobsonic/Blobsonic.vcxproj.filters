@@ -57,6 +57,12 @@
     <None Include="Source\Resources\shader\text.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Source\Resources\shader\button.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Source\Resources\shader\button.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\Bitmap.h">

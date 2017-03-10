@@ -16,6 +16,7 @@
 #include "Component.h"
 #include "MyTimer.h"
 #include "Text.h"
+#include "Button.h"
 
 //physics
 #include "OBB.h"
@@ -28,6 +29,7 @@ private:
 	std::vector<std::pair<std::string, Light>> m_vLights;		//!< Store Lights with id
 	std::vector<std::pair<std::string, QuatCamera>> m_vCamera;	//!< Store Cameras with id
 	std::vector<std::pair<std::string, MyRobot>> m_vRobots;		//!< Store Robots with id
+	std::vector<std::pair<std::string, Button>> m_vButton;		//!< Store buttons with id
 	std::vector<std::pair<std::string, OBB>> m_vOBB;    //!< Store Physics
 	std::vector<std::pair<std::string, AABB>> m_vAABB;    //!< Store Physics
 	std::vector<std::pair<std::string, Sphere>> m_vSphere;    //!< Store Physics
@@ -57,6 +59,7 @@ public:
 	void addCamera(std::pair<std::string, QuatCamera> camera);		//!< Add light into the scene only one camera can be active
 	void addRobot(std::pair<std::string, MyRobot> robot);			//!< Add robot into the scene currenly only uses the first element
 	void addPhysical(std::pair<std::string, Model> model);			//!< Add  pyscis object into the scene
+	void addButton(std::pair<std::string, Button> button);			//!< Add robot into the scene currenly only uses the first element
 
 	void initScene();							//!< Initialize scene
 	void handleInput(GLFWwindow* window);		//!< Handle user inputs

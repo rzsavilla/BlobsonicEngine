@@ -74,6 +74,10 @@
 		<Vertex>Source\Resources\shader\colour.vert</Vertex>
 		<Fragment>Source\Resources\shader\colour.frag</Fragment>
 	</Shader>
+	<Shader> <ID>button_shader</ID>
+		<Vertex>Source\Resources\shader\button.vert</Vertex>
+		<Fragment>Source\Resources\shader\button.frag</Fragment>
+	</Shader>
 	
 </Resources>
 

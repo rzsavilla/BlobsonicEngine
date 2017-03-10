@@ -21,6 +21,8 @@
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag" />
     <None Include="Source\Resources\shader\basic.vert" />
+    <None Include="Source\Resources\shader\button.frag" />
+    <None Include="Source\Resources\shader\button.vert" />
     <None Include="Source\Resources\shader\colour.frag" />
     <None Include="Source\Resources\shader\colour.vert" />
     <None Include="Source\Resources\shader\phong.frag" />
