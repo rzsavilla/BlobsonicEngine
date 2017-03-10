@@ -25,9 +25,8 @@ OBB::OBB(Model model)
 void OBB::update(const float dt)
 {
 
-	
-	
 	m_RenderModel.setPosition(m_vPosition);
+	m_vCenter = m_vPosition + m_vScale / 2.0f;
 
 }
 
@@ -112,7 +111,7 @@ void OBB::CollideWithBox(OBB* other)
 		
 		
 
-	//project 3 axis 
+	//project 6 axis 
 	for (int axisTest = 0; axisTest < 6; axisTest++)
 	{
 		//values for min other->and max
@@ -182,5 +181,15 @@ void OBB::movementForTesting(float x, float y, float z)
 	m_vPosition.x += x;
 	m_vPosition.y += y;
 	m_vPosition.z += z;
+}
+
+glm::vec3 OBB::getCenter()
+{
+	return m_vCenter;
+}
+
+glm::vec3 OBB::getExtents()
+{
+	return glm::vec3();
 }
 

@@ -244,7 +244,7 @@ void GameScene::update(float dt)
 
 void GameScene::checkForCollision(float dt)
 {
-	
+	m_vSphere[0].second.CollideWithOBB(&m_vOBB[0].second);
 
 }
 

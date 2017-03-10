@@ -25,6 +25,8 @@ public:
 
 	void movementForTesting(float x, float y, float z);
 
+	glm::vec3 getCenter();
+	glm::vec3 getExtents();
 
 private:
 

@@ -7,7 +7,7 @@
 #include "Model.h"
 #include "Physical.h"
 #include "OBB.h"
-
+#include <algorithm>
 
 class Sphere : public Physical, Component
 {
@@ -28,6 +28,9 @@ public:
 	Model m_RenderModel; // <! The rendered object for testing (Delete later)
 
 private:
+
+	float m_fRadius; //<! The radius of the sphere
+
 
 	};
 

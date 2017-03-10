@@ -139,9 +139,9 @@
 			<Z>0.0f</Z>
 		</Position>
 		<Scale>
-			<X>5.0f</X>
-			<Y>5.0f</Y>
-			<Z>5.0f</Z>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
