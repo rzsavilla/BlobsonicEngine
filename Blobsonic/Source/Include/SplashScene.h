@@ -9,8 +9,7 @@
 #include "Scene.h"
 #include "MyTimer.h"
 #include "Text.h"
-
-class SplashScene : public Scene {
+class SplashScene {
 private:
 	MyTimer timer;							//!< Timer for when to switch scenes
 	std::shared_ptr<Text> m_LoadingText;	//!< Splash screen loading text

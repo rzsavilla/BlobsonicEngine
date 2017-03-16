@@ -263,7 +263,6 @@ std::pair<std::string, Model> SceneLoader::loadPhysicsObject(tinyxml2::XMLElemen
 	return std::pair<std::string, Model>(sID, model);
 }
 
-
 std::pair<std::string, Light> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -466,18 +465,18 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 		//}
 		//m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));
 	}
-	else if (str == "Splash") {
-		std::shared_ptr<SplashScene> splashScene = std::make_unique<SplashScene>();
-		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
-		{
-			if (strcmp(element->Value(), "ID") == 0) {
-				if (readElementText(element, c)) {
-					sID = std::string(c, strlen(c));		//ID
-				}
-			}
-		}
-		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID, splashScene));
-	}
+	//else if (str == "Splash") {
+	//	std::shared_ptr<SplashScene> splashScene = std::make_unique<SplashScene>();
+	//	for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
+	//	{
+	//		if (strcmp(element->Value(), "ID") == 0) {
+	//			if (readElementText(element, c)) {
+	//				sID = std::string(c, strlen(c));		//ID
+	//			}
+	//		}
+	//	}
+	//	//m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID, splashScene));
+	//}
 	else {
 
 	}
@@ -547,11 +546,10 @@ glm::vec3 SceneLoader::parseVec3(tinyxml2::XMLElement * e)
 	return v;		//Return vector
 }
 
-SceneLoader::SceneLoader(std::string sFilename, ResourceManager * res, std::vector<std::pair<std::string, std::shared_ptr<Scene>>>* scenes)
+SceneLoader::SceneLoader(ResourceManager * res, std::vector<std::pair<std::string, std::shared_ptr<Scene>>>* scenes)
 {
 	m_res = res;		//Pointer to Resource manager
 	m_scenes = scenes;	//Pointer to vector of scenes
-	load(sFilename);
 }
 
 SceneLoader::~SceneLoader()

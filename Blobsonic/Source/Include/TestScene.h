@@ -10,4 +10,7 @@ private:
 public:
 	TestScene();
 
+	void initScene() override;
+
+	void update(float dt) override;
 };

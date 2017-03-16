@@ -88,15 +88,12 @@ void Engine::Engine::render()
 }
 
 Engine::Engine::Engine()
-
 {
 	m_bRunning = false;
 }
 
 void Engine::Engine::init(int width, int height)
 {
-	m_State = EngineState::Splash;
-
 	MessageHandler::getInstance()->attachReceiver(this);
 
 	m_iWindowWidth = width;
@@ -115,7 +112,7 @@ void Engine::Engine::init(int width, int height)
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, TRUE);
 	glfwWindowHint(GLFW_DEPTH_BITS, 32);		//Enable Depth buffer
 
-												//Open Window
+	//Open Window
 	m_window = glfwCreateWindow(m_iWindowWidth, m_iWindowHeight, m_sWindowTitle.c_str(), NULL, NULL);
 
 	glfwMakeContextCurrent(m_window);
@@ -171,10 +168,6 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 					break;
 				}
 			}
-		}
-		else if (s == "SwitchState") {
-			auto data = static_cast<EngineMessage::SwitchState*>(msgs->at(i).get());
-			m_State = EngineState(data->m_iState);
 		}
 	}
 }

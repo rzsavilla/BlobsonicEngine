@@ -14,7 +14,7 @@
 
 void SceneComponent::handleInput()
 {
-	m_scenes.at(m_uiActiveScene).second->handleInput(m_ptrWindow);
+	//m_scenes.at(m_uiActiveScene).second->handleInput(m_ptrWindow);
 }
 
 std::shared_ptr<Text> SceneComponent::getTextObject(std::string id)
@@ -139,7 +139,7 @@ void SceneComponent::init()
 	m_scenes.clear();
 	m_res = ResourceManager();
 	std::string sFile = "Source\\Resources\\scenes\\Physics Test.xml";
-	SceneLoader sceneLoader(sFile, &m_res, &m_scenes);
+	//SceneLoader sceneLoader(sFile, &m_res, &m_scenes);
 
 	if (m_scenes.empty()) {
 		std::cout << "No scenes loaded\n";

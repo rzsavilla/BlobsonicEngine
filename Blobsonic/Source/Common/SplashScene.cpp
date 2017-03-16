@@ -2,6 +2,7 @@
 #include "SplashScene.h"
 #include "SceneMessages.h"
 
+/*
 SplashScene::SplashScene()
 {
 }
@@ -28,3 +29,4 @@ void SplashScene::draw()
 {
 	m_LoadingText->draw();
 }
+*/

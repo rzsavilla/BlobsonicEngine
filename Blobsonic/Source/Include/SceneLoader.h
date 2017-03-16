@@ -18,15 +18,12 @@
 #include "Model.h"
 #include "GameScene.h"
 
-
 #include "tinyxml2.h"
 
 class SceneLoader {
 private:
 	ResourceManager* m_res;											//!< Pointer to Resource manager where loaded resources will be stored
 	std::vector<std::pair<std::string,std::shared_ptr<Scene>>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
-	
-
 
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
 	void loadTexture(tinyxml2::XMLElement* e);			//!< Parse file to load texture
@@ -51,7 +48,7 @@ private:
 	glm::vec3 parseVec3(tinyxml2::XMLElement*e);				//!< Parse data into a vec3
 public:
 	//! Default constructor
-	SceneLoader(std::string sFilename,ResourceManager* res, std::vector<std::pair<std::string, std::shared_ptr<Scene>>>*);							//!< Default constructor
+	SceneLoader(ResourceManager* res, std::vector<std::pair<std::string, std::shared_ptr<Scene>>>*);							//!< Default constructor
 	~SceneLoader();							//!< Destructor
 
 	/*! Loads scene

@@ -8,6 +8,8 @@
 #include "InputMessages.h"
 #include "System.h"
 
+#include "TestScene.h"
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	MessageHandler::getInstance()->sendMessage(std::make_shared<InputMessage::KeyPress>(key, action));
@@ -24,19 +26,13 @@ namespace Engine {
 		//EntityManager m_entityManager;
 
 	private:	//Scenes
-		enum EngineState {
-			Splash,
-			Main,
-			Game,
-		};
-
+		TestScene m_TestScene;
 	private:	//GLFW
 		int m_iWindowWidth;
 		int m_iWindowHeight;
 		std::string m_sWindowTitle;
 		GLFWwindow* m_window;		//!< GLFW Window
 	private:
-		EngineState m_State;
 		bool m_bIsInitialized;
 
 		void loop();			//!< Game Loop

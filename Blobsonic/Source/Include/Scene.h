@@ -8,6 +8,8 @@
 
 #include <stdafx.h>
 #include "ResourceManager.h"
+#include "EntityManager.h"
+
 #include "Drawable.h"
 #include "Message.h"
 
@@ -17,16 +19,7 @@
 
 /* Abstract Scene class*/
 
-
-//class Scene {
-//private:
-//
-//public:
-//	Scene();
-//
-//};
-
-class Scene: public Drawable
+class Scene
 {
 protected:
 	unsigned int m_uiCameraActive;	//!< index of camera being used
@@ -55,35 +48,23 @@ protected:
 	*/
 	std::vector<std::shared_ptr<Message>>* m_ptrMessages;	
 	std::map<GLchar, Character>* m_ptrCharacters;			//!< Pointer to character used for create Text
+
+	EntityManager m_Entitties;	//!< Store entities
+
 	/*! Pointer to resource manager
 		Allows scenes to access loaded resources
 	*/
 	ResourceManager* m_ptrResources;	
 public:
+	Scene(ResourceManager* res) { m_ptrResources = res; }
 	~Scene() {};	//!< Destructor
 	/**
 		Load textures, initialize shaders, etc.
 	*/
 	virtual void initScene() = 0;
 
-	/*! 
-		Process GLFW inputs for scene
-	*/
-	virtual void handleInput(GLFWwindow* window) = 0;
-
 	//! Update scene
 	virtual void update(float dt) = 0;
-
-	//! Draw Scene
-	virtual void draw() = 0;
-
-	/*! 
-		Set pointer to vector of messages.
-		Allow seen to create messages/ Communicate to other components
-	*/
-	void setMessages(std::vector<std::shared_ptr<Message>>* messages) {
-		m_ptrMessages = messages;
-	}
 
 	/*!	
 		Allows scene to create Text by passing pointer to characters texture

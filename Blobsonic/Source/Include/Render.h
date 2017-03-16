@@ -9,7 +9,6 @@ namespace System {
 		Component::Camera* m_ptrActiveCamera;
 	private:
 		void renderModel(std::shared_ptr<Entity> entity);
-		void renderInstanceModel(std::shared_ptr<Entity> entity);
 	public:
 		Render();
 
