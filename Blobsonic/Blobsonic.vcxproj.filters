@@ -76,6 +76,9 @@
     <Filter Include="Header Files\Engine\Scenes">
       <UniqueIdentifier>{23d5f0be-204a-4da5-a29e-9d5da9604d69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Scene">
+      <UniqueIdentifier>{71751e42-9dda-402e-bab0-ab10cc2aad10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -116,9 +119,6 @@
     <ClInclude Include="Source\Include\ft2build.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\GameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\gl_core_4_3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -156,15 +156,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\QuatCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\SceneComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\SceneLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\SplashScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\stb_image.h">
@@ -281,6 +272,18 @@
     <ClInclude Include="Source\Include\Scene.h">
       <Filter>Header Files\Engine\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\SplashScene.h">
+      <Filter>Header Files\Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\SceneLoader.h">
+      <Filter>Header Files\Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\SceneComponent.h">
+      <Filter>Header Files\Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\GameScene.h">
+      <Filter>Header Files\Engine\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -325,16 +328,7 @@
     <ClCompile Include="Source\Common\ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\SceneComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\SceneLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\SplashScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -405,6 +399,15 @@
     </ClCompile>
     <ClCompile Include="Source\Include\TestScene.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\SplashScene.cpp">
+      <Filter>Source Files\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\SceneLoader.cpp">
+      <Filter>Source Files\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Scene.cpp">
+      <Filter>Source Files\Engine\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
