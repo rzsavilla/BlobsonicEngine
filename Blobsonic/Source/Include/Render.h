@@ -13,7 +13,7 @@ namespace System {
 		Render();
 
 		void process(std::vector<std::shared_ptr<Entity>>* entity) override;
-		void update(float dt) override { };
+		void update(float dt) override;
 
 		//---Message Receiver--//
 		void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;

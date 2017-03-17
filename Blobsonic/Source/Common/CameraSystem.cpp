@@ -83,7 +83,7 @@ System::CameraSystem::CameraSystem()
 
 void System::CameraSystem::process(std::vector<std::shared_ptr<Entity>>* entities)
 {
-	for (auto it = entities->end(); it != entities->end(); ++it) {
+	for (auto it = entities->begin(); it != entities->end(); ++it) {
 		if ((*it)->has<Component::Camera>()) {
 			m_ptrActiveCamera = (*it)->get<Component::Camera>();
 
@@ -108,7 +108,7 @@ void System::CameraSystem::update(float dt)
 		dY = dMousePosY - dPrevMousePosY;
 		dX /= 25.0f;
 		dY /= 25.0f;
-		//rotate(glm::radians((float)dX), glm::radians((float)dY));
+		rotate(glm::radians((float)dX), glm::radians((float)dY));
 		//m_ptrActiveCamera->m_vCameraDist = glm::rotate(m_ptrActiveCamera->m_vCameraDist,glm::vec3(dX,dY,0.0f));
 		dPrevMousePosX = dMousePosX;
 		dPrevMousePosY = dMousePosY;
@@ -129,18 +129,16 @@ void System::CameraSystem::processMessages(const std::vector<std::shared_ptr<Mes
 					switch (data->m_iKey)
 					{
 					case GLFW_KEY_UP:
-						//zoom(m_ptrActiveCamera->m_fMoveSpeed * m_fDt);
-						m_ptrActiveCamera->m_vCameraDist.y += m_ptrActiveCamera->m_fMoveSpeed;
+						zoom(m_ptrActiveCamera->m_fMoveSpeed);
 						break;
 					case GLFW_KEY_DOWN:
-						//zoom(-m_ptrActiveCamera->m_fMoveSpeed * m_fDt);
-						m_ptrActiveCamera->m_vCameraDist.y -= m_ptrActiveCamera->m_fMoveSpeed;
+						zoom(-m_ptrActiveCamera->m_fMoveSpeed);
 						break;
 					case GLFW_KEY_A:
-						//pan(-m_ptrActiveCamera->m_fMoveSpeed, 0.0f);
+						pan(-m_ptrActiveCamera->m_fMoveSpeed, 0.0f);
 						break;
 					case GLFW_KEY_D:
-						//pan(m_ptrActiveCamera->m_fMoveSpeed, 0.0f);
+						pan(m_ptrActiveCamera->m_fMoveSpeed, 0.0f);
 						break;
 					default:
 						break;

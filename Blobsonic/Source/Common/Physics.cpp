@@ -3,6 +3,7 @@
 
 System::Physics::Physics()
 {
+
 }
 
 void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)

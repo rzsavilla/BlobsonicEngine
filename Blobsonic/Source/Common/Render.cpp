@@ -104,6 +104,11 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 	}
 }
 
+void System::Render::update(float dt)
+{
+
+}
+
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
 	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
