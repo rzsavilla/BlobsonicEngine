@@ -83,7 +83,7 @@ void Sphere::CollideWithOBB(OBB * other)
 	else if(distance <= 0)std::cout << "Collision" << std::endl;
 
 	//std::cout << "Sphere : " << m_vCenter.x << " " << m_vCenter.y << " " << m_vCenter.z << " OBB : " << center.x << " " << center.y << " " << center.z << std::endl;
-	//std::cout << clamp.x << " " << clamp.y << " " << clamp.z << std::endl;
+	std::cout << clamp.x << " " << clamp.y << " " << clamp.z << std::endl;
 	//std::cout << m_fRadius << std::endl;
 
 }
