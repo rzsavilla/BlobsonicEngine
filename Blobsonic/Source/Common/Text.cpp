@@ -5,7 +5,7 @@
 	Tutorial: https://learnopengl.com/#!In-Practice/Text-Rendering
 	Freetype: https://www.freetype.org/
 */
-
+/*
 Text::Text(std::string string, std::map<GLchar, Character>* characters, float x, float y, glm::vec3 colour, float scale)
 {
 	m_string = string;
@@ -82,3 +82,4 @@ void Text::draw()
 	gl::BindVertexArray(0);
 	gl::BindTexture(gl::TEXTURE_2D, 0);
 }
+*/

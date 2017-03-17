@@ -22,6 +22,13 @@ namespace Component {
 			m_qOrientation = glm::quat(1.0, 0.0, 0.0, 0.0);
 			m_projection = glm::perspective(m_fFieldOfView, m_fAspectRatio, m_fNearPlane, m_fFarPlane);
 
+			m_view = glm::lookAt(
+				glm::vec3(0.0f, 0.0f, 10.0f),	//Pos
+				glm::vec3(0.0f, 0.0f, 0.0f),	//Dir
+				glm::vec3(0.0f, 1.0f, 0.0f)		//Up
+			);
+				
+
 			m_fMoveSpeed = 5.0f;
 
 			m_bActive = false;

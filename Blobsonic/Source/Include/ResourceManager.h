@@ -1,77 +1,34 @@
-/**
-* @class	ResourceManager
-* @brief	Stores all resources
-* Used to store and retrieve resources by string id
-*/
-
 #pragma once
 
 #include <stdafx.h>
 #include "Mesh.h"
 #include "Texture.h"
-#include "QuatCamera.h"
 #include "Material.h"
+#include "Text.h"
 #include "GLSLProgram.h"
-#include "UI.h"
 
 class ResourceManager {
 private:
-	std::vector<std::pair<std::string, Mesh>> m_vMeshes;			//!< Stores meshes
-	std::vector<std::pair<std::string, Texture*>> m_vTextures;		//!< Stores textures
-	std::vector<std::pair<std::string, Material>> m_vMaterials;		//!< Stores materials
-	std::vector<std::pair<std::string, std::shared_ptr<GLSLProgram>>> m_vShaders;		//!<Stores shaders
-	std::vector<std::pair<std::string, UI>> m_vUI;
-
+	std::map<std::string, std::shared_ptr<Mesh>> m_meshes;
+	std::map<std::string, std::shared_ptr<Texture>> m_textures;
+	std::map<std::string, std::shared_ptr<Material>> m_materials;
+	std::map<std::string, std::shared_ptr<GLSLProgram>> m_shaders;
 public:
-	ResourceManager();	//!< Default constructor
+	ResourceManager();
 
-	/**	Store a mesh
-		Stores mesh into a vector of meshes.
-	*/
-	void addMesh(std::string ID, Mesh newMesh);
+	void addMesh(std::string name, std::shared_ptr<Mesh> mesh);
 
-	/**	Store a mesh
-		Stores texture into a vector of texture.
-	*/
-	void addTexture(std::string ID,Texture* newTexture);
+	void addTexture(std::string name, std::shared_ptr<Texture> texture);
 
-	/**	Store a material
-		Stores material into a vector of material.
-	*/
-	void addMaterial(std::string ID, Material newMaterial);
+	void addMaterial(std::string name, std::shared_ptr<Material> material);
 
-	/**	Store a shader program
-	Stores shader program into a vector of GLSLShader.
-	*/
-	void addShader(std::string ID, std::shared_ptr<GLSLProgram> newShader);
+	void addShader(std::string name, std::shared_ptr<GLSLProgram> shader);
 
-	/**	Store a UI component
-	Stores shader program into a vector of GLSLShader.
-	*/
-	void addUI(std::string ID, UI newUI);
+	std::shared_ptr<Mesh> getMesh(const std::string& name);
 
-	/** Returns pointer to pointer mesh
-		\return Returns pointer to mesh element
-	*/
-	Mesh* getMesh(std::string ID);
+	std::shared_ptr<Texture> getTexture(const std::string& name);
 
-	/** Returns pointer to pointer texture
-		\return Returns pointer to texture element
-	*/
-	Texture* getTexture(std::string ID);
+	std::shared_ptr<Material> getMaterial(const std::string& name);
 
-	/** Returns pointer to pointer material
-		\return Returns pointer to material element
-	*/
-	Material* getMaterial(std::string ID);
-
-	/** Returns pointer to shader pointer
-		\return Returns pointer to shader element
-	*/
-	std::shared_ptr<GLSLProgram> getShader(std::string ID);
-
-	/** Returns pointer to UI component pointer
-	\return Returns pointer to UI component element
-	*/
-	UI* getUI(std::string ID);
+	std::shared_ptr<GLSLProgram> getShader(const std::string& name);
 };

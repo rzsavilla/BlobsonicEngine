@@ -79,6 +79,9 @@
     <Filter Include="Source Files\Engine\Scene">
       <UniqueIdentifier>{71751e42-9dda-402e-bab0-ab10cc2aad10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Entity">
+      <UniqueIdentifier>{806abcfe-31aa-4127-8017-965a105787ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -103,6 +106,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Source\Resources\shader\text.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Source\Resources\shader\singlePhong.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -141,9 +147,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\MyRobot.h">
@@ -189,9 +192,6 @@
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Physical.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Transformable.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Sphere.h">
@@ -248,12 +248,6 @@
     <ClInclude Include="Source\Include\Player.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\TransformableComponent.h">
-      <Filter>Header Files\Engine\Entity\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\ModelComponent.h">
-      <Filter>Header Files\Engine\Entity\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\ResourceManager.h">
       <Filter>Header Files\Engine\Handler</Filter>
     </ClInclude>
@@ -284,6 +278,21 @@
     <ClInclude Include="Source\Include\GameScene.h">
       <Filter>Header Files\Engine\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\EntityFactory.h">
+      <Filter>Header Files\Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\TransformableOLD.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Transformable.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\ModelOLD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Model.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -308,9 +317,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\MyRobot.cpp">
@@ -397,9 +403,6 @@
     <ClCompile Include="Source\Common\Render.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Include\TestScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\SplashScene.cpp">
       <Filter>Source Files\Engine\Scene</Filter>
     </ClCompile>
@@ -408,6 +411,18 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Scene.cpp">
       <Filter>Source Files\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\TestScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\EntityFactory.cpp">
+      <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Include\PlayerController.cpp">
+      <Filter>Source Files\Engine\System\Contoller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\ModelOLD.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ public:
 	void setSpecular(glm::vec3 Specular);	//!< Set specular light reflectivity
 	void setAmbient(float Red, float Green, float Blue);	//!< Set ambient light reflectivity
 	void setDiffuse(float Red, float Green, float Blue);	//!< Set diffuse light reflectivity
-	void setSpecula(float Red, float Green, float Blue);	//!< Set specular light reflectivity
+	void setSpecular(float Red, float Green, float Blue);	//!< Set specular light reflectivity
 	void setShininess(float shininess);						//!< Returns specular highlight exponent higher value decreases lights spread increases brightness
 		
 	glm::vec3 getAmbient() ;		//!< Returns ambient light reflectivity

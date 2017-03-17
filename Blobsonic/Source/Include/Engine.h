@@ -23,8 +23,8 @@ namespace Engine {
 		bool m_bRunning;	//!< Flag to start and end game loop
 
 		ResourceManager m_resourceManager;
-		//EntityManager m_entityManager;
 
+		void loadResources();
 	private:	//Scenes
 		TestScene m_TestScene;
 	private:	//GLFW

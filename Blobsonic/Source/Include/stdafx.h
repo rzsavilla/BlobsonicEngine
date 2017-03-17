@@ -14,6 +14,7 @@
 #include <string.h>
 #include <vector>
 #include <memory>
+#include <map>
 
 #include "Scene.h"
 

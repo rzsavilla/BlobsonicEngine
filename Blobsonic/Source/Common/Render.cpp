@@ -1,16 +1,11 @@
 #include <stdafx.h>
-//Components
 #include "Render.h"
-#include "Model.h"
-#include "Transformable.h"
 //Messages
 #include "CameraMessages.h"
-
 #include <stdafx.h>
 //Components
-#include "Render.h"
-#include "ModelComponent.h"
-#include "TransformableComponent.h"
+#include "Model.h"
+#include "Transformable.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -87,7 +82,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 System::Render::Render()
 {
-
+	m_ptrActiveCamera = NULL;
 }
 
 void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)

@@ -15,11 +15,11 @@
 #include "ResourceManager.h"
 #include "GLSLProgram.h"
 #include "Light.h"
-#include "Model.h"
+#include "ModelOLD.h"
 #include "GameScene.h"
 
 #include "tinyxml2.h"
-
+/*
 class SceneLoader {
 private:
 	ResourceManager* m_res;											//!< Pointer to Resource manager where loaded resources will be stored
@@ -51,9 +51,10 @@ public:
 	SceneLoader(ResourceManager* res, std::vector<std::pair<std::string, std::shared_ptr<Scene>>>*);							//!< Default constructor
 	~SceneLoader();							//!< Destructor
 
-	/*! Loads scene
-		Can load resources directly to ResourceManager and 
-		load scene directly into Scene;
-	*/
+	//Loads scene
+		//Can load resources directly to ResourceManager and 
+		//load scene directly into Scene;
 	int load(std::string sFilename); 
 };
+
+*/

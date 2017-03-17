@@ -1,12 +1,17 @@
 #include <stdafx.h>
 #include "Engine.h"
-#include "Model.h"
+#include "ModelOLD.h"
 #include "Transformable.h"
 #include "Camera.h"
 #include "Render.h"
 #include "EngineMessages.h"
 
 #include "InputMessages.h"
+
+void Engine::Engine::loadResources()
+{
+	m_TestScene.initScene();
+}
 
 void Engine::Engine::loop()
 {
@@ -60,7 +65,7 @@ void Engine::Engine::update(float dt)
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//--System process entities--//
-
+			(*it).second->process(m_TestScene.getEntities());
 		}
 	}
 
@@ -82,12 +87,13 @@ void Engine::Engine::render()
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first == typeid(System::Render)) {	//Only process render systems
 			//Render entities
-
+			(*it).second->process(m_TestScene.getEntities());
 		}
 	}
 }
 
 Engine::Engine::Engine()
+	:m_TestScene(&m_resourceManager)
 {
 	m_bRunning = false;
 }
@@ -141,6 +147,9 @@ void Engine::Engine::init(int width, int height)
 	gl::Enable(gl::DEPTH_TEST);
 	gl::Enable(gl::CULL_FACE);
 	gl::CullFace(gl::BACK);
+
+	//Load Game Resources --TEMPORARY--
+	loadResources();
 }
 
 void Engine::Engine::run()
@@ -152,6 +161,7 @@ void Engine::Engine::run()
 
 void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
+	//Create Input Messages
 	for (int i = 0; i < msgs->size(); i++) {
 		std::string s = msgs->at(i)->sID;
 

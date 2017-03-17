@@ -3,7 +3,7 @@
 #include "CameraMessages.h"
 #include "InputMessages.h"
 #include "RenderMessages.h"
-#include "TransformableComponent.h"
+#include "Transformable.h"
 
 double dPrevMousePosX;
 double dPrevMousePosY;

@@ -14,8 +14,8 @@ private:
 	bool m_bDestroy;
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 public:
-	Entity();
-	~Entity();
+	Entity() {}
+	~Entity() {}
 
 	template<typename T, typename... Args>
 	T &attach(Args &&...args) {

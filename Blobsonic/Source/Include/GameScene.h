@@ -9,7 +9,7 @@
 
 #include <Scene.h>
 
-#include "Model.h"
+#include "ModelOLD.h"
 #include "Light.h"
 #include "QuatCamera.h"
 #include "MyRobot.h"

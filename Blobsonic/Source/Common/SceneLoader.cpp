@@ -2,7 +2,7 @@
 #include "SceneLoader.h"
 #include <cstdlib>
 #include "SplashScene.h"
-
+/*
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -588,3 +588,4 @@ int SceneLoader::load(std::string sFilename)
 	}
 	return XML_SUCCESS;
 }
+*/

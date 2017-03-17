@@ -8,7 +8,7 @@ class TestScene: public Scene {
 private:
 
 public:
-	TestScene();
+	TestScene(ResourceManager* res);
 
 	void initScene() override;
 
