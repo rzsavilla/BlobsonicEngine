@@ -73,7 +73,6 @@
     <ClInclude Include="Source\Include\Texture.h" />
     <ClInclude Include="Source\Include\tinyxml2.h" />
     <ClInclude Include="Source\Include\Transformable.h" />
-    <ClInclude Include="Source\Include\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
@@ -116,7 +115,6 @@
     <ClCompile Include="Source\Common\Texture.cpp" />
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
-    <ClCompile Include="Source\Common\UI.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5189E8BA-F4EE-426F-AA59-E3CA4757AD1F}</ProjectGuid>
