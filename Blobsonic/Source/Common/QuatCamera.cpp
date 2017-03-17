@@ -183,7 +183,7 @@ void QuatCamera::updateView()
 	_xaxis = glm::vec3(_view[0][0], _view[1][0], _view[2][0]);
 	_yaxis = glm::vec3(_view[0][1], _view[1][1], _view[2][1]);
 	_zaxis = glm::vec3(_view[0][2], _view[1][2], _view[2][2]);
-
+	m_bHasTarget = false;
 	if (m_bHasTarget) {
 		//_view = glm::lookAt(_position,target,glm::vec3(0.0f,1.0f,0.0f));
 		_view = glm::lookAt(glm::vec3(40.0f,40.0f,-40.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f, 1.0f, 0.0f));

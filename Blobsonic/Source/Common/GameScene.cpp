@@ -231,8 +231,6 @@ void GameScene::update(float dt)
 		m_vModels.erase(m_vModels.begin() + viDelete[i]);
 	}
 
-	//Update Physicals
-	checkForCollision(dt);
 	for (auto phycicalsIt = m_vOBB.begin(); phycicalsIt != m_vOBB.end(); ++phycicalsIt) {
 		(*phycicalsIt).second.update(dt);
 	}
@@ -247,6 +245,9 @@ void GameScene::update(float dt)
 	for (auto robotIt = m_vRobots.begin(); robotIt != m_vRobots.end(); ++robotIt) {
 		(*robotIt).second.update(dt);
 	}
+
+	//Update Physicals
+	checkForCollision(dt);
 
 	//Update Text
 	m_PickupCounterText->setString("Collected:" + std::to_string(m_iCollected) + "/" + std::to_string(m_iTotalPickups));
@@ -321,16 +322,16 @@ void GameScene::draw()
 
 	// Button drawing
 	
-	for (auto buttonIt = m_vButton.begin(); buttonIt != m_vButton.end(); ++buttonIt) {
-		(*buttonIt).second.getShader()->use();
-		//Pass camera uniforms to shader (For active camera)
-		updateCamera((*buttonIt).second.getShader(), m_vCamera.at(m_uiCameraActive).second);
-		//Pass light uniforms to shaders
-		updateLights((*buttonIt).second.getShader());
-		//Draw model
-		(*buttonIt).second.draw();
-		
-	}
+	//for (auto buttonIt = m_vButton.begin(); buttonIt != m_vButton.end(); ++buttonIt) {
+	//	(*buttonIt).second.getShader()->use();
+	//	//Pass camera uniforms to shader (For active camera)
+	//	updateCamera((*buttonIt).second.getShader(), m_vCamera.at(m_uiCameraActive).second);
+	//	//Pass light uniforms to shaders
+	//	updateLights((*buttonIt).second.getShader());
+	//	//Draw model
+	//	(*buttonIt).second.draw();
+	//	
+	//}
 	
 	gl::Disable(gl::DEPTH_TEST);
 }

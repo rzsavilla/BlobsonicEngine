@@ -27,6 +27,7 @@ void OBB::update(const float dt)
 
 	m_RenderModel.setPosition(m_vPosition);
 	m_vCenter = m_vPosition + m_vScale / 2.0f;
+	extents = m_vScale / 2.0f;
 
 }
 
@@ -190,6 +191,11 @@ glm::vec3 OBB::getCenter()
 
 glm::vec3 OBB::getExtents()
 {
-	return glm::vec3();
+	return extents;
+}
+
+glm::mat3 OBB::getRotationMatrix()
+{
+	return m_rotationMatrix;
 }
 

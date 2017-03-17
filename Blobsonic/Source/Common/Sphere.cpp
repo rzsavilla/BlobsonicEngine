@@ -39,7 +39,7 @@ void Sphere::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
 
 void Sphere::CollideWithSphere(Sphere* other)
 {
-
+	
 	
 
 }
@@ -73,8 +73,12 @@ void Sphere::CollideWithOBB(OBB * other)
 	if (dist.z >= 0) clamp.z = std::min(dist.z, extents.z);
 	if (dist.z < 0) clamp.z = std::max(dist.z, -extents.z);
 
+
+	//multiply the clmap by the rotation matrix
+	//clamp = clamp  * other->getRotationMatrix();
+
 	//find the distance from the edge of the box to the centere of the sphere
-	glm::vec3 diff = m_vCenter - clamp;
+	glm::vec3 diff = dist - clamp;
 
 	//find the distance from the edge of the box to the edge of the sphere
 	float distance = sqrt((diff.x * diff.x) + (diff.y * diff.y) + (diff.z * diff.z)) - m_fRadius;
@@ -82,9 +86,11 @@ void Sphere::CollideWithOBB(OBB * other)
 	if (distance > 0) std::cout << "No Collision" << std::endl;
 	else if(distance <= 0)std::cout << "Collision" << std::endl;
 
+	//std::cout << other->getExtents().x << other->getExtents().y << other->
 	//std::cout << "Sphere : " << m_vCenter.x << " " << m_vCenter.y << " " << m_vCenter.z << " OBB : " << center.x << " " << center.y << " " << center.z << std::endl;
-	std::cout << clamp.x << " " << clamp.y << " " << clamp.z << std::endl;
+	//std::cout << clamp.x << " " << clamp.y << " " << clamp.z << std::endl;
 	//std::cout << m_fRadius << std::endl;
+	//std::cout << distance << std::endl;
 
 }
 
