@@ -55,5 +55,6 @@ public:
 	//Pointer to resources/gives scene access to resources
 	void setResources(ResourceManager* res);
 
+	EntityManager* getEntityManager() { return &m_entities; }
 	std::vector<std::shared_ptr<Entity>>* getEntities() { return &m_entities.m_entities; }
 };

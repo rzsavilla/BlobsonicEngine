@@ -78,28 +78,6 @@
 </Scene>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
-	<Model> <ID>room_model</ID>
-		<Mesh>room_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>room_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	
 	<Model> <ID>startLight_model</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>default_material</Material>

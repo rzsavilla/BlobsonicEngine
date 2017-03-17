@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <Scene.h>
+#include "Scene.h"
 
 #include "ModelOLD.h"
 #include "Light.h"
@@ -18,6 +18,19 @@
 #include "Text.h"
 #include "OBB.h"
 #include "AABB.h"
+
+class GameScene: public Scene {
+public:
+	GameScene(ResourceManager* res)
+		:Scene(res)
+	{
+		
+	}
+
+	void initScene() override { };
+
+	void update(float dt) override { };
+};
 
 /*
 class GameScene :public Scene {

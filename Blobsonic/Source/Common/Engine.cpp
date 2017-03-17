@@ -65,7 +65,7 @@ void Engine::Engine::update(float dt)
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//--System process entities--//
-			(*it).second->process(m_TestScene.getEntities());
+			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
 		}
 	}
 
@@ -87,13 +87,14 @@ void Engine::Engine::render()
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first == typeid(System::Render)) {	//Only process render systems
 			//Render entities
-			(*it).second->process(m_TestScene.getEntities());
+			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
 		}
 	}
 }
 
 Engine::Engine::Engine()
 	:m_TestScene(&m_resourceManager)
+	,m_sceneLoader(&m_resourceManager,&m_scenes)
 {
 	m_bRunning = false;
 }
@@ -148,8 +149,7 @@ void Engine::Engine::init(int width, int height)
 	gl::Enable(gl::CULL_FACE);
 	gl::CullFace(gl::BACK);
 
-	//Load Game Resources --TEMPORARY--
-	loadResources();
+	m_sceneLoader.load("Source\\Resources\\scenes\\test.xml");
 }
 
 void Engine::Engine::run()

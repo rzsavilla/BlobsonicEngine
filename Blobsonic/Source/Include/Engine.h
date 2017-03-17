@@ -10,6 +10,8 @@
 
 #include "TestScene.h"
 
+#include "SceneLoader.h"
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	MessageHandler::getInstance()->sendMessage(std::make_shared<InputMessage::KeyPress>(key, action));
@@ -23,8 +25,11 @@ namespace Engine {
 		bool m_bRunning;	//!< Flag to start and end game loop
 
 		ResourceManager m_resourceManager;
-
 		void loadResources();
+
+		//Scenes
+		SceneLoader m_sceneLoader;
+		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
 	private:	//Scenes
 		TestScene m_TestScene;
 	private:	//GLFW

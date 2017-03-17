@@ -14,4 +14,6 @@ public:
 	std::shared_ptr<Entity> createPlayer(glm::vec3 position);	//Entity with transformable,movable,player and model components
 
 	std::shared_ptr<Entity> createCamera(glm::vec3 position);
+
+	std::shared_ptr<Entity> createActor();
 };

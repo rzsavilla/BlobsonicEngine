@@ -53,3 +53,15 @@ std::shared_ptr<Entity> EntityFactory::createCamera(glm::vec3 position)
 	cam->m_bActive = true;
 	return entity;
 }
+
+std::shared_ptr<Entity> EntityFactory::createActor()
+{
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+
+	//////Attach components
+	entity->attach<Component::Transformable>();
+	entity->attach<Component::Model>();
+	//Set component Properties
+	auto t = entity->get<Component::Transformable>();
+	return entity;
+}
