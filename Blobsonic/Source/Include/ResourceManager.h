@@ -12,7 +12,7 @@
 #include "QuatCamera.h"
 #include "Material.h"
 #include "GLSLProgram.h"
-#include "UI.h"
+
 
 class ResourceManager {
 private:
@@ -20,7 +20,6 @@ private:
 	std::vector<std::pair<std::string, Texture*>> m_vTextures;		//!< Stores textures
 	std::vector<std::pair<std::string, Material>> m_vMaterials;		//!< Stores materials
 	std::vector<std::pair<std::string, std::shared_ptr<GLSLProgram>>> m_vShaders;		//!<Stores shaders
-	std::vector<std::pair<std::string, UI>> m_vUI;
 
 public:
 	ResourceManager();	//!< Default constructor
@@ -45,11 +44,6 @@ public:
 	*/
 	void addShader(std::string ID, std::shared_ptr<GLSLProgram> newShader);
 
-	/**	Store a UI component
-	Stores shader program into a vector of GLSLShader.
-	*/
-	void addUI(std::string ID, UI newUI);
-
 	/** Returns pointer to pointer mesh
 		\return Returns pointer to mesh element
 	*/
@@ -70,8 +64,4 @@ public:
 	*/
 	std::shared_ptr<GLSLProgram> getShader(std::string ID);
 
-	/** Returns pointer to UI component pointer
-	\return Returns pointer to UI component element
-	*/
-	UI* getUI(std::string ID);
 };

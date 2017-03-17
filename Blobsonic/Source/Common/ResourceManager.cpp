@@ -26,11 +26,6 @@ void ResourceManager::addShader(std::string ID, std::shared_ptr<GLSLProgram> new
 	m_vShaders.push_back(std::pair<std::string, std::shared_ptr<GLSLProgram>>(ID,newShader));
 }
 
-void ResourceManager::addUI(std::string ID, UI newUI)
-{
-	m_vUI.push_back(std::pair<std::string, UI>(ID, newUI));
-}
-
 Mesh* ResourceManager::getMesh(std::string ID)
 {
 	//Look through vector
@@ -73,16 +68,5 @@ std::shared_ptr<GLSLProgram> ResourceManager::getShader(std::string ID)
 		}
 	}
 
-	return NULL;
-}
-
-UI* ResourceManager::getUI(std::string ID)
-{
-	//Look through vector
-	for (auto it = m_vUI.begin(); it != m_vUI.end(); ++it) {
-		if ((*it).first == ID) {
-			return &(*it).second;		//Returns material pointer
-		}
-	}
 	return NULL;
 }
