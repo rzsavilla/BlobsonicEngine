@@ -67,6 +67,7 @@
     <ClInclude Include="Source\Include\MyTimer.h" />
     <ClInclude Include="Source\Include\ObjectComponent.h" />
     <ClInclude Include="Source\Include\Physical.h" />
+    <ClInclude Include="Source\Include\Physics.h" />
     <ClInclude Include="Source\Include\Player.h" />
     <ClInclude Include="Source\Include\PlayerController.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="Source\Common\MyTimer.cpp" />
     <ClCompile Include="Source\Common\ObjectComponent.cpp" />
     <ClCompile Include="Source\Common\Physical.cpp" />
+    <ClCompile Include="Source\Common\Physics.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />

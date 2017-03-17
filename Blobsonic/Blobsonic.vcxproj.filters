@@ -293,6 +293,9 @@
     <ClInclude Include="Source\Include\Model.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Physics.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -423,6 +426,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\ModelOLD.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Physics.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
