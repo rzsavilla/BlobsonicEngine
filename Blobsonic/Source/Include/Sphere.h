@@ -27,6 +27,8 @@ public:
 	void movementForTesting(float x, float y, float z);
 	Model m_RenderModel; // <! The rendered object for testing (Delete later)
 
+	float getRadius();
+
 private:
 
 	float m_fRadius; //<! The radius of the sphere

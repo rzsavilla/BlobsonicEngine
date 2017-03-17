@@ -184,10 +184,6 @@ void OBB::movementForTesting(float x, float y, float z)
 	m_vPosition.z += z;
 }
 
-glm::vec3 OBB::getCenter()
-{
-	return m_vCenter;
-}
 
 glm::vec3 OBB::getExtents()
 {

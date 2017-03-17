@@ -23,6 +23,7 @@ Sphere::Sphere(Model model)
 void Sphere::update(const float dt)
 {
 	m_RenderModel.setPosition(m_vPosition);
+	m_vCenter = m_vPosition;
 }
 
 void Sphere::init()
@@ -39,8 +40,17 @@ void Sphere::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
 
 void Sphere::CollideWithSphere(Sphere* other)
 {
+	//find the dist between the centre of each sphere
+	glm::vec3 Dist = m_vCenter - other->getCenter();
+
+	//find the magnitude of this distance
+	float magDist = sqrt((Dist.x * Dist.x) + (Dist.y * Dist.y) + (Dist.z * Dist.z));
 	
-	
+	//subtract the radius 
+	magDist  = magDist - m_fRadius;
+
+	if (magDist <= other->getRadius()) std::cout << "Collision" << std::endl;
+	else  std::cout << "No Collision" << std::endl;
 
 }
 
@@ -99,5 +109,10 @@ void Sphere::movementForTesting(float x, float y, float z)
 	m_vPosition.x += x;
 	m_vPosition.y += y;
 	m_vPosition.z += z;
+}
+
+float Sphere::getRadius()
+{
+	return m_fRadius;
 }
 
