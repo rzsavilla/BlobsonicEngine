@@ -213,6 +213,7 @@ void QuatCamera::roll(const float z)
 	_orientation = _orientation * zRoll;
 	_orientation = glm::normalize(_orientation);
 	updateView();
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
