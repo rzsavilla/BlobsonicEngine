@@ -83,9 +83,25 @@ void GameScene::addRobot(std::pair<std::string, MyRobot> robot)
 
 void GameScene::addPhysical(std::pair<std::string, Model> model)
 {
-
-	m_vPhysicals.push_back(model);
+	if (model.first == "Sphere")
+	{
+		m_vSphere.push_back(model);
+	}
+	if (model.first == "OBB")
+	{
+		m_vOBB.push_back(model);
+	}
+	if (model.first == "AABB")
+	{
+		m_vAABB.push_back(model);
+	}
 	
+	
+}
+
+void GameScene::addButton(std::pair<std::string, Button> button)
+{
+	m_vButton.push_back(button);
 }
 
 void GameScene::initScene()
@@ -94,6 +110,11 @@ void GameScene::initScene()
 	m_dMouseX = 0.0, m_dMouseY = 0.0;
 	m_dPrevMouseX = 0.0, m_dPrevMouseY = 0.0;
 	m_uiCameraActive = 0;
+
+	// Button initalizer
+	addButton(std::pair<std::string, Button>("MyButton", m_ptrResources->getMesh("cube_mesh")));
+	m_vButton.begin()->second.setShader(m_ptrResources->getShader("button_shader"));
+	m_vButton.begin()->second.setMaterial(m_ptrResources->getMaterial("default_material"));
 
 	//Create Text
 	m_PickupCounterText = std::make_shared<Text>("", m_ptrCharacters, 1.0f, 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.5f);
@@ -141,17 +162,17 @@ void GameScene::update(float dt)
 {
 
 
-	//move white box
-	if (m_iKey_W) m_vPhysicals[0].second.movementForTesting(0.0f,1.0f,0.0f);
-	else if(m_iKey_S)m_vPhysicals[0].second.movementForTesting(0.0f, -1.0f, 0.0f);
-	if (m_iKey_A) m_vPhysicals[0].second.movementForTesting(-1.0f, 0.0f, 0.0f);
-	else if (m_iKey_D)m_vPhysicals[0].second.movementForTesting(1.0f, 0.0f, 0.0f);
+	//move box
+	if (m_iKey_W) m_vSphere[1].second.movementForTesting(0.0f,1.0f,0.0f);
+	else if(m_iKey_S)m_vSphere[1].second.movementForTesting(0.0f, -1.0f, 0.0f);
+	if (m_iKey_A) m_vSphere[1].second.movementForTesting(-1.0f, 0.0f, 0.0f);
+	else if (m_iKey_D)m_vSphere[1].second.movementForTesting(1.0f, 0.0f, 0.0f);
 
-	//move red box
-	if (m_iKey_Up) m_vPhysicals[1].second.movementForTesting(0.0f, 1.0f, 0.0f);
-	else if (m_iKey_Down)m_vPhysicals[1].second.movementForTesting(0.0f, -1.0f, 0.0f);
-	if (m_iKey_Left) m_vPhysicals[1].second.movementForTesting(-1.0f, 0.0f, 0.0f);
-	else if (m_iKey_Right)m_vPhysicals[1].second.movementForTesting(1.0f, 0.0f, 0.0f);
+	//move Sphere
+	if (m_iKey_Up) m_vSphere[0].second.movementForTesting(0.0f, 1.0f, 0.0f);
+	else if (m_iKey_Down)m_vSphere[0].second.movementForTesting(0.0f, -1.0f, 0.0f);
+	if (m_iKey_Left) m_vSphere[0].second.movementForTesting(-1.0f, 0.0f, 0.0f);
+	else if (m_iKey_Right)m_vSphere[0].second.movementForTesting(1.0f, 0.0f, 0.0f);
 
 	////Robot movement
 	//if (m_iKey_W) m_vRobots.begin()->second.moveForward();
@@ -187,6 +208,8 @@ void GameScene::update(float dt)
 		);
 	}
 
+	
+
 	std::vector<int> viDelete;	//Stores model index for models to be deleted
 	//Update models
 	for (int i = 0; i < m_vModels.size(); i++) {
@@ -208,9 +231,13 @@ void GameScene::update(float dt)
 		m_vModels.erase(m_vModels.begin() + viDelete[i]);
 	}
 
-	//Update Physicals
-	checkForCollision(dt);
-	for (auto phycicalsIt = m_vPhysicals.begin(); phycicalsIt != m_vPhysicals.end(); ++phycicalsIt) {
+	for (auto phycicalsIt = m_vOBB.begin(); phycicalsIt != m_vOBB.end(); ++phycicalsIt) {
+		(*phycicalsIt).second.update(dt);
+	}
+	for (auto phycicalsIt = m_vAABB.begin(); phycicalsIt != m_vAABB.end(); ++phycicalsIt) {
+		(*phycicalsIt).second.update(dt);
+	}
+	for (auto phycicalsIt = m_vSphere.begin(); phycicalsIt != m_vSphere.end(); ++phycicalsIt) {
 		(*phycicalsIt).second.update(dt);
 	}
 
@@ -219,25 +246,16 @@ void GameScene::update(float dt)
 		(*robotIt).second.update(dt);
 	}
 
+	//Update Physicals
+	checkForCollision(dt);
+
 	//Update Text
 	m_PickupCounterText->setString("Collected:" + std::to_string(m_iCollected) + "/" + std::to_string(m_iTotalPickups));
 }
 
 void GameScene::checkForCollision(float dt)
 {
-	for (int i = 0; i != m_vPhysicals.size(); i++)
-	{
-		for (int x = 0; x != m_vPhysicals.size(); x++)
-		{
-			if (x != i)
-			{
-				
-			}
-			
-		}
-		
-	}
-	m_vPhysicals[0].second.CollideWithBox(&m_vPhysicals[1].second);
+	m_vSphere[0].second.CollideWithSphere(&m_vSphere[1].second);
 
 }
 
@@ -267,9 +285,9 @@ void GameScene::draw()
 		(*robotIt).second.draw();
 	}
 
-	for(auto physicalsIt = m_vPhysicals.begin(); physicalsIt != m_vPhysicals.end(); ++physicalsIt)
+	for(auto physicalsIt = m_vOBB.begin(); physicalsIt != m_vOBB.end(); ++physicalsIt)
 	{
-		//set the sahder for the physics object
+		//set the shader for the physics object
 		(*physicalsIt).second.m_RenderModel.getShader()->use();
 		//pass data to the camera
 		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
@@ -278,5 +296,42 @@ void GameScene::draw()
 		//Draw model
 		(*physicalsIt).second.m_RenderModel.draw();
 	}
+	for (auto physicalsIt = m_vAABB.begin(); physicalsIt != m_vAABB.end(); ++physicalsIt)
+	{
+		//set the shader for the physics object
+		(*physicalsIt).second.m_RenderModel.getShader()->use();
+		//pass data to the camera
+		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
+		//update the lights with unifroms
+		updateLights((*physicalsIt).second.m_RenderModel.getShader());
+		//Draw model
+		(*physicalsIt).second.m_RenderModel.draw();
+	}
+
+	for (auto physicalsIt = m_vSphere.begin(); physicalsIt != m_vSphere.end(); ++physicalsIt)
+	{
+		//set the shader for the physics object
+		(*physicalsIt).second.m_RenderModel.getShader()->use();
+		//pass data to the camera
+		updateCamera((*physicalsIt).second.m_RenderModel.getShader(), m_vCamera.at(m_uiCameraActive).second);
+		//update the lights with unifroms
+		updateLights((*physicalsIt).second.m_RenderModel.getShader());
+		//Draw model
+		(*physicalsIt).second.m_RenderModel.draw();
+	}
+
+	// Button drawing
+	
+	//for (auto buttonIt = m_vButton.begin(); buttonIt != m_vButton.end(); ++buttonIt) {
+	//	(*buttonIt).second.getShader()->use();
+	//	//Pass camera uniforms to shader (For active camera)
+	//	updateCamera((*buttonIt).second.getShader(), m_vCamera.at(m_uiCameraActive).second);
+	//	//Pass light uniforms to shaders
+	//	updateLights((*buttonIt).second.getShader());
+	//	//Draw model
+	//	(*buttonIt).second.draw();
+	//	
+	//}
+	
 	gl::Disable(gl::DEPTH_TEST);
 }

@@ -346,6 +346,11 @@ std::pair<std::string, QuatCamera> SceneLoader::loadCamera(tinyxml2::XMLElement 
 			camera.roll(v.z);
 			if (m_bDebug) std::cout << "Orientation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
+		else if (strcmp(childValue, "View") == 0) {
+			glm::vec3 v = parseVec3(child);
+			camera.lookAt(v);
+			if (m_bDebug) std::cout << "View Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
 		else if (strcmp(childValue, "FOV") == 0) {
 			if (readElementText(child, c)) {
 				camera.setFieldOfView(atof(c));
@@ -460,7 +465,7 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 				gameScene->addRobot(loadRobot(element));
 			}
 			else if (strcmp(element->Value(), "Physics") == 0) {
-				gameScene->addPhysical(loadModel(element));
+				gameScene->addPhysical(loadPhysicsObject(element));
 			}
 		}
 		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));
