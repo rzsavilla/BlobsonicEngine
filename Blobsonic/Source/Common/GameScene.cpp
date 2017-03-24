@@ -163,10 +163,10 @@ void GameScene::update(float dt)
 
 
 	//move box
-	if (m_iKey_W) m_vSphere[1].second.movementForTesting(0.0f,1.0f,0.0f);
-	else if(m_iKey_S)m_vSphere[1].second.movementForTesting(0.0f, -1.0f, 0.0f);
-	if (m_iKey_A) m_vSphere[1].second.movementForTesting(-1.0f, 0.0f, 0.0f);
-	else if (m_iKey_D)m_vSphere[1].second.movementForTesting(1.0f, 0.0f, 0.0f);
+	if (m_iKey_W) m_vOBB[0].second.movementForTesting(0.0f,1.0f,0.0f);
+	else if(m_iKey_S)m_vOBB[0].second.movementForTesting(0.0f, -1.0f, 0.0f);
+	if (m_iKey_A) m_vOBB[0].second.movementForTesting(-1.0f, 0.0f, 0.0f);
+	else if (m_iKey_D)m_vOBB[0].second.movementForTesting(1.0f, 0.0f, 0.0f);
 
 	//move Sphere
 	if (m_iKey_Up) m_vSphere[0].second.movementForTesting(0.0f, 1.0f, 0.0f);
@@ -255,7 +255,7 @@ void GameScene::update(float dt)
 
 void GameScene::checkForCollision(float dt)
 {
-	m_vSphere[0].second.CollideWithSphere(&m_vSphere[1].second);
+	m_vSphere[0].second.CollideWithOBB(&m_vOBB[0].second);
 
 }
 

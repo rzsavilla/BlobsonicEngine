@@ -164,16 +164,12 @@ void OBB::CollideWithBox(OBB* other)
 		else
 		{
 			testAxis[axisTest] = false; // There is a collision along this axis
-			std::cout << "NO Collision" << std::endl;
 			return;
 				
 		}
 
 	}
 
-	std::cout << "Collision" << std::endl;
-
-	
 
 }
 
