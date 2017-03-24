@@ -184,17 +184,18 @@ void QuatCamera::updateView()
 	_yaxis = glm::vec3(_view[0][1], _view[1][1], _view[2][1]);
 	_zaxis = glm::vec3(_view[0][2], _view[1][2], _view[2][2]);
 
-	if (m_bHasTarget) {
+	//if (m_bHasTarget) {
 		//_view = glm::lookAt(_position,target,glm::vec3(0.0f,1.0f,0.0f));
-		_view = glm::lookAt(glm::vec3(40.0f,40.0f,-40.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	}
-	else {
+		//m_bHasTarget = false;
+		//_view = glm::lookAt(glm::vec3(40.0f,40.0f,-40.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	//}
+	//else {
 		//And use this and current camera position to set the translate part of the view matrix
-		_view[3][0] = -glm::dot(_xaxis, _position); //Translation x
-		_view[3][1] = -glm::dot(_yaxis, _position); //Translation y
-		_view[3][2] = -glm::dot(_zaxis, _position); //Translation z
-		m_bHasTarget = false;
-	}
+	_view[3][0] = -glm::dot(_xaxis, _position); //Translation x
+	_view[3][1] = -glm::dot(_yaxis, _position); //Translation y
+	_view[3][2] = -glm::dot(_zaxis, _position); //Translation z
+		
+	//}
 	//std::cout << 
 }
 

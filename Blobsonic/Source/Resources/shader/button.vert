@@ -23,6 +23,8 @@ void main()
 	fragVert = vec3(mModel * vec4(VertexPosition,1.0));
 	fragNormal = vec3(NMatrix * vec4(VertexNormal,0.0));
 
+	//gl_Position = mProjection * vec4(fragVert.xy, 0.0, 1.0);
+
 	//Vertex position with Model, View and Projection transformations
 	gl_Position = mProjection * mView * mModel * vec4(VertexPosition,1.0);
 }

@@ -15,12 +15,20 @@ void Button::initButton(Mesh* CubeMesh)
 	m_buttonModel.setRotation(-15.0f, zAxis);
 	m_buttonModel.setRotation(45.0f, yAxis);
 
-	m_vCameraPos = m_Camera.position();
+	//m_vCameraPos = m_Camera.position();
 	m_vCameraProj = m_Camera.projection();
+	m_Camera.view();
+	
 
-	x = 20.0f;
-	y = 10.0f;
-	z = -20.0f;
+	// Button position values
+	//x = 20.0f;
+	//y = 10.0f;
+	//z = -20.0f;
+
+	// Button colour values
+	r = 0.0f;
+	g = 0.5f;
+	b = 0.5f;
 };
 
 Button::Button(Mesh* CubeMesh)
@@ -35,17 +43,16 @@ Button::~Button()
 
 }
 
-void Button::setPosition(glm::vec2 newPos)
+void Button::setPosition()
 { // Sets the position of the button
-
+	//buttonPos = vec3(x, y, z);
+	//m_buttonModel.setPosition(buttonPos);
 }
 
-void Button::setColour(glm::vec3 newColour)
+void Button::setColour()
 { // Set the colour of the button
-	//vec3 colour = vec3(1.0f, 0.0f, 1.0f); //Pink
-
-	//m_ptrShader->use();
-	//m_ptrShader->setUniform("myColour", colour); 
+	buttonColour = vec3(r, g, b); 
+	m_ptrShader->setUniform("myColour", buttonColour);
 }
 
 void Button::setText()
@@ -55,17 +62,31 @@ void Button::setText()
   //m_ButtonText->setShader(m_ptrResources->getShader("text_shader"));
 }
 
+void Button::update()
+{ // Updates the button
+	m_vCameraPos = m_Camera.view();
+	//m_vCameraPos = m_Camera.position();
+	x = m_vCameraPos[3][0];
+	y = m_vCameraPos[3][1];
+	z = m_vCameraPos[3][2];
+	buttonPos = vec3(x, y, z);
+	m_buttonModel.setPosition(buttonPos);
+
+	m_ptrShader->use();
+
+	m_buttonModel.draw();
+
+}
+
 void Button::draw()
 {// Drawn the button using OpenGL
-	// Position
-	glm::vec3 pos = glm::vec3(x, y, z);;
-	m_buttonModel.setPosition(pos);
 
-	// Colour
-	vec3 colour = vec3(0.0f, 1.0f, 0.0f); //teal
+	setColour();
+	setPosition();
+	//update();
+
 	m_ptrShader->use();
-	m_ptrShader->setUniform("myColour", colour);
-	
+
 	m_buttonModel.draw();
 }
 

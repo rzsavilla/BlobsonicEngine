@@ -7,7 +7,7 @@ class Button : public Drawable {
 private:
 	glm::vec2 m_vPosition;
 	glm::vec3 m_vColour;
-	glm::vec3 m_vCameraPos;
+	glm::mat4 m_vCameraPos;
 	glm::mat4 m_vCameraProj;
 
 	std::string m_sString;
@@ -17,7 +17,11 @@ private:
 	Model m_buttonModel;
 	QuatCamera m_Camera;
 
-	float x, y, z;
+	float x, y, z; // Button position
+	float r, g, b; // Button Colour
+
+	glm::vec3 buttonColour;
+	glm::vec3 buttonPos;
 
 public:
 	Button(Mesh* CubeMesh); //!< Default Constructor
@@ -31,11 +35,13 @@ public:
 															//void setShader(std::shared_ptr<GLSLProgram> shader);
 	void setMaterial(Material * material);
 
-	void setPosition(glm::vec2 newPos);
-	void setColour(glm::vec3 newColour);
+	void setPosition();
+	void setColour();
 	void setText();
 
-	void draw() override;
+	void update();
+
+	void draw(); //override
 
 	bool collision(glm::vec2 point);
 };

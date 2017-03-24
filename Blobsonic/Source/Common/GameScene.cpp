@@ -250,6 +250,11 @@ void GameScene::update(float dt)
 
 	//Update Text
 	m_PickupCounterText->setString("Collected:" + std::to_string(m_iCollected) + "/" + std::to_string(m_iTotalPickups));
+
+	// Updates Button
+	for (auto buttonIt = m_vButton.begin(); buttonIt != m_vButton.end(); ++buttonIt) {
+		(*buttonIt).second.update();
+	}
 }
 
 void GameScene::checkForCollision(float dt)
