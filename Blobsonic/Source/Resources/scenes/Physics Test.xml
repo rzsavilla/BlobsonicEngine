@@ -109,8 +109,8 @@
 	</Model>	
 	
 <Physics> 
-		<ID>Sphere</ID>
-		<Mesh>sphere_mesh</Mesh>
+		<ID>OBB</ID>
+		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
