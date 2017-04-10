@@ -8,7 +8,7 @@
 namespace Component {
 	struct Camera {
 		Camera() {
-			m_fFieldOfView = glm::radians(90.0f);
+			m_fFieldOfView = glm::radians(45.0f);
 			m_fNearPlane = 0.01f;
 			m_fFarPlane = 1000.0f;
 			m_fAspectRatio = 4.0f / 3.0f;;
