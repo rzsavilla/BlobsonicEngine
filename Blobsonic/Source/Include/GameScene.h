@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <Scene.h>
+#include "Scene.h"
 
-#include "Model.h"
+#include "ModelOLD.h"
 #include "Light.h"
 #include "QuatCamera.h"
 #include "MyRobot.h"
@@ -23,6 +23,20 @@
 #include "AABB.h"
 #include "Sphere.h"
 
+class GameScene: public Scene {
+public:
+	GameScene(ResourceManager* res)
+		:Scene(res)
+	{
+		
+	}
+
+	void initScene() override { };
+
+	void update(float dt) override { };
+};
+
+/*
 class GameScene :public Scene {
 private:
 	std::vector<std::pair<std::string, Model>> m_vModels;		//!< Store Models with id
@@ -67,3 +81,5 @@ public:
 	void checkForCollision(float dt);			//!<Check through objects for collision
 	void draw();								//!< Draw scene
 };
+
+*/

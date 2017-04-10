@@ -4,12 +4,12 @@
 
 //Chris O'Neill
 
-#include "Model.h"
+#include "ModelOLD.h"
 #include "Physical.h"
 #include "OBB.h"
 #include <algorithm>
 
-class Sphere : public Physical, Component
+class Sphere : public Physical
 {
 public:
 	Sphere(); // <! Default Constructor for a box/cube physics

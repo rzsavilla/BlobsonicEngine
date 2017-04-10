@@ -13,7 +13,7 @@
 #pragma once
 
 #include "Drawable.h"
-
+/*
 struct Character {
 	GLuint     TextureID;  // ID handle of the glyph texture
 	glm::ivec2 Size;       // Size of glyph
@@ -41,3 +41,5 @@ public:
 
 	void draw();	//!< Draw text
 };
+
+*/

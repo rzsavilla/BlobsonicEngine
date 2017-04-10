@@ -22,11 +22,18 @@ private:
 	std::vector<GLfloat> vf_expandedVertices;	//Expanded vertices
 	std::vector<GLfloat> vf_expandedTexCoords;	//Expanded texture coordinates
 	std::vector<GLfloat> vf_expandedNormals;	//Expanded vertex normals;
+
+	GLuint m_VAO;
+	GLuint m_handle[3];
+
+	void setBuffers();
 public:
 	Mesh();	//!< Default Constructor
 	Mesh(std::string sFilename);	//!< Constructor set to parse obj file
 	bool load(std::string sFilename);	//!< Parse obj file
 
+	void setVAO(GLuint vao);
+	GLuint getVAO();
 	
 	const std::vector<GLfloat>& getVertNormals();			//!< Returns reference to vertex normals
 	const std::vector<GLuint>& getVertNormIndices();		//!< Returns reference to vertex normals indices

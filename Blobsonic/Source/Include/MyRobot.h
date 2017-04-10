@@ -7,7 +7,7 @@
 #pragma once
 
 #include <stdafx.h>
-#include "Model.h"
+#include "ModelOLD.h"
 
 // constants for arm and leg movement states
 const char BACKWARD_STATE = 0;

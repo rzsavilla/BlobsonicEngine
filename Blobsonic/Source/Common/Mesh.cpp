@@ -8,6 +8,32 @@ typedef struct {
 	float nx, ny, nz;
 };
 
+void Mesh::setBuffers()
+{
+	gl::GenVertexArrays(1, &m_VAO);
+	gl::GenBuffers(3, m_handle);
+
+	gl::BindVertexArray(m_VAO);
+
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, m_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->getExpandedVertices().size()) * sizeof(GLfloat), this->getExpandedVertices().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, 0, NULL);
+	gl::EnableVertexAttribArray(0);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, m_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, this->getExpandedTexCoords().size() * sizeof(GLfloat), this->getExpandedTexCoords().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 2, gl::FLOAT, FALSE, 0, ((GLubyte *)NULL + (0)));
+	gl::EnableVertexAttribArray(1);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, m_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->getExpandedNormals().size()) * sizeof(GLfloat), this->getExpandedNormals().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 3, gl::FLOAT, gl::FALSE_, 0, NULL);
+	gl::EnableVertexAttribArray(2);
+}
+
 Mesh::Mesh()
 {
 }
@@ -157,7 +183,19 @@ bool Mesh::load(std::string sFile)
 
 	delete[] file;
 	fclose(infile);
+
+	setBuffers();
 	return true;
+}
+
+void Mesh::setVAO(GLuint vao)
+{
+	m_VAO = vao;
+}
+
+GLuint Mesh::getVAO()
+{
+	return m_VAO;
 }
 
 const std::vector<GLfloat>&  Mesh::getVertices()

@@ -1,14 +1,21 @@
 #include <stdafx.h>
 
 #include "Engine.h"
-#include "SceneComponent.h"
+
+#include "Render.h"
+#include "CameraSystem.h"
+#include "PlayerController.h"
 
 int main() {
-	//Attach components to the engine
-	Engine::getInstance()->attachComponent(std::make_unique<Render>());
-	Engine::getInstance()->attachComponent(std::make_unique<SceneComponent>());
-	Engine::getInstance()->init();		//Initialize engine
-	Engine::getInstance()->run();		//Start engine
+	//Attach systems to the engine
 
+	Engine::Engine engine;
+
+	engine.init(1024, 768);
+	engine.attachSystem<System::Render>();				//Render objects
+	engine.attachSystem<System::CameraSystem>();		//Control active camera
+	//engine.attachSystem<System::PlayerController>();	//Control player character
+	engine.run();
+	glfwTerminate();
 	return 0;
 }

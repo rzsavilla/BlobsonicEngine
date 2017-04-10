@@ -6,7 +6,7 @@
 //Stores key press events
 static std::vector<std::pair<int, int>> g_keys;
 
-class InputHandler: public Component {
+class InputHandler: public Component::Component {
 private:
 	GLFWwindow* m_ptrWindow;
 

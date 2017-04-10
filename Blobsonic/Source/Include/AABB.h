@@ -3,11 +3,11 @@
 
 //Chris O'Neill
 
-#include "Model.h"
+#include "ModelOLD.h"
 #include "Physical.h"
 
 
-class AABB : public Physical, Component
+class AABB : public Physical
 {
 public:
 	AABB(); // <! Default Constructor for a box/cube physics

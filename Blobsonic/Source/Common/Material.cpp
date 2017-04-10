@@ -46,7 +46,7 @@ void Material::setDiffuse(float Red, float Green, float Blue)
 	m_vDiffuseReflect = glm::vec3(Red, Green, Blue);
 }
 
-void Material::setSpecula(float Red, float Green, float Blue)
+void Material::setSpecular(float Red, float Green, float Blue)
 {
 	m_vSpecularReflect = glm::vec3(Red, Green, Blue);
 }

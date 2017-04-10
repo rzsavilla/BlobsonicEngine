@@ -27,14 +27,25 @@
     <None Include="Source\Resources\shader\colour.vert" />
     <None Include="Source\Resources\shader\phong.frag" />
     <None Include="Source\Resources\shader\phong.vert" />
+    <None Include="Source\Resources\shader\singlePhong.frag" />
     <None Include="Source\Resources\shader\text.frag" />
     <None Include="Source\Resources\shader\text.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\AABB.h" />
-    <ClInclude Include="Source\Include\Actor.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
+    <ClInclude Include="Source\Include\Camera.h" />
+    <ClInclude Include="Source\Include\CameraMessages.h" />
+    <ClInclude Include="Source\Include\CameraSystem.h" />
     <ClInclude Include="Source\Include\Capsule.h" />
+    <ClInclude Include="Source\Include\EngineMessages.h" />
+    <ClInclude Include="Source\Include\Entity.h" />
+    <ClInclude Include="Source\Include\EntityFactory.h" />
+    <ClInclude Include="Source\Include\EntityManager.h" />
+    <ClInclude Include="Source\Include\InputMessages.h" />
+    <ClInclude Include="Source\Include\MessageHandler.h" />
+    <ClInclude Include="Source\Include\MessageReceiver.h" />
+    <ClInclude Include="Source\Include\Model.h" />
     <ClInclude Include="Source\Include\OBB.h" />
     <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
@@ -52,36 +63,45 @@
     <ClInclude Include="Source\Include\Material.h" />
     <ClInclude Include="Source\Include\Mesh.h" />
     <ClInclude Include="Source\Include\Message.h" />
-    <ClInclude Include="Source\Include\Model.h" />
+    <ClInclude Include="Source\Include\ModelOLD.h" />
     <ClInclude Include="Source\Include\Movable.h" />
     <ClInclude Include="Source\Include\MyRobot.h" />
     <ClInclude Include="Source\Include\MyTimer.h" />
     <ClInclude Include="Source\Include\ObjectComponent.h" />
     <ClInclude Include="Source\Include\Physical.h" />
+    <ClInclude Include="Source\Include\Physics.h" />
+    <ClInclude Include="Source\Include\Player.h" />
+    <ClInclude Include="Source\Include\PlayerController.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
     <ClInclude Include="Source\Include\QuatCamera.h" />
     <ClInclude Include="Source\Include\Render.h" />
+    <ClInclude Include="Source\Include\RenderMessages.h" />
     <ClInclude Include="Source\Include\ResourceManager.h" />
     <ClInclude Include="Source\Include\Scene.h" />
     <ClInclude Include="Source\Include\SceneComponent.h" />
     <ClInclude Include="Source\Include\SceneLoader.h" />
+    <ClInclude Include="Source\Include\SceneMessages.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
+    <ClInclude Include="Source\Include\System.h" />
+    <ClInclude Include="Source\Include\TestScene.h" />
     <ClInclude Include="Source\Include\Text.h" />
     <ClInclude Include="Source\Include\Texture.h" />
     <ClInclude Include="Source\Include\tinyxml2.h" />
+    <ClInclude Include="Source\Include\TransformableOLD.h" />
     <ClInclude Include="Source\Include\Transformable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
-    <ClCompile Include="Source\Common\Actor.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
+    <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
+    <ClCompile Include="Source\Common\EntityFactory.cpp" />
+    <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
-    <ClCompile Include="Source\Common\Component.cpp" />
     <ClCompile Include="Source\Common\Engine.cpp" />
     <ClCompile Include="Source\Common\GameObject.cpp" />
     <ClCompile Include="Source\Common\GameScene.cpp" />
@@ -94,13 +114,13 @@
     <ClCompile Include="Source\Common\main.cpp" />
     <ClCompile Include="Source\Common\Material.cpp" />
     <ClCompile Include="Source\Common\Mesh.cpp" />
-    <ClCompile Include="Source\Common\Message.cpp" />
-    <ClCompile Include="Source\Common\Model.cpp" />
+    <ClCompile Include="Source\Common\ModelOLD.cpp" />
     <ClCompile Include="Source\Common\Movable.cpp" />
     <ClCompile Include="Source\Common\MyRobot.cpp" />
     <ClCompile Include="Source\Common\MyTimer.cpp" />
     <ClCompile Include="Source\Common\ObjectComponent.cpp" />
     <ClCompile Include="Source\Common\Physical.cpp" />
+    <ClCompile Include="Source\Common\Physics.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
@@ -111,10 +131,12 @@
     <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />
+    <ClCompile Include="Source\Common\TestScene.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />
     <ClCompile Include="Source\Common\Texture.cpp" />
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
+    <ClCompile Include="Source\Include\PlayerController.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5189E8BA-F4EE-426F-AA59-E3CA4757AD1F}</ProjectGuid>

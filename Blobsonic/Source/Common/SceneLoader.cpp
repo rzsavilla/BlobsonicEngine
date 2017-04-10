@@ -3,10 +3,15 @@
 #include <cstdlib>
 #include "SplashScene.h"
 
+//Components
+#include "Model.h"
+#include "Camera.h"
+
+
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
-	Mesh mesh;
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 	char* c = "";
 	std::string s;
 	for (XMLElement* Child = e->FirstChildElement(); Child != NULL; Child = Child->NextSiblingElement()) {
@@ -21,7 +26,7 @@ void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 			//Load mesh
 			if (readElementText(Child, c)) {
 				std::string sFile(c, strlen(c));
-				mesh.load(sFile);
+				mesh->load(sFile);
 			};
 		}
 		else if (strcmp(childValue, "Texture") == 0) {
@@ -37,7 +42,7 @@ void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* c = "";
 	std::string s;
-	Texture* texture = NULL;
+	std::shared_ptr<Texture> texture = NULL;
 	for (XMLElement* Child = e->FirstChildElement(); Child != NULL; Child = Child->NextSiblingElement()) {
 		const char* childValue = Child->Value();
 		if (strcmp(childValue, "ID") == 0) {
@@ -54,7 +59,7 @@ void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
 				Bitmap bmp = Bitmap::bitmapFromFile(sFile);
 				bmp.flipVertically();
 				//Create texture
-				texture = new Texture(bmp);
+				texture = std::make_shared<Texture>(bmp);
 			};
 		}
 	}
@@ -67,7 +72,7 @@ void SceneLoader::loadMaterial(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* c = "";
 	std::string s;
-	Material material;
+	std::shared_ptr<Material> material = std::make_shared<Material>();
 	glm::vec3 v;
 	for (XMLElement* Child = e->FirstChildElement(); Child != NULL; Child = Child->NextSiblingElement()) {
 		const char* childValue = Child->Value();
@@ -79,19 +84,19 @@ void SceneLoader::loadMaterial(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "AmbientReflect") == 0) {
 			v = parseVec3(Child);
-			material.setAmbient(v);
+			material->setAmbient(v);
 		}
 		else if (strcmp(childValue, "DiffuseReflect") == 0) {
 			v = parseVec3(Child);
-			material.setDiffuse(v);
+			material->setDiffuse(v);
 		}
 		else if (strcmp(childValue, "SpecularReflect") == 0) {
 			v = parseVec3(Child);
-			material.setSpecular(v);
+			material->setSpecular(v);
 		}
 		else if (strcmp(childValue, "Shininess") == 0) {
 			if (readElementText(Child, c)) {
-				material.setShininess(atof(c));
+				material->setShininess(atof(c));
 			}
 		}
 	}
@@ -139,7 +144,7 @@ void SceneLoader::loadShader(tinyxml2::XMLElement * e)
 	if (m_bDebug) std::cout << " Shader Loaded: " << s << "\n";
 }
 
-std::pair<std::string, Model> SceneLoader::loadModel(tinyxml2::XMLElement * e)
+std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
 
@@ -147,7 +152,11 @@ std::pair<std::string, Model> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 
 	if (m_bDebug) std::cout << "\nLoading Model \n  ";
 
-	Model model;
+	std::shared_ptr<Entity> entity = m_factory.createActor();
+
+	auto model = entity->get<Component::Model>();
+	auto transform = entity->get<Component::Transformable>();
+
 	std::string sID;
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
@@ -159,112 +168,48 @@ std::pair<std::string, Model> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(modelChild, cData)) {
-				model.setMesh(m_res->getMesh(std::string(cData, strlen(cData))));
+				model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
 			}
 		}
 		else if (strcmp(childValue, "Shader") == 0) {
 			if (readElementText(modelChild, cData)) {
-				model.setShader(m_res->getShader(std::string(cData, strlen(cData))));
+				model->m_shader = (m_res->getShader(std::string(cData, strlen(cData))));
 			}
 		}
 		else if (strcmp(childValue, "Texture") == 0) {
 			if (readElementText(modelChild, cData)) {
-				model.setTexture(m_res->getTexture(std::string(cData, strlen(cData))));
+				model->m_textures.push_back(m_res->getTexture(std::string(cData, strlen(cData))));
 			}
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(modelChild);
-			model.setPosition(v);
-
+			transform->setPosition(v);
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			model.setScale(v);
+			transform->m_transform = glm::scale(transform->m_transform, v);
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-		else if (strcmp(childValue, "Origin") == 0) {
-			//Set model origin
-			glm::vec3 v = parseVec3(modelChild);
-			model.setOrigin(v);
-			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
+		//else if (strcmp(childValue, "Origin") == 0) {
+		//	//Set model origin
+		//	glm::vec3 v = parseVec3(modelChild);
+		//	transform->setOrigin(v);
+		//	if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		//}
 		else if (strcmp(childValue, "Material") == 0) {
 			if (readElementText(modelChild, cData)) {
-				model.setMaterial(m_res->getMaterial(std::string(cData, strlen(cData))));
+				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
 			}
 			
 		}
 	}
-	return std::pair<std::string, Model>(sID,model);
+	return entity;
 }
 
-std::pair<std::string, Model> SceneLoader::loadPhysicsObject(tinyxml2::XMLElement * e)
-{
-	using namespace tinyxml2;
-
-	char* cData = "";			//Temporary storage for element data
-
-	if (m_bDebug) std::cout << "\nLoading Model \n  ";
-
-	Model model;
-	std::string sID;
-	//Look at Model Element
-	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
-		const char* childValue = modelChild->Value();
-		if (strcmp(childValue, "ID") == 0) {
-			if (readElementText(modelChild, cData)) {
-				sID = std::string(cData, strlen(cData));
-			}
-		}
-		else if (strcmp(childValue, "Mesh") == 0) {
-			if (readElementText(modelChild, cData)) {
-				model.setMesh(m_res->getMesh(std::string(cData, strlen(cData))));
-			}
-		}
-		else if (strcmp(childValue, "Shader") == 0) {
-			if (readElementText(modelChild, cData)) {
-				model.setShader(m_res->getShader(std::string(cData, strlen(cData))));
-			}
-		}
-		else if (strcmp(childValue, "Texture") == 0) {
-			if (readElementText(modelChild, cData)) {
-				model.setTexture(m_res->getTexture(std::string(cData, strlen(cData))));
-			}
-		}
-		else if (strcmp(childValue, "Position") == 0) {
-			glm::vec3 v = parseVec3(modelChild);
-			model.setPosition(v);
-
-			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Scale") == 0) {
-			//Set model scale
-			glm::vec3 v = parseVec3(modelChild);
-			model.setScale(v);
-			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Origin") == 0) {
-			//Set model origin
-			glm::vec3 v = parseVec3(modelChild);
-			model.setOrigin(v);
-			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Material") == 0) {
-			if (readElementText(modelChild, cData)) {
-				model.setMaterial(m_res->getMaterial(std::string(cData, strlen(cData))));
-			}
-
-		}
-	}
-	
-
-	return std::pair<std::string, Model>(sID, model);
-}
-
-
-std::pair<std::string, Light> SceneLoader::loadLight(tinyxml2::XMLElement * e)
+/*
+std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
 
@@ -312,8 +257,9 @@ std::pair<std::string, Light> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 
 	return std::pair<std::string, Light>(sID, light);
 }
+*/
 
-std::pair<std::string, QuatCamera> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
+std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
 
@@ -321,7 +267,11 @@ std::pair<std::string, QuatCamera> SceneLoader::loadCamera(tinyxml2::XMLElement 
 
 	if (m_bDebug) std::cout << "\nLoading Camera \n  ";
 
-	QuatCamera camera;
+
+	std::shared_ptr<Entity> entity = m_factory.createCamera(glm::vec3(0.0f));
+
+	auto camera = entity->get<Component::Camera>();
+
 	std::string s;
 	char * c;
 	std::string sID;
@@ -337,97 +287,53 @@ std::pair<std::string, QuatCamera> SceneLoader::loadCamera(tinyxml2::XMLElement 
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(child);
-			camera.setPosition(v);
+			camera->m_vPosition = v;
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-		else if (strcmp(childValue, "Orientation") == 0) {
+	/*	else if (strcmp(childValue, "Orientation") == 0) {
 			glm::vec3 v = parseVec3(child);
 			camera.rotate(v.x,v.y);
 			camera.roll(v.z);
 			if (m_bDebug) std::cout << "Orientation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "View") == 0) {
-			glm::vec3 v = parseVec3(child);
-			camera.lookAt(v);
-			if (m_bDebug) std::cout << "View Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
+		}*/
 		else if (strcmp(childValue, "FOV") == 0) {
 			if (readElementText(child, c)) {
-				camera.setFieldOfView(atof(c));
+				camera->m_fFarPlane = (atof(c));
 			}
 			if (m_bDebug) std::cout << "Field of View: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "AspectRatio") == 0) {
 			if (readElementText(child, c)) {
-				camera.setAspectRatio(atof(c));
+				camera->m_fAspectRatio = (atof(c));
 			}
 			if (m_bDebug) std::cout << "Aspect Ratio: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "FarPlane") == 0) {
 			if (readElementText(child, c)) {
-				fFar = atof(c);
+				camera->m_fFarPlane = atof(c);
 			}
 			if (m_bDebug) std::cout << "Far plane: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "NearPlane") == 0) {
 			if (readElementText(child, c)) {
-				fNear = atof(c);
+				camera->m_fNearPlane = atof(c);
 			}
 			if (m_bDebug) std::cout << "NearPlane: " << c << "\n  ";
 		}
-		else if (strcmp(childValue, "RotSpeed") == 0) {
-			if (readElementText(child, c)) {
-				camera.setRotateSpeed(atof(c));
-			}
-			if (m_bDebug) std::cout << "Rotation Speed: " << c << "\n  ";
-		}
+		//else if (strcmp(childValue, "RotSpeed") == 0) {
+		//	if (readElementText(child, c)) {
+		//		camera->m_fMoveSpeed(atof(c));
+		//	}
+		//	if (m_bDebug) std::cout << "Rotation Speed: " << c << "\n  ";
+		//}
 		else if (strcmp(childValue, "MoveSpeed") == 0) {
 			if (readElementText(child, c)) {
-				camera.setMoveSpeed(atof(c));
+				camera->m_fMoveSpeed = (atof(c));
 			}
 			if (m_bDebug) std::cout << "MoveSpeed Speed: " << c << "\n  ";
 		}
 	}
-	camera.setNearAndFarPlanes(fNear, fFar);
-	return std::pair<std::string, QuatCamera>(sID, camera);
-}
-
-std::pair<std::string, MyRobot> SceneLoader::loadRobot(tinyxml2::XMLElement * e)
-{
-	using namespace tinyxml2;
-
-	char* cData = "";			//Temporary storage for element data
-
-	if (m_bDebug) std::cout << "\nLoading Model \n  ";
-
-	MyRobot robot(m_res->getMesh("cube_mesh"));
-	std::string sID;
-	//Look at Model Element
-	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
-		const char* childValue = modelChild->Value();
-		if (strcmp(childValue, "ID") == 0) {
-			if (readElementText(modelChild, cData)) {
-				sID = std::string(cData, strlen(cData));
-			}
-		}
-		else if (strcmp(childValue, "Shader") == 0) {
-			if (readElementText(modelChild, cData)) {
-				robot.setShader(m_res->getShader(std::string(cData, strlen(cData))));
-			}
-		}
-		else if (strcmp(childValue, "Position") == 0) {
-			glm::vec3 v = parseVec3(modelChild);
-			robot.setPosition(v.x,v.y,v.z);
-			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Material") == 0) {
-			if (readElementText(modelChild, cData)) {
-				robot.setMaterial(m_res->getMaterial(std::string(cData, strlen(cData))));
-			}
-
-		}
-	}
-	return std::pair<std::string, MyRobot>(sID, robot);
+	return entity;
 }
 
 void SceneLoader::readScene(tinyxml2::XMLNode * node)
@@ -441,9 +347,15 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	}
 	using namespace tinyxml2;
 	std::string sID;
-	if (str == "Game") {
-		std::shared_ptr<GameScene> gameScene = std::make_unique<GameScene>();	//Create scene
 
+	//-- Add entities into the scene --//
+	
+	if (str == "Game") {
+
+		std::shared_ptr<GameScene> scene = std::make_shared<GameScene>(m_res);				//Create scene
+		EntityManager* entities = scene->getEntityManager();	//Get scene entity manager used to add entities in to the scene
+
+		//Add Scene Entities
 		if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
 		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
 		{
@@ -453,37 +365,21 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 				}
 			}
 			else if (strcmp(element->Value(), "Model") == 0) {
-				gameScene->addModel(loadModel(element));
+				entities->addEntity(loadModel(element));
 			}
 			else if (strcmp(element->Value(), "Light") == 0) {
-				gameScene->addLight(loadLight(element));
+				//entities->addEntity(loadLight(element));
 			}
 			else if (strcmp(element->Value(), "Camera") == 0) {
-				gameScene->addCamera(loadCamera(element));
-			}
-			else if (strcmp(element->Value(), "Robot") == 0) {
-				gameScene->addRobot(loadRobot(element));
+				entities->addEntity(loadCamera(element));
 			}
 			else if (strcmp(element->Value(), "Physics") == 0) {
-				gameScene->addPhysical(loadPhysicsObject(element));
+				entities->addEntity(loadModel(element));
 			}
 		}
-		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID,gameScene));
-	}
-	else if (str == "Splash") {
-		std::shared_ptr<SplashScene> splashScene = std::make_unique<SplashScene>();
-		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
-		{
-			if (strcmp(element->Value(), "ID") == 0) {
-				if (readElementText(element, c)) {
-					sID = std::string(c, strlen(c));		//ID
-				}
-			}
-		}
-		m_scenes->push_back(std::pair<std::string, std::shared_ptr<Scene>>(sID, splashScene));
-	}
-	else {
 
+		//Attach Scene to engine
+		m_scenes->emplace(sID, scene);
 	}
 }
 
@@ -551,11 +447,11 @@ glm::vec3 SceneLoader::parseVec3(tinyxml2::XMLElement * e)
 	return v;		//Return vector
 }
 
-SceneLoader::SceneLoader(std::string sFilename, ResourceManager * res, std::vector<std::pair<std::string, std::shared_ptr<Scene>>>* scenes)
+SceneLoader::SceneLoader(ResourceManager * res, std::map<std::string, std::shared_ptr<Scene>>* scenes)
+	:m_factory(res)
 {
 	m_res = res;		//Pointer to Resource manager
 	m_scenes = scenes;	//Pointer to vector of scenes
-	load(sFilename);
 }
 
 SceneLoader::~SceneLoader()
