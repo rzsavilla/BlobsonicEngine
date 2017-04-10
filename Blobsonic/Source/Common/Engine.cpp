@@ -56,7 +56,7 @@ void Engine::Engine::loop()
 		}
 	}
 
-	////Close window and terminate GLFW
+	//Close window and terminate GLFW
 	glfwTerminate();
 }
 

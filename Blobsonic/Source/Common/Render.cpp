@@ -42,7 +42,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 			std::shared_ptr<Texture> texture = NULL;
 			std::shared_ptr<Mesh> mesh = model->m_meshes.at(i);			//Get pointer to mesh
 
-																		//Pass material uniforms to shader
+			//Pass material uniforms to shader
 			if (model->m_shader != NULL && i < model->m_materials.size()) {
 				//Material reflectivity
 				model->m_shader->setUniform("Ka", model->m_materials.at(i)->getAmbient());			//Ambient material reflection
@@ -58,7 +58,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			gl::BindVertexArray(mesh->getVAO());		//Bind VAO
 
-														//Has Texture
+			//Has Texture
 			if ((!mesh->getExpandedTexCoords().empty() && !texture == NULL)) {
 				gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
 				gl::GenerateMipmap(gl::TEXTURE_2D);

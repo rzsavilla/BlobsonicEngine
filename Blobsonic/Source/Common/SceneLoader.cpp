@@ -259,7 +259,6 @@ std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 }
 */
 
-
 std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;

@@ -43,7 +43,6 @@ in vec2 texCoord;			//Texture coordinates
 out vec4 Colour;			//Returns fragment - Data used to render pixel
 
 void main() {
-
 	//vec3 viewDir = normalize(viewPos - fragVert);
 
 	//vec4 result;	//Result of all light calculations from array of lights
@@ -51,8 +50,8 @@ void main() {
 	//	result += vec4(calcPointLight(pLight[i], fragNormal,fragVert, viewDir),1.0f);
 	//}
 
-	//Colour = texture(tex, texCoord);
-	Colour = vec4(1.0f,1.0f,1.0,1.0f);
+	Colour = texture(tex, texCoord);
+	//Colour = vec4(1.0f,1.0f,1.0,1.0f);
 }
 
 vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
@@ -75,9 +74,9 @@ vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
 	vec3 specular =  light.Ls * Ks * spec;
 
 	//Apply Texture
-	ambient *= vec3(texture(tex, texCoord));
-	diffuse *= vec3(texture(tex, texCoord));
-	specular *= vec3(texture(tex, texCoord));
+	//ambient *= vec3(texture(tex, texCoord));
+	//diffuse *= vec3(texture(tex, texCoord));
+	//specular *= vec3(texture(tex, texCoord));
 
 	////Light Attenuation//////
 	if (light.radius > 0) {
