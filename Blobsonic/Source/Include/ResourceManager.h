@@ -13,6 +13,7 @@ private:
 	std::map<std::string, std::shared_ptr<Texture>> m_textures;
 	std::map<std::string, std::shared_ptr<Material>> m_materials;
 	std::map<std::string, std::shared_ptr<GLSLProgram>> m_shaders;
+
 public:
 	ResourceManager();
 

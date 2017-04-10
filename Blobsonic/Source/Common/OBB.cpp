@@ -25,9 +25,9 @@ OBB::OBB(Model model)
 void OBB::update(const float dt)
 {
 
-	
-	
 	m_RenderModel.setPosition(m_vPosition);
+	m_vCenter = m_vPosition + m_vScale / 2.0f;
+	extents = m_vScale / 2.0f;
 
 }
 
@@ -112,7 +112,7 @@ void OBB::CollideWithBox(OBB* other)
 		
 		
 
-	//project 3 axis 
+	//project 6 axis 
 	for (int axisTest = 0; axisTest < 6; axisTest++)
 	{
 		//values for min other->and max
@@ -164,16 +164,12 @@ void OBB::CollideWithBox(OBB* other)
 		else
 		{
 			testAxis[axisTest] = false; // There is a collision along this axis
-			std::cout << "NO Collision" << std::endl;
 			return;
 				
 		}
 
 	}
 
-	std::cout << "Collision" << std::endl;
-
-	
 
 }
 
@@ -182,5 +178,16 @@ void OBB::movementForTesting(float x, float y, float z)
 	m_vPosition.x += x;
 	m_vPosition.y += y;
 	m_vPosition.z += z;
+}
+
+
+glm::vec3 OBB::getExtents()
+{
+	return extents;
+}
+
+glm::mat3 OBB::getRotationMatrix()
+{
+	return m_rotationMatrix;
 }
 

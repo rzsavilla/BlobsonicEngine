@@ -32,3 +32,8 @@ void Physical::handleMessage(std::shared_ptr<Message> msg)
 void Physical::setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr)
 {
 }
+
+glm::vec3 Physical::getCenter()
+{
+	return m_vCenter;
+}

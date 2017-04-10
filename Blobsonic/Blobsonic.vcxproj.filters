@@ -108,7 +108,10 @@
     <None Include="Source\Resources\shader\text.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Source\Resources\shader\singlePhong.frag">
+    <None Include="Source\Resources\shader\button.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Source\Resources\shader\button.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -199,9 +202,6 @@
     </ClInclude>
     <ClInclude Include="Source\Include\Capsule.h">
       <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\UI.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Component.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
@@ -372,9 +372,6 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Capsule.cpp">
       <Filter>Source Files\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\UI.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Engine.cpp">
       <Filter>Source Files\Engine</Filter>

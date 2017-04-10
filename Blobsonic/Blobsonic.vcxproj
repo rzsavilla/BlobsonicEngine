@@ -21,6 +21,8 @@
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag" />
     <None Include="Source\Resources\shader\basic.vert" />
+    <None Include="Source\Resources\shader\button.frag" />
+    <None Include="Source\Resources\shader\button.vert" />
     <None Include="Source\Resources\shader\colour.frag" />
     <None Include="Source\Resources\shader\colour.vert" />
     <None Include="Source\Resources\shader\phong.frag" />
@@ -90,7 +92,6 @@
     <ClInclude Include="Source\Include\tinyxml2.h" />
     <ClInclude Include="Source\Include\TransformableOLD.h" />
     <ClInclude Include="Source\Include\Transformable.h" />
-    <ClInclude Include="Source\Include\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
@@ -135,7 +136,6 @@
     <ClCompile Include="Source\Common\Texture.cpp" />
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
-    <ClCompile Include="Source\Common\UI.cpp" />
     <ClCompile Include="Source\Include\PlayerController.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
