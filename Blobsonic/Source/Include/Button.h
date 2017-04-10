@@ -3,6 +3,8 @@
 #include "Scene.h"
 #include "Drawable.h"
 
+/*
+
 class Button : public Drawable {
 private:
 	glm::vec2 m_vPosition;
@@ -11,7 +13,7 @@ private:
 	glm::mat4 m_vCameraProj;
 
 	std::string m_sString;
-	std::shared_ptr<Text> m_ButtonText;
+	//std::shared_ptr<Text> m_ButtonText
 	std::shared_ptr<GLSLProgram> m_ptrShader;
 	Material* m_ptrMaterial;	// Pointer to material
 	Model m_buttonModel;
@@ -45,3 +47,5 @@ public:
 
 	bool collision(glm::vec2 point);
 };
+
+*/

@@ -1,8 +1,8 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Button.h"
 
 //Button::Button(){}
-
+/*
 void Button::initButton(Mesh* CubeMesh)
 {
 	m_buttonModel.setMesh(CubeMesh);
@@ -111,3 +111,5 @@ bool Button::collision(glm::vec2 point)
 {
 	return false;
 }
+
+*/
