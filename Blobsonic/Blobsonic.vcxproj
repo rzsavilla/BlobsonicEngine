@@ -33,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\AABB.h" />
+    <ClInclude Include="Source\Include\aModel.h" />
+    <ClInclude Include="Source\Include\AssimpMesh.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
     <ClInclude Include="Source\Include\Camera.h" />
     <ClInclude Include="Source\Include\CameraMessages.h" />
@@ -95,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
+    <ClCompile Include="Source\Common\aModel.cpp" />
+    <ClCompile Include="Source\Common\AssimpMesh.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
@@ -222,7 +226,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -248,7 +252,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -114,6 +114,7 @@
     <None Include="Source\Resources\shader\button.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Source\Resources\shader\singlePhong.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\Bitmap.h">
@@ -296,6 +297,12 @@
     <ClInclude Include="Source\Include\Physics.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\aModel.h">
+      <Filter>Header Files\Res</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\AssimpMesh.h">
+      <Filter>Header Files\Res</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -426,6 +433,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Physics.cpp">
       <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\aModel.cpp">
+      <Filter>Source Files\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\AssimpMesh.cpp">
+      <Filter>Source Files\Res</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
