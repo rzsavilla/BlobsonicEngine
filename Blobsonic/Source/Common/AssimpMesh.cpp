@@ -24,22 +24,6 @@ AssimpMesh::AssimpMesh(std::string sFilename) {
 	this->load(sFilename);
 }
 
-void removeChar(char str[], char t) {
-	int i, iIntegers;
-	i = 0;
-	while (i<strlen(str))
-	{
-		if (str[i] == t)
-		{
-			for (iIntegers = i; iIntegers<strlen(str); iIntegers++)
-				str[iIntegers] = str[iIntegers + 1];
-		}
-		else i++;
-	}
-
-
-}
-
 bool AssimpMesh::load(std::string sFile) {
 
 	Assimp::Importer import;

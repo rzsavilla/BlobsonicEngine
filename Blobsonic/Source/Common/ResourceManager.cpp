@@ -10,6 +10,11 @@ void ResourceManager::addMesh(std::string name, std::shared_ptr<Mesh> mesh) {
 	m_meshes.emplace(name, mesh);
 }
 
+void ResourceManager::addAssimpMesh(std::string name, std::shared_ptr<AssimpMesh> newaMesh)
+{
+	m_vAssimpMeshes.emplace(name, newaMesh);
+}
+
 void ResourceManager::addTexture(std::string name, std::shared_ptr<Texture> texture) {
 	m_textures.emplace(name, texture);
 }
@@ -26,6 +31,14 @@ std::shared_ptr<Mesh> ResourceManager::getMesh(const std::string& name) {
 	auto mesh = m_meshes.find(name);
 	if (mesh != m_meshes.end()) {
 		return mesh->second;
+	}
+}
+
+std::shared_ptr<AssimpMesh> ResourceManager::getAssimpMesh(const std::string& name)
+{
+	auto aMesh = m_vAssimpMeshes.find(name);
+	if(aMesh != m_vAssimpMeshes.end()) {
+		return aMesh->second;
 	}
 }
 

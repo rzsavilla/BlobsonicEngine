@@ -9,6 +9,7 @@ namespace Component {
 	struct Model : public Component {
 		Model() {}
 		std::vector<std::shared_ptr<Mesh>> m_meshes;
+		std::vector<std::shared_ptr<AssimpMesh>> m_aMeshes;
 		std::vector<std::shared_ptr<Texture>> m_textures;
 		std::vector<std::shared_ptr<Material>> m_materials;
 		std::shared_ptr<GLSLProgram> m_shader;
