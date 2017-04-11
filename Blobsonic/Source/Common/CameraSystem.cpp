@@ -45,7 +45,6 @@ void System::CameraSystem::updateView()
 			m_ptrActiveCamera->m_view[3][2] = -glm::dot(m_ptrActiveCamera->m_vAxisZ, m_ptrActiveCamera->m_vPosition); //Translation z
 
 			MessageHandler::getInstance()->sendMessage(std::make_shared<RenderMessage::RenderCamera>(m_ptrActiveCamera));
-
 		}
 	}
 }

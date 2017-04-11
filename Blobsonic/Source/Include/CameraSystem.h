@@ -1,5 +1,6 @@
 #pragma once
 
+#define GLM_FORCE_RADIANS
 #include <stdafx.h>
 #include "System.h"
 #include "Camera.h"
