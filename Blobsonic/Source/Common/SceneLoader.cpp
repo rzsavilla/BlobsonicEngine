@@ -290,7 +290,7 @@ std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 			camera->m_vPosition = v;
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-	/*	else if (strcmp(childValue, "Orientation") == 0) {
+		/*	else if (strcmp(childValue, "Orientation") == 0) {
 			glm::vec3 v = parseVec3(child);
 			camera.rotate(v.x,v.y);
 			camera.roll(v.z);
@@ -349,9 +349,7 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	std::string sID;
 
 	//-- Add entities into the scene --//
-	
 	if (str == "Game") {
-
 		std::shared_ptr<GameScene> scene = std::make_shared<GameScene>(m_res);				//Create scene
 		EntityManager* entities = scene->getEntityManager();	//Get scene entity manager used to add entities in to the scene
 
@@ -377,7 +375,6 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 				entities->addEntity(loadModel(element));
 			}
 		}
-
 		//Attach Scene to engine
 		m_scenes->emplace(sID, scene);
 	}
