@@ -273,7 +273,6 @@ std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 
 	if (m_bDebug) std::cout << "\nLoading Camera \n  ";
 
-
 	std::shared_ptr<Entity> entity = m_factory.createCamera(glm::vec3(0.0f));
 
 	auto camera = entity->get<Component::Camera>();

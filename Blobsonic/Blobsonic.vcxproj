@@ -82,6 +82,7 @@
     <ClInclude Include="Source\Include\Scene.h" />
     <ClInclude Include="Source\Include\SceneComponent.h" />
     <ClInclude Include="Source\Include\SceneLoader.h" />
+    <ClInclude Include="Source\Include\SceneManager.h" />
     <ClInclude Include="Source\Include\SceneMessages.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
@@ -132,6 +133,7 @@
     <ClCompile Include="Source\Common\Scene.cpp" />
     <ClCompile Include="Source\Common\SceneComponent.cpp" />
     <ClCompile Include="Source\Common\SceneLoader.cpp" />
+    <ClCompile Include="Source\Common\SceneManager.cpp" />
     <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />

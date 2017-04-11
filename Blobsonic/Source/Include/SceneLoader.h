@@ -35,8 +35,8 @@ private:
 	//std::shared_ptr<Entity> loadLight(tinyxml2::XMLElement* e);		//!< Parse and create light
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
 
-	void readScene(tinyxml2::XMLNode* node);									//!< Parse a scene
-	void readResources(tinyxml2::XMLNode* node);								//!< Parse resources
+	void readScene(tinyxml2::XMLNode* node);				//!< Parse a scene
+	void readResources(tinyxml2::XMLNode* node);			//!< Parse resources
 
 	bool m_bDebug = true;				//!< Flag for couts
 

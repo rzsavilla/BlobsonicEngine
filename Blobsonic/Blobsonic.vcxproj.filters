@@ -82,6 +82,9 @@
     <Filter Include="Source Files\Engine\Entity">
       <UniqueIdentifier>{806abcfe-31aa-4127-8017-965a105787ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Handler">
+      <UniqueIdentifier>{d425f47a-fc8e-4d80-8ae3-62257af3f9c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -303,6 +306,9 @@
     <ClInclude Include="Source\Include\AssimpMesh.h">
       <Filter>Header Files\Res</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\SceneManager.h">
+      <Filter>Header Files\Engine\Handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -339,9 +345,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\QuatCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\SceneComponent.cpp">
@@ -439,6 +442,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\AssimpMesh.cpp">
       <Filter>Source Files\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\ResourceManager.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\SceneManager.cpp">
+      <Filter>Source Files\Handler</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
