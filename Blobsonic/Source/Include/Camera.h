@@ -8,7 +8,7 @@
 namespace Component {
 	struct Camera {
 		Camera() {
-			m_fFieldOfView = glm::radians(90.0f);
+			m_fFieldOfView = glm::radians(45.0f);
 			m_fNearPlane = 0.01f;
 			m_fFarPlane = 1000.0f;
 			m_fAspectRatio = 4.0f / 3.0f;;
@@ -54,7 +54,7 @@ namespace Component {
 		glm::mat4 m_view;
 		glm::mat4 m_projection;
 
-		bool m_bActive;	//!< Render uses this camera when active
+		bool m_bActive;				//!< Render uses this camera when active !!NOT USED!!
 		float m_fMoveSpeed;
 		bool m_bFollowTarget;
 
