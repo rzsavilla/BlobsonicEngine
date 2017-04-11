@@ -1,5 +1,7 @@
 #pragma once
 
+#define GLM_FORCE_RADIANS
+
 #include <stdio.h>
 #include <tchar.h>
 #include <gl_core_4_3.hpp>
@@ -17,5 +19,3 @@
 #include <map>
 
 #include "Scene.h"
-
-#define GLM_FORCE_RADIANS

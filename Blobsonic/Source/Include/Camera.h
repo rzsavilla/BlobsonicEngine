@@ -1,6 +1,5 @@
 #pragma once
 
-#define GLM_FORCE_RADIANS
 #include <stdafx.h>
 #include "Component.h"
 #include <glm/gtc/matrix_transform.hpp>

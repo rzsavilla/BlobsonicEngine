@@ -167,8 +167,7 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-	</Model>
-	
+	</Model>	
 	<Model> <ID>pickup_model</ID>
 		<Mesh>soccer_mesh</Mesh>
 		<Material>default_material</Material>
