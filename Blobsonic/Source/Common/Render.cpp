@@ -20,7 +20,12 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 								//Apply transformations to model	//Pass model matrix as uniform
 		if (entity->has<Component::Transformable>()) {
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
-			model->m_shader->setUniform("mModel", transformable->m_transform);
+			//model->m_shader->setUniform("mModel", transformable->m_transform);
+
+			mat4 t = mat4(1.0f);
+			t = glm::scale(t, transformable->m_vScale);
+			t = glm::translate(t, transformable->m_vPosition);
+			model->m_shader->setUniform("mModel", t);
 		}
 		else {
 			//Pass default transform

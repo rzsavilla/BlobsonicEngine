@@ -83,9 +83,12 @@ void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 positio
 	fSize = std::max(fSize, Dimensions.z * Scale.z);
 	a->m_vDimensions = glm::vec3(fSize, fSize, fSize);
 
-	t->setPosition(position);
+	t->m_vPosition = position;
 	t->m_vDimensions = Dimensions;
 	t->m_vScale = Scale;
 	t->m_vCenter = position + Dimensions * Scale / 2.0f;
+
+
+	std::cout << "Testing" << std::endl;
 
 }
