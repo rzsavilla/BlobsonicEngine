@@ -130,6 +130,31 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 	}
 
+	gl::GenVertexArrays(1, &am_VAO);
+	gl::GenBuffers(3, am_handle);
+
+	gl::BindVertexArray(am_VAO);
+
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)0);
+	gl::EnableVertexAttribArray(0);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)(3 * sizeof(GLfloat)));
+
+	//gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)(6 * sizeof(GLfloat)));
+	gl::EnableVertexAttribArray(2);
+
 	// Return a mesh object created from the extracted mesh data
 	return aModel(vertices, indices, textures);
 
@@ -201,13 +226,52 @@ GLuint AssimpMesh::getVAO()
 
 void AssimpMesh::setBuffers()
 {
+	/*
 	gl::GenVertexArrays(1, &am_VAO);
 	gl::GenBuffers(3, am_handle);
 
 	gl::BindVertexArray(am_VAO);
 
 	const GLfloat kiSize = sizeof(GLfloat);
+	
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), 0);
+	gl::EnableVertexAttribArray(0);
 
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)offsetof(aVertex, TexCoords));
+	gl::EnableVertexAttribArray(2);
+	*/
+	/*
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), 0);
+	gl::EnableVertexAttribArray(0);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)offsetof(aVertex, TexCoords));
+	gl::EnableVertexAttribArray(2);
+	*/
+	/*
 	//Vertices
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
 	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 3, this->meshes[0].getPosition().data(), gl::STATIC_DRAW);
@@ -225,8 +289,7 @@ void AssimpMesh::setBuffers()
 	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 2, this->meshes[0].getTexCoords().data(), gl::STATIC_DRAW);
 	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, 0, NULL);
 	gl::EnableVertexAttribArray(2);
-
-
+	*/
 }
 
 //((GLubyte *)NULL + (sizeof(GLfloat) * 6))

@@ -105,7 +105,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			gl::BindVertexArray(aMesh->getVAO());		//Bind VAO
 
-														//Has Texture
+			//Has Texture
 			if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
 				gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
 				gl::GenerateMipmap(gl::TEXTURE_2D);

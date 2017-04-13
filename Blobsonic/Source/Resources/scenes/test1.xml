@@ -4,6 +4,9 @@
 	<Mesh> <ID>cube_mesh</ID>
 		<File>Source\Resources\models\cube.obj</File>
 	</Mesh>
+	<Mesh> <ID>plane_mesh</ID>
+		<File>Source\Resources\models\plane2.obj</File>
+	</Mesh>
 	<Mesh> <ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
 	</Mesh>
@@ -91,6 +94,27 @@
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>10.0f</X>
+			<Y>10.0f</Y>
+			<Z>10.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+	</Model>
+	<Model> <ID>room_model</ID>
+		<Mesh>cube_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>-10.0f</Z>
 		</Position>
 		<Scale>
 			<X>10.0f</X>
