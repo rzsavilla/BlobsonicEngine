@@ -10,7 +10,7 @@
 
 void Engine::Engine::loadResources()
 {
-	m_TestScene.initScene();
+	//m_TestScene.initScene();
 }
 
 void Engine::Engine::loop()
@@ -65,14 +65,14 @@ void Engine::Engine::update(float dt)
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//--System process entities--//
-			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+			//(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
 		}
 	}
 
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//Update Systems
-			(*it).second->update(dt);
+			//(*it).second->update(dt);
 		}
 	}
 }
@@ -87,14 +87,14 @@ void Engine::Engine::render()
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first == typeid(System::Render)) {	//Only process render systems
 			//Render entities
-			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+			//(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
 		}
 	}
 }
 
 Engine::Engine::Engine()
-	:m_TestScene(&m_resourceManager)
-	,m_sceneLoader(&m_resourceManager,&m_scenes)
+	//:m_TestScene(&m_resourceManager)
+	:m_sceneLoader(&m_resourceManager,&m_scenes)
 {
 	m_bRunning = false;
 }
@@ -106,7 +106,7 @@ void Engine::Engine::init(int width, int height)
 	m_iWindowWidth = width;
 	m_iWindowHeight = height;
 	m_sWindowTitle = "Game Engine";
-	//----------------------------GLWF---------------------//
+	//---------------------------GLWF---------------------//
 	//Initialize GLFW 
 	if (!glfwInit()) exit(EXIT_FAILURE);
 

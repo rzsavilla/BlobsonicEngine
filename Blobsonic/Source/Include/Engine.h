@@ -2,8 +2,6 @@
 
 #include <stdafx.h>
 #include <memory>
-#include "EntityManager.h"
-#include "ResourceManager.h"
 #include "MessageHandler.h"
 #include "InputMessages.h"
 #include "System.h"
@@ -11,6 +9,9 @@
 #include "TestScene.h"
 
 #include "SceneLoader.h"
+
+#include "EntityManager.h"
+#include "ResourceManager.h"
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -27,11 +28,10 @@ namespace Engine {
 		ResourceManager m_resourceManager;
 		void loadResources();
 
-		//Scenes
+	private:
+		//TestScene m_TestScene;
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
-	private:	//Scenes
-		TestScene m_TestScene;
 	private:	//GLFW
 		int m_iWindowWidth;
 		int m_iWindowHeight;
