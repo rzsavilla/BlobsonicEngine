@@ -29,5 +29,13 @@ public:
 	AssimpMesh();	//!< Default Constructor
 	AssimpMesh(std::string sFilename);	//!< Constructor set to parse obj file
 	bool load(std::string sFilename);	//!< Parse obj file
+	
+	void setVAO(GLuint vao);
+	GLuint getVAO();
 
+private:
+	GLuint am_VAO;
+	GLuint am_handle[3];
+
+	void setBuffers();
 };

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Resources>
+	<Mesh> <ID>cube_mesh</ID>
+		<File>Source\Resources\models\cube.obj</File>
+	</Mesh>
+	<Mesh> <ID>soccer_mesh</ID>
+		<File>Source\Resources\models\soccer.obj</File>
+	</Mesh>
+	<Mesh> <ID>room_mesh</ID>
+		<File>Source\Resources\models\room.obj</File>
+	</Mesh>
+	
+	<Texture> <ID>die_texture</ID>
+		<File>Source\Resources\textures\dice.png</File>
+	</Texture>
+	<Texture> <ID>red_texture</ID>
+		<File>Source\Resources\textures\red.png</File>
+	</Texture>
+	<Texture> <ID>white_texture</ID>
+		<File>Source\Resources\textures\white.png</File>
+	</Texture>
+	
+	<Material> <ID>default_material</ID>
+		<AmbientReflect>
+			<X>0.5f</X>
+			<Y>0.5f</Y>
+			<Z>0.5f</Z>
+		</AmbientReflect>
+		<DiffuseReflect>
+			<X>0.8f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</DiffuseReflect>
+		<SpecularReflect>
+			<X>0.9f</X>
+			<Y>0.9f</Y>
+			<Z>0.9f</Z>
+		</SpecularReflect>
+		<Shininess>200.0</Shininess>
+	</Material>
+	
+	<Material> <ID>bright_material</ID>
+		<AmbientReflect>
+			<X>0.7ff</X>
+			<Y>0.7f</Y>
+			<Z>0.7f</Z>
+		</AmbientReflect>
+		<DiffuseReflect>
+			<X>0.8f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</DiffuseReflect>
+		<SpecularReflect>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</SpecularReflect>
+		<Shininess>1.0</Shininess>
+	</Material>
+	
+	<Shader> <ID>text_shader</ID>
+		<Vertex>Source\Resources\shader\text.vert</Vertex>
+		<Fragment>Source\Resources\shader\text.frag</Fragment>
+	</Shader>
+	<Shader> <ID>phong_shader</ID>
+		<Vertex>Source\Resources\shader\phong.vert</Vertex>
+		<Fragment>Source\Resources\shader\phong.frag</Fragment>
+	</Shader>
+	<Shader> <ID>colour_shader</ID>
+		<Vertex>Source\Resources\shader\colour.vert</Vertex>
+		<Fragment>Source\Resources\shader\colour.frag</Fragment>
+	</Shader>
+	<Shader> <ID>button_shader</ID>
+		<Vertex>Source\Resources\shader\button.vert</Vertex>
+		<Fragment>Source\Resources\shader\button.frag</Fragment>
+	</Shader>
+	
+</Resources>
+
+<Scene> <Type>Splash</Type> <ID>splash_scene</ID>
+</Scene>
+
+<Scene> <Type>Game</Type> <ID>game_scene</ID>
+	<Model> <ID>room_model</ID>
+		<Mesh>cube_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>die_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>10.0f</X>
+			<Y>10.0f</Y>
+			<Z>10.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+	</Model>
+	<Camera> <ID>cam1</ID>
+		<Position>
+			<X>40.0f</X>
+			<Y>40.0f</Y>
+			<Z>-40.0f</Z>
+		</Position>
+		<Orientation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Orientation>
+		<FOV>45.0f</FOV>
+		<AspectRatio>1.33333</AspectRatio>
+		<FarPlane>1000.0f</FarPlane>
+		<NearPlane>0.1f</NearPlane>
+		<RotSpeed>0.5f</RotSpeed>
+	</Camera>
+	<Camera> <ID>cam2</ID>
+		<Position>
+			<X>10.0f</X>
+			<Y>27.0f</Y>
+			<Z>125.0f</Z>
+		</Position>
+		<Orientation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Orientation>
+		<FOV>90.0f</FOV>
+		<AspectRatio>1.3333f</AspectRatio>
+		<FarPlane>1000.0f</FarPlane>
+		<NearPlane>0.1f</NearPlane>
+		<RotSpeed>0.5f</RotSpeed>
+	</Camera>
+	<Camera> <ID>cam3</ID>
+		<Position>
+			<X>-125.0f</X>
+			<Y>28.0f</Y>
+			<Z>125.0f</Z>
+		</Position>
+		<Orientation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Orientation>
+		<FOV>45.0f</FOV>
+		<AspectRatio>1.33333</AspectRatio>
+		<FarPlane>1000.0f</FarPlane>
+		<NearPlane>0.1f</NearPlane>
+		<RotSpeed>0.5f</RotSpeed>
+	</Camera>
+</Scene>
+

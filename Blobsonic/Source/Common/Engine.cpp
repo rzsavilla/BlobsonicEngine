@@ -146,10 +146,10 @@ void Engine::Engine::init(int width, int height)
 	}
 
 	gl::Enable(gl::DEPTH_TEST);
-	gl::Enable(gl::CULL_FACE);
-	gl::CullFace(gl::BACK);
+	//gl::Enable(gl::CULL_FACE);
+	//gl::CullFace(gl::BACK);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\test.xml");
+	m_sceneLoader.load("Source\\Resources\\scenes\\test1.xml");
 }
 
 void Engine::Engine::run()
