@@ -95,6 +95,7 @@ void Engine::Engine::render()
 Engine::Engine::Engine()
 	:m_TestScene(&m_resourceManager)
 	,m_sceneLoader(&m_resourceManager,&m_scenes)
+	,m_SceneManager(&m_resourceManager)
 {
 	m_bRunning = false;
 }

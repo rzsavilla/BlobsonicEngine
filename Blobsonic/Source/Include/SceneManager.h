@@ -8,13 +8,14 @@
 #pragma once
 
 #include "Scene.h"
+#include "ResourceManager.h"
 
 class SceneManager {
 private:
 	std::string m_sActiveScene;									//<! ID/Name of active scene
 	std::map<std::string, std::shared_ptr<Scene>> m_scenes;		//!< Store scenes
 public:
-	SceneManager();	//!< Defualt constructor
+	SceneManager(ResourceManager* res);	//!< Defualt constructor
 
 	bool setActiveScene(std::string name);		//!< Set active scene
 

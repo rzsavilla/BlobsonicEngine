@@ -2,15 +2,16 @@
 
 #include <stdafx.h>
 #include <memory>
-#include "EntityManager.h"
-#include "ResourceManager.h"
 #include "MessageHandler.h"
 #include "InputMessages.h"
 #include "System.h"
 
 #include "TestScene.h"
 
+#include "EntityManager.h"
+#include "ResourceManager.h"
 #include "SceneLoader.h"
+#include "SceneManager.h"
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -27,10 +28,11 @@ namespace Engine {
 		ResourceManager m_resourceManager;
 		void loadResources();
 
-		//Scenes
+		
+	private:	//Scenes
+		SceneManager m_SceneManager;
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
-	private:	//Scenes
 		TestScene m_TestScene;
 	private:	//GLFW
 		int m_iWindowWidth;
@@ -56,10 +58,10 @@ namespace Engine {
 			m_ptrSystems.erase(typeid(T));
 		}
 
-		void init(int width, int height); //!< Initialize Engine
-		void run();						//!< Start Game loop
+		void init(int width, int height);	//!< Initialize Engine
+		void run();							//!< Start Game loop
 
-										//---Message Receiver--//
+		//---Message Receiver--//
 		void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
 	};
 }
