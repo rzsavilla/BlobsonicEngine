@@ -16,4 +16,6 @@ public:
 	std::shared_ptr<Entity> createCamera(glm::vec3 position);
 
 	std::shared_ptr<Entity> createActor();
+
+	void attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale);//Use for "early out" collision testing
 };

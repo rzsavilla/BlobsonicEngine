@@ -135,7 +135,7 @@
 	
 	<Physics> 
 		<ID>Sphere</ID>
-		<Mesh>sphere_mesh</Mesh>
+		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>white_texture</Texture>
@@ -184,23 +184,23 @@
 	</Light>
 	
 	
-	<Camera> <ID>cam1</ID>
+<Camera> 
+		<ID>cam3</ID>
 		<Position>
-			<X>40.0f</X>
-			<Y>40.0f</Y>
-			<Z>-40.0f</Z>
+			<X>-125.0f</X>
+			<Y>28.0f</Y>
+			<Z>125.0f</Z>
 		</Position>
-		
-		<View>
+		<Orientation>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
-		</View>
+		</Orientation>
 		<FOV>45.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>1000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>100f</RotSpeed>
+		<RotSpeed>0.5f</RotSpeed>
 	</Camera>
 	
 </Scene>

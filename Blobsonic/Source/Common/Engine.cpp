@@ -149,7 +149,7 @@ void Engine::Engine::init(int width, int height)
 	//gl::Enable(gl::CULL_FACE);
 	//gl::CullFace(gl::BACK);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\test1.xml");
+	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml");
 }
 
 void Engine::Engine::run()

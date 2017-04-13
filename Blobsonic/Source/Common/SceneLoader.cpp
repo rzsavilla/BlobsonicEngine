@@ -6,7 +6,7 @@
 //Components
 #include "Model.h"
 #include "Camera.h"
-
+#include "AABB.h"
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -157,9 +157,12 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	if (m_bDebug) std::cout << "\nLoading Model \n  ";
 
 	std::shared_ptr<Entity> entity = m_factory.createActor();
+	//entity->attach<AABB>();
+	
 
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
+	//auto aabb = entity->get<AABB>();
 
 	std::string sID;
 	//Look at Model Element
@@ -196,7 +199,15 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			transform->m_transform = glm::scale(transform->m_transform, v);
+			transform->m_vScale = v;
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Dimensions") == 0) {
+			//Set model scale
+			glm::vec3 v = parseVec3(modelChild);
+			transform->m_transform = glm::scale(transform->m_transform, v);
+			transform->m_vDimensions = v;
+			if (m_bDebug) std::cout << "Dimension Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		//else if (strcmp(childValue, "Origin") == 0) {
 		//	//Set model origin
@@ -208,9 +219,10 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			if (readElementText(modelChild, cData)) {
 				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
 			}
-			
 		}
 	}
+
+	m_factory.attachAABB(entity, transform->getPosition(),transform->m_vDimensions, transform->m_vScale);
 	return entity;
 }
 

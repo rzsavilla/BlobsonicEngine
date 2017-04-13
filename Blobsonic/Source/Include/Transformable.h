@@ -22,6 +22,10 @@ namespace Component {
 		float m_fSpeed;
 		float m_fRotationSpeed;
 
+
+		glm::vec3 m_vScale;
+		glm::vec3 m_vDimensions;
+		glm::vec3 m_vCenter;
 		glm::vec3 m_vPosition;
 
 		void setPosition(glm::vec3 position) {
