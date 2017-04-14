@@ -126,6 +126,7 @@ void Engine::Engine::init(int width, int height)
 	glfwSetKeyCallback(m_window, key_callback);
 
 	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	
 
 	//Tell systems a window has been set
 	MessageHandler::getInstance()->sendMessage(std::make_shared<EngineMessage::SetWindow>(m_window));
@@ -145,11 +146,18 @@ void Engine::Engine::init(int width, int height)
 		exit(EXIT_FAILURE);
 	}
 
+	gl::Enable(gl::BLEND);
+	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
+	
 	gl::Enable(gl::DEPTH_TEST);
-	gl::Enable(gl::CULL_FACE);
-	gl::CullFace(gl::BACK);
+	//gl::Enable(gl::CULL_FACE);
+	//gl::CullFace(gl::BACK);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\test.xml");
+
+	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml");
+
+
+
 }
 
 void Engine::Engine::run()

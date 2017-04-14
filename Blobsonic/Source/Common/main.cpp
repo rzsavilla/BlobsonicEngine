@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "CameraSystem.h"
 #include "PlayerController.h"
+#include "Physics.h"
 
 int main() {
 	//Attach systems to the engine
@@ -14,6 +15,7 @@ int main() {
 	engine.init(1024, 768);
 	engine.attachSystem<System::Render>();				//Render objects
 	engine.attachSystem<System::CameraSystem>();		//Control active camera
+	engine.attachSystem<System::Physics>();				//Do physics check on scene
 	//engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.run();
 	glfwTerminate();

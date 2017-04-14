@@ -8,6 +8,7 @@
 #include "GLSLProgram.h"
 #include "AssimpMesh.h"
 
+
 class ResourceManager {
 private:
 	std::map<std::string, std::shared_ptr<Mesh>> m_meshes;

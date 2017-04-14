@@ -34,19 +34,24 @@ bool AssimpMesh::load(std::string sFile) {
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return false;
 	}
+
 	this->directory = sFile.substr(0, sFile.find_last_of('/'));
 	this->processNode(scene->mRootNode, scene);
+
+	this->setBuffers();
 
 	return true;
 }
 
 void AssimpMesh::processNode(aiNode* node, const aiScene* scene) {
-	// Process all the node's meshes (if any)
+	
+	// Process all the node's meshes
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		this->meshes.push_back(this->processMesh(mesh, scene));
 	}
+	
 	// Then do the same for each of its children
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 	{
@@ -63,17 +68,20 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 	for (GLuint i = 0; i < mesh->mNumVertices; i++)
 	{
 		aVertex vertex;
-		glm::vec3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
-						  // Positions
+		glm::vec3 vector;
+
+		// Positions
 		vector.x = mesh->mVertices[i].x;
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
 		vertex.Position = vector;
+		
 		// Normals
 		vector.x = mesh->mNormals[i].x;
 		vector.y = mesh->mNormals[i].y;
 		vector.z = mesh->mNormals[i].z;
 		vertex.Normal = vector;
+		
 		// Texture Coordinates
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
 		{
@@ -86,16 +94,21 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 		}
 		else
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+		
 		vertices.push_back(vertex);
 	}
+
 	// Now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 	for (GLuint i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
+
 		// Retrieve all indices of the face and store them in the indices vector
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 			indices.push_back(face.mIndices[j]);
+	
 	}
+
 	// Process materials
 	if (mesh->mMaterialIndex >= 0)
 	{
@@ -117,6 +130,31 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 	}
 
+	gl::GenVertexArrays(1, &am_VAO);
+	gl::GenBuffers(3, am_handle);
+
+	gl::BindVertexArray(am_VAO);
+
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)0);
+	gl::EnableVertexAttribArray(0);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)(3 * sizeof(GLfloat)));
+
+	//gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)(6 * sizeof(GLfloat)));
+	gl::EnableVertexAttribArray(2);
+
 	// Return a mesh object created from the extracted mesh data
 	return aModel(vertices, indices, textures);
 
@@ -124,12 +162,14 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 vector<aTexture> AssimpMesh::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName) {
 	vector<aTexture> textures;
+	
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
 		// Check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
 		GLboolean skip = false;
+		
 		for (GLuint j = 0; j < textures_loaded.size(); j++)
 		{
 			if (std::strcmp(textures_loaded[j].myPath.C_Str(), str.C_Str()) == 0)
@@ -173,3 +213,83 @@ GLint AssimpMesh::TextureFromFile(const char* path, string directory)
 	textureID = texture->object();
 	return textureID;
 }
+
+void AssimpMesh::setVAO(GLuint vao)
+{
+	am_VAO = vao;
+}
+
+GLuint AssimpMesh::getVAO()
+{
+	return am_VAO;
+}
+
+void AssimpMesh::setBuffers()
+{
+	/*
+	gl::GenVertexArrays(1, &am_VAO);
+	gl::GenBuffers(3, am_handle);
+
+	gl::BindVertexArray(am_VAO);
+
+	const GLfloat kiSize = sizeof(GLfloat);
+	
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), 0);
+	gl::EnableVertexAttribArray(0);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)offsetof(aVertex, TexCoords));
+	gl::EnableVertexAttribArray(2);
+	*/
+	/*
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), 0);
+	gl::EnableVertexAttribArray(0);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)offsetof(aVertex, TexCoords));
+	gl::EnableVertexAttribArray(2);
+	*/
+	/*
+	//Vertices
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 3, this->meshes[0].getPosition().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, 0, 0);
+	gl::EnableVertexAttribArray(0);
+
+	//Normals
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 3, this->meshes[0].getNormal().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, 0, NULL);
+	gl::EnableVertexAttribArray(1);
+
+	//Texture Coordinates
+	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 2, this->meshes[0].getTexCoords().data(), gl::STATIC_DRAW);
+	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, 0, NULL);
+	gl::EnableVertexAttribArray(2);
+	*/
+}
+
+//((GLubyte *)NULL + (sizeof(GLfloat) * 6))

@@ -15,6 +15,7 @@ struct aVertex {
 	glm::vec3 Normal;
 	// TexCoords
 	glm::vec2 TexCoords;
+
 };
 
 struct aTexture {

@@ -4,34 +4,29 @@
 //Chris O'Neill
 
 #include "ModelOLD.h"
-#include "Physical.h"
 
-
-class AABB : public Physical
+class AABB : public Component::Component
 {
 public:
 	AABB(); // <! Default Constructor for a box/cube physics
-	AABB(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
 
-	void update(float dt);	//!< Update Box
+	//void movementForTesting(float x, float y, float z);
+	//Model m_RenderModel; // <! The rendered object for testing (Delete later)
+	//AABB(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
+
+	//void update(float dt);	//!< Update Box
 
 	//Component Functions
-	void init();	//!< Initialize component
-	void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
-	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
-	void CollideWithBox(AABB* other);			//<!Checks for collision with anotehr box
+	//void init();	//!< Initialize component
+	//void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
+	//void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
 
-	void movementForTesting(float x, float y, float z);
-	Model m_RenderModel; // <! The rendered object for testing (Delete later)
-
-private:
+public:
 
 	//collision detection variables
 
-	glm::vec3 obb1LocalPoints[8];
-	glm::vec3 obb2LocalPoints[8];
-
-
+	glm::vec3 obbLocalPoints[8];
+	
 	float m_fMinX; //!< min value on the x axis
 	float m_fMinY; //!< min value on the y axis
 	float m_fMinZ; //!< min value on the z axis
@@ -40,6 +35,9 @@ private:
 	float m_fMaxY; //!< max value on the y axis
 	float m_fMaxZ; //!< max value on the z axis
 	
+
+	glm::vec3 m_vDimensions;
+
 	bool testAxis[3];
 
 };

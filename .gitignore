@@ -15,6 +15,7 @@
 *.iobj
 *.ipdb
 *.bsc
+Intermediates/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

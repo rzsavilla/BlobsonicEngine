@@ -6,6 +6,11 @@ namespace System {
 	class Physics: public System {
 	private:
 
+		std::vector<std::shared_ptr <Entity>> m_vAABBS; // !< AABB for the scene
+
+		bool CheckAABBAABBCollision(std::shared_ptr <Entity> aabb1, std::shared_ptr <Entity> aabb2);
+
+
 	public:
 		Physics();
 		//! Process all entities

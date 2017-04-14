@@ -25,7 +25,6 @@ class SceneLoader {
 private:
 	ResourceManager* m_res;									//!< Pointer to Resource manager where loaded resources will be stored
 	std::map<std::string,std::shared_ptr<Scene>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
-
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
 	void loadTexture(tinyxml2::XMLElement* e);			//!< Parse file to load texture
 	void loadMaterial(tinyxml2::XMLElement* e);			//!< Parse file to load material

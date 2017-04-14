@@ -50,8 +50,9 @@ void main() {
 	//	result += vec4(calcPointLight(pLight[i], fragNormal,fragVert, viewDir),1.0f);
 	//}
 
+	
 	Colour = texture(tex, texCoord);
-	//Colour = vec4(1.0f,1.0f,1.0,1.0f);
+	//Colour = vec4(1.0f,0.0f,1.0,0.1f);
 }
 
 vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
