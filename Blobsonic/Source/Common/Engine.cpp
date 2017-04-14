@@ -65,14 +65,14 @@ void Engine::Engine::update(float dt)
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//--System process entities--//
-			//(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
 		}
 	}
 
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//Update Systems
-			//(*it).second->update(dt);
+			(*it).second->update(dt);
 		}
 	}
 }
@@ -87,7 +87,7 @@ void Engine::Engine::render()
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first == typeid(System::Render)) {	//Only process render systems
 			//Render entities
-			//(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
 		}
 	}
 }
