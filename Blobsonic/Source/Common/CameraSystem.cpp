@@ -125,22 +125,17 @@ void System::CameraSystem::processMessages(const std::vector<std::shared_ptr<Mes
 				//Get data key data from message
 				auto data = static_cast<InputMessage::KeyPress*>(msgs->at(i).get());
 				if (data->m_iAction == GLFW_PRESS || data->m_iAction == GLFW_REPEAT) {	//Key is pressed
-					switch (data->m_iKey)
-					{
-					case GLFW_KEY_UP:
+					if (data->m_iKey == GLFW_KEY_UP || data->m_iKey == GLFW_KEY_W) {
 						zoom(m_ptrActiveCamera->m_fMoveSpeed);
-						break;
-					case GLFW_KEY_DOWN:
+					}
+					else if (data->m_iKey == GLFW_KEY_DOWN || data->m_iKey == GLFW_KEY_S) {
 						zoom(-m_ptrActiveCamera->m_fMoveSpeed);
-						break;
-					case GLFW_KEY_A:
+					}
+					else if (data->m_iKey == GLFW_KEY_LEFT || data->m_iKey == GLFW_KEY_A) {
 						pan(-m_ptrActiveCamera->m_fMoveSpeed, 0.0f);
-						break;
-					case GLFW_KEY_D:
+					}
+					else if (data->m_iKey == GLFW_KEY_RIGHT || data->m_iKey == GLFW_KEY_D) {
 						pan(m_ptrActiveCamera->m_fMoveSpeed, 0.0f);
-						break;
-					default:
-						break;
 					}
 				}
 			}
