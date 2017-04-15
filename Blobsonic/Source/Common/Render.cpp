@@ -17,15 +17,12 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
-								//Apply transformations to model	//Pass model matrix as uniform
-		if (entity->has<Component::Transformable>()) {
+								
+		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
-			//model->m_shader->setUniform("mModel", transformable->m_transform);
 
-			mat4 t = mat4(1.0f);
-			t = glm::scale(t, transformable->m_vScale);
-			t = glm::translate(t, transformable->m_vPosition);
-			model->m_shader->setUniform("mModel", t);
+			model->m_shader->setUniform("mModel", transformable->getTransform());
+			//transformable->setRotation(transformable->getRotation() + glm::vec3(0.0f, 0.0f, 0.01f));
 		}
 		else {
 			//Pass default transform
