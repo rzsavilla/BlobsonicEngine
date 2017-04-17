@@ -151,19 +151,12 @@ void SceneLoader::loadShader(tinyxml2::XMLElement * e)
 std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
-
 	char* cData = "";			//Temporary storage for element data
-
 	if (m_bDebug) std::cout << "\nLoading Model \n  ";
-
 	std::shared_ptr<Entity> entity = m_factory.createActor();
-	
-	
-
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
 	
-
 	std::string sID;
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
@@ -171,13 +164,13 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		if (strcmp(childValue, "ID") == 0) {
 			if (readElementText(modelChild, cData)) {
 				sID = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "ID: " << sID << "\n";
 			}
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(modelChild, cData)) {
 				model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
 				model->m_aMeshes.push_back(m_res->getAssimpMesh(std::string(cData, strlen(cData))));
-
 			}
 		}
 		else if (strcmp(childValue, "Shader") == 0) {
@@ -198,23 +191,27 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		else if (strcmp(childValue, "Scale") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_transform = glm::scale(transform->m_transform, v);
 			transform->m_vScale = v;
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Rotation") == 0) {
+			//Set model rotation
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setRotation(v);
+			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Dimensions") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_transform = glm::scale(transform->m_transform, v);
 			transform->m_vDimensions = v;
 			if (m_bDebug) std::cout << "Dimension Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-		//else if (strcmp(childValue, "Origin") == 0) {
-		//	//Set model origin
-		//	glm::vec3 v = parseVec3(modelChild);
-		//	transform->setOrigin(v);
-		//	if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		//}
+		else if (strcmp(childValue, "Origin") == 0) {
+			//Set model origin
+			glm::vec3 v = parseVec3(modelChild);
+			transform->m_vOrigin = v;
+			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
 		else if (strcmp(childValue, "Material") == 0) {
 			if (readElementText(modelChild, cData)) {
 				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
@@ -293,7 +290,7 @@ std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 	char * c;
 	std::string sID;
 	float fNear = 0.1f;
-	float fFar = 100.0f;
+	float fFar = 1000.0f;
 	//Look at Model Element
 	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		const char* childValue = child->Value();
@@ -304,48 +301,42 @@ std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(child);
-			camera->m_vPosition = v;
+			camera->setPosition(v);
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-		/*	else if (strcmp(childValue, "Orientation") == 0) {
+		else if (strcmp(childValue, "Orientation") == 0) {
 			glm::vec3 v = parseVec3(child);
-			camera.rotate(v.x,v.y);
-			camera.roll(v.z);
+			//camera->setRotation(v);
+			camera->setOrientation(v);
 			if (m_bDebug) std::cout << "Orientation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}*/
+		}
 		else if (strcmp(childValue, "FOV") == 0) {
 			if (readElementText(child, c)) {
-				camera->m_fFarPlane = (atof(c));
+				camera->setFOV(atof(c));
 			}
 			if (m_bDebug) std::cout << "Field of View: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "AspectRatio") == 0) {
 			if (readElementText(child, c)) {
-				camera->m_fAspectRatio = (atof(c));
+				camera->setAspectRatio(atof(c));
 			}
 			if (m_bDebug) std::cout << "Aspect Ratio: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "FarPlane") == 0) {
 			if (readElementText(child, c)) {
-				camera->m_fFarPlane = atof(c);
+				camera->setFarPlane(atof(c));
 			}
 			if (m_bDebug) std::cout << "Far plane: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "NearPlane") == 0) {
 			if (readElementText(child, c)) {
-				camera->m_fNearPlane = atof(c);
+				camera->setNearPlane(atof(c));
 			}
 			if (m_bDebug) std::cout << "NearPlane: " << c << "\n  ";
 		}
-		//else if (strcmp(childValue, "RotSpeed") == 0) {
-		//	if (readElementText(child, c)) {
-		//		camera->m_fMoveSpeed(atof(c));
-		//	}
-		//	if (m_bDebug) std::cout << "Rotation Speed: " << c << "\n  ";
-		//}
 		else if (strcmp(childValue, "MoveSpeed") == 0) {
 			if (readElementText(child, c)) {
-				camera->m_fMoveSpeed = (atof(c));
+				camera->setMoveSpeed((atof(c)));
 			}
 			if (m_bDebug) std::cout << "MoveSpeed Speed: " << c << "\n  ";
 		}

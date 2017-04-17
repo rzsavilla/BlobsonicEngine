@@ -449,5 +449,11 @@
     <ClCompile Include="Source\Common\SceneManager.cpp">
       <Filter>Source Files\Handler</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\Camera.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\CameraController.cpp">
+      <Filter>Source Files\Engine\System\Contoller</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -49,7 +49,7 @@ void Engine::Engine::loop()
 
 		//Reset every second
 		if (glfwGetTime() - dTimer > 1.0) {
-			std::cout << "FPS:" << iFrames << "\n";
+			//std::cout << "FPS:" << iFrames << "\n";
 			dTimer++;
 			iUpdates = 0;
 			iFrames = 0;
@@ -93,7 +93,6 @@ void Engine::Engine::render()
 }
 
 Engine::Engine::Engine()
-	//:m_TestScene(&m_resourceManager)
 	:m_sceneLoader(&m_resourceManager,&m_scenes)
 {
 	m_bRunning = false;
@@ -127,7 +126,6 @@ void Engine::Engine::init(int width, int height)
 
 	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	
-
 	//Tell systems a window has been set
 	MessageHandler::getInstance()->sendMessage(std::make_shared<EngineMessage::SetWindow>(m_window));
 
@@ -150,14 +148,12 @@ void Engine::Engine::init(int width, int height)
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
 	
 	gl::Enable(gl::DEPTH_TEST);
-	//gl::Enable(gl::CULL_FACE);
-	//gl::CullFace(gl::BACK);
+	gl::Enable(gl::CULL_FACE);
+	gl::CullFace(gl::BACK);
 
+	m_sceneLoader.load("Source\\Resources\\scenes\\CubeTest.xml");
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml");
-
-
-
+	glfwSetCursorPos(m_window, 0.0, 0.0);
 }
 
 void Engine::Engine::run()

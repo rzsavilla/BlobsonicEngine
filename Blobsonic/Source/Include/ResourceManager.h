@@ -8,6 +8,7 @@
 #include "GLSLProgram.h"
 #include "AssimpMesh.h"
 
+#include "MessageHandler.h"
 
 class ResourceManager {
 private:

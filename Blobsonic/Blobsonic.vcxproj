@@ -101,6 +101,8 @@
     <ClCompile Include="Source\Common\aModel.cpp" />
     <ClCompile Include="Source\Common\AssimpMesh.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
+    <ClCompile Include="Source\Common\Camera.cpp" />
+    <ClCompile Include="Source\Common\CameraController.cpp" />
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />

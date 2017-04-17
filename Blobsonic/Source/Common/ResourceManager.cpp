@@ -1,5 +1,6 @@
 #include <stdafx.h>
 #include "ResourceManager.h"
+#include "EngineMessages.h"
 
 ResourceManager::ResourceManager()
 {
@@ -32,6 +33,9 @@ std::shared_ptr<Mesh> ResourceManager::getMesh(const std::string& name) {
 	if (mesh != m_meshes.end()) {
 		return mesh->second;
 	}
+
+	std::cout << "Mesh Could Not be Found \n";
+	return std::make_shared<Mesh>();
 }
 
 std::shared_ptr<AssimpMesh> ResourceManager::getAssimpMesh(const std::string& name)

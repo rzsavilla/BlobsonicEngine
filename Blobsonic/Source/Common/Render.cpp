@@ -31,9 +31,9 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 		//Pass Camera uniforms
 		if (m_ptrActiveCamera != NULL) {
-			model->m_shader->setUniform("mView", m_ptrActiveCamera->m_view);				//View matrix
-			model->m_shader->setUniform("mProjection", m_ptrActiveCamera->m_projection);	//Projection matrix
-			model->m_shader->setUniform("viewPos", m_ptrActiveCamera->m_vPosition);
+			model->m_shader->setUniform("mView", m_ptrActiveCamera->getView());				//View matrix
+			model->m_shader->setUniform("mProjection", m_ptrActiveCamera->getProjection());	//Projection matrix
+			model->m_shader->setUniform("viewPos", m_ptrActiveCamera->getPosition());		//Camera/Eye position
 		}
 	}
 
@@ -142,10 +142,10 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		//Find and set active camera
 		if ((*it)->has<Component::Camera>()) {
 			auto cam = (*it)->get<Component::Camera>();
-			if (cam->m_bActive) {
+			//if (cam->m_bActive) {
 				//Set camera pointer to this
 				m_ptrActiveCamera = cam;
-			}
+			//}
 		}
 		//Find Model Component
 		else  if ((*it)->has<Component::Model>()) {
@@ -166,7 +166,7 @@ void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>
 			//Get data key data from message
 			auto data = static_cast<CameraMessage::SetActiveCamera*>((*it).get());
 
-			m_ptrActiveCamera = data->ptrCam;
+			m_ptrActiveCamera = data->entity->get<Component::Camera>();
 		}
 	}
 }

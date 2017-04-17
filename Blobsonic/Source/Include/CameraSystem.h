@@ -22,7 +22,6 @@ const glm::vec3 WORLDZ = glm::vec3(0, 0, 1);
 namespace System {
 	class CameraSystem : public System {
 	private:
-		float m_fDt;
 		Component::Camera* m_ptrActiveCamera;
 	private:
 		void setPosition(const glm::vec3& position); //position setter method
@@ -38,8 +37,6 @@ namespace System {
 		void updateView();
 
 		void reset(void); //Reset the camera
-
-
 	public:
 		CameraSystem();
 

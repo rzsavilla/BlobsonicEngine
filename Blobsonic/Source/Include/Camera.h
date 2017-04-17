@@ -1,3 +1,11 @@
+/**
+*	@file Camera.h
+*	@class Camera
+*	@author Rozen Savilla
+*	@brief Camera component
+*	Camera component responsible for determing the orienatation, position or a camera it returns a projection and a view matrix.
+*/
+
 #pragma once
 
 #include <stdafx.h>
@@ -6,59 +14,86 @@
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Component {
-	struct Camera {
-		Camera() {
-			m_fFieldOfView = glm::radians(45.0f);
-			m_fNearPlane = 0.01f;
-			m_fFarPlane = 1000.0f;
-			m_fAspectRatio = 4.0f / 3.0f;;
+	class Camera {
+	private:
+		float m_fFieldOfView;	//!< Field of View degrees
+		float m_fNearPlane;		//!< Closest render distance
+		float m_fFarPlane;		//!< Furthest render distance
+		float m_fAspectRatio;	//!< Aspect Ratio
 
-			m_vAxisX = glm::vec3(0.0f);
-			m_vAxisY = glm::vec3(0.0f);
-			m_vAxisZ = glm::vec3(0.0f);
+		float m_fYaw;			//!< X axis rotation
+		float m_fPitch;			//!< Y axis rotation
+		float m_fRoll;			//!< Z axis rotation
 
-			m_vPosition = glm::vec3(0.0f, 0.0f, 5.0f);
+		glm::vec3 m_vPosition;	//!< World position
 
-			m_qOrientation = glm::quat(1.0, 0.0, 0.0, 0.0);
-			m_projection = glm::perspective(m_fFieldOfView, m_fAspectRatio, m_fNearPlane, m_fFarPlane);
+		bool m_bUsePerspective;	//!< Use perspective projection if true else use othorgraphic
+		float m_fMoveSpeed;		//!< Camera world movement speed
+	public:
+		Camera();				//!< Default contructor
 
-			m_view = glm::lookAt(
-				glm::vec3(0.0f, 0.0f, 10.0f),	//Pos
-				glm::vec3(0.0f, 0.0f, 0.0f),	//Dir
-				glm::vec3(0.0f, 1.0f, 0.0f)		//Up
-			);
-				
+		void zoom(float zoom);						//!< Move camera forward based on rotation
+		void strafe(float strafe);					//!< Move camera horizontally based on rotation
+		void pedestal(float pedestal);				//!< Move camera vertically based on rotation
+		void pitch(float pitch);					//!< Pith camera or X axis rotation
+		void yaw(float yaw);						//!< Yaw camera or Y axis rotation
+		void roll(float roll);						//!< Roll camera or Z axis rotation
+		void rotate(float pitch,float yaw);		//!< Apply pitch and yaw rotation
 
-			m_fMoveSpeed = 5.0f;
+		void translate(glm::vec3 translation);		//!< Translate camera position				
+		void translate(float x, float y, float z);	//!< Translate camera position
 
-			m_bActive = false;
+		void reset();						//!< Reset camera attributes
 
-			m_bFollowTarget = false;
-			m_vTarget = glm::vec3(0.0f);
-			m_vCameraDist = glm::vec3(0.0f, 300.0f, 100.0f);
-		};
+		/*!
+			Set camera projection attributes
+			@param FOV Field of View
+			@param AspectRatio Aspect Ratio
+			@param Near Closest Render Distance or Near Plane
+			@param Far Furthest Render Distance or Far Plane
+		*/
+		void setProjectionAtt(float FOV, float AspectRatio, float Near, float Far);
+		void setFOV(float FOV);						//!< Set field of view
+		void setAspectRatio(float AspectRatio);		//!< Set aspect aatio
+		void setNearPlane(float Near);				//!< Set near plane
+		void setFarPlane(float Far);				//!< Set far plane
 
-		float m_fFieldOfView;
-		float m_fNearPlane;
-		float m_fFarPlane;
-		float m_fAspectRatio;
+		/*!
+			Set camera orientation
+			Determines the cameras pitch , yaw and roll angle.
+			@param newOrientation The camera pitch, yaw and roll angle.
+		*/
+		void setOrientation(glm::vec3 newOrientation);
 
-		//Camera coordinate axis
-		glm::vec3 m_vAxisX;
-		glm::vec3 m_vAxisY;
-		glm::vec3 m_vAxisZ;
+		/*!
+			Set camera orientation
+			Determines the cameras pitch , yaw and roll angle.
+			@param newOrientation The camera pitch, yaw and roll angle.
+		*/
+		void setOrientation(float pitch, float yaw, float roll);
+		void setPitch(float pitch);						//!< Set camera pitch angle
+		void setYaw(float yaw);							//!< Set camera yaw angle
+		void setRoll(float roll);						//!< Set camera roll angle in degrees
+		void setPosition(glm::vec3 newPosition);		//!< Set camera position
+		void setPosition(float x, float y, float z);	//!< Set camera position
+		void setMoveSpeed(float speed);					//!< Set Camera movement speed
 
-		glm::vec3 m_vPosition;
+		/*!
+			Determines perspective or orthographic projection.
+			@param isPerspective Sets camera projection to perspective if true, if false camera uses orthographic perspective
+		*/
+		void setPerspective(bool isPerspective);
 
-		glm::quat m_qOrientation;
-		glm::mat4 m_view;
-		glm::mat4 m_projection;
+		float getPitch();		//!< Return pitch angle	(X axis rotation)
+		float getYaw();			//!< Return yaw angle	(Y axis rotation)
+		float getRoll();		//!< Return roll angle	(Z axis rotation)
+		glm::vec3 getPosition();	//!< Return Camera position/eye
 
-		bool m_bActive;				//!< Render uses this camera when active !!NOT USED!!
-		float m_fMoveSpeed;
-		bool m_bFollowTarget;
+		float getMoveSpeed();	//!< Return camera movement speed
 
-		glm::vec3 m_vTarget;
-		glm::vec3 m_vCameraDist;	//!< Camera distance from target
+		glm::mat4 getView();				//!< Return camera view matrix
+		glm::mat4 getProjection();			//!< Return projection matrix
+
+		glm::quat getQuatRotation();		//!< Returns quaternion rotation
 	};
 }

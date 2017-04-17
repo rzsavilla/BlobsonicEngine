@@ -50,8 +50,7 @@ std::shared_ptr<Entity> EntityFactory::createCamera(glm::vec3 position)
 	auto t = entity->get<Component::Transformable>();
 	auto cam = entity->get<Component::Camera>();
 
-	cam->m_vPosition = position;
-	cam->m_bActive = true;
+	cam->setPosition(position);
 	return entity;
 }
 

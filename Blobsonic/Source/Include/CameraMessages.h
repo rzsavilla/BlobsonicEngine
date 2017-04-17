@@ -5,11 +5,11 @@
 
 namespace CameraMessage {
 	struct SetActiveCamera : public Message {
-		SetActiveCamera(Component::Camera* cam)
-			:ptrCam(cam)
+		SetActiveCamera(std::shared_ptr<Entity> CameraEntity)
+			:entity(CameraEntity)
 		{
 			sID = "SetActiveCamera";
 		}
-		Component::Camera* ptrCam;
+		std::shared_ptr<Entity> entity;
 	};
 }
