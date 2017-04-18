@@ -309,6 +309,15 @@
     <ClInclude Include="Source\Include\SceneManager.h">
       <Filter>Header Files\Engine\Handler</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Destroyable.h">
+      <Filter>Header Files\Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Gameplay.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Pickup.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\GameScene.cpp">
@@ -454,6 +463,15 @@
     </ClCompile>
     <ClCompile Include="Source\Common\CameraController.cpp">
       <Filter>Source Files\Engine\System\Contoller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Destroyable.cpp">
+      <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Gameplay.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Pickup.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -40,10 +40,12 @@
     <ClInclude Include="Source\Include\CameraMessages.h" />
     <ClInclude Include="Source\Include\CameraSystem.h" />
     <ClInclude Include="Source\Include\Capsule.h" />
+    <ClInclude Include="Source\Include\Destroyable.h" />
     <ClInclude Include="Source\Include\EngineMessages.h" />
     <ClInclude Include="Source\Include\Entity.h" />
     <ClInclude Include="Source\Include\EntityFactory.h" />
     <ClInclude Include="Source\Include\EntityManager.h" />
+    <ClInclude Include="Source\Include\Gameplay.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
@@ -72,6 +74,7 @@
     <ClInclude Include="Source\Include\ObjectComponent.h" />
     <ClInclude Include="Source\Include\Physical.h" />
     <ClInclude Include="Source\Include\Physics.h" />
+    <ClInclude Include="Source\Include\Pickup.h" />
     <ClInclude Include="Source\Include\Player.h" />
     <ClInclude Include="Source\Include\PlayerController.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
@@ -105,7 +108,9 @@
     <ClCompile Include="Source\Common\CameraController.cpp" />
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
+    <ClCompile Include="Source\Common\Destroyable.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
+    <ClCompile Include="Source\Common\Gameplay.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
@@ -128,6 +133,7 @@
     <ClCompile Include="Source\Common\ObjectComponent.cpp" />
     <ClCompile Include="Source\Common\Physical.cpp" />
     <ClCompile Include="Source\Common\Physics.cpp" />
+    <ClCompile Include="Source\Common\Pickup.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
