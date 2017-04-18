@@ -2,8 +2,6 @@
 
 #include "System.h"
 
-
-
 namespace System {
 	const int kiCameraActions = 8;
 	class CameraController: public System{
