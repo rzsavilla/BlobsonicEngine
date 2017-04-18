@@ -20,3 +20,5 @@
 
 #include "Scene.h"
 #include "Destroyable.h"
+
+#include "MessageHandler.h"
