@@ -1,4 +1,4 @@
-#include <stdafx.h>
+#include "stdafx.h"
 
 #include "Engine.h"
 
@@ -7,6 +7,7 @@
 #include "PlayerController.h"
 #include "Physics.h"
 #include "CameraController.h"
+#include "Gameplay.h"
 
 int main() {
 	//Attach systems to the engine
@@ -19,6 +20,7 @@ int main() {
 	//engine.attachSystem<System::Physics>();				//Do physics check on scene
 	//engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.attachSystem<System::CameraController>();
+	engine.attachSystem<System::Gameplay>();
 	engine.run();
 	glfwTerminate();
 	return 0;
