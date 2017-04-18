@@ -9,18 +9,22 @@
 #include <memory>
 #include <typeindex>
 
+#include "Destroyable.h"
+
 static int iUniqueIDCounter = 0;
 
-class Entity {
+class Entity: public Destroyable {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 	int m_iUID;	//!< Unique ID
 public:
 	Entity() {
-		m_iUID = iUniqueIDCounter;
+		m_iUID = iUniqueIDCounter;	//Set Unique ID
 		iUniqueIDCounter++;
 	}
-	~Entity() {}
+	~Entity() { 
+		m_components.clear();	//Remove all attached components
+	}
 
 	template<typename T, typename... Args>
 	T &attach(Args &&...args) {
