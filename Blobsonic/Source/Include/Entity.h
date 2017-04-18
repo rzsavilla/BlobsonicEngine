@@ -49,10 +49,6 @@ public:
 		m_components.erase(typeid(T));
 	}
 
-	void destroy();
-
-	bool isDestroyed();
-
 	//! Return Unique Identifier
 	int getID() {
 		return m_iUID;
