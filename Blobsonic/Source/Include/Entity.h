@@ -9,12 +9,18 @@
 #include <memory>
 #include <typeindex>
 
+static int iUniqueIDCounter = 0;
+
 class Entity {
 private:
 	bool m_bDestroy;
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
+	int m_iUID;	//!< Unique ID
 public:
-	Entity() {}
+	Entity() {
+		m_iUID = iUniqueIDCounter;
+		iUniqueIDCounter++;
+	}
 	~Entity() {}
 
 	template<typename T, typename... Args>
@@ -46,4 +52,9 @@ public:
 	void destroy();
 
 	bool isDestroyed();
+
+	//! Return Unique Identifier
+	int getID() {
+		return m_iUID;
+	}
 };
