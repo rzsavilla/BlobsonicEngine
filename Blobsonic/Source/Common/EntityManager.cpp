@@ -8,11 +8,9 @@ void EntityManager::addEntity(std::shared_ptr<Entity> newEntity)
 
 void EntityManager::update()
 {
-	for (auto it = m_entities.begin(); it != m_entities.end(); ++it)
-	{
-		//Look for destroyed entites
-		if ((*it)->isDestroyed()) {
-			m_entities.erase(it);		//Remove destroyed entites from vector
+	for (int i = 0; i < m_entities.size(); i++) {
+		if (m_entities.at(i)->isDestroyed()) {
+			m_entities.erase(m_entities.begin() + i);	//Remove Destroyed entity
 		}
 	}
 }
