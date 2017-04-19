@@ -10,7 +10,6 @@
 	<Mesh> <ID>room_mesh</ID>
 		<File>Source\Resources\models\room.obj</File>
 	</Mesh>
-	
 	<Mesh> <ID>plane_mesh</ID>
 		<File>Source\Resources\models\plane.obj</File>
 	</Mesh>
@@ -25,8 +24,8 @@
 		<File>Source\Resources\textures\white.png</File>
 	</Texture>
 	
-	<Texture> <ID>stone_texture</ID>
-		<File>Source\Resources\textures\stone.png</File>
+	<Texture> <ID>floor_texture</ID>
+		<File>Source\Resources\textures\floor.jpg</File>
 	</Texture>
 	
 	<Material> <ID>default_material</ID>
@@ -89,7 +88,35 @@
 <Scene> <Type>Splash</Type> <ID>splash_scene</ID>
 </Scene>
 
-<Scene> <Type>Game</Type> <ID>game_scene</ID>	
+<Scene> <Type>Game</Type> <ID>game_scene</ID>
+	<Model> <ID>floor</ID>
+		<Mesh>plane_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>floor_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>50.0f</X>
+			<Y>1.0f</Y>
+			<Z>50.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+	</Model>
+
+	
 	<Model> <ID>cube1</ID>
 		<Mesh>soccer_mesh</Mesh>
 		<Material>default_material</Material>
