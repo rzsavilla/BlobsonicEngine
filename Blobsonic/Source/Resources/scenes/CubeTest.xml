@@ -10,9 +10,7 @@
 	<Mesh> <ID>room_mesh</ID>
 		<File>Source\Resources\models\room.obj</File>
 	</Mesh>
-	<Mesh> <ID>skybox_mesh</ID>
-		<File>Source\Resources\models\skybox.obj</File>
-	</Mesh>
+	
 	<Mesh> <ID>plane_mesh</ID>
 		<File>Source\Resources\models\plane.obj</File>
 	</Mesh>
@@ -26,9 +24,7 @@
 	<Texture> <ID>white_texture</ID>
 		<File>Source\Resources\textures\white.png</File>
 	</Texture>
-	<Texture> <ID>skybox_texture</ID>
-		<File>Source\Resources\textures\skybox_water.bmp</File>
-	</Texture>
+	
 	<Texture> <ID>stone_texture</ID>
 		<File>Source\Resources\textures\stone.png</File>
 	</Texture>
@@ -93,62 +89,7 @@
 <Scene> <Type>Splash</Type> <ID>splash_scene</ID>
 </Scene>
 
-<Scene> <Type>Game</Type> <ID>game_scene</ID>
-	
-	<Model> <ID>Floor_Model</ID>
-		<Mesh>plane_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>stone_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>50.0f</X>
-			<Y>50.0f</Y>
-			<Z>50.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	
-	<Model> <ID>Skybox_Model</ID>
-		<Mesh>skybox_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>skybox_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	
+<Scene> <Type>Game</Type> <ID>game_scene</ID>	
 	<Model> <ID>cube1</ID>
 		<Mesh>soccer_mesh</Mesh>
 		<Material>default_material</Material>
