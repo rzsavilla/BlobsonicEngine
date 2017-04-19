@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{d2cc714f-e36f-4f98-bf05-bc8d17cb2349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObject">
-      <UniqueIdentifier>{403e3c20-75b5-4be1-958a-7d883ac2d01a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{3b6e529e-97fb-4724-8c29-665336f33ade}</UniqueIdentifier>
     </Filter>
@@ -85,6 +82,21 @@
     <Filter Include="Source Files\Handler">
       <UniqueIdentifier>{d425f47a-fc8e-4d80-8ae3-62257af3f9c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\OLDUnused">
+      <UniqueIdentifier>{faed27da-39ab-4f5a-9433-fc6f28888a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tools">
+      <UniqueIdentifier>{624d8e1c-9a83-4b6e-96b1-67ee834272a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OLDUnused\GameObject">
+      <UniqueIdentifier>{403e3c20-75b5-4be1-958a-7d883ac2d01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OLDUnused">
+      <UniqueIdentifier>{479615ba-dc07-4644-9b50-d1b5067e255f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{4b482fcb-b3e2-4c3d-83b2-46bc48c322d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -120,74 +132,17 @@
     <None Include="Source\Resources\shader\singlePhong.frag" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Include\Bitmap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Drawable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\ft2build.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\gl_core_4_3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\GLSLProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\ID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\InputHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\MyRobot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\MyTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\PlayerInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\QuatCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\tinyxml2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\GameObject.h">
-      <Filter>Header Files\GameObject</Filter>
+      <Filter>Header Files\OLDUnused\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\ObjectComponent.h">
-      <Filter>Header Files\GameObject</Filter>
+      <Filter>Header Files\OLDUnused\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\Movable.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
@@ -291,9 +246,6 @@
     <ClInclude Include="Source\Include\Transformable.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\ModelOLD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\Model.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
@@ -318,51 +270,72 @@
     <ClInclude Include="Source\Include\Pickup.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Text.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\tinyxml2.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Button.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\ID.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Bitmap.h">
+      <Filter>Header Files\Res</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Drawable.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\ft2build.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\gl_core_4_3.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\GLSLProgram.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Graphics.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\InputHandler.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\ModelOLD.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Mesh.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\MyRobot.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Material.h">
+      <Filter>Header Files\Res</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\MyTimer.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Texture.h">
+      <Filter>Header Files\Res</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\stb_image.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\QuatCamera.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\PlayerInput.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\GameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\gl_core_4_3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\GLSLProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\ID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\InputHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\MyRobot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\MyTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\PlayerInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\QuatCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\SceneComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\GameObject.cpp">
@@ -407,9 +380,6 @@
     <ClCompile Include="Source\Common\Bitmap.cpp">
       <Filter>Source Files\Res</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\main.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -431,17 +401,11 @@
     <ClCompile Include="Source\Common\Scene.cpp">
       <Filter>Source Files\Engine\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\TestScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\EntityFactory.cpp">
       <Filter>Source Files\Engine\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Source\Include\PlayerController.cpp">
       <Filter>Source Files\Engine\System\Contoller</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\ModelOLD.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Physics.cpp">
       <Filter>Source Files\Engine\System</Filter>
@@ -475,6 +439,54 @@
     </ClCompile>
     <ClCompile Include="Source\Common\EntityManager.cpp">
       <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\ModelOLD.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Material.cpp">
+      <Filter>Source Files\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\InputHandler.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\MyTimer.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\QuatCamera.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\SceneComponent.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\PlayerInput.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\MyRobot.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\ID.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\gl_core_4_3.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\GameScene.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\GLSLProgram.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Button.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\TestScene.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Graphics.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\tinyxml2.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
