@@ -7,7 +7,6 @@
 *.userosscache
 *.sln.docstates
 *.sln
-*.obj
 *.tlog 
 *.lastbuildstate
 *.exe
@@ -25,7 +24,6 @@ Intermediates/
 [Rr]eleases/
 bld/
 [Bb]in/
-[Oo]bj/
 [Ll]og/
 
 # Visual Studio 2015 cache/options directory
