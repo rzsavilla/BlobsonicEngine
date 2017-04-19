@@ -62,6 +62,9 @@ void Engine::Engine::loop()
 
 void Engine::Engine::update(float dt)
 {
+	//Update Active Scene Entity Manager
+	m_scenes.find("game_scene")->second->getEntityManager()->update();
+
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
 			//--System process entities--//
