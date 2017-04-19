@@ -110,6 +110,7 @@
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\Destroyable.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
+    <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />

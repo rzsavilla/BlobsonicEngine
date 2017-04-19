@@ -473,5 +473,8 @@
     <ClCompile Include="Source\Common\Pickup.cpp">
       <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\EntityManager.cpp">
+      <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
