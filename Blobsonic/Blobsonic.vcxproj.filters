@@ -97,6 +97,9 @@
     <Filter Include="Source Files\Tools">
       <UniqueIdentifier>{4b482fcb-b3e2-4c3d-83b2-46bc48c322d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Entity\Components\AI">
+      <UniqueIdentifier>{3addae98-4c38-4c42-b907-f9dd2c3d5f6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -330,6 +333,15 @@
     <ClInclude Include="Source\Include\PlayerInput.h">
       <Filter>Header Files\OLDUnused</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\AIController.h">
+      <Filter>Header Files\Engine\System\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\AIMovement.h">
+      <Filter>Header Files\Engine\Entity\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\AIPerception.h">
+      <Filter>Header Files\Engine\Entity\Components\AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Light.cpp">
@@ -487,6 +499,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\tinyxml2.cpp">
       <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\AIController.cpp">
+      <Filter>Source Files\Engine\System\Contoller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\AIMovement.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -33,6 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\AABB.h" />
+    <ClInclude Include="Source\Include\AIMovement.h" />
+    <ClInclude Include="Source\Include\AIController.h" />
+    <ClInclude Include="Source\Include\AIPerception.h" />
     <ClInclude Include="Source\Include\aModel.h" />
     <ClInclude Include="Source\Include\AssimpMesh.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
@@ -101,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
+    <ClCompile Include="Source\Common\AIMovement.cpp" />
+    <ClCompile Include="Source\Common\AIController.cpp" />
     <ClCompile Include="Source\Common\aModel.cpp" />
     <ClCompile Include="Source\Common\AssimpMesh.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
