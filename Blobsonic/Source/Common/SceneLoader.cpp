@@ -61,7 +61,6 @@ void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
 				std::string sFile(c, strlen(c));
 				//Load image
 				Bitmap bmp = Bitmap::bitmapFromFile(sFile);
-				bmp.flipVertically();
 				//Create texture
 				texture = std::make_shared<Texture>(bmp);
 			};
