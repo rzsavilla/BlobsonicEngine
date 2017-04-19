@@ -151,10 +151,8 @@ void Engine::Engine::init(int width, int height)
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
 	
 	gl::Enable(gl::DEPTH_TEST);
-	gl::Enable(gl::CULL_FACE);
-	gl::CullFace(gl::BACK);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\CubeTest.xml");
+	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
 }
