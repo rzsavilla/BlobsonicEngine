@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "EntityManager.h"
 
+EntityManager::EntityManager()
+{
+}
+
 void EntityManager::addEntity(std::shared_ptr<Entity> newEntity)
 {
 	m_entities.push_back(newEntity);
