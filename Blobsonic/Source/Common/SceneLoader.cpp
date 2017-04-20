@@ -387,6 +387,38 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	}
 }
 
+bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node)
+{
+	using namespace tinyxml2;
+	//Get Resource File Location
+	std::string sFile = node->FirstChildElement()->GetText();
+
+	XMLDocument doc;
+	if (doc.LoadFile(sFile.c_str()) != XML_SUCCESS) {
+		//Failed to load
+		std::cout << "Could not load ResourceFile : " << sFile << "\n";
+		return false;
+	}
+
+	if (m_bDebug) std::cout << "Reading Resource file: " << sFile << "\n";
+
+	XMLNode *ptrRoot = doc.FirstChild();
+	if (ptrRoot == nullptr) {
+		std::cout << "No root: " << sFile << "\n";
+		return false;
+	}
+
+	for (XMLNode* node = ptrRoot; node != NULL; node = node->NextSiblingElement()) {
+		const char* value = node->Value();
+
+		if (strcmp(node->Value(), "Resources") == 0) {
+			readResources(node);
+		}
+	}
+
+	return true;
+}
+
 void SceneLoader::readResources(tinyxml2::XMLNode* node)
 {
 	using namespace tinyxml2;
@@ -487,6 +519,9 @@ int SceneLoader::load(std::string sFilename)
 
 		if (strcmp(node->Value(), "Resources") == 0) {
 			readResources(node);
+		}
+		else if (strcmp(node->Value(), "ResourceFile") == 0) {
+			readResourceFile(node);
 		}
 		else if (strcmp(node->Value(), "Scene") == 0) {
 			readScene(node);
