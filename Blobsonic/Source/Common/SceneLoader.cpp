@@ -217,8 +217,8 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			}
 		}
 	}
-
-	m_factory.attachAABB(entity, transform->m_vPosition,transform->m_vDimensions, transform->m_vScale);
+	if(sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition,transform->m_vDimensions, transform->m_vScale);
+	else if(sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, transform->m_vDimensions, transform->m_vScale, transform->getRotation());
 	return entity;
 }
 

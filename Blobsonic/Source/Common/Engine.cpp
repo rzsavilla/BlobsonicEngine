@@ -152,7 +152,7 @@ void Engine::Engine::init(int width, int height)
 	
 	gl::Enable(gl::DEPTH_TEST);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
+	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml");
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
 }

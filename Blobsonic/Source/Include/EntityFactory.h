@@ -18,4 +18,8 @@ public:
 	std::shared_ptr<Entity> createActor();
 
 	void attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale);//Use for "early out" collision testing
+	
+	void attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale, glm::vec3 Rot);// Use for precicse box collision testing
+
+
 };

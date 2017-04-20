@@ -2,6 +2,7 @@
 *	@struct Transformable
 *	@brief Provides entity with transform matrix
 *	Transform matrix for translation, rotation and scaling
+*	Gives entity a size (for collisions)
 */
 
 #pragma once
@@ -29,6 +30,12 @@ namespace Component {
 		glm::vec3 m_vPosition;
 		glm::vec3 m_vRotation;	//!< x,y,z rotation in radians
 		glm::vec3 m_vOrigin;	//!< x,y,z origin
+
+		void setScale(glm::vec3 Scale)
+		{
+			m_vDimensions = m_vDimensions * Scale;
+			m_vScale = Scale;
+		}
 
 		void setPosition(glm::vec3 position) {
 			m_vPosition = position;
