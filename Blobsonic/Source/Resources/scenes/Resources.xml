@@ -17,10 +17,13 @@
 		<ID>plane_mesh</ID>
 		<File>Source\Resources\models\plane.obj</File>
 	</Mesh>
-	
 	<Mesh> 
 		<ID>deer_mesh</ID>
 		<File>Source\Resources\models\deer.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>skybox_mesh</ID>
+		<File>Source\Resources\models\skybox.obj</File>
 	</Mesh>
 	
 	<Texture> 
@@ -44,6 +47,11 @@
 	<Texture> 
 		<ID>deer_texture</ID>
 		<File>Source\Resources\textures\deer texture.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>skybox_texture</ID>
+		<File>Source\Resources\textures\skybox_water.bmp</File>
 	</Texture>
 	
 	<Material> 

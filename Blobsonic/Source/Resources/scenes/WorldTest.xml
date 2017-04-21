@@ -62,6 +62,33 @@
 		</Origin>
 	</Model>
 
+	<Model> <ID>skybox</ID>
+		<Mesh>skybox_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>skybox_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>10.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+	</Model>
+	
 	<Model> <ID>cube1</ID>
 		<Mesh>soccer_mesh</Mesh>
 		<Material>default_material</Material>
