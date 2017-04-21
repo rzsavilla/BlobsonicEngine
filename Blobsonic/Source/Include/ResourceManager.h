@@ -18,6 +18,7 @@ private:
 	std::map<std::string, std::shared_ptr<Material>> m_materials;
 	std::map<std::string, std::shared_ptr<GLSLProgram>> m_shaders;
 
+	std::vector<std::string> m_vsLoadedResFiles;	//!< Stores file locations of loaded ResourceFiles
 public:
 	ResourceManager();
 
@@ -31,6 +32,10 @@ public:
 
 	void addShader(std::string name, std::shared_ptr<GLSLProgram> shader);
 
+	void addLoadedResFile(std::string file);	//!< Record Resource file that has been added
+
+	void removeLoadedResFile(std::string file);	//!< Remove loaded Resource file from list
+
 	std::shared_ptr<Mesh> getMesh(const std::string& name);
 
 	std::shared_ptr<AssimpMesh> getAssimpMesh(const std::string& ID);
@@ -40,4 +45,6 @@ public:
 	std::shared_ptr<Material> getMaterial(const std::string& name);
 
 	std::shared_ptr<GLSLProgram> getShader(const std::string& name);
+
+	bool isResFileLoaded(std::string file);	//!< Check if resource file has been loaded
 };

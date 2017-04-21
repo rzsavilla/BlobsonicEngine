@@ -28,6 +28,21 @@ void ResourceManager::addShader(std::string name, std::shared_ptr<GLSLProgram> s
 	m_shaders.emplace(name, shader);
 }
 
+void ResourceManager::addLoadedResFile(std::string file)
+{
+	m_vsLoadedResFiles.push_back(file);
+}
+
+void ResourceManager::removeLoadedResFile(std::string file)
+{
+	for (auto it = m_vsLoadedResFiles.begin(); it != m_vsLoadedResFiles.end(); ++it) {
+		if ((*it) == file) {
+			m_vsLoadedResFiles.erase(it);
+			return;
+		}
+	}
+}
+
 std::shared_ptr<Mesh> ResourceManager::getMesh(const std::string& name) {
 	auto mesh = m_meshes.find(name);
 	if (mesh != m_meshes.end()) {
@@ -65,4 +80,14 @@ std::shared_ptr<GLSLProgram> ResourceManager::getShader(const std::string& name)
 	if (shader != m_shaders.end()) {
 		return shader->second;
 	}
+}
+
+bool ResourceManager::isResFileLoaded(std::string file)
+{
+	for (auto it = m_vsLoadedResFiles.begin(); it != m_vsLoadedResFiles.end(); ++it) {
+		if ((*it) == file) {
+			return true;		//File has already been loaded
+		}
+	}
+	return false;
 }

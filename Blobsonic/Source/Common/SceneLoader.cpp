@@ -393,30 +393,36 @@ bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node)
 	//Get Resource File Location
 	std::string sFile = node->FirstChildElement()->GetText();
 
-	XMLDocument doc;
-	if (doc.LoadFile(sFile.c_str()) != XML_SUCCESS) {
-		//Failed to load
-		std::cout << "Could not load ResourceFile : " << sFile << "\n";
-		return false;
-	}
-
-	if (m_bDebug) std::cout << "Reading Resource file: " << sFile << "\n";
-
-	XMLNode *ptrRoot = doc.FirstChild();
-	if (ptrRoot == nullptr) {
-		std::cout << "No root: " << sFile << "\n";
-		return false;
-	}
-
-	for (XMLNode* node = ptrRoot; node != NULL; node = node->NextSiblingElement()) {
-		const char* value = node->Value();
-
-		if (strcmp(node->Value(), "Resources") == 0) {
-			readResources(node);
+	//Check if resources need to be loaded
+	if (!m_res->isResFileLoaded(sFile)) {
+		XMLDocument doc;
+		if (doc.LoadFile(sFile.c_str()) != XML_SUCCESS) {
+			//Failed to load
+			std::cout << "Could not load ResourceFile : " << sFile << "\n";
+			return false;
 		}
-	}
+		if (m_bDebug) std::cout << "Reading Resource file: " << sFile << "\n";
 
-	return true;
+		XMLNode *ptrRoot = doc.FirstChild();
+		if (ptrRoot == nullptr) {
+			std::cout << "No root: " << sFile << "\n";
+			return false;
+		}
+
+		for (XMLNode* node = ptrRoot; node != NULL; node = node->NextSiblingElement()) {
+			const char* value = node->Value();
+
+			if (strcmp(node->Value(), "Resources") == 0) {
+				readResources(node);
+			}
+		}
+		m_res->addLoadedResFile(sFile);	//Record that this file has been loaded
+		return true;
+	}
+	else {
+		if (m_bDebug) std::cout << "Resource file has already been loaded: " << sFile << "\n";
+		return true;
+	}
 }
 
 void SceneLoader::readResources(tinyxml2::XMLNode* node)
