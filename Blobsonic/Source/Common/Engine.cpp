@@ -13,6 +13,11 @@ void Engine::Engine::loadResources()
 	//m_TestScene.initScene();
 }
 
+void Engine::Engine::initScene()
+{
+	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
+}
+
 void Engine::Engine::loop()
 {
 	double dFPSLimit = 1.0 / 60.0;
@@ -152,7 +157,7 @@ void Engine::Engine::init(int width, int height)
 	
 	gl::Enable(gl::DEPTH_TEST);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
+	initScene();
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
 }
@@ -178,6 +183,9 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 				{
 				case GLFW_KEY_ESCAPE:
 					m_bRunning = false;	//End game loop
+					break;
+				case GLFW_KEY_P:
+					initScene();
 					break;
 				default:
 					break;

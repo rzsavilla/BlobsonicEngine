@@ -524,6 +524,7 @@ int SceneLoader::load(std::string sFilename)
 			readResourceFile(node);
 		}
 		else if (strcmp(node->Value(), "Scene") == 0) {
+			m_scenes->clear();
 			readScene(node);
 		}
 	}

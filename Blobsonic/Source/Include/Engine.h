@@ -32,6 +32,7 @@ namespace Engine {
 		//TestScene m_TestScene;
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
+		void initScene();	//!< Initialize Scene
 	private:	//GLFW
 		int m_iWindowWidth;
 		int m_iWindowHeight;
