@@ -87,7 +87,7 @@ void System::Physics::update(float dt)
 		{
 			if (i != x)
 			{
-				CheckShereSphereCollision(m_vSpheres.at(i), m_vSpheres.at(x));
+				CheckOBBSphereCollision(m_vOBBS.at(x), m_vSpheres.at(i));
 			}
 		}
 
