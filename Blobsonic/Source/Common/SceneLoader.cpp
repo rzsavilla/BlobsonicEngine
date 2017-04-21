@@ -156,6 +156,9 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	std::shared_ptr<Entity> entity = m_factory.createActor();
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
+	glm::vec3 Dimensions;
+	float radius;
+
 
 	std::string sID;
 	//Look at Model Element
@@ -210,8 +213,8 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		else if (strcmp(childValue, "Dimensions") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vDimensions = v;
-			if (m_bDebug) std::cout << "Dimension Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+			Dimensions = v;
+			if (m_bDebug) std::cout << "Dimensions Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Origin") == 0) {
 			//Set model origin
@@ -224,9 +227,15 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
 			}
 		}
+		else if (strcmp(childValue, "Radius") == 0) {
+			if (readElementText(modelChild, cData)) {
+				radius = atof(cData);
+			}
+		}
 	}
-	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, transform->m_vDimensions, transform->m_vScale);
-	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, transform->m_vDimensions, transform->m_vScale, transform->getRotation());
+	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition, radius);
 	return entity;
 }
 

@@ -23,7 +23,9 @@ public:
 	float m_fMaxX; //!< max value on the x axis
 	float m_fMaxY; //!< max value on the y axis
 	float m_fMaxZ; //!< max value on the z axis
-
+	
+	glm::vec3 m_vDimensions; // the distance from the center of the transformable to the edge (includes the scale )
+	glm::vec3 m_vCenter;
 
 	bool testAxis[3];
 
