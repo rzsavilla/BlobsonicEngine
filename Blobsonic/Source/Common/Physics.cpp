@@ -77,29 +77,29 @@ bool System::Physics::CheckAABBAABBCollision(std::shared_ptr<Entity> aabb1, std:
 	auto box1 = aabb1->get<Component::Transformable>();
 	auto box2 = aabb2->get<Component::Transformable>();
 
-	box1->m_vCenter = box1->m_vPosition + box1->m_vDimensions / 2.0f;
-	box2->m_vCenter = box2->m_vPosition + box2->m_vDimensions / 2.0f;
+	aabox1->m_vCenter = box1->m_vPosition + aabox1->m_vDimensions / 2.0f;
+	aabox2->m_vCenter = box2->m_vPosition + aabox2->m_vDimensions / 2.0f;
 
 	//create positions of all vertecies
-	aabox1->obbLocalPoints[0] = glm::vec3(box1->m_vCenter.x - box1->m_vDimensions.x / 2, box1->m_vCenter.y + box1->m_vDimensions.y / 2, box1->m_vCenter.z + box1->m_vDimensions.z / 2);	//Front - Top left
-	aabox1->obbLocalPoints[1] = glm::vec3(box1->m_vCenter.x + box1->m_vDimensions.x / 2, box1->m_vCenter.y + box1->m_vDimensions.y / 2, box1->m_vCenter.z + box1->m_vDimensions.z / 2);	//Front - Top Right
-	aabox1->obbLocalPoints[2] = glm::vec3(box1->m_vCenter.x + box1->m_vDimensions.x / 2, box1->m_vCenter.y - box1->m_vDimensions.y / 2, box1->m_vCenter.z + box1->m_vDimensions.z / 2);	//Front - Bottom Right
-	aabox1->obbLocalPoints[3] = glm::vec3(box1->m_vCenter.x - box1->m_vDimensions.x / 2, box1->m_vCenter.y - box1->m_vDimensions.y / 2, box1->m_vCenter.z + box1->m_vDimensions.z / 2);	//Front - Bottom left
-	aabox1->obbLocalPoints[4] = glm::vec3(box1->m_vCenter.x - box1->m_vDimensions.x / 2, box1->m_vCenter.y + box1->m_vDimensions.y / 2, box1->m_vCenter.z - box1->m_vDimensions.z / 2);	//Back - Top left
-	aabox1->obbLocalPoints[5] = glm::vec3(box1->m_vCenter.x + box1->m_vDimensions.x / 2, box1->m_vCenter.y + box1->m_vDimensions.y / 2, box1->m_vCenter.z - box1->m_vDimensions.z / 2);	//Back - Top Right
-	aabox1->obbLocalPoints[6] = glm::vec3(box1->m_vCenter.x + box1->m_vDimensions.x / 2, box1->m_vCenter.y - box1->m_vDimensions.y / 2, box1->m_vCenter.z - box1->m_vDimensions.z / 2);	//Back - Bottom Right
-	aabox1->obbLocalPoints[7] = glm::vec3(box1->m_vCenter.x - box1->m_vDimensions.x / 2, box1->m_vCenter.y - box1->m_vDimensions.y / 2, box1->m_vCenter.z - box1->m_vDimensions.z / 2);	//Back - Bottom left
-																								 
-
-	aabox2->obbLocalPoints[0] = glm::vec3(box2->m_vCenter.x - box2->m_vDimensions.x / 2, box2->m_vCenter.y + box2->m_vDimensions.y / 2, box2->m_vCenter.z + box2->m_vDimensions.z / 2);	//Front - Top left
-	aabox2->obbLocalPoints[1] = glm::vec3(box2->m_vCenter.x + box2->m_vDimensions.x / 2, box2->m_vCenter.y + box2->m_vDimensions.y / 2, box2->m_vCenter.z + box2->m_vDimensions.z / 2);	//Front - Top Right
-	aabox2->obbLocalPoints[2] = glm::vec3(box2->m_vCenter.x + box2->m_vDimensions.x / 2, box2->m_vCenter.y - box2->m_vDimensions.y / 2, box2->m_vCenter.z + box2->m_vDimensions.z / 2);	//Front - Bottom Right
-	aabox2->obbLocalPoints[3] = glm::vec3(box2->m_vCenter.x - box2->m_vDimensions.x / 2, box2->m_vCenter.y - box2->m_vDimensions.y / 2, box2->m_vCenter.z + box2->m_vDimensions.z / 2);	//Front - Bottom left
-	aabox2->obbLocalPoints[4] = glm::vec3(box2->m_vCenter.x - box2->m_vDimensions.x / 2, box2->m_vCenter.y + box2->m_vDimensions.y / 2, box2->m_vCenter.z - box2->m_vDimensions.z / 2);	//Back - Top left
-	aabox2->obbLocalPoints[5] = glm::vec3(box2->m_vCenter.x + box2->m_vDimensions.x / 2, box2->m_vCenter.y + box2->m_vDimensions.y / 2, box2->m_vCenter.z - box2->m_vDimensions.z / 2);	//Back - Top Right
-	aabox2->obbLocalPoints[6] = glm::vec3(box2->m_vCenter.x + box2->m_vDimensions.x / 2, box2->m_vCenter.y - box2->m_vDimensions.y / 2, box2->m_vCenter.z - box2->m_vDimensions.z / 2);	//Back - Bottom Right
-	aabox2->obbLocalPoints[7] = glm::vec3(box2->m_vCenter.x - box2->m_vDimensions.x / 2, box2->m_vCenter.y - box2->m_vDimensions.y / 2, box2->m_vCenter.z - box2->m_vDimensions.z / 2);	//Back - Bottom left
-
+	aabox1->obbLocalPoints[0] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Top left
+	aabox1->obbLocalPoints[1] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Top Right
+	aabox1->obbLocalPoints[2] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Bottom Right
+	aabox1->obbLocalPoints[3] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Bottom left
+	aabox1->obbLocalPoints[4] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Top left
+	aabox1->obbLocalPoints[5] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Top Right
+	aabox1->obbLocalPoints[6] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Bottom Right
+	aabox1->obbLocalPoints[7] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Bottom left
+																								 												
+																																				
+	aabox2->obbLocalPoints[0] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Top left
+	aabox2->obbLocalPoints[1] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Top Right
+	aabox2->obbLocalPoints[2] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Bottom Right
+	aabox2->obbLocalPoints[3] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Bottom left
+	aabox2->obbLocalPoints[4] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Top left
+	aabox2->obbLocalPoints[5] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Top Right
+	aabox2->obbLocalPoints[6] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Bottom Right
+	aabox2->obbLocalPoints[7] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Bottom left
+																
 
 	//set up the mins and maxs
 	aabox1->m_fMinX = 9999999999999999999.0f;
@@ -255,24 +255,24 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 	
 
 	//create positions of all vertecies
-	obox1->m_obbLocalPoints[0] = glm::vec3(box1->m_vCenter.x - box1->m_vScale.x / 2, box1->m_vCenter.y + box1->m_vScale.y / 2, box1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Top left
-	obox1->m_obbLocalPoints[1] = glm::vec3(box1->m_vCenter.x + box1->m_vScale.x / 2, box1->m_vCenter.y + box1->m_vScale.y / 2, box1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Top Right
-	obox1->m_obbLocalPoints[2] = glm::vec3(box1->m_vCenter.x + box1->m_vScale.x / 2, box1->m_vCenter.y - box1->m_vScale.y / 2, box1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Bottom Right
-	obox1->m_obbLocalPoints[3] = glm::vec3(box1->m_vCenter.x - box1->m_vScale.x / 2, box1->m_vCenter.y - box1->m_vScale.y / 2, box1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Bottom left
-	obox1->m_obbLocalPoints[4] = glm::vec3(box1->m_vCenter.x - box1->m_vScale.x / 2, box1->m_vCenter.y + box1->m_vScale.y / 2, box1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Top left
-	obox1->m_obbLocalPoints[5] = glm::vec3(box1->m_vCenter.x + box1->m_vScale.x / 2, box1->m_vCenter.y + box1->m_vScale.y / 2, box1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Top Right
-	obox1->m_obbLocalPoints[6] = glm::vec3(box1->m_vCenter.x + box1->m_vScale.x / 2, box1->m_vCenter.y - box1->m_vScale.y / 2, box1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Bottom Right
-	obox1->m_obbLocalPoints[7] = glm::vec3(box1->m_vCenter.x - box1->m_vScale.x / 2, box1->m_vCenter.y - box1->m_vScale.y / 2, box1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Bottom left
+	obox1->m_obbLocalPoints[0] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Top left
+	obox1->m_obbLocalPoints[1] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Top Right
+	obox1->m_obbLocalPoints[2] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Bottom Right
+	obox1->m_obbLocalPoints[3] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Bottom left
+	obox1->m_obbLocalPoints[4] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Top left
+	obox1->m_obbLocalPoints[5] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Top Right
+	obox1->m_obbLocalPoints[6] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Bottom Right
+	obox1->m_obbLocalPoints[7] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Bottom left
 
 
-	obox2->m_obbLocalPoints[0] = glm::vec3(box2->m_vCenter.x - box2->m_vScale.x / 2, box2->m_vCenter.y + box2->m_vScale.y / 2, box2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Top left
-	obox2->m_obbLocalPoints[1] = glm::vec3(box2->m_vCenter.x + box2->m_vScale.x / 2, box2->m_vCenter.y + box2->m_vScale.y / 2, box2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Top Right
-	obox2->m_obbLocalPoints[2] = glm::vec3(box2->m_vCenter.x + box2->m_vScale.x / 2, box2->m_vCenter.y - box2->m_vScale.y / 2, box2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Bottom Right
-	obox2->m_obbLocalPoints[3] = glm::vec3(box2->m_vCenter.x - box2->m_vScale.x / 2, box2->m_vCenter.y - box2->m_vScale.y / 2, box2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Bottom left
-	obox2->m_obbLocalPoints[4] = glm::vec3(box2->m_vCenter.x - box2->m_vScale.x / 2, box2->m_vCenter.y + box2->m_vScale.y / 2, box2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Top left
-	obox2->m_obbLocalPoints[5] = glm::vec3(box2->m_vCenter.x + box2->m_vScale.x / 2, box2->m_vCenter.y + box2->m_vScale.y / 2, box2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Top Right
-	obox2->m_obbLocalPoints[6] = glm::vec3(box2->m_vCenter.x + box2->m_vScale.x / 2, box2->m_vCenter.y - box2->m_vScale.y / 2, box2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Bottom Right
-	obox2->m_obbLocalPoints[7] = glm::vec3(box2->m_vCenter.x - box2->m_vScale.x / 2, box2->m_vCenter.y - box2->m_vScale.y / 2, box2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Bottom left
+	obox2->m_obbLocalPoints[0] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Top left
+	obox2->m_obbLocalPoints[1] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Top Right
+	obox2->m_obbLocalPoints[2] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Bottom Right
+	obox2->m_obbLocalPoints[3] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Bottom left
+	obox2->m_obbLocalPoints[4] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Top left
+	obox2->m_obbLocalPoints[5] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Top Right
+	obox2->m_obbLocalPoints[6] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Bottom Right
+	obox2->m_obbLocalPoints[7] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Bottom left
 
 	//multiply points by rotation matrix			
 

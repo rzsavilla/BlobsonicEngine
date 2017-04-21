@@ -77,15 +77,16 @@ void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 positio
 	entity->attach<AABB>();
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
+	auto a = entity->get<AABB>();
 
 	//find the longest side of the whole object , so as the bounding box ebcases all orientation
 	float fSize = std::max(Dimensions.x * Scale.x, Dimensions.y * Scale.y);
 	fSize = std::max(fSize, Dimensions.z * Scale.z);
 
 	t->m_vPosition = position;
-	t->m_vDimensions = Dimensions;
+	a->m_vDimensions = Dimensions;
 	t->m_vScale = Scale;
-	t->m_vCenter = position + Dimensions * Scale / 2.0f;
+	a->m_vCenter = position + (Dimensions * Scale) / 2.0f;
 
 }
 
@@ -98,10 +99,13 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	entity->attach<OBB>();
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
+	auto o = entity->get<OBB>();
 
 	t->m_vPosition = position;
-	t->m_vDimensions = Dimensions * Scale;
+	o->m_vDimensions = Dimensions * Scale;
 	t->m_vScale = Scale;
-	t->m_vCenter = position + Dimensions * Scale / 2.0f;
+	o->m_vCenter = position + Dimensions * Scale / 2.0f;
 	t->setRotation(Rot);
 }
+
+
