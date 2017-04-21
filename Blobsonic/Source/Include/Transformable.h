@@ -6,58 +6,37 @@
 
 #pragma once
 
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Component.h"
 
+static float fMyRotation = 0;
+
 namespace Component {
-	struct Transformable : public Component {
-		Transformable() {
-			m_fSpeed = 5.0f;
-			m_fRotationSpeed = 0.1f;
-		};
+	class Transformable : public Component {
+	private:
+		
+	public:
+		glm::vec3 m_vPosition;	//!< Camera World/Relative Position
+		glm::vec3 m_vScale;		//!< Entity scale x,y,z
+		glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in radians
+
+		glm::vec3 m_vDimensions;	//Plz move to different component
+		glm::vec3 m_vCenter;		
+		
+		glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
+	public:
+		Transformable();					//!< Default Constructor
 		float m_fSpeed;
 		float m_fRotationSpeed;
 
+		void setPosition(glm::vec3 position);
+		void setRotation(glm::vec3 degrees);	//!< Set rotation, parameter in degrees saved as radians
+		void setScale(glm::vec3 scale);
 
-		glm::vec3 m_vScale;
-		glm::vec3 m_vDimensions;
-		glm::vec3 m_vCenter;
-		glm::vec3 m_vPosition;
-		glm::vec3 m_vRotation;	//!< x,y,z rotation in radians
-		glm::vec3 m_vOrigin;	//!< x,y,z origin
+		glm::vec3 getPosition();	//!< Returns position
+		glm::vec3 getRotation();	//!< Returns rotation in degrees
+		glm::vec3 getScale();		//!< Returns scale
 
-		void setPosition(glm::vec3 position) {
-			m_vPosition = position;
-		};
-
-		void setRotation(glm::vec3 rotation) {
-			m_vRotation = rotation;
-		}
-
-		glm::vec3 getPosition() {
-			return m_vPosition;
-		}
-
-		glm::vec3 getScale() {
-			return m_vScale;
-		}
-
-		glm::vec3 getRotation() {
-			return m_vRotation;
-		}
-
-		glm::mat4 getTransform() {
-			glm::mat4 t, s, r;	//Translation scale and rotation matrices
-			s = glm::scale(glm::mat4(1.0f), getScale());									//Scale
-			//t = glm::translate(glm::mat4(1.0f), getPosition());								//Translate
-			t[3][0] = getPosition().x;
-			t[3][1] = getPosition().y;
-			t[3][2] = getPosition().z;
-			t[3][3] = 1.0f;
-			r = glm::rotate(glm::mat4(1.0f), getRotation().x, glm::vec3(1.0f, 0.0f, 0.0f));	//X rotation
-			r = glm::rotate(r, getRotation().y, glm::vec3(0.0f, 1.0f, 0.0f));				//Y rotation
-			r = glm::rotate(r, getRotation().z, glm::vec3(0.0f, 0.0f, 1.0f));				//Z rotation
-			return t * r * s;
-		}
+		glm::mat4 getTransform();	//!< Returns transformation matrix
 	};
 }
