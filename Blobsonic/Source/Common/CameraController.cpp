@@ -100,16 +100,16 @@ void System::CameraController::processMessages(const std::vector<std::shared_ptr
 				//Get data key data from message
 				auto data = static_cast<InputMessage::KeyPress*>(msgs->at(i).get());
 				if (data->m_iAction == GLFW_PRESS || data->m_iAction == GLFW_REPEAT) {	//Key is pressed or held down
-					if (data->m_iKey == GLFW_KEY_UP || data->m_iKey == GLFW_KEY_W) {
+					if (data->m_iKey == GLFW_KEY_W) {
 						m_bAction[0] = true;
 					}
-					else if (data->m_iKey == GLFW_KEY_DOWN || data->m_iKey == GLFW_KEY_S) {
+					else if (data->m_iKey == GLFW_KEY_S) {
 						m_bAction[1] = true;
 					}
-					else if (data->m_iKey == GLFW_KEY_LEFT || data->m_iKey == GLFW_KEY_A) {
+					else if (data->m_iKey == GLFW_KEY_A) {
 						m_bAction[2] = true;
 					}
-					else if (data->m_iKey == GLFW_KEY_RIGHT || data->m_iKey == GLFW_KEY_D) {
+					else if (data->m_iKey == GLFW_KEY_D) {
 						m_bAction[3] = true;
 					}
 					else if (data->m_iKey == GLFW_KEY_Q) {
