@@ -29,7 +29,7 @@ namespace Engine {
 		void loadResources();
 
 	private:
-		//TestScene m_TestScene;
+		bool m_bReloadScene;	//!< Flag for xml scene intialization
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
 		void initScene();	//!< Initialize Scene
