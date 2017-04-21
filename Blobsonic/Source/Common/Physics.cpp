@@ -2,7 +2,7 @@
 #include "Physics.h"
 #include "AABB.h"
 #include "OBB.h"
-
+#include "Sphere.h"
 
 System::Physics::Physics()
 {
@@ -13,6 +13,7 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 {
 	m_vAABBS.clear();
 	m_vOBBS.clear();
+	m_vSpheres.clear();
 
 	for (auto it = entities->begin(); it != entities->end(); ++it)
 	{
@@ -26,6 +27,13 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 	{
 		if ((*it)->has<OBB>() && (*it)->has<Component::Transformable>()) {
 			m_vOBBS.push_back((*it));
+
+		}
+	}
+	for (auto it = entities->begin(); it != entities->end(); ++it)
+	{
+		if ((*it)->has<Sphere>() && (*it)->has<Component::Transformable>()) {
+			m_vSpheres.push_back((*it));
 
 		}
 	}
@@ -54,6 +62,19 @@ void System::Physics::update(float dt)
 			if (i != x)
 			{
 				CheckOBBOBBCollision(m_vOBBS.at(i), m_vOBBS.at(x));
+			}
+		}
+
+	}
+
+	//process Sphere
+	for (int i = 0; i < m_vSpheres.size(); i++)
+	{
+		for (int x = 0; x < m_vSpheres.size(); x++)
+		{
+			if (i != x)
+			{
+				CheckShereSphereCollision(m_vSpheres.at(i), m_vSpheres.at(x));
 			}
 		}
 
@@ -373,13 +394,36 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 		else
 		{
 			testAxis[axisTest] = false; // There is no collision along this axis
-			std::cout << "No" << std::endl;
 			return false;
 
 		}
 
 	}
-	std::cout << "Collision" << std::endl;
 	return true;
 
 }
+
+bool System::Physics::CheckShereSphereCollision(std::shared_ptr<Entity> sphere1, std::shared_ptr<Entity> sphere2)
+{
+
+	//setup data for the Sphere's
+	auto sph1 = sphere1->get<Sphere>();
+	auto sph2 = sphere2->get<Sphere>();
+
+	auto t1 = sphere1->get<Component::Transformable>();
+	auto t2 = sphere2->get<Component::Transformable>();
+
+	//find the dist between the centre of each sphere
+	glm::vec3 Dist = sph1->m_vCenter - sph2->m_vCenter;
+	
+	//find the magnitude of this distance
+	float magDist = sqrt((Dist.x * Dist.x) + (Dist.y * Dist.y) + (Dist.z * Dist.z));
+	
+	//subtract the radius 
+	magDist = magDist - sph1->m_fRadius;
+	
+	if (magDist <= sph2->m_fRadius) return true;
+	else  return false;
+}
+
+

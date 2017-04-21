@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "AABB.h"
 #include "OBB.h"
+#include "Sphere.h"
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -104,8 +105,47 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	t->m_vPosition = position;
 	o->m_vDimensions = Dimensions * Scale;
 	t->m_vScale = Scale;
-	o->m_vCenter = position + Dimensions * Scale / 2.0f;
+
+	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.x, glm::vec3(1.0f, 0.0, 0.0f));
+	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.y, glm::vec3(0.0f, 1.0, 0.0f));
+	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.z, glm::vec3(0.0f, 0.0, 1.0f));
+
+	o->m_vCenter = glm::mat3(o->m_Rotation) * (position + (Dimensions * Scale) / 2.0f);
+
 	t->setRotation(Rot);
+}
+
+void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position, float radius)
+{
+	//////Attach components
+	if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
+	entity->attach<Sphere>();
+	//Set component Properties
+	auto t = entity->get<Component::Transformable>();
+	auto s = entity->get<Sphere>();
+
+	t->m_vPosition = position;
+	s->m_fRadius = radius;
+
+	if (entity->has<AABB>()) 
+	{
+		auto AA = entity->get<AABB>();
+		s->m_vCenter = AA->m_vCenter;
+	}
+	else if (entity->has<OBB>())
+	{
+		auto O = entity->get<OBB>();
+		s->m_vCenter = O->m_vCenter;
+	}
+	else
+	{
+	
+		s->m_vCenter = t->m_vPosition + (t->getScale() / 2.0f);
+	}
+
+	
 }
 
 

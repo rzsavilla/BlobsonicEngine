@@ -4,38 +4,16 @@
 
 //Chris O'Neill
 
-#include "ModelOLD.h"
-#include "Physical.h"
-#include "OBB.h"
-#include <algorithm>
 
-class Sphere : public Physical
+class Sphere : public Component::Component
 {
 public:
-	Sphere(); // <! Default Constructor for a box/cube physics
-	Sphere(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
-
-	void update(float dt);	//!< Update Box
-
-							//Component Functions
-	void init();	//!< Initialize component
-	void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
-	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
-	void CollideWithSphere(Sphere* other);			//<!Checks for collision with anotehr sphere
-	void CollideWithOBB(OBB* other);			//<!Checks for collision with anotehr sphere
-
-	void movementForTesting(float x, float y, float z);
-	Model m_RenderModel; // <! The rendered object for testing (Delete later)
-
-	float getRadius();
-
-private:
+	Sphere(); // <! Default Constructor for a Sphere physics
 
 	float m_fRadius; //<! The radius of the sphere
+	glm::vec3 m_vCenter; // <! Set manually , the position of the center of the cube (ideally set to the centre of the entity)
+
+};
 
 
-	};
-
-
-
-#endif // !BOXPHYSICS_H
+#endif // !SPHERE_H

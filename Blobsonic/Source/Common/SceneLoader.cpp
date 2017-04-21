@@ -156,6 +156,8 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
 	glm::vec3 Dimensions;
+	float radius;
+
 
 	std::string sID;
 	//Look at Model Element
@@ -217,9 +219,15 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
 			}
 		}
+		else if (strcmp(childValue, "Radius") == 0) {
+			if (readElementText(modelChild, cData)) {
+				radius = atof(cData);
+			}
+		}
 	}
 	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
 	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition, radius);
 	return entity;
 }
 

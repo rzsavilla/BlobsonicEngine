@@ -89,8 +89,8 @@
 
 	
 	<Model> 
-		<ID>OBB</ID>
-		<Mesh>cube_mesh</Mesh>
+		<ID>Sphere</ID>
+		<Mesh>sphere_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>white_texture</Texture>
@@ -99,21 +99,7 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
-		<Scale>
-			<X>5.0f</X>
-			<Y>5.0f</Y>
-			<Z>5.0f</Z>
-		</Scale>
-		<Dimensions>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Dimensions>
-		<Rotation>
-			<x>0</x>
-			<x>0</x>
-			<x>0</x>
-		</Rotation>
+		<Radius> 5 </Radius>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
