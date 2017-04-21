@@ -342,6 +342,9 @@
     <ClInclude Include="Source\Include\AIPerception.h">
       <Filter>Header Files\Engine\Entity\Components\AI</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\EntityLoader.h">
+      <Filter>Header Files\Engine\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Light.cpp">
@@ -412,9 +415,6 @@
     </ClCompile>
     <ClCompile Include="Source\Common\EntityFactory.cpp">
       <Filter>Source Files\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Include\PlayerController.cpp">
-      <Filter>Source Files\Engine\System\Contoller</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Physics.cpp">
       <Filter>Source Files\Engine\System</Filter>
@@ -508,6 +508,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Transformable.cpp">
       <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\EntityLoader.cpp">
+      <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\PlayerController.cpp">
+      <Filter>Source Files\Engine\System\Contoller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
