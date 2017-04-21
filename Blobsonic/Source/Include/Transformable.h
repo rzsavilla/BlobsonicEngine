@@ -18,7 +18,7 @@ namespace Component {
 	public:
 		glm::vec3 m_vPosition;	//!< Camera World/Relative Position
 		glm::vec3 m_vScale;		//!< Entity scale x,y,z
-		glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in radians
+		glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in degrees
 
 		glm::vec3 m_vDimensions;	//Plz move to different component
 		glm::vec3 m_vCenter;		
@@ -26,12 +26,12 @@ namespace Component {
 		glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
 	public:
 		Transformable();					//!< Default Constructor
-		float m_fSpeed;
-		float m_fRotationSpeed;
+		float m_fSpeed;						//!< Temporary variable will be stored in separate component
+		float m_fRotationSpeed;				//!< Temporary variable will be stored in separate component
 
-		void setPosition(glm::vec3 position);
-		void setRotation(glm::vec3 degrees);	//!< Set rotation, parameter in degrees saved as radians
-		void setScale(glm::vec3 scale);
+		void setPosition(glm::vec3 position);	//!< Set Position
+		void setRotation(glm::vec3 degrees);	//!< Set Rotation
+		void setScale(glm::vec3 scale);			//!< Set Scale
 
 		glm::vec3 getPosition();	//!< Returns position
 		glm::vec3 getRotation();	//!< Returns rotation in degrees

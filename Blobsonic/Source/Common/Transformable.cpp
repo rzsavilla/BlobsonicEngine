@@ -17,7 +17,7 @@ void Component::Transformable::setPosition(glm::vec3 position)
 
 void Component::Transformable::setRotation(glm::vec3 degrees)
 {
-	m_vRotation = glm::radians(degrees);
+	m_vRotation = degrees;
 }
 
 void Component::Transformable::setScale(glm::vec3 scale)
@@ -32,7 +32,7 @@ glm::vec3 Component::Transformable::getPosition()
 
 glm::vec3 Component::Transformable::getRotation()
 {
-	return glm::degrees(m_vRotation);
+	return m_vRotation;
 }
 
 glm::vec3 Component::Transformable::getScale()
@@ -47,9 +47,10 @@ glm::mat4 Component::Transformable::getTransform()
 	t = glm::translate(glm::mat4(1.0f), getPosition());								//Translate
 
 	//Rotations applied are in radians
-	r = glm::rotate(glm::mat4(1.0f), m_vRotation.x, glm::vec3(1.0f, 0.0f, 0.0f));	//X rotation
-	r = glm::rotate(r, m_vRotation.y, glm::vec3(0.0f, 1.0f, 0.0f));					//Y rotation
-	r = glm::rotate(r, m_vRotation.z, glm::vec3(0.0f, 0.0f, 1.0f));					//Z rotation
+	glm::vec3 rad = glm::radians(getRotation());
+	r = glm::rotate(glm::mat4(1.0f), rad.x, glm::vec3(1.0f, 0.0f, 0.0f));	//X rotation
+	r = glm::rotate(r, rad.y, glm::vec3(0.0f, 1.0f, 0.0f));					//Y rotation
+	r = glm::rotate(r, rad.z, glm::vec3(0.0f, 0.0f, 1.0f));					//Z rotation
 
 	return t * r * s;
 }

@@ -155,7 +155,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	std::shared_ptr<Entity> entity = m_factory.createActor();
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
-	
+
 	std::string sID;
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
@@ -184,13 +184,13 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vPosition = v;
+			transform->setPosition(v);
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vScale = v;
+			transform->setScale(v);
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Rotation") == 0) {
@@ -217,7 +217,6 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			}
 		}
 	}
-
 	m_factory.attachAABB(entity, transform->m_vPosition,transform->m_vDimensions, transform->m_vScale);
 	return entity;
 }

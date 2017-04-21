@@ -368,9 +368,6 @@
     <ClCompile Include="Source\Common\Physical.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Transformable.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\Sphere.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
@@ -504,6 +501,12 @@
       <Filter>Source Files\Engine\System\Contoller</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\AIMovement.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\TransformableOld.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Transformable.cpp">
       <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
