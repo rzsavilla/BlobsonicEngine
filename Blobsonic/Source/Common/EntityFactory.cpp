@@ -70,7 +70,9 @@ std::shared_ptr<Entity> EntityFactory::createActor()
 void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale)
 {
 	//////Attach components
-	entity->attach<Component::Transformable>();
+	if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
 	entity->attach<AABB>();
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
@@ -86,7 +88,6 @@ void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 positio
 	t->m_vDimensions = Dimensions;
 	t->m_vScale = Scale;
 	t->m_vCenter = position + Dimensions * Scale / 2.0f;
-
 
 	std::cout << "Testing" << std::endl;
 
