@@ -80,6 +80,18 @@ void System::Physics::update(float dt)
 
 	}
 
+	//process Sphere Box Collision
+	for (int i = 0; i < m_vSpheres.size(); i++)
+	{
+		for (int x = 0; x < m_vOBBS.size(); x++)
+		{
+			if (i != x)
+			{
+				CheckShereSphereCollision(m_vSpheres.at(i), m_vSpheres.at(x));
+			}
+		}
+
+	}
 
 
 }
@@ -422,8 +434,55 @@ bool System::Physics::CheckShereSphereCollision(std::shared_ptr<Entity> sphere1,
 	//subtract the radius 
 	magDist = magDist - sph1->m_fRadius;
 	
-	if (magDist <= sph2->m_fRadius) return true;
+	if (magDist <= sph2->m_fRadius)return true;
 	else  return false;
+
+}
+
+bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std::shared_ptr<Entity> eSphere)
+{
+	//setup data for sphere and box
+	auto sphere = eSphere->get<Sphere>();
+	auto box = eBox->get<OBB>();
+
+	auto tSphere = eSphere->get<Component::Transformable>();
+	auto tBox = eBox->get<Component::Transformable>();
+
+	//find the distance from center to center
+	glm::vec3 overAllDistance = box->m_vCenter - sphere->m_vCenter;
+
+	//find the clamp on the box
+	glm::vec3 clamp;
+
+	if (overAllDistance.x < 0) clamp.x = box->m_vCenter.x - (box->m_vDimensions.x / 2.0f);
+	if (overAllDistance.x >= 0) clamp.x = box->m_vCenter.x + (box->m_vDimensions.x / 2.0f);
+	if (overAllDistance.y < 0) clamp.y = box->m_vCenter.y - (box->m_vDimensions.y / 2.0f);
+	if (overAllDistance.y >= 0) clamp.y = box->m_vCenter.y + (box->m_vDimensions.y / 2.0f);
+	if (overAllDistance.z < 0) clamp.z = box->m_vCenter.z - (box->m_vDimensions.z / 2.0f);
+	if (overAllDistance.z >= 0) clamp.z = box->m_vCenter.z + (box->m_vDimensions.z / 2.0f);
+
+	//find dist from clamp to center of circle
+	glm::vec3 dist = clamp - sphere->m_vCenter;
+	float fDist = abs(sqrt((dist.x * dist.x) + (dist.y * dist.y) + (dist.z * dist.z)));
+	//subract the radius
+	fDist = fDist - sphere->m_fRadius;
+
+	if (fDist <= 0)
+	{
+		std::cout << "Collision" << endl;
+		return true;
+	}
+	else
+	{
+		std::cout << "NO Collision" << endl;
+		return false;
+	}
+
+
+
+
+
+	
 }
 
 
