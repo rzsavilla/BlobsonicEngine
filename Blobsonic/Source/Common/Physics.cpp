@@ -57,6 +57,10 @@ void System::Physics::update(float dt)
 	//process OBB
 	for (int i = 0; i < m_vOBBS.size(); i++)
 	{
+		updateOBB(m_vOBBS.at(i));
+	}
+	for (int i = 0; i < m_vOBBS.size(); i++)
+	{
 		for (int x = 0; x < m_vOBBS.size(); x++)
 		{
 			if (i != x)
@@ -85,10 +89,9 @@ void System::Physics::update(float dt)
 	{
 		for (int x = 0; x < m_vOBBS.size(); x++)
 		{
-			if (i != x)
-			{
-				CheckOBBSphereCollision(m_vOBBS.at(x), m_vSpheres.at(i));
-			}
+			
+			CheckOBBSphereCollision(m_vOBBS.at(x), m_vSpheres.at(i));
+			
 		}
 
 	}
@@ -288,24 +291,24 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 	
 
 	//create positions of all vertecies
-	obox1->m_obbLocalPoints[0] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Top left
-	obox1->m_obbLocalPoints[1] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Top Right
-	obox1->m_obbLocalPoints[2] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Bottom Right
-	obox1->m_obbLocalPoints[3] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z + box1->m_vScale.z / 2);	//Front - Bottom left
-	obox1->m_obbLocalPoints[4] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Top left
-	obox1->m_obbLocalPoints[5] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y + box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Top Right
-	obox1->m_obbLocalPoints[6] = glm::vec3(obox1->m_vCenter.x + box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Bottom Right
-	obox1->m_obbLocalPoints[7] = glm::vec3(obox1->m_vCenter.x - box1->m_vScale.x / 2, obox1->m_vCenter.y - box1->m_vScale.y / 2, obox1->m_vCenter.z - box1->m_vScale.z / 2);	//Back - Bottom left
+	obox1->m_obbLocalPoints[0] = glm::vec3(obox1->m_vCenter.x - obox1->m_vDimensions.x / 2, obox1->m_vCenter.y + obox1->m_vDimensions.y / 2, obox1->m_vCenter.z + obox1->m_vDimensions.z / 2);	//Front - Top left
+	obox1->m_obbLocalPoints[1] = glm::vec3(obox1->m_vCenter.x + obox1->m_vDimensions.x / 2, obox1->m_vCenter.y + obox1->m_vDimensions.y / 2, obox1->m_vCenter.z + obox1->m_vDimensions.z / 2);	//Front - Top Right
+	obox1->m_obbLocalPoints[2] = glm::vec3(obox1->m_vCenter.x + obox1->m_vDimensions.x / 2, obox1->m_vCenter.y - obox1->m_vDimensions.y / 2, obox1->m_vCenter.z + obox1->m_vDimensions.z / 2);	//Front - Bottom Right
+	obox1->m_obbLocalPoints[3] = glm::vec3(obox1->m_vCenter.x - obox1->m_vDimensions.x / 2, obox1->m_vCenter.y - obox1->m_vDimensions.y / 2, obox1->m_vCenter.z + obox1->m_vDimensions.z / 2);	//Front - Bottom left
+	obox1->m_obbLocalPoints[4] = glm::vec3(obox1->m_vCenter.x - obox1->m_vDimensions.x / 2, obox1->m_vCenter.y + obox1->m_vDimensions.y / 2, obox1->m_vCenter.z - obox1->m_vDimensions.z / 2);	//Back - Top left
+	obox1->m_obbLocalPoints[5] = glm::vec3(obox1->m_vCenter.x + obox1->m_vDimensions.x / 2, obox1->m_vCenter.y + obox1->m_vDimensions.y / 2, obox1->m_vCenter.z - obox1->m_vDimensions.z / 2);	//Back - Top Right
+	obox1->m_obbLocalPoints[6] = glm::vec3(obox1->m_vCenter.x + obox1->m_vDimensions.x / 2, obox1->m_vCenter.y - obox1->m_vDimensions.y / 2, obox1->m_vCenter.z - obox1->m_vDimensions.z / 2);	//Back - Bottom Right
+	obox1->m_obbLocalPoints[7] = glm::vec3(obox1->m_vCenter.x - obox1->m_vDimensions.x / 2, obox1->m_vCenter.y - obox1->m_vDimensions.y / 2, obox1->m_vCenter.z - obox1->m_vDimensions.z / 2);	//Back - Bottom left
 
 
-	obox2->m_obbLocalPoints[0] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Top left
-	obox2->m_obbLocalPoints[1] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Top Right
-	obox2->m_obbLocalPoints[2] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Bottom Right
-	obox2->m_obbLocalPoints[3] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z + box2->m_vScale.z / 2);	//Front - Bottom left
-	obox2->m_obbLocalPoints[4] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Top left
-	obox2->m_obbLocalPoints[5] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y + box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Top Right
-	obox2->m_obbLocalPoints[6] = glm::vec3(obox2->m_vCenter.x + box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Bottom Right
-	obox2->m_obbLocalPoints[7] = glm::vec3(obox2->m_vCenter.x - box2->m_vScale.x / 2, obox2->m_vCenter.y - box2->m_vScale.y / 2,obox2->m_vCenter.z - box2->m_vScale.z / 2);	//Back - Bottom left
+	obox2->m_obbLocalPoints[0] = glm::vec3(obox2->m_vCenter.x - obox2->m_vDimensions.x / 2, obox2->m_vCenter.y + obox2->m_vDimensions.y / 2,obox2->m_vCenter.z + obox2->m_vDimensions.z / 2);	//Front - Top left
+	obox2->m_obbLocalPoints[1] = glm::vec3(obox2->m_vCenter.x + obox2->m_vDimensions.x / 2, obox2->m_vCenter.y + obox2->m_vDimensions.y / 2,obox2->m_vCenter.z + obox2->m_vDimensions.z / 2);	//Front - Top Right
+	obox2->m_obbLocalPoints[2] = glm::vec3(obox2->m_vCenter.x + obox2->m_vDimensions.x / 2, obox2->m_vCenter.y - obox2->m_vDimensions.y / 2,obox2->m_vCenter.z + obox2->m_vDimensions.z / 2);	//Front - Bottom Right
+	obox2->m_obbLocalPoints[3] = glm::vec3(obox2->m_vCenter.x - obox2->m_vDimensions.x / 2, obox2->m_vCenter.y - obox2->m_vDimensions.y / 2,obox2->m_vCenter.z + obox2->m_vDimensions.z / 2);	//Front - Bottom left
+	obox2->m_obbLocalPoints[4] = glm::vec3(obox2->m_vCenter.x - obox2->m_vDimensions.x / 2, obox2->m_vCenter.y + obox2->m_vDimensions.y / 2,obox2->m_vCenter.z - obox2->m_vDimensions.z / 2);	//Back - Top left
+	obox2->m_obbLocalPoints[5] = glm::vec3(obox2->m_vCenter.x + obox2->m_vDimensions.x / 2, obox2->m_vCenter.y + obox2->m_vDimensions.y / 2,obox2->m_vCenter.z - obox2->m_vDimensions.z / 2);	//Back - Top Right
+	obox2->m_obbLocalPoints[6] = glm::vec3(obox2->m_vCenter.x + obox2->m_vDimensions.x / 2, obox2->m_vCenter.y - obox2->m_vDimensions.y / 2,obox2->m_vCenter.z - obox2->m_vDimensions.z / 2);	//Back - Bottom Right
+	obox2->m_obbLocalPoints[7] = glm::vec3(obox2->m_vCenter.x - obox2->m_vDimensions.x / 2, obox2->m_vCenter.y - obox2->m_vDimensions.y / 2,obox2->m_vCenter.z - obox2->m_vDimensions.z / 2);	//Back - Bottom left
 
 	//multiply points by rotation matrix			
 
@@ -447,25 +450,179 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 	auto tSphere = eSphere->get<Component::Transformable>();
 	auto tBox = eBox->get<Component::Transformable>();
+	
+	//local version
+	Sphere localSphere = *sphere;
+	Component::Transformable localTransSphere = *tSphere;
+	
+	bool bExtremeClamp = true;
+
+
+	//translate sphere by inverse box position
+	localSphere.m_vCenter = localSphere.m_vCenter - box->m_vCenter;
+
+	//rotate sphere by inverse box rotation
+	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
+	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
+	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
+
+	localSphere.m_vCenter = localSphere.m_vCenter * mat3(localSphere.m_Rotation);
 
 	//find the distance from center to center
-	glm::vec3 overAllDistance = box->m_vCenter - sphere->m_vCenter;
-
-	//find the clamp on the box
+	glm::vec3 overAllDistance =  glm::vec3(0,0,0) + localSphere.m_vCenter ;
 	glm::vec3 clamp;
 
-	if (overAllDistance.x < 0) clamp.x = box->m_vCenter.x - (box->m_vDimensions.x / 2.0f);
-	if (overAllDistance.x >= 0) clamp.x = box->m_vCenter.x + (box->m_vDimensions.x / 2.0f);
-	if (overAllDistance.y < 0) clamp.y = box->m_vCenter.y - (box->m_vDimensions.y / 2.0f);
-	if (overAllDistance.y >= 0) clamp.y = box->m_vCenter.y + (box->m_vDimensions.y / 2.0f);
-	if (overAllDistance.z < 0) clamp.z = box->m_vCenter.z - (box->m_vDimensions.z / 2.0f);
-	if (overAllDistance.z >= 0) clamp.z = box->m_vCenter.z + (box->m_vDimensions.z / 2.0f);
+
+	//find which portion of space around the cube the sphere exists in
+	
+	if (overAllDistance.x < 0) // to the left of cube
+	{
+		if ((localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
+		{
+			std::cout << "left" << std::endl;
+			clamp.x = -box->m_vDimensions.x / 2.0f;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = localSphere.m_vCenter.z;
+			bExtremeClamp = false;
+		}
+
+	}
+
+	if (overAllDistance.x > 0) // to the right of cube
+	{
+		if ((localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
+		{
+			std::cout << "right" << std::endl;
+			clamp.x = box->m_vDimensions.x / 2.0f;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = localSphere.m_vCenter.z;
+			bExtremeClamp = false;
+		}
+
+	}
+
+	if (overAllDistance.y > 0) // above the cube
+	{
+		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
+		{
+			std::cout << "above" << std::endl;
+			clamp.x = localSphere.m_vCenter.x;
+			clamp.y = box->m_vDimensions.y / 2.0f;
+			clamp.z = localSphere.m_vCenter.z;
+			bExtremeClamp = false;
+		}
+
+	}
+	if (overAllDistance.y < 0) // below the cube
+	{
+		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
+		{
+			std::cout << "below" << std::endl;
+			clamp.x = localSphere.m_vCenter.x;
+			clamp.y = -box->m_vDimensions.y / 2.0f;
+			clamp.z = localSphere.m_vCenter.z;
+			bExtremeClamp = false;
+		}
+
+	}
+	if (overAllDistance.z > 0) // infront of the cube
+	{
+		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f))
+		{
+			std::cout << "infront" << std::endl;
+			clamp.x = localSphere.m_vCenter.x;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = box->m_vDimensions.z / 2.0f;
+			bExtremeClamp = false;
+		}
+
+	}
+	if (overAllDistance.z < 0) // behind the cube
+	{
+		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f))
+		{
+			std::cout << "behind  " << std::endl;
+			clamp.x = localSphere.m_vCenter.x;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = -box->m_vDimensions.z / 2.0f;
+			bExtremeClamp = false;
+		}
+
+	}
+
+	if (overAllDistance.z < 0 && overAllDistance.x < 0) // behind and left 
+	{
+
+		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0)
+		{
+			std::cout << "behind and left " << std::endl;
+			clamp.x = -box->m_vDimensions.x / 2.0f;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = -box->m_vDimensions.z / 2.0f;
+			bExtremeClamp = false;
+		}
+
+	}
+	if (overAllDistance.z < 0 && overAllDistance.x > 0) // behind and right 
+	{
+		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f)
+		{
+			std::cout << "behind and right " << std::endl;
+			clamp.x = box->m_vDimensions.x / 2.0f;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = -box->m_vDimensions.z / 2.0f;
+			bExtremeClamp = false;
+		}
+
+	}
+	if (overAllDistance.z > 0 && overAllDistance.x > 0) // infront and right 
+	{
+		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f)
+		{
+			std::cout << "infront and right " << std::endl;
+			clamp.x = box->m_vDimensions.x / 2.0f;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = box->m_vDimensions.z / 2.0f;
+			bExtremeClamp = false;
+		}
+
+	}
+	if (overAllDistance.z > 0 && overAllDistance.x < 0) // infront and left 
+	{
+		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f)
+		{
+			std::cout << "infront and left " << std::endl;
+			clamp.x = -box->m_vDimensions.x / 2.0f;
+			clamp.y = localSphere.m_vCenter.y;
+			clamp.z = box->m_vDimensions.z / 2.0f;
+			bExtremeClamp = false;
+		}
+
+	}
+
+
+	//extreme clamps
+	if (bExtremeClamp)
+	{
+		if (overAllDistance.x < 0) clamp.x = 0 - (box->m_vDimensions.x / 2.0f);
+		if (overAllDistance.x >= 0) clamp.x = 0 + (box->m_vDimensions.x / 2.0f);
+		if (overAllDistance.y < 0) clamp.y = 0 - (box->m_vDimensions.y / 2.0f);
+		if (overAllDistance.y >= 0) clamp.y = 0 + (box->m_vDimensions.y / 2.0f);
+		if (overAllDistance.z < 0) clamp.z = 0 - (box->m_vDimensions.z / 2.0f);
+		if (overAllDistance.z >= 0) clamp.z = 0 + (box->m_vDimensions.z / 2.0f);
+	}
+
+
+
 
 	//find dist from clamp to center of circle
-	glm::vec3 dist = clamp - sphere->m_vCenter;
+	glm::vec3 dist = clamp - localSphere.m_vCenter;
 	float fDist = abs(sqrt((dist.x * dist.x) + (dist.y * dist.y) + (dist.z * dist.z)));
 	//subract the radius
-	fDist = fDist - sphere->m_fRadius;
+	fDist = fDist - localSphere.m_fRadius;
+
+	//std::cout << "Overall : " << overAllDistance.x << " " << overAllDistance.y << " " << overAllDistance.z << std::endl;
+	//std::cout << "Clamp : " << clamp.x << " " << clamp.y << " " << clamp.z << std::endl;
 
 	if (fDist <= 0)
 	{
@@ -483,6 +640,21 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 
 	
+}
+
+void System::Physics::updateOBB(std::shared_ptr<Entity> eBox)
+{
+
+	auto box = eBox->get<OBB>();
+	auto tBox = eBox->get<Component::Transformable>();
+
+	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.x, glm::vec3(1.0f, 0.0, 0.0f));
+	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.y, glm::vec3(0.0f, 1.0, 0.0f));
+	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.z, glm::vec3(0.0f, 0.0, 1.0f));
+
+	box->m_vCenter = glm::mat3(box->m_Rotation) * (tBox->m_vPosition + (box->m_vDimensions / 2.0f));
+
+
 }
 
 

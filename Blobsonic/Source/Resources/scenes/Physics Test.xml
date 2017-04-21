@@ -99,31 +99,6 @@
 		</Position>
 		<Radius> 1 </Radius>
 		<Scale>
-			<X>6.0f</X>
-			<Y>6.0f</Y>
-			<Z>6.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-		<Type>Box</Type>
-
-	</Model>	
-		<Model> 
-		<ID>Sphere</ID>
-		<Mesh>sphere_mesh</Mesh>
-		<Material>bright_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>white_texture</Texture>
-		<Position>
-			<X>8.0f</X>
-			<Y>0.0f</Y>
-			<Z>-20.0f</Z>
-		</Position>
-		<Radius> 1 </Radius>
-		<Scale>
 			<X>5.0f</X>
 			<Y>5.0f</Y>
 			<Z>5.0f</Z>
@@ -133,9 +108,10 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Type>Box</Type>
 
-	</Model>
+
+	</Model>	
+	
 	
 	<Model> 
 		<ID>OBB</ID>
@@ -168,7 +144,7 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Type>Box</Type>
+		<Player>0.5</Player>
 
 	</Model>	
 

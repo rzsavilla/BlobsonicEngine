@@ -15,6 +15,8 @@ namespace System {
 		bool CheckShereSphereCollision(std::shared_ptr <Entity> sphere1, std::shared_ptr <Entity> sphere2);
 		bool CheckOBBSphereCollision(std::shared_ptr <Entity> eBox, std::shared_ptr <Entity> eSphere);
 
+		void updateOBB(std::shared_ptr <Entity> eBox);
+
 
 	public:
 		Physics();
