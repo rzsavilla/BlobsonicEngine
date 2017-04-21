@@ -155,7 +155,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	std::shared_ptr<Entity> entity = m_factory.createActor();
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
-	
+
 	std::string sID;
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
@@ -184,13 +184,13 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vPosition = v;
+			transform->setPosition(v);
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vScale = v;
+			transform->setScale(v);
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Rotation") == 0) {
@@ -216,7 +216,6 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
 			}
 		}
-	}
 	if(sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition,transform->m_vDimensions, transform->m_vScale);
 	else if(sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, transform->m_vDimensions, transform->m_vScale, transform->getRotation());
 	return entity;
@@ -387,6 +386,44 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	}
 }
 
+bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node)
+{
+	using namespace tinyxml2;
+	//Get Resource File Location
+	std::string sFile = node->FirstChildElement()->GetText();
+
+	//Check if resources need to be loaded
+	if (!m_res->isResFileLoaded(sFile)) {
+		XMLDocument doc;
+		if (doc.LoadFile(sFile.c_str()) != XML_SUCCESS) {
+			//Failed to load
+			std::cout << "Could not load ResourceFile : " << sFile << "\n";
+			return false;
+		}
+		if (m_bDebug) std::cout << "Reading Resource file: " << sFile << "\n";
+
+		XMLNode *ptrRoot = doc.FirstChild();
+		if (ptrRoot == nullptr) {
+			std::cout << "No root: " << sFile << "\n";
+			return false;
+		}
+
+		for (XMLNode* node = ptrRoot; node != NULL; node = node->NextSiblingElement()) {
+			const char* value = node->Value();
+
+			if (strcmp(node->Value(), "Resources") == 0) {
+				readResources(node);
+			}
+		}
+		m_res->addLoadedResFile(sFile);	//Record that this file has been loaded
+		return true;
+	}
+	else {
+		if (m_bDebug) std::cout << "Resource file has already been loaded: " << sFile << "\n";
+		return true;
+	}
+}
+
 void SceneLoader::readResources(tinyxml2::XMLNode* node)
 {
 	using namespace tinyxml2;
@@ -488,7 +525,11 @@ int SceneLoader::load(std::string sFilename)
 		if (strcmp(node->Value(), "Resources") == 0) {
 			readResources(node);
 		}
+		else if (strcmp(node->Value(), "ResourceFile") == 0) {
+			readResourceFile(node);
+		}
 		else if (strcmp(node->Value(), "Scene") == 0) {
+			m_scenes->clear();
 			readScene(node);
 		}
 	}

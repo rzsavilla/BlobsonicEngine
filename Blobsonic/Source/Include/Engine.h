@@ -26,12 +26,11 @@ namespace Engine {
 		bool m_bRunning;	//!< Flag to start and end game loop
 
 		ResourceManager m_resourceManager;
-		void loadResources();
-
 	private:
-		//TestScene m_TestScene;
+		bool m_bReloadScene;	//!< Flag for xml scene intialization
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
+		void initScene();	//!< Initialize Scene
 	private:	//GLFW
 		int m_iWindowWidth;
 		int m_iWindowHeight;

@@ -23,6 +23,14 @@
 
 class SceneLoader {
 private:
+
+	//Resource Directories
+	std::string m_sTextureDir;
+	std::string m_sMeshDir;
+	std::string m_sShadersDir;
+	std::string m_sMaterialDir;
+
+
 	ResourceManager* m_res;									//!< Pointer to Resource manager where loaded resources will be stored
 	std::map<std::string,std::shared_ptr<Scene>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
@@ -35,6 +43,8 @@ private:
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
 
 	void readScene(tinyxml2::XMLNode* node);				//!< Parse a scene
+
+	bool readResourceFile(tinyxml2::XMLNode* node);								//!< Open and read seperate file containing list of resources
 	void readResources(tinyxml2::XMLNode* node);			//!< Parse resources
 
 	bool m_bDebug = true;				//!< Flag for couts
@@ -42,7 +52,7 @@ private:
 	//! Checks whether element text exists
 	bool readElementText(tinyxml2::XMLElement* e,char*& data);	//!< Read the value of an element returns false if the element is empty
 	
-	EntityFactory m_factory;
+	EntityFactory m_factory;									//!< Create preset entities
 	
 	//! Read X,Y,Z elements
 	glm::vec3 parseVec3(tinyxml2::XMLElement*e);				//!< Parse data into a vec3

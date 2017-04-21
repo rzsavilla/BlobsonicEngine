@@ -71,7 +71,9 @@ std::shared_ptr<Entity> EntityFactory::createActor()
 void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale)
 {
 	//////Attach components
-	entity->attach<Component::Transformable>();
+	if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
 	entity->attach<AABB>();
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
@@ -85,13 +87,14 @@ void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 positio
 	t->m_vScale = Scale;
 	t->m_vCenter = position + Dimensions * Scale / 2.0f;
 
-
 }
 
 void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale, glm::vec3 Rot)
 {
 	//////Attach components
-	entity->attach<Component::Transformable>();
+  if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
 	entity->attach<OBB>();
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
@@ -101,6 +104,4 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	t->m_vScale = Scale;
 	t->m_vCenter = position + Dimensions * Scale / 2.0f;
 	t->setRotation(Rot);
-
-
 }

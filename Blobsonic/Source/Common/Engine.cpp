@@ -8,9 +8,13 @@
 
 #include "InputMessages.h"
 
-void Engine::Engine::loadResources()
+void Engine::Engine::initScene()
 {
-	//m_TestScene.initScene();
+	std::cout << "\n----------Initialize Scene----------\n\n";
+	m_scenes.clear();
+	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
+	std::cout << "\n----------Scene Initialized----------\n\n";
+	m_bReloadScene = false;
 }
 
 void Engine::Engine::loop()
@@ -29,13 +33,15 @@ void Engine::Engine::loop()
 		dt += (dCurrentTime - dPrevTime) / dFPSLimit;
 		dPrevTime = dCurrentTime;
 
+		if (m_bReloadScene) initScene();
+
 		//Limit update
 		while (dt >= 1.0) {
 			update((float)dt);
 			iUpdates++;
 			dt--;
 		}
-
+		
 		//Render
 		render();
 		iFrames++;	//Count frames
@@ -63,19 +69,21 @@ void Engine::Engine::loop()
 void Engine::Engine::update(float dt)
 {
 	//Update Active Scene Entity Manager
-	m_scenes.find("game_scene")->second->getEntityManager()->update();
+	//m_scenes.find("game_scene")->second->getEntityManager()->update();
 
-	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
-		if (it->first != typeid(System::Render)) {	//Do not process render systems
-			//--System process entities--//
-			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+	if (m_scenes.size() > 0) {
+		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+			if (it->first != typeid(System::Render)) {	//Do not process render systems
+				//--System process entities--//
+				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+			}
 		}
-	}
 
-	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
-		if (it->first != typeid(System::Render)) {	//Do not process render systems
-			//Update Systems
-			(*it).second->update(dt);
+		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+			if (it->first != typeid(System::Render)) {	//Do not process render systems
+				//Update Systems
+				(*it).second->update(dt);
+			}
 		}
 	}
 }
@@ -87,10 +95,12 @@ void Engine::Engine::render()
 	gl::ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	//Render systems process
-	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
-		if (it->first == typeid(System::Render)) {	//Only process render systems
-			//Render entities
-			(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+	if (m_scenes.size() > 0) {
+		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+			if (it->first == typeid(System::Render)) {	//Only process render systems
+				//Render entities
+				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+			}
 		}
 	}
 }
@@ -152,7 +162,7 @@ void Engine::Engine::init(int width, int height)
 	
 	gl::Enable(gl::DEPTH_TEST);
 
-	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml");
+	initScene();
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
 }
@@ -178,6 +188,9 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 				{
 				case GLFW_KEY_ESCAPE:
 					m_bRunning = false;	//End game loop
+					break;
+				case GLFW_KEY_P:
+					m_bReloadScene = true;
 					break;
 				default:
 					break;

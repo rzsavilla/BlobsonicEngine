@@ -20,7 +20,7 @@ protected:
 	glm::mat3 m_rotationMatrix;		//!< Rotation matrix
 	bool m_bUpdated;				//!< Flag, member variable has been changed
 public:
-	Transformable();				//!< Default Contstructor
+	Transformable() {}				//!< Default Contstructor
 
 	//void init();
 

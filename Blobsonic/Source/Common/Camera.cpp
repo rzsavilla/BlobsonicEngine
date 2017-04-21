@@ -195,6 +195,9 @@ glm::mat4 Component::Camera::getView()
 
 glm::mat4 Component::Camera::getProjection()
 {
+	if (m_fNearPlane <= 0) m_fNearPlane = 0.1f;
+	if (m_fFarPlane <= m_fNearPlane) m_fFarPlane = 1000.0f;
+
 	if (m_bUsePerspective) {
 		//Perspective projection
 		return glm::perspective(m_fFieldOfView, m_fAspectRatio, m_fNearPlane, m_fFarPlane);
