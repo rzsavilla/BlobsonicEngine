@@ -26,8 +26,6 @@ namespace Engine {
 		bool m_bRunning;	//!< Flag to start and end game loop
 
 		ResourceManager m_resourceManager;
-		void loadResources();
-
 	private:
 		bool m_bReloadScene;	//!< Flag for xml scene intialization
 		SceneLoader m_sceneLoader;

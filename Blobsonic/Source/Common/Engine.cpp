@@ -8,11 +8,6 @@
 
 #include "InputMessages.h"
 
-void Engine::Engine::loadResources()
-{
-	//m_TestScene.initScene();
-}
-
 void Engine::Engine::initScene()
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
