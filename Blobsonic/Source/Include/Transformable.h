@@ -2,14 +2,13 @@
 *	@struct Transformable
 *	@brief Provides entity with transform matrix
 *	Transform matrix for translation, rotation and scaling
+*	Gives entity a size (for collisions)
 */
 
 #pragma once
 
 #include "stdafx.h"
 #include "Component.h"
-
-static float fMyRotation = 0;
 
 namespace Component {
 	class Transformable : public Component {

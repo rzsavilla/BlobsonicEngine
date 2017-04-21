@@ -56,45 +56,45 @@ void Sphere::CollideWithSphere(Sphere* other)
 
 void Sphere::CollideWithOBB(OBB * other)
 {
-	//find center of OBB
-	glm::vec3 center = other->getCenter();
+	////find center of OBB
+	//glm::vec3 center = other->getCenter();
 
-	//find dist between
-	m_vCenter = m_vPosition;
-	glm::vec3 dist = m_vCenter - center;
+	////find dist between
+	//m_vCenter = m_vPosition;
+	//glm::vec3 dist = m_vCenter - center;
 
-	//find clamp
-	glm::vec3 clamp;
+	////find clamp
+	//glm::vec3 clamp;
 
-	//find extends
-	glm::vec3 extents = other->getExtents();
+	////find extends
+	//glm::vec3 extents = other->getExtents();
 
-	
-	//find shortest distnace
-	// x - axis
-	if (dist.x >= 0) clamp.x = std::min(dist.x, extents.x);
-	if (dist.x < 0) clamp.x = std::max(dist.x, -extents.x);
+	//
+	////find shortest distnace
+	//// x - axis
+	//if (dist.x >= 0) clamp.x = std::min(dist.x, extents.x);
+	//if (dist.x < 0) clamp.x = std::max(dist.x, -extents.x);
 
-	// y - axis
-	if (dist.y >= 0) clamp.y = std::min(dist.y, extents.y);
-	if (dist.y < 0) clamp.y = std::max(dist.y, -extents.y);
+	//// y - axis
+	//if (dist.y >= 0) clamp.y = std::min(dist.y, extents.y);
+	//if (dist.y < 0) clamp.y = std::max(dist.y, -extents.y);
 
-	// z - axis
-	if (dist.z >= 0) clamp.z = std::min(dist.z, extents.z);
-	if (dist.z < 0) clamp.z = std::max(dist.z, -extents.z);
+	//// z - axis
+	//if (dist.z >= 0) clamp.z = std::min(dist.z, extents.z);
+	//if (dist.z < 0) clamp.z = std::max(dist.z, -extents.z);
 
 
-	//multiply the clmap by the rotation matrix
-	//clamp = clamp  * other->getRotationMatrix();
+	////multiply the clmap by the rotation matrix
+	////clamp = clamp  * other->getRotationMatrix();
 
-	//find the distance from the edge of the box to the centere of the sphere
-	glm::vec3 diff = dist - clamp;
+	////find the distance from the edge of the box to the centere of the sphere
+	//glm::vec3 diff = dist - clamp;
 
-	//find the distance from the edge of the box to the edge of the sphere
-	float distance = sqrt((diff.x * diff.x) + (diff.y * diff.y) + (diff.z * diff.z)) - m_fRadius;
+	////find the distance from the edge of the box to the edge of the sphere
+	//float distance = sqrt((diff.x * diff.x) + (diff.y * diff.y) + (diff.z * diff.z)) - m_fRadius;
 
-	if (distance > 0) std::cout << "No Collision" << std::endl;
-	else if(distance <= 0)std::cout << "Collision" << std::endl;
+	//if (distance > 0) std::cout << "No Collision" << std::endl;
+	//else if(distance <= 0)std::cout << "Collision" << std::endl;
 
 }
 

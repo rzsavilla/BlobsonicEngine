@@ -89,7 +89,7 @@
 
 	
 	<Model> 
-		<ID>AABB</ID>
+		<ID>OBB</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
@@ -109,6 +109,11 @@
 			<Y>1.0f</Y>
 			<Z>1.0f</Z>
 		</Dimensions>
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
@@ -119,13 +124,13 @@
 	</Model>	
 	
 	<Model> 
-		<ID>AABB</ID>
+		<ID>OBB</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>white_texture</Texture>
 		<Position>
-			<X>20.0f</X>
+			<X>2.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
@@ -139,6 +144,11 @@
 			<Y>1.0f</Y>
 			<Z>1.0f</Z>
 		</Dimensions>
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>

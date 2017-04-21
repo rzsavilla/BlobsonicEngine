@@ -5,6 +5,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "AABB.h"
+#include "OBB.h"
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -76,19 +77,31 @@ void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 positio
 	entity->attach<AABB>();
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
-	auto a = entity->get<AABB>();
-	
 
 	//find the longest side of the whole object , so as the bounding box ebcases all orientation
 	float fSize = std::max(Dimensions.x * Scale.x, Dimensions.y * Scale.y);
 	fSize = std::max(fSize, Dimensions.z * Scale.z);
-	a->m_vDimensions = glm::vec3(fSize, fSize, fSize);
 
 	t->m_vPosition = position;
 	t->m_vDimensions = Dimensions;
 	t->m_vScale = Scale;
 	t->m_vCenter = position + Dimensions * Scale / 2.0f;
 
-	std::cout << "Testing" << std::endl;
+}
 
+void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale, glm::vec3 Rot)
+{
+	//////Attach components
+  if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
+	entity->attach<OBB>();
+	//Set component Properties
+	auto t = entity->get<Component::Transformable>();
+
+	t->m_vPosition = position;
+	t->m_vDimensions = Dimensions * Scale;
+	t->m_vScale = Scale;
+	t->m_vCenter = position + Dimensions * Scale / 2.0f;
+	t->setRotation(Rot);
 }
