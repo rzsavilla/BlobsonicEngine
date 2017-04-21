@@ -86,29 +86,23 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	
-
-	
 	<Model> 
-		<ID>AABB</ID>
-		<Mesh>cube_mesh</Mesh>
+		<ID>Sphere</ID>
+		<Mesh>sphere_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
-		<Texture>white_texture</Texture>
+		<Texture>red_texture</Texture>
 		<Position>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
+		<Radius> 1 </Radius>
 		<Scale>
-			<X>5.0f</X>
-			<Y>5.0f</Y>
-			<Z>5.0f</Z>
+			<X>6.0f</X>
+			<Y>6.0f</Y>
+			<Z>6.0f</Z>
 		</Scale>
-		<Dimensions>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Dimensions>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
@@ -117,15 +111,40 @@
 		<Type>Box</Type>
 
 	</Model>	
+		<Model> 
+		<ID>Sphere</ID>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>white_texture</Texture>
+		<Position>
+			<X>8.0f</X>
+			<Y>0.0f</Y>
+			<Z>-20.0f</Z>
+		</Position>
+		<Radius> 1 </Radius>
+		<Scale>
+			<X>5.0f</X>
+			<Y>5.0f</Y>
+			<Z>5.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		<Type>Box</Type>
+
+	</Model>
 	
 	<Model> 
-		<ID>AABB</ID>
+		<ID>OBB</ID>
 		<Mesh>cube_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>white_texture</Texture>
 		<Position>
-			<X>20.0f</X>
+			<X>30.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
@@ -139,6 +158,11 @@
 			<Y>1.0f</Y>
 			<Z>1.0f</Z>
 		</Dimensions>
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>

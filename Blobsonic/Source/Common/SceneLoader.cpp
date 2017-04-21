@@ -7,6 +7,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "AABB.h"
+#include "Player.h"
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -155,6 +156,9 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	std::shared_ptr<Entity> entity = m_factory.createActor();
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
+	glm::vec3 Dimensions;
+	float radius;
+
 
 	std::string sID;
 	//Look at Model Element
@@ -164,6 +168,13 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			if (readElementText(modelChild, cData)) {
 				sID = std::string(cData, strlen(cData));
 				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		else if (strcmp(childValue, "Player") == 0) {
+			//Attach player component
+			entity->attach<Component::Player>();
+			if (readElementText(modelChild, cData)) {
+				entity->get<Component::Player>()->m_fMoveSpeed = atof(cData);
 			}
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
@@ -202,8 +213,8 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		else if (strcmp(childValue, "Dimensions") == 0) {
 			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vDimensions = v;
-			if (m_bDebug) std::cout << "Dimension Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+			Dimensions = v;
+			if (m_bDebug) std::cout << "Dimensions Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Origin") == 0) {
 			//Set model origin
@@ -216,8 +227,15 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
 			}
 		}
+		else if (strcmp(childValue, "Radius") == 0) {
+			if (readElementText(modelChild, cData)) {
+				radius = atof(cData);
+			}
+		}
 	}
-	m_factory.attachAABB(entity, transform->m_vPosition,transform->m_vDimensions, transform->m_vScale);
+	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition, radius);
 	return entity;
 }
 

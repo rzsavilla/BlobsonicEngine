@@ -1,25 +1,18 @@
 #pragma once
 
-#include <stdafx.h>
+#include "stdafx.h"
 #include "System.h"
-#include "Player.h"
-
-enum Action {
-	forward,
-	turnLeft,
-	turnRight,
-	backward,
-};
 
 namespace System {
 	class PlayerController : public System {
 	private:
-		std::vector<std::shared_ptr<Entity>> m_vPlayers;	//Player entities
-		bool m_bAction[4];
+		std::shared_ptr<Entity> m_vPlayer;	//Player entities
+		static const int m_kiActions = 6;
+		bool m_bAction[m_kiActions];
 	public:
 		PlayerController();
 
-		void process(std::shared_ptr<Entity> entity);
+		void process(std::vector<std::shared_ptr<Entity>>* entities) ;
 		void update(float dt);
 
 		//---Message Receiver--//

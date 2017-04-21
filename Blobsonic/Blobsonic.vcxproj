@@ -48,6 +48,7 @@
     <ClInclude Include="Source\Include\EngineMessages.h" />
     <ClInclude Include="Source\Include\Entity.h" />
     <ClInclude Include="Source\Include\EntityFactory.h" />
+    <ClInclude Include="Source\Include\EntityLoader.h" />
     <ClInclude Include="Source\Include\EntityManager.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\Destroyable.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
+    <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
@@ -143,6 +145,7 @@
     <ClCompile Include="Source\Common\Physical.cpp" />
     <ClCompile Include="Source\Common\Physics.cpp" />
     <ClCompile Include="Source\Common\Pickup.cpp" />
+    <ClCompile Include="Source\Common\PlayerController.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
@@ -160,7 +163,6 @@
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
     <ClCompile Include="Source\Common\TransformableOld.cpp" />
-    <ClCompile Include="Source\Include\PlayerController.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5189E8BA-F4EE-426F-AA59-E3CA4757AD1F}</ProjectGuid>
@@ -244,6 +246,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -255,6 +258,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -268,6 +272,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -284,6 +289,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

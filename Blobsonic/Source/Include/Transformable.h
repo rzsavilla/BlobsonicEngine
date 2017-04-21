@@ -2,14 +2,13 @@
 *	@struct Transformable
 *	@brief Provides entity with transform matrix
 *	Transform matrix for translation, rotation and scaling
+*	Gives entity a size (for collisions)
 */
 
 #pragma once
 
 #include "stdafx.h"
 #include "Component.h"
-
-static float fMyRotation = 0;
 
 namespace Component {
 	class Transformable : public Component {
@@ -20,8 +19,7 @@ namespace Component {
 		glm::vec3 m_vScale;		//!< Entity scale x,y,z
 		glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in degrees
 
-		glm::vec3 m_vDimensions;	//Plz move to different component
-		glm::vec3 m_vCenter;		
+		
 		
 		glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
 	public:
