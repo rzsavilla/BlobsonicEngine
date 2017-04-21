@@ -7,6 +7,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "AABB.h"
+#include "Player.h"
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -164,6 +165,13 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			if (readElementText(modelChild, cData)) {
 				sID = std::string(cData, strlen(cData));
 				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		else if (strcmp(childValue, "Player") == 0) {
+			//Attach player component
+			entity->attach<Component::Player>();
+			if (readElementText(modelChild, cData)) {
+				entity->get<Component::Player>()->m_fMoveSpeed = atof(cData);
 			}
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
