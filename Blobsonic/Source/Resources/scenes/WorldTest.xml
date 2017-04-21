@@ -20,7 +20,7 @@
 		</Position>
 		<Rotation>
 			<X>0.0f</X>
-			<Y>0.0f</Y>
+			<Y>45.0f</Y>
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
@@ -75,7 +75,7 @@
 		<Rotation>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
-			<Z>10.0f</Z>
+			<Z>180.0f</Z>
 		</Rotation>
 		<Scale>
 			<X>1.0f</X>
