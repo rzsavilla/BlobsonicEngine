@@ -342,6 +342,12 @@
     <ClInclude Include="Source\Include\AIPerception.h">
       <Filter>Header Files\Engine\Entity\Components\AI</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Math3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Light.cpp">
@@ -508,6 +514,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Transformable.cpp">
       <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Math3D.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

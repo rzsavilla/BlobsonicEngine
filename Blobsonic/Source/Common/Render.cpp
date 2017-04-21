@@ -98,6 +98,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
 				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
 				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
+				//model->m_shader->setUniformIndex("")
 			}
 
 			//Check for texture

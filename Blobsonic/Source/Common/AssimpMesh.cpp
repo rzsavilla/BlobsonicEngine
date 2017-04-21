@@ -1,5 +1,5 @@
 
-#include <stdafx.h>
+#include "stdafx.h"
 
 #include "AssimpMesh.h"
 #include <algorithm>
@@ -9,6 +9,7 @@
 #include <assimp/postprocess.h>
 #include "aModel.h"
 #include "Texture.h"
+#include "Math3D.h"
 
 /* Code from https://learnopengl.com/#!Model-Loading/Model*/
 
@@ -24,16 +25,33 @@ AssimpMesh::AssimpMesh(std::string sFilename) {
 	this->load(sFilename);
 }
 
-bool AssimpMesh::load(std::string sFile) {
+void AssimpMesh::Clear()
+{
+	if (am_VAO != 0) {
+		gl::DeleteVertexArrays(1, &am_VAO);
+		am_VAO = 0;
+	}
+	m_NumBones = 0;
+}
 
-	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_FlipUVs);
+bool AssimpMesh::load(std::string sFile) {
+	// Release the previously loaded mesh (if it exists)
+	Clear();
+
+	//Assimp::Importer import;
+	//const aiScene* scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
+		//aiProcess_LimitBoneWeights);
+	scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
+		aiProcess_LimitBoneWeights);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return false;
 	}
+
+	m_GlobalInverseTransform = scene->mRootNode->mTransformation;
+	m_GlobalInverseTransform.Inverse();
 
 	this->directory = sFile.substr(0, sFile.find_last_of('/'));
 	this->processNode(scene->mRootNode, scene);
@@ -45,11 +63,42 @@ bool AssimpMesh::load(std::string sFile) {
 
 void AssimpMesh::processNode(aiNode* node, const aiScene* scene) {
 	
+	m_Entries.resize(scene->mNumMeshes);
+
+	vector<aVertex> vertices;
+	vector<GLuint> indices;
+	vector<VertexBoneData> bones;
+
+	unsigned int NumVertices = 0;
+	unsigned int NumIndices = 0;
+
+	for (unsigned int i = 0; i < m_Entries.size(); i++) {
+		m_Entries[i].MaterialIndex = scene->mMeshes[i]->mMaterialIndex;
+
+		// Total mesh indices. 
+		m_Entries[i].NumIndices = scene->mMeshes[i]->mNumFaces * 3;
+
+		// Set the base vertex of this mesh (initial vertex for this mesh within the vertices array) to the current total vertices. 
+		m_Entries[i].BaseVertex = NumVertices;
+
+		// Set the base index of this mesh (initial index for this mesh within the indices array) to the current total indices. 
+		m_Entries[i].BaseIndex = NumIndices;
+
+		// Increment total vertices and indices. 
+		NumVertices += scene->mMeshes[i]->mNumVertices;
+		NumIndices += m_Entries[i].NumIndices;
+	}
+
+	// Reserve space in the vectors for the vertex attributes and indices
+	vertices.reserve(NumVertices);
+	bones.resize(NumVertices);
+	indices.reserve(NumIndices);
+
 	// Process all the node's meshes
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		this->meshes.push_back(this->processMesh(mesh, scene));
+		this->meshes.push_back(this->processMesh(i, mesh, scene, vertices, indices, bones));
 	}
 	
 	// Then do the same for each of its children
@@ -59,9 +108,7 @@ void AssimpMesh::processNode(aiNode* node, const aiScene* scene) {
 	}
 }
 
-aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
-	vector<aVertex> vertices;
-	vector<GLuint> indices;
+aModel AssimpMesh::processMesh(GLuint ind, aiMesh* mesh, const aiScene* scene, vector<aVertex> vertices, vector<GLuint> indices, vector<VertexBoneData> bones) {
 	vector<aTexture> textures;
 
 	// Walk through each of the mesh's vertices
@@ -98,6 +145,13 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 		vertices.push_back(vertex);
 	}
 
+	// Load the mesh's bones. 
+	if (mesh->HasBones()) {
+		LoadBones(ind, mesh, bones);
+
+	}
+
+
 	// Now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 	for (GLuint i = 0; i < mesh->mNumFaces; i++)
 	{
@@ -132,32 +186,316 @@ aModel AssimpMesh::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 	gl::GenVertexArrays(1, &am_VAO);
 	gl::GenBuffers(3, am_handle);
+	gl::GenBuffers(1, &vbo);
+	gl::GenBuffers(1, &ebo);
+	gl::GenBuffers(1, &boneBo);
 
 	gl::BindVertexArray(am_VAO);
 
 	//Vertices
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
 	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	
 	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)0);
 	gl::EnableVertexAttribArray(0);
 
 	//Normals
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
 	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	
 	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)(3 * sizeof(GLfloat)));
-
-	//gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
 	gl::EnableVertexAttribArray(1);
+	//gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+	
 
 	//Texture Coordinates
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
 	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+	
 	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)(6 * sizeof(GLfloat)));
 	gl::EnableVertexAttribArray(2);
+
+	// Bind the bone data buffer object
+	gl::BindBuffer(gl::ARRAY_BUFFER, boneBo);
+	gl::BufferData(gl::ARRAY_BUFFER, sizeof(bones[0]) * bones.size(), &bones[0], gl::STATIC_DRAW);
+
+	gl::VertexAttribIPointer(3, 4, gl::INT, sizeof(VertexBoneData), (const GLvoid*)0);
+	gl::EnableVertexAttribArray(3);
+
+
+	gl::VertexAttribPointer(4, 4, gl::FLOAT, FALSE, sizeof(VertexBoneData), (const GLvoid*)16);
+	gl::EnableVertexAttribArray(4);
+
+	gl::BindBuffer(gl::ELEMENT_ARRAY_BUFFER, ebo);
+	gl::BufferData(gl::ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0],
+		gl::STATIC_DRAW);
 
 	// Return a mesh object created from the extracted mesh data
 	return aModel(vertices, indices, textures);
 
+}
+
+
+void AssimpMesh::LoadBones(unsigned int MeshIndex, const aiMesh* pMesh, std::vector<VertexBoneData>& Bones)
+{
+
+	// Loop through all bones in the Assimp mesh.
+	for (unsigned int i = 0; i < pMesh->mNumBones; i++) {
+
+		unsigned int BoneIndex = 0;
+
+		// Obtain the bone name.
+		std::string BoneName(pMesh->mBones[i]->mName.data);
+
+		// If bone isn't already in the map. 
+		if (m_BoneMapping.find(BoneName) == m_BoneMapping.end()) {
+
+			// Set the bone ID to be the current total number of bones. 
+			BoneIndex = m_NumBones;
+
+			// Increment total bones. 
+			m_NumBones++;
+
+			// Push new bone info into bones vector. 
+			BoneInfo bi;
+			m_BoneInfo.push_back(bi);
+		}
+		else {
+			// Bone ID is already in map. 
+			BoneIndex = m_BoneMapping[BoneName];
+		}
+
+		m_BoneMapping[BoneName] = BoneIndex;
+
+		// Obtains the offset matrix which transforms the bone from mesh space into bone space. 
+		m_BoneInfo[BoneIndex].BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
+
+
+		// Iterate over all the affected vertices by this bone i.e weights. 
+		for (unsigned int j = 0; j < pMesh->mBones[i]->mNumWeights; j++) {
+
+			// Obtain an index to the affected vertex within the array of vertices.
+			unsigned int VertexID = (int)m_Entries[MeshIndex].BaseVertex + (int)pMesh->mBones[i]->mWeights[j].mVertexId;
+			// The value of how much this bone influences the vertex. 
+			float Weight = pMesh->mBones[i]->mWeights[j].mWeight;
+
+			// Insert bone data for particular vertex ID. A maximum of 4 bones can influence the same vertex. 
+			Bones[VertexID].AddBoneData(BoneIndex, Weight);
+		}
+	}
+}
+
+void AssimpMesh::BoneTransform(float TimeInSeconds, std::vector<Matrix4f>& Transforms)
+{
+	Matrix4f Identity;
+	Identity.InitIdentity();
+
+	float TicksPerSecond = scene->mAnimations[0]->mTicksPerSecond;
+	float TimeInTicks = TimeInSeconds * TicksPerSecond;
+	float AnimationTime = fmod(TimeInTicks, scene->mAnimations[0]->mDuration);
+
+	ReadNodeHierarchy(AnimationTime, scene->mRootNode, Identity);
+
+	Transforms.resize(m_NumBones);
+
+	// Populates transforms vector with new bone transformation matrices. 
+	for (unsigned int i = 0; i < m_NumBones; i++) {
+		Transforms[i] = m_BoneInfo[i].FinalTransformation;
+	}
+
+}
+
+unsigned int AssimpMesh::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim)
+{
+	// Check if there are rotation keyframes. 
+	assert(pNodeAnim->mNumRotationKeys > 0);
+
+	// Find the rotation key just before the current animation time and return the index. 
+	for (unsigned int i = 0; i < pNodeAnim->mNumRotationKeys - 1; i++) {
+		if (AnimationTime < (float)pNodeAnim->mRotationKeys[i + 1].mTime) {
+			return i;
+		}
+	}
+	assert(0);
+
+	return 0;
+}
+
+unsigned int AssimpMesh::FindScale(float AnimationTime, const aiNodeAnim* pNodeAnim)
+{
+	assert(pNodeAnim->mNumScalingKeys > 0);
+
+	// Find the scaling key just before the current animation time and return the index. 
+	for (unsigned int i = 0; i < pNodeAnim->mNumScalingKeys - 1; i++) {
+		if (AnimationTime < (float)pNodeAnim->mScalingKeys[i + 1].mTime) {
+			return i;
+		}
+	}
+	assert(0);
+
+	return 0;
+}
+
+unsigned int AssimpMesh::FindTranslation(float AnimationTime, const aiNodeAnim* pNodeAnim)
+{
+	assert(pNodeAnim->mNumPositionKeys > 0);
+
+	// Find the translation key just before the current animation time and return the index. 
+	for (unsigned int i = 0; i < pNodeAnim->mNumPositionKeys - 1; i++) {
+		if (AnimationTime < (float)pNodeAnim->mPositionKeys[i + 1].mTime) {
+			return i;
+		}
+	}
+	assert(0);
+
+	return 0;
+}
+
+
+void AssimpMesh::CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+{
+	// we need at least two values to interpolate...
+	if (pNodeAnim->mNumRotationKeys == 1) {
+		Out = pNodeAnim->mRotationKeys[0].mValue;
+		return;
+	}
+	// Obtain the current rotation keyframe. 
+	unsigned int RotationIndex = FindRotation(AnimationTime, pNodeAnim);
+
+	// Calculate the next rotation keyframe and check bounds. 
+	unsigned int NextRotationIndex = (RotationIndex + 1);
+	assert(NextRotationIndex < pNodeAnim->mNumRotationKeys);
+
+	// Calculate delta time, i.e time between the two keyframes.
+	float DeltaTime = pNodeAnim->mRotationKeys[NextRotationIndex].mTime - pNodeAnim->mRotationKeys[RotationIndex].mTime;
+
+	// Calculate the elapsed time within the delta time.  
+	float Factor = (AnimationTime - (float)pNodeAnim->mRotationKeys[RotationIndex].mTime) / DeltaTime;
+	//assert(Factor >= 0.0f && Factor <= 1.0f);
+
+	// Obtain the quaternions values for the current and next keyframe. 
+	const aiQuaternion& StartRotationQ = pNodeAnim->mRotationKeys[RotationIndex].mValue;
+	const aiQuaternion& EndRotationQ = pNodeAnim->mRotationKeys[NextRotationIndex].mValue;
+
+	// Interpolate between them using the Factor. 
+	aiQuaternion::Interpolate(Out, StartRotationQ, EndRotationQ, Factor);
+
+	// Normalise and set the reference. 
+	Out = Out.Normalize();
+}
+
+void AssimpMesh::CalcInterpolatedScaling(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+{
+	// we need at least two values to interpolate...
+	if (pNodeAnim->mNumScalingKeys == 1) {
+		Out = pNodeAnim->mScalingKeys[0].mValue;
+		return;
+	}
+
+	unsigned int ScalingIndex = FindScale(AnimationTime, pNodeAnim);
+	unsigned int NextScalingIndex = (ScalingIndex + 1);
+	assert(NextScalingIndex < pNodeAnim->mNumScalingKeys);
+	float DeltaTime = pNodeAnim->mScalingKeys[NextScalingIndex].mTime - pNodeAnim->mScalingKeys[ScalingIndex].mTime;
+	float Factor = (AnimationTime - (float)pNodeAnim->mScalingKeys[ScalingIndex].mTime) / DeltaTime;
+	//assert(Factor >= 0.0f && Factor <= 1.0f);
+	const aiVector3D& Start = pNodeAnim->mScalingKeys[ScalingIndex].mValue;
+	const aiVector3D& End = pNodeAnim->mScalingKeys[NextScalingIndex].mValue;
+
+	aiVector3D Delta = End - Start;
+	Out = Start + Factor * Delta;
+}
+
+void AssimpMesh::CalcInterpolatedTranslation(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+{
+	// we need at least two values to interpolate...
+	if (pNodeAnim->mNumPositionKeys == 1) {
+		Out = pNodeAnim->mPositionKeys[0].mValue;
+		return;
+	}
+
+
+	unsigned int PositionIndex = FindTranslation(AnimationTime, pNodeAnim);
+	unsigned int NextPositionIndex = (PositionIndex + 1);
+	assert(NextPositionIndex < pNodeAnim->mNumPositionKeys);
+	float DeltaTime = pNodeAnim->mPositionKeys[NextPositionIndex].mTime - pNodeAnim->mPositionKeys[PositionIndex].mTime;
+	float Factor = (AnimationTime - (float)pNodeAnim->mPositionKeys[PositionIndex].mTime) / DeltaTime;
+	//assert(Factor >= 0.0f && Factor <= 1.0f);
+	const aiVector3D& Start = pNodeAnim->mPositionKeys[PositionIndex].mValue;
+	const aiVector3D& End = pNodeAnim->mPositionKeys[NextPositionIndex].mValue;
+
+	aiVector3D Delta = End - Start;
+	Out = Start + Factor * Delta;
+}
+
+void AssimpMesh::ReadNodeHierarchy(float AnimationTime, const aiNode* pNode, const Matrix4f& ParentTransform)
+{
+	Matrix4f IdentityTest;
+	IdentityTest.InitIdentity();
+
+	// Obtain the name of the current node 
+	std::string NodeName(pNode->mName.data);
+
+	// Use the first animation 
+	const aiAnimation* pAnimation = scene->mAnimations[0];
+
+	// Obtain transformation relative to node's parent. 
+	Matrix4f NodeTransformation(pNode->mTransformation);
+
+	const aiNodeAnim* pNodeAnim = NULL;
+
+	// Find the animation channel of the current node. 
+	for (unsigned i = 0; i < pAnimation->mNumChannels; i++) {
+		const aiNodeAnim* pNodeAnimIndex = pAnimation->mChannels[i];
+
+		// If there is a match for a channel with the current node's name, then we've found the animation channel. 
+		if (std::string(pNodeAnimIndex->mNodeName.data) == NodeName) {
+			pNodeAnim = pNodeAnimIndex;
+		}
+	}
+
+	if (pNodeAnim) {
+
+		//// Interpolate scaling and generate scaling transformation matrix
+		//aiVector3D Scaling;
+		//CalcInterpolatedScaling(Scaling, AnimationTime, pNodeAnim);
+		//Matrix4f ScalingM;
+		//ScalingM.InitScaleTransform(Scaling.x, Scaling.y, Scaling.z);
+
+		// Interpolate rotation and generate rotation transformation matrix
+		aiQuaternion RotationQ;
+		CalcInterpolatedRotation(RotationQ, AnimationTime, pNodeAnim);
+		Matrix4f RotationM = Matrix4f(RotationQ.GetMatrix());
+
+		// Interpolate translation and generate translation transformation matrix
+		aiVector3D Translation;
+		CalcInterpolatedTranslation(Translation, AnimationTime, pNodeAnim);
+		Matrix4f TranslationM;
+		TranslationM.InitTranslationTransform(Translation.x, Translation.y, Translation.z);
+
+		// Combine the above transformations
+		NodeTransformation = TranslationM * RotationM;/* *ScalingM;*/
+	}
+
+	Matrix4f GlobalTransformation = ParentTransform * NodeTransformation;
+
+	// Apply the final transformation to the indexed bone in the array. 
+	if (m_BoneMapping.find(NodeName) != m_BoneMapping.end()) {
+		unsigned int BoneIndex = m_BoneMapping[NodeName];
+		m_BoneInfo[BoneIndex].FinalTransformation = m_GlobalInverseTransform  * GlobalTransformation *
+			m_BoneInfo[BoneIndex].BoneOffset;
+	}
+
+	// Do the same for all the node's children. 
+	for (unsigned i = 0; i < pNode->mNumChildren; i++) {
+		ReadNodeHierarchy(AnimationTime, pNode->mChildren[i], GlobalTransformation);
+	}
+}
+
+void AssimpMesh::SetBoneTransform(unsigned int Index, const Matrix4f& Transform)
+{
+	assert(Index < 100);
+
+	m_pShaderProg->setUniformIndex(Index, Transform);
 }
 
 vector<aTexture> AssimpMesh::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName) {
