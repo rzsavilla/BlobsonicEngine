@@ -15,7 +15,9 @@
 using std::string;
 #include <map>
 
+#include "Math3D.h"
 #include <glm/glm.hpp>
+
 using glm::vec2;
 using glm::vec3;
 using glm::vec4;
@@ -44,6 +46,9 @@ namespace GLSLShader {
 class GLSLProgram
 {
 private:
+	static const unsigned int ui_BoneArraySize = 70;
+	GLint m_boneLocation[ui_BoneArraySize]; //!< Bone uniform locations 
+
 	int  handle;
 	bool linked;
 	std::map<string, int> uniformLocations;
@@ -85,6 +90,7 @@ public:
 	void   setUniform(const char *name, int val);
 	void   setUniform(const char *name, bool val);
 	void   setUniform(const char *name, GLuint val);
+	void   setUniformIndex(unsigned int Index, const Matrix4f& matIn);
 
 	void   printActiveUniforms();
 	void   printActiveUniformBlocks();

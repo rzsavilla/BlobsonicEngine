@@ -2,7 +2,7 @@
 
 <Resources>
 	<Mesh> <ID>cube_mesh</ID>
-		<File>Source\Resources\models\cube.obj</File>
+		<File>Source\Resources\models\Minotaur@Attack.FBX</File>
 	</Mesh>
 	
 	<Material> <ID>default_material</ID>
