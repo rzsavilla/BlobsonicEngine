@@ -116,7 +116,7 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	t->setRotation(Rot);
 }
 
-void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position, float radius)
+void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position)
 {
 	//////Attach components
 	if (!entity->has<Component::Transformable>()) {
@@ -128,7 +128,6 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 	auto s = entity->get<Sphere>();
 
 	t->m_vPosition = position;
-	s->m_fRadius = radius;
 
 	if (entity->has<AABB>()) 
 	{

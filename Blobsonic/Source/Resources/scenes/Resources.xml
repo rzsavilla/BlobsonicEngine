@@ -10,6 +10,10 @@
 		<File>Source\Resources\models\cube.obj</File>
 	</Mesh>
 	<Mesh> 
+ +		<ID>Capsule_mesh</ID>
+ +		<File>Source\Resources\models\Capsule.obj</File>
+ +	</Mesh>
+	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
 	</Mesh>
