@@ -3,7 +3,6 @@
 #include "AABB.h"
 #include "OBB.h"
 #include "Sphere.h"
-#include "Capsule.h"
 
 System::Physics::Physics()
 {
@@ -15,49 +14,37 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 	m_vAABBS.clear();
 	m_vOBBS.clear();
 	m_vSpheres.clear();
-	m_vCapsules.clear();
 
 	for (auto it = entities->begin(); it != entities->end(); ++it)
 	{
-		if ((*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
-			m_vCapsules.push_back((*it));
-		}
 		if ((*it)->has<AABB>() && (*it)->has<Component::Transformable>()) {
 			m_vAABBS.push_back((*it));
 
 		}
-		if ((*it)->has<OBB>() && !(*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
+	}
+
+	for (auto it = entities->begin(); it != entities->end(); ++it)
+	{
+		if ((*it)->has<OBB>() && (*it)->has<Component::Transformable>()) {
 			m_vOBBS.push_back((*it));
 
 		}
-		if ((*it)->has<Sphere>() && !(*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
+	}
+	for (auto it = entities->begin(); it != entities->end(); ++it)
+	{
+		if ((*it)->has<Sphere>() && (*it)->has<Component::Transformable>()) {
 			m_vSpheres.push_back((*it));
 
 		}
 	}
 
-	
-
 }
 
 void System::Physics::update(float dt)
 {
-
-	//update all physicls positions
-	for (int i = 0; i < m_vAABBS.size(); i++)
-	{
-		updateAABB(m_vAABBS.at(i));
-	}
-	for (int i = 0; i < m_vOBBS.size(); i++)
-	{
-		updateOBB(m_vOBBS.at(i));
-	}
-
-
 	//process AABB
 	for (int i = 0; i < m_vAABBS.size(); i++)
 	{
-		
 		for (int x = 0; x < m_vAABBS.size(); x++)
 		{
 			if (i != x)
@@ -68,7 +55,10 @@ void System::Physics::update(float dt)
 
 	}
 	//process OBB
-	
+	for (int i = 0; i < m_vOBBS.size(); i++)
+	{
+		updateOBB(m_vOBBS.at(i));
+	}
 	for (int i = 0; i < m_vOBBS.size(); i++)
 	{
 		for (int x = 0; x < m_vOBBS.size(); x++)
@@ -102,43 +92,6 @@ void System::Physics::update(float dt)
 			
 			CheckOBBSphereCollision(m_vOBBS.at(x), m_vSpheres.at(i));
 			
-		}
-
-	}
-	
-	//process OBB Capsule collision
-	for (int i = 0; i < m_vOBBS.size(); i++)
-	{
-		for (int x = 0; x < m_vCapsules.size(); x++)
-		{
-
-			if (CheckOBBCapsuleCollision(m_vCapsules.at(x), m_vOBBS.at(i))) std::cout << "Collision" << std::endl;
-			else  std::cout << "No Collision" << std::endl;
-			
-
-		}
-
-	}
-	//process Sphere Capsule collision
-	for (int i = 0; i < m_vSpheres.size(); i++)
-	{
-		for (int x = 0; x < m_vCapsules.size(); x++)
-		{
-
-			CheckSphereCapsuleCollision(m_vCapsules.at(x), m_vSpheres.at(i));
-
-		}
-
-	}
-	//process Capsule Capsule collision
-	for (int i = 0; i < m_vCapsules.size(); i++)
-	{
-		for (int x = 0; x < m_vCapsules.size(); x++)
-		{
-			if (i != x)
-			{
-				CheckSphereCapsuleCollision(m_vCapsules.at(x), m_vCapsules.at(i));
-			}
 		}
 
 	}
@@ -526,6 +479,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if ((localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
 		{
+			std::cout << "left" << std::endl;
 			clamp.x = -box->m_vDimensions.x / 2.0f;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = localSphere.m_vCenter.z;
@@ -538,6 +492,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if ((localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
 		{
+			std::cout << "right" << std::endl;
 			clamp.x = box->m_vDimensions.x / 2.0f;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = localSphere.m_vCenter.z;
@@ -550,6 +505,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
 		{
+			std::cout << "above" << std::endl;
 			clamp.x = localSphere.m_vCenter.x;
 			clamp.y = box->m_vDimensions.y / 2.0f;
 			clamp.z = localSphere.m_vCenter.z;
@@ -561,6 +517,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.z < box->m_vDimensions.z / 2.0f && localSphere.m_vCenter.z > -box->m_vDimensions.z / 2.0f))
 		{
+			std::cout << "below" << std::endl;
 			clamp.x = localSphere.m_vCenter.x;
 			clamp.y = -box->m_vDimensions.y / 2.0f;
 			clamp.z = localSphere.m_vCenter.z;
@@ -572,6 +529,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f))
 		{
+			std::cout << "infront" << std::endl;
 			clamp.x = localSphere.m_vCenter.x;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = box->m_vDimensions.z / 2.0f;
@@ -583,6 +541,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if ((localSphere.m_vCenter.x < box->m_vDimensions.x / 2.0f && localSphere.m_vCenter.x > -box->m_vDimensions.x / 2.0f) && (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f))
 		{
+			std::cout << "behind  " << std::endl;
 			clamp.x = localSphere.m_vCenter.x;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = -box->m_vDimensions.z / 2.0f;
@@ -596,6 +555,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0)
 		{
+			std::cout << "behind and left " << std::endl;
 			clamp.x = -box->m_vDimensions.x / 2.0f;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = -box->m_vDimensions.z / 2.0f;
@@ -607,6 +567,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f)
 		{
+			std::cout << "behind and right " << std::endl;
 			clamp.x = box->m_vDimensions.x / 2.0f;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = -box->m_vDimensions.z / 2.0f;
@@ -618,6 +579,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f)
 		{
+			std::cout << "infront and right " << std::endl;
 			clamp.x = box->m_vDimensions.x / 2.0f;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = box->m_vDimensions.z / 2.0f;
@@ -629,6 +591,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	{
 		if (localSphere.m_vCenter.y < box->m_vDimensions.y / 2.0f && localSphere.m_vCenter.y > -box->m_vDimensions.y / 2.0f)
 		{
+			std::cout << "infront and left " << std::endl;
 			clamp.x = -box->m_vDimensions.x / 2.0f;
 			clamp.y = localSphere.m_vCenter.y;
 			clamp.z = box->m_vDimensions.z / 2.0f;
@@ -658,13 +621,17 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	//subract the radius
 	fDist = fDist - localSphere.m_fRadius;
 
+	//std::cout << "Overall : " << overAllDistance.x << " " << overAllDistance.y << " " << overAllDistance.z << std::endl;
+	//std::cout << "Clamp : " << clamp.x << " " << clamp.y << " " << clamp.z << std::endl;
 
 	if (fDist <= 0)
 	{
+		std::cout << "Collision" << endl;
 		return true;
 	}
 	else
 	{
+		std::cout << "NO Collision" << endl;
 		return false;
 	}
 
@@ -673,80 +640,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 
 	
-}
-
-bool System::Physics::CheckOBBCapsuleCollision(std::shared_ptr<Entity> eCap, std::shared_ptr<Entity> eBox)
-{
-	// check the OBB against the capsules OBB
-	if (CheckOBBOBBCollision(eCap, eBox)) return true;
-
-
-	//Component::Transformable originalTrans = *eBox->get<Component::Transformable>();
-	//auto transformable = eCap->get<Component::Transformable>();
-
-	//move the sphere to capsule spher pos one
-	auto sphere = eCap->get<Sphere>();
-	auto cap = eCap->get<Capsule>();
-	sphere->m_vCenter = cap->m_vSphereCenter1;
-
-	// check the OBB against the capsules Sphere
-	if (CheckOBBOBBCollision(eBox, eCap)) return true;
-
-	//move sphere to cap pos 2
-	sphere->m_vCenter = cap->m_vSphereCenter2;
-
-	// check the OBB against the capsules Sphere
-	if (CheckOBBOBBCollision(eBox, eCap)) return true;
-
-
-	return false;
-}
-
-bool System::Physics::CheckSphereCapsuleCollision(std::shared_ptr<Entity> eCap, std::shared_ptr<Entity> eSphere)
-{
-	// check the Sphere against the capsules OBB
-	if (CheckOBBSphereCollision(eCap, eSphere)) return true;
-
-	//move the sphere to capsule spher pos one
-	auto sphere = eCap->get<Sphere>();
-	auto cap = eCap->get<Capsule>();
-	sphere->m_vCenter = cap->m_vSphereCenter1;
-
-	// check the OBB against the capsules Sphere
-	if (CheckShereSphereCollision(eSphere, eCap)) return true;
-
-	//move sphere to cap pos 2
-	sphere->m_vCenter = cap->m_vSphereCenter2;
-
-	// check the OBB against the capsules Sphere
-	if (CheckShereSphereCollision(eSphere, eCap)) return true;
-
-
-	return false;
-}
-
-bool System::Physics::CheckCapsuleCapsuleCollision(std::shared_ptr<Entity> eCap1, std::shared_ptr<Entity> eCap2)
-{
-	//check  capsule 1 obb against capsule 2
-	if (CheckOBBCapsuleCollision(eCap2, eCap1))return true;
-
-	//move the sphere to capsule spher pos one
-	auto sphere = eCap1->get<Sphere>();
-	auto cap = eCap1->get<Capsule>();
-	sphere->m_vCenter = cap->m_vSphereCenter1;
-
-	//check capsule 1 sphere aginst capsule 2
-	if (CheckSphereCapsuleCollision(eCap2, eCap1))return true;
-	
-
-	//move sphere to cap pos 2
-	sphere->m_vCenter = cap->m_vSphereCenter2;
-
-	//check capsule 1 sphere aginst
-	if (CheckSphereCapsuleCollision(eCap2, eCap1))return true;
-
-	return false;
-
 }
 
 void System::Physics::updateOBB(std::shared_ptr<Entity> eBox)
@@ -760,18 +653,6 @@ void System::Physics::updateOBB(std::shared_ptr<Entity> eBox)
 	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.z, glm::vec3(0.0f, 0.0, 1.0f));
 
 	box->m_vCenter = glm::mat3(box->m_Rotation) * (tBox->m_vPosition + (box->m_vDimensions / 2.0f));
-
-
-}
-
-void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
-{
-
-	auto box = eBox->get<AABB>();
-	auto tBox = eBox->get<Component::Transformable>();
-
-
-	box->m_vCenter = tBox->m_vPosition + (box->m_vDimensions / 2.0f);
 
 
 }

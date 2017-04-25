@@ -356,6 +356,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Common\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Common\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -523,8 +526,6 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Text.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
-    <ClCompile Include="Source\Common\Light.cpp">
-      <Filter>Source Files\OLDUnused</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -41,7 +41,6 @@ void Engine::Engine::loop()
 			iUpdates++;
 			dt--;
 		}
-		update(0.1);
 		
 		//Render
 		render();

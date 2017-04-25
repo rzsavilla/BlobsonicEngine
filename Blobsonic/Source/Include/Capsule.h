@@ -8,7 +8,7 @@ class Capsule : public Component::Component
 {
 public:
 	Capsule(); // <! Default Constructor for a capsule pshyics physics
-	
+
 	glm::vec3 m_vSphereCenter1;
 	glm::vec3 m_vSphereCenter2;
 
