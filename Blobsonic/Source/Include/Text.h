@@ -51,5 +51,7 @@ namespace Component {
 		std::string getString();
 		//! Get Shader program
 		std::shared_ptr<GLSLProgram> getShader();
+		//! Get Vertex Array Object, required for rendering
+		GLuint getVAO();
 	};
 }

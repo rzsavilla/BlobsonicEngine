@@ -26,6 +26,11 @@ std::shared_ptr<GLSLProgram> Component::Text::getShader()
 	return m_shader;
 }
 
+GLuint Component::Text::getVAO()
+{
+	return m_VAO;
+}
+
 void Component::Text::buildBuffers()
 {
 	GLuint VBO;
