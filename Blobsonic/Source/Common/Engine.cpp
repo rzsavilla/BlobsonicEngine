@@ -37,7 +37,7 @@ void Engine::Engine::loop()
 
 		//Limit update
 		while (dt >= 1.0) {
-			//update((float)dt);
+			update((float)dt);
 			iUpdates++;
 			dt--;
 		}

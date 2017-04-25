@@ -1,90 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Resources>
-	<Mesh> <ID>cube_mesh</ID>
-		<File>Source\Resources\models\cube.obj</File>
-	</Mesh>
-	
-	<Mesh> <ID>room_mesh</ID>
-		<File>Source\Resources\models\room.obj</File>
-	</Mesh>
-
-	<Mesh> <ID>sphere_mesh</ID>
-		<File>Source\Resources\models\sphere.obj</File>
-	</Mesh>
-	
-	
-	<Texture> <ID>room_texture</ID>
-		<File>Source\Resources\textures\room.png</File>
-	</Texture>
-	<Texture> <ID>red_texture</ID>
-		<File>Source\Resources\textures\red.png</File>
-	</Texture>
-	<Texture> <ID>white_texture</ID>
-		<File>Source\Resources\textures\white.png</File>
-	</Texture>
-	
-	<Material> <ID>default_material</ID>
-		<AmbientReflect>
-			<X>0.5f</X>
-			<Y>0.5f</Y>
-			<Z>0.5f</Z>
-		</AmbientReflect>
-		<DiffuseReflect>
-			<X>0.8f</X>
-			<Y>0.8f</Y>
-			<Z>0.8f</Z>
-		</DiffuseReflect>
-		<SpecularReflect>
-			<X>0.9f</X>
-			<Y>0.9f</Y>
-			<Z>0.9f</Z>
-		</SpecularReflect>
-		<Shininess>200.0</Shininess>
-	</Material>
-	
-	<Material> <ID>bright_material</ID>
-		<AmbientReflect>
-			<X>0.7ff</X>
-			<Y>0.7f</Y>
-			<Z>0.7f</Z>
-		</AmbientReflect>
-		<DiffuseReflect>
-			<X>0.8f</X>
-			<Y>0.8f</Y>
-			<Z>0.8f</Z>
-		</DiffuseReflect>
-		<SpecularReflect>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</SpecularReflect>
-		<Shininess>1.0</Shininess>
-	</Material>
-	
-	<Shader> <ID>text_shader</ID>
-		<Vertex>Source\Resources\shader\text.vert</Vertex>
-		<Fragment>Source\Resources\shader\text.frag</Fragment>
-	</Shader>
-	<Shader> <ID>phong_shader</ID>
-		<Vertex>Source\Resources\shader\phong.vert</Vertex>
-		<Fragment>Source\Resources\shader\phong.frag</Fragment>
-	</Shader>
-	<Shader> <ID>colour_shader</ID>
-		<Vertex>Source\Resources\shader\colour.vert</Vertex>
-		<Fragment>Source\Resources\shader\colour.frag</Fragment>
-	</Shader>
-	<Shader> <ID>button_shader</ID>
-		<Vertex>Source\Resources\shader\button.vert</Vertex>
-		<Fragment>Source\Resources\shader\button.frag</Fragment>
-	</Shader>
-	
-</Resources>
+<ResourceFile> 
+	<Location>Source\Resources\Scenes\Resources.xml</Location> 
+</ResourceFile>
 
 <Scene> <Type>Splash</Type> <ID>splash_scene</ID>
 </Scene>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
+	
 	
 	<Model> 
 		<ID>Sphere</ID>
@@ -94,46 +18,15 @@
 		<Texture>red_texture</Texture>
 		<Position>
 			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Radius> 1 </Radius>
-		<Scale>
-			<X>5.0f</X>
-			<Y>5.0f</Y>
-			<Z>5.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-
-
-	</Model>	
-	
-	
-	<Model> 
-		<ID>OBB</ID>
-		<Mesh>cube_mesh</Mesh>
-		<Material>bright_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>white_texture</Texture>
-		<Position>
-			<X>30.0f</X>
-			<Y>0.0f</Y>
+			<Y>11.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Scale>
-			<X>5.0f</X>
-			<Y>5.0f</Y>
-			<Z>5.0f</Z>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
 		</Scale>
-		<Dimensions>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Dimensions>
+	
 		<Rotation>
 			<x>0</x>
 			<x>0</x>
@@ -144,9 +37,38 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Player>0.5</Player>
+		<Gravity>1</Gravity>
 
-	</Model>	
+
+	</Model>		
+	
+	<Model> 
+		<ID>OBB</ID>
+		<Mesh>plane_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>floor_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>-5.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>500.0f</X>
+			<Y>1.0f</Y>
+			<Z>500.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+	</Model>		
 
 	
 	<Light> <ID>start_light</ID>
@@ -182,10 +104,11 @@
 			<Z>125.0f</Z>
 		</Position>
 		<Orientation>
-			<X>0.0f</X>
+			<X>45.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
+	
 		<FOV>45.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>1000.0f</FarPlane>

@@ -25,7 +25,14 @@
 		<ID>skybox_mesh</ID>
 		<File>Source\Resources\models\skybox.obj</File>
 	</Mesh>
-	
+	<Mesh> 
+		<ID>sphere_mesh</ID>
+		<File>Source\Resources\models\sphere.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>Capsule_mesh</ID>
+		<File>Source\Resources\models\Capsule.obj</File>
+	</Mesh>
 	<Texture> 
 		<ID>room_texture</ID>
 		<File>Source\Resources\textures\room.png</File>
