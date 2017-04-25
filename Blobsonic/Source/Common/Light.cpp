@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "..\Include\Light.h"
 
-Light::Light()
+Component::Light::Light()
 {
 	m_vAmbient = glm::vec3(0.0f);
 	m_vDiffuse = glm::vec3(0.0f);
@@ -9,22 +9,17 @@ Light::Light()
 	m_fRadius = 0.0f;
 }
 
-Light::Light(glm::vec3 Ambient, glm::vec3 Diffuse, glm::vec3 Specular, float radius)
+Component::Light::Light(glm::vec3 Ambient, glm::vec3 Diffuse, glm::vec3 Specular, float radius)
 {
 	setIntensity(Ambient, Diffuse, Specular,radius);
 }
 
-void Light::setPosition(glm::vec3 position)
+void Component::Light::setType(LightType type)
 {
-	m_vPosition = position;
+	m_type = type;
 }
 
-void Light::setPosition(float x, float y, float z)
-{
-	m_vPosition = glm::vec3(x, y, z);
-}
-
-void Light::setIntensity(glm::vec3 Ambient, glm::vec3 Diffuse, glm::vec3 Specular,float radius)
+void Component::Light::setIntensity(glm::vec3 Ambient, glm::vec3 Diffuse, glm::vec3 Specular,float radius)
 {
 	m_vAmbient = Ambient;
 	m_vDiffuse = Diffuse;
@@ -32,62 +27,72 @@ void Light::setIntensity(glm::vec3 Ambient, glm::vec3 Diffuse, glm::vec3 Specula
 	m_fRadius = radius;
 }
 
-void Light::setAmbient(glm::vec3 Ambient)
+void Component::Light::setAmbient(glm::vec3 Ambient)
 {
 	m_vAmbient = Ambient;
 }
 
-void Light::setDiffuse(glm::vec3 Diffuse)
+void Component::Light::setDiffuse(glm::vec3 Diffuse)
 {
 	m_vDiffuse = Diffuse;
 }
 
-void Light::setSpecular(glm::vec3 Specular)
+void Component::Light::setSpecular(glm::vec3 Specular)
 {
 	m_vSpecular = Specular;
 }
 
-void Light::setAmbient(float Red, float Green, float Blue)
+void Component::Light::setAmbient(float Red, float Green, float Blue)
 {
 	m_vAmbient = glm::vec3(Red, Green, Blue);
 }
 
-void Light::setDiffuse(float Red, float Green, float Blue)
+void Component::Light::setDiffuse(float Red, float Green, float Blue)
 {
 	m_vDiffuse = glm::vec3(Red, Green, Blue);
 }
 
-void Light::setSpecula(float Red, float Green, float Blue)
+void Component::Light::setSpecula(float Red, float Green, float Blue)
 {
 	m_vSpecular = glm::vec3(Red, Green, Blue);
 }
 
-void Light::setRadius(float radius)
+void Component::Light::setRadius(float radius)
 {
 	m_fRadius = radius;
 }
 
-glm::vec3 Light::getPosition() 
+void Component::Light::setDirection(glm::vec3 newDirection)
 {
-	return m_vPosition;
+	m_vDirection = glm::normalize(newDirection);
 }
 
-glm::vec3 Light::getAmbient() 
+LightType Component::Light::getType()
+{
+	return m_type;
+}
+
+glm::vec3 Component::Light::getAmbient()
 {
 	return m_vAmbient;
 }
 
-glm::vec3 Light::getDiffuse() 
+glm::vec3 Component::Light::getDiffuse()
 {
 	return m_vDiffuse;
 }
 
-glm::vec3 Light::getSpecular() 
+glm::vec3 Component::Light::getSpecular()
 {
 	return m_vSpecular;
 }
 
-float Light::getRadius()
+float Component::Light::getRadius()
 {
 	return m_fRadius;
+}
+
+glm::vec3 Component::Light::getDirection()
+{
+	return m_vDirection;
 }
