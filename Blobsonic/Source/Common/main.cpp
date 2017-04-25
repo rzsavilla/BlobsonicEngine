@@ -22,6 +22,5 @@ int main() {
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();
 	engine.run();
-	glfwTerminate();
 	return 0;
 }

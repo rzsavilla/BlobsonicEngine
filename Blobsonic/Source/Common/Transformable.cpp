@@ -25,6 +25,11 @@ void Component::Transformable::setScale(glm::vec3 scale)
 	m_vScale = scale;
 }
 
+void Component::Transformable::setOrigin(glm::vec3 origin)
+{
+	m_vOrigin = origin;
+}
+
 glm::vec3 Component::Transformable::getPosition()
 {
 	return m_vPosition;
@@ -40,9 +45,14 @@ glm::vec3 Component::Transformable::getScale()
 	return m_vScale;
 }
 
+glm::vec3 Component::Transformable::getOrigin()
+{
+	return m_vOrigin;
+}
+
 glm::mat4 Component::Transformable::getTransform()
 {
-	glm::mat4 t, s, r;	//Translation scale and rotation matrices
+	glm::mat4 t, s, r,o;	//Translation scale and rotation matrices
 	s = glm::scale(glm::mat4(1.0f), getScale());									//Scale
 	t = glm::translate(glm::mat4(1.0f), getPosition());								//Translate
 
@@ -52,5 +62,7 @@ glm::mat4 Component::Transformable::getTransform()
 	r = glm::rotate(r, rad.y, glm::vec3(0.0f, 1.0f, 0.0f));					//Y rotation
 	r = glm::rotate(r, rad.z, glm::vec3(0.0f, 0.0f, 1.0f));					//Z rotation
 
-	return t * r * s;
+	o = glm::translate(glm::mat4(1.0f), getOrigin());
+
+	return t * r  * o * s;
 }
