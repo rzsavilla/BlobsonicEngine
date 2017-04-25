@@ -1,0 +1,28 @@
+﻿Revert "Merged with cristian"
+
+This reverts commit ca3b284fc4766509a441d412f9d79bc4a0592598, reversing
+changes made to 0b730eee758de488fb9582b8afaba809b19b57e9.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: Rozen Savilla <P14164119@GWHXX633WIN012W.lec-admin.dmu.ac.uk>
+#
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   Blobsonic/Blobsonic.vcxproj
+#	modified:   Blobsonic/Blobsonic.vcxproj.filters
+#	modified:   Blobsonic/Source/Common/AssimpMesh.cpp
+#	modified:   Blobsonic/Source/Common/GLSLProgram.cpp
+#	deleted:    Blobsonic/Source/Common/Math3D.cpp
+#	modified:   Blobsonic/Source/Common/Render.cpp
+#	modified:   Blobsonic/Source/Include/AssimpMesh.h
+#	modified:   Blobsonic/Source/Include/GLSLProgram.h
+#	modified:   Blobsonic/Source/Resources/models/Minotaur@Attack.FBX
+#	deleted:    Blobsonic/Source/Resources/models/boblampclean.md5anim
+#	deleted:    Blobsonic/Source/Resources/models/boblampclean.md5mesh
+#	modified:   Blobsonic/Source/Resources/scenes/TestAssimp.xml
+#
+

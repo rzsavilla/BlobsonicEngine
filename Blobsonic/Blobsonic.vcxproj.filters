@@ -342,16 +342,8 @@
     <ClInclude Include="Source\Include\AIPerception.h">
       <Filter>Header Files\Engine\Entity\Components\AI</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Source\Include\Math3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\defines.h">
-      <Filter>Header Files</Filter>
-=======
     <ClInclude Include="Source\Include\EntityLoader.h">
       <Filter>Header Files\Engine\Entity</Filter>
->>>>>>> fdbfb42e52ff3c4b6b875ab45b4ae0987086664e
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -517,16 +509,11 @@
     <ClCompile Include="Source\Common\Transformable.cpp">
       <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Source\Common\Math3D.cpp">
-      <Filter>Source Files</Filter>
-=======
     <ClCompile Include="Source\Common\EntityLoader.cpp">
       <Filter>Source Files\Engine\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\PlayerController.cpp">
       <Filter>Source Files\Engine\System\Contoller</Filter>
->>>>>>> fdbfb42e52ff3c4b6b875ab45b4ae0987086664e
     </ClCompile>
   </ItemGroup>
 </Project>
