@@ -100,6 +100,12 @@
     <Filter Include="Header Files\Engine\Entity\Components\AI">
       <UniqueIdentifier>{3addae98-4c38-4c42-b907-f9dd2c3d5f6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Entity\GUI">
+      <UniqueIdentifier>{fe29243a-975c-4b87-ab0b-6ef50f7a39de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Component\GUI">
+      <UniqueIdentifier>{4465977f-9dd5-4951-8470-63c6d3ddf290}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -273,9 +279,6 @@
     <ClInclude Include="Source\Include\Pickup.h">
       <Filter>Header Files\Engine\Entity\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\Text.h">
-      <Filter>Header Files\OLDUnused</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\tinyxml2.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
@@ -345,6 +348,12 @@
     <ClInclude Include="Source\Include\EntityLoader.h">
       <Filter>Header Files\Engine\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\TextOld.h">
+      <Filter>Header Files\OLDUnused</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Text.h">
+      <Filter>Header Files\Engine\Entity\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Light.cpp">
@@ -385,9 +394,6 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Texture.cpp">
       <Filter>Source Files\Res</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Text.cpp">
-      <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Bitmap.cpp">
       <Filter>Source Files\Res</Filter>
@@ -514,6 +520,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\PlayerController.cpp">
       <Filter>Source Files\Engine\System\Contoller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\TextOld.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Text.cpp">
+      <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

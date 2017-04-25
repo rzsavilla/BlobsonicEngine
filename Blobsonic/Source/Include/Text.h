@@ -1,21 +1,22 @@
 /**
 * @class	Text
-* @brief	Render text onto the window
-* Renders text using freetype
-* The Scene stores game objects, and updates objects and game logic.
+* @brief	Contains data for rendering text onto window
+* @author	Rozen Savilla 
+* Renders text using freetype onto window, gives entity variables required for rendering text
 */
 
 /*
-	Tutorial: https://learnopengl.com/#!In-Practice/Text-Rendering
-	Freetype: https://www.freetype.org/
+Tutorial: https://learnopengl.com/#!In-Practice/Text-Rendering
+Freetype: https://www.freetype.org/
 */
-
 #pragma once
 
-#include "Drawable.h"
+#include "stdafx.h"
+#include "Component.h"
 
-/*
+#include "GLSLProgram.h"
 
+//Freetype character
 struct Character {
 	GLuint     TextureID;  // ID handle of the glyph texture
 	glm::ivec2 Size;       // Size of glyph
@@ -23,25 +24,32 @@ struct Character {
 	GLuint     Advance;    // Offset to advance to next glyph
 };
 
-class Text :public Drawable {
-private:
-	std::string m_string;			//!< String that is rendered
-	glm::vec2 m_vPos;				//!< Text position
-	glm::vec3 m_vColour;			//!< Text colour
-	std::shared_ptr<GLSLProgram> m_shader;	//!< Shader used to draw text
-	float m_fScale;					//!< Text Scale
-	std::map<GLchar, Character>* m_ptrCharacters;	//!< Pointer to freetype characters texture used to draw text
+namespace Component {
+	class Text : public Component {
+	private:
+		std::string m_sText;	//!< String to be rendered
+		glm::vec3 m_vPos;		//!< Screen Position/Relative/Origin (if transformable component is also attached)
+		glm::vec4 m_vColour;	//!< Stores text colour RGBA;
 
-	GLuint VAO, VBO;		//!< Vertex array buffer and Vertex buffer object index to opengl data buffer
-public:
-	//! Default constructor
-	Text(std::string string, std::map<GLchar, Character>* characters, float x, float y, glm::vec3 colour, float scale);
+		std::shared_ptr<GLSLProgram> m_shader;
+		std::map<GLchar, Character>* m_ptrCharacters;	//!< Pointer to freetype character textures;
+	
+		GLuint m_VAO;	//!< Vertex Array Object
+	public:
+		Text();	//!< Default
 
-	void setString(std::string string);		//!< Set string to be rendered
+		//! Set string Text to rendered
+		void setString(std::string text);
 
-	void setShader(std::shared_ptr<GLSLProgram> shader);	//!< Set shader used to draw text
+		//! Set shader program to be used to render text
+		void setShader(std::shared_ptr<GLSLProgram> shader);
 
-	void draw();	//!< Draw text
-};
+		//! Pass buffer to OpenGL
+		void buildBuffers();
 
-*/
+		//! Get string Text
+		std::string getString();
+		//! Get Shader program
+		std::shared_ptr<GLSLProgram> getShader();
+	};
+}

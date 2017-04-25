@@ -98,6 +98,7 @@
     <ClInclude Include="Source\Include\System.h" />
     <ClInclude Include="Source\Include\TestScene.h" />
     <ClInclude Include="Source\Include\Text.h" />
+    <ClInclude Include="Source\Include\TextOld.h" />
     <ClInclude Include="Source\Include\Texture.h" />
     <ClInclude Include="Source\Include\tinyxml2.h" />
     <ClInclude Include="Source\Include\TransformableOLD.h" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Source\Common\stdafx.cpp" />
     <ClCompile Include="Source\Common\TestScene.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />
+    <ClCompile Include="Source\Common\TextOld.cpp" />
     <ClCompile Include="Source\Common\Texture.cpp" />
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
