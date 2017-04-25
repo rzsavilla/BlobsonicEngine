@@ -141,9 +141,6 @@
     <None Include="Source\Resources\shader\singlePhong.frag" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Include\Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -356,9 +353,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

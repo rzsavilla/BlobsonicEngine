@@ -17,7 +17,7 @@ enum LightType {
 };
 
 namespace Component {
-class Light: public Component::Component {
+class Light: public Component {
 	private:
 		LightType m_type;		//!< Type of light
 		glm::vec3 m_vAmbient;	//!< Ambient Light Intensity
