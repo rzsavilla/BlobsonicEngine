@@ -14,6 +14,6 @@ void main()
 
 	gl_Position = mProjection * vec4(pos, 1.0f, 0.0f);
     gl_Position = mProjection * mModel * vec4(VertexPosition.xy, 0.0, 1.0);
-    gl_Position = mProjection * mView * mModel * vec4(pos, VertexPosition.z, 1.0);
+    gl_Position = mProjection * mView * mModel * vec4(pos, vec2(VertexPosition.z, 1.0));
     TexCoords = VertexPosition.zw;
 }  
