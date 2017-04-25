@@ -298,12 +298,6 @@ void GLSLProgram::setUniform(const char *name, bool val)
 	gl::Uniform1i(loc, val);
 }
 
-void GLSLProgram::setUniformIndex(unsigned int Index, const Matrix4f& matIn)
-{
-	// Pass transformation matrix to uniform array. 
-	gl::UniformMatrix4fv(m_boneLocation[Index], 1, TRUE, (const GLfloat*)matIn.m);
-}
-
 void GLSLProgram::printActiveUniforms() {
 #ifdef __APPLE__
 	// For OpenGL 4.1, use gl::GetActiveUniform
