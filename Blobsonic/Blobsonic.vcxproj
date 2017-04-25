@@ -50,6 +50,7 @@
     <ClInclude Include="Source\Include\EntityLoader.h" />
     <ClInclude Include="Source\Include\EntityManager.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
+    <ClInclude Include="Source\Include\GUIButton.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Source\Include\Transformable.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GUIButton.cpp" />
     <ClCompile Include="Source\Common\AABB.cpp" />
     <ClCompile Include="Source\Common\AIMovement.cpp" />
     <ClCompile Include="Source\Common\AIController.cpp" />

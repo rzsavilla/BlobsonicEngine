@@ -12,7 +12,7 @@ void Engine::Engine::initScene()
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
 	m_scenes.clear();
-	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml");
+	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
 }

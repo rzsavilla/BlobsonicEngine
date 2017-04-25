@@ -7,6 +7,7 @@
 #include "Model.h"
 #include "Transformable.h"
 #include "Text.h"
+#include "GUIButton.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -35,6 +36,11 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 			model->m_shader->setUniform("mView", m_ptrActiveCamera->getView());				//View matrix
 			model->m_shader->setUniform("mProjection", m_ptrActiveCamera->getProjection());	//Projection matrix
 			model->m_shader->setUniform("viewPos", m_ptrActiveCamera->getPosition());		//Camera/Eye position
+
+			// Sets the camera to orthographic and then back to perspective after the value has been passed to the shader
+			m_ptrActiveCamera->setPerspective(false);
+			model->m_shader->setUniform("mViewO", m_ptrActiveCamera->getProjection());		
+			m_ptrActiveCamera->setPerspective(true);
 		}
 	}
 
@@ -99,6 +105,8 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
 				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
 				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
+
+				//model->m_shader->setUniform("button", );	//Shininess
 			}
 
 			//Check for texture
@@ -157,7 +165,7 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Model>()) {
 			renderModel((*it));	//Render Model
 		}
-		//Finde Text Component
+		//Find Text Component
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
 		}

@@ -354,6 +354,9 @@
     <ClInclude Include="Source\Include\Text.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\GUIButton.h">
+      <Filter>Header Files\Engine\Entity\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Light.cpp">
@@ -525,6 +528,9 @@
       <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Text.cpp">
+      <Filter>Source Files\Engine\Component\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIButton.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
   </ItemGroup>

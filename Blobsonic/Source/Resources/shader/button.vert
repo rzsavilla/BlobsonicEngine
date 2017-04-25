@@ -1,30 +1,19 @@
-#version 430
+// https://learnopengl.com/#!In-Practice/Text-Rendering
+#version 430 core
+layout (location = 0) in vec4 VertexPosition; // <vec2 pos, vec2 tex>
+out vec2 TexCoords;
 
-layout (location=0) in vec3 VertexPosition;
-layout (location=2) in vec3 VertexNormal;
-
-uniform mat4 mModel;			//Model Matrix
-uniform mat3 NormalMatrix;		
-
-uniform mat4 mView;				//View matrix
-uniform mat4 mProjection;		//Projection matrix
-
-out vec3 fragNormal;			//Fragment vertex in world space
-out vec3 fragVert;				//Fragment normal scaled
+uniform mat4 mProjection;
+uniform mat4 mModel;
+uniform mat4 mViewO;
+uniform mat4 mView;
 
 void main()
 {
-	//ModelView Matrix
-	mat4 mModelView = mView * mModel;
+	vec2 pos = vec2(10,10) * VertexPosition.xy;
 
-	//Normal Matrix
-	mat4 NMatrix = transpose(inverse(mModel));
-
-	fragVert = vec3(mModel * vec4(VertexPosition,1.0));
-	fragNormal = vec3(NMatrix * vec4(VertexNormal,0.0));
-
-	//gl_Position = mProjection * vec4(fragVert.xy, 0.0, 1.0);
-
-	//Vertex position with Model, View and Projection transformations
-	gl_Position = mProjection * mView * mModel * vec4(VertexPosition,1.0);
-}
+	gl_Position = mProjection * vec4(pos, 1.0f, 0.0f);
+    gl_Position = mProjection * mModel * vec4(VertexPosition.xy, 0.0, 1.0);
+    gl_Position = mProjection * mView * mModel * vec4(pos, VertexPosition.z, 1.0);
+    TexCoords = VertexPosition.zw;
+}  

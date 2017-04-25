@@ -239,6 +239,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
 	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
 	else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	else if (sID == "Button")m_factory.attachButton(entity);
 	return entity;
 }
 
