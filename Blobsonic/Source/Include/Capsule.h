@@ -3,27 +3,15 @@
 
 //Chris O'Neill
 
-#include "ModelOLD.h"
-#include "Physical.h"
 
-class Capsule : public Physical
+class Capsule : public Component::Component
 {
 public:
-	Capsule(); // <! Default Constructor for a box/cube physics
-	Capsule(Model model); // <! Overloaded Constructor for a box/cube physics , Takes the model as a parameter
+	Capsule(); // <! Default Constructor for a capsule pshyics physics
+	
+	glm::vec3 m_vSphereCenter1;
+	glm::vec3 m_vSphereCenter2;
 
-	void update(float dt);	//!< Update Box
-
-							//Component Functions
-	void init();	//!< Initialize component
-	void handleMessage(std::shared_ptr<Message> msg);		//!< Each component will read and ignore Messages depending on implementation of this function														
-	void setLocalMsgPtr(std::vector<std::shared_ptr<Message>>* ptr); // <!Allows component to access all local messages
-	void CollideWithCapsule(Capsule* other);			//<!Checks for collision with anotehr box
-
-	void movementForTesting(float x, float y, float z);
-	Model m_RenderModel; // <! The rendered object for testing (Delete later)
-
-private:
 
 };
 

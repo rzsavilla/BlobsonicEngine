@@ -235,7 +235,8 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	}
 	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
 	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition, radius);
+	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
+	else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
 	return entity;
 }
 

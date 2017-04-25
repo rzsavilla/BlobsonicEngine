@@ -7,6 +7,7 @@
 #include "AABB.h"
 #include "OBB.h"
 #include "Sphere.h"
+#include "Capsule.h"
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -115,7 +116,7 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	t->setRotation(Rot);
 }
 
-void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position, float radius)
+void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position)
 {
 	//////Attach components
 	if (!entity->has<Component::Transformable>()) {
@@ -127,7 +128,6 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 	auto s = entity->get<Sphere>();
 
 	t->m_vPosition = position;
-	s->m_fRadius = radius;
 
 	if (entity->has<AABB>()) 
 	{
@@ -152,5 +152,69 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 
 	
 }
+
+void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 dimensions, glm::vec3 scale, glm::vec3 Rot)
+{
+
+	//////Attach components
+	if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
+
+	if (!entity->has<OBB>()) {
+		entity->attach<OBB>();
+	}
+
+	if (!entity->has<Sphere>()) {
+		entity->attach<Sphere>();
+	}
+
+	if (!entity->has<Capsule>()) {
+		entity->attach<Capsule>();
+	}
+
+
+	//Set OBB Properties
+	auto t = entity->get<Component::Transformable>();
+	auto o = entity->get<OBB>();
+
+	t->m_vPosition = position;
+	o->m_vDimensions = dimensions * scale;
+	t->m_vScale = scale;
+
+	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.x, glm::vec3(1.0f, 0.0, 0.0f));
+	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.y, glm::vec3(0.0f, 1.0, 0.0f));
+	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.z, glm::vec3(0.0f, 0.0, 1.0f));
+
+	o->m_vCenter = glm::mat3(o->m_Rotation) * (position + (dimensions * scale) / 2.0f);
+
+	t->setRotation(Rot);
+
+
+	//Set up sphere
+	auto s = entity->get<Sphere>();
+
+	float fSize = std::max(t->m_vScale.x, t->m_vScale.z);
+	s->m_vCenter = t->m_vPosition;
+	s->m_fRadius = fSize;
+
+	//set up capsule
+	auto c = entity->get<Capsule>();
+
+	float x = o->m_vCenter.x;
+	float y = o->m_vCenter.y + ((dimensions.y * scale.y) / 2.0f);
+	float z = o->m_vCenter.z;
+
+	c->m_vSphereCenter1 = glm::mat3(o->m_Rotation) * vec3(x,y,z);
+
+	y = o->m_vCenter.y - ((dimensions.y * scale.y) / 2.0f);
+
+	c->m_vSphereCenter2 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
+
+
+
+}
+
+
 
 
