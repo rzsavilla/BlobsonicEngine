@@ -16,6 +16,11 @@ void Component::Text::setShader(std::shared_ptr<GLSLProgram> shader)
 	m_shader = shader;
 }
 
+void Component::Text::setCharacters(std::map<GLchar, Character>* ptrCharacters)
+{
+	m_ptrCharacters = ptrCharacters;
+}
+
 std::string Component::Text::getString()
 {
 	return m_sText;
@@ -29,6 +34,11 @@ std::shared_ptr<GLSLProgram> Component::Text::getShader()
 GLuint Component::Text::getVAO()
 {
 	return m_VAO;
+}
+
+std::map<GLchar, Character>* Component::Text::getCharactersPtr()
+{
+	return m_ptrCharacters;
 }
 
 void Component::Text::buildBuffers()

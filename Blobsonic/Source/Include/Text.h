@@ -38,14 +38,16 @@ namespace Component {
 	public:
 		Text();	//!< Default
 
+				//! Pass buffer to OpenGL
+		void buildBuffers();
+
 		//! Set string Text to rendered
 		void setString(std::string text);
-
 		//! Set shader program to be used to render text
 		void setShader(std::shared_ptr<GLSLProgram> shader);
-
-		//! Pass buffer to OpenGL
-		void buildBuffers();
+		
+		//! Set character textures for
+		void setCharacters(std::map<GLchar, Character>* ptrCharacters);
 
 		//! Get string Text
 		std::string getString();
@@ -53,5 +55,7 @@ namespace Component {
 		std::shared_ptr<GLSLProgram> getShader();
 		//! Get Vertex Array Object, required for rendering
 		GLuint getVAO();
+
+		std::map<GLchar, Character>* getCharactersPtr();
 	};
 }
