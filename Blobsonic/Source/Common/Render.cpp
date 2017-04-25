@@ -6,6 +6,7 @@
 //Components
 #include "Model.h"
 #include "Transformable.h"
+#include "Text.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -130,6 +131,11 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	
 }
 
+void System::Render::renderText(std::shared_ptr<Entity> entity)
+{
+
+}
+
 System::Render::Render()
 {
 	m_ptrActiveCamera = NULL;
@@ -148,8 +154,12 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 			//}
 		}
 		//Find Model Component
-		else  if ((*it)->has<Component::Model>()) {
+		if ((*it)->has<Component::Model>()) {
 			renderModel((*it));	//Render Model
+		}
+		//Finde Text Component
+		if ((*it)->has<Component::Text>()) {
+			renderText(*it);	//Render Text
 		}
 	}
 }
