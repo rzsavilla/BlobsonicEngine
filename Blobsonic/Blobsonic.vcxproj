@@ -246,7 +246,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;H:\Year 3\IMAT3606 Games Programming\GroupEngine\Blobsonic\Source\Include\Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -258,7 +258,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;H:\Year 3\IMAT3606 Games Programming\GroupEngine\Blobsonic\Source\Include\Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -272,7 +272,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;H:\Year 3\IMAT3606 Games Programming\GroupEngine\Blobsonic\Source\Include\Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -289,7 +289,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;H:\Year 3\IMAT3606 Games Programming\GroupEngine\Blobsonic\Source\Include\Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

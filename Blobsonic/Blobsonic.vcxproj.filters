@@ -355,9 +355,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -527,6 +524,9 @@
     <ClCompile Include="Source\Common\PlayerController.cpp">
       <Filter>Source Files\Engine\System\Contoller</Filter>
 >>>>>>> fdbfb42e52ff3c4b6b875ab45b4ae0987086664e
+    </ClCompile>
+    <ClCompile Include="Source\Common\Light.cpp">
+      <Filter>Source Files\OLDUnused</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
