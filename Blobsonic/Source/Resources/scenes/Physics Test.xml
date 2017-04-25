@@ -37,7 +37,8 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Gravity>1</Gravity>
+		<Physical>1</Physical>
+		<Mass> 10 </Mass>
 
 
 	</Model>		
@@ -68,6 +69,8 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
+		<Mass> INF </Mass>
+		
 	</Model>		
 
 	

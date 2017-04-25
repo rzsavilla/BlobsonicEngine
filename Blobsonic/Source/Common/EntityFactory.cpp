@@ -215,6 +215,13 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 
 }
 
+void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity)
+{
+
+
+
+}
+
 
 
 

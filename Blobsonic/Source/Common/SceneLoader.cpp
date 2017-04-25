@@ -158,6 +158,8 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	auto transform = entity->get<Component::Transformable>();
 	glm::vec3 Dimensions;
 	float radius;
+	float mass;
+
 
 
 	std::string sID;
