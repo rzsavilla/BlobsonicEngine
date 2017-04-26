@@ -202,6 +202,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		else if (strcmp(childValue, "Shader") == 0) {
 			if (readElementText(modelChild, cData)) {
 				model->m_shader = (m_res->getShader(std::string(cData, strlen(cData))));
+				model->m_shader->initialiseBoneUniforms();
 			}
 		}
 		else if (strcmp(childValue, "Texture") == 0) {

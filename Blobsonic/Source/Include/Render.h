@@ -10,6 +10,7 @@ namespace System {
 	private:
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
+		float m_fDeltaTime;
 	public:
 		Render();
 

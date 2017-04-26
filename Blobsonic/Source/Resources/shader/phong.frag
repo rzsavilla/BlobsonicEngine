@@ -183,8 +183,8 @@ void main() {
 	//------------//
 
 
-	Colour = texture(tex, texCoord);	//Just Textures
+	//Colour = texture(tex, texCoord);	//Just Textures
 	//Colour = texture(tex, texCoord) * lights;	//Textures + lighting
-	//Colour = vec4(1.0f,0.0f,1.0,0.1f);
+	Colour = vec4(1.0f,1.0f,1.0,1.0f);
 }
 //------------------------------------------------------------------------------------------//

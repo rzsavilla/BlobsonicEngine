@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Resources>
+
+
+	<Mesh> 
+		<ID>sphere_mesh</ID>
+		<File>Source\Resources\models\Minotaur_noText.fbx</File>
+	</Mesh>
+	
+	<Texture> 
+		<ID>floor_texture</ID>
+		<File>Source\Resources\textures\floor.jpg</File>
+	</Texture>
+	
+	<Material> 
+		<ID>bright_material</ID>
+		<AmbientReflect>
+			<X>0.7ff</X>
+			<Y>0.7f</Y>
+			<Z>0.7f</Z>
+		</AmbientReflect>
+		<DiffuseReflect>
+			<X>0.8f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</DiffuseReflect>
+		<SpecularReflect>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</SpecularReflect>
+		<Shininess>1.0</Shininess>
+	</Material>
+	
+
+	<Shader> 
+		<ID>phong_shader</ID>
+		<Vertex>Source\Resources\shader\phong.vert</Vertex>
+		<Fragment>Source\Resources\shader\phong.frag</Fragment>
+	</Shader>
+
+
+	
+</Resources>
+

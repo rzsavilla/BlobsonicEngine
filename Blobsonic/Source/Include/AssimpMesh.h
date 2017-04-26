@@ -106,10 +106,13 @@ public:
 	void BoneTransform(float TimeInSeconds, std::vector<Matrix4f>& Transforms); //!< Traverses the scene hierarchy and fetches the matrix transformation for each bone given the time. 
 	void SetBoneTransform(unsigned int Index, const Matrix4f& Transform); //!< Inserts a bone transformation in the uniform array at the given index. 
 
+	bool getHasBones();
 
 	void setVAO(GLuint vao);
 	GLuint getVAO();
 
+
+	std::vector<MeshEntry> m_Entries; //!< Array of mesh entries 
 private:
 	GLuint am_VAO;
 	GLuint am_handle[3];
@@ -136,7 +139,6 @@ private:
 	void Clear();
 	Matrix4f GlobalTransformation; //!< Root node transformation. 
 	Matrix4f m_GlobalInverseTransform;
-	std::vector<MeshEntry> m_Entries; //!< Array of mesh entries 
 	unsigned int m_NumBones; //!< Total number of bones in the model. 
 
 	std::map<std::string, unsigned int> m_BoneMapping; //!< Map of bone names to ids

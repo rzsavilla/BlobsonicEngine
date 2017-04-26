@@ -41,8 +41,12 @@ bool AssimpMesh::load(std::string sFile) {
 	//Assimp::Importer import;
 	//const aiScene* scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
 	//aiProcess_LimitBoneWeights);
-	scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
-		aiProcess_LimitBoneWeights);
+	scene = import.ReadFile(sFile, 
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_SortByPType |
+		aiProcess_Triangulate |
+		aiProcess_GenSmoothNormals |
+		aiProcess_FlipUVs | aiProcess_LimitBoneWeights);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -94,6 +98,16 @@ void AssimpMesh::processNode(aiNode* node, const aiScene* scene) {
 	bones.resize(NumVertices);
 	indices.reserve(NumIndices);
 
+
+	/*
+	//
+	//Vertices are not getting added in processMesh. Al pasar por referencia deber'ian a;adirse y no pasa
+	//
+	//
+	*/
+
+
+
 	// Process all the node's meshes
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
@@ -106,6 +120,54 @@ void AssimpMesh::processNode(aiNode* node, const aiScene* scene) {
 	{
 		this->processNode(node->mChildren[i], scene);
 	}
+
+	//gl::GenVertexArrays(1, &am_VAO);
+	//gl::GenBuffers(3, am_handle);
+	//gl::GenBuffers(1, &vbo);
+	//gl::GenBuffers(1, &ebo);
+	//gl::GenBuffers(1, &boneBo);
+
+	//gl::BindVertexArray(am_VAO);
+
+	////Vertices
+	//gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
+	//gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+
+	//gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)0);
+	//gl::EnableVertexAttribArray(0);
+
+	////Normals
+	//gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
+	//gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+
+	//gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)(3 * sizeof(GLfloat)));
+	//gl::EnableVertexAttribArray(1);
+	////gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
+
+	////Texture Coordinates
+	//gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
+	//gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
+
+	//gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)(6 * sizeof(GLfloat)));
+	//gl::EnableVertexAttribArray(2);
+
+	//// Bind the bone data buffer object
+	//gl::BindBuffer(gl::ARRAY_BUFFER, boneBo);
+	//gl::BufferData(gl::ARRAY_BUFFER, sizeof(bones[0]) * bones.size(), &bones[0], gl::STATIC_DRAW);
+
+	//gl::VertexAttribIPointer(3, 4, gl::INT, sizeof(VertexBoneData), (const GLvoid*)0);
+	//gl::EnableVertexAttribArray(3);
+
+	//gl::VertexAttribPointer(4, 4, gl::FLOAT, FALSE, sizeof(VertexBoneData), (const GLvoid*)16);
+	//gl::EnableVertexAttribArray(4);
+
+	//gl::BindBuffer(gl::ELEMENT_ARRAY_BUFFER, ebo);
+	//gl::BufferData(gl::ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0],
+	//	gl::STATIC_DRAW);
+
+	//vertices.clear();
+	//indices.clear();
+	//bones.clear();
 }
 
 aModel AssimpMesh::processMesh(GLuint ind, aiMesh* mesh, const aiScene* scene, vector<aVertex> vertices, vector<GLuint> indices, vector<VertexBoneData> bones) {
@@ -195,33 +257,31 @@ aModel AssimpMesh::processMesh(GLuint ind, aiMesh* mesh, const aiScene* scene, v
 	//Vertices
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
 	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
-
+	
 	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)0);
-	gl::EnableVertexAttribArray(0);
+	gl::EnableVertexAttribArray(0);	
 
 	//Normals
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
 	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
-
+	
 	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)(3 * sizeof(GLfloat)));
 	gl::EnableVertexAttribArray(1);
 	//gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
 
-
 	//Texture Coordinates
 	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
 	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
-
+	
 	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)(6 * sizeof(GLfloat)));
 	gl::EnableVertexAttribArray(2);
 
 	// Bind the bone data buffer object
 	gl::BindBuffer(gl::ARRAY_BUFFER, boneBo);
 	gl::BufferData(gl::ARRAY_BUFFER, sizeof(bones[0]) * bones.size(), &bones[0], gl::STATIC_DRAW);
-
+	
 	gl::VertexAttribIPointer(3, 4, gl::INT, sizeof(VertexBoneData), (const GLvoid*)0);
 	gl::EnableVertexAttribArray(3);
-
 
 	gl::VertexAttribPointer(4, 4, gl::FLOAT, FALSE, sizeof(VertexBoneData), (const GLvoid*)16);
 	gl::EnableVertexAttribArray(4);
@@ -496,6 +556,14 @@ void AssimpMesh::SetBoneTransform(unsigned int Index, const Matrix4f& Transform)
 	assert(Index < 100);
 
 	m_pShaderProg->setUniformIndex(Index, Transform);
+}
+
+bool AssimpMesh::getHasBones()
+{
+	if (m_NumBones > 0)
+		return true;
+	else
+		return false;
 }
 
 vector<aTexture> AssimpMesh::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName) {

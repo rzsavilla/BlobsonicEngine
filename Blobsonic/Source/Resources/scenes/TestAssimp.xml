@@ -1,121 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Resources>
-	<Mesh> <ID>cube_mesh</ID>
-		<File>Source\Resources\models\cube.obj</File>
-	</Mesh>
-	
-	<Material> <ID>default_material</ID>
-		<AmbientReflect>
-			<X>0.5f</X>
-			<Y>0.5f</Y>
-			<Z>0.5f</Z>
-		</AmbientReflect>
-		<DiffuseReflect>
-			<X>0.8f</X>
-			<Y>0.8f</Y>
-			<Z>0.8f</Z>
-		</DiffuseReflect>
-		<SpecularReflect>
-			<X>0.9f</X>
-			<Y>0.9f</Y>
-			<Z>0.9f</Z>
-		</SpecularReflect>
-		<Shininess>200.0</Shininess>
-	</Material>
-	
-	<Shader> <ID>text_shader</ID>
-		<Vertex>Source\Resources\shader\text.vert</Vertex>
-		<Fragment>Source\Resources\shader\text.frag</Fragment>
-	</Shader>
-	<Shader> <ID>phong_shader</ID>
-		<Vertex>Source\Resources\shader\phong.vert</Vertex>
-		<Fragment>Source\Resources\shader\phong.frag</Fragment>
-	</Shader>
-	<Shader> <ID>colour_shader</ID>
-		<Vertex>Source\Resources\shader\colour.vert</Vertex>
-		<Fragment>Source\Resources\shader\colour.frag</Fragment>
-	</Shader>
-	<Shader> <ID>button_shader</ID>
-		<Vertex>Source\Resources\shader\button.vert</Vertex>
-		<Fragment>Source\Resources\shader\button.frag</Fragment>
-	</Shader>
-	
-</Resources>
+<ResourceFile> 
+	<Location>Source\Resources\Scenes\Resources2.xml</Location> 
+</ResourceFile>
 
 <Scene> <Type>Splash</Type> <ID>splash_scene</ID>
 </Scene>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
-	<Model> <ID>cube3</ID>
-		<Mesh>cube_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>white_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>2.0f</Y>
-			<Z>-20.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	<Model> <ID>cube4</ID>
-		<Mesh>cube_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>red_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>2.0f</Y>
-			<Z>20.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
 	
-	<Camera> <ID>cam1</ID>
+	
+	<Model> 
+		<ID>Sphere</ID>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>floor_texture</Texture>
 		<Position>
-			<X>-20.0f</X>
-			<Y>30.0f</Y>
-			<Z>30.0f</Z>
+			<X>0.0f</X>
+			<Y>11.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		<Physical>1</Physical>
+		<Mass> 10 </Mass>
+
+
+	</Model>				
+
+	
+	<Light> <ID>start_light</ID>
+		<Position>
+			<X>1.0f</X>
+			<Y>40.0f</Y>
+			<Z>1.0f</Z>
+		</Position>
+		<Ambient>
+			<X>0.8f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>0.8f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</Diffuse>
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+		<Radius>420.0f</Radius>
+	</Light>
+	
+	
+	<Camera> 
+		<ID>cam3</ID>
+		<Position>
+			<X>-125.0f</X>
+			<Y>28.0f</Y>
+			<Z>125.0f</Z>
 		</Position>
 		<Orientation>
-			<X>20.0f</X>
-			<Y>25.0f</Y>
+			<X>45.0f</X>
+			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
+	
 		<FOV>45.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>1000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>0.7f</MoveSpeed>
 	</Camera>
+	
 </Scene>
+
