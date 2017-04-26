@@ -707,7 +707,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 			float PenetrationDepth = localSphere.m_fRadius - d;
 			resolveCollision(eBox, eSphere, Normal);
 			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
-
 		}
 		
 		return true;
