@@ -9,10 +9,7 @@
 		<ID>sphere_mesh</ID>
 		<File>Source\Resources\models\Animated_Ball_noText.fbx</File>
 	</Mesh>
-	<Mesh> 
- +		<ID>Capsule_mesh</ID>
- +		<File>Source\Resources\models\Capsule.obj</File>
- +	</Mesh>
+
 	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
