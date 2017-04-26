@@ -15,6 +15,7 @@ public:
 
 	float m_fMass; //<! Mass of object in kg's
 	float m_fINVMass; //<! inverse mass Mass of object in kg's
+	float m_fRestitution; // <! Collision restitution
 
 	glm::vec3 m_fForce;	//<! Force of object in newtons
 	glm::vec3 m_vVelocity; //<! Vel of object in m/s

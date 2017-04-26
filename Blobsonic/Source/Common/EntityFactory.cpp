@@ -143,7 +143,7 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 	else
 	{
 	
-		s->m_vCenter = t->m_vPosition + (t->getScale() / 2.0f);
+		s->m_vCenter = position;
 	}
 
 	//find the largest scale of the sphere
