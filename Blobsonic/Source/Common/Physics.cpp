@@ -674,6 +674,8 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	fDist = fDist - localSphere.m_fRadius;
 
 
+	std::cout << fDist << std::endl;
+
 	if (fDist <= 0)
 	{
 		//check for physical component on sphere
@@ -836,13 +838,25 @@ void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::sha
 	glm::vec3 vRelVel = phys2->m_vVelocity - phys1->m_vVelocity;
 
 	//calculate velocity along normal
-	float fFelVelocity = glm::dot(vRelVel, CollisionNormal);
+	float fRelVelocity = glm::dot(vRelVel, CollisionNormal);
 
 	//do not resolve if traverling away from
-	if (fFelVelocity > 0)return;
+	if (fRelVelocity > 0)return;
 	
 	//calculate restitution
-	//float e = std::min()
+	//consider changing
+	float e = std::min(phys1->m_fRestitution, phys1->m_fRestitution);
+
+	//calculate impulse scalar
+	float j = -(1 + e) * fRelVelocity;
+	j /= phys1->m_fINVMass + phys2->m_fINVMass;
+
+	//Apply the impluse
+	glm::vec3 impulse = j * CollisionNormal;
+	phys1->m_vVelocity -= phys1->m_fINVMass * impulse;
+	phys2->m_vVelocity += phys2->m_fINVMass * impulse;
+
+
 
 
 

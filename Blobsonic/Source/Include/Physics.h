@@ -25,8 +25,10 @@ namespace System {
 
 		void updateOBB(std::shared_ptr <Entity> eBox);
 		void updateAABB(std::shared_ptr <Entity> eBox);
-
 		void updatePhysicals(std::shared_ptr <Entity> e, float dt);
+
+		void resolveCollision(std::shared_ptr <Entity> object1, std::shared_ptr <Entity> object2, glm::vec3 CollisionNormal);
+
 
 
 	public:
