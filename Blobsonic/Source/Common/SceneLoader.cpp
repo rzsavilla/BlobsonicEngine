@@ -28,7 +28,7 @@ void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 			//Load mesh
 			if (readElementText(Child, c)) {
 				std::string sFile(c, strlen(c));
-				mesh->load(sFile);
+				//mesh->load(sFile);
 				aMesh->load(sFile);
 			};
 		}
@@ -37,8 +37,8 @@ void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 		}
 	}
 	m_res->addAssimpMesh(s, aMesh);	//Add mesh to resource manager;
-	m_res->addMesh(s, mesh);	//Add mesh to resource manager;
-	m_res->addMesh(s,mesh);	//Add mesh to resource manager;
+	//m_res->addMesh(s, mesh);	//Add mesh to resource manager;
+	//m_res->addMesh(s,mesh);	//Add mesh to resource manager;
 	if (m_bDebug) std::cout << " Mesh Loaded: " << s << "\n";
 }
 
@@ -181,7 +181,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(modelChild, cData)) {
-				model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
+				//model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
 				model->m_aMeshes.push_back(m_res->getAssimpMesh(std::string(cData, strlen(cData))));
 			}
 		}

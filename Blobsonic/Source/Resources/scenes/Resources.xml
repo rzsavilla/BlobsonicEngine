@@ -7,7 +7,7 @@
 	</Mesh>
 	<Mesh> 
 		<ID>sphere_mesh</ID>
-		<File>Source\Resources\models\cube.obj</File>
+		<File>Source\Resources\models\Animated_Ball_noText.fbx</File>
 	</Mesh>
 	<Mesh> 
  +		<ID>Capsule_mesh</ID>
