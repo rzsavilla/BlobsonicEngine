@@ -1,5 +1,7 @@
 #pragma once
 
+#define GRAVITYCOEFFICENT -9.81 // m/s/s
+
 #include "System.h"
 
 namespace System {
@@ -10,6 +12,7 @@ namespace System {
 		std::vector<std::shared_ptr <Entity>> m_vOBBS; // !< OBB for the scene
 		std::vector<std::shared_ptr <Entity>> m_vSpheres; // !< Spheres for the scene
 		std::vector<std::shared_ptr <Entity>> m_vCapsules; // !< Capsules for the scene
+		std::vector<std::shared_ptr <Entity>> m_vPhysicals; // !< Physicals for the scene
 
 		bool CheckAABBAABBCollision(std::shared_ptr <Entity> aabb1, std::shared_ptr <Entity> aabb2);
 		bool CheckOBBOBBCollision(std::shared_ptr <Entity> obb1, std::shared_ptr <Entity> obb2);
@@ -22,6 +25,8 @@ namespace System {
 
 		void updateOBB(std::shared_ptr <Entity> eBox);
 		void updateAABB(std::shared_ptr <Entity> eBox);
+
+		void updatePhysicals(std::shared_ptr <Entity> e, float dt);
 
 
 	public:
