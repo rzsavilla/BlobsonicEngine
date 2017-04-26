@@ -47,4 +47,6 @@ public:
 	std::shared_ptr<GLSLProgram> getShader(const std::string& name);
 
 	bool isResFileLoaded(std::string file);	//!< Check if resource file has been loaded
+
+	void ClearResources();	//!< Empty all resources
 };
