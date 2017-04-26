@@ -41,7 +41,7 @@
 		</Origin>
 		
 		<Mass>10</Mass>
-	
+		<Restitution>0.6</Restitution>
 
 	</Model>		
 	

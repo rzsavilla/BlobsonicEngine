@@ -65,6 +65,11 @@ void System::Physics::update(float dt)
 	{
 		updateOBB(m_vOBBS.at(i));
 	}
+	for (int i = 0; i < m_vSpheres.size(); i++)
+	{
+		updateSphere(m_vSpheres.at(i));
+	}
+
 	
 
 
@@ -674,6 +679,8 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	fDist = fDist - localSphere.m_fRadius;
 
 
+	std::cout << fDist << std::endl;
+
 	if (fDist <= 0)
 	{
 		//check for physical component on sphere
@@ -681,11 +688,15 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 		{
 			//find collison normal
 			glm::vec3 Normal = localSphere.m_vCenter - clamp;
+			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+
 			glm::normalize(Normal);
 			Normal = -Normal;
-			
-			resolveCollision(eBox, eSphere, Normal);
 
+			//find the penetration depth
+			float PenetrationDepth = localSphere.m_fRadius - d;
+			resolveCollision(eBox, eSphere, Normal);
+			//PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
 
 		}
 
@@ -823,6 +834,15 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 
 }
 
+void System::Physics::updateSphere(std::shared_ptr<Entity> eSphere)
+{
+	auto trans1 = eSphere->get<Component::Transformable>();
+	auto sphere = eSphere->get<Sphere>();
+
+	sphere->m_vCenter = trans1->getPosition();
+
+}
+
 void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, glm::vec3 CollisionNormal)
 {
 	//get physicals and transformables
@@ -836,14 +856,44 @@ void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::sha
 	glm::vec3 vRelVel = phys2->m_vVelocity - phys1->m_vVelocity;
 
 	//calculate velocity along normal
-	float fFelVelocity = glm::dot(vRelVel, CollisionNormal);
+	float fRelVelocity = glm::dot(vRelVel, CollisionNormal);
 
 	//do not resolve if traverling away from
-	if (fFelVelocity > 0)return;
+	if (fRelVelocity > 0)return;
 	
 	//calculate restitution
-	//float e = std::min()
+	//consider changing
+	float e = std::min(phys1->m_fRestitution, phys1->m_fRestitution);
+
+	//calculate impulse scalar
+	float j = -(1 + e) * fRelVelocity;
+	j /= phys1->m_fINVMass + phys2->m_fINVMass;
+
+	//Apply the impluse
+	glm::vec3 impulse = j * CollisionNormal;
+	phys1->m_vVelocity -= phys1->m_fINVMass * impulse;
+	phys2->m_vVelocity += phys2->m_fINVMass * impulse;
 
 
+
+
+
+}
+
+void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, float Depth, glm::vec3 CollisionNormal)
+{
+
+	//get physicals and transformables
+	auto trans1 = object1->get<Component::Transformable>();
+	auto phys1 = object1->get<Physical>();
+
+	auto trans2 = object2->get<Component::Transformable>();
+	auto phys2 = object2->get<Physical>();
+
+	//reduces rounding errors in the hardware
+	float percent = 0.2f; 
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * percent * CollisionNormal;
+	trans1->m_vPosition -= phys1->m_fINVMass * correction;
+	trans2->m_vPosition += phys2->m_fINVMass * correction;
 
 }
