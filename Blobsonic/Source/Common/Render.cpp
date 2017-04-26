@@ -16,10 +16,9 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 {
 	//Get pointer to model component
 	auto model = entity->get<Component::Model>();
-
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
-								
+
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 
@@ -33,6 +32,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 		//Pass Camera uniforms
 		if (m_ptrActiveCamera != NULL) {
+			
 			model->m_shader->setUniform("mView", m_ptrActiveCamera->getView());				//View matrix
 			model->m_shader->setUniform("mProjection", m_ptrActiveCamera->getProjection());	//Projection matrix
 			model->m_shader->setUniform("viewPos", m_ptrActiveCamera->getPosition());		//Camera/Eye position
@@ -43,7 +43,6 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 			m_ptrActiveCamera->setPerspective(true);
 		}
 	}
-
 	/*
 	//Draw model meshes
 	if (!model->m_meshes.empty()) {
@@ -136,7 +135,6 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 			gl::BindVertexArray(0);													//Unbind VAO
 		}
 	}
-	
 }
 
 void System::Render::renderText(std::shared_ptr<Entity> entity)
@@ -151,6 +149,7 @@ System::Render::Render()
 
 void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 {
+	//gl::Disable(gl::DEPTH_TEST);
 	//Iterate through all entities
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
 		//Find and set active camera

@@ -8,5 +8,7 @@ uniform sampler2D button;
 void main()
 {    
     //vec4 sampled = vec4(1.0, 1.0, 1.0, texture(button, TexCoords).r);
-    color =  vec4(0.0,0.5,0.5,1.0); //sampled; //vec4(buttonColor, 1.0) *
+   // color =  vec4(0.0,0.5,0.5,1.0); //sampled; //vec4(buttonColor, 1.0) *
+
+   color = texture( button, TexCoords );
 }  
