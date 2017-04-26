@@ -119,6 +119,7 @@
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
+    <ClCompile Include="Source\Common\Math3D.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
