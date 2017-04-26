@@ -1,27 +1,12 @@
-/* https://learnopengl.com/ */
-
+/* 
+Tutorial https://learnopengl.com/ */
 /*
-	Phong fragment shader used for majority of models renders object with phong shading. 
-	Allows for multiple point lights. 
+*	@author Rozen Savilla
+*	Phong fragment shader used for majority of models renders object with phong shading. 
+*	Allows for multiple lights. 
 */
 
-#version 430
-
-//OpenGL required const number for arrays, must be manually changed when lights are changed
-#define POINT_LIGHT_COUNT 3  
-
-struct PointLight {
-	vec3 Ld;
-	vec3 La;
-	vec3 Ls;
-	vec3 position;
-	float radius;
-};
-
-uniform int pLightCount;
-uniform PointLight pLight[POINT_LIGHT_COUNT];	//Array of point lights
-
-vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);	//Declare function
+#version 430 core
 
 //Material
 uniform vec3 Ka;			//Ambient reflectivity
@@ -40,49 +25,85 @@ in vec3 fragNormal;			//Normal position in eye space
 uniform sampler2D tex;
 in vec2 texCoord;			//Texture coordinates
 
-out vec4 Colour;			//Returns fragment - Data used to render pixel
+//------------------------LIGHTING Variables/Uniforms/Functions-----------------------------//
+//OpenGL required const number for arrays, must be manually changed when lights are changed
+#define DIR_LIGHT_COUNT 1
+#define POINT_LIGHT_COUNT 1  
+#define SPOT_LIGHT_COUNT 1
 
-void main() {
-	//vec3 viewDir = normalize(viewPos - fragVert);
+//Dir Light parameters
+struct DirLight {
+    vec3 direction;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
 
-	//vec4 result;	//Result of all light calculations from array of lights
-	//for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
-	//	result += vec4(calcPointLight(pLight[i], fragNormal,fragVert, viewDir),1.0f);
-	//}
+//Point Light parameters
+struct PointLight {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	vec3 position;
+	float radius;
+};
 
-	
-	Colour = texture(tex, texCoord);
-	//Colour = vec4(1.0f,0.0f,1.0,0.1f);
+//Spot Light parameters
+struct SpotLight {
+vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	vec3 position;
+	vec3 direction;
+	float cutOff;
+	float outerCutOff;
+	float constant;
+	float linear;
+	float quadratic;
+};
+
+uniform DirLight dirLights[DIR_LIGHT_COUNT];		//Array of directional lights
+uniform PointLight pointLights[POINT_LIGHT_COUNT];	//Array of point lights
+uniform PointLight spotLights[SPOT_LIGHT_COUNT];	//Array of point lights
+
+vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDirection) {
+	//Calculate light direction to current vertex
+	vec3 lightDirection = normalize(-light.direction);
+
+    //--Diffuse--
+    float diff = max(dot(normal, lightDirection), 0.0);
+
+    //--Specular--
+    vec3 reflectDir = reflect(-lightDirection, normal);
+    float spec = pow(max(dot(viewDirection, reflectDir), 0.0), shininess);
+
+    vec3 ambient = light.ambient * Ka;
+    vec3 diffuse = light.diffuse * diff * Kd ;
+    vec3 specular = light.specular * spec * Ks;
+    return (ambient + diffuse + specular);
 }
 
-vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
-	
+vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragmentPosition, vec3 viewDirection) {
 	vec3 norm = normalize(normal);
-	vec3 lightDir = normalize(light.position - fragVert);
+	vec3 lightDirection = normalize(light.position - fragmentPosition);
 	
 	//////Ambient//////
-	vec3 ambient = light.La * Ka;
+	vec3 ambient = light.ambient * Ka;
 
 	//////Diffuse//////
-	float diff = max(dot(norm,lightDir),0.0);
-	vec3 diffuse = light.Ld * Kd * diff;
+	float diff = max(dot(norm,lightDirection),0.0);
+	vec3 diffuse = light.diffuse * Kd * diff;
 	diffuse = clamp(diffuse,0.0,1.0);
 
 	//////Specular//////
-	viewDir = normalize(viewPos - fragVert);
-	vec3 reflectDir = reflect(-lightDir, norm);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
-	vec3 specular =  light.Ls * Ks * spec;
-
-	//Apply Texture
-	//ambient *= vec3(texture(tex, texCoord));
-	//diffuse *= vec3(texture(tex, texCoord));
-	//specular *= vec3(texture(tex, texCoord));
+	vec3 reflectDir = reflect(-lightDirection, norm);
+	float spec = pow(max(dot(viewDirection, reflectDir), 0.0), shininess);
+	vec3 specular =  light.specular * Ks * spec;
 
 	////Light Attenuation//////
 	if (light.radius > 0) {
 		//Gradual loss of light intensity over distance
-		float att = smoothstep(light.radius, 0, length(light.position - fragVert));
+		float att = smoothstep(light.radius, 0, length(light.position - fragmentPosition));
 		
 		//Apply attenuation
 		ambient *= att;
@@ -90,5 +111,80 @@ vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
 		specular *= att;
 	}
 	return ambient + diffuse + specular;
-	//return vec3(1.0f,1.0f,1.0f);
 }
+
+vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragmentPosition, vec3 viewDirection) {
+	vec3 lightDirection = normalize(light.position - fragmentPosition); //Light Direction to the current vertex;
+	vec3 targetDirection = normalize(-light.direction);					//Light direction to spotlight target
+	float angle = dot(lightDirection,targetDirection);
+
+	
+
+	//--Attenuation--------------------------
+	float distance = length(light.position - fragmentPosition);
+	float fAtt = angle / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
+	fAtt = clamp(fAtt,0.0,1.0);
+
+	//--Light Intensity-----------------
+	float theta = dot(lightDirection, normalize(-light.direction));
+	float epsilon = light.cutOff - light.outerCutOff;
+	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
+
+	if (angle > light.outerCutOff) {
+		//--Ambient------------------------
+		vec3 ambient = light.ambient * Ka;
+
+		//--Diffuse------------------------
+		float diff = max(dot(normal,lightDirection),0.0);
+		vec3 diffuse = light.diffuse * diff * Kd;
+
+		//--Specular----------------------
+		vec3 reflectDir = reflect(-lightDirection, normal);
+		float spec = pow(max(dot(viewDirection, reflectDir), 0.0), shininess);
+		vec3 specular = light.specular * spec * Ks;
+
+		//Apply attenuation and light intensity
+		ambient *= fAtt * intensity;
+		diffuse *= fAtt * intensity;
+		specular *= fAtt * intensity;
+
+		return vec3(ambient + diffuse + specular);
+	}
+	return vec3(0.0f,0.0f,0.0f);
+}
+
+//Calculate light
+vec4 applyLights(vec3 fragmentPos,vec3 fragmentNormal, vec3 viewDirection) {
+	vec4 result = vec4(0.0f);
+	for (int i = 0; i < DIR_LIGHT_COUNT; i++) {
+		result += vec4(calcDirLight(dirLights[i], fragmentNormal, viewDirection),1.0f);
+	}
+
+	for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
+		result += vec4(calcPointLight(pointLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+	}
+
+	for (int i = 0; i < SPOT_LIGHT_COUNT; i++) {
+		result += vec4(calcPointLight(spotLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+	}
+	return result;
+}
+//-------------------------------------------------------------------------------------------//
+
+//------------------------------------MAIN--------------------------------------------------//
+out vec4 Colour;			//Returns fragment - Data used to render pixel
+
+void main() {
+	vec3 viewDir = normalize(viewPos - fragVert);
+
+	//--Lighting--//
+	vec4 lights;	//Result of all light calculations from array of lights
+	lights = applyLights(fragVert,fragNormal,viewDir);
+	//------------//
+
+
+	Colour = texture(tex, texCoord);	//Just Textures
+	//Colour = texture(tex, texCoord) * lights;	//Textures + lighting
+	//Colour = vec4(1.0f,0.0f,1.0,0.1f);
+}
+//------------------------------------------------------------------------------------------//
