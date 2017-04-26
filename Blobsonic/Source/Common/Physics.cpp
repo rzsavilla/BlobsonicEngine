@@ -694,9 +694,9 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 			Normal = -Normal;
 
 			//find the penetration depth
-			glm::vec3 PenetrationDepth = localSphere.m_fRadius - d;
+			float PenetrationDepth = localSphere.m_fRadius - d;
 			resolveCollision(eBox, eSphere, Normal);
-			PositionalCorrection(eBox, eSphere, PenetrationDepth ,Normal)
+			//PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
 
 		}
 
@@ -892,8 +892,8 @@ void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std:
 
 	//reduces rounding errors in the hardware
 	float percent = 0.2f; 
-	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass)) * percent * CollisionNormal;
-	trans1->m_vPosition -= A.inv_mass * correction;
-	trans2->m_vPosition += B.inv_mass * correction;
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * percent * CollisionNormal;
+	trans1->m_vPosition -= phys1->m_fINVMass * correction;
+	trans2->m_vPosition += phys2->m_fINVMass * correction;
 
 }
