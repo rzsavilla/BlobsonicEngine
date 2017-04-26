@@ -65,19 +65,19 @@
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>
-			<X>0.5f</X>
-			<Y>0.5f</Y>
-			<Z>0.5f</Z>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</AmbientReflect>
 		<DiffuseReflect>
-			<X>0.8f</X>
-			<Y>0.8f</Y>
-			<Z>0.8f</Z>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</DiffuseReflect>
 		<SpecularReflect>
-			<X>0.9f</X>
-			<Y>0.9f</Y>
-			<Z>0.9f</Z>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</SpecularReflect>
 		<Shininess>200.0</Shininess>
 	</Material>
