@@ -29,6 +29,9 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
+
+		//Pass lighting
+		passLightUniforms(model->m_shader);
 								
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
@@ -147,10 +150,31 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 }
 
-void System::Render::passLightUniforms()
+void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 {
-	for (auto it = m_lightEntities.begin(); it != m_lightEntities.end(); ++it) {
+	int iDirCount = 0;
+	int iPointCount = 0;
+	int iSpotCount = 0;
 
+	Component::Transformable* t = NULL;
+
+	//Pass directional lighting parameters to shader
+	for (int i = 0; i < m_directionalLights.size(); i++) {
+		if (m_directionalLights.at(i)->has<Component::Transformable>()) {
+			t = m_directionalLights.at(i)->get<Component::Transformable>();
+		}
+		auto dirLight = m_directionalLights.at(i)->get<Component::DirectionalLight>();
+
+		std::string sDirLight = "dirLights[" + std::to_string(i) + "].";
+
+		if (t) {	//Has transformable component
+			shader->setUniform((sDirLight + "rotation").data(), t->getRotation());
+		}
+
+		shader->setUniform((sDirLight + "ambient").data(), dirLight->getAmbient());
+		shader->setUniform((sDirLight + "diffuse").data(), dirLight->getAmbient());
+		shader->setUniform((sDirLight + "specular").data(), dirLight->getAmbient());
+		shader->setUniform((sDirLight + "direction").data(), dirLight->getAmbient());
 	}
 }
 
@@ -180,8 +204,8 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 			renderText(*it);	//Render Text
 		}
 		//Find Light Component
-		if ((*it)->has<Component::Light>()) {
-			addEntity((*it), &m_lightEntities);
+		if ((*it)->has<Component::DirectionalLight>()) {
+			addEntity((*it), &m_directionalLights);
 		}
 	}
 }
@@ -189,6 +213,7 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 void System::Render::update(float dt)
 {
 
+	//Remove Destroyed Entities
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)

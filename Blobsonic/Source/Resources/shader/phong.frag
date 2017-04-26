@@ -118,8 +118,6 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragmentPosition, vec3 vie
 	vec3 targetDirection = normalize(-light.direction);					//Light direction to spotlight target
 	float angle = dot(lightDirection,targetDirection);
 
-	
-
 	//--Attenuation--------------------------
 	float distance = length(light.position - fragmentPosition);
 	float fAtt = angle / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
@@ -160,13 +158,13 @@ vec4 applyLights(vec3 fragmentPos,vec3 fragmentNormal, vec3 viewDirection) {
 		result += vec4(calcDirLight(dirLights[i], fragmentNormal, viewDirection),1.0f);
 	}
 
-	for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
-		result += vec4(calcPointLight(pointLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
-	}
-
-	for (int i = 0; i < SPOT_LIGHT_COUNT; i++) {
-		result += vec4(calcPointLight(spotLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
-	}
+	//for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
+	//	result += vec4(calcPointLight(pointLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+	//}
+	//
+	//for (int i = 0; i < SPOT_LIGHT_COUNT; i++) {
+	//	result += vec4(calcPointLight(spotLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+	//}
 	return result;
 }
 //-------------------------------------------------------------------------------------------//
@@ -183,8 +181,8 @@ void main() {
 	//------------//
 
 
-	Colour = texture(tex, texCoord);	//Just Textures
-	//Colour = texture(tex, texCoord) * lights;	//Textures + lighting
+	//Colour = texture(tex, texCoord);	//Just Textures
+	Colour = texture(tex, texCoord) * lights;	//Textures + lighting
 	//Colour = vec4(1.0f,0.0f,1.0,0.1f);
 }
 //------------------------------------------------------------------------------------------//

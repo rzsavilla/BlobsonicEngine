@@ -20,7 +20,7 @@
 		</Position>
 		<Rotation>
 			<X>0.0f</X>
-			<Y>45.0f</Y>
+			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
@@ -193,6 +193,30 @@
 			<Z>0.0f</Z>
 		</Origin>
 	</Model>
+	
+	<Light> <ID>light1</ID>
+		<Type>Directional</Type>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Ambient>
+			<X>0.5f</X>
+			<Y>0.5f</Y>
+			<Z>1o.0f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>0.9f</X>
+			<Y>0.9f</Y>
+			<Z>0.9f</Z>
+		</Diffuse>	
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+	</Light>
 	
 	<Camera> <ID>cam1</ID>
 		<Position>
