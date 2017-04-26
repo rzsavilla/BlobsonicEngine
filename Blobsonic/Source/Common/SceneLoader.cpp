@@ -160,6 +160,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	glm::vec3 Dimensions;
 	float radius;
 	float mass = 1;
+	float restitution = 0.5;
 	const char* Value;
 	vector<std::string> components;
 	std::string tempString;
@@ -252,6 +253,11 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				mass = atof(cData);
 			}
 		}
+		else if (strcmp(childValue, "Restitution") == 0) {
+			if (readElementText(modelChild, cData)) {
+				restitution = atof(cData);
+			}
+		}
 		
 	}
 		
@@ -262,9 +268,9 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		else if (components[i] == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
 		else if (components[i] == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
 		else if (components[i] == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-		else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass);
+		else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass, restitution);
 	}
-		return entity;
+	return entity;
 	
 }
 /*
