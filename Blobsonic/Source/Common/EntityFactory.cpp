@@ -219,7 +219,7 @@ void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass)
 		entity->attach<Component::Transformable>();
 	}
 	if (!entity->has<Physical>()) {
-		entity->attach<Component::Transformable>();
+		entity->attach<Physical>();
 	}
 	auto physical = entity->get<Physical>();
 	

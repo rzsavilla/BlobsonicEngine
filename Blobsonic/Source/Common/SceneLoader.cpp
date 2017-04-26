@@ -159,8 +159,10 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	auto transform = entity->get<Component::Transformable>();
 	glm::vec3 Dimensions;
 	float radius;
-	float mass;
+	float mass = 1;
 	const char* Value;
+	vector<std::string> components;
+	std::string tempString;
 
 
 
@@ -168,11 +170,19 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement())
 	{
+		
 		const char* childValue = modelChild->Value();
 		if (strcmp(childValue, "ID") == 0) {
 			if (readElementText(modelChild, cData)) {
 				sID = std::string(cData, strlen(cData));
 				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		if (strcmp(childValue, "Component") == 0) {
+			if (readElementText(modelChild, cData)) {
+				tempString = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "Adding component : " << tempString << "\n";
+				components.push_back(tempString);
 			}
 		}
 		else if (strcmp(childValue, "Player") == 0) {
@@ -237,25 +247,23 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				radius = atof(cData);
 			}
 		}
-		else if (strcmp(childValue, "Physical") == 0)
-		{
-			for (tinyxml2::XMLNode* child2 = modelChild->FirstChild(); child2 != NULL; child2 = child2->NextSibling())
-			{
-				Value = child2->Value();
-				if (strcmp(Value, "Mass") == 0)
-				{
-					
-					mass = atof(cData);
-					
-				}
+		else if (strcmp(childValue, "Mass") == 0) {
+			if (readElementText(modelChild, cData)) {
+				mass = atof(cData);
 			}
 		}
+		
 	}
 		
-		if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
-		else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-		else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
-		else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	//attach components
+	for (int i = 0; i < components.size(); i++)
+	{
+		if (components[i] == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+		else if (components[i] == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (components[i] == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
+		else if (components[i] == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass);
+	}
 		return entity;
 	
 }

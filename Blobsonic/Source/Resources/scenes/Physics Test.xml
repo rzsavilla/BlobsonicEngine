@@ -11,14 +11,15 @@
 	
 	
 	<Model> 
-		<ID>Sphere</ID>
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
 		<Mesh>sphere_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
 			<X>0.0f</X>
-			<Y>11.0f</Y>
+			<Y>500.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Scale>
@@ -38,14 +39,15 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Physical>
-			<Mass>10</Mass>
-		</Physical>
+		
+		<Mass>10</Mass>
+	
 
 	</Model>		
 	
 	<Model> 
-		<ID>OBB</ID>
+		<Component>OBB</Component>
+		<Component>Physical</Component>
 		<Mesh>plane_mesh</Mesh>
 		<Material>default_material</Material>
 		<Shader>phong_shader</Shader>
@@ -70,9 +72,9 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Physical>
-			<Mass>0</Mass>
-		</Physical>
+	
+		<Mass>0</Mass>
+		
 		
 	</Model>		
 

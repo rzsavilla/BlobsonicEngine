@@ -167,6 +167,7 @@ void Engine::Engine::init(int width, int height)
 	initScene(true);
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
+	glfwSwapInterval(1);
 }
 
 void Engine::Engine::run()

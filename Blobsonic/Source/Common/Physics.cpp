@@ -17,6 +17,7 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 	m_vOBBS.clear();
 	m_vSpheres.clear();
 	m_vCapsules.clear();
+	m_vPhysicals.clear();
 
 	for (auto it = entities->begin(); it != entities->end(); ++it)
 	{
@@ -35,6 +36,9 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 			m_vSpheres.push_back((*it));
 
 		}
+		if ((*it)->has<Physical>() && (*it)->has<Component::Transformable>()) {
+			m_vPhysicals.push_back((*it));
+		}
 	}
 
 
@@ -44,7 +48,15 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 void System::Physics::update(float dt)
 {
 
-	//update all physicls positions
+
+	//update physicals positions
+	for (int i = 0; i < m_vPhysicals.size(); i++)
+	{
+		updatePhysicals(m_vPhysicals.at(i),dt);
+	}
+
+
+	//update all collidables positions
 	for (int i = 0; i < m_vAABBS.size(); i++)
 	{
 		updateAABB(m_vAABBS.at(i));
@@ -53,6 +65,7 @@ void System::Physics::update(float dt)
 	{
 		updateOBB(m_vOBBS.at(i));
 	}
+	
 
 
 	//process AABB
@@ -103,6 +116,7 @@ void System::Physics::update(float dt)
 
 			CheckOBBSphereCollision(m_vOBBS.at(x), m_vSpheres.at(i));
 
+
 		}
 
 	}
@@ -113,8 +127,8 @@ void System::Physics::update(float dt)
 		for (int x = 0; x < m_vCapsules.size(); x++)
 		{
 
-			if (CheckOBBCapsuleCollision(m_vCapsules.at(x), m_vOBBS.at(i))) std::cout << "Collision" << std::endl;
-			else  std::cout << "No Collision" << std::endl;
+			CheckOBBCapsuleCollision(m_vCapsules.at(x), m_vOBBS.at(i));
+			
 
 
 		}
@@ -662,6 +676,19 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 	if (fDist <= 0)
 	{
+		//check for physical component on sphere
+		if (eSphere->has<Physical>())
+		{
+			//find collison normal
+			glm::vec3 Normal = localSphere.m_vCenter - clamp;
+			glm::normalize(Normal);
+			Normal = -Normal;
+			
+			resolveCollision(eBox, eSphere, Normal);
+
+
+		}
+
 		return true;
 	}
 	else
@@ -773,6 +800,50 @@ void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
 
 
 	box->m_vCenter = tBox->m_vPosition + (box->m_vDimensions / 2.0f);
+
+
+}
+
+void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
+{
+	dt = 1 / 60.0f;
+	//get transformable and physical
+	auto trans = e->get<Component::Transformable>();
+	auto phys = e->get<Physical>();
+
+	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
+	{
+		phys->m_vAcceleration = glm::vec3(phys->m_vAcceleration.x, GRAVITYCOEFFICENT, phys->m_vAcceleration.z);
+		phys->m_vVelocity += phys->m_vAcceleration * dt;
+		trans->m_vPosition += phys->m_vVelocity * dt;
+	
+	}
+
+
+
+}
+
+void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, glm::vec3 CollisionNormal)
+{
+	//get physicals and transformables
+	auto trans1 = object1->get<Component::Transformable>();
+	auto phys1 = object1->get<Physical>();
+
+	auto trans2 = object2->get<Component::Transformable>();
+	auto phys2 = object2->get<Physical>();
+
+	//calculate relative velocity
+	glm::vec3 vRelVel = phys2->m_vVelocity - phys1->m_vVelocity;
+
+	//calculate velocity along normal
+	float fFelVelocity = glm::dot(vRelVel, CollisionNormal);
+
+	//do not resolve if traverling away from
+	if (fFelVelocity > 0)return;
+	
+	//calculate restitution
+	//float e = std::min()
+
 
 
 }
