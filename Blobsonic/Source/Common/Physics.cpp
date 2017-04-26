@@ -526,7 +526,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 
 	//translate sphere by inverse box position
-	localSphere.m_vCenter = localSphere.m_vCenter - box->m_vCenter;
+	localSphere.m_vCenter = localSphere.m_vCenter - tBox->getPosition();
 
 	//rotate sphere by inverse box rotation
 	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
@@ -541,6 +541,8 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 
 	//find which portion of space around the cube the sphere exists in
+
+	box->m_vDimensions;
 
 	if (overAllDistance.x < 0) // to the left of cube
 	{
@@ -678,8 +680,10 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	//subract the radius
 	fDist = fDist - localSphere.m_fRadius;
 
-
-	std::cout << fDist << std::endl;
+	if (sphere->m_vCenter.x == 20 && fDist < 50)
+	{
+		std:cout << fDist << std::endl;
+	}
 
 	if (fDist <= 0)
 	{
@@ -688,29 +692,29 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 		{
 			//find collison normal
 			glm::vec3 Normal = localSphere.m_vCenter - clamp;
+			glm::vec3 newVector = Normal;
+			newVector = glm::normalize(newVector);
+			newVector *= localSphere.m_fRadius;
+			Normal = Normal - newVector;
+
+
 			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
 
-			glm::normalize(Normal);
+			Normal = glm::normalize(Normal);
 			Normal = -Normal;
 
 			//find the penetration depth
 			float PenetrationDepth = localSphere.m_fRadius - d;
 			resolveCollision(eBox, eSphere, Normal);
-			//PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
-
+			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
 		}
-
+		
 		return true;
 	}
 	else
 	{
 		return false;
 	}
-
-
-
-
-
 
 }
 
@@ -719,9 +723,6 @@ bool System::Physics::CheckOBBCapsuleCollision(std::shared_ptr<Entity> eCap, std
 	// check the OBB against the capsules OBB
 	if (CheckOBBOBBCollision(eCap, eBox)) return true;
 
-
-	//Component::Transformable originalTrans = *eBox->get<Component::Transformable>();
-	//auto transformable = eCap->get<Component::Transformable>();
 
 	//move the sphere to capsule spher pos one
 	auto sphere = eCap->get<Sphere>();
@@ -863,7 +864,7 @@ void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::sha
 	
 	//calculate restitution
 	//consider changing
-	float e = std::min(phys1->m_fRestitution, phys1->m_fRestitution);
+	float e = std::min(phys1->m_fRestitution, phys2->m_fRestitution);
 
 	//calculate impulse scalar
 	float j = -(1 + e) * fRelVelocity;
@@ -891,7 +892,7 @@ void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std:
 	auto phys2 = object2->get<Physical>();
 
 	//reduces rounding errors in the hardware
-	float percent = 0.2f; 
+	float percent = 0.0025f; 
 	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * percent * CollisionNormal;
 	trans1->m_vPosition -= phys1->m_fINVMass * correction;
 	trans2->m_vPosition += phys2->m_fINVMass * correction;
