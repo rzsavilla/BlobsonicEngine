@@ -11,6 +11,17 @@
 #include "RenderMessages.h"
 #include "CameraMessages.h"
 
+void System::Render::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (auto it = entities->begin(); it != entities->end(); ++it) {
+
+		if ((*it)->getID() == entity->getID()) {
+			return;	//Entity already stored
+		}
+	}
+	entities->push_back(entity);	//Store entity
+}
+
 void System::Render::renderModel(std::shared_ptr<Entity> entity)
 {
 	//Get pointer to model component
@@ -136,6 +147,13 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 }
 
+void System::Render::passLightUniforms()
+{
+	for (auto it = m_lightEntities.begin(); it != m_lightEntities.end(); ++it) {
+
+	}
+}
+
 System::Render::Render()
 {
 	m_ptrActiveCamera = NULL;
@@ -157,9 +175,13 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Model>()) {
 			renderModel((*it));	//Render Model
 		}
-		//Finde Text Component
+		//Find Text Component
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
+		}
+		//Find Light Component
+		if ((*it)->has<Component::Light>()) {
+			addEntity((*it), &m_lightEntities);
 		}
 	}
 }

@@ -2,14 +2,27 @@
 
 #include "System.h"
 #include "Camera.h"
+#include "DirectionalLight.h"
 
 namespace System {
 	class Render : public System {
 	private:
 		Component::Camera* m_ptrActiveCamera;
+
+		std::vector<std::shared_ptr<Entity>> m_modelEntities;
+		std::vector<std::shared_ptr<Entity>> m_textEntites;
+		std::vector<std::shared_ptr<Entity>> m_lightEntities;	//!< Store all lights
 	private:
+		/*!
+		*	@brief Function Adds new entities to the vector of entities.
+		*	Function looks at entity ID before
+		*	
+		*/
+		void addEntity(std::shared_ptr<Entity> entity , std::vector<std::shared_ptr<Entity>>* entities);
+
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
+		void passLightUniforms();
 	public:
 		Render();
 
