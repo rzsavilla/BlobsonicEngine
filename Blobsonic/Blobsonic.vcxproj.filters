@@ -521,5 +521,8 @@
     <ClCompile Include="Source\Common\Text.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\Math3D.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
