@@ -65,6 +65,11 @@ void System::Physics::update(float dt)
 	{
 		updateOBB(m_vOBBS.at(i));
 	}
+	for (int i = 0; i < m_vSpheres.size(); i++)
+	{
+		updateSphere(m_vSpheres.at(i));
+	}
+
 	
 
 
@@ -683,11 +688,15 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 		{
 			//find collison normal
 			glm::vec3 Normal = localSphere.m_vCenter - clamp;
+			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+
 			glm::normalize(Normal);
 			Normal = -Normal;
-			
-			resolveCollision(eBox, eSphere, Normal);
 
+			//find the penetration depth
+			glm::vec3 PenetrationDepth = localSphere.m_fRadius - d;
+			resolveCollision(eBox, eSphere, Normal);
+			PositionalCorrection(eBox, eSphere, PenetrationDepth ,Normal)
 
 		}
 
@@ -825,6 +834,15 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 
 }
 
+void System::Physics::updateSphere(std::shared_ptr<Entity> eSphere)
+{
+	auto trans1 = eSphere->get<Component::Transformable>();
+	auto sphere = eSphere->get<Sphere>();
+
+	sphere->m_vCenter = trans1->getPosition();
+
+}
+
 void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, glm::vec3 CollisionNormal)
 {
 	//get physicals and transformables
@@ -859,5 +877,23 @@ void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::sha
 
 
 
+
+}
+
+void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, float Depth, glm::vec3 CollisionNormal)
+{
+
+	//get physicals and transformables
+	auto trans1 = object1->get<Component::Transformable>();
+	auto phys1 = object1->get<Physical>();
+
+	auto trans2 = object2->get<Component::Transformable>();
+	auto phys2 = object2->get<Physical>();
+
+	//reduces rounding errors in the hardware
+	float percent = 0.2f; 
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass)) * percent * CollisionNormal;
+	trans1->m_vPosition -= A.inv_mass * correction;
+	trans2->m_vPosition += B.inv_mass * correction;
 
 }
