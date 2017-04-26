@@ -44,6 +44,7 @@
     <ClInclude Include="Source\Include\CameraSystem.h" />
     <ClInclude Include="Source\Include\Capsule.h" />
     <ClInclude Include="Source\Include\Destroyable.h" />
+    <ClInclude Include="Source\Include\DirectionalLight.h" />
     <ClInclude Include="Source\Include\EngineMessages.h" />
     <ClInclude Include="Source\Include\Entity.h" />
     <ClInclude Include="Source\Include\EntityFactory.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="Source\Include\EntityManager.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
+    <ClInclude Include="Source\Include\Light.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
     <ClInclude Include="Source\Include\Model.h" />
@@ -115,10 +117,12 @@
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\Destroyable.cpp" />
+    <ClCompile Include="Source\Common\DirectionalLight.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
+    <ClCompile Include="Source\Common\Light.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />

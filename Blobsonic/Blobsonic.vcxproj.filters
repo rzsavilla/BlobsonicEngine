@@ -106,6 +106,12 @@
     <Filter Include="Source Files\Engine\Component\GUI">
       <UniqueIdentifier>{4465977f-9dd5-4951-8470-63c6d3ddf290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Entity\Components\Lights">
+      <UniqueIdentifier>{49fb2824-ee11-4044-a992-b37a76b6834a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Component\Lights">
+      <UniqueIdentifier>{4d2d1688-e5b4-4b71-a979-a9e0148f8ed6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -351,6 +357,12 @@
     <ClInclude Include="Source\Include\Text.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\DirectionalLight.h">
+      <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Light.h">
+      <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -523,6 +535,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Math3D.cpp">
       <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\DirectionalLight.cpp">
+      <Filter>Source Files\Engine\Component\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Light.cpp">
+      <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
