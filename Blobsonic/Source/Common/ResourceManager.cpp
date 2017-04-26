@@ -91,3 +91,12 @@ bool ResourceManager::isResFileLoaded(std::string file)
 	}
 	return false;
 }
+
+void ResourceManager::ClearResources()
+{
+	m_meshes.clear();
+	m_vAssimpMeshes.clear();
+	m_textures.clear();
+	m_materials.clear();
+	m_shaders.clear();
+}

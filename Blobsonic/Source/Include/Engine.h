@@ -28,9 +28,10 @@ namespace Engine {
 		ResourceManager m_resourceManager;
 	private:
 		bool m_bReloadScene;	//!< Flag for xml scene intialization
+		bool m_bForceReload;	//!< Flag for xml scene loading forcing resources to be reloaded
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
-		void initScene();	//!< Initialize Scene
+		void initScene(/*! Optional default is false*/bool forceReloadRes = false);	//!< Initialize Scene
 	private:	//GLFW
 		int m_iWindowWidth;
 		int m_iWindowHeight;
