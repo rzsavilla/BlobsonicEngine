@@ -9,6 +9,7 @@
 #include "AABB.h"
 #include "Player.h"
 
+
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -159,12 +160,14 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	glm::vec3 Dimensions;
 	float radius;
 	float mass;
+	const char* Value;
 
 
 
 	std::string sID;
 	//Look at Model Element
-	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement())
+	{
 		const char* childValue = modelChild->Value();
 		if (strcmp(childValue, "ID") == 0) {
 			if (readElementText(modelChild, cData)) {
@@ -234,14 +237,28 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				radius = atof(cData);
 			}
 		}
+		else if (strcmp(childValue, "Physical") == 0)
+		{
+			for (tinyxml2::XMLNode* child2 = modelChild->FirstChild(); child2 != NULL; child2 = child2->NextSibling())
+			{
+				Value = child2->Value();
+				if (strcmp(Value, "Mass") == 0)
+				{
+					
+					mass = atof(cData);
+					
+				}
+			}
+		}
 	}
-	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
-	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
-	else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-	return entity;
+		
+		if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+		else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
+		else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		return entity;
+	
 }
-
 /*
 std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 {

@@ -15,7 +15,7 @@
 		<Mesh>sphere_mesh</Mesh>
 		<Material>bright_material</Material>
 		<Shader>phong_shader</Shader>
-		<Texture>floor_texture</Texture>
+		<Texture>red_texture</Texture>
 		<Position>
 			<X>0.0f</X>
 			<Y>11.0f</Y>
@@ -32,14 +32,15 @@
 			<x>0</x>
 			<x>0</x>
 		</Rotation>
+		
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Physical>1</Physical>
-		<Mass> 10 </Mass>
-
+		<Physical>
+			<Mass>10</Mass>
+		</Physical>
 
 	</Model>		
 	
@@ -69,7 +70,9 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-		<Mass> INF </Mass>
+		<Physical>
+			<Mass>0</Mass>
+		</Physical>
 		
 	</Model>		
 

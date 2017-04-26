@@ -8,6 +8,7 @@
 #include "OBB.h"
 #include "Sphere.h"
 #include "Capsule.h"
+#include "Physical.h"
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -212,8 +213,28 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 	c->m_vSphereCenter2 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
 }
 
-void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity)
+void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass)
 {
+	if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
+	if (!entity->has<Physical>()) {
+		entity->attach<Component::Transformable>();
+	}
+	auto physical = entity->get<Physical>();
+	
+	//apply the mass
+	physical->m_fMass = mass;
+	//check for infinite mass
+	if (physical->m_fMass == 0)
+	{
+		physical->m_fINVMass = 0;
+	}
+	else
+	{
+		//set inverserse
+		physical->m_fINVMass = 1 / mass;
+	}
 
 
 

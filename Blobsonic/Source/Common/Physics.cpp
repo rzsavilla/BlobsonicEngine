@@ -4,6 +4,7 @@
 #include "OBB.h"
 #include "Sphere.h"
 #include "Capsule.h"
+#include "Physical.h"
 
 System::Physics::Physics()
 {
