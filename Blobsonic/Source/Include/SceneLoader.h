@@ -23,15 +23,15 @@
 
 class SceneLoader {
 private:
-
 	//Resource Directories
-	std::string m_sTextureDir;
-	std::string m_sMeshDir;
-	std::string m_sShadersDir;
-	std::string m_sMaterialDir;
-
+	std::string m_sTextureDir;		//!< File location for textures
+	std::string m_sMeshDir;			//!< File location for Meshes
+	std::string m_sShadersDir;		//!< File location for Shaders
+	std::string m_sMaterialDir;		//!< File location for materials
 
 	ResourceManager* m_res;									//!< Pointer to Resource manager where loaded resources will be stored
+	EntityFactory m_factory;								//!< Create preset entities
+
 	std::map<std::string,std::shared_ptr<Scene>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
 	void loadTexture(tinyxml2::XMLElement* e);			//!< Parse file to load texture
@@ -43,26 +43,20 @@ private:
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
 
 	void readScene(tinyxml2::XMLNode* node);				//!< Parse a scene
-
-	bool readResourceFile(tinyxml2::XMLNode* node);								//!< Open and read seperate file containing list of resources
+	bool readResourceFile(tinyxml2::XMLNode* node,/*! Optional default is false */bool forceReloadRes = false);			//!< Open and parse seperate file containing list of resources
 	void readResources(tinyxml2::XMLNode* node);			//!< Parse resources
-
 	bool m_bDebug = true;				//!< Flag for couts
 
-	//! Checks whether element text exists
+private:	//Parsing functions
 	bool readElementText(tinyxml2::XMLElement* e,char*& data);	//!< Read the value of an element returns false if the element is empty
-	
-	EntityFactory m_factory;									//!< Create preset entities
-	
-	//! Read X,Y,Z elements
 	glm::vec3 parseVec3(tinyxml2::XMLElement*e);				//!< Parse data into a vec3
 public:
 	//! Default constructor
 	SceneLoader(ResourceManager* res, std::map<std::string, std::shared_ptr<Scene>>* scenes);							//!< Default constructor
-	~SceneLoader();							//!< Destructor
+	~SceneLoader();		//!< Destructor
 
-	//Loads scene
-	//Can load resources directly to ResourceManager and 
-	//load scene directly into Scene;
-	int load(std::string sFilename); 
+	/*!
+	*	Load xml scene file
+	*/
+	int load(std::string sFilename,/*!< Optional default is false*/bool forceLoadRes = false);
 };

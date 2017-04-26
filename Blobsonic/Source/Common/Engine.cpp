@@ -8,13 +8,14 @@
 
 #include "InputMessages.h"
 
-void Engine::Engine::initScene()
+void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
-	m_scenes.clear();
-	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
+	m_scenes.clear();	//Remove all entities from scene
+	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml", forceReloadRes);
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
+	m_bForceReload = false;
 }
 
 void Engine::Engine::loop()
@@ -33,7 +34,8 @@ void Engine::Engine::loop()
 		dt += (dCurrentTime - dPrevTime) / dFPSLimit;
 		dPrevTime = dCurrentTime;
 
-		if (m_bReloadScene) initScene();
+		if (m_bReloadScene) initScene();			//Reload scene
+		else if (m_bForceReload) initScene(true);	//Reload scene including scene resources
 
 		//Limit update
 		while (dt >= 1.0) {
@@ -162,7 +164,7 @@ void Engine::Engine::init(int width, int height)
 	
 	gl::Enable(gl::DEPTH_TEST);
 
-	initScene();
+	initScene(true);
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
 }
@@ -190,8 +192,10 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 					m_bRunning = false;	//End game loop
 					break;
 				case GLFW_KEY_P:
-					m_bReloadScene = true;
+					m_bReloadScene = true;	//Reload scene objects
 					break;
+				case GLFW_KEY_O:
+					m_bForceReload = true;	//Reload entire scene including resources
 				default:
 					break;
 				}
