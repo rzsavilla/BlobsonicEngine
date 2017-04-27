@@ -11,19 +11,20 @@ namespace System {
 
 		std::vector<std::shared_ptr<Entity>> m_modelEntities;
 		std::vector<std::shared_ptr<Entity>> m_textEntites;
-
 		std::vector<std::shared_ptr<Entity>> m_directionalLights;	//!< Store all directional lights
 	private:
 		/*!
 		*	@brief Function Adds new entities to the vector of entities.
-		*	Function looks at entity ID before
-		*	
+		*	Function compares UID of entity and stored entities if not found will add to the vector.
 		*/
 		void addEntity(std::shared_ptr<Entity> entity , std::vector<std::shared_ptr<Entity>>* entities);
 
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
 		void passLightUniforms(std::shared_ptr<GLSLProgram> shader);
+
+		//! Removed destroyed entities from vector
+		void removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities);
 	public:
 		Render();
 

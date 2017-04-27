@@ -178,6 +178,15 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 	}
 }
 
+void System::Render::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (int i = 0; i < entities->size(); i++) {
+		if (entities->at(i)->isDestroyed()) {
+			entities->erase(entities->begin() + i);
+		}
+	}
+}
+
 System::Render::Render()
 {
 	m_ptrActiveCamera = NULL;
@@ -214,6 +223,7 @@ void System::Render::update(float dt)
 {
 
 	//Remove Destroyed Entities
+	removeDestroyed(&m_directionalLights);
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
