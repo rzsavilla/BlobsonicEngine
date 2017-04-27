@@ -1,12 +1,12 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Render.h"
 //Messages
 #include "CameraMessages.h"
-#include <stdafx.h>
 //Components
 #include "Model.h"
 #include "Transformable.h"
 #include "Text.h"
+#include "PointLight.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -170,6 +170,24 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 		shader->setUniform((sDirLight + "specular").data(), dirLight->getSpecular());
 		shader->setUniform((sDirLight + "direction").data(), dirLight->getDirection());
 	}
+
+	//Pass directional lighting parameters to shader
+	for (int i = 0; i < m_pointLights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto pointLight = m_pointLights.at(i)->get<Component::PointLight>();
+
+		//Pass uniforms
+		std::string sDirLight = "pointLights[" + std::to_string(i) + "].";
+		shader->setUniform((sDirLight + "ambient").data(), pointLight->getAmbient());
+		shader->setUniform((sDirLight + "diffuse").data(), pointLight->getDiffuse());
+		shader->setUniform((sDirLight + "specular").data(), pointLight->getSpecular());
+		shader->setUniform((sDirLight + "radius").data(), pointLight->getRadius());
+
+		if (m_pointLights.at(i)->has<Component::Transformable>()) {
+			t = m_pointLights.at(i)->get<Component::Transformable>();
+			shader->setUniform((sDirLight + "position").data(), t->getPosition());
+		}
+	}
 }
 
 void System::Render::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
@@ -206,9 +224,12 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
 		}
-		//Find Light Component
+		//Find Light Components
 		if ((*it)->has<Component::DirectionalLight>()) {
 			addEntity((*it), &m_directionalLights);
+		}
+		if ((*it)->has<Component::PointLight>()) {
+			addEntity((*it), &m_pointLights);
 		}
 	}
 }
@@ -218,6 +239,7 @@ void System::Render::update(float dt)
 
 	//Remove Destroyed Entities
 	removeDestroyed(&m_directionalLights);
+	removeDestroyed(&m_pointLights);
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)

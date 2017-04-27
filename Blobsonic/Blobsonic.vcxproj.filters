@@ -363,6 +363,9 @@
     <ClInclude Include="Source\Include\Light.h">
       <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\PointLight.h">
+      <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -540,6 +543,9 @@
       <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Light.cpp">
+      <Filter>Source Files\Engine\Component\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\PointLight.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
   </ItemGroup>

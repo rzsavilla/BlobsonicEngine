@@ -83,6 +83,7 @@
     <ClInclude Include="Source\Include\Player.h" />
     <ClInclude Include="Source\Include\PlayerController.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
+    <ClInclude Include="Source\Include\PointLight.h" />
     <ClInclude Include="Source\Include\QuatCamera.h" />
     <ClInclude Include="Source\Include\Render.h" />
     <ClInclude Include="Source\Include\RenderMessages.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="Source\Common\Pickup.cpp" />
     <ClCompile Include="Source\Common\PlayerController.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
+    <ClCompile Include="Source\Common\PointLight.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
     <ClCompile Include="Source\Common\ResourceManager.cpp" />

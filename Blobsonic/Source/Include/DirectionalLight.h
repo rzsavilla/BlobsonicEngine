@@ -1,3 +1,10 @@
+/**
+* @class	Scene
+* @brief	Directional Light Component
+* @author	Rozen Savilla
+* Stores light variables
+*/
+
 #pragma once
 
 #include "Component.h"

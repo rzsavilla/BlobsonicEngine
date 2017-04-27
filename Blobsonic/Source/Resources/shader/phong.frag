@@ -158,13 +158,13 @@ vec4 applyLights(vec3 fragmentPos,vec3 fragmentNormal, vec3 viewDirection) {
 		result += vec4(calcDirLight(dirLights[i], fragmentNormal, viewDirection),1.0f);
 	}
 
-	//for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
-	//	result += vec4(calcPointLight(pointLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
-	//}
-	//
-	//for (int i = 0; i < SPOT_LIGHT_COUNT; i++) {
-	//	result += vec4(calcPointLight(spotLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
-	//}
+	for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
+		result += vec4(calcPointLight(pointLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+	}
+	
+	for (int i = 0; i < SPOT_LIGHT_COUNT; i++) {
+		result += vec4(calcPointLight(spotLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+	}
 	return result;
 }
 //-------------------------------------------------------------------------------------------//
@@ -179,6 +179,9 @@ void main() {
 	vec4 lights;	//Result of all light calculations from array of lights
 	lights = applyLights(fragVert,fragNormal,viewDir);
 	//------------//
+
+	//light = vec4(calcPointLight(testPoint,fragPos,))
+
 
 	//Colour = texture(tex, texCoord);	//Just Textures
 	Colour = texture(tex, texCoord) * lights;	//Textures + lighting
