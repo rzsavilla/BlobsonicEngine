@@ -9,6 +9,7 @@
 #include "AABB.h"
 #include "Player.h"
 #include "DirectionalLight.h"
+#include "PointLight.h"
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -274,9 +275,10 @@ std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 
 	entity->attach<Component::Transformable>();
 
-	glm::vec3 vPosition,vRotation;
+	glm::vec3 vPosition;
 	glm::vec3 vAmbient, vDiffuse, vSpecular;
-	glm::vec3 vDirection;
+	glm::vec3 vDirection = glm::vec3(0.0f,-1.0f,0.0f);
+	float fRadius = 0.0f;
 
 	using namespace tinyxml2;
 
@@ -303,9 +305,11 @@ std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 			vPosition = parseVec3(modelChild);
 			if (m_bDebug) std::cout << "Position Set : " << vPosition.x << ", " << vPosition.y << ", " << vPosition.z << "\n  ";
 		}
-		else if (strcmp(childValue, "Rotation") == 0) {
-			vRotation = parseVec3(modelChild);
-			if (m_bDebug) std::cout << "Rotation Set : " << vRotation.x << ", " << vRotation.y << ", " << vRotation.z << "\n  ";
+		else if (strcmp(childValue, "Radius") == 0) {
+			if (readElementText(modelChild, cData)) {
+				fRadius = atof(cData);
+			}
+			if (m_bDebug) std::cout << "Radius Set : " << fRadius << "\n  ";
 		}
 		else if (strcmp(childValue, "Ambient") == 0) {
 			vAmbient = parseVec3(modelChild);
@@ -334,15 +338,22 @@ std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 		dirLight->setIntensity(vAmbient,vDiffuse,vSpecular);
 	}
 	else if (sType == "Point") {
-
+		entity->attach<Component::PointLight>();
+		auto pointLight = entity->get<Component::PointLight>();
+		if (entity->has<Component::Transformable>()) {
+			t = entity->get<Component::Transformable>();
+			t->setPosition(vPosition);
+		}
+		pointLight->setIntensity(vAmbient, vDiffuse, vSpecular);
+		pointLight->setRadius(fRadius);
 	}
 	else if (sType == "Spotlight") {
 
 	}
 	else {
+		entity->destroy();					//Returns empty destroyed entity
 		return std::make_shared<Entity>();	//Return empty entity
 	}
-
 	return entity;
 }
 
