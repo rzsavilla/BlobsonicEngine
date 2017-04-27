@@ -180,8 +180,6 @@ void main() {
 	lights = applyLights(fragVert,fragNormal,viewDir);
 	//------------//
 
-	//light = vec4(calcPointLight(testPoint,fragPos,))
-
 
 	//Colour = texture(tex, texCoord);	//Just Textures
 	Colour = texture(tex, texCoord) * lights;	//Textures + lighting
