@@ -196,20 +196,20 @@
 	
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
-		<Rotation>
+		<Direction>
 			<X>0.0f</X>
-			<Y>1.0f</Y>
+			<Y>-1.0f</Y>
 			<Z>0.0f</Z>
-		</Rotation>
+		</Direction>
 		<Ambient>
-			<X>0.5f</X>
-			<Y>0.5f</Y>
-			<Z>1o.0f</Z>
+			<X>0.1f</X>
+			<Y>0.1f</Y>
+			<Z>0.1f</Z>
 		</Ambient>
 		<Diffuse>
-			<X>0.9f</X>
-			<Y>0.9f</Y>
-			<Z>0.9f</Z>
+			<X>0.5f</X>
+			<Y>0.5f</Y>
+			<Z>0.5f</Z>
 		</Diffuse>	
 		<Specular>
 			<X>1.0f</X>

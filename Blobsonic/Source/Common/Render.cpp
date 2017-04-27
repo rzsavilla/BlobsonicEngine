@@ -159,22 +159,16 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 	Component::Transformable* t = NULL;
 
 	//Pass directional lighting parameters to shader
-	for (int i = 0; i < m_directionalLights.size(); i++) {
-		if (m_directionalLights.at(i)->has<Component::Transformable>()) {
-			t = m_directionalLights.at(i)->get<Component::Transformable>();
-		}
+	for (int i = 0; i < m_directionalLights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
 		auto dirLight = m_directionalLights.at(i)->get<Component::DirectionalLight>();
 
+		//Pass uniforms
 		std::string sDirLight = "dirLights[" + std::to_string(i) + "].";
-
-		if (t) {	//Has transformable component
-			shader->setUniform((sDirLight + "rotation").data(), t->getRotation());
-		}
-
 		shader->setUniform((sDirLight + "ambient").data(), dirLight->getAmbient());
-		shader->setUniform((sDirLight + "diffuse").data(), dirLight->getAmbient());
-		shader->setUniform((sDirLight + "specular").data(), dirLight->getAmbient());
-		shader->setUniform((sDirLight + "direction").data(), dirLight->getAmbient());
+		shader->setUniform((sDirLight + "diffuse").data(), dirLight->getDiffuse());
+		shader->setUniform((sDirLight + "specular").data(), dirLight->getSpecular());
+		shader->setUniform((sDirLight + "direction").data(), dirLight->getDirection());
 	}
 }
 

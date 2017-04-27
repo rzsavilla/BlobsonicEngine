@@ -330,7 +330,7 @@ std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 	if (sType == "Directional") {
 		entity->attach<Component::DirectionalLight>();
 		auto dirLight = entity->get<Component::DirectionalLight>();
-		t->setRotation(glm::normalize(vRotation));
+		dirLight->setDirection(vDirection);
 		dirLight->setIntensity(vAmbient,vDiffuse,vSpecular);
 	}
 	else if (sType == "Point") {
