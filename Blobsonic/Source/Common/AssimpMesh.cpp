@@ -41,13 +41,16 @@ bool AssimpMesh::load(std::string sFile) {
 	//Assimp::Importer import;
 	//const aiScene* scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
 	//aiProcess_LimitBoneWeights);
-	scene = import.ReadFile(sFile, 
+
+	scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
+		aiProcess_LimitBoneWeights);
+	/*scene = import.ReadFile(sFile, 
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType |
 		aiProcess_Triangulate |
 		aiProcess_GenSmoothNormals |
 		aiProcess_FlipUVs | aiProcess_LimitBoneWeights);
-
+*/
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;

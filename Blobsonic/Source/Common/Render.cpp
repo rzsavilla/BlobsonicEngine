@@ -136,41 +136,42 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			gl::BindVertexArray(aMesh->getVAO());		//Bind VAO
 
-			for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
-				int index = 3;
-				gl::DrawElementsBaseVertex(gl::TRIANGLES,
-					aMesh->m_Entries[k].NumIndices,
-					gl::UNSIGNED_INT,
-					(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
-					aMesh->m_Entries[k].BaseVertex);
-			}
-			//for (int k = 0; k < 1; k++) {
-			//	//Has Texture
-			//	if ((!aMesh->meshes[k].getPosition().empty() && !texture == NULL)) {
-			//		gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
-			//		gl::GenerateMipmap(gl::TEXTURE_2D);
-			//		gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
-			//		gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
-
-			//		gl::DrawElementsBaseVertex(gl::TRIANGLES,
-			//			aMesh->m_Entries[k].NumIndices,
-			//			gl::UNSIGNED_INT,
-			//			(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
-			//			aMesh->m_Entries[k].BaseVertex);
-			//		
-			//		//gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-			//		gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
-			//	}
-			//	//Has expanded normals
-			//	else if (!aMesh->meshes[i].getNormal().empty()) {
-			//		gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-			//	}
-			//	//No Texture and No expanded normals
-			//	else {
-			//		gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
-			//	}
+			//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
+			//	int index = 3;
+			//	gl::DrawElementsBaseVertex(gl::TRIANGLES,
+			//		aMesh->m_Entries[k].NumIndices,
+			//		gl::UNSIGNED_INT,
+			//		(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+			//		aMesh->m_Entries[k].BaseVertex);
 			//}
-			//gl::BindVertexArray(0);	//Unbind VAO
+			//for (int k = 0; k < 1; k++) {
+				//Has Texture
+				if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
+					gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
+					gl::GenerateMipmap(gl::TEXTURE_2D);
+					gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
+					gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+
+					//gl::DrawElementsBaseVertex(gl::TRIANGLES,
+					//	aMesh->m_Entries[k].NumIndices,
+					//	gl::UNSIGNED_INT,
+					//	(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+					//	aMesh->m_Entries[k].BaseVertex);
+					//
+
+					gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+					gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
+				}
+				//Has expanded normals
+				else if (!aMesh->meshes[i].getNormal().empty()) {
+					gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+				}
+				//No Texture and No expanded normals
+				else {
+					gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
+				}
+			//}
+			gl::BindVertexArray(0);	//Unbind VAO
 		}
 	}
 	
