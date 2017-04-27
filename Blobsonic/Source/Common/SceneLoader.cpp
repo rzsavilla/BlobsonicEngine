@@ -10,7 +10,6 @@
 #include "Player.h"
 #include "DirectionalLight.h"
 
-
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -429,11 +428,17 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	using namespace tinyxml2;
 	std::string sID;
 
+	//Remove entities from previous scene
+	if (!m_scenes->empty()) {
+		m_scenes->begin()->second->clearScene();
+	}
+	//Remove previous scenes
+	m_scenes->clear();
+
 	//-- Add entities into the scene --//
 	if (str == "Game") {
 		std::shared_ptr<GameScene> scene = std::make_shared<GameScene>(m_res);				//Create scene
 		EntityManager* entities = scene->getEntityManager();	//Get scene entity manager used to add entities in to the scene
-		entities->m_entities.clear();
 		//Add Scene Entities
 		if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
 		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
@@ -608,7 +613,6 @@ int SceneLoader::load(std::string sFilename, bool forceLoadRes)
 			readResourceFile(node, forceLoadRes);
 		}
 		else if (strcmp(node->Value(), "Scene") == 0) {
-			m_scenes->clear();
 			readScene(node);
 		}
 	}
