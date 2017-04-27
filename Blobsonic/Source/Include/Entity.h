@@ -33,7 +33,7 @@ public:
 
 		//Set component parent as this entity
 		std::shared_ptr<Component::Component> component(static_cast<void>(m_components.end()));
-		component->setParent(this);
+		component->setParent(std::make_shared<Entity>(this));
 		return *get<T>();
 	}
 
