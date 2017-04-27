@@ -30,9 +30,8 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
 
-		//Pass lighting
 		passLightUniforms(model->m_shader);
-								
+    
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 
@@ -98,14 +97,15 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	}
 	
 	*/
-	
+	m_fDeltaTime = 0.001;
+
 	//Draw model Assimp meshes
 	if (!model->m_aMeshes.empty()) {
 		for (int i = 0; i < model->m_aMeshes.size(); i++) {
 
 			std::shared_ptr<Texture> texture = NULL;
 			std::shared_ptr<AssimpMesh> aMesh = model->m_aMeshes.at(i);	//Get pointer to amesh
-
+			
 																		//Pass material uniforms to shader
 			if (model->m_shader != NULL && i < model->m_materials.size()) {
 				//Material reflectivity
@@ -113,6 +113,20 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
 				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
 				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
+			
+				if (aMesh->getHasBones()) {
+					// Vector of bone transformation matrices. 
+					std::vector<Matrix4f> Transforms;
+
+					// Obtains newly transformed matrices from the bone hierarchy at the given time. 
+					aMesh->BoneTransform(m_fDeltaTime, Transforms);
+
+					// Passes each new bone transformation into the shader. 
+					for (unsigned int j = 0; j < Transforms.size(); j++) {
+						model->m_shader->setUniformIndex(j, Transforms[j]);
+
+					}
+				}
 			}
 
 			//Check for texture
@@ -122,24 +136,41 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			gl::BindVertexArray(aMesh->getVAO());		//Bind VAO
 
-			//Has Texture
-			if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
-				gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
-				gl::GenerateMipmap(gl::TEXTURE_2D);
-				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
-				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
-				gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
+			for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
+				int index = 3;
+				gl::DrawElementsBaseVertex(gl::TRIANGLES,
+					aMesh->m_Entries[k].NumIndices,
+					gl::UNSIGNED_INT,
+					(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+					aMesh->m_Entries[k].BaseVertex);
 			}
-			//Has expanded normals
-			else if (!aMesh->meshes[i].getNormal().empty()) {
-				gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-			}
-			//No Texture and No expanded normals
-			else {
-				gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
-			}
-			gl::BindVertexArray(0);													//Unbind VAO
+			//for (int k = 0; k < 1; k++) {
+			//	//Has Texture
+			//	if ((!aMesh->meshes[k].getPosition().empty() && !texture == NULL)) {
+			//		gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
+			//		gl::GenerateMipmap(gl::TEXTURE_2D);
+			//		gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
+			//		gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+
+			//		gl::DrawElementsBaseVertex(gl::TRIANGLES,
+			//			aMesh->m_Entries[k].NumIndices,
+			//			gl::UNSIGNED_INT,
+			//			(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+			//			aMesh->m_Entries[k].BaseVertex);
+			//		
+			//		//gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+			//		gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
+			//	}
+			//	//Has expanded normals
+			//	else if (!aMesh->meshes[i].getNormal().empty()) {
+			//		gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+			//	}
+			//	//No Texture and No expanded normals
+			//	else {
+			//		gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
+			//	}
+			//}
+			//gl::BindVertexArray(0);	//Unbind VAO
 		}
 	}
 	

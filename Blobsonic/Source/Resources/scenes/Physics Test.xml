@@ -9,7 +9,6 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	
-	
 	<Model> 
 		<Component>Sphere</Component>
 		<Component>Physical</Component>
@@ -18,8 +17,8 @@
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>0.0f</X>
-			<Y>500.0f</Y>
+			<X>20.0f</X>
+			<Y>300.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Scale>
@@ -41,32 +40,3626 @@
 		</Origin>
 		
 		<Mass>10</Mass>
-		<Restitution>0.6</Restitution>
+		<Restitution>0.25</Restitution>
+
+	</Model>
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
 
 	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
 	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
+	<Model> 
+		<Component>Sphere</Component>
+		<Component>Physical</Component>
+		<Mesh>sphere_mesh</Mesh>
+		<Material>bright_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Scale>
+			<X>2.5f</X>
+			<Y>2.5f</Y>
+			<Z>2.5f</Z>
+		</Scale>
+	
+		<Rotation>
+			<x>0</x>
+			<x>0</x>
+			<x>0</x>
+		</Rotation>
+		
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		
+		<Mass>10</Mass>
+		<Restitution>0.5</Restitution>
+
+	</Model>		
 	<Model> 
 		<Component>OBB</Component>
 		<Component>Physical</Component>
-		<Mesh>plane_mesh</Mesh>
+		<Mesh>cube_mesh</Mesh>
 		<Material>default_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>floor_texture</Texture>
 		<Position>
 			<X>0.0f</X>
-			<Y>-5.0f</Y>
+			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
 			<X>0.0f</X>
-			<Y>0.0f</Y>
+			<Y>-5.0f</Y>
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
 			<X>500.0f</X>
-			<Y>1.0f</Y>
+			<Y>5.0f</Y>
 			<Z>500.0f</Z>
 		</Scale>
+		<Dimensions>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Dimensions>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
@@ -74,6 +3667,7 @@
 		</Origin>
 	
 		<Mass>0</Mass>
+		<Restitution>1</Restitution>
 		
 		
 	</Model>		

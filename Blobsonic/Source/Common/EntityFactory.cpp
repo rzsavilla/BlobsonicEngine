@@ -115,6 +115,8 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	o->m_vCenter = glm::mat3(o->m_Rotation) * (position + (Dimensions * Scale) / 2.0f);
 
 	t->setRotation(Rot);
+
+	o->setParent(entity);
 }
 
 void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position)
@@ -213,7 +215,7 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 	c->m_vSphereCenter2 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
 }
 
-void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass)
+void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass,float restitution)
 {
 	if (!entity->has<Component::Transformable>()) {
 		entity->attach<Component::Transformable>();
@@ -236,6 +238,7 @@ void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass)
 		physical->m_fINVMass = 1 / mass;
 	}
 
-
+	//set restitution
+	physical->m_fRestitution = restitution;
 
 }

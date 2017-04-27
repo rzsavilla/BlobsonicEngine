@@ -24,10 +24,12 @@ namespace System {
 
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
+    
 		void passLightUniforms(std::shared_ptr<GLSLProgram> shader);
-
 		//! Removed destroyed entities from vector
 		void removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities);
+    
+		float m_fDeltaTime;
 	public:
 		Render();		//!< Default constructor
 

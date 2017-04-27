@@ -91,6 +91,8 @@ public:
 	void   setUniform(const char *name, GLuint val);
 	void   setUniformIndex(unsigned int Index, const Matrix4f& matIn);
 
+	void   initialiseBoneUniforms();
+
 	void   printActiveUniforms();
 	void   printActiveUniformBlocks();
 	void   printActiveAttribs();
