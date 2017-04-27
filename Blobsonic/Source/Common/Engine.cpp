@@ -11,7 +11,7 @@
 void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
-	m_scenes.clear();	//Remove all entities from scene
+	//m_scenes.clear();	//Remove all entities from scene
 	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes);
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
@@ -102,6 +102,8 @@ void Engine::Engine::render()
 			if (it->first == typeid(System::Render)) {	//Only process render systems
 				//Render entities
 				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+				//Update Render System
+				(*it).second->update(0.0f);	
 			}
 		}
 	}
