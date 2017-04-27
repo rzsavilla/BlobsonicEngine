@@ -354,6 +354,9 @@
     <ClInclude Include="Source\Include\Text.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\SpriteRender.h">
+      <Filter>Header Files\Engine\Entity\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Include\GUIButton.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
     </ClInclude>
@@ -530,7 +533,10 @@
     <ClCompile Include="Source\Common\Text.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="GUIButton.cpp">
+    <ClCompile Include="Source\Common\SpriteRender.cpp">
+      <Filter>Source Files\Engine\Component\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\GUIButton.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
   </ItemGroup>

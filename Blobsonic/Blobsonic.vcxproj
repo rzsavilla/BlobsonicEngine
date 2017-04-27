@@ -94,6 +94,7 @@
     <ClInclude Include="Source\Include\SceneMessages.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
+    <ClInclude Include="Source\Include\SpriteRender.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
     <ClInclude Include="Source\Include\System.h" />
@@ -106,7 +107,6 @@
     <ClInclude Include="Source\Include\Transformable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GUIButton.cpp" />
     <ClCompile Include="Source\Common\AABB.cpp" />
     <ClCompile Include="Source\Common\AIMovement.cpp" />
     <ClCompile Include="Source\Common\AIController.cpp" />
@@ -122,6 +122,7 @@
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
+    <ClCompile Include="Source\Common\GUIButton.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Source\Common\SceneManager.cpp" />
     <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
+    <ClCompile Include="Source\Common\SpriteRender.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />
     <ClCompile Include="Source\Common\TestScene.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />

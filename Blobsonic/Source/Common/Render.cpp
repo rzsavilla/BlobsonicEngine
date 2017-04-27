@@ -7,7 +7,8 @@
 #include "Model.h"
 #include "Transformable.h"
 #include "Text.h"
-#include "GUIButton.h"
+#include "SpriteRender.h"
+//#include "GUIButton.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -104,7 +105,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
 				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
 				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
-
+				
 				//model->m_shader->setUniform("button", );	//Shininess
 			}
 
@@ -142,6 +143,64 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 }
 
+void System::Render::renderSprite(std::shared_ptr<Entity> entity)
+{
+	//GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color)
+	//auto modelS = entity->get<Component::Model>();
+	// Prepare transformations
+	auto spriteRender = entity->get <Component::SpriteRenderer>();
+
+	spriteRender->getShader()->use();
+	spriteRender->getTexture();
+	spriteRender->getColor();
+	spriteRender->getPosition();
+	spriteRender->getRotate();
+	spriteRender->getSize();
+	spriteRender->getVertices();
+	spriteRender->getVAO();
+
+	//spriteRender->
+
+	//spriteRender->getShader().get;
+
+	GLfloat vertices[] = {
+		// Pos      // Tex
+		0.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 0.0f,
+
+		0.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, 0.0f, 1.0f, 0.0f
+	};
+
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(spriteRender->getPosition(), 0.0f));
+
+	model = glm::translate(model, glm::vec3(0.5f * spriteRender->getSize().x, 0.5f * spriteRender->getSize().y, 0.0f));
+	model = glm::rotate(model, spriteRender->getRotate(), glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::translate(model, glm::vec3(-0.5f * spriteRender->getSize().x, -0.5f * spriteRender->getSize().y, 0.0f));
+
+	model = glm::scale(model, glm::vec3(spriteRender->getSize(), 1.0f));
+
+	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
+	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+
+	spriteRender->getShader()->setUniform("vertex", vertices);
+	spriteRender->getShader()->setUniform("projection", projection);
+	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor());
+	spriteRender->getShader()->setUniform("model", model);
+
+	// Set active texture
+	// ...
+
+	gl::BindVertexArray(spriteRender->getVAO());
+	gl::DrawArrays(gl::TRIANGLES, 0, 6);
+	gl::BindVertexArray(0);
+	
+	std::printf("Hello World!");
+}
+
 System::Render::Render()
 {
 	m_ptrActiveCamera = NULL;
@@ -167,6 +226,10 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		//Find Text Component
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
+		}
+		//Find Sprite Component
+		if ((*it)->has<Component::SpriteRenderer>()) {
+			renderSprite(*it);	//Render Sprite
 		}
 	}
 }

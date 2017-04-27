@@ -10,7 +10,7 @@ namespace System {
 	private:
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
-		void renderButton(std::shared_ptr<Entity> entity);
+		void renderSprite(std::shared_ptr<Entity> entity);
 	public:
 		Render();
 
