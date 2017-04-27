@@ -95,6 +95,7 @@
     <ClInclude Include="Source\Include\SceneMessages.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
+    <ClInclude Include="Source\Include\Spotlight.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
     <ClInclude Include="Source\Include\System.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
     <ClCompile Include="Source\Common\TransformableOld.cpp" />
+    <ClCompile Include="Source\Include\Spotlight.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5189E8BA-F4EE-426F-AA59-E3CA4757AD1F}</ProjectGuid>

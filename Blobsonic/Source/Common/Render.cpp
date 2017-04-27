@@ -171,21 +171,45 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 		shader->setUniform((sDirLight + "direction").data(), dirLight->getDirection());
 	}
 
-	//Pass directional lighting parameters to shader
+	//Pass point lighting parameters to shader
 	for (int i = 0; i < m_pointLights.size(); i++) {	//Iterate through all lights
 		//Get Light Component
 		auto pointLight = m_pointLights.at(i)->get<Component::PointLight>();
 
 		//Pass uniforms
-		std::string sDirLight = "pointLights[" + std::to_string(i) + "].";
-		shader->setUniform((sDirLight + "ambient").data(), pointLight->getAmbient());
-		shader->setUniform((sDirLight + "diffuse").data(), pointLight->getDiffuse());
-		shader->setUniform((sDirLight + "specular").data(), pointLight->getSpecular());
-		shader->setUniform((sDirLight + "radius").data(), pointLight->getRadius());
+		std::string sPointLight = "pointLights[" + std::to_string(i) + "].";
+		shader->setUniform((sPointLight + "ambient").data(), pointLight->getAmbient());
+		shader->setUniform((sPointLight + "diffuse").data(), pointLight->getDiffuse());
+		shader->setUniform((sPointLight + "specular").data(), pointLight->getSpecular());
+		shader->setUniform((sPointLight + "radius").data(), pointLight->getRadius());
 
 		if (m_pointLights.at(i)->has<Component::Transformable>()) {
 			t = m_pointLights.at(i)->get<Component::Transformable>();
-			shader->setUniform((sDirLight + "position").data(), t->getPosition());
+			shader->setUniform((sPointLight + "position").data(), t->getPosition());
+		}
+	}
+
+	//Pass  spot lighting parameters to shader
+	for (int i = 0; i < m_spotlights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto spotlight = m_spotlights.at(i)->get<Component::Spotlight>();
+
+		//Pass uniforms
+		std::string sSpotLight = "spotlights[" + std::to_string(i) + "].";
+		shader->setUniform((sSpotLight + "ambient").data(), spotlight->getAmbient());
+		shader->setUniform((sSpotLight + "diffuse").data(), spotlight->getDiffuse());
+		shader->setUniform((sSpotLight + "specular").data(), spotlight->getSpecular());
+		shader->setUniform((sSpotLight + "direction").data(), spotlight->getDirection());
+
+		shader->setUniform((sSpotLight + "cutOff").data(), spotlight->getCutOff());
+		shader->setUniform((sSpotLight + "outerCutOff").data(), spotlight->getOuterCutOff());
+		shader->setUniform((sSpotLight + "constant").data(), spotlight->getConstant());
+		shader->setUniform((sSpotLight + "linear").data(), spotlight->getLinear());
+		shader->setUniform((sSpotLight + "quadratic").data(), spotlight->getQuadratic());
+
+		if (m_spotlights.at(i)->has<Component::Transformable>()) {
+			t = m_spotlights.at(i)->get<Component::Transformable>();
+			shader->setUniform((sSpotLight + "position").data(), t->getPosition());
 		}
 	}
 }
@@ -225,11 +249,14 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 			renderText(*it);	//Render Text
 		}
 		//Find Light Components
-		if ((*it)->has<Component::DirectionalLight>()) {
+		if ((*it)->has<Component::DirectionalLight>()) {	//Directional light
 			addEntity((*it), &m_directionalLights);
 		}
 		if ((*it)->has<Component::PointLight>()) {
-			addEntity((*it), &m_pointLights);
+			addEntity((*it), &m_pointLights);				//Point light
+		}
+		if ((*it)->has<Component::Spotlight>()) {
+			addEntity((*it), &m_spotlights);				//Spotlight
 		}
 	}
 }
@@ -240,6 +267,7 @@ void System::Render::update(float dt)
 	//Remove Destroyed Entities
 	removeDestroyed(&m_directionalLights);
 	removeDestroyed(&m_pointLights);
+	removeDestroyed(&m_spotlights);
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
