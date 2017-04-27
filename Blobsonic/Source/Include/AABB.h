@@ -26,6 +26,10 @@ public:
 	
 	glm::vec3 m_vDimensions; // the distance from the center of the transformable to the edge (includes the scale )
 	glm::vec3 m_vCenter;
+	glm::vec3 m_vPosition;	//!< Camera World/Relative Position
+	glm::vec3 m_vScale;		//!< Entity scale x,y,z
+	glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in degrees
+	glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
 
 	bool testAxis[3];
 
