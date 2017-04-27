@@ -18,7 +18,8 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
-								
+
+
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 

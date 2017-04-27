@@ -28,6 +28,4 @@ public:
 	void attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 dimensions, glm::vec3 scale, glm::vec3 Rot);
 
 	void attachPhysical(std::shared_ptr<Entity> entity, float mass, float restitution);
-
-
 };

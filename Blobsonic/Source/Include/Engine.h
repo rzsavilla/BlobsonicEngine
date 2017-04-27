@@ -13,6 +13,8 @@
 #include "EntityManager.h"
 #include "ResourceManager.h"
 
+#include "MyTimer.h"
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	MessageHandler::getInstance()->sendMessage(std::make_shared<InputMessage::KeyPress>(key, action));
@@ -24,6 +26,8 @@ namespace Engine {
 		//! Stores ptr to engine system
 		std::map<std::type_index, std::shared_ptr<System::System>> m_ptrSystems;
 		bool m_bRunning;	//!< Flag to start and end game loop
+
+		MyTimer m_deltaTimer;
 
 		ResourceManager m_resourceManager;
 	private:

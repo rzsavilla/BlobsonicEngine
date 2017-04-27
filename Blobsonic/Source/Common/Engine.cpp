@@ -12,7 +12,7 @@ void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
 	m_scenes.clear();	//Remove all entities from scene
-	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test.xml", forceReloadRes);
+	m_sceneLoader.load("Source\\Resources\\scenes\\Physics Test - Copy.xml", forceReloadRes);
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
 	m_bForceReload = false;
@@ -28,6 +28,8 @@ void Engine::Engine::loop()
 	double dCurrentTime = 0;
 	int iFrames = 0;
 	int iUpdates = 0;
+
+	m_deltaTimer.reset();
 	while (m_bRunning) {
 		//Calculate delta time
 		dCurrentTime = glfwGetTime();
@@ -37,13 +39,15 @@ void Engine::Engine::loop()
 		if (m_bReloadScene) initScene();			//Reload scene
 		else if (m_bForceReload) initScene(true);	//Reload scene including scene resources
 
+		
+
 		//Limit update
 		while (dt >= 1.0) {
-			update((float)dt);
 			iUpdates++;
 			dt--;
 		}
-		
+		update((float)m_deltaTimer.getElapsed());
+
 		//Render
 		render();
 		iFrames++;	//Count frames
@@ -62,6 +66,7 @@ void Engine::Engine::loop()
 			iUpdates = 0;
 			iFrames = 0;
 		}
+		m_deltaTimer.reset();
 	}
 
 	//Close window and terminate GLFW
