@@ -1,15 +1,26 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Render.h"
 //Messages
 #include "CameraMessages.h"
-#include <stdafx.h>
 //Components
 #include "Model.h"
 #include "Transformable.h"
 #include "Text.h"
+#include "PointLight.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
+
+void System::Render::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (auto it = entities->begin(); it != entities->end(); ++it) {
+
+		if ((*it)->getID() == entity->getID()) {
+			return;	//Entity already stored
+		}
+	}
+	entities->push_back(entity);	//Store entity
+}
 
 void System::Render::renderModel(std::shared_ptr<Entity> entity)
 {
@@ -19,7 +30,8 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
 
-
+		passLightUniforms(model->m_shader);
+    
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 
@@ -169,6 +181,79 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 }
 
+void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
+{
+	int iDirCount = 0;
+	int iPointCount = 0;
+	int iSpotCount = 0;
+
+	Component::Transformable* t = NULL;
+
+	//Pass directional lighting parameters to shader
+	for (int i = 0; i < m_directionalLights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto dirLight = m_directionalLights.at(i)->get<Component::DirectionalLight>();
+
+		//Pass uniforms
+		std::string sDirLight = "dirLights[" + std::to_string(i) + "].";
+		shader->setUniform((sDirLight + "ambient").data(), dirLight->getAmbient());
+		shader->setUniform((sDirLight + "diffuse").data(), dirLight->getDiffuse());
+		shader->setUniform((sDirLight + "specular").data(), dirLight->getSpecular());
+		shader->setUniform((sDirLight + "direction").data(), dirLight->getDirection());
+	}
+
+	//Pass point lighting parameters to shader
+	for (int i = 0; i < m_pointLights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto pointLight = m_pointLights.at(i)->get<Component::PointLight>();
+
+		//Pass uniforms
+		std::string sPointLight = "pointLights[" + std::to_string(i) + "].";
+		shader->setUniform((sPointLight + "ambient").data(), pointLight->getAmbient());
+		shader->setUniform((sPointLight + "diffuse").data(), pointLight->getDiffuse());
+		shader->setUniform((sPointLight + "specular").data(), pointLight->getSpecular());
+		shader->setUniform((sPointLight + "radius").data(), pointLight->getRadius());
+
+		if (m_pointLights.at(i)->has<Component::Transformable>()) {
+			t = m_pointLights.at(i)->get<Component::Transformable>();
+			shader->setUniform((sPointLight + "position").data(), t->getPosition());
+		}
+	}
+
+	//Pass  spot lighting parameters to shader
+	for (int i = 0; i < m_spotlights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto spotlight = m_spotlights.at(i)->get<Component::Spotlight>();
+
+		//Pass uniforms
+		std::string sSpotLight = "spotlights[" + std::to_string(i) + "].";
+		shader->setUniform((sSpotLight + "ambient").data(), spotlight->getAmbient());
+		shader->setUniform((sSpotLight + "diffuse").data(), spotlight->getDiffuse());
+		shader->setUniform((sSpotLight + "specular").data(), spotlight->getSpecular());
+		shader->setUniform((sSpotLight + "direction").data(), spotlight->getDirection());
+
+		shader->setUniform((sSpotLight + "cutOff").data(), spotlight->getCutOff());
+		shader->setUniform((sSpotLight + "outerCutOff").data(), spotlight->getOuterCutOff());
+		shader->setUniform((sSpotLight + "constant").data(), spotlight->getConstant());
+		shader->setUniform((sSpotLight + "linear").data(), spotlight->getLinear());
+		shader->setUniform((sSpotLight + "quadratic").data(), spotlight->getQuadratic());
+
+		if (m_spotlights.at(i)->has<Component::Transformable>()) {
+			t = m_spotlights.at(i)->get<Component::Transformable>();
+			shader->setUniform((sSpotLight + "position").data(), t->getPosition());
+		}
+	}
+}
+
+void System::Render::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (int i = 0; i < entities->size(); i++) {
+		if (entities->at(i)->isDestroyed()) {
+			entities->erase(entities->begin() + i);
+		}
+	}
+}
+
 System::Render::Render()
 {
 	m_ptrActiveCamera = NULL;
@@ -190,9 +275,19 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Model>()) {
 			renderModel((*it));	//Render Model
 		}
-		//Finde Text Component
+		//Find Text Component
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
+		}
+		//Find Light Components
+		if ((*it)->has<Component::DirectionalLight>()) {	//Directional light
+			addEntity((*it), &m_directionalLights);
+		}
+		if ((*it)->has<Component::PointLight>()) {
+			addEntity((*it), &m_pointLights);				//Point light
+		}
+		if ((*it)->has<Component::Spotlight>()) {
+			addEntity((*it), &m_spotlights);				//Spotlight
 		}
 	}
 }
@@ -200,6 +295,10 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 void System::Render::update(float dt)
 {
 
+	//Remove Destroyed Entities
+	removeDestroyed(&m_directionalLights);
+	removeDestroyed(&m_pointLights);
+	removeDestroyed(&m_spotlights);
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)

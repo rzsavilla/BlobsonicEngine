@@ -107,6 +107,8 @@ void Engine::Engine::render()
 			if (it->first == typeid(System::Render)) {	//Only process render systems
 				//Render entities
 				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+				//Update Render System
+				(*it).second->update(0.0f);	
 			}
 		}
 	}

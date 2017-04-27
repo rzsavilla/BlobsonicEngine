@@ -24,37 +24,37 @@
 class Scene
 {
 protected:
-	//std::map<GLchar, Character>* m_ptrCharacters;			//!< Pointer to character used for create Text
-
-	EntityManager m_entities;	//!< Store entities
+	/*! Entity storage and management
+	* Stores entities and used to set entity destruction
+	*/
+	EntityManager m_entities;	
 
 	/*! Pointer to resource manager
 		Allows scenes to access loaded resources
 	*/
 	ResourceManager* m_ptrResources;
 
+	/*!	Factory pattern entity generation
+	*	Used to generate premade entities or attach new components to entities
+	*/
 	EntityFactory m_factory;
 public:
-	Scene(ResourceManager* res)
-		:m_factory(res), m_ptrResources(res)
-	{  }
-	~Scene() {};	//!< Destructor
+	Scene(ResourceManager* res);
+	~Scene();	//!< Destructor
 	/**
-		Load textures, initialize shaders, etc.
+		Scene loader replaces majority of what this function would do.
+		SceneLoader is simply called to initialize the scene
 	*/
 	virtual void initScene() = 0;
 
 	//! Update scene
 	virtual void update(float dt) = 0;
 
-	/*!	
-		Allows scene to create Text by passing pointer to characters texture
-	*/
-	//void setCharacters(std::map<GLchar, Character>* characters);
-
 	//Pointer to resources/gives scene access to resources
 	void setResources(ResourceManager* res);
 
 	EntityManager* getEntityManager() { return &m_entities; }
 	std::vector<std::shared_ptr<Entity>>* getEntities() { return &m_entities.m_entities; }
+
+	void clearScene();	//!< Empties the scene destroying all entities
 };
