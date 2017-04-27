@@ -38,6 +38,7 @@ private:
 	void loadMaterial(tinyxml2::XMLElement* e);			//!< Parse file to load material
 	void loadShader(tinyxml2::XMLElement* e);			//!< Parse file to load shader
 
+	std::shared_ptr<Entity> loadEntity(tinyxml2::XMLElement* e);			//!< Parse and create model
 	std::shared_ptr<Entity> loadModel(tinyxml2::XMLElement* e);			//!< Parse and create model
 	//std::shared_ptr<Entity> loadLight(tinyxml2::XMLElement* e);		//!< Parse and create light
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera

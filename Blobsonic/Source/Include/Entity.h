@@ -10,6 +10,7 @@
 #include <typeindex>
 
 #include "Destroyable.h"
+#include "Component.h"
 
 static int iUniqueIDCounter = 0;
 

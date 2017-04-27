@@ -14,6 +14,12 @@ namespace System {
 		std::vector<std::shared_ptr <Entity>> m_vCapsules; // !< Capsules for the scene
 		std::vector<std::shared_ptr <Entity>> m_vPhysicals; // !< Physicals for the scene
 
+
+		std::vector<std::shared_ptr <Entity>> m_vCheckSpheres; // !< Spheres for the scene
+		std::vector<std::shared_ptr <Entity>> m_vCheckOBBS; // !< OBBs for the scene
+		std::vector<std::shared_ptr <Entity>> m_vCheckCapsule; // !< Capsules for the scene
+
+
 		bool CheckAABBAABBCollision(std::shared_ptr <Entity> aabb1, std::shared_ptr <Entity> aabb2);
 		bool CheckOBBOBBCollision(std::shared_ptr <Entity> obb1, std::shared_ptr <Entity> obb2);
 		bool CheckShereSphereCollision(std::shared_ptr <Entity> sphere1, std::shared_ptr <Entity> sphere2);
@@ -30,6 +36,10 @@ namespace System {
 
 		void resolveCollision(std::shared_ptr <Entity> object1, std::shared_ptr <Entity> object2, glm::vec3 CollisionNormal);
 		void PositionalCorrection(std::shared_ptr <Entity> object1, std::shared_ptr <Entity> object2, float Depth, glm::vec3 CollisionNormal);
+
+		void broadPhase(float dt);
+		void narrowPhase(float dt);
+
 
 
 	public:
