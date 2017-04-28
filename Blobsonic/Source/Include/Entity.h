@@ -14,7 +14,7 @@
 
 static int iUniqueIDCounter = 0;
 
-class Entity: public Destroyable {
+class Entity: public Destroyable, public std::enable_shared_from_this<Entity> {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 	int m_iUID;	//!< Unique ID
@@ -30,7 +30,10 @@ public:
 	template<typename T, typename... Args>
 	T &attach(Args &&...args) {
 		m_components[typeid(T)] = std::make_shared<T>(std::forward<Args>(args)...);
-
+		
+		std::shared_ptr<Component::Component> component;
+		component = std::static_pointer_cast<Component::Component>(m_components[typeid(T)]);
+		component->setParent(shared_from_this());
 		return *get<T>();
 	}
 

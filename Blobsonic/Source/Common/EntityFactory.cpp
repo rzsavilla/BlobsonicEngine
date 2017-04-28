@@ -115,8 +115,6 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	o->m_vCenter = glm::mat3(o->m_Rotation) * (position + (Dimensions * Scale) / 2.0f);
 
 	t->setRotation(Rot);
-
-	o->setParent(entity);
 }
 
 void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position)
