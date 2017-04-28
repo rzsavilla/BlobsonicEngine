@@ -31,9 +31,6 @@ public:
 	T &attach(Args &&...args) {
 		m_components[typeid(T)] = std::make_shared<T>(std::forward<Args>(args)...);
 
-		//Set component parent as this entity
-		std::shared_ptr<Component::Component> component(static_cast<void>(m_components.end()));
-		component->setParent(std::make_shared<Entity>(this));
 		return *get<T>();
 	}
 
