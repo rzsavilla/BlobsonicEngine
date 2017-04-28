@@ -14,7 +14,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Component {
-	class Camera {
+	class Camera: public Component{
 	private:
 		float m_fFieldOfView;	//!< Field of View degrees
 		float m_fNearPlane;		//!< Closest render distance
