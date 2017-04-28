@@ -633,19 +633,29 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 		}
 		else if (strcmp(childValue, "isPlaying") == 0) {
 			if (readElementText(child, c)) {
-				sound->setPlaying(atof(c));
+				std::string var(c, strlen(c));
+				if (!c) 
+					sound->setPlaying(false);
+				else if (c) 
+					sound->setPlaying(true);
 			}
 			if (m_bDebug) std::cout << "isPlaying Set : " << atof(c) << "\n  ";
 		}
 		else if (strcmp(childValue, "isLooping") == 0) {
 			if (readElementText(child, c)) {
-				sound->setLooping(atof(c));
+				std::string var(c, strlen(c));
+				if (!c) sound->setLooping(false);
+				else if (c) 
+					sound->setLooping(true);
 			}
 			if (m_bDebug) std::cout << "isLooping set: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "startsPaused") == 0) {
 			if (readElementText(child, c)) {
-				sound->setPaused(atof(c));
+				std::string var(c, strlen(c));
+				if (c == "false") sound->setPaused(false);
+				else if(c == "true") 
+					sound->setPaused(true);
 			}
 			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
 		}

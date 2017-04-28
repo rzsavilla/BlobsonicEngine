@@ -47,7 +47,7 @@ System::Audio::Audio()
 {
 	m_ptrActiveCamera = NULL;
 	engine = createIrrKlangDevice();
-	engine->play2D("Source/Resources/audio/getout.ogg", true);
+	
 }
 
 System::Audio::~Audio()
@@ -70,7 +70,16 @@ void System::Audio::process(std::vector<std::shared_ptr<Entity>>* entities)
 
 void System::Audio::update(float dt)
 {
-
+	for (auto it = m_soundEntities.begin(); it != m_soundEntities.end(); ++it) {
+		//Find and set active camera
+		if ((*it)->has<Component::Sound>()) {
+			auto sound = (*it)->get<Component::Sound>();
+			if (sound->getPlaying()) {
+				engine->play2D(sound->getFile().c_str(), sound->getLooping());
+				sound->setPlaying(false);
+			}
+		}
+	}
 
 	removeDestroyed(&m_soundEntities);
 }
@@ -81,7 +90,6 @@ void System::Audio::processMessages(const std::vector<std::shared_ptr<Message>>*
 		if ((*it)->sID == "SetActiveCamera") {
 			//Get data key data from message
 			auto data = static_cast<CameraMessage::SetActiveCamera*>((*it).get());
-
 			m_ptrActiveCamera = data->entity->get<Component::Camera>();
 		}
 	}
