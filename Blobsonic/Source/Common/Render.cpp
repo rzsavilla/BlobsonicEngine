@@ -149,6 +149,7 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	//auto modelS = entity->get<Component::Model>();
 	// Prepare transformations
 	auto spriteRender = entity->get <Component::SpriteRenderer>();
+	auto t = entity->get <Component::Transformable>();
 	
 	spriteRender->getShader()->use();/*
 	spriteRender->getTexture();
@@ -159,10 +160,10 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	spriteRender->getVertices();
 	spriteRender->getVAO();
 	*/
-	spriteRender->setPosition(glm::vec2(200, 200));
-	spriteRender->setSize(glm::vec2(300, 400));
-	spriteRender->setRotate(45.0f);
-	spriteRender->setColor(glm::vec3(0.0f, 1.0f, 0.0f));
+	//spriteRender->setPosition(glm::vec2(200, 200));
+	//spriteRender->setSize(glm::vec2(300, 400));
+	//spriteRender->setRotate(45.0f);
+	//spriteRender->setColor(glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//spriteRender->
 
@@ -184,7 +185,7 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	
 	spriteRender->getShader()->setUniform("projection", projection);
 	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor());
-	spriteRender->getShader()->setUniform("model", model);
+	spriteRender->getShader()->setUniform("model", t->getTransform());
 
 	// Set active texture
 	// ...

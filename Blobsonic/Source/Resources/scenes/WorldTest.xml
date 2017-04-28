@@ -204,8 +204,8 @@
 		<Shader>button_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>200.0f</X>
-			<Y>200.0f</Y>
+			<X>20.0f</X>
+			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -215,7 +215,7 @@
 		</Rotation>
 		<Scale>
 			<X>200.0f</X> 	
-			<Y>400.0f</Y>
+			<Y>100.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
@@ -223,18 +223,31 @@
 			<Y>1.0f</Y>
 			<Z>0.0f</Z>
 		</Colour>
-		
-		<Size>
-			<X>400.0f</X> 	
-			<Y>200.0f</Y>
+	</Sprite>
+	
+	<Sprite> <ID>sprite</ID>
+		<Shader>button_shader</Shader>
+		<Texture>red_texture</Texture>
+		<Position>
+			<X>804.0f</X>
+			<Y>20.0f</Y>
 			<Z>0.0f</Z>
-		</Size>
-		<Origin>
+		</Position>
+		<Rotation>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
-		</Origin>
-		
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Colour>
 	</Sprite>
 	
 	<Camera> <ID>cam1</ID>

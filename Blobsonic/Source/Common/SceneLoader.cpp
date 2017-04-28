@@ -68,7 +68,7 @@ std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
 				sprite->setShader((m_res->getShader(std::string(cData, strlen(cData)))));
 			}
 		}
-		/*
+		
 		else if (strcmp(childValue, "Texture") == 0) {
 			if (readElementText(modelChild, cData)) {
 				sprite->setTexture(m_res->getTexture(std::string(cData, strlen(cData))));
@@ -112,7 +112,7 @@ std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
 			transform->m_vOrigin = v;
 			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-	*/	
+		
 	}
 	
 	return entity;
