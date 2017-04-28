@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "Capsule.h"
 #include "GUIButton.h"
+#include "SpriteRender.h"
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -58,24 +59,14 @@ std::shared_ptr<Entity> EntityFactory::createCamera(glm::vec3 position)
 	return entity;
 }
 
-std::shared_ptr<Entity> EntityFactory::createButton(glm::vec3 position)
+std::shared_ptr<Entity> EntityFactory::createSprite()
 {
 	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
 
 	//////Attach components
 	entity->attach<Component::Transformable>();
-	entity->attach<Component::Model>();
-	entity->attach<Component::Text>();
-	entity->attach<Component::Button>();
-
-	//Set component Properties
-	auto t = entity->get<Component::Transformable>();
-	t->setPosition(position);
-	
-	auto b = entity->get<Component::Button>();
+	entity->attach<Component::SpriteRenderer>();
 	return entity;
-
-
 }
 
 std::shared_ptr<Entity> EntityFactory::createActor()
@@ -233,9 +224,9 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 	c->m_vSphereCenter2 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
 }
 
-void EntityFactory::attachButton(std::shared_ptr<Entity> entity)
+void EntityFactory::attachSprite(std::shared_ptr<Entity> entity)
 {
-	entity->attach<Component::Button>();
+	entity->attach<Component::SpriteRenderer>();
 }
 
 void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity)

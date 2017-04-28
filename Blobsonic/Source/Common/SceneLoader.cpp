@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "AABB.h"
 #include "Player.h"
+#include "SpriteRender.h"
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -40,6 +41,82 @@ void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 	m_res->addMesh(s, mesh);	//Add mesh to resource manager;
 	m_res->addMesh(s,mesh);	//Add mesh to resource manager;
 	if (m_bDebug) std::cout << " Mesh Loaded: " << s << "\n";
+}
+
+std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
+{
+	
+	using namespace tinyxml2;
+	char* cData = "";			//Temporary storage for element data
+	if (m_bDebug) std::cout << "\nLoading Sprite \n  ";
+	std::shared_ptr<Entity> entity = m_factory.createSprite();
+	auto sprite = entity->get<Component::SpriteRenderer>();
+	auto transform = entity->get<Component::Transformable>();
+
+	std::string sID;
+	//Look at Model Element
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
+		const char* childValue = modelChild->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sID = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		else if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sprite->setShader((m_res->getShader(std::string(cData, strlen(cData)))));
+			}
+		}
+		/*
+		else if (strcmp(childValue, "Texture") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sprite->setTexture(m_res->getTexture(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Position") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setPosition(v);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Rotation") == 0) {
+			//Set model rotation
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setRotation(v);
+			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Scale") == 0) {
+			//Set model scale
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setScale(v);
+			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Colour") == 0) {
+			//Set model scale
+			glm::vec3 v = parseVec3(modelChild);
+			sprite->setColor(v);
+			if (m_bDebug) std::cout << "Colour Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		
+		
+		else if (strcmp(childValue, "Size") == 0) {
+			//Set model size
+			glm::vec3 v = parseVec3(modelChild);
+			sprite->setSize(vec2(v));
+			if (m_bDebug) std::cout << "Size Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		
+		else if (strcmp(childValue, "Origin") == 0) {
+			//Set model origin
+			glm::vec3 v = parseVec3(modelChild);
+			transform->m_vOrigin = v;
+			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+	*/	
+	}
+	
+	return entity;
+
 }
 
 void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
@@ -239,7 +316,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
 	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
 	else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-	else if (sID == "Button")m_factory.attachButton(entity);
+	else if (sID == "Button")m_factory.attachSprite(entity);
 	return entity;
 }
 
@@ -401,6 +478,9 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			}
 			else if (strcmp(element->Value(), "Physics") == 0) {
 				entities->addEntity(loadModel(element));
+			}
+			else if (strcmp(element->Value(), "Sprite") == 0) {
+				entities->addEntity(loadSprite(element));
 			}
 		}
 		//Attach Scene to engine

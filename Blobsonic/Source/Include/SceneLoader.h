@@ -34,11 +34,13 @@ private:
 	ResourceManager* m_res;									//!< Pointer to Resource manager where loaded resources will be stored
 	std::map<std::string,std::shared_ptr<Scene>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
+				//!< Parse file to load sprites
 	void loadTexture(tinyxml2::XMLElement* e);			//!< Parse file to load texture
 	void loadMaterial(tinyxml2::XMLElement* e);			//!< Parse file to load material
 	void loadShader(tinyxml2::XMLElement* e);			//!< Parse file to load shader
 
 	std::shared_ptr<Entity> loadModel(tinyxml2::XMLElement* e);			//!< Parse and create model
+	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	//std::shared_ptr<Entity> loadLight(tinyxml2::XMLElement* e);		//!< Parse and create light
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
 

@@ -3,7 +3,7 @@
 
 Component::SpriteRenderer::SpriteRenderer()
 {
-	
+	initRenderData();
 }
 
 //Component::SpriteRenderer::~SpriteRenderer()
@@ -32,11 +32,11 @@ void Component::SpriteRenderer::initRenderData()
 
 	gl::GenVertexArrays(1, &this->quadVAO);
 	gl::GenBuffers(1, &VBO);
-
+	gl::BindVertexArray(this->quadVAO);
 	gl::BindBuffer(gl::ARRAY_BUFFER, VBO);
 	gl::BufferData(gl::ARRAY_BUFFER, sizeof(vertices), vertices, gl::STATIC_DRAW);
 
-	gl::BindVertexArray(this->quadVAO);
+	
 	gl::EnableVertexAttribArray(0);
 	gl::VertexAttribPointer(0, 4, gl::FLOAT, FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 	gl::BindBuffer(gl::ARRAY_BUFFER, 0);

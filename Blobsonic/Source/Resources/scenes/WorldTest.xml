@@ -174,10 +174,15 @@
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>0.0f</X>
-			<Y>2.0f</Y>
-			<Z>20.0f</Z>
+			<X>200.0f</X>
+			<Y>200.0f</Y>
+			<Z>0.0f</Z>
 		</Position>
+		<Size>
+			<X>400.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Size>
 		<Rotation>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
@@ -195,32 +200,42 @@
 		</Origin>
 	</Model>
 	
-	<Model> <ID>button</ID>
-		<Mesh>plane_mesh</Mesh>
-		<Material>default_material</Material>
+	<Sprite> <ID>sprite</ID>
 		<Shader>button_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
+			<X>200.0f</X>
+			<Y>200.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
-			<X>90.0f</X>
+			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>200.0f</X> 	
+			<Y>400.0f</Y>
+			<Z>0.0f</Z>
 		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Colour>
+		
+		<Size>
+			<X>400.0f</X> 	
+			<Y>200.0f</Y>
+			<Z>0.0f</Z>
+		</Size>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
-	</Model>
+		
+	</Sprite>
 	
 	<Camera> <ID>cam1</ID>
 		<Position>

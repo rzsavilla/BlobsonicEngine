@@ -149,8 +149,8 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	//auto modelS = entity->get<Component::Model>();
 	// Prepare transformations
 	auto spriteRender = entity->get <Component::SpriteRenderer>();
-
-	spriteRender->getShader()->use();
+	
+	spriteRender->getShader()->use();/*
 	spriteRender->getTexture();
 	spriteRender->getColor();
 	spriteRender->getPosition();
@@ -158,21 +158,15 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	spriteRender->getSize();
 	spriteRender->getVertices();
 	spriteRender->getVAO();
+	*/
+	spriteRender->setPosition(glm::vec2(200, 200));
+	spriteRender->setSize(glm::vec2(300, 400));
+	spriteRender->setRotate(45.0f);
+	spriteRender->setColor(glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//spriteRender->
 
 	//spriteRender->getShader().get;
-
-	GLfloat vertices[] = {
-		// Pos      // Tex
-		0.0f, 1.0f, 0.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 0.0f,
-
-		0.0f, 1.0f, 0.0f, 1.0f,
-		1.0f, 1.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 0.0f
-	};
 
 	glm::mat4 model;
 	model = glm::translate(model, glm::vec3(spriteRender->getPosition(), 0.0f));
@@ -183,10 +177,11 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 
 	model = glm::scale(model, glm::vec3(spriteRender->getSize(), 1.0f));
 
-	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
-	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::perspective(45.0f, 1.33333f, 0.1f, 1000.0f);
 
-	spriteRender->getShader()->setUniform("vertex", vertices);
+	
 	spriteRender->getShader()->setUniform("projection", projection);
 	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor());
 	spriteRender->getShader()->setUniform("model", model);
@@ -197,8 +192,8 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	gl::BindVertexArray(spriteRender->getVAO());
 	gl::DrawArrays(gl::TRIANGLES, 0, 6);
 	gl::BindVertexArray(0);
+
 	
-	std::printf("Hello World!");
 }
 
 System::Render::Render()
