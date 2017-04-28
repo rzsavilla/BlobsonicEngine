@@ -224,26 +224,26 @@
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(VC_LibraryPath_x86)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(VC_LibraryPath_x86)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration)\;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(VC_LibraryPath_x64)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration)\;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(VC_LibraryPath_x64)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
