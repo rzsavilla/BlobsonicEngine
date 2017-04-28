@@ -369,6 +369,9 @@
     <ClInclude Include="Source\Include\Spotlight.h">
       <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Audio.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -553,6 +556,9 @@
     </ClCompile>
     <ClCompile Include="Source\Include\Spotlight.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Audio.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

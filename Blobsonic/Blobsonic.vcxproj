@@ -38,6 +38,7 @@
     <ClInclude Include="Source\Include\AIPerception.h" />
     <ClInclude Include="Source\Include\aModel.h" />
     <ClInclude Include="Source\Include\AssimpMesh.h" />
+    <ClInclude Include="Source\Include\Audio.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
     <ClInclude Include="Source\Include\Camera.h" />
     <ClInclude Include="Source\Include\CameraMessages.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Source\Common\AIController.cpp" />
     <ClCompile Include="Source\Common\aModel.cpp" />
     <ClCompile Include="Source\Common\AssimpMesh.cpp" />
+    <ClCompile Include="Source\Common\Audio.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
     <ClCompile Include="Source\Common\Camera.cpp" />
     <ClCompile Include="Source\Common\CameraController.cpp" />
@@ -252,7 +254,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>irrKlang.lib;assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -264,7 +266,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>irrKlang.lib;glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -278,7 +280,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -295,7 +297,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
