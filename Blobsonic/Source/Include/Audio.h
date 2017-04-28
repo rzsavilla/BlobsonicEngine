@@ -12,7 +12,7 @@ namespace System {
 	private:
 		Component::Camera* m_ptrActiveCamera;
 
-		std::vector<std::shared_ptr<Entity>> m_modelEntities;
+		std::vector<std::shared_ptr<Entity>> m_soundEntities;
 
 	private:
 		/*!

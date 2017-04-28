@@ -5,6 +5,8 @@
 #include "RenderMessages.h"
 #include "CameraMessages.h"
 
+#include "Sound.h"
+
 //Audio engine
 #include <irrKlang\irrKlang.h>
 
@@ -59,12 +61,9 @@ void System::Audio::process(std::vector<std::shared_ptr<Entity>>* entities)
 	//Iterate through all entities
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
 		//Find and set active camera
-		if ((*it)->has<Component::Camera>()) {
-			auto cam = (*it)->get<Component::Camera>();
-			//if (cam->m_bActive) {
-			//Set camera pointer to this
-			m_ptrActiveCamera = cam;
-			//}
+		if ((*it)->has<Component::Sound>()) {
+			auto sound = (*it)->get<Component::Sound>();
+			addEntity((*it), &m_soundEntities);
 		}
 	}
 }
@@ -72,6 +71,8 @@ void System::Audio::process(std::vector<std::shared_ptr<Entity>>* entities)
 void System::Audio::update(float dt)
 {
 
+
+	removeDestroyed(&m_soundEntities);
 }
 
 void System::Audio::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)

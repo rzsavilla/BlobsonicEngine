@@ -372,6 +372,9 @@
     <ClInclude Include="Source\Include\Audio.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Sound.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -559,6 +562,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Audio.cpp">
       <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Sound.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
