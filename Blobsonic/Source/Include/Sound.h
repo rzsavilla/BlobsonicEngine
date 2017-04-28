@@ -13,13 +13,14 @@ namespace Component {
 		bool startsPaused;
 
 	public:
-		Sound(std::string f, bool playing, bool looping, bool paused);
+		Sound();
 
 		std::string getFile();
 		bool getPlaying();
 		bool getLooping();
 		bool getPaused();
 
+		void setFile(std::string f);
 		void setPlaying(bool state);
 		void setLooping(bool state);
 		void setPaused(bool state);

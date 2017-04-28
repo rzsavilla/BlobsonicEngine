@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "Capsule.h"
 #include "Physical.h"
+#include "Sound.h"
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -55,6 +56,18 @@ std::shared_ptr<Entity> EntityFactory::createCamera(glm::vec3 position)
 	auto cam = entity->get<Component::Camera>();
 
 	cam->setPosition(position);
+	return entity;
+}
+
+std::shared_ptr<Entity> EntityFactory::createSound()
+{
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+
+	//////Attach components
+	entity->attach<Component::Sound>();
+	//Set component Properties
+	auto sound = entity->get<Component::Sound>();
+
 	return entity;
 }
 

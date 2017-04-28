@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "Sound.h"
 
-Component::Sound::Sound(std::string f, bool playing, bool looping, bool paused)
+Component::Sound::Sound()
 {
-	file = f;
-	isPlaying = playing;
-	isLooping = looping;
-	startsPaused = paused;
+	isPlaying = false;
+	isLooping = false;
+	startsPaused = false;
 
 }
 
@@ -28,6 +27,11 @@ bool Component::Sound::getLooping()
 bool Component::Sound::getPaused()
 {
 	return startsPaused;
+}
+
+void Component::Sound::setFile(std::string f)
+{
+	file = f;
 }
 
 void Component::Sound::setPlaying(bool state)
