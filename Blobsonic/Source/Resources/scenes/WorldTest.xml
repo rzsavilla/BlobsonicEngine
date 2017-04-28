@@ -200,18 +200,18 @@
 		</Origin>
 	</Model>
 	
-	<Sprite> <ID>sprite</ID>
+	<Sprite> <ID>sprite1</ID>
 		<Shader>button_shader</Shader>
-		<Texture>red_texture</Texture>
+		<Texture>button_texture</Texture>
 		<Position>
 			<X>20.0f</X>
-			<Y>20.0f</Y>
+			<Y>120.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
 			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
+			<Y>180.0f</Y>
+			<Z>180.0f</Z>
 		</Rotation>
 		<Scale>
 			<X>200.0f</X> 	
@@ -219,24 +219,25 @@
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
+			<!-- Note: This uses CMY colour(Cyan, Magmenta, Yellow) -->
 			<X>1.0f</X> 	
 			<Y>1.0f</Y>
-			<Z>0.0f</Z>
+			<Z>0.5f</Z>
 		</Colour>
 	</Sprite>
 	
-	<Sprite> <ID>sprite</ID>
+	<Sprite> <ID>sprite2</ID>
 		<Shader>button_shader</Shader>
-		<Texture>red_texture</Texture>
+		<Texture>sprite_texture</Texture>
 		<Position>
 			<X>804.0f</X>
-			<Y>20.0f</Y>
+			<Y>120.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
 			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
+			<Y>180.0f</Y>
+			<Z>180.0f</Z>
 		</Rotation>
 		<Scale>
 			<X>200.0f</X> 	
@@ -244,9 +245,10 @@
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
-			<X>1.0f</X> 	
+			<!-- Note: This uses CMY colour(Cyan, Magmenta, Yellow) -->
+			<X>0.5f</X> 	
 			<Y>1.0f</Y>
-			<Z>0.0f</Z>
+			<Z>0.5f</Z>
 		</Colour>
 	</Sprite>
 	

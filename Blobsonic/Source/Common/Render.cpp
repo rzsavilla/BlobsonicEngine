@@ -145,29 +145,11 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 {
-	//GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color)
-	//auto modelS = entity->get<Component::Model>();
-	// Prepare transformations
 	auto spriteRender = entity->get <Component::SpriteRenderer>();
 	auto t = entity->get <Component::Transformable>();
+	std::shared_ptr<Texture> texture = NULL;
 	
-	spriteRender->getShader()->use();/*
-	spriteRender->getTexture();
-	spriteRender->getColor();
-	spriteRender->getPosition();
-	spriteRender->getRotate();
-	spriteRender->getSize();
-	spriteRender->getVertices();
-	spriteRender->getVAO();
-	*/
-	//spriteRender->setPosition(glm::vec2(200, 200));
-	//spriteRender->setSize(glm::vec2(300, 400));
-	//spriteRender->setRotate(45.0f);
-	//spriteRender->setColor(glm::vec3(0.0f, 1.0f, 0.0f));
-
-	//spriteRender->
-
-	//spriteRender->getShader().get;
+	spriteRender->getShader()->use();
 
 	glm::mat4 model;
 	model = glm::translate(model, glm::vec3(spriteRender->getPosition(), 0.0f));
@@ -182,19 +164,22 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::perspective(45.0f, 1.33333f, 0.1f, 1000.0f);
 
-	
+	// Sets the uniforms for the shader
 	spriteRender->getShader()->setUniform("projection", projection);
-	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor());
+	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor()); // Note: This uses CMY colour (Cyan, Magmenta, Yellow)
 	spriteRender->getShader()->setUniform("model", t->getTransform());
 
-	// Set active texture
-	// ...
+	// Sets the active texture
+	gl::ActiveTexture(gl::TEXTURE0);
 
+	//Check for texture
+	texture = spriteRender->getTexture();
+
+	// Bind VAO
 	gl::BindVertexArray(spriteRender->getVAO());
+	// Binds the texture
+	gl::BindTexture(gl::TEXTURE_2D, texture->object());
 	gl::DrawArrays(gl::TRIANGLES, 0, 6);
-	gl::BindVertexArray(0);
-
-	
 }
 
 System::Render::Render()
