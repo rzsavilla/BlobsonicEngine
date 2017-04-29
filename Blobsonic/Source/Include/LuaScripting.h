@@ -17,6 +17,8 @@
 #include <LuaBridge.h>
 #include <iostream>
 
+#include "System.h"
+
 extern "C" {
 	# include "lua.h"
 	# include "lauxlib.h"
@@ -26,24 +28,26 @@ extern "C" {
 using namespace luabridge;
 
 namespace System {
-	class LuaScripting: public System {
-	private:
-		const std::string m_scriptsDir = "Source/Resources/scripts/";
+	namespace Scripting {
+		class LuaScripting : public System {
+		private:
+			const std::string m_scriptsDir = "Source/Resources/scripts/";
 
-		lua_State* m_luaState;	//!< Lua State, stores loaded script
-		void loadScript(std::string luaFile);		//!< Load .lua script file store into state
-		
-		void registerFunctions();
-	private:	//Functions that can be called by lua
+			lua_State* m_luaState;	//!< Lua State, stores loaded script
+			void loadScript(std::string luaFile);		//!< Load .lua script file store into state
 
-		std::shared_ptr<Entity> Entity_new(lua_State* L);	//!Lua function call to create new entity object
-	public:
-		LuaScripting();
-		
-		void process(std::vector<std::shared_ptr<Entity>>* entity) override;
-		void update(float dt) override;
+			void registerFunctions();
+		private:	//Functions that can be called by lua
 
-		//---Message Receiver--//
-		void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
-	};
+			std::shared_ptr<Entity> Entity_new(lua_State* L);	//!Lua function call to create new entity object
+		public:
+			LuaScripting();
+
+			void process(std::vector<std::shared_ptr<Entity>>* entity) override;
+			void update(float dt) override;
+
+			//---Message Receiver--//
+			void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
+		};
+	}
 };

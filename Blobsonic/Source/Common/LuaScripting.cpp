@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "LuaScripting.h"
 
-void System::LuaScripting::loadScript(std::string luaFile)
+void System::Scripting::LuaScripting::loadScript(std::string luaFile)
 {
 	m_luaState = luaL_newstate();
 
@@ -19,33 +19,33 @@ void System::LuaScripting::loadScript(std::string luaFile)
 	}
 }
 
-void System::LuaScripting::registerFunctions()
+void System::Scripting::LuaScripting::registerFunctions()
 {
 
 }
 
-std::shared_ptr<Entity> System::LuaScripting::Entity_new(lua_State * L)
+std::shared_ptr<Entity> System::Scripting::LuaScripting::Entity_new(lua_State * L)
 {
 	const char* name = luaL_checkstring(L, 1);
 	return std::make_shared<Entity>();
 }
 
-System::LuaScripting::LuaScripting()
+System::Scripting::LuaScripting::LuaScripting()
 {
 	loadScript("init.lua");
 }
 
-void System::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
+void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
 {
 
 }
 
-void System::LuaScripting::update(float dt)
+void System::Scripting::LuaScripting::update(float dt)
 {
 
 }
 
-void System::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
+void System::Scripting::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
 
 }
