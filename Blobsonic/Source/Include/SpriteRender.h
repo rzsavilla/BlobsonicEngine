@@ -46,6 +46,6 @@ class SpriteRenderer : public Component
 		void setRotate(GLfloat rot);
 		void setColor(glm::vec3 colour);
 
-		void DrawSprite(GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color);
+		//void DrawSprite(GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color);
 	};
  }

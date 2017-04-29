@@ -357,13 +357,11 @@
     <ClInclude Include="Source\Include\Text.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Source\Include\SpriteRender.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Source\Include\GUIButton.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
-=======
     <ClInclude Include="Source\Include\DirectionalLight.h">
       <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
     </ClInclude>
@@ -378,7 +376,6 @@
     </ClInclude>
     <ClInclude Include="Source\Include\LuaScripting.h">
       <Filter>Header Files\Engine\System</Filter>
->>>>>>> refs/remotes/origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -550,13 +547,11 @@
     <ClCompile Include="Source\Common\Text.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Source\Common\SpriteRender.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\GUIButton.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
-=======
     <ClCompile Include="Source\Common\Math3D.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
@@ -574,7 +569,6 @@
     </ClCompile>
     <ClCompile Include="Source\Common\LuaScripting.cpp">
       <Filter>Source Files\Engine\System</Filter>
->>>>>>> refs/remotes/origin/master
     </ClCompile>
   </ItemGroup>
 </Project>

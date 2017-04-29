@@ -41,12 +41,10 @@ private:
 
 	std::shared_ptr<Entity> loadEntity(tinyxml2::XMLElement* e);			//!< Parse and create model
 	std::shared_ptr<Entity> loadModel(tinyxml2::XMLElement* e);			//!< Parse and create model
-<<<<<<< HEAD
+ 
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
-	//std::shared_ptr<Entity> loadLight(tinyxml2::XMLElement* e);		//!< Parse and create light
-=======
+
 	std::shared_ptr<Entity> loadLight(tinyxml2::XMLElement* e);		//!< Parse and create light
->>>>>>> refs/remotes/origin/master
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
 
 	void readScene(tinyxml2::XMLNode* node);				//!< Parse a scene

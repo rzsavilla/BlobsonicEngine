@@ -200,7 +200,6 @@
 		</Origin>
 	</Model>
 	
-<<<<<<< HEAD
 	<Sprite> <ID>sprite1</ID>
 		<Shader>button_shader</Shader>
 		<Texture>button_texture</Texture>
@@ -210,9 +209,9 @@
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
-			<X>0.0f</X>
-			<Y>180.0f</Y>
-			<Z>180.0f</Z>
+			<X>180.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
 			<X>200.0f</X> 	
@@ -220,10 +219,9 @@
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
-			<!-- Note: This uses CMY colour(Cyan, Magmenta, Yellow) -->
 			<X>1.0f</X> 	
 			<Y>1.0f</Y>
-			<Z>0.5f</Z>
+			<Z>0.0f</Z>
 		</Colour>
 	</Sprite>
 	
@@ -236,9 +234,9 @@
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
-			<X>0.0f</X>
-			<Y>180.0f</Y>
-			<Z>180.0f</Z>
+			<X>180.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
 			<X>200.0f</X> 	
@@ -246,13 +244,12 @@
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
-			<!-- Note: This uses CMY colour(Cyan, Magmenta, Yellow) -->
 			<X>0.5f</X> 	
-			<Y>1.0f</Y>
-			<Z>0.5f</Z>
+			<Y>0.5f</Y>
+			<Z>1.0f</Z>
 		</Colour>
 	</Sprite>
-=======
+
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>
@@ -334,7 +331,6 @@
 		<Linear>0.009f</Linear>
 		<Quadratic>0.0032f</Quadratic>
 	</Light>
->>>>>>> refs/remotes/origin/master
 	
 	<Camera> <ID>cam1</ID>
 		<Position>

@@ -11,13 +11,9 @@
 void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
-<<<<<<< HEAD
-	m_scenes.clear();
-	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
-=======
+ 
 	m_scenes.clear();	//Remove all entities from scene
 	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes);
->>>>>>> refs/remotes/origin/master
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
 	m_bForceReload = false;

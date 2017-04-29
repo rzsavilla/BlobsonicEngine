@@ -97,11 +97,8 @@
     <ClInclude Include="Source\Include\SceneMessages.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
-<<<<<<< HEAD
     <ClInclude Include="Source\Include\SpriteRender.h" />
-=======
     <ClInclude Include="Source\Include\Spotlight.h" />
->>>>>>> refs/remotes/origin/master
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
     <ClInclude Include="Source\Include\System.h" />
@@ -130,13 +127,10 @@
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Source\Common\GUIButton.cpp" />
-=======
     <ClCompile Include="Source\Common\Light.cpp" />
     <ClCompile Include="Source\Common\LuaScripting.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
->>>>>>> refs/remotes/origin/master
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
