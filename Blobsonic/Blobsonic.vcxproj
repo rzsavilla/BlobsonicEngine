@@ -54,7 +54,6 @@
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\Light.h" />
     <ClInclude Include="Source\Include\LuaEntity.h" />
-    <ClInclude Include="Source\Include\LuaFactory.h" />
     <ClInclude Include="Source\Include\LuaScripting.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
