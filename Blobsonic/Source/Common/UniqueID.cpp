@@ -1,13 +1,16 @@
 #include "stdafx.h"
 #include "UniqueID.h"
 
+//Initialize static class variable
+int UniqueID::ms_iUIDCounter = 0;
+
 void UniqueID::setUID()
 {
-
+	ms_iUIDCounter++;
+	m_uiUID = ms_iUIDCounter;
 }
 
-void UniqueID::getUID()
+int UniqueID::getUID()
 {
-	ms_iUIDCounter++;
-
+	return m_uiUID;
 }

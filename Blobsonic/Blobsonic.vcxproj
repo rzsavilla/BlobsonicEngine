@@ -107,6 +107,7 @@
     <ClInclude Include="Source\Include\tinyxml2.h" />
     <ClInclude Include="Source\Include\TransformableOLD.h" />
     <ClInclude Include="Source\Include\Transformable.h" />
+    <ClInclude Include="Source\Include\UniqueID.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
     <ClCompile Include="Source\Common\TransformableOld.cpp" />
+    <ClCompile Include="Source\Common\UniqueID.cpp" />
     <ClCompile Include="Source\Include\Spotlight.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

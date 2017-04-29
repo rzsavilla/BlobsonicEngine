@@ -18,5 +18,5 @@ protected:
 	*/
 	void setUID();				
 public:
-	void getUID();		//!< Returns UID
+	int getUID();		//!< Returns UID
 };

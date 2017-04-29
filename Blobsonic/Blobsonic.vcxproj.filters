@@ -372,6 +372,9 @@
     <ClInclude Include="Source\Include\LuaScripting.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\UniqueID.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -559,6 +562,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\LuaScripting.cpp">
       <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\UniqueID.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
