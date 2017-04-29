@@ -15,6 +15,8 @@ public:
 
 	std::shared_ptr<Entity> createCamera(glm::vec3 position);
 
+	std::shared_ptr<Entity> createSound();
+  
 	std::shared_ptr<Entity> createSprite();
 
 	std::shared_ptr<Entity> createActor();

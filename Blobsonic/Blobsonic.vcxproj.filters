@@ -369,6 +369,11 @@
     <ClInclude Include="Source\Include\Spotlight.h">
       <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Audio.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Sound.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
     <ClInclude Include="Source\Include\LuaScripting.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
@@ -565,6 +570,12 @@
     </ClCompile>
     <ClCompile Include="Source\Include\Spotlight.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Audio.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Sound.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

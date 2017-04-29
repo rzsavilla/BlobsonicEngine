@@ -144,7 +144,4 @@ private:
 	std::map<std::string, unsigned int> m_BoneMapping; //!< Map of bone names to ids
 	std::vector<BoneInfo> m_BoneInfo; //!< Array containing bone information such as offset matrix and final transformation. 
 
-
-
-	void setBuffers();
 };

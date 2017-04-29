@@ -11,6 +11,8 @@
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "Spotlight.h"
+
+#include "Sound.h"
 #include "SpriteRender.h"
 
 void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
@@ -118,8 +120,6 @@ void SceneLoader::loadShader(tinyxml2::XMLElement * e)
 	m_res->addShader(s, shader);
 	if (m_bDebug) std::cout << " Shader Loaded: " << s << "\n";
 }
-
-
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -674,6 +674,69 @@ std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 	return entity;
 }
 
+std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
+{
+	using namespace tinyxml2;
+
+	char* cData = "";			//Temporary storage for element data
+
+	if (m_bDebug) std::cout << "\nLoading Audio \n  ";
+
+	std::shared_ptr<Entity> entity = m_factory.createSound();
+	auto sound = entity->get<Component::Sound>();
+
+	std::string s;
+	char * c;
+	std::string sID;
+
+	//Look at Model Element
+	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
+		const char* childValue = child->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(child, cData)) {
+				sID = std::string(cData, strlen(cData));
+			}
+		}
+		else if (strcmp(childValue, "File") == 0) {
+			//Load file
+			if (readElementText(child, c)) {
+				std::string sFile(c, strlen(c));
+				sound->setFile(sFile);
+				if (m_bDebug) std::cout << "File Set : " << sFile << "\n  ";
+			}
+		}
+		else if (strcmp(childValue, "isPlaying") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (!c) 
+					sound->setPlaying(false);
+				else if (c) 
+					sound->setPlaying(true);
+			}
+			if (m_bDebug) std::cout << "isPlaying Set : " << atof(c) << "\n  ";
+		}
+		else if (strcmp(childValue, "isLooping") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (!c) sound->setLooping(false);
+				else if (c) 
+					sound->setLooping(true);
+			}
+			if (m_bDebug) std::cout << "isLooping set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "startsPaused") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (c == "false") sound->setPaused(false);
+				else if(c == "true") 
+					sound->setPaused(true);
+			}
+			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
+		}
+	}
+	return entity;
+}
+
 void SceneLoader::readScene(tinyxml2::XMLNode * node)
 {
 	bool bTypeFound = false;
@@ -721,6 +784,9 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			else if (strcmp(element->Value(), "Physics") == 0) {
 				entities->addEntity(loadModel(element));
 			}
+			else if (strcmp(element->Value(), "Audio") == 0) {
+				entities->addEntity(loadAudio(element));
+      }
 			else if (strcmp(element->Value(), "Sprite") == 0) {
 				entities->addEntity(loadSprite(element));
 			}
