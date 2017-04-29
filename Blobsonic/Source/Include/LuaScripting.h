@@ -31,15 +31,19 @@ namespace System {
 	namespace Scripting {
 		class LuaScripting : public System {
 		private:
+			const bool m_bDebug = true;	//For couts
+
 			const std::string m_scriptsDir = "Source/Resources/scripts/";
 
 			lua_State* m_luaState;	//!< Lua State, stores loaded script
 			void loadScript(std::string luaFile);		//!< Load .lua script file store into state
 
-			void registerFunctions();
+			void registerFunctions(lua_State* L);
+			void registerClasses(lua_State* L);
 		private:	//Functions that can be called by lua
 
-			std::shared_ptr<Entity> Entity_new(lua_State* L);	//!Lua function call to create new entity object
+			//Temp
+			bool m_bLoaded = false;
 		public:
 			LuaScripting();
 

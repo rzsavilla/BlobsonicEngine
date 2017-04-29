@@ -112,6 +112,12 @@
     <Filter Include="Source Files\Engine\Component\Lights">
       <UniqueIdentifier>{4d2d1688-e5b4-4b71-a979-a9e0148f8ed6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\LUA">
+      <UniqueIdentifier>{418fbe27-e4e7-46e2-9c20-8801c7e63a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\LUA">
+      <UniqueIdentifier>{f0fe5e03-4fe4-4802-857e-97189fdba37f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -375,6 +381,12 @@
     <ClInclude Include="Source\Include\UniqueID.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\LuaEntity.h">
+      <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\LuaFactory.h">
+      <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -565,6 +577,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\UniqueID.cpp">
       <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\LuaEntity.cpp">
+      <Filter>Source Files\Engine\LUA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

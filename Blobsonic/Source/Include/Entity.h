@@ -10,18 +10,27 @@
 #include <typeindex>
 
 #include "Destroyable.h"
+#include "UniqueID.h"
+
 #include "Component.h"
 
-static int iUniqueIDCounter = 0;
+static void LuaLoaded() {
+	std::cout << "Lua is working\n";
+}
 
-class Entity: public Destroyable, public std::enable_shared_from_this<Entity> {
+class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 	int m_iUID;	//!< Unique ID
+
+	const bool m_bDebug = true;	//!< Flag for Couts
 public:
 	Entity() {
-		m_iUID = iUniqueIDCounter;	//Set Unique ID
-		iUniqueIDCounter++;
+		this->setUID();
+		if (m_bDebug) std::cout << "Entity Created: " << this->getUID() << "\n";
+		//--DELETE-- Old code replaced by UniqueID class
+		//m_iUID = iUniqueIDCounter;	//Set Unique ID
+		//iUniqueIDCounter++;
 	}
 	
 	~Entity() { 
@@ -51,6 +60,13 @@ public:
 		else {
 			terminate();
 		}
+	}
+
+	template<typename T>
+	int getComponentByID(const int id) {
+		std::cout << "Component Retrieved: " << id << "\n";
+
+		return 0;
 	}
 
 	template<typename T>
