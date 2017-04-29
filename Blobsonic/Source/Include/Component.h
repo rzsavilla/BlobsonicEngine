@@ -8,11 +8,10 @@
 #include "UniqueID.h"
 
 #include "Entity.h"
-
-static int iUniqueIDCounter = 0;
+#include "Name.h"
 
 namespace Component {
-	struct Component: public UniqueID {
+	struct Component: public UniqueID, public Name {
 	private:
 		std::shared_ptr<Entity> m_parent;
 	public:

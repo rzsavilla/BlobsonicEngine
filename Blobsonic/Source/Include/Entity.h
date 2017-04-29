@@ -23,16 +23,12 @@ static void LuaLoaded() {
 class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
-	int m_iUID;	//!< Unique ID
 
 	const bool m_bDebug = true;	//!< Flag for Couts
 public:
 	Entity() {
 		this->setUID();
 		if (m_bDebug) std::cout << "Entity Created: " << this->getUID() << "\n";
-		//--DELETE-- Old code replaced by UniqueID class
-		//m_iUID = iUniqueIDCounter;	//Set Unique ID
-		//iUniqueIDCounter++;
 	}
 	
 	~Entity() { 
@@ -84,10 +80,5 @@ public:
 	template<typename T>
 	void removeComponent() {
 		m_components.erase(typeid(T));
-	}
-
-	//! Return Unique Identifier
-	int getID() {
-		return m_iUID;
 	}
 };
