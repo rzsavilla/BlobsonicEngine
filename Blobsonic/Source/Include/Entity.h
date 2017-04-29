@@ -1,6 +1,8 @@
 /*
 *	@class Entity
 *	@brief Container for components
+*	@author Rozen Savill
+*	Components are stored within this object and are easily attached and detached
 */
 
 #pragma once
@@ -58,15 +60,25 @@ public:
 			return std::static_pointer_cast<T>(m_components[typeid(T)]).get();
 		}
 		else {
+			std::cout << "Could Not find Component\n";
 			terminate();
 		}
 	}
 
 	template<typename T>
-	int getComponentByID(const int id) {
-		std::cout << "Component Retrieved: " << id << "\n";
+	T* getComponentByID(const int id) {
+		if (has<T>()) {	//Check if entity has component of type T
+			for (auto it = m_components.begin(); it != m_components.end(); ++it) {
+				Component::Component* comp = std::static_pointer_cast<Component::Component>((*it).second).get();
 
-		return 0;
+				if (comp->getUID() == id) {	//Component found
+					if (m_bDebug) std::cout << "ComponentFound\n";
+					return std::static_pointer_cast<T>(m_components[typeid(T)]).get();
+				}
+			}
+		}
+		//if (m_bDebug) std::cout << "Could Not find Component\n";
+		return NULL;
 	}
 
 	template<typename T>
