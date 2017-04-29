@@ -372,6 +372,9 @@
     <ClInclude Include="Source\Include\LuaScripting.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\SpriteRender.h">
+      <Filter>Header Files\Engine\Entity\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -554,11 +557,14 @@
     <ClCompile Include="Source\Common\PointLight.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Include\Spotlight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\LuaScripting.cpp">
       <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\SpriteRender.cpp">
+      <Filter>Source Files\Engine\Component\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Include\Spotlight.cpp">
+      <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -96,6 +96,7 @@
     <ClInclude Include="Source\Include\SceneMessages.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
+    <ClInclude Include="Source\Include\SpriteRender.h" />
     <ClInclude Include="Source\Include\Spotlight.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Source\Common\SceneManager.cpp" />
     <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
+    <ClCompile Include="Source\Common\SpriteRender.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />
     <ClCompile Include="Source\Common\TestScene.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />
