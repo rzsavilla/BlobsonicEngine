@@ -1,9 +1,7 @@
 /*
 *	@class Transformable
 *	@brief Provides entity with transform matrix
-*	@author Rozen Savilla
-*	Transform matrix for translation, rotation scaling and origin.
-*	Transformable component is the core component for majority of all entities as it gives the entity a position in world space
+*	Transform matrix for translation, rotation scaling and origin
 *	Gives entity a size (for collisions) -- To be removed
 */
 
