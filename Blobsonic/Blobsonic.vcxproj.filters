@@ -384,6 +384,9 @@
     <ClInclude Include="Source\Include\LuaEntity.h">
       <Filter>Header Files\Engine\LUA</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Name.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -577,6 +580,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\LuaEntity.cpp">
       <Filter>Source Files\Engine\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Name.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

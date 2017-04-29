@@ -1,4 +1,5 @@
-#include "..\Include\Name.h"
+#include "stdafx.h"
+#include "Name.h"
 
 Name::Name()
 {

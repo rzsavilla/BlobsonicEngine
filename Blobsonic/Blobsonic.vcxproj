@@ -58,6 +58,7 @@
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
     <ClInclude Include="Source\Include\Model.h" />
+    <ClInclude Include="Source\Include\Name.h" />
     <ClInclude Include="Source\Include\OBB.h" />
     <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
@@ -132,6 +133,7 @@
     <ClCompile Include="Source\Common\LuaScripting.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
+    <ClCompile Include="Source\Common\Name.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Engine.cpp" />
