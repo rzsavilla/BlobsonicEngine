@@ -10,6 +10,42 @@ Component::Transformable::Transformable()
 	m_vOrigin = glm::vec3(0.0f);
 }
 
+void Component::Transformable::translate(float x, float y, float z)
+{
+	m_vPosition.x += x;
+	m_vPosition.y += y;
+	m_vPosition.z += z;
+}
+
+void Component::Transformable::rotate(float x, float y, float z)
+{
+	m_vRotation.x += x;
+	m_vRotation.y += y;
+	m_vRotation.z += z;
+}
+
+void Component::Transformable::scale(float x, float y, float z)
+{
+	m_vScale.x += x;
+	m_vScale.y += y;
+	m_vScale.z += z;
+}
+
+void Component::Transformable::translate(glm::vec3 translation)
+{
+	m_vPosition += translation;
+}
+
+void Component::Transformable::rotate(glm::vec3 rotation)
+{
+	m_vRotation += rotation;
+}
+
+void Component::Transformable::scale(glm::vec3 scale)
+{
+	m_vScale += scale;
+}
+
 void Component::Transformable::setPosition(glm::vec3 position)
 {
 	m_vPosition = position;
