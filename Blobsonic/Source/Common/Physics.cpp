@@ -4,6 +4,7 @@
 #include "OBB.h"
 #include "Sphere.h"
 #include "Capsule.h"
+#include "Physical.h"
 
 System::Physics::Physics()
 {
@@ -16,6 +17,9 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 	m_vOBBS.clear();
 	m_vSpheres.clear();
 	m_vCapsules.clear();
+	m_vPhysicals.clear();
+
+
 
 	for (auto it = entities->begin(); it != entities->end(); ++it)
 	{
@@ -34,16 +38,29 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 			m_vSpheres.push_back((*it));
 
 		}
+		if ((*it)->has<Physical>() && (*it)->has<Component::Transformable>()) {
+			m_vPhysicals.push_back((*it));
+		}
 	}
 
-
+	
 
 }
 
 void System::Physics::update(float dt)
 {
 
-	//update all physicls positions
+	dt = 1 / 60.0f;
+
+
+	//update physicals positions
+	for (int i = 0; i < m_vPhysicals.size(); i++)
+	{
+		updatePhysicals(m_vPhysicals.at(i),dt);
+	}
+
+
+	//update all collidables positions
 	for (int i = 0; i < m_vAABBS.size(); i++)
 	{
 		updateAABB(m_vAABBS.at(i));
@@ -52,96 +69,15 @@ void System::Physics::update(float dt)
 	{
 		updateOBB(m_vOBBS.at(i));
 	}
-
-
-	//process AABB
-	for (int i = 0; i < m_vAABBS.size(); i++)
-	{
-
-		for (int x = 0; x < m_vAABBS.size(); x++)
-		{
-			if (i != x)
-			{
-				CheckAABBAABBCollision(m_vAABBS.at(i), m_vAABBS.at(x));
-			}
-		}
-
-	}
-	//process OBB
-
-	for (int i = 0; i < m_vOBBS.size(); i++)
-	{
-		for (int x = 0; x < m_vOBBS.size(); x++)
-		{
-			if (i != x)
-			{
-				CheckOBBOBBCollision(m_vOBBS.at(i), m_vOBBS.at(x));
-			}
-		}
-
-	}
-
-	//process Sphere
 	for (int i = 0; i < m_vSpheres.size(); i++)
 	{
-		for (int x = 0; x < m_vSpheres.size(); x++)
-		{
-			if (i != x)
-			{
-				CheckShereSphereCollision(m_vSpheres.at(i), m_vSpheres.at(x));
-			}
-		}
-
+		updateSphere(m_vSpheres.at(i));
 	}
 
-	//process Sphere Box Collision
-	for (int i = 0; i < m_vSpheres.size(); i++)
-	{
-		for (int x = 0; x < m_vOBBS.size(); x++)
-		{
+	broadPhase(dt);
+	narrowPhase(dt);
 
-			CheckOBBSphereCollision(m_vOBBS.at(x), m_vSpheres.at(i));
-
-		}
-
-	}
-
-	//process OBB Capsule collision
-	for (int i = 0; i < m_vOBBS.size(); i++)
-	{
-		for (int x = 0; x < m_vCapsules.size(); x++)
-		{
-
-			if (CheckOBBCapsuleCollision(m_vCapsules.at(x), m_vOBBS.at(i))) std::cout << "Collision" << std::endl;
-			else  std::cout << "No Collision" << std::endl;
-
-
-		}
-
-	}
-	//process Sphere Capsule collision
-	for (int i = 0; i < m_vSpheres.size(); i++)
-	{
-		for (int x = 0; x < m_vCapsules.size(); x++)
-		{
-
-			CheckSphereCapsuleCollision(m_vCapsules.at(x), m_vSpheres.at(i));
-
-		}
-
-	}
-	//process Capsule Capsule collision
-	for (int i = 0; i < m_vCapsules.size(); i++)
-	{
-		for (int x = 0; x < m_vCapsules.size(); x++)
-		{
-			if (i != x)
-			{
-				CheckSphereCapsuleCollision(m_vCapsules.at(x), m_vCapsules.at(i));
-			}
-		}
-
-	}
+	
 
 
 }
@@ -506,7 +442,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 
 	//translate sphere by inverse box position
-	localSphere.m_vCenter = localSphere.m_vCenter - box->m_vCenter;
+	localSphere.m_vCenter = localSphere.m_vCenter - tBox->getPosition();
 
 	//rotate sphere by inverse box rotation
 	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
@@ -521,6 +457,8 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 
 	//find which portion of space around the cube the sphere exists in
+
+	box->m_vDimensions;
 
 	if (overAllDistance.x < 0) // to the left of cube
 	{
@@ -658,20 +596,41 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	//subract the radius
 	fDist = fDist - localSphere.m_fRadius;
 
+	if (sphere->m_vCenter.x == 20 && fDist < 50)
+	{
+		std:cout << fDist << std::endl;
+	}
 
 	if (fDist <= 0)
 	{
+		//check for physical component on sphere
+		if (eSphere->has<Physical>())
+		{
+			//find collison normal
+			glm::vec3 Normal = localSphere.m_vCenter - clamp;
+			glm::vec3 newVector = Normal;
+			newVector = glm::normalize(newVector);
+			newVector *= localSphere.m_fRadius;
+			Normal = Normal - newVector;
+
+
+			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+
+			Normal = glm::normalize(Normal);
+			Normal = -Normal;
+
+			//find the penetration depth
+			float PenetrationDepth = localSphere.m_fRadius - d;
+			resolveCollision(eBox, eSphere, Normal);
+			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
+		}
+		
 		return true;
 	}
 	else
 	{
 		return false;
 	}
-
-
-
-
-
 
 }
 
@@ -680,9 +639,6 @@ bool System::Physics::CheckOBBCapsuleCollision(std::shared_ptr<Entity> eCap, std
 	// check the OBB against the capsules OBB
 	if (CheckOBBOBBCollision(eCap, eBox)) return true;
 
-
-	//Component::Transformable originalTrans = *eBox->get<Component::Transformable>();
-	//auto transformable = eCap->get<Component::Transformable>();
 
 	//move the sphere to capsule spher pos one
 	auto sphere = eCap->get<Sphere>();
@@ -774,4 +730,203 @@ void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
 	box->m_vCenter = tBox->m_vPosition + (box->m_vDimensions / 2.0f);
 
 
+}
+
+void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
+{
+	
+	//get transformable and physical
+	auto trans = e->get<Component::Transformable>();
+	auto phys = e->get<Physical>();
+
+	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
+	{
+		phys->m_vAcceleration = glm::vec3(phys->m_vAcceleration.x, GRAVITYCOEFFICENT, phys->m_vAcceleration.z);
+		phys->m_vVelocity += phys->m_vAcceleration * dt;
+		trans->m_vPosition += phys->m_vVelocity * dt;
+
+	
+	}
+
+
+
+}
+
+void System::Physics::updateSphere(std::shared_ptr<Entity> eSphere)
+{
+	auto trans1 = eSphere->get<Component::Transformable>();
+	auto sphere = eSphere->get<Sphere>();
+
+	sphere->m_vCenter = trans1->getPosition();
+
+}
+
+void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, glm::vec3 CollisionNormal)
+{
+	//get physicals and transformables
+	auto trans1 = object1->get<Component::Transformable>();
+	auto phys1 = object1->get<Physical>();
+
+	auto trans2 = object2->get<Component::Transformable>();
+	auto phys2 = object2->get<Physical>();
+
+	//calculate relative velocity
+	glm::vec3 vRelVel = phys2->m_vVelocity - phys1->m_vVelocity;
+
+	//calculate velocity along normal
+	float fRelVelocity = glm::dot(vRelVel, CollisionNormal);
+
+	//do not resolve if traverling away from
+	if (fRelVelocity > 0)return;
+	
+	//calculate restitution
+	//consider changing
+	float e = std::min(phys1->m_fRestitution, phys2->m_fRestitution);
+
+	//calculate impulse scalar
+	float j = -(1 + e) * fRelVelocity;
+	j /= phys1->m_fINVMass + phys2->m_fINVMass;
+
+	//Apply the impluse
+	glm::vec3 impulse = j * CollisionNormal;
+	phys1->m_vVelocity -= phys1->m_fINVMass * impulse;
+	phys2->m_vVelocity += phys2->m_fINVMass * impulse;
+
+
+
+
+
+}
+
+void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, float Depth, glm::vec3 CollisionNormal)
+{
+
+	//get physicals and transformables
+	auto trans1 = object1->get<Component::Transformable>();
+	auto phys1 = object1->get<Physical>();
+
+	auto trans2 = object2->get<Component::Transformable>();
+	auto phys2 = object2->get<Physical>();
+
+	//reduces rounding errors in the hardware
+	float percent = 0.0025f; 
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * percent * CollisionNormal;
+	trans1->m_vPosition -= phys1->m_fINVMass * correction;
+	trans2->m_vPosition += phys2->m_fINVMass * correction;
+
+}
+
+void System::Physics::broadPhase(float dt)
+{
+	m_vCheckSpheres.clear();
+	m_vCheckOBBS.clear();
+	m_vCheckCapsule.clear();
+	
+	//process AABB
+	for (int i = 0; i < m_vAABBS.size(); i++)
+	{
+
+		for (int x = 0; x < m_vAABBS.size(); x++)
+		{
+			if (i != x)
+			{
+				if (CheckAABBAABBCollision(m_vAABBS.at(i), m_vAABBS.at(x)))
+				{
+					// these 2 entities need to be checked
+					if (m_vAABBS.at(i)->has<Sphere>())m_vCheckSpheres.push_back(m_vAABBS.at(i));
+					if (m_vAABBS.at(x)->has<Sphere>())m_vCheckSpheres.push_back(m_vAABBS.at(x));
+
+					if (m_vAABBS.at(i)->has<OBB>())m_vCheckOBBS.push_back(m_vAABBS.at(i));
+					if (m_vAABBS.at(x)->has<OBB>())m_vCheckOBBS.push_back(m_vAABBS.at(x));
+
+					if (m_vAABBS.at(i)->has<Capsule>())m_vCheckCapsule.push_back(m_vAABBS.at(i));
+					if (m_vAABBS.at(x)->has<Capsule>())m_vCheckCapsule.push_back(m_vAABBS.at(x));
+
+
+				}
+			}
+		}
+
+	}
+}
+
+void System::Physics::narrowPhase(float dt)
+{
+	
+	//process OBB
+
+	for (int i = 0; i < m_vCheckOBBS.size(); i++)
+	{
+		for (int x = 0; x < m_vCheckOBBS.size(); x++)
+		{
+			if (i != x)
+			{
+				CheckOBBOBBCollision(m_vCheckOBBS.at(i), m_vCheckOBBS.at(x));
+			}
+		}
+
+	}
+
+	//process Sphere
+	for (int i = 0; i < m_vCheckSpheres.size(); i++)
+	{
+		for (int x = 0; x < m_vCheckSpheres.size(); x++)
+		{
+			if (i != x)
+			{
+				CheckShereSphereCollision(m_vCheckSpheres.at(i), m_vCheckSpheres.at(x));
+			}
+		}
+
+	}
+
+	//process Sphere Box Collision
+	for (int i = 0; i < m_vCheckSpheres.size(); i++)
+	{
+		for (int x = 0; x < m_vCheckOBBS.size(); x++)
+		{
+
+			CheckOBBSphereCollision(m_vCheckOBBS.at(x), m_vCheckSpheres.at(i));
+
+
+		}
+
+	}
+
+	//process OBB Capsule collision
+	for (int i = 0; i < m_vCheckOBBS.size(); i++)
+	{
+		for (int x = 0; x < m_vCheckCapsule.size(); x++)
+		{
+
+			CheckOBBCapsuleCollision(m_vCheckCapsule.at(x), m_vCheckOBBS.at(i));
+
+
+
+		}
+
+	}
+	//process Sphere Capsule collision
+	for (int i = 0; i < m_vCheckSpheres.size(); i++)
+	{
+		for (int x = 0; x < m_vCheckCapsule.size(); x++)
+		{
+
+			CheckSphereCapsuleCollision(m_vCheckCapsule.at(x), m_vCheckSpheres.at(i));
+
+		}
+
+	}
+	//process Capsule Capsule collision
+	for (int i = 0; i < m_vCheckCapsule.size(); i++)
+	{
+		for (int x = 0; x < m_vCheckCapsule.size(); x++)
+		{
+			if (i != x)
+			{
+				CheckSphereCapsuleCollision(m_vCheckCapsule.at(x), m_vCheckCapsule.at(i));
+			}
+		}
+
+	}
 }

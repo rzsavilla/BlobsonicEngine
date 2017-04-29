@@ -298,6 +298,23 @@ void GLSLProgram::setUniform(const char *name, bool val)
 	gl::Uniform1i(loc, val);
 }
 
+void GLSLProgram::setUniformIndex(unsigned int Index, const Matrix4f& matIn)
+{
+	// Pass transformation matrix to uniform array. 
+	gl::UniformMatrix4fv(m_boneLocation[Index], 1, TRUE, (const GLfloat*)matIn.m);
+}
+
+void GLSLProgram::initialiseBoneUniforms()
+{
+	for (unsigned int i = 0; i < ui_BoneArraySize; i++) {
+
+		char Name[128];
+		memset(Name, 0, sizeof(Name));
+		_snprintf_s(Name, sizeof(Name), "gBones[%d]", i);
+		m_boneLocation[i] = gl::GetUniformLocation(handle, Name);
+	}
+}
+
 void GLSLProgram::printActiveUniforms() {
 #ifdef __APPLE__
 	// For OpenGL 4.1, use gl::GetActiveUniform

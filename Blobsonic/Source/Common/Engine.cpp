@@ -8,13 +8,19 @@
 
 #include "InputMessages.h"
 
-void Engine::Engine::initScene()
+void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
+<<<<<<< HEAD
 	m_scenes.clear();
 	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml");
+=======
+	m_scenes.clear();	//Remove all entities from scene
+	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes);
+>>>>>>> refs/remotes/origin/master
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
+	m_bForceReload = false;
 }
 
 void Engine::Engine::loop()
@@ -27,21 +33,26 @@ void Engine::Engine::loop()
 	double dCurrentTime = 0;
 	int iFrames = 0;
 	int iUpdates = 0;
+
+	m_deltaTimer.reset();
 	while (m_bRunning) {
 		//Calculate delta time
 		dCurrentTime = glfwGetTime();
 		dt += (dCurrentTime - dPrevTime) / dFPSLimit;
 		dPrevTime = dCurrentTime;
 
-		if (m_bReloadScene) initScene();
+		if (m_bReloadScene) initScene();			//Reload scene
+		else if (m_bForceReload) initScene(true);	//Reload scene including scene resources
+
+		
 
 		//Limit update
 		while (dt >= 1.0) {
-			update((float)dt);
 			iUpdates++;
 			dt--;
 		}
-		
+		update((float)m_deltaTimer.getElapsed());
+
 		//Render
 		render();
 		iFrames++;	//Count frames
@@ -60,6 +71,7 @@ void Engine::Engine::loop()
 			iUpdates = 0;
 			iFrames = 0;
 		}
+		m_deltaTimer.reset();
 	}
 
 	//Close window and terminate GLFW
@@ -100,6 +112,8 @@ void Engine::Engine::render()
 			if (it->first == typeid(System::Render)) {	//Only process render systems
 				//Render entities
 				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+				//Update Render System
+				(*it).second->update(0.0f);	
 			}
 		}
 	}
@@ -162,9 +176,10 @@ void Engine::Engine::init(int width, int height)
 	
 	gl::Enable(gl::DEPTH_TEST);
 
-	initScene();
+	initScene(true);
 
 	glfwSetCursorPos(m_window, 0.0, 0.0);
+	glfwSwapInterval(1);
 }
 
 void Engine::Engine::run()
@@ -190,8 +205,10 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 					m_bRunning = false;	//End game loop
 					break;
 				case GLFW_KEY_P:
-					m_bReloadScene = true;
+					m_bReloadScene = true;	//Reload scene objects
 					break;
+				case GLFW_KEY_O:
+					m_bForceReload = true;	//Reload entire scene including resources
 				default:
 					break;
 				}

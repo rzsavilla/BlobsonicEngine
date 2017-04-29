@@ -1,17 +1,31 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Render.h"
 //Messages
 #include "CameraMessages.h"
-#include <stdafx.h>
 //Components
 #include "Model.h"
 #include "Transformable.h"
 #include "Text.h"
+<<<<<<< HEAD
 #include "SpriteRender.h"
 //#include "GUIButton.h"
+=======
+#include "PointLight.h"
+>>>>>>> refs/remotes/origin/master
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
+
+void System::Render::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (auto it = entities->begin(); it != entities->end(); ++it) {
+
+		if ((*it)->getID() == entity->getID()) {
+			return;	//Entity already stored
+		}
+	}
+	entities->push_back(entity);	//Store entity
+}
 
 void System::Render::renderModel(std::shared_ptr<Entity> entity)
 {
@@ -20,6 +34,11 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	if (model->m_shader != NULL) {
 		model->m_shader->use();	//Set shader
 
+<<<<<<< HEAD
+=======
+		passLightUniforms(model->m_shader);
+    
+>>>>>>> refs/remotes/origin/master
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 
@@ -90,14 +109,15 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	}
 	
 	*/
-	
+	m_fDeltaTime = 0.001;
+
 	//Draw model Assimp meshes
 	if (!model->m_aMeshes.empty()) {
 		for (int i = 0; i < model->m_aMeshes.size(); i++) {
 
 			std::shared_ptr<Texture> texture = NULL;
 			std::shared_ptr<AssimpMesh> aMesh = model->m_aMeshes.at(i);	//Get pointer to amesh
-
+			
 																		//Pass material uniforms to shader
 			if (model->m_shader != NULL && i < model->m_materials.size()) {
 				//Material reflectivity
@@ -105,8 +125,25 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
 				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
 				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
+<<<<<<< HEAD
 				
 				//model->m_shader->setUniform("button", );	//Shininess
+=======
+			
+				if (aMesh->getHasBones()) {
+					// Vector of bone transformation matrices. 
+					std::vector<Matrix4f> Transforms;
+
+					// Obtains newly transformed matrices from the bone hierarchy at the given time. 
+					aMesh->BoneTransform(m_fDeltaTime, Transforms);
+
+					// Passes each new bone transformation into the shader. 
+					for (unsigned int j = 0; j < Transforms.size(); j++) {
+						model->m_shader->setUniformIndex(j, Transforms[j]);
+
+					}
+				}
+>>>>>>> refs/remotes/origin/master
 			}
 
 			//Check for texture
@@ -116,24 +153,42 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			gl::BindVertexArray(aMesh->getVAO());		//Bind VAO
 
-			//Has Texture
-			if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
-				gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
-				gl::GenerateMipmap(gl::TEXTURE_2D);
-				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
-				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
-				gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
-			}
-			//Has expanded normals
-			else if (!aMesh->meshes[i].getNormal().empty()) {
-				gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-			}
-			//No Texture and No expanded normals
-			else {
-				gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
-			}
-			gl::BindVertexArray(0);													//Unbind VAO
+			//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
+			//	int index = 3;
+			//	gl::DrawElementsBaseVertex(gl::TRIANGLES,
+			//		aMesh->m_Entries[k].NumIndices,
+			//		gl::UNSIGNED_INT,
+			//		(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+			//		aMesh->m_Entries[k].BaseVertex);
+			//}
+			//for (int k = 0; k < 1; k++) {
+				//Has Texture
+				if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
+					gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
+					gl::GenerateMipmap(gl::TEXTURE_2D);
+					gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
+					gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+
+					//gl::DrawElementsBaseVertex(gl::TRIANGLES,
+					//	aMesh->m_Entries[k].NumIndices,
+					//	gl::UNSIGNED_INT,
+					//	(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+					//	aMesh->m_Entries[k].BaseVertex);
+					//
+
+					gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+					gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
+				}
+				//Has expanded normals
+				else if (!aMesh->meshes[i].getNormal().empty()) {
+					gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+				}
+				//No Texture and No expanded normals
+				else {
+					gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
+				}
+			//}
+			gl::BindVertexArray(0);	//Unbind VAO
 		}
 	}
 }
@@ -143,6 +198,7 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 }
 
+<<<<<<< HEAD
 void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 {
 	auto spriteRender = entity->get <Component::SpriteRenderer>();
@@ -180,6 +236,79 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	// Binds the texture
 	gl::BindTexture(gl::TEXTURE_2D, texture->object());
 	gl::DrawArrays(gl::TRIANGLES, 0, 6);
+=======
+void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
+{
+	int iDirCount = 0;
+	int iPointCount = 0;
+	int iSpotCount = 0;
+
+	Component::Transformable* t = NULL;
+
+	//Pass directional lighting parameters to shader
+	for (int i = 0; i < m_directionalLights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto dirLight = m_directionalLights.at(i)->get<Component::DirectionalLight>();
+
+		//Pass uniforms
+		std::string sDirLight = "dirLights[" + std::to_string(i) + "].";
+		shader->setUniform((sDirLight + "ambient").data(), dirLight->getAmbient());
+		shader->setUniform((sDirLight + "diffuse").data(), dirLight->getDiffuse());
+		shader->setUniform((sDirLight + "specular").data(), dirLight->getSpecular());
+		shader->setUniform((sDirLight + "direction").data(), dirLight->getDirection());
+	}
+
+	//Pass point lighting parameters to shader
+	for (int i = 0; i < m_pointLights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto pointLight = m_pointLights.at(i)->get<Component::PointLight>();
+
+		//Pass uniforms
+		std::string sPointLight = "pointLights[" + std::to_string(i) + "].";
+		shader->setUniform((sPointLight + "ambient").data(), pointLight->getAmbient());
+		shader->setUniform((sPointLight + "diffuse").data(), pointLight->getDiffuse());
+		shader->setUniform((sPointLight + "specular").data(), pointLight->getSpecular());
+		shader->setUniform((sPointLight + "radius").data(), pointLight->getRadius());
+
+		if (m_pointLights.at(i)->has<Component::Transformable>()) {
+			t = m_pointLights.at(i)->get<Component::Transformable>();
+			shader->setUniform((sPointLight + "position").data(), t->getPosition());
+		}
+	}
+
+	//Pass  spot lighting parameters to shader
+	for (int i = 0; i < m_spotlights.size(); i++) {	//Iterate through all lights
+		//Get Light Component
+		auto spotlight = m_spotlights.at(i)->get<Component::Spotlight>();
+
+		//Pass uniforms
+		std::string sSpotLight = "spotlights[" + std::to_string(i) + "].";
+		shader->setUniform((sSpotLight + "ambient").data(), spotlight->getAmbient());
+		shader->setUniform((sSpotLight + "diffuse").data(), spotlight->getDiffuse());
+		shader->setUniform((sSpotLight + "specular").data(), spotlight->getSpecular());
+		shader->setUniform((sSpotLight + "direction").data(), spotlight->getDirection());
+
+		shader->setUniform((sSpotLight + "cutOff").data(), spotlight->getCutOff());
+		shader->setUniform((sSpotLight + "outerCutOff").data(), spotlight->getOuterCutOff());
+		shader->setUniform((sSpotLight + "constant").data(), spotlight->getConstant());
+		shader->setUniform((sSpotLight + "linear").data(), spotlight->getLinear());
+		shader->setUniform((sSpotLight + "quadratic").data(), spotlight->getQuadratic());
+
+		if (m_spotlights.at(i)->has<Component::Transformable>()) {
+			t = m_spotlights.at(i)->get<Component::Transformable>();
+			shader->setUniform((sSpotLight + "position").data(), t->getPosition());
+		}
+	}
+}
+
+void System::Render::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (int i = 0; i < entities->size(); i++) {
+		if (entities->at(i)->isDestroyed()) {
+			entities->erase(entities->begin() + i);
+		}
+	}
+>>>>>>> refs/remotes/origin/master
 }
 
 System::Render::Render()
@@ -208,9 +337,21 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
 		}
+<<<<<<< HEAD
 		//Find Sprite Component
 		if ((*it)->has<Component::SpriteRenderer>()) {
 			renderSprite(*it);	//Render Sprite
+=======
+		//Find Light Components
+		if ((*it)->has<Component::DirectionalLight>()) {	//Directional light
+			addEntity((*it), &m_directionalLights);
+		}
+		if ((*it)->has<Component::PointLight>()) {
+			addEntity((*it), &m_pointLights);				//Point light
+		}
+		if ((*it)->has<Component::Spotlight>()) {
+			addEntity((*it), &m_spotlights);				//Spotlight
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 }
@@ -218,6 +359,10 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 void System::Render::update(float dt)
 {
 
+	//Remove Destroyed Entities
+	removeDestroyed(&m_directionalLights);
+	removeDestroyed(&m_pointLights);
+	removeDestroyed(&m_spotlights);
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)

@@ -8,8 +8,12 @@
 #include "OBB.h"
 #include "Sphere.h"
 #include "Capsule.h"
+<<<<<<< HEAD
 #include "GUIButton.h"
 #include "SpriteRender.h"
+=======
+#include "Physical.h"
+>>>>>>> refs/remotes/origin/master
 
 EntityFactory::EntityFactory(ResourceManager * res)
 {
@@ -154,7 +158,7 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 	else
 	{
 	
-		s->m_vCenter = t->m_vPosition + (t->getScale() / 2.0f);
+		s->m_vCenter = position;
 	}
 
 	//find the largest scale of the sphere
@@ -224,14 +228,39 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 	c->m_vSphereCenter2 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
 }
 
+<<<<<<< HEAD
 void EntityFactory::attachSprite(std::shared_ptr<Entity> entity)
 {
 	entity->attach<Component::SpriteRenderer>();
 }
 
 void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity)
+=======
+void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass,float restitution)
+>>>>>>> refs/remotes/origin/master
 {
+	if (!entity->has<Component::Transformable>()) {
+		entity->attach<Component::Transformable>();
+	}
+	if (!entity->has<Physical>()) {
+		entity->attach<Physical>();
+	}
+	auto physical = entity->get<Physical>();
+	
+	//apply the mass
+	physical->m_fMass = mass;
+	//check for infinite mass
+	if (physical->m_fMass == 0)
+	{
+		physical->m_fINVMass = 0;
+	}
+	else
+	{
+		//set inverserse
+		physical->m_fINVMass = 1 / mass;
+	}
 
-
+	//set restitution
+	physical->m_fRestitution = restitution;
 
 }

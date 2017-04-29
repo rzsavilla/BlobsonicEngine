@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdafx.h>
+#include "stdafx.h"
 #include <memory>
 #include "MessageHandler.h"
 #include "InputMessages.h"
@@ -12,6 +12,8 @@
 
 #include "EntityManager.h"
 #include "ResourceManager.h"
+
+#include "MyTimer.h"
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -25,12 +27,15 @@ namespace Engine {
 		std::map<std::type_index, std::shared_ptr<System::System>> m_ptrSystems;
 		bool m_bRunning;	//!< Flag to start and end game loop
 
+		MyTimer m_deltaTimer;
+
 		ResourceManager m_resourceManager;
 	private:
 		bool m_bReloadScene;	//!< Flag for xml scene intialization
+		bool m_bForceReload;	//!< Flag for xml scene loading forcing resources to be reloaded
 		SceneLoader m_sceneLoader;
 		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
-		void initScene();	//!< Initialize Scene
+		void initScene(/*! Optional default is false*/bool forceReloadRes = false);	//!< Initialize Scene
 	private:	//GLFW
 		int m_iWindowWidth;
 		int m_iWindowHeight;

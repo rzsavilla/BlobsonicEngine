@@ -8,7 +8,13 @@
 #include "Camera.h"
 #include "AABB.h"
 #include "Player.h"
+<<<<<<< HEAD
 #include "SpriteRender.h"
+=======
+#include "DirectionalLight.h"
+#include "PointLight.h"
+#include "Spotlight.h"
+>>>>>>> refs/remotes/origin/master
 
 void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 {
@@ -29,7 +35,7 @@ void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 			//Load mesh
 			if (readElementText(Child, c)) {
 				std::string sFile(c, strlen(c));
-				mesh->load(sFile);
+				//mesh->load(sFile);
 				aMesh->load(sFile);
 			};
 		}
@@ -38,8 +44,8 @@ void SceneLoader::loadMesh(tinyxml2::XMLElement * e)
 		}
 	}
 	m_res->addAssimpMesh(s, aMesh);	//Add mesh to resource manager;
-	m_res->addMesh(s, mesh);	//Add mesh to resource manager;
-	m_res->addMesh(s,mesh);	//Add mesh to resource manager;
+	//m_res->addMesh(s, mesh);	//Add mesh to resource manager;
+	//m_res->addMesh(s,mesh);	//Add mesh to resource manager;
 	if (m_bDebug) std::cout << " Mesh Loaded: " << s << "\n";
 }
 
@@ -225,7 +231,7 @@ void SceneLoader::loadShader(tinyxml2::XMLElement * e)
 	if (m_bDebug) std::cout << " Shader Loaded: " << s << "\n";
 }
 
-std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
+std::shared_ptr<Entity> SceneLoader::loadEntity(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
@@ -235,20 +241,36 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	auto transform = entity->get<Component::Transformable>();
 	glm::vec3 Dimensions;
 	float radius;
-	float mass;
+	float mass = 1;
+	float restitution = 0.5;
+	const char* Value;
+	vector<std::string> components;
+	std::string tempString;
 
 
 
 	std::string sID;
 	//Look at Model Element
-	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement())
+	{
+
 		const char* childValue = modelChild->Value();
+
+		if (strcmp(childValue, "Component") == 0) {
+			
+		}
+
+
 		if (strcmp(childValue, "ID") == 0) {
 			if (readElementText(modelChild, cData)) {
 				sID = std::string(cData, strlen(cData));
 				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+				if (m_bDebug) std::cout << "Adding component : " << tempString << "\n";
+				components.push_back(tempString);
+					
 			}
 		}
+		
 		else if (strcmp(childValue, "Player") == 0) {
 			//Attach player component
 			entity->attach<Component::Player>();
@@ -258,7 +280,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(modelChild, cData)) {
-				model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
+				//model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
 				model->m_aMeshes.push_back(m_res->getAssimpMesh(std::string(cData, strlen(cData))));
 			}
 		}
@@ -311,26 +333,191 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 				radius = atof(cData);
 			}
 		}
+		else if (strcmp(childValue, "Mass") == 0) {
+			if (readElementText(modelChild, cData)) {
+				mass = atof(cData);
+			}
+		}
+		else if (strcmp(childValue, "Restitution") == 0) {
+			if (readElementText(modelChild, cData)) {
+				restitution = atof(cData);
+			}
+		}
+
 	}
+
+	//attach components
+	for (int i = 0; i < components.size(); i++)
+	{
+		if (components[i] == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+		else if (components[i] == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (components[i] == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
+		else if (components[i] == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass, restitution);
+	}
+<<<<<<< HEAD
 	if (sID == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
 	else if (sID == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
 	else if (sID == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
 	else if (sID == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
 	else if (sID == "Button")m_factory.attachSprite(entity);
+=======
+>>>>>>> refs/remotes/origin/master
 	return entity;
 }
 
-/*
+std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
+{
+	using namespace tinyxml2;
+	char* cData = "";			//Temporary storage for element data
+	if (m_bDebug) std::cout << "\nLoading Model \n  ";
+	std::shared_ptr<Entity> entity = m_factory.createActor();
+	auto model = entity->get<Component::Model>();
+	auto transform = entity->get<Component::Transformable>();
+	glm::vec3 Dimensions;
+	float radius;
+	float mass = 1;
+	float restitution = 0.5;
+	const char* Value;
+	vector<std::string> components;
+	std::string tempString;
+
+
+
+	std::string sID;
+	//Look at Model Element
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement())
+	{
+		
+		const char* childValue = modelChild->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sID = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		if (strcmp(childValue, "Component") == 0) {
+			if (readElementText(modelChild, cData)) {
+				tempString = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "Adding component : " << tempString << "\n";
+				components.push_back(tempString);
+			}
+		}
+		else if (strcmp(childValue, "Player") == 0) {
+			//Attach player component
+			entity->attach<Component::Player>();
+			if (readElementText(modelChild, cData)) {
+				entity->get<Component::Player>()->m_fMoveSpeed = atof(cData);
+			}
+		}
+		else if (strcmp(childValue, "Mesh") == 0) {
+			if (readElementText(modelChild, cData)) {
+				//model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
+				model->m_aMeshes.push_back(m_res->getAssimpMesh(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model->m_shader = (m_res->getShader(std::string(cData, strlen(cData))));
+				model->m_shader->initialiseBoneUniforms();
+			}
+		}
+		else if (strcmp(childValue, "Texture") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model->m_textures.push_back(m_res->getTexture(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Position") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setPosition(v);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Scale") == 0) {
+			//Set model scale
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setScale(v);
+			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Rotation") == 0) {
+			//Set model rotation
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setRotation(v);
+			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Dimensions") == 0) {
+			//Set model scale
+			glm::vec3 v = parseVec3(modelChild);
+			Dimensions = v;
+			if (m_bDebug) std::cout << "Dimensions Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Origin") == 0) {
+			//Set model origin
+			glm::vec3 v = parseVec3(modelChild);
+			transform->m_vOrigin = v;
+			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Material") == 0) {
+			if (readElementText(modelChild, cData)) {
+				model->m_materials.push_back((m_res->getMaterial(std::string(cData, strlen(cData)))));
+			}
+		}
+		else if (strcmp(childValue, "Radius") == 0) {
+			if (readElementText(modelChild, cData)) {
+				radius = atof(cData);
+			}
+		}
+		else if (strcmp(childValue, "Mass") == 0) {
+			if (readElementText(modelChild, cData)) {
+				mass = atof(cData);
+			}
+		}
+		else if (strcmp(childValue, "Restitution") == 0) {
+			if (readElementText(modelChild, cData)) {
+				restitution = atof(cData);
+			}
+		}
+		
+	}
+		
+	//attach components
+	for (int i = 0; i < components.size(); i++)
+	{
+		if (components[i] == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+		else if (components[i] == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (components[i] == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
+		else if (components[i] == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+		else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass, restitution);
+	}
+	return entity;
+	
+}
+
 std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 {
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+
+	entity->attach<Component::Transformable>();
+
+	glm::vec3 vPosition;
+	glm::vec3 vAmbient, vDiffuse, vSpecular;
+	glm::vec3 vDirection = glm::vec3(0.0f,-1.0f,0.0f);
+	float fRadius = 0.0f;
+
+	//Default values
+	float fCutOff = 45.0f;
+	float fOuterCutoff = 45.0f;
+	float fConstant =  1.0f;
+	float fLinear = 0.09f;
+	float fQuadratic = 0.032f;
+
 	using namespace tinyxml2;
 
 	char* cData = "";			//Temporary storage for element data
 
 	if (m_bDebug) std::cout << "\nLoading Light \n  ";
 
-	Light light;
 	std::string sID;
+	std::string sType = "";
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
 		const char* childValue = modelChild->Value();
@@ -339,37 +526,95 @@ std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 				sID = std::string(cData, strlen(cData));
 			}
 		}
+		else if (strcmp(childValue, "Type") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sType = std::string(cData, strlen(cData));
+			}
+		}
 		else if (strcmp(childValue, "Position") == 0) {
-			glm::vec3 v = parseVec3(modelChild);
-			light.setPosition(v);
-
-			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Ambient") == 0) {
-			glm::vec3 v = parseVec3(modelChild);
-			light.setAmbient(v);
-			if (m_bDebug) std::cout << "Ambient intensity: " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Diffuse") == 0) {
-			glm::vec3 v = parseVec3(modelChild);
-			light.setDiffuse(v);
-			if (m_bDebug) std::cout << "Diffuse intensity: " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}
-		else if (strcmp(childValue, "Specular") == 0) {
-			glm::vec3 v = parseVec3(modelChild);
-			light.setSpecular(v);
-			if (m_bDebug) std::cout << "Specular intensity: " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+			vPosition = parseVec3(modelChild);
+			if (m_bDebug) std::cout << "Position Set : " << vPosition.x << ", " << vPosition.y << ", " << vPosition.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Radius") == 0) {
-			if (readElementText(modelChild, cData)) {
-				light.setRadius(atof(cData));
-			}
+			if (readElementText(modelChild, cData)) { fRadius = atof(cData); }
+			if (m_bDebug) std::cout << "Radius Set : " << fRadius << "\n  ";
+		}
+		else if (strcmp(childValue, "Direction") == 0) {
+			vDirection = parseVec3(modelChild);
+			if (m_bDebug) std::cout << "Light Direction: " << vDirection.x << ", " << vDirection.y << ", " << vDirection.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Ambient") == 0) {
+			vAmbient = parseVec3(modelChild);
+			if (m_bDebug) std::cout << "Ambient intensity: " << vAmbient.x << ", " << vAmbient.y << ", " << vAmbient.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Diffuse") == 0) {
+			vDiffuse = parseVec3(modelChild);
+			if (m_bDebug) std::cout << "Diffuse intensity: " << vDiffuse.x << ", " << vDiffuse.y << ", " << vDiffuse.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Specular") == 0) {
+			vSpecular = parseVec3(modelChild);
+			if (m_bDebug) std::cout << "Specular intensity: " << vSpecular.x << ", " << vSpecular.y << ", " << vSpecular.z << "\n  ";
+		}
+		else if (strcmp(childValue, "CutOff") == 0) {
+			if (readElementText(modelChild, cData)) { fCutOff = atof(cData); }
+			if (m_bDebug) std::cout << "CutOff Set : " << fCutOff << "\n  ";
+		}
+		else if (strcmp(childValue, "OuterCutOff") == 0) {
+			if (readElementText(modelChild, cData)) { fOuterCutoff = atof(cData); }
+			if (m_bDebug) std::cout << "OuterCutOff Set : " << fOuterCutoff << "\n  ";
+		}
+		else if (strcmp(childValue, "Constant") == 0) {
+			if (readElementText(modelChild, cData)) { fConstant = atof(cData); }
+			if (m_bDebug) std::cout << "Constant Set : " << fConstant << "\n  ";
+		}
+		else if (strcmp(childValue, "Linear") == 0) {
+			if (readElementText(modelChild, cData)) { fLinear = atof(cData); }
+			if (m_bDebug) std::cout << "Linear Set : " << fLinear << "\n  ";
+		}
+		else if (strcmp(childValue, "Quadratic") == 0) {
+			if (readElementText(modelChild, cData)) { fQuadratic = atof(cData); }
+			if (m_bDebug) std::cout << "Quadratic Set : " << fQuadratic << "\n  ";
 		}
 	}
 
-	return std::pair<std::string, Light>(sID, light);
+	auto t = entity->get<Component::Transformable>();
+
+	if (sType == "Directional") {
+		entity->attach<Component::DirectionalLight>();
+		auto dirLight = entity->get<Component::DirectionalLight>();
+		dirLight->setDirection(vDirection);
+		dirLight->setIntensity(vAmbient,vDiffuse,vSpecular);
+	}
+	else if (sType == "Point") {
+		entity->attach<Component::PointLight>();
+		auto pointLight = entity->get<Component::PointLight>();
+		if (entity->has<Component::Transformable>()) {
+			t = entity->get<Component::Transformable>();
+			t->setPosition(vPosition);
+		}
+		pointLight->setIntensity(vAmbient, vDiffuse, vSpecular);
+		pointLight->setRadius(fRadius);
+	}
+	else if (sType == "Spotlight") {
+		entity->attach<Component::Spotlight>();
+		auto spotlight = entity->get<Component::Spotlight>();
+		if (entity->has<Component::Transformable>()) {
+			t->setPosition(vPosition);
+		}
+		spotlight->setIntensity(vAmbient, vDiffuse, vSpecular);
+		spotlight->setDirection(vDirection);
+		spotlight->setCutOff(fCutOff);
+		spotlight->setOuterCutOff(fOuterCutoff);
+		spotlight->setConstant(fConstant);
+		spotlight->setLinear(fLinear);
+		spotlight->setQuadratic(fQuadratic);
+	}
+	else {
+		entity->destroy();					//Returns empty destroyed entity
+		return std::make_shared<Entity>();	//Return empty entity
+	}
+	return entity;
 }
-*/
 
 std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 {
@@ -453,11 +698,17 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	using namespace tinyxml2;
 	std::string sID;
 
+	//Remove entities from previous scene
+	if (!m_scenes->empty()) {
+		m_scenes->begin()->second->clearScene();
+	}
+	//Remove previous scenes
+	m_scenes->clear();
+
 	//-- Add entities into the scene --//
 	if (str == "Game") {
 		std::shared_ptr<GameScene> scene = std::make_shared<GameScene>(m_res);				//Create scene
 		EntityManager* entities = scene->getEntityManager();	//Get scene entity manager used to add entities in to the scene
-
 		//Add Scene Entities
 		if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
 		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
@@ -470,8 +721,11 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			else if (strcmp(element->Value(), "Model") == 0) {
 				entities->addEntity(loadModel(element));
 			}
+			else if (strcmp(element->Value(), "Entity") == 0) {
+				entities->addEntity(loadEntity(element));
+			}
 			else if (strcmp(element->Value(), "Light") == 0) {
-				//entities->addEntity(loadLight(element));
+				entities->addEntity(loadLight(element));
 			}
 			else if (strcmp(element->Value(), "Camera") == 0) {
 				entities->addEntity(loadCamera(element));
@@ -488,20 +742,24 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 	}
 }
 
-bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node)
+bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node, bool forceReloadRes)
 {
 	using namespace tinyxml2;
 	//Get Resource File Location
 	std::string sFile = node->FirstChildElement()->GetText();
 
 	//Check if resources need to be loaded
-	if (!m_res->isResFileLoaded(sFile)) {
+	if (!m_res->isResFileLoaded(sFile) || forceReloadRes) {
 		XMLDocument doc;
 		if (doc.LoadFile(sFile.c_str()) != XML_SUCCESS) {
 			//Failed to load
 			std::cout << "Could not load ResourceFile : " << sFile << "\n";
 			return false;
 		}
+
+		//Empty the resource manager
+		m_res->ClearResources();
+
 		if (m_bDebug) std::cout << "Reading Resource file: " << sFile << "\n";
 
 		XMLNode *ptrRoot = doc.FirstChild();
@@ -602,7 +860,7 @@ SceneLoader::~SceneLoader()
 
 }
 
-int SceneLoader::load(std::string sFilename)
+int SceneLoader::load(std::string sFilename, bool forceLoadRes)
 {
 	using namespace tinyxml2;
 	//Load xml scene file
@@ -628,10 +886,9 @@ int SceneLoader::load(std::string sFilename)
 			readResources(node);
 		}
 		else if (strcmp(node->Value(), "ResourceFile") == 0) {
-			readResourceFile(node);
+			readResourceFile(node, forceLoadRes);
 		}
 		else if (strcmp(node->Value(), "Scene") == 0) {
-			m_scenes->clear();
 			readScene(node);
 		}
 	}
