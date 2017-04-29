@@ -23,6 +23,7 @@ public:
 		m_iUID = iUniqueIDCounter;	//Set Unique ID
 		iUniqueIDCounter++;
 	}
+	
 	~Entity() { 
 		m_components.clear();	//Remove all attached components
 	}
