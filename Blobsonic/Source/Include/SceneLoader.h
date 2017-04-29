@@ -29,8 +29,8 @@ private:
 	std::string m_sShadersDir;		//!< File location for Shaders
 	std::string m_sMaterialDir;		//!< File location for materials
 
-	ResourceManager* m_res;									//!< Pointer to Resource manager where loaded resources will be stored
-	EntityFactory m_factory;								//!< Create preset entities
+	std::shared_ptr<ResourceManager> m_res;		//!< Pointer to Resource manager where loaded resources will be stored
+	EntityFactory m_factory;					//!< Create preset entities
 
 	std::map<std::string,std::shared_ptr<Scene>>* m_scenes;	//!< Pointer to vector of scenes to store all loaded scenes
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
@@ -53,7 +53,7 @@ private:	//Parsing functions
 	glm::vec3 parseVec3(tinyxml2::XMLElement*e);				//!< Parse data into a vec3
 public:
 	//! Default constructor
-	SceneLoader(ResourceManager* res, std::map<std::string, std::shared_ptr<Scene>>* scenes);							//!< Default constructor
+	SceneLoader(std::shared_ptr<ResourceManager> res, std::map<std::string, std::shared_ptr<Scene>>* scenes);							//!< Default constructor
 	~SceneLoader();		//!< Destructor
 
 	/*!

@@ -7,6 +7,7 @@
 #include "EngineMessages.h"
 
 #include "InputMessages.h"
+#include "SceneMessages.h"
 
 void Engine::Engine::initScene(bool forceReloadRes)
 {
@@ -115,7 +116,7 @@ void Engine::Engine::render()
 }
 
 Engine::Engine::Engine()
-	:m_sceneLoader(&m_resourceManager,&m_scenes)
+	:m_sceneLoader(m_resourceManager,&m_scenes)
 {
 	m_bRunning = false;
 }
@@ -204,9 +205,19 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 					break;
 				case GLFW_KEY_O:
 					m_bForceReload = true;	//Reload entire scene including resources
+				case GLFW_KEY_I:			//Reload scene and scripts
+					m_bReloadScene = true;
+					MessageHandler::getInstance()->sendMessage<SceneMessage::Reload>();
 				default:
 					break;
 				}
+			}
+		}
+		else if (s == "AddEntity") {
+			auto data = static_cast<SceneMessage::AddEntity*>(msgs->at(i).get());
+			//MessageHandler::getInstance()->removeMessage(i);
+			if (!m_scenes.empty()) {
+				m_scenes.begin()->second->getEntityManager()->addEntity(data->entity);
 			}
 		}
 	}

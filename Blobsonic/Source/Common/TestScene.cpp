@@ -2,7 +2,6 @@
 #include "TestScene.h"
 
 TestScene::TestScene(ResourceManager* res)
-	:Scene(res)
 {
 
 }

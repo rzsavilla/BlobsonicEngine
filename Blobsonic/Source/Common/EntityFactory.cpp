@@ -10,9 +10,9 @@
 #include "Capsule.h"
 #include "Physical.h"
 
-EntityFactory::EntityFactory(ResourceManager * res)
+EntityFactory::EntityFactory()
 {
-	m_ptrResources = res;
+	m_ptrResources = ResourceManager::getInstance();	//!< Set pointer to resource manager
 }
 
 std::shared_ptr<Entity> EntityFactory::create(std::string entity)
@@ -35,10 +35,10 @@ std::shared_ptr<Entity> EntityFactory::createPlayer(glm::vec3 position)
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
 	auto m = entity->get<Component::Model>();
-	m->m_meshes.push_back(m_ptrResources->getMesh("cube"));
-	m->m_textures.push_back(m_ptrResources->getTexture("red"));
-	m->m_materials.push_back(m_ptrResources->getMaterial("default"));
-	m->m_shader = m_ptrResources->getShader("phong");
+	m->m_aMeshes.push_back(m_ptrResources->getAssimpMesh("deer_mesh"));
+	m->m_textures.push_back(m_ptrResources->getTexture("red_texture"));
+	m->m_materials.push_back(m_ptrResources->getMaterial("default_material"));
+	m->m_shader = m_ptrResources->getShader("phong_shader");
 
 	return entity;
 }
