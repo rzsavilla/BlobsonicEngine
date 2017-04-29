@@ -51,7 +51,6 @@
     <ClInclude Include="Source\Include\EntityLoader.h" />
     <ClInclude Include="Source\Include\EntityManager.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
-    <ClInclude Include="Source\Include\GUIButton.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\Light.h" />
     <ClInclude Include="Source\Include\LuaScripting.h" />
@@ -127,7 +126,6 @@
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
-    <ClCompile Include="Source\Common\GUIButton.cpp" />
     <ClCompile Include="Source\Common\Light.cpp" />
     <ClCompile Include="Source\Common\LuaScripting.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
