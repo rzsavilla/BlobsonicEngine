@@ -20,7 +20,7 @@ std::shared_ptr<Entity> EntityFactory::create(std::string entity)
 	if (entity == "Player") {
 		return createPlayer(glm::vec3(0.0f, 0.0f, 0.0f));
 	}
-	return std::shared_ptr<Entity>();
+	return std::make_shared<Entity>();
 }
 
 std::shared_ptr<Entity> EntityFactory::createPlayer(glm::vec3 position)
