@@ -8,6 +8,7 @@
 </Scene>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
+
 	<Model> <ID>deer</ID>
 		<Mesh>deer_mesh</Mesh>
 		<Material>default_material</Material>
@@ -34,7 +35,7 @@
 			<Z>0.0f</Z>
 		</Origin>
 	</Model>
-	
+	 
 	<Model> <ID>floor</ID>
 		<Mesh>plane_mesh</Mesh>
 		<Material>default_material</Material>
@@ -173,10 +174,15 @@
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>0.0f</X>
-			<Y>2.0f</Y>
-			<Z>20.0f</Z>
+			<X>200.0f</X>
+			<Y>200.0f</Y>
+			<Z>0.0f</Z>
 		</Position>
+		<Size>
+			<X>400.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Size>
 		<Rotation>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
@@ -194,6 +200,56 @@
 		</Origin>
 	</Model>
 	
+	<Sprite> <ID>sprite1</ID>
+		<Shader>button_shader</Shader>
+		<Texture>button_texture</Texture>
+		<Position>
+			<X>20.0f</X>
+			<Y>120.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>180.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Colour>
+	</Sprite>
+	
+	<Sprite> <ID>sprite2</ID>
+		<Shader>button_shader</Shader>
+		<Texture>sprite_texture</Texture>
+		<Position>
+			<X>804.0f</X>
+			<Y>120.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>180.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.5f</X> 	
+			<Y>0.5f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+	</Sprite>
+
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>
@@ -286,13 +342,13 @@
 	
 	<Camera> <ID>cam1</ID>
 		<Position>
-			<X>-20.0f</X>
-			<Y>30.0f</Y>
-			<Z>30.0f</Z>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>4.0f</Z>
 		</Position>
 		<Orientation>
-			<X>20.0f</X>
-			<Y>25.0f</Y>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
 		<FOV>45.0f</FOV>

@@ -59,6 +59,16 @@
 		<File>Source\Resources\textures\skybox_water.bmp</File>
 	</Texture>
 	
+	<Texture> 
+		<ID>button_texture</ID>
+		<File>Source\Resources\textures\button.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>sprite_texture</ID>
+		<File>Source\Resources\textures\sprite.png</File>
+	</Texture>
+	
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>
