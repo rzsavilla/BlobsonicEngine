@@ -7,6 +7,7 @@
 #include "Transformable.h"
 #include "Text.h"
 #include "PointLight.h"
+#include "SpriteRender.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -31,7 +32,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 		model->m_shader->use();	//Set shader
 
 		passLightUniforms(model->m_shader);
-    
+
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 
@@ -54,48 +55,43 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 	/*
 	//Draw model meshes
 	if (!model->m_meshes.empty()) {
-		for (int i = 0; i < model->m_meshes.size(); i++) {
-
-			std::shared_ptr<Texture> texture = NULL;
-			std::shared_ptr<Mesh> mesh = model->m_meshes.at(i);			//Get pointer to mesh
-
-			//Pass material uniforms to shader
-			if (model->m_shader != NULL && i < model->m_materials.size()) {
-				//Material reflectivity
-				model->m_shader->setUniform("Ka", model->m_materials.at(i)->getAmbient());			//Ambient material reflection
-				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
-				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
-				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
-			}
-
-			//Check for texture
-			if (!model->m_textures.empty() && i < model->m_textures.size()) {
-				texture = model->m_textures.at(i);	//Get pointer to texture
-			}
-
-			gl::BindVertexArray(mesh->getVAO());		//Bind VAO
-
-			//Has Texture
-			if ((!mesh->getExpandedTexCoords().empty() && !texture == NULL)) {
-				gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
-				gl::GenerateMipmap(gl::TEXTURE_2D);
-				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
-				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
-				gl::DrawArrays(gl::TRIANGLES, 0, mesh->getExpandedVertices().size());
-				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
-			}
-			//Has expanded normals
-			else if (!mesh->getExpandedNormals().empty()) {
-				gl::DrawArrays(gl::TRIANGLES, 0, mesh->getExpandedVertices().size());
-			}
-			//No Texture and No expaned normals
-			else {
-				gl::DrawElements(gl::TRIANGLES, mesh->getVertIndices().size(), gl::UNSIGNED_INT, 0);
-			}
-			gl::BindVertexArray(0);													//Unbind VAO
-		}
+	for (int i = 0; i < model->m_meshes.size(); i++) {
+	std::shared_ptr<Texture> texture = NULL;
+	std::shared_ptr<Mesh> mesh = model->m_meshes.at(i);			//Get pointer to mesh
+	//Pass material uniforms to shader
+	if (model->m_shader != NULL && i < model->m_materials.size()) {
+	//Material reflectivity
+	model->m_shader->setUniform("Ka", model->m_materials.at(i)->getAmbient());			//Ambient material reflection
+	model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
+	model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
+	model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
 	}
-	
+	//Check for texture
+	if (!model->m_textures.empty() && i < model->m_textures.size()) {
+	texture = model->m_textures.at(i);	//Get pointer to texture
+	}
+	gl::BindVertexArray(mesh->getVAO());		//Bind VAO
+	//Has Texture
+	if ((!mesh->getExpandedTexCoords().empty() && !texture == NULL)) {
+	gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
+	gl::GenerateMipmap(gl::TEXTURE_2D);
+	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
+	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+	gl::DrawArrays(gl::TRIANGLES, 0, mesh->getExpandedVertices().size());
+	gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture
+	}
+	//Has expanded normals
+	else if (!mesh->getExpandedNormals().empty()) {
+	gl::DrawArrays(gl::TRIANGLES, 0, mesh->getExpandedVertices().size());
+	}
+	//No Texture and No expaned normals
+	else {
+	gl::DrawElements(gl::TRIANGLES, mesh->getVertIndices().size(), gl::UNSIGNED_INT, 0);
+	}
+	gl::BindVertexArray(0);													//Unbind VAO
+	}
+	}
+
 	*/
 	m_fDeltaTime = 0.001;
 
@@ -105,7 +101,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			std::shared_ptr<Texture> texture = NULL;
 			std::shared_ptr<AssimpMesh> aMesh = model->m_aMeshes.at(i);	//Get pointer to amesh
-			
+
 																		//Pass material uniforms to shader
 			if (model->m_shader != NULL && i < model->m_materials.size()) {
 				//Material reflectivity
@@ -113,7 +109,7 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 				model->m_shader->setUniform("Kd", model->m_materials.at(i)->getDiffuse());			//Diffuse
 				model->m_shader->setUniform("Ks", model->m_materials.at(i)->getSpecular());			//Specular
 				model->m_shader->setUniform("shininess", model->m_materials.at(i)->getShininess());	//Shininess
-			
+
 				if (aMesh->getHasBones()) {
 					// Vector of bone transformation matrices. 
 					std::vector<Matrix4f> Transforms;
@@ -136,50 +132,91 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 			gl::BindVertexArray(aMesh->getVAO());		//Bind VAO
 
-			//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
-			//	int index = 3;
-			//	gl::DrawElementsBaseVertex(gl::TRIANGLES,
-			//		aMesh->m_Entries[k].NumIndices,
-			//		gl::UNSIGNED_INT,
-			//		(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
-			//		aMesh->m_Entries[k].BaseVertex);
-			//}
-			//for (int k = 0; k < 1; k++) {
-				//Has Texture
-				if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
-					gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
-					gl::GenerateMipmap(gl::TEXTURE_2D);
-					gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
-					gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+														//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
+														//	int index = 3;
+														//	gl::DrawElementsBaseVertex(gl::TRIANGLES,
+														//		aMesh->m_Entries[k].NumIndices,
+														//		gl::UNSIGNED_INT,
+														//		(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+														//		aMesh->m_Entries[k].BaseVertex);
+														//}
+														//for (int k = 0; k < 1; k++) {
+														//Has Texture
+			if ((!aMesh->meshes[i].getPosition().empty() && !texture == NULL)) {
+				gl::BindTexture(gl::TEXTURE_2D, texture->object());							//Bind Texture
+				gl::GenerateMipmap(gl::TEXTURE_2D);
+				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
+				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
 
-					//gl::DrawElementsBaseVertex(gl::TRIANGLES,
-					//	aMesh->m_Entries[k].NumIndices,
-					//	gl::UNSIGNED_INT,
-					//	(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
-					//	aMesh->m_Entries[k].BaseVertex);
-					//
+				//gl::DrawElementsBaseVertex(gl::TRIANGLES,
+				//	aMesh->m_Entries[k].NumIndices,
+				//	gl::UNSIGNED_INT,
+				//	(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+				//	aMesh->m_Entries[k].BaseVertex);
+				//
 
-					gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-					gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
-				}
-				//Has expanded normals
-				else if (!aMesh->meshes[i].getNormal().empty()) {
-					gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
-				}
-				//No Texture and No expanded normals
-				else {
-					gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
-				}
+				gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
+			}
+			//Has expanded normals
+			else if (!aMesh->meshes[i].getNormal().empty()) {
+				gl::DrawArrays(gl::TRIANGLES, 0, aMesh->meshes[i].getVertex().size());
+			}
+			//No Texture and No expanded normals
+			else {
+				gl::DrawElements(gl::TRIANGLES, aMesh->meshes[i].getIndices().size(), gl::UNSIGNED_INT, 0);
+			}
 			//}
 			gl::BindVertexArray(0);	//Unbind VAO
 		}
 	}
-	
+
 }
 
 void System::Render::renderText(std::shared_ptr<Entity> entity)
 {
 
+}
+
+void System::Render::renderSprite(std::shared_ptr<Entity> entity)
+{
+	//GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color)
+	//auto modelS = entity->get<Component::Model>();
+	// Prepare transformations
+	std::shared_ptr<Texture> texture = NULL;
+	auto spriteRender = entity->get <Component::SpriteRenderer>();
+	auto t = entity->get <Component::Transformable>();
+
+	spriteRender->getShader()->use();
+
+	//glm::mat4 model;
+	//model = glm::translate(model, glm::vec3(spriteRender->getPosition(), 0.0f));
+
+	//model = glm::translate(model, glm::vec3(0.5f * spriteRender->getSize().x, 0.5f * spriteRender->getSize().y, 0.0f));
+	//model = glm::rotate(model, spriteRender->getRotate(), glm::vec3(0.0f, 0.0f, 1.0f));
+	//model = glm::translate(model, glm::vec3(-0.5f * spriteRender->getSize().x, -0.5f * spriteRender->getSize().y, 0.0f));
+
+	//model = glm::scale(model, glm::vec3(spriteRender->getSize(), 1.0f));
+
+	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::perspective(45.0f, 1.33333f, 0.1f, 1000.0f);
+
+
+	spriteRender->getShader()->setUniform("projection", projection);
+	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor());
+	spriteRender->getShader()->setUniform("model", t->getTransform());
+
+	gl::ActiveTexture(gl::TEXTURE0);
+
+	//Check for texture
+	texture = spriteRender->getTexture();
+
+	// Bind VAO
+	gl::BindVertexArray(spriteRender->getVAO());
+	// Binds the texture
+	gl::BindTexture(gl::TEXTURE_2D, texture->object());
+	gl::DrawArrays(gl::TRIANGLES, 0, 6);
 }
 
 void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
@@ -192,7 +229,7 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 
 	//Pass directional lighting parameters to shader
 	for (int i = 0; i < m_directionalLights.size(); i++) {	//Iterate through all lights
-		//Get Light Component
+															//Get Light Component
 		auto dirLight = m_directionalLights.at(i)->get<Component::DirectionalLight>();
 
 		//Pass uniforms
@@ -205,7 +242,7 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 
 	//Pass point lighting parameters to shader
 	for (int i = 0; i < m_pointLights.size(); i++) {	//Iterate through all lights
-		//Get Light Component
+														//Get Light Component
 		auto pointLight = m_pointLights.at(i)->get<Component::PointLight>();
 
 		//Pass uniforms
@@ -223,7 +260,7 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 
 	//Pass  spot lighting parameters to shader
 	for (int i = 0; i < m_spotlights.size(); i++) {	//Iterate through all lights
-		//Get Light Component
+													//Get Light Component
 		auto spotlight = m_spotlights.at(i)->get<Component::Spotlight>();
 
 		//Pass uniforms
@@ -268,8 +305,8 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Camera>()) {
 			auto cam = (*it)->get<Component::Camera>();
 			//if (cam->m_bActive) {
-				//Set camera pointer to this
-				m_ptrActiveCamera = cam;
+			//Set camera pointer to this
+			m_ptrActiveCamera = cam;
 			//}
 		}
 		//Find Model Component
@@ -279,6 +316,9 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		//Find Text Component
 		if ((*it)->has<Component::Text>()) {
 			renderText(*it);	//Render Text
+		}
+		if ((*it)->has<Component::SpriteRenderer>()) {
+			renderSprite((*it));				//Sprite
 		}
 		//Find Light Components
 		if ((*it)->has<Component::DirectionalLight>()) {	//Directional light
@@ -290,6 +330,7 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Spotlight>()) {
 			addEntity((*it), &m_spotlights);				//Spotlight
 		}
+		
 	}
 }
 

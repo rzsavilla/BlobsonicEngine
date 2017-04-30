@@ -24,6 +24,7 @@ namespace System {
 
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
+		void renderSprite(std::shared_ptr<Entity> entity);
     
 		void passLightUniforms(std::shared_ptr<GLSLProgram> shader);
 		//! Removed destroyed entities from vector

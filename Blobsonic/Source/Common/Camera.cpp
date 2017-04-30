@@ -206,7 +206,10 @@ glm::mat4 Component::Camera::getProjection()
 		//Orthographic projection	//Currently broken
 		glm::ivec2 windowSize;
 		glfwGetWindowSize(glfwGetCurrentContext(), &windowSize.x, &windowSize.y);
-		return glm::ortho(0.0f, (float)windowSize.x, 0.0f, (float)windowSize.y, m_fNearPlane, m_fFarPlane);
+		//return glm::ortho(0.0f, (float)windowSize.x, 0.0f, (float)windowSize.y, m_fNearPlane, m_fFarPlane);
+		//return glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, 0.1f, 1000.0f);
+		//return glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
+		return glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, 0.1f, 100.0f);
 	}
 }
 

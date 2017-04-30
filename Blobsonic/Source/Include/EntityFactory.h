@@ -15,6 +15,10 @@ public:
 
 	std::shared_ptr<Entity> createCamera(glm::vec3 position);
 
+	std::shared_ptr<Entity> createSound();
+  
+	std::shared_ptr<Entity> createSprite();
+
 	std::shared_ptr<Entity> createActor();
 
 	//Phsyics
@@ -25,6 +29,8 @@ public:
 	void attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position); // becarefull when resizing entity
 
 	void attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 dimensions, glm::vec3 scale, glm::vec3 Rot);
+
+	void attachSprite(std::shared_ptr<Entity> entity);
 
 	void attachPhysical(std::shared_ptr<Entity> entity, float mass, float restitution);
 };

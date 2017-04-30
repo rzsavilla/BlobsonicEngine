@@ -38,19 +38,9 @@ bool AssimpMesh::load(std::string sFile) {
 	// Release the previously loaded mesh (if it exists)
 	Clear();
 
-	//Assimp::Importer import;
-	//const aiScene* scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
-	//aiProcess_LimitBoneWeights);
-
 	scene = import.ReadFile(sFile, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs |
 		aiProcess_LimitBoneWeights);
-	/*scene = import.ReadFile(sFile, 
-		aiProcess_JoinIdenticalVertices |
-		aiProcess_SortByPType |
-		aiProcess_Triangulate |
-		aiProcess_GenSmoothNormals |
-		aiProcess_FlipUVs | aiProcess_LimitBoneWeights);
-*/
+
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
@@ -62,8 +52,6 @@ bool AssimpMesh::load(std::string sFile) {
 
 	this->directory = sFile.substr(0, sFile.find_last_of('/'));
 	this->processNode(scene->mRootNode, scene);
-
-	this->setBuffers();
 
 	return true;
 }
@@ -232,13 +220,6 @@ aModel AssimpMesh::processMesh(GLuint ind, aiMesh* mesh, const aiScene* scene, v
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
-		// We assume a convention for sampler names in the shaders. Each diffuse texture should be named
-		// as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER.
-		// Same applies to other texture as the following list summarizes:
-		// Diffuse: texture_diffuseN
-		// Specular: texture_specularN
-		// Normal: texture_normalN
 
 		// 1. Diffuse maps
 		vector<aTexture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -632,73 +613,3 @@ GLuint AssimpMesh::getVAO()
 {
 	return am_VAO;
 }
-
-void AssimpMesh::setBuffers()
-{
-	/*
-	gl::GenVertexArrays(1, &am_VAO);
-	gl::GenBuffers(3, am_handle);
-
-	gl::BindVertexArray(am_VAO);
-
-	const GLfloat kiSize = sizeof(GLfloat);
-
-	//Vertices
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
-	gl::BufferData(gl::ARRAY_BUFFER, (vertices.size()) * sizeof(aVertex), &vertices[0], gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), 0);
-	gl::EnableVertexAttribArray(0);
-
-	//Normals
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
-	gl::EnableVertexAttribArray(1);
-
-	//Texture Coordinates
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)offsetof(aVertex, TexCoords));
-	gl::EnableVertexAttribArray(2);
-	*/
-	/*
-	//Vertices
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), 0);
-	gl::EnableVertexAttribArray(0);
-
-	//Normals
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, sizeof(aVertex), (GLvoid*)offsetof(aVertex, Normal));
-	gl::EnableVertexAttribArray(1);
-
-	//Texture Coordinates
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(aVertex), this->meshes[0].getVertex().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, sizeof(aVertex), (GLvoid*)offsetof(aVertex, TexCoords));
-	gl::EnableVertexAttribArray(2);
-	*/
-	/*
-	//Vertices
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[0]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 3, this->meshes[0].getPosition().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)0, 3, gl::FLOAT, gl::FALSE_, 0, 0);
-	gl::EnableVertexAttribArray(0);
-
-	//Normals
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[2]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 3, this->meshes[0].getNormal().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)1, 3, gl::FLOAT, gl::FALSE_, 0, NULL);
-	gl::EnableVertexAttribArray(1);
-
-	//Texture Coordinates
-	gl::BindBuffer(gl::ARRAY_BUFFER, am_handle[1]);
-	gl::BufferData(gl::ARRAY_BUFFER, (this->meshes[0].getVertex().size()) * sizeof(GLfloat) * 2, this->meshes[0].getTexCoords().data(), gl::STATIC_DRAW);
-	gl::VertexAttribPointer((GLuint)2, 2, gl::FLOAT, FALSE, 0, NULL);
-	gl::EnableVertexAttribArray(2);
-	*/
-}
-
-//((GLubyte *)NULL + (sizeof(GLfloat) * 6))
