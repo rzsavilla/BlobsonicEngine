@@ -38,7 +38,6 @@
     <ClInclude Include="Source\Include\AIPerception.h" />
     <ClInclude Include="Source\Include\aModel.h" />
     <ClInclude Include="Source\Include\AssimpMesh.h" />
-    <ClInclude Include="Source\Include\Audio.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
     <ClInclude Include="Source\Include\Camera.h" />
     <ClInclude Include="Source\Include\CameraMessages.h" />
@@ -54,6 +53,7 @@
     <ClInclude Include="Source\Include\Gameplay.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\Light.h" />
+    <ClInclude Include="Source\Include\LuaEntity.h" />
     <ClInclude Include="Source\Include\LuaScripting.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
@@ -95,10 +95,8 @@
     <ClInclude Include="Source\Include\SceneLoader.h" />
     <ClInclude Include="Source\Include\SceneManager.h" />
     <ClInclude Include="Source\Include\SceneMessages.h" />
-    <ClInclude Include="Source\Include\Sound.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
-    <ClInclude Include="Source\Include\SpriteRender.h" />
     <ClInclude Include="Source\Include\Spotlight.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
@@ -129,6 +127,7 @@
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
+    <ClCompile Include="Source\Common\GUIButton.cpp" />
     <ClCompile Include="Source\Common\Light.cpp" />
     <ClCompile Include="Source\Common\LuaScripting.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
@@ -260,12 +259,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;irrKlang.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -274,12 +271,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib;irrKlang.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -290,12 +285,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;%(AdditionalDependencies);lua53.lib;irrKlang.lib</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -307,12 +302,12 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib;irrKlang.lib;</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
