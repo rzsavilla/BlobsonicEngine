@@ -42,13 +42,14 @@ void Engine::Engine::loop()
 		else if (m_bForceReload) initScene(true);	//Reload scene including scene resources
 
 		
-
-		//Limit update
+		//Simply measures how much more time is left before the next update/physics test is calculated
+		//This means that the system framerate does not effect physics etc.
+		//Removed the need for dt being passed through update.
 		while (dt >= 1.0) {
+			update((float)m_deltaTimer.getElapsed());
 			iUpdates++;
 			dt--;
 		}
-		update((float)m_deltaTimer.getElapsed());
 
 		//Render
 		render();
