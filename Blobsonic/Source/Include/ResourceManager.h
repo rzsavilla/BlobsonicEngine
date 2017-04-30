@@ -1,3 +1,8 @@
+/*
+	Singleton -- Only a single instance of this class can exist at any one time
+	Stores all loaded game resources
+*/
+
 #pragma once
 
 #include <stdafx.h>
@@ -19,8 +24,11 @@ private:
 	std::map<std::string, std::shared_ptr<GLSLProgram>> m_shaders;
 
 	std::vector<std::string> m_vsLoadedResFiles;	//!< Stores file locations of loaded ResourceFiles
-public:
 	ResourceManager();
+public:
+	//----Singleton---
+	~ResourceManager();	//!< Destructor
+	static std::shared_ptr<ResourceManager> getInstance();	//!< Return instace
 
 	void addMesh(std::string name, std::shared_ptr<Mesh> mesh);
 

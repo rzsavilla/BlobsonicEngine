@@ -370,8 +370,6 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	vector<std::string> components;
 	std::string tempString;
 
-
-
 	std::string sID;
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement())
@@ -758,7 +756,7 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 
 	//-- Add entities into the scene --//
 	if (str == "Game") {
-		std::shared_ptr<GameScene> scene = std::make_shared<GameScene>(m_res);				//Create scene
+		std::shared_ptr<Scene> scene = std::make_shared<Scene>();				//Create scene
 		EntityManager* entities = scene->getEntityManager();	//Get scene entity manager used to add entities in to the scene
 																//Add Scene Entities
 		if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
@@ -902,10 +900,9 @@ glm::vec3 SceneLoader::parseVec3(tinyxml2::XMLElement * e)
 	return v;		//Return vector
 }
 
-SceneLoader::SceneLoader(ResourceManager * res, std::map<std::string, std::shared_ptr<Scene>>* scenes)
-	:m_factory(res)
+SceneLoader::SceneLoader(std::shared_ptr<ResourceManager> res, std::map<std::string, std::shared_ptr<Scene>>* scenes)
 {
-	m_res = res;		//Pointer to Resource manager
+	m_res = ResourceManager::getInstance();		//Pointer to Resource manager
 	m_scenes = scenes;	//Pointer to vector of scenes
 }
 

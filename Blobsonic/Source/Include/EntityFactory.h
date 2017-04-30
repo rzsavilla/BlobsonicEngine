@@ -5,9 +5,9 @@
 
 class EntityFactory {
 private:
-	ResourceManager* m_ptrResources;
+	std::shared_ptr<ResourceManager> m_ptrResources;	//!< Pointer to resourcemanager
 public:
-	EntityFactory(ResourceManager* res);
+	EntityFactory();	//!< Default Constructor
 
 	std::shared_ptr<Entity> create(std::string entity);
 
@@ -20,7 +20,6 @@ public:
 	std::shared_ptr<Entity> createSprite();
 
 	std::shared_ptr<Entity> createActor();
-
 
 	//Phsyics
 	void attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale);//Use for "early out" collision testing

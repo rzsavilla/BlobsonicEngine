@@ -1,92 +1,72 @@
 #include "stdafx.h"
 #include "LuaScripting.h"
+#include "Entity.h"
 
+#include "InputMessages.h"
+#include "SceneMessages.h"
 
-void printMessage(const std::string& s) {
-	std::cout << s << std::endl;
-}
+#include "Component.h"
+#include "Transformable.h"
 
-void System::LuaScripting::loadScript(std::string luaFile)
+#include "Player.h"
+#include "LuaEntity.h"
+
+void System::Scripting::LuaScripting::loadScript(std::string luaFile)
 {
-	//Load script file
-	luaL_dofile(m_luaState, luaFile.c_str());
-
-	//load lua libs
-	luaL_openlibs(m_luaState);
-
-	getGlobalNamespace(m_luaState).
-		addFunction("printMessage", printMessage);
-
-	//Check if lua file loaded
-	if (luaL_loadfile(m_luaState, luaFile.c_str())) {
-		//call lua script
-		lua_pcall(m_luaState, 0, 0, 0);
-	}
-
-	if (luaL_dofile(m_luaState, luaFile.c_str()) != 0) {
-		lua_pcall(m_luaState, 0, 0, 0);
-		std::cout << "Could not load file: " << luaFile << std::endl;
-	}
-	else {
-		std::cout << "Script Loaded" << std::endl;
-	}
-}
-
-void System::LuaScripting::addFunctions()
-{
-
-}
-
-void System::LuaScripting::helloWorld()
-{
-
-}
-
-void sayHello(const std::string& s) {
-	std::cout << s << std::endl;
-}
-
-System::LuaScripting::LuaScripting()
-{
+	if (m_bDebug) std::cout << "\n----------Loading Script: " << luaFile << " -------------\n";
 	m_luaState = luaL_newstate();
 
-	//loadScript("script.lua");
-	
-	lua_State* L = luaL_newstate();
-	//Openg libs
-	luaL_openlibs(L);
+	luaL_openlibs(m_luaState);		//Openg libs
+			
+	registerFunctions(m_luaState);	//Attach functions
+	registerClasses(m_luaState);	//Attach classes
 
-	//Attach functions
-	addFunctions();
-	getGlobalNamespace(L).
-		addFunction("sayHello", &sayHello);
-
-	//Load Script
-	luaL_dofile(L, "script.lua");
-	lua_pcall(L, 0, 0, 0);
-
-	//Get Variable
-	LuaRef s = getGlobal(L, "testString");
-	LuaRef n = getGlobal(L, "number");
-
-	std::string luaString = s.cast<std::string>();
-
-	int answer = n.cast<int>();
-	std::cout << luaString << std::endl;
-	std::cout << "And here's our number:" << answer << std::endl;
+	//Check if lua file loaded
+	if (luaL_dofile(m_luaState, (m_scriptsDir + luaFile).c_str())) {
+		std::cout << "Could not load lua script: " << (m_scriptsDir + luaFile) << "\n";
+		return;
+	}
+	if (m_bDebug)std::cout << "Script Loaded: " << (m_scriptsDir + luaFile) << std::endl;
+	lua_pcall(m_luaState, 0, 0, 0);
 }
 
-void System::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
+void System::Scripting::LuaScripting::registerFunctions(lua_State * L)
+{
+	getGlobalNamespace(L).addFunction("LuaLoaded", &LuaLoaded);
+}
+
+void System::Scripting::LuaScripting::registerClasses(lua_State * L)
+{
+	using namespace Component;
+
+	LuaEntity::register_lua(L);
+}
+
+System::Scripting::LuaScripting::LuaScripting()
+{
+	MessageHandler::getInstance()->attachReceiver(this);
+}
+
+void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
 {
 
 }
 
-void System::LuaScripting::update(float dt)
+void System::Scripting::LuaScripting::update(float dt)
 {
-
+	if (!m_bLoaded) {
+		loadScript("init.lua");
+		m_bLoaded = true;
+	}
 }
 
-void System::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
+void System::Scripting::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
-
+	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
+		if ((*it)->sID == "Scene_Reload") {
+			//Reload scripts
+			std::cout << "Reload Scripts\n";
+			if (m_bLoaded) m_bLoaded = false;
+		}
+	}
 }

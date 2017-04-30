@@ -20,7 +20,6 @@ std::shared_ptr<MessageHandler> MessageHandler::getInstance()
 			instance.reset(new MessageHandler());
 		}
 	}
-
 	return instance;
 }
 

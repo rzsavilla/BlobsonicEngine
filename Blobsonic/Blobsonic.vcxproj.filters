@@ -378,8 +378,14 @@
     <ClInclude Include="Source\Include\LuaScripting.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\UniqueID.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Include\LuaEntity.h">
       <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Name.h">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -578,6 +584,14 @@
     <ClCompile Include="Source\Common\Audio.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\UniqueID.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\LuaEntity.cpp">
+      <Filter>Source Files\Engine\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Name.cpp">
+      <Filter>Source Files\Tools</Filter>
     <ClCompile Include="Source\Common\Sound.cpp">
       <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>

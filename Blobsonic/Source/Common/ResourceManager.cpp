@@ -7,6 +7,21 @@ ResourceManager::ResourceManager()
 
 }
 
+ResourceManager::~ResourceManager()
+{
+
+}
+
+std::shared_ptr<ResourceManager> ResourceManager::getInstance()
+{
+	static std::shared_ptr<ResourceManager> instance = nullptr;
+
+	if (!instance) {
+		instance.reset(new ResourceManager);
+	}
+	return instance;
+}
+
 void ResourceManager::addMesh(std::string name, std::shared_ptr<Mesh> mesh) {
 	m_meshes.emplace(name, mesh);
 }

@@ -1,6 +1,8 @@
 /*
 *	@class Entity
 *	@brief Container for components
+*	@author Rozen Savill
+*	Components are stored within this object and are easily attached and detached
 */
 
 #pragma once
@@ -10,19 +12,25 @@
 #include <typeindex>
 
 #include "Destroyable.h"
+#include "UniqueID.h"
+
 #include "Component.h"
 
-static int iUniqueIDCounter = 0;
+static void LuaLoaded() {
+	std::cout << "Lua is working\n";
+}
 
-class Entity: public Destroyable, public std::enable_shared_from_this<Entity> {
+class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
-	int m_iUID;	//!< Unique ID
+
+	const bool m_bDebug = true;	//!< Flag for Couts
 public:
 	Entity() {
-		m_iUID = iUniqueIDCounter;	//Set Unique ID
-		iUniqueIDCounter++;
+		this->setUID();
+		if (m_bDebug) std::cout << "Entity Created: " << this->getUID() << "\n";
 	}
+	
 	~Entity() { 
 		m_components.clear();	//Remove all attached components
 	}
@@ -48,17 +56,29 @@ public:
 			return std::static_pointer_cast<T>(m_components[typeid(T)]).get();
 		}
 		else {
+			std::cout << "Could Not find Component\n";
 			terminate();
 		}
 	}
 
 	template<typename T>
-	void removeComponent() {
-		m_components.erase(typeid(T));
+	T* getComponentByID(const int id) {
+		if (has<T>()) {	//Check if entity has component of type T
+			for (auto it = m_components.begin(); it != m_components.end(); ++it) {
+				Component::Component* comp = std::static_pointer_cast<Component::Component>((*it).second).get();
+
+				if (comp->getUID() == id) {	//Component found
+					if (m_bDebug) std::cout << "ComponentFound\n";
+					return std::static_pointer_cast<T>(m_components[typeid(T)]).get();
+				}
+			}
+		}
+		//if (m_bDebug) std::cout << "Could Not find Component\n";
+		return NULL;
 	}
 
-	//! Return Unique Identifier
-	int getID() {
-		return m_iUID;
+	template<typename T>
+	void removeComponent() {
+		m_components.erase(typeid(T));
 	}
 };

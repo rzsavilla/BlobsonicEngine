@@ -29,7 +29,7 @@ namespace Engine {
 
 		MyTimer m_deltaTimer;
 
-		ResourceManager m_resourceManager;
+		std::shared_ptr<ResourceManager> m_resourceManager;
 	private:
 		bool m_bReloadScene;	//!< Flag for xml scene intialization
 		bool m_bForceReload;	//!< Flag for xml scene loading forcing resources to be reloaded
