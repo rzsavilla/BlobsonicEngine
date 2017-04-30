@@ -343,6 +343,7 @@
 		<Position>
 			<X>0.0f</X>
 			<Y>30.0f</Y>
+			<Z>70.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>

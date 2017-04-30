@@ -5,6 +5,7 @@
 #include "InputMessages.h"
 
 #include "Player.h"
+#include "Transformable.h"
 
 System::PlayerController::PlayerController() {
 	//Reset actions

@@ -1,9 +1,8 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "SceneLoader.h"
-#include <cstdlib>
-#include "SplashScene.h"
 
 //Components
+#include "Transformable.h"
 #include "Model.h"
 #include "Camera.h"
 #include "AABB.h"
@@ -374,7 +373,6 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	//Look at Model Element
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement())
 	{
-
 		const char* childValue = modelChild->Value();
 		if (strcmp(childValue, "ID") == 0) {
 			if (readElementText(modelChild, cData)) {
@@ -745,26 +743,18 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 		str = std::string(c, strlen(c));
 	}
 	using namespace tinyxml2;
-	std::string sID;
-
-	//Remove entities from previous scene
-	if (!m_scenes->empty()) {
-		m_scenes->begin()->second->clearScene();
-	}
-	//Remove previous scenes
-	m_scenes->clear();
+	std::string sName;
 
 	//-- Add entities into the scene --//
 	if (str == "Game") {
-		std::shared_ptr<Scene> scene = std::make_shared<Scene>();				//Create scene
-		EntityManager* entities = scene->getEntityManager();	//Get scene entity manager used to add entities in to the scene
+		EntityManager* entities = m_SceneLoading->getEntityManager();	//Get scene entity manager used to add entities in to the scene
 																//Add Scene Entities
 		if (m_bDebug) std::cout << "\nLoading Scene elements\n ";
 		for (XMLElement* element = node->FirstChildElement(); element != NULL; element = element->NextSiblingElement())
 		{
-			if (strcmp(element->Value(), "ID") == 0) {
+			if (strcmp(element->Value(), "Name") == 0) {
 				if (readElementText(element, c)) {
-					sID = std::string(c, strlen(c));		//ID
+					m_SceneLoading->setName(std::string(c, strlen(c)));	//Set Scene Name
 				}
 			}
 			else if (strcmp(element->Value(), "Model") == 0) {
@@ -784,13 +774,11 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			}
 			else if (strcmp(element->Value(), "Audio") == 0) {
 				entities->addEntity(loadAudio(element));
-      }
+			}
 			else if (strcmp(element->Value(), "Sprite") == 0) {
 				entities->addEntity(loadSprite(element));
 			}
 		}
-		//Attach Scene to engine
-		m_scenes->emplace(sID, scene);
 	}
 }
 
@@ -900,10 +888,12 @@ glm::vec3 SceneLoader::parseVec3(tinyxml2::XMLElement * e)
 	return v;		//Return vector
 }
 
-SceneLoader::SceneLoader(std::shared_ptr<ResourceManager> res, std::map<std::string, std::shared_ptr<Scene>>* scenes)
+SceneLoader::SceneLoader()
 {
 	m_res = ResourceManager::getInstance();		//Pointer to Resource manager
-	m_scenes = scenes;	//Pointer to vector of scenes
+	m_LoadingState = Idle;
+	m_node = NULL;
+	m_rootNode = NULL;
 }
 
 SceneLoader::~SceneLoader()
@@ -911,9 +901,10 @@ SceneLoader::~SceneLoader()
 
 }
 
-int SceneLoader::load(std::string sFilename, bool forceLoadRes)
+std::shared_ptr<Scene> SceneLoader::fastLoadScene(std::string sFilename, bool forceLoadRes /*!< Optional default is false*/)
 {
 	using namespace tinyxml2;
+	m_SceneLoading = std::make_shared<Scene>();
 	//Load xml scene file
 	XMLDocument doc;
 	if (doc.LoadFile(sFilename.c_str()) != XML_SUCCESS) {
@@ -940,8 +931,56 @@ int SceneLoader::load(std::string sFilename, bool forceLoadRes)
 			readResourceFile(node, forceLoadRes);
 		}
 		else if (strcmp(node->Value(), "Scene") == 0) {
+			m_SceneLoading = std::make_shared<Scene>();	//Create Scene
 			readScene(node);
 		}
 	}
-	return XML_SUCCESS;
+	return m_SceneLoading;	// Return loaded scene
+}
+
+bool SceneLoader::loadScene(std::shared_ptr<Scene> scene, std::string sFilename, bool forceLoadRes)
+{
+	using namespace tinyxml2;
+	//Load xml scene file
+	if (m_LoadingState == Idle) {
+		if (m_document.LoadFile(sFilename.c_str()) != XML_SUCCESS) {
+			//Failed to load
+			std::cout << "Could not load file: " << sFilename << "\n";
+			return false;
+		}
+
+		if (m_bDebug) std::cout << "Reading scene file: " << sFilename << "\n";
+
+		m_rootNode = m_document.FirstChild();
+		if (m_rootNode == nullptr) {
+			std::cout << "No root: " << sFilename << "\n";
+			terminate();
+		}
+	}
+	//Choose a loading state
+	else {
+		if (m_node != NULL) {
+			const char* value = m_node->Value();
+
+			if (strcmp(m_node->Value(), "Resources") == 0) {
+				readResources(m_node);
+			}
+			else if (strcmp(m_node->Value(), "ResourceFile") == 0) {
+				readResourceFile(m_node, forceLoadRes);
+			}
+			else if (strcmp(m_node->Value(), "Scene") == 0) {
+				m_SceneLoading = std::make_shared<Scene>();	//Create Scene
+				readScene(m_node);
+			}
+			m_node->NextSiblingElement();	//Next Node
+		}
+		else {
+			//Finished Reading XML file
+			m_rootNode = NULL;
+			m_LoadingState = Idle;
+			return true;
+		}
+	}
+
+	return false;	// Not finished loading
 }

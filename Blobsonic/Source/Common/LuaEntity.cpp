@@ -8,6 +8,7 @@
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "SpotLight.h"
+#include "Transformable.h"
 
 static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityFactory>();
 
