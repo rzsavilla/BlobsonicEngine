@@ -4,9 +4,6 @@
 	<Location>Source\Resources\Scenes\Resources.xml</Location> 
 </ResourceFile>
 
-<Scene> <Type>Splash</Type> <ID>splash_scene</ID>
-</Scene>
-
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 
 	<Model> <ID>deer</ID>
@@ -356,7 +353,7 @@
 		<FarPlane>1000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>0.7f</MoveSpeed>
+		<MoveSpeed>0.05f</MoveSpeed>
 	</Camera>
 </Scene>
 
