@@ -148,9 +148,11 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Source\Resources\shader\button.vert">
-      <Filter>Resource Files</Filter>
+		<Filter>Resource Files</Filter>
     </None>
-    <None Include="Source\Resources\shader\singlePhong.frag" />
+    <None Include="Source\Resources\shader\singlePhong.frag">
+		<Filter>Resource Files</Filter>
+	</None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\stdafx.h">
@@ -592,6 +594,7 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Name.cpp">
       <Filter>Source Files\Tools</Filter>
+	</ClCompile>
     <ClCompile Include="Source\Common\Sound.cpp">
       <Filter>Source Files\Engine\Component</Filter>
     </ClCompile>

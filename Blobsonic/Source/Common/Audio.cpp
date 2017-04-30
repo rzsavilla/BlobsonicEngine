@@ -27,7 +27,7 @@ void System::Audio::addEntity(std::shared_ptr<Entity> entity, std::vector<std::s
 {
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
 
-		if ((*it)->getID() == entity->getID()) {
+		if ((*it)->getUID() == entity->getUID()) {
 			return;	//Entity already stored
 		}
 	}
