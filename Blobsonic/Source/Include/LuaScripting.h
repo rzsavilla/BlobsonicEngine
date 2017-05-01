@@ -18,6 +18,7 @@
 #include "System.h"
 #include <iostream>
 
+
 namespace System {
 	namespace Scripting {
 		class LuaScripting : public System {
@@ -29,11 +30,11 @@ namespace System {
 		public:
 			LuaScripting();
 
-			void process(std::vector<std::shared_ptr<Entity>>* entity) override;
+			void process(std::vector<std::shared_ptr<Entity>>* entity);
 			void update(float dt) override;
 
 			//---Message Receiver--//
-			void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
+			void processMessages(const std::vector<std::shared_ptr<Message>>* msgs);
 		};
 	}
 };

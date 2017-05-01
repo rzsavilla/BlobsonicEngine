@@ -9,11 +9,9 @@
 #include "CameraController.h"
 #include "Gameplay.h"
 #include "Audio.h"
-#include "LuaScripting.h";
 
 int main() {
 	//Attach systems to the engine
-
 	Engine::Engine engine;
 
 	engine.init(1024, 768);
@@ -24,23 +22,6 @@ int main() {
 	engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();
-	engine.attachSystem<System::Scripting::LuaScripting>();
 	engine.run();
 	return 0;
 }
-
-////Code to test if lua and luabridge is successfuly
-//using namespace luabridge;
-//int main() {
-//	lua_State* L = luaL_newstate();
-//	luaL_dofile(L, "script.lua");
-//	luaL_openlibs(L);
-//	lua_pcall(L, 0, 0, 0);
-//	LuaRef s = getGlobal(L, "testString");
-//	LuaRef n = getGlobal(L, "number");
-//	std::string luaString = s.cast<std::string>();
-//	int answer = n.cast<int>();
-//	std::cout << luaString << std::endl;
-//	std::cout << "And here's our number:" << answer << std::endl;
-//	system("pause");
-//}
