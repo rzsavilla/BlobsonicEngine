@@ -47,7 +47,5 @@ class SpriteRenderer : public Component
 		void setColor(glm::vec3 colour);
 
 		//void DrawSprite(GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color);
-		//!Set the variables of a by reading the values set within a lua table
-		void setComponent(luabridge::LuaRef& table) {};
 	};
  }

@@ -8,9 +8,6 @@ namespace Component {
 
 	public:
 		AIMovement();
-
-		//!Set the variables of a by reading the values set within a lua table
-		void setComponent(luabridge::LuaRef& table) {};
 	};
 
 }

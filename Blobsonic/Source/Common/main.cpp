@@ -10,6 +10,8 @@
 #include "Gameplay.h"
 #include "Audio.h"
 
+#include <sol.hpp>
+
 int main() {
 	//Attach systems to the engine
 	Engine::Engine engine;
