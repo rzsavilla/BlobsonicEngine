@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Transformable.h"
 
+#include <glm/gtc/type_ptr.hpp>	//make_vec3
+
 Component::Transformable::Transformable() 
 {
 	m_vPosition = glm::vec3(0.0f);
@@ -100,5 +102,13 @@ glm::mat4 Component::Transformable::getTransform()
 
 	o = glm::translate(glm::mat4(1.0f), getOrigin());
 
-	return t * r  * o * s;
+	return t * r * o * s;
+}
+
+void Component::Transformable::setComponent(luabridge::LuaRef & table)
+{
+	using namespace luabridge;
+	auto filenameRef = table["filename"];
+	if (filenameRef.isTable()) m_vPosition = glm::make_vec3(filenameRef.cast<float*>());
+	else std::cout << "Error, Transformable.position is not a table!" << std::endl;
 }

@@ -6,22 +6,15 @@
 
 #pragma once
 
-#include <stdafx.h>
+#include "stdafx.h"
 #include "ResourceManager.h"
 #include "EntityManager.h"
-
-#include "Drawable.h"
-#include "Message.h"
-
-#include "ModelOLD.h"
-#include "Light.h"
-#include "Text.h"
-
 #include "EntityFactory.h"
+#include "UniqueID.h"
 
 /* Abstract Scene class*/
 
-class Scene
+class Scene: public Destroyable, public UniqueID, public Name
 {
 protected:
 	/*! Entity storage and management

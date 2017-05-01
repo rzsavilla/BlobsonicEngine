@@ -13,8 +13,9 @@ void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
  
-	m_scenes.clear();	//Remove all entities from scene
-	m_sceneLoader.load("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes);
+	m_SceneManager->destroyActiveScene();
+	m_SceneManager->addActiveScene(
+		m_sceneLoader.fastLoadScene("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes));
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
 	m_bForceReload = false;
@@ -42,13 +43,14 @@ void Engine::Engine::loop()
 		else if (m_bForceReload) initScene(true);	//Reload scene including scene resources
 
 		
-
-		//Limit update
+		//Simply measures how much more time is left before the next update/physics test is calculated
+		//This means that the system framerate does not effect physics etc.
+		//Removed the need for dt being passed through update.
 		while (dt >= 1.0) {
+			update((float)m_deltaTimer.getElapsed());
 			iUpdates++;
 			dt--;
 		}
-		update((float)m_deltaTimer.getElapsed());
 
 		//Render
 		render();
@@ -77,14 +79,14 @@ void Engine::Engine::loop()
 
 void Engine::Engine::update(float dt)
 {
-	//Update Active Scene Entity Manager
-	//m_scenes.find("game_scene")->second->getEntityManager()->update();
-
-	if (m_scenes.size() > 0) {
+	//Get Active Scene
+	std::shared_ptr<Scene> m_activeScene = m_SceneManager->getActiveScene();
+	if (m_activeScene) {
+		//Pass scene entities to systems
 		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 			if (it->first != typeid(System::Render)) {	//Do not process render systems
 				//--System process entities--//
-				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+				(*it).second->process(m_activeScene->getEntities());
 			}
 		}
 
@@ -102,13 +104,14 @@ void Engine::Engine::render()
 	//Clear Screen
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 	gl::ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
+	//Get Active Scene
+	std::shared_ptr<Scene> m_activeScene = m_SceneManager->getActiveScene();
 	//Render systems process
-	if (m_scenes.size() > 0) {
+	if (m_activeScene) {
 		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 			if (it->first == typeid(System::Render)) {	//Only process render systems
 				//Render entities
-				(*it).second->process(m_scenes.find("game_scene")->second->getEntities());
+				(*it).second->process(m_activeScene->getEntities());
 				//Update Render System
 				(*it).second->update(0.0f);	
 			}
@@ -117,9 +120,9 @@ void Engine::Engine::render()
 }
 
 Engine::Engine::Engine()
-	:m_sceneLoader(m_resourceManager,&m_scenes)
 {
 	m_bRunning = false;
+	m_SceneManager = SceneManager::getInstance();
 }
 
 void Engine::Engine::init(int width, int height)
@@ -215,10 +218,11 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 			}
 		}
 		else if (s == "AddEntity") {
+			//Add Entity to active scene
 			auto data = static_cast<SceneMessage::AddEntity*>(msgs->at(i).get());
-			//MessageHandler::getInstance()->removeMessage(i);
-			if (!m_scenes.empty()) {
-				m_scenes.begin()->second->getEntityManager()->addEntity(data->entity);
+			auto activeScene = m_SceneManager->getActiveScene();
+			if (activeScene) {
+				activeScene->getEntityManager()->addEntity(data->entity);
 			}
 		}
 	}

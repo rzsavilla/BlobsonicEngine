@@ -31,4 +31,8 @@ namespace SceneMessage {
 	struct Exit : public Message {
 		Exit() { sID = "Scene_Exit"; }
 	};
+
+	struct SceneChanged : public Message {
+		SceneChanged() { sID = "SceneChanged"; }
+	};
 }

@@ -1,17 +1,12 @@
 #pragma once
 
-#include "stdafx.h"
-#include <memory>
 #include "MessageHandler.h"
 #include "InputMessages.h"
 #include "System.h"
-
-#include "TestScene.h"
-
 #include "SceneLoader.h"
-
 #include "EntityManager.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 
 #include "MyTimer.h"
 
@@ -33,8 +28,10 @@ namespace Engine {
 	private:
 		bool m_bReloadScene;	//!< Flag for xml scene intialization
 		bool m_bForceReload;	//!< Flag for xml scene loading forcing resources to be reloaded
-		SceneLoader m_sceneLoader;
-		std::map<std::string, std::shared_ptr<Scene>> m_scenes;
+		
+		SceneLoader m_sceneLoader;		//!< Responsible for loading scene/xml files
+		std::shared_ptr<SceneManager> m_SceneManager;	//!< Manages all scenes
+
 		void initScene(/*! Optional default is false*/bool forceReloadRes = false);	//!< Initialize Scene
 	private:	//GLFW
 		int m_iWindowWidth;
@@ -63,7 +60,7 @@ namespace Engine {
 		void init(int width, int height); //!< Initialize Engine
 		void run();						//!< Start Game loop
 
-										//---Message Receiver--//
+		//---Message Receiver--//
 		void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
 	};
 }

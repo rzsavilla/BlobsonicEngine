@@ -17,11 +17,9 @@ public:
 
 	glm::vec3 m_vDimensions;	//Plz move to different component
 	glm::vec3 m_vCenter;
-	
 
-
-	
-	
+	//!Set the variables of a by reading the values set within a lua table
+	void setComponent(luabridge::LuaRef& table) {};
 };
 
 

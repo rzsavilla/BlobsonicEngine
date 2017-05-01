@@ -1,6 +1,5 @@
-LuaLoaded()
 
-local box = LuaEntity()
-
-
-box:attachComponent("Player")
+local box = {
+	Name = "Box"
+}
+return window

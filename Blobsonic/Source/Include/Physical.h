@@ -21,11 +21,8 @@ public:
 	glm::vec3 m_vVelocity; //<! Vel of object in m/s
 	glm::vec3 m_vAcceleration; //<! Accel of object in m/s/s
 
-
-
-
-
-
+	//!Set the variables of a by reading the values set within a lua table
+	void setComponent(luabridge::LuaRef& table) {};
 };
 
 

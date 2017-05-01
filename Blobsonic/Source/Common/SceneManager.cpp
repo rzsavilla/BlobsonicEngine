@@ -6,6 +6,25 @@ SceneManager::SceneManager()
 
 }
 
+SceneManager::~SceneManager()
+{
+	//Set all scene to be destroyed
+	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
+		(*it)->destroy();
+	}
+	m_scenes.clear();	//Remove all pointers to scene
+}
+
+std::shared_ptr<SceneManager> SceneManager::getInstance()
+{
+	static std::shared_ptr<SceneManager> instance = nullptr;
+
+	if (!instance) {
+		instance.reset(new SceneManager);
+	}
+	return instance;
+}
+
 bool SceneManager::setActiveScene(std::string name)
 {
 	if (this->hasScene(name)) {
@@ -17,22 +36,58 @@ bool SceneManager::setActiveScene(std::string name)
 	}
 }
 
-bool SceneManager::hasScene(std::string name)
+void SceneManager::destroyActiveScene()
 {
-	return m_scenes.find(name) != m_scenes.end();
+	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
+		if ((*it)->getName() == m_sActiveScene) {
+			(*it)->clearScene();	//!< Destroy all entities within scene
+			m_scenes.erase(it);	//Remove scene
+			return;
+		}
+	}
 }
 
-void SceneManager::addScene(std::string name, std::shared_ptr<Scene> scene)
+bool SceneManager::hasScene(int uniqueID)
 {
-	m_scenes.emplace(name, scene);
+	return false;
+}
+
+bool SceneManager::hasScene(std::string name)
+{
+	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
+		if ((*it)->getName() == name) {
+			return true;	//Scene exists
+		}
+	}
+	return false;
+}
+
+void SceneManager::addActiveScene(std::shared_ptr<Scene> scene)
+{
+	m_sActiveScene = scene->getName();
+	m_scenes.push_back(scene);
+}
+
+void SceneManager::addScene(std::shared_ptr<Scene> scene)
+{
+	m_scenes.push_back(scene);
 }
 
 void SceneManager::removeScene(std::string name)
 {
-	m_scenes.erase(name);
+	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
+		if ((*it)->getName() == name) {
+			m_scenes.erase(it);
+		}
+	}
 }
 
 std::shared_ptr<Scene> SceneManager::getActiveScene()
 {
-	return m_scenes.find(m_sActiveScene)->second;
+	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
+		if ((*it)->getName() == m_sActiveScene) {
+			return (*it);	//Return scene
+		}
+	}
+	return NULL; //No Active Scene
 }

@@ -11,6 +11,7 @@
 #include "Physical.h"
 #include "Sound.h"
 #include "SpriteRender.h"
+#include "Transformable.h"
 
 EntityFactory::EntityFactory()
 {
