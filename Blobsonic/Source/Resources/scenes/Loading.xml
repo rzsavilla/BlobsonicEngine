@@ -9,7 +9,7 @@
 		<Shader>button_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>20.0f</X>
+			<X>300.0f</X>
 			<Y>120.0f</Y>
 			<Z>0.0f</Z>
 		</Position>

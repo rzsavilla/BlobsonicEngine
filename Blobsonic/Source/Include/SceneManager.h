@@ -22,7 +22,7 @@ class SceneManager {
 private:
 
 	const float m_fTransitionDelay = 0.0f;			//!< Minimum time elapsed before transitioning to the next scene
-	const bool m_bForceReloadResouces = false;		//!< Flag to reload scene resourcefile
+	bool m_bForceReloadResouces;		//!< Flag to reload scene resourcefile
 private:
 	std::string m_sActiveScene;						//!< ID/Name of active scene
 	std::shared_ptr<Scene> m_ActiveScene;			//!< Loaded active Scene
@@ -45,7 +45,7 @@ public:
 
 	void setLoadingScene(std::string filename);	//!< Set the filename of the loading scene
 
-	void changeScene(std::string filename /* default false */);
+	void changeScene(std::string filename, bool reloadResources = false /* default false Force reload all resources */);
 
 	std::shared_ptr<Scene> getActiveScene();						//!< Returns active scene
 

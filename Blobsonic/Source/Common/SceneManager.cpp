@@ -5,6 +5,7 @@ SceneManager::SceneManager()
 {
 	m_State = Active;
 	m_bHasLoadingScreen = false;
+	m_bForceReloadResouces = false;
 }
 
 SceneManager::~SceneManager()
@@ -29,17 +30,15 @@ void SceneManager::setLoadingScene(std::string filename)
 	m_sLoadingScene = filename;
 }
 
-void SceneManager::changeScene(std::string filename)
+void SceneManager::changeScene(std::string filename, bool reloadResources)
 {
 	if (m_State == Active) {
-		std::cout << "Reload Scene\n";
+		m_bForceReloadResouces = reloadResources;
 		m_transitionTimer.reset();
 		m_sActiveScene = filename;
 		if (m_ActiveScene)	m_ActiveScene->clearScene();
 		if (m_LoadingScene) m_LoadingScene->clearScene();
 		m_ActiveScene = std::make_shared<Scene>();
-
-		m_ActiveScene->destroy();
 		
 		if (!m_sLoadingScene.empty()) m_LoadingScene = m_loader.fastLoadScene(m_sLoadingScene);
 
@@ -57,7 +56,7 @@ std::shared_ptr<Scene> SceneManager::getActiveScene()
 	else if (m_State == Loading) {
 		if (!m_loader.loadScene(m_ActiveScene, m_sActiveScene, m_bForceReloadResouces)) {
 			//Scene is still being loaded
-			if (m_LoadingScene) return m_LoadingScene;
+			if (m_LoadingScene && !m_bForceReloadResouces) return m_LoadingScene;
 			return NULL;
 		}
 		else {

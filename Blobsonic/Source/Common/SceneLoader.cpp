@@ -783,6 +783,9 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 
 bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node, bool forceReloadRes)
 {
+	if (forceReloadRes) {
+		m_res->ClearResources();
+	}
 	using namespace tinyxml2;
 	//Get Resource File Location
 	std::string sFile = node->FirstChildElement()->GetText();

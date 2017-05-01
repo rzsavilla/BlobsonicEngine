@@ -109,6 +109,7 @@ bool ResourceManager::isResFileLoaded(std::string file)
 
 void ResourceManager::ClearResources()
 {
+	m_vsLoadedResFiles.clear();
 	m_meshes.clear();
 	m_vAssimpMeshes.clear();
 	m_textures.clear();
