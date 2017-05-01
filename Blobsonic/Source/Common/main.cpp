@@ -9,8 +9,7 @@
 #include "CameraController.h"
 #include "Gameplay.h"
 #include "Audio.h"
-
-#include <sol.hpp>
+#include "LuaScripting.h"
 
 int main() {
 	//Attach systems to the engine
@@ -24,6 +23,7 @@ int main() {
 	engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();
+	engine.attachSystem<System::Scripting::LuaScripting>();
 	engine.run();
 	return 0;
 }
