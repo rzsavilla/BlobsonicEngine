@@ -104,11 +104,3 @@ glm::mat4 Component::Transformable::getTransform()
 
 	return t * r * o * s;
 }
-
-void Component::Transformable::setComponent(luabridge::LuaRef & table)
-{
-	using namespace luabridge;
-	auto filenameRef = table["filename"];
-	if (filenameRef.isTable()) m_vPosition = glm::make_vec3(filenameRef.cast<float*>());
-	else std::cout << "Error, Transformable.position is not a table!" << std::endl;
-}

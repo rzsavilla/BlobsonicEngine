@@ -42,8 +42,5 @@ namespace Component {
 		glm::vec3 getOrigin();		//!< Returns origin
 
 		glm::mat4 getTransform();	//!< Returns transformation matrix
-
-		//!Set the variables of a by reading the values set within a lua table
-		void setComponent(luabridge::LuaRef& table);
 	};
 }

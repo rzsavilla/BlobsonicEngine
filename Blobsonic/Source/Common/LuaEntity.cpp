@@ -42,14 +42,3 @@ unsigned int LuaEntity::getID()
 {
 	return m_entity->getUID();
 }
-
-void LuaEntity::register_lua(luabridge::lua_State * L)
-{
-	using namespace luabridge;
-	getGlobalNamespace(L).
-		beginClass<LuaEntity>("LuaEntity")
-		.addConstructor<void(*)()>()
-		.addFunction("attachComponent",&LuaEntity::attachComponent)
-		.addFunction("getID",&LuaEntity::getID)
-		.endClass();
-}

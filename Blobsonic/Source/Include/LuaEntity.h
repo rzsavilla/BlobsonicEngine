@@ -21,7 +21,4 @@ public:
 	void attachComponent(const std::string& sComponent);
 
 	unsigned int getID();
-
-	//! Bind class to lua script
-	static void register_lua(luabridge::lua_State* L);
 };
