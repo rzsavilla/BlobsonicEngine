@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Transformable.h"
+#include "LuaHelper.h"
 
 #include <glm/gtc/type_ptr.hpp>	//make_vec3
 
@@ -8,8 +9,34 @@ Component::Transformable::Transformable()
 	m_vPosition = glm::vec3(0.0f);
 	m_vRotation = glm::vec3(0.0f);
 	m_vScale = glm::vec3(1.0f);
-
 	m_vOrigin = glm::vec3(0.0f);
+}
+
+Component::Transformable::Transformable(sol::table t)
+{
+	//Set Default variables
+	m_vPosition = glm::vec3(0.0f);
+	m_vRotation = glm::vec3(0.0f);
+	m_vScale = glm::vec3(1.0f);
+	m_vOrigin = glm::vec3(0.0f);
+
+	//Read variables from lua table
+	if (m_bDebug) std::cout << " Transformable: " << "\n";
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			//Set variables
+			if (s == "Position") 
+				this->setPosition(LuaHelper::readVec3((*it).second));
+			else if (s == "Rotation")
+				this->setRotation(LuaHelper::readVec3((*it).second));
+			else if (s == "Scale")
+				this->setScale(LuaHelper::readVec3((*it).second));
+			else if (s == "Origin")
+				this->setOrigin(LuaHelper::readVec3((*it).second));
+		}
+	}
 }
 
 void Component::Transformable::translate(float x, float y, float z)
