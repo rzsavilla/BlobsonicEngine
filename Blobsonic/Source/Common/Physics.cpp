@@ -746,6 +746,10 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 		phys->m_vVelocity += phys->m_vAcceleration * dt;
 		trans->m_vPosition += phys->m_vVelocity * dt;
 
+		if (phys->m_vVelocity.x < EPSILON) phys->m_vVelocity.x = 0;
+		if (phys->m_vVelocity.y < EPSILON) phys->m_vVelocity.y = 0;
+		if (phys->m_vVelocity.z < EPSILON) phys->m_vVelocity.z = 0;
+
 	
 	}
 
@@ -810,8 +814,8 @@ void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std:
 	auto phys2 = object2->get<Physical>();
 
 	//reduces rounding errors in the hardware
-	float percent = 0.0025f; 
-	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * percent * CollisionNormal;
+	
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * EPSILON * CollisionNormal;
 	trans1->m_vPosition -= phys1->m_fINVMass * correction;
 	trans2->m_vPosition += phys2->m_fINVMass * correction;
 
