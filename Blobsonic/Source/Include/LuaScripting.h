@@ -5,19 +5,12 @@
 *	Handles loading and using lua scripts acts as an interface to lua to call C++ functions/class
 */
 
-/*
-	Using Lua with C++ tutorial
-	https://eliasdaler.wordpress.com/2013/10/11/lua_cpp_binder/
-	
-	Code for getting lua table data:
-	https://eliasdaler.wordpress.com/2014/07/18/using-lua-with-cpp-luabridge/
-*/
-
 #pragma once
 
 #include "System.h"
 #include <iostream>
 
+#include "LuaHelper.h"
 
 namespace System {
 	namespace Scripting {

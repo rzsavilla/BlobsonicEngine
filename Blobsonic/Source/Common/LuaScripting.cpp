@@ -24,7 +24,9 @@ void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity
 void System::Scripting::LuaScripting::update(float dt)
 {
 	if (!m_bLoaded) {
+		lua_State* L = luaL_newstate();
 
+		LuaHelper::loadScriptFile(L, (m_scriptsDir + "init.lua"));
 		m_bLoaded = true;
 	}
 }
