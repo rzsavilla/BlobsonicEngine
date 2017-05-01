@@ -421,7 +421,30 @@ bool System::Physics::CheckShereSphereCollision(std::shared_ptr<Entity> sphere1,
 	//subtract the radius 
 	magDist = magDist - sph1->m_fRadius;
 
-	if (magDist <= sph2->m_fRadius)return true;
+	if (magDist <= sph2->m_fRadius)
+	{
+		// find penetration
+		//find collison normal
+		glm::vec3 Normal = sph1->m_vCenter - sph2->m_vCenter;
+		glm::vec3 newVector = Normal;
+		newVector = glm::normalize(newVector);
+		newVector *= sph1->m_fRadius;
+		newVector *= sph2->m_fRadius;
+		Normal = Normal - newVector;
+
+
+		float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+
+		Normal = glm::normalize(Normal);
+		Normal = -Normal;
+
+		//find the penetration depth
+		float PenetrationDepth = (sph1->m_fRadius + sph2->m_fRadius) - d;
+		resolveCollision(sphere1, sphere2, Normal);
+		PositionalCorrection(sphere1, sphere2, PenetrationDepth, Normal);
+
+		return true;
+	}
 	else  return false;
 
 }
