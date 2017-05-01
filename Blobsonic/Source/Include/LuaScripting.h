@@ -20,6 +20,10 @@ namespace System {
 			const std::string m_scriptsDir = "Source/Resources/scripts/";
 		private: //Temp
 			bool m_bLoaded = false;
+
+		private:	//Read lua tables
+			void readRootTable(lua_State* L);
+			std::shared_ptr<Entity> readEntity(sol::table t);
 		public:
 			LuaScripting();
 

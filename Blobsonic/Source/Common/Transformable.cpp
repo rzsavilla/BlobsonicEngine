@@ -21,7 +21,6 @@ Component::Transformable::Transformable(sol::table t)
 	m_vOrigin = glm::vec3(0.0f);
 
 	//Read variables from lua table
-	if (m_bDebug) std::cout << " Transformable: " << "\n";
 	for (auto it = t.begin(); it != t.end(); ++it) {
 		auto key = (*it).first;	//Get element key
 		std::string s = key.as<std::string>();		//Get element value
