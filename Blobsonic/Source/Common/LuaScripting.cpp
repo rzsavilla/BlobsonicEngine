@@ -101,7 +101,7 @@ void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity
 
 void System::Scripting::LuaScripting::update(float dt)
 {
-	if (!m_bLoaded) {
+	if (!m_bLoaded && (m_SceneManager->getState() == Active)) {
 		lua_State* L = luaL_newstate();
 
 		sol::state_view lua(L);
@@ -115,17 +115,6 @@ void System::Scripting::LuaScripting::update(float dt)
 			sol::table rootTable = lua["root"];
 
 			readRootTable(L);
-
-			//// table is in the stack at index 't'
-			//lua_pushnil(L);  // first key
-
-			//for (auto it = rootTable.begin(); it != rootTable.end(); ++it) {
-			//	auto key = (*it).first;
-			//	if (key.get_type() == sol::type::string) {
-			//		std::cout << "Key: ";
-			//		std::cout << key.as<std::string>() << "\n";
-			//	}
-			//}
 		}
 		else {
 			if (m_bDebug) std::cout << "Failed to load script\n";
