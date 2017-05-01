@@ -148,11 +148,11 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Source\Resources\shader\button.vert">
-		<Filter>Resource Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="Source\Resources\shader\singlePhong.frag">
-		<Filter>Resource Files</Filter>
-	</None>
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\stdafx.h">
@@ -389,6 +389,15 @@
     <ClInclude Include="Source\Include\Name.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\LuaHelperFunctions.h">
+      <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Sound.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\SpriteRender.h">
+      <Filter>Header Files\Engine\Entity\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -594,9 +603,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Name.cpp">
       <Filter>Source Files\Tools</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Source\Common\Sound.cpp">
       <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\LuaHelperFunctions.cpp">
+      <Filter>Source Files\Engine\LUA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -13,5 +13,8 @@ namespace Component {
 		std::vector<std::shared_ptr<Texture>> m_textures;
 		std::vector<std::shared_ptr<Material>> m_materials;
 		std::shared_ptr<GLSLProgram> m_shader;
+
+		//!Set the variables of a by reading the values set within a lua table
+		void setComponent(luabridge::LuaRef& table) {};
 	};
 }

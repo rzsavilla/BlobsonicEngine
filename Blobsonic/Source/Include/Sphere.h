@@ -14,6 +14,9 @@ public:
 	glm::vec3 m_vCenter; // <! Set manually , the position of the center of the cube (ideally set to the centre of the entity)
 	glm::mat4 m_Rotation;
 
+
+	//!Set the variables of a by reading the values set within a lua table
+	void setComponent(luabridge::LuaRef& table) {};
 };
 
 

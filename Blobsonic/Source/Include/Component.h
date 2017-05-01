@@ -10,6 +10,8 @@
 #include "Entity.h"
 #include "Name.h"
 
+#include "LuaBridge.h"
+
 namespace Component {
 	struct Component: public UniqueID, public Name {
 	private:
@@ -19,6 +21,7 @@ namespace Component {
 			setUID();
 			m_parent = NULL;
 		}
+
 		void setParent(std::shared_ptr<Entity> parent) {
 			m_parent = parent;
 		}
@@ -29,5 +32,8 @@ namespace Component {
 		const std::shared_ptr<Entity> getParent() const {
 			return m_parent;
 		}
+
+		//!Set the variables of a by reading the values set within a lua table
+		virtual void setComponent(luabridge::LuaRef& table) = 0;
 	};
 }

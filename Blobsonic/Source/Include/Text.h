@@ -57,5 +57,8 @@ namespace Component {
 		GLuint getVAO();
 
 		std::map<GLchar, Character>* getCharactersPtr();
+
+		//!Set the variables of a by reading the values set within a lua table
+		void setComponent(luabridge::LuaRef& table) {};
 	};
 }
