@@ -40,7 +40,7 @@ namespace System {
 		void broadPhase(float dt);
 		void narrowPhase(float dt);
 
-
+		void applyImpulse(glm::vec3 Normal, float force, std::shared_ptr <Entity> object);
 
 	public:
 		Physics();

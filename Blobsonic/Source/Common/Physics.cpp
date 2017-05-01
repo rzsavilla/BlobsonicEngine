@@ -931,3 +931,20 @@ void System::Physics::narrowPhase(float dt)
 
 	}
 }
+
+void System::Physics::applyImpulse(glm::vec3 Normal, float force, std::shared_ptr<Entity> object)
+{
+
+	//get physicals and transformables
+	auto trans = object->get<Component::Transformable>();
+	auto phys = object->get<Physical>();
+
+	// find the acceleration
+	//f = ma
+
+	float Acceleration = force / phys->m_fMass;
+
+	//multiply normal my accerlation
+	phys->m_vAcceleration =  Normal * Acceleration;
+
+}
