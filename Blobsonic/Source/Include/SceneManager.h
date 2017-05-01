@@ -2,34 +2,52 @@
 * @class	Scene
 * @brief	Storage for scenes and determines active scene
 * @author	Rozen Savilla
-* Storage for loaded scenes ready to be activated
+* Prepares/loads scene stores them and determines active scene
 */
 
 #pragma once
 
 #include "Scene.h"
+#include "SceneLoader.h"
+#include "MyTimer.h"
+
+//! Scene Manager States
+enum SceneManagerState {
+	Loading,
+	Active,
+	Loaded
+};
 
 class SceneManager {
 private:
+
+	const float m_fTransitionDelay = 0.0f;			//!< Minimum time elapsed before transitioning to the next scene
+	const bool m_bForceReloadResouces = false;		//!< Flag to reload scene resourcefile
+private:
 	std::string m_sActiveScene;						//!< ID/Name of active scene
-	std::vector<std::shared_ptr<Scene>> m_scenes;	//!< Scene storage
+	std::shared_ptr<Scene> m_ActiveScene;			//!< Loaded active Scene
+	std::shared_ptr<Scene> m_LoadingScene;			//!< Loading Scene
+
+	SceneLoader m_loader;	//!< Loads scene files
+	SceneManagerState m_State;	//!< Current scene state
+
+	//---Loading-----Scene
+	bool m_bHasLoadingScreen;		//!< Flag to determine if scene manager has a loading screen
+	std::string m_sLoadingScene;	//!< Scene file for loading scene
 
 	SceneManager();	//!< Private default constructor Singleton
+	
+	MyTimer m_transitionTimer;	//!< Counts delay when changing scen
 public:
 	~SceneManager();	//!< Destructor
 
 	static std::shared_ptr<SceneManager> getInstance();		//!< Return class instance
 
-	bool setActiveScene(std::string name);		//!< Set active scene
-	void destroyActiveScene();					//!< Destroys the active scene
+	void setLoadingScene(std::string filename);	//!< Set the filename of the loading scene
 
-	bool hasScene(int uniqueID);					//!< Check if scene exists search by UID
-	bool hasScene(std::string name);	//!< Check if scene exists search by name
-
-	void addActiveScene(std::shared_ptr<Scene> scene);		//!< Add new scene and set it as active scene. Will also destroy current active scene
-
-	void addScene(std::shared_ptr<Scene> scene);	//!< Add a scene into the scene manager
-	void removeScene(std::string name);								//!< Remove scene from scene manager/Destroys
+	void changeScene(std::string filename /* default false */);
 
 	std::shared_ptr<Scene> getActiveScene();						//!< Returns active scene
+
+	SceneManagerState getState();	//!< Return current scene manager state
 };

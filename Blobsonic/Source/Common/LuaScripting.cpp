@@ -13,6 +13,11 @@
 #include "LuaEntity.h"
 
 
+void System::Scripting::LuaScripting::attachFunctions(lua_State * L)
+{
+
+}
+
 void System::Scripting::LuaScripting::readRootTable(lua_State * L)
 {
 	std::cout << "-------Reading Root--------\n";
@@ -86,6 +91,7 @@ std::shared_ptr<Entity> System::Scripting::LuaScripting::readEntity(sol::table t
 System::Scripting::LuaScripting::LuaScripting()
 {
 	MessageHandler::getInstance()->attachReceiver(this);
+	m_SceneManager = SceneManager::getInstance();
 }
 
 void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
@@ -138,4 +144,58 @@ void System::Scripting::LuaScripting::processMessages(const std::vector<std::sha
 			if (m_bLoaded) m_bLoaded = false;
 		}
 	}
+}
+
+bool System::Scripting::isKeyDown(const std::string & key)
+{
+	int iKey = -1;
+
+	if (key == "w" || key == "W") {
+		iKey = GLFW_KEY_W;
+	}
+	else if (key == "s" || key == "S") {
+		iKey = GLFW_KEY_S;
+	}
+	else if (key == "a" || key == "A") {
+		iKey = GLFW_KEY_A;
+	}
+	else if (key == "d" || key == "D") {
+		iKey = GLFW_KEY_D;
+	}
+	else if (key == "up") iKey = GLFW_KEY_UP;
+	else if (key == "down")	iKey = GLFW_KEY_DOWN;
+	else if (key == "left")	iKey = GLFW_KEY_LEFT;
+	else if (key == "right")iKey = GLFW_KEY_RIGHT;
+	else if (key == "space") iKey = GLFW_KEY_SPACE;
+	else if (key == "esc") iKey = GLFW_KEY_ESCAPE;
+
+	if (iKey != -1) {
+		if (glfwGetKey(glfwGetCurrentContext(), iKey)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool System::Scripting::isMouseDown(const std::string & button)
+{
+	int iButton = -1;
+	if (button == "Left") {
+
+	}
+	else if (button == "Right") {
+
+	}
+
+	if (iButton != -1) {
+		if (glfwGetKey(glfwGetCurrentContext(), iButton)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void System::Scripting::changeScene(std::string sceneFile)
+{
+	MessageHandler::getInstance()->sendMessage<SceneMessage::ChangeScene>(sceneFile);
 }

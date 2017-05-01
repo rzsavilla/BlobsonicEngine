@@ -282,7 +282,6 @@ std::shared_ptr<Entity> SceneLoader::loadEntity(tinyxml2::XMLElement * e)
 
 std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
 {
-
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
 	if (m_bDebug) std::cout << "\nLoading Sprite \n  ";
@@ -903,21 +902,22 @@ SceneLoader::~SceneLoader()
 
 std::shared_ptr<Scene> SceneLoader::fastLoadScene(std::string sFilename, bool forceLoadRes /*!< Optional default is false*/)
 {
+	std::string sLocation = m_sSceneFiles + sFilename;
 	using namespace tinyxml2;
 	m_SceneLoading = std::make_shared<Scene>();
 	//Load xml scene file
 	XMLDocument doc;
-	if (doc.LoadFile(sFilename.c_str()) != XML_SUCCESS) {
+	if (doc.LoadFile(sLocation.c_str()) != XML_SUCCESS) {
 		//Failed to load
-		std::cout << "Could not load file: " << sFilename << "\n";
+		std::cout << "Could not load file: " << sLocation << "\n";
 		return false;
 	}
 
-	if (m_bDebug) std::cout << "Reading scene file: " << sFilename << "\n";
+	if (m_bDebug) std::cout << "Reading scene file: " << sLocation << "\n";
 
 	XMLNode *ptrRoot = doc.FirstChild();
 	if (ptrRoot == nullptr) {
-		std::cout << "No root: " << sFilename << "\n";
+		std::cout << "No root: " << sLocation << "\n";
 		return false;
 	}
 
@@ -938,24 +938,27 @@ std::shared_ptr<Scene> SceneLoader::fastLoadScene(std::string sFilename, bool fo
 	return m_SceneLoading;	// Return loaded scene
 }
 
-bool SceneLoader::loadScene(std::shared_ptr<Scene> scene, std::string sFilename, bool forceLoadRes)
+bool SceneLoader::loadScene(std::shared_ptr<Scene>& scene, std::string sFilename, bool forceLoadRes)
 {
 	using namespace tinyxml2;
 	//Load xml scene file
 	if (m_LoadingState == Idle) {
-		if (m_document.LoadFile(sFilename.c_str()) != XML_SUCCESS) {
+		std::string sLocation = m_sSceneFiles + sFilename;
+		if (m_document.LoadFile(sLocation.c_str()) != XML_SUCCESS) {
 			//Failed to load
-			std::cout << "Could not load file: " << sFilename << "\n";
+			std::cout << "Could not load file: " << sLocation << "\n";
 			return false;
 		}
 
-		if (m_bDebug) std::cout << "Reading scene file: " << sFilename << "\n";
-
+		if (m_bDebug) std::cout << "Reading scene file: " << sLocation << "\n";
+		m_SceneLoading = std::make_shared<Scene>();
 		m_rootNode = m_document.FirstChild();
+		m_node = m_rootNode;
 		if (m_rootNode == nullptr) {
-			std::cout << "No root: " << sFilename << "\n";
+			std::cout << "No root: " << sLocation << "\n";
 			terminate();
 		}
+		m_LoadingState = LoadScene;
 	}
 	//Choose a loading state
 	else {
@@ -969,14 +972,15 @@ bool SceneLoader::loadScene(std::shared_ptr<Scene> scene, std::string sFilename,
 				readResourceFile(m_node, forceLoadRes);
 			}
 			else if (strcmp(m_node->Value(), "Scene") == 0) {
-				m_SceneLoading = std::make_shared<Scene>();	//Create Scene
 				readScene(m_node);
 			}
-			m_node->NextSiblingElement();	//Next Node
+			m_node = m_node->NextSiblingElement();	//Next Node
 		}
 		else {
 			//Finished Reading XML file
 			m_rootNode = NULL;
+			scene = std::shared_ptr<Scene >(m_SceneLoading);
+			m_SceneLoading = NULL;
 			m_LoadingState = Idle;
 			return true;
 		}

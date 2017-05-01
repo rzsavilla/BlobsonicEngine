@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Resources>
+	<Mesh> 
+		<ID>cube_mesh</ID>
+		<File>Source\Resources\models\cube.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>plane_mesh</ID>
+		<File>Source\Resources\models\plane.obj</File>
+	</Mesh>
+	<Texture> 
+		<ID>red_texture</ID>
+		<File>Source\Resources\textures\red.png</File>
+	</Texture>
+	<Texture> 
+		<ID>white_texture</ID>
+		<File>Source\Resources\textures\white.png</File>
+	</Texture>
+	<Material> 
+		<ID>default_material</ID>
+		<AmbientReflect>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</AmbientReflect>
+		<DiffuseReflect>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</DiffuseReflect>
+		<SpecularReflect>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</SpecularReflect>
+		<Shininess>200.0</Shininess>
+	</Material>
+	
+	<Shader> 
+		<ID>text_shader</ID>
+		<Vertex>Source\Resources\shader\text.vert</Vertex>
+		<Fragment>Source\Resources\shader\text.frag</Fragment>
+	</Shader>
+	<Shader> 
+		<ID>phong_shader</ID>
+		<Vertex>Source\Resources\shader\phong.vert</Vertex>
+		<Fragment>Source\Resources\shader\phong.frag</Fragment>
+	</Shader>
+	<Shader> 
+		<ID>colour_shader</ID>
+		<Vertex>Source\Resources\shader\colour.vert</Vertex>
+		<Fragment>Source\Resources\shader\colour.frag</Fragment>
+	</Shader>
+	<Shader> 
+		<ID>button_shader</ID>
+		<Vertex>Source\Resources\shader\button.vert</Vertex>
+		<Fragment>Source\Resources\shader\button.frag</Fragment>
+	</Shader>
+</Resources>
+

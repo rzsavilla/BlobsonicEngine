@@ -23,7 +23,7 @@ int main() {
 	engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();
-	engine.attachSystem<System::Scripting::LuaScripting>();
+	//engine.attachSystem<System::Scripting::LuaScripting>();
 	engine.run();
 	return 0;
 }

@@ -13,9 +13,9 @@ void Engine::Engine::initScene(bool forceReloadRes)
 {
 	std::cout << "\n----------Initialize Scene----------\n\n";
  
-	m_SceneManager->destroyActiveScene();
-	m_SceneManager->addActiveScene(
-		m_sceneLoader.fastLoadScene("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes));
+	//m_SceneManager->addActiveScene(m_sceneLoader.fastLoadScene("WorldTest.xml", forceReloadRes));
+	m_SceneManager->setLoadingScene("Loading.xml");
+	m_SceneManager->changeScene("WorldTest.xml");
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
 	m_bForceReload = false;
