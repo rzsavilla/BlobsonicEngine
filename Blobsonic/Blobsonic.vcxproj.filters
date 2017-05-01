@@ -398,6 +398,9 @@
     <ClInclude Include="Source\Include\sol.hpp">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\LuaHelper.h">
+      <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -606,6 +609,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Sound.cpp">
       <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\LuaHelper.cpp">
+      <Filter>Source Files\Engine\LUA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

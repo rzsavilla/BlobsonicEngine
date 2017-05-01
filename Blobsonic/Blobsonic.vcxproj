@@ -54,6 +54,7 @@
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\Light.h" />
     <ClInclude Include="Source\Include\LuaEntity.h" />
+    <ClInclude Include="Source\Include\LuaHelper.h" />
     <ClInclude Include="Source\Include\LuaScripting.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Source\Common\GUIButton.cpp" />
     <ClCompile Include="Source\Common\Light.cpp" />
     <ClCompile Include="Source\Common\LuaEntity.cpp" />
+    <ClCompile Include="Source\Common\LuaHelper.cpp" />
     <ClCompile Include="Source\Common\LuaScripting.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
