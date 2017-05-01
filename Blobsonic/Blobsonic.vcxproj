@@ -268,7 +268,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;H:\Labs\IMAT3606 Programming\Assignment 2\BlobsonicEngine\Blobsonic\Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -280,7 +280,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;H:\Labs\IMAT3606 Programming\Assignment 2\BlobsonicEngine\Blobsonic\Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
@@ -294,7 +294,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;H:\Labs\IMAT3606 Programming\Assignment 2\BlobsonicEngine\Blobsonic\Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -311,7 +311,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;H:\Labs\IMAT3606 Programming\Assignment 2\BlobsonicEngine\Blobsonic\Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
