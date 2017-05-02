@@ -337,16 +337,15 @@
 		<isPlaying>false</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
+		<sound3D>true</sound3D>
+		<Position>
+			<X>-1.0f</X>
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+
 	</Audio>
 
-	<Audio>
-		<ID>bell</ID>
-		<File>Source\Resources\audio\bell.wav</File>
-		<isInitialized>true</isInitialized>
-		<isPlaying>false</isPlaying>
-		<isLooping>false</isLooping>
-		<startsPaused>false</startsPaused>
-	</Audio>
 	
 	<Camera> <ID>cam1</ID>
 		<Position>

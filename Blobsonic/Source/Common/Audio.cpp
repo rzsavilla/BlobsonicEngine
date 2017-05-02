@@ -6,6 +6,7 @@
 #include "CameraMessages.h"
 
 #include "Sound.h"
+#include "Transformable.h"
 
 //Audio engine
 #include <irrKlang\irrKlang.h>
@@ -36,13 +37,23 @@ void System::Audio::addEntity(std::shared_ptr<Entity> entity, std::vector<std::s
 
 void System::Audio::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
 {
+	//Stop destroyed audio
 	for (int i = 0; i < entities->size(); i++) {
 		if (entities->at(i)->isDestroyed()) {
 			auto s = entities->at(i)->get<Component::Sound>();
 			irrklang::ISound* snd = s->getSound();
 			snd->stop();
 			snd->drop();
-			entities->erase(entities->begin() + i);
+		}
+	}
+
+	//Remove entity from array
+	int size = entities->size();
+	if (!entities->empty()) {
+		for (int i = entities->size() - 1; i > -1; i--) {
+			if (entities->at(i)->isDestroyed()) {
+				entities->erase(entities->begin() + i);
+			}
 		}
 	}
 }
@@ -69,11 +80,18 @@ void System::Audio::process(std::vector<std::shared_ptr<Entity>>* entities)
 			auto sound = (*it)->get<Component::Sound>();
 			addEntity((*it), &m_soundEntities);
 		}
+		if ((*it)->has<Component::Camera>()) {
+			m_ptrActiveCamera = (*it);
+		}
 	}
 }
 
 void System::Audio::update(float dt)
 {
+	vec3 v;
+	vec3df pos, doppler, up, lkat;
+	glm::vec4 intUp, intlkat;
+
 	for (auto it = m_soundEntities.begin(); it != m_soundEntities.end(); ++it) {
 		//Find and set active camera
 		if ((*it)->has<Component::Sound>()) {
@@ -81,8 +99,44 @@ void System::Audio::update(float dt)
 			if (sound->getInitialized()) {
 				if (!sound->getPlaying()) {
 					sound->setInitialized(false);
-					sound->startPlaying(engine);
-					
+					if (!sound->getsound3D())
+						sound->startPlaying2D(engine);
+					else if (sound->getsound3D()) {
+						
+						if ((*it)->has<Component::Transformable>()) {
+							auto t = (*it)->get<Component::Transformable>();
+							v = t->getPosition();
+							pos.X = v.x;
+							pos.Y = v.y;
+							pos.Z = v.z;
+							sound->setPos(pos);
+						}
+						sound->startPlaying3D(engine);
+					}
+				}
+			}
+			if (m_ptrActiveCamera != NULL) {
+				if (m_ptrActiveCamera->has<Component::Transformable>()) {
+					auto cam = m_ptrActiveCamera->get<Component::Camera>();
+					v = cam->getPosition();
+					pos.X = v.x;
+					pos.Y = v.y;
+					pos.Z = v.z;
+
+								
+					intUp = cam->getUp();
+					intlkat = cam->getLookAt();
+
+					up.X = intUp.x;
+					up.Y = intUp.y;
+					up.Z = intUp.z;
+
+					lkat.X = intlkat.x;
+					lkat.Y = intlkat.y;
+					lkat.Z = intlkat.z;
+
+					doppler = vec3df(0, 0, 0); //Default no doppler effect
+					engine->setListenerPosition(pos, lkat, doppler, up);
 				}
 			}
 			if (sound->getFinished() && !sound->getLooping()) {
@@ -97,11 +151,6 @@ void System::Audio::update(float dt)
 void System::Audio::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
 	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
-		if ((*it)->sID == "SetActiveCamera") {
-			//Get data key data from message
-			auto data = static_cast<CameraMessage::SetActiveCamera*>((*it).get());
-			m_ptrActiveCamera = data->entity->get<Component::Camera>();
-		}
 		if ((*it)->sID == "Scene_Reload") {
 			//engine->stopAllSounds();
 		}
