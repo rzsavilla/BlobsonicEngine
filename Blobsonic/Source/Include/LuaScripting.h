@@ -27,6 +27,10 @@ namespace System {
 		static void reloadScene();		//!< Set loading scene
 		static void forceReloadScene();		//!< Set loading scene
 
+		static void getActiveCamera();	//!< Return active camera
+
+		static void getPlayer();		//!< Return player LuaEntity
+
 		class LuaScripting : public System {
 		private:
 			std::shared_ptr<SceneManager> m_SceneManager;

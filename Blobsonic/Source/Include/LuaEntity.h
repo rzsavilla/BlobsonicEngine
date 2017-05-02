@@ -1,6 +1,6 @@
 /*
 *	@class LuaEntity
-*	@brief Interface class for creating entities
+*	@brief Handle for a C++ Entity
 *	@author Rozen Savilla
 *	Stores variables and functions
 */
@@ -11,14 +11,17 @@
 
 #include "Entity.h"
 
-class LuaEntity {
-private:
+#include "sol.hpp"
+
+struct LuaEntity {
 	std::shared_ptr<Entity> m_entity;
 	bool m_bDebug = true;
-public:
+
 	LuaEntity();	//!< Default Constructor
 	
 	void attachComponent(const std::string& sComponent);
 
 	unsigned int getID();
+
+	void lua_get(sol::table t);
 };

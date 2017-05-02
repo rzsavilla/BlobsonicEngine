@@ -33,7 +33,12 @@ void System::Scripting::LuaScripting::attachFunctions(lua_State * L)
 
 void System::Scripting::LuaScripting::attachClasses(lua_State * L)
 {
+	sol::state_view lua(L);
+
+	lua.new_usertype<LuaEntity>("Entity", "AttachComponent",&LuaEntity::attachComponent);
+
 }
+
 void System::Scripting::LuaScripting::readRootTable(lua_State * L)
 {
 	std::cout << "-------Reading Root--------\n";
@@ -238,4 +243,9 @@ void System::Scripting::reloadScene()
 void System::Scripting::forceReloadScene()
 {
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),true);
+}
+
+void System::Scripting::getActiveCamera()
+{
+
 }
