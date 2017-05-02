@@ -221,8 +221,8 @@ glm::quat Component::Camera::getQuatRotation()
 	glm::quat qRoll = glm::angleAxis(m_fRoll, glm::vec3(0.0f, 0.0f, 1.0f));		//Rotation around Z axis
 
 	//Rotation matrix
-	glm::quat qOrientation = qPitch * qYaw * qRoll;
-	//qOrientation = qRoll * qOrientation;
+	glm::quat qOrientation = qPitch * qYaw;
+	qOrientation = qRoll * qOrientation;
 	qOrientation = glm::normalize(qOrientation);
 
 	return qOrientation;
