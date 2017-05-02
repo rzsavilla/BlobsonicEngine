@@ -39,6 +39,8 @@ namespace SceneMessage {
 	struct ChangeScene :public Message {
 		ChangeScene(std::string NewScene) {
 			sID = "ChangeScene";
+			sNewScene = NewScene;
 		}
+		std::string sNewScene;
 	};
 }

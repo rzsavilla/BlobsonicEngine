@@ -10,6 +10,9 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+	m_ActiveScene->clearScene();
+	m_LoadingScene->clearScene();
+
 	m_ActiveScene->destroy();
 	m_LoadingScene->destroy();
 }
@@ -73,6 +76,11 @@ std::shared_ptr<Scene> SceneManager::getActiveScene()
 		if (m_LoadingScene) return m_LoadingScene;
 	}
 	return NULL; //No Scene
+}
+
+std::string SceneManager::getActiveSceneName()
+{
+	return m_sActiveScene;
 }
 
 SceneManagerState SceneManager::getState()
