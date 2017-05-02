@@ -3,16 +3,18 @@
 
 SceneManager::SceneManager()
 {
-
+	m_State = Active;
+	m_bHasLoadingScreen = false;
+	m_bForceReloadResouces = false;
 }
 
 SceneManager::~SceneManager()
 {
-	//Set all scene to be destroyed
-	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
-		(*it)->destroy();
-	}
-	m_scenes.clear();	//Remove all pointers to scene
+	m_ActiveScene->clearScene();
+	m_LoadingScene->clearScene();
+
+	m_ActiveScene->destroy();
+	m_LoadingScene->destroy();
 }
 
 std::shared_ptr<SceneManager> SceneManager::getInstance()
@@ -25,69 +27,63 @@ std::shared_ptr<SceneManager> SceneManager::getInstance()
 	return instance;
 }
 
-bool SceneManager::setActiveScene(std::string name)
+void SceneManager::setLoadingScene(std::string filename)
 {
-	if (this->hasScene(name)) {
-		m_sActiveScene = name;
-		return true;
-	}
-	else {
-		return false;
-	}
+	m_bHasLoadingScreen = true;
+	m_sLoadingScene = filename;
 }
 
-void SceneManager::destroyActiveScene()
+void SceneManager::changeScene(std::string filename, bool reloadResources)
 {
-	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
-		if ((*it)->getName() == m_sActiveScene) {
-			(*it)->clearScene();	//!< Destroy all entities within scene
-			m_scenes.erase(it);	//Remove scene
-			return;
-		}
-	}
-}
+	if (m_State == Active) {
+		m_bForceReloadResouces = reloadResources;
+		m_transitionTimer.reset();
+		m_sActiveScene = filename;
+		if (m_ActiveScene)	m_ActiveScene->clearScene();
+		if (m_LoadingScene) m_LoadingScene->clearScene();
+		m_ActiveScene = std::make_shared<Scene>();
+		
+		if (!m_sLoadingScene.empty()) m_LoadingScene = m_loader.fastLoadScene(m_sLoadingScene);
 
-bool SceneManager::hasScene(int uniqueID)
-{
-	return false;
-}
-
-bool SceneManager::hasScene(std::string name)
-{
-	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
-		if ((*it)->getName() == name) {
-			return true;	//Scene exists
-		}
-	}
-	return false;
-}
-
-void SceneManager::addActiveScene(std::shared_ptr<Scene> scene)
-{
-	m_sActiveScene = scene->getName();
-	m_scenes.push_back(scene);
-}
-
-void SceneManager::addScene(std::shared_ptr<Scene> scene)
-{
-	m_scenes.push_back(scene);
-}
-
-void SceneManager::removeScene(std::string name)
-{
-	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
-		if ((*it)->getName() == name) {
-			m_scenes.erase(it);
-		}
+		m_State = Loading;
 	}
 }
 
 std::shared_ptr<Scene> SceneManager::getActiveScene()
 {
-	for (auto it = m_scenes.begin(); it != m_scenes.end(); ++it) {
-		if ((*it)->getName() == m_sActiveScene) {
-			return (*it);	//Return scene
+	if (m_State == Active) {
+		if (m_ActiveScene) {
+			return m_ActiveScene;
 		}
 	}
-	return NULL; //No Active Scene
+	else if (m_State == Loading) {
+		if (!m_loader.loadScene(m_ActiveScene, m_sActiveScene, m_bForceReloadResouces)) {
+			//Scene is still being loaded
+			if (m_LoadingScene && !m_bForceReloadResouces) return m_LoadingScene;
+			return NULL;
+		}
+		else {
+			m_State = Loaded;
+		}
+	}
+	else if (m_State == Loaded) {
+		std::cout << "Loaded\n";
+		//State has finished Loading
+		if ((m_transitionTimer.getElapsed() > m_fTransitionDelay)) {
+			std::cout << m_transitionTimer.getElapsed() << "\n";
+			m_State = Active;
+		}
+		if (m_LoadingScene) return m_LoadingScene;
+	}
+	return NULL; //No Scene
+}
+
+std::string SceneManager::getActiveSceneName()
+{
+	return m_sActiveScene;
+}
+
+SceneManagerState SceneManager::getState()
+{
+	return m_State;
 }

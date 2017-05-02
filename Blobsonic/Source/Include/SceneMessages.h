@@ -35,4 +35,12 @@ namespace SceneMessage {
 	struct SceneChanged : public Message {
 		SceneChanged() { sID = "SceneChanged"; }
 	};
+
+	struct ChangeScene :public Message {
+		ChangeScene(std::string NewScene) {
+			sID = "ChangeScene";
+			sNewScene = NewScene;
+		}
+		std::string sNewScene;
+	};
 }

@@ -19,6 +19,7 @@ namespace Component {
 			setUID();
 			m_parent = NULL;
 		}
+
 		void setParent(std::shared_ptr<Entity> parent) {
 			m_parent = parent;
 		}
