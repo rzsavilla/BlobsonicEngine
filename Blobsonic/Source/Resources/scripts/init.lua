@@ -1,5 +1,5 @@
 
-root = {
+ root = {
 	Entity = {
 		Name = "Player",
 		Transformable = {
@@ -15,6 +15,5 @@ root = {
 			Material = "default_material",
 			Shader = "phong_shader"
 		}
-
 	}
 }
