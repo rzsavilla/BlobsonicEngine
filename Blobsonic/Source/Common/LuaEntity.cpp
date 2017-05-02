@@ -14,9 +14,8 @@ static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityF
 
 LuaEntity::LuaEntity()
 {
-	std::cout << "---New Lua Entity---\n";
-	m_entity = std::make_shared<Entity>();	//Instatiate entity
-	MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);	
+	m_entity = std::make_shared<Entity>();	//Pointer to handled entity
+	MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
 }
 
 void LuaEntity::attachComponent(const std::string& sComponent)
@@ -41,4 +40,9 @@ void LuaEntity::attachComponent(const std::string& sComponent)
 unsigned int LuaEntity::getID()
 {
 	return m_entity->getUID();
+}
+
+void LuaEntity::lua_get(sol::table t)
+{
+
 }

@@ -1,0 +1,8 @@
+
+player = {
+	Transformable = {
+	},
+	Model = {
+	
+	}
+}

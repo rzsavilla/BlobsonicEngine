@@ -160,15 +160,17 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 
 	t->m_vPosition = position;
 
-	if (entity->has<AABB>())
-	{
-		auto AA = entity->get<AABB>();
-		s->m_vCenter = AA->m_vCenter;
-	}
-	else if (entity->has<OBB>())
+
+	if (entity->has<OBB>())
 	{
 		auto O = entity->get<OBB>();
 		s->m_vCenter = O->m_vCenter;
+	}
+
+	else if (entity->has<AABB>())
+	{
+		auto AA = entity->get<AABB>();
+		s->m_vCenter = AA->m_vCenter;
 	}
 	else
 	{

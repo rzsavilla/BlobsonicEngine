@@ -19,7 +19,7 @@ int main() {
 	engine.attachSystem<System::Render>();				//Render objects
 	engine.attachSystem<System::CameraSystem>();		//Control active camera
 	engine.attachSystem<System::Physics>();				//Do physics check on scene
-	engine.attachSystem<System::Audio>();				//Do physics check on scene
+	engine.attachSystem<System::Audio>();				//Start audio objects
 	engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();

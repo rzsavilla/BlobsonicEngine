@@ -20,6 +20,9 @@
 
 class SceneLoader {
 private:
+	//Scene file location
+	const std::string m_sSceneFiles = "Source/Resources/scenes/";		//!< Location of scene xml files
+
 	//Resource Directories
 	std::string m_sTextureDir;		//!< File location for textures
 	std::string m_sMeshDir;			//!< File location for Meshes
@@ -81,5 +84,5 @@ public:
 	*	Staggers loading allowing for game update and render to run whilst still loading
 	*	@return bool Returns true when loading is finished.
 	*/
-	bool loadScene(std::shared_ptr<Scene> scene,std::string sFilename, bool forceLoadRes = false);
+	bool loadScene(std::shared_ptr<Scene>& scene,std::string sFilename, bool forceLoadRes = false);
 };

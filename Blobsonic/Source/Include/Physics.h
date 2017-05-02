@@ -1,6 +1,7 @@
 #pragma once
 
 #define GRAVITYCOEFFICENT -9.81 // m/s/s
+#define EPSILON 0.0025f
 
 #include "System.h"
 
@@ -40,7 +41,7 @@ namespace System {
 		void broadPhase(float dt);
 		void narrowPhase(float dt);
 
-
+		void applyImpulse(glm::vec3 Normal, float force, std::shared_ptr <Entity> object);
 
 	public:
 		Physics();

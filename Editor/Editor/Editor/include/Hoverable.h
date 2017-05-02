@@ -1,0 +1,60 @@
+////////////////////////////////////////////////////////////
+//
+// Hoverable.h
+//
+// Uses Hoverable.cpp
+//
+////////////////////////////////////////////////////////////
+#ifndef HOVERABLE_H
+#define HOVERABLE_H
+
+#include "SFML\Graphics.hpp"
+
+using namespace sf;
+
+class Hoverable
+{
+public:
+	////////////////////////////////////////////////////////////
+	/// \brief Overloaded Bool Function
+	///
+	/// Testes if the object has been clicked on
+	///
+	/// \param sfVmouseClick sf::Vector2f of where the mouse is hovering
+	////////////////////////////////////////////////////////////
+	bool m_bHovering(Vector2f sfVmouseClick);
+
+protected:
+
+
+	////////////////////////////////////////////////////////////
+	/// \brief  m_sfVTopLeftPos sf::Vector2f where the top left of the button is
+	////////////////////////////////////////////////////////////
+	Vector2f m_sfVTopLeftPosHoverable;
+	////////////////////////////////////////////////////////////
+	/// \brief   m_sfVSize sf::Vector2f the size of the button
+	////////////////////////////////////////////////////////////
+	Vector2f m_sfVSizeHoverable;
+
+};
+
+#endif
+
+////////////////////////////////////////////////////////////
+/// \class Hoverable.h
+///
+/// Hoverable.h is a blass class that will be used to test if an element is been hoverable on
+///
+/// Objects that can be hovered on should inherit from Hoverable.h
+///
+/// It contains public bool fuction that should be used to test is sometimes has been hovered over
+///
+/// Usage example:
+/// \code
+/// 
+/// if(button01.m_bClicked(mousePosition)) window.open();
+///
+/// 
+/// \endcode
+///
+////////////////////////////////////////////////////////////

@@ -112,6 +112,7 @@
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
+		
 	</Model>
 	<Model> <ID>cube2</ID>
 		<Mesh>soccer_mesh</Mesh>
@@ -202,11 +203,11 @@
 		<Texture>button_texture</Texture>
 		<Position>
 			<X>20.0f</X>
-			<Y>120.0f</Y>
+			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
-			<X>180.0f</X>
+			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Rotation>
@@ -227,11 +228,11 @@
 		<Texture>sprite_texture</Texture>
 		<Position>
 			<X>804.0f</X>
-			<Y>120.0f</Y>
+			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
-			<X>180.0f</X>
+			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Rotation>
@@ -329,15 +330,23 @@
 		<Quadratic>0.0032f</Quadratic>
 	</Light>
 	
-	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
-		<isPlaying>true</isPlaying>
+		<isInitialized>true</isInitialized>
+		<isPlaying>false</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	-->
+
+	<Audio>
+		<ID>bell</ID>
+		<File>Source\Resources\audio\bell.wav</File>
+		<isInitialized>true</isInitialized>
+		<isPlaying>false</isPlaying>
+		<isLooping>false</isLooping>
+		<startsPaused>false</startsPaused>
+	</Audio>
 	
 	<Camera> <ID>cam1</ID>
 		<Position>

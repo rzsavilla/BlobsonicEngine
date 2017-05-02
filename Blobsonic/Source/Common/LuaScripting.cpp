@@ -13,6 +13,32 @@
 #include "LuaEntity.h"
 
 
+void System::Scripting::LuaScripting::attachFunctions(lua_State * L)
+{
+	sol::state_view lua(L);
+
+	//lua.set_function("changeScene", &Scripting::changeScene);
+	lua.set_function("sayHello", &sayHello);
+
+	lua.set_function("isKeyDown", &Scripting::isKeyDown);
+	lua.set_function("isMouseDown", &Scripting::isMouseDown);
+
+	lua.set_function("changeScene", &Scripting::changeScene);
+	lua.set_function("setLoadingScene", &setLoadingScene);
+
+	lua.set_function("reloadScene", &Scripting::reloadScene);
+	lua.set_function("forceReloadScene", &Scripting::forceReloadScene);
+}
+
+
+void System::Scripting::LuaScripting::attachClasses(lua_State * L)
+{
+	sol::state_view lua(L);
+
+	lua.new_usertype<LuaEntity>("Entity", "AttachComponent",&LuaEntity::attachComponent);
+
+}
+
 void System::Scripting::LuaScripting::readRootTable(lua_State * L)
 {
 	std::cout << "-------Reading Root--------\n";
@@ -86,6 +112,7 @@ std::shared_ptr<Entity> System::Scripting::LuaScripting::readEntity(sol::table t
 System::Scripting::LuaScripting::LuaScripting()
 {
 	MessageHandler::getInstance()->attachReceiver(this);
+	m_SceneManager = SceneManager::getInstance();
 }
 
 void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
@@ -95,8 +122,11 @@ void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity
 
 void System::Scripting::LuaScripting::update(float dt)
 {
-	if (!m_bLoaded) {
+	if (!m_bLoaded && (m_SceneManager->getState() == Active)) {
 		lua_State* L = luaL_newstate();
+
+		attachClasses(L);
+		attachFunctions(L);
 
 		sol::state_view lua(L);
 		LuaHelper::loadScriptFile(L, (m_scriptsDir + "init.lua"));
@@ -108,24 +138,20 @@ void System::Scripting::LuaScripting::update(float dt)
 			//Look for root table
 			sol::table rootTable = lua["root"];
 
-			readRootTable(L);
-
-			//// table is in the stack at index 't'
-			//lua_pushnil(L);  // first key
-
-			//for (auto it = rootTable.begin(); it != rootTable.end(); ++it) {
-			//	auto key = (*it).first;
-			//	if (key.get_type() == sol::type::string) {
-			//		std::cout << "Key: ";
-			//		std::cout << key.as<std::string>() << "\n";
-			//	}
-			//}
+			//readRootTable(L);
 		}
 		else {
 			if (m_bDebug) std::cout << "Failed to load script\n";
 		}
-
 		m_bLoaded = true;
+	}
+	else if ((m_SceneManager->getState() == Active)) {
+		//Use Run script
+		m_RunState = luaL_newstate();
+		LuaHelper::loadLibraries(m_RunState);
+		attachClasses(m_RunState);
+		attachFunctions(m_RunState);
+		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
 	}
 }
 
@@ -138,4 +164,88 @@ void System::Scripting::LuaScripting::processMessages(const std::vector<std::sha
 			if (m_bLoaded) m_bLoaded = false;
 		}
 	}
+}
+
+bool System::Scripting::isKeyDown(const std::string & key)
+{
+	int iKey = -1;
+
+	if (key == "w" || key == "W") {
+		iKey = GLFW_KEY_W;
+	}
+	else if (key == "s" || key == "S") {
+		iKey = GLFW_KEY_S;
+	}
+	else if (key == "a" || key == "A") {
+		iKey = GLFW_KEY_A;
+	}
+	else if (key == "d" || key == "D") {
+		iKey = GLFW_KEY_D;
+	}
+	else if (key == "p" || key == "P") {
+		iKey = GLFW_KEY_P;
+	}
+	else if (key == "o" || key == "O") {
+		iKey = GLFW_KEY_I;
+	}
+	else if (key == "i" || key == "I") {
+		iKey = GLFW_KEY_I;
+	}
+
+	else if (key == "up") iKey = GLFW_KEY_UP;
+	else if (key == "down")	iKey = GLFW_KEY_DOWN;
+	else if (key == "left")	iKey = GLFW_KEY_LEFT;
+	else if (key == "right")iKey = GLFW_KEY_RIGHT;
+	else if (key == "space") iKey = GLFW_KEY_SPACE;
+	else if (key == "esc") iKey = GLFW_KEY_ESCAPE;
+
+	if (iKey != -1) {
+		if (glfwGetKey(glfwGetCurrentContext(), iKey)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool System::Scripting::isMouseDown(const std::string & button)
+{
+	int iButton = -1;
+	if (button == "Left") {
+		iButton == GLFW_MOUSE_BUTTON_1;
+	}
+	else if (button == "Right") {
+		iButton == GLFW_MOUSE_BUTTON_2;
+	}
+
+	if (iButton != -1) {
+		if (glfwGetKey(glfwGetCurrentContext(), iButton)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void System::Scripting::changeScene(std::string sceneFile)
+{
+	SceneManager::getInstance()->changeScene(sceneFile,true);
+}
+
+void System::Scripting::setLoadingScene(std::string sceneFile)
+{
+	SceneManager::getInstance()->setLoadingScene(sceneFile);
+}
+
+void System::Scripting::reloadScene()
+{
+	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),false);
+}
+
+void System::Scripting::forceReloadScene()
+{
+	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),true);
+}
+
+void System::Scripting::getActiveCamera()
+{
+
 }

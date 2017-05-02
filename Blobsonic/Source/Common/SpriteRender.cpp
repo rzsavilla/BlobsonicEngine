@@ -6,11 +6,6 @@ Component::SpriteRenderer::SpriteRenderer()
 	initRenderData();
 }
 
-//Component::SpriteRenderer::~SpriteRenderer()
-//{
-
-//}
-
 void Component::SpriteRenderer::initRenderData()
 {
 	// Configure VAO/VBO
@@ -26,16 +21,11 @@ void Component::SpriteRenderer::initRenderData()
 		1.0f, 0.0f, 1.0f, 0.0f
 	};
 
-	// Initialise/Load/Etc. Texture
-	// ...
-
-
 	gl::GenVertexArrays(1, &this->quadVAO);
 	gl::GenBuffers(1, &VBO);
 	gl::BindVertexArray(this->quadVAO);
 	gl::BindBuffer(gl::ARRAY_BUFFER, VBO);
 	gl::BufferData(gl::ARRAY_BUFFER, sizeof(vertices), vertices, gl::STATIC_DRAW);
-
 	
 	gl::EnableVertexAttribArray(0);
 	gl::VertexAttribPointer(0, 4, gl::FLOAT, FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
