@@ -5,9 +5,9 @@
 
 class EntityFactory {
 private:
-	ResourceManager* m_ptrResources;
+	std::shared_ptr<ResourceManager> m_ptrResources;	//!< Pointer to resourcemanager
 public:
-	EntityFactory(ResourceManager* res);
+	EntityFactory();	//!< Default Constructor
 
 	std::shared_ptr<Entity> create(std::string entity);
 
@@ -15,8 +15,11 @@ public:
 
 	std::shared_ptr<Entity> createCamera(glm::vec3 position);
 
-	std::shared_ptr<Entity> createActor();
+	std::shared_ptr<Entity> createSound();
+  
+	std::shared_ptr<Entity> createSprite();
 
+	std::shared_ptr<Entity> createActor();
 
 	//Phsyics
 	void attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale);//Use for "early out" collision testing
@@ -26,6 +29,8 @@ public:
 	void attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position); // becarefull when resizing entity
 
 	void attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 dimensions, glm::vec3 scale, glm::vec3 Rot);
+
+	void attachSprite(std::shared_ptr<Entity> entity);
 
 	void attachPhysical(std::shared_ptr<Entity> entity, float mass, float restitution);
 };

@@ -25,8 +25,7 @@
 
 class GameScene: public Scene {
 public:
-	GameScene(ResourceManager* res)
-		:Scene(res)
+	GameScene()
 	{
 		
 	}

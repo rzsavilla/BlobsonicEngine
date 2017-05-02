@@ -18,6 +18,8 @@
 #include <memory>
 #include <map>
 
+#include <iostream>
+
 #include "Scene.h"
 #include "Destroyable.h"
 

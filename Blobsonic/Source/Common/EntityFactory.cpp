@@ -9,10 +9,13 @@
 #include "Sphere.h"
 #include "Capsule.h"
 #include "Physical.h"
+#include "Sound.h"
+#include "SpriteRender.h"
+#include "Transformable.h"
 
-EntityFactory::EntityFactory(ResourceManager * res)
+EntityFactory::EntityFactory()
 {
-	m_ptrResources = res;
+	m_ptrResources = ResourceManager::getInstance();	//!< Set pointer to resource manager
 }
 
 std::shared_ptr<Entity> EntityFactory::create(std::string entity)
@@ -20,7 +23,7 @@ std::shared_ptr<Entity> EntityFactory::create(std::string entity)
 	if (entity == "Player") {
 		return createPlayer(glm::vec3(0.0f, 0.0f, 0.0f));
 	}
-	return std::shared_ptr<Entity>();
+	return std::make_shared<Entity>();
 }
 
 std::shared_ptr<Entity> EntityFactory::createPlayer(glm::vec3 position)
@@ -35,10 +38,10 @@ std::shared_ptr<Entity> EntityFactory::createPlayer(glm::vec3 position)
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
 	auto m = entity->get<Component::Model>();
-	m->m_meshes.push_back(m_ptrResources->getMesh("cube"));
-	m->m_textures.push_back(m_ptrResources->getTexture("red"));
-	m->m_materials.push_back(m_ptrResources->getMaterial("default"));
-	m->m_shader = m_ptrResources->getShader("phong");
+	m->m_aMeshes.push_back(m_ptrResources->getAssimpMesh("deer_mesh"));
+	m->m_textures.push_back(m_ptrResources->getTexture("red_texture"));
+	m->m_materials.push_back(m_ptrResources->getMaterial("default_material"));
+	m->m_shader = m_ptrResources->getShader("phong_shader");
 
 	return entity;
 }
@@ -58,6 +61,18 @@ std::shared_ptr<Entity> EntityFactory::createCamera(glm::vec3 position)
 	return entity;
 }
 
+std::shared_ptr<Entity> EntityFactory::createSound()
+{
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+
+	//////Attach components
+	entity->attach<Component::Sound>();
+	//Set component Properties
+	auto sound = entity->get<Component::Sound>();
+
+	return entity;
+}
+
 std::shared_ptr<Entity> EntityFactory::createActor()
 {
 	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
@@ -68,6 +83,21 @@ std::shared_ptr<Entity> EntityFactory::createActor()
 	//Set component Properties
 	auto t = entity->get<Component::Transformable>();
 	return entity;
+}
+
+std::shared_ptr<Entity> EntityFactory::createSprite()
+{
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+
+	//////Attach components
+	entity->attach<Component::Transformable>();
+	entity->attach<Component::SpriteRenderer>();
+	return entity;
+}
+
+void EntityFactory::attachSprite(std::shared_ptr<Entity> entity)
+{
+	entity->attach<Component::SpriteRenderer>();
 }
 
 
@@ -96,7 +126,7 @@ void EntityFactory::attachAABB(std::shared_ptr<Entity> entity, glm::vec3 positio
 void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale, glm::vec3 Rot)
 {
 	//////Attach components
-  if (!entity->has<Component::Transformable>()) {
+	if (!entity->has<Component::Transformable>()) {
 		entity->attach<Component::Transformable>();
 	}
 	entity->attach<OBB>();
@@ -115,8 +145,6 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	o->m_vCenter = glm::mat3(o->m_Rotation) * (position + (Dimensions * Scale) / 2.0f);
 
 	t->setRotation(Rot);
-
-	o->setParent(entity);
 }
 
 void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position)
@@ -132,28 +160,30 @@ void EntityFactory::attachSphere(std::shared_ptr<Entity> entity, glm::vec3 posit
 
 	t->m_vPosition = position;
 
-	 if (entity->has<OBB>())
+
+	if (entity->has<OBB>())
 	{
 		auto O = entity->get<OBB>();
 		s->m_vCenter = O->m_vCenter;
 	}
-	else if (entity->has<AABB>()) 
+
+	else if (entity->has<AABB>())
 	{
 		auto AA = entity->get<AABB>();
 		s->m_vCenter = AA->m_vCenter;
 	}
 	else
 	{
-	
+
 		s->m_vCenter = position;
 	}
 
 	//find the largest scale of the sphere
-	float fSize = std::max(t->m_vScale.x,  t->m_vScale.y);
+	float fSize = std::max(t->m_vScale.x, t->m_vScale.y);
 	fSize = std::max(fSize, t->m_vScale.z);
-	s->m_fRadius = fSize ;
+	s->m_fRadius = fSize;
 
-	
+
 }
 
 void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 dimensions, glm::vec3 scale, glm::vec3 Rot)
@@ -208,14 +238,14 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 	float y = o->m_vCenter.y + ((dimensions.y * scale.y) / 2.0f);
 	float z = o->m_vCenter.z;
 
-	c->m_vSphereCenter1 = glm::mat3(o->m_Rotation) * vec3(x,y,z);
+	c->m_vSphereCenter1 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
 
 	y = o->m_vCenter.y - ((dimensions.y * scale.y) / 2.0f);
 
 	c->m_vSphereCenter2 = glm::mat3(o->m_Rotation) * vec3(x, y, z);
 }
 
-void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass,float restitution)
+void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity, float mass, float restitution)
 {
 	if (!entity->has<Component::Transformable>()) {
 		entity->attach<Component::Transformable>();
@@ -224,7 +254,7 @@ void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity,float mass,flo
 		entity->attach<Physical>();
 	}
 	auto physical = entity->get<Physical>();
-	
+
 	//apply the mass
 	physical->m_fMass = mass;
 	//check for infinite mass

@@ -44,6 +44,7 @@
     <ClInclude Include="Source\Include\CameraSystem.h" />
     <ClInclude Include="Source\Include\Capsule.h" />
     <ClInclude Include="Source\Include\Destroyable.h" />
+    <ClInclude Include="Source\Include\DirectionalLight.h" />
     <ClInclude Include="Source\Include\EngineMessages.h" />
     <ClInclude Include="Source\Include\Entity.h" />
     <ClInclude Include="Source\Include\EntityFactory.h" />
@@ -51,9 +52,14 @@
     <ClInclude Include="Source\Include\EntityManager.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
+    <ClInclude Include="Source\Include\Light.h" />
+    <ClInclude Include="Source\Include\LuaEntity.h" />
+    <ClInclude Include="Source\Include\LuaHelper.h" />
+    <ClInclude Include="Source\Include\LuaScripting.h" />
     <ClInclude Include="Source\Include\MessageHandler.h" />
     <ClInclude Include="Source\Include\MessageReceiver.h" />
     <ClInclude Include="Source\Include\Model.h" />
+    <ClInclude Include="Source\Include\Name.h" />
     <ClInclude Include="Source\Include\OBB.h" />
     <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
@@ -81,6 +87,7 @@
     <ClInclude Include="Source\Include\Player.h" />
     <ClInclude Include="Source\Include\PlayerController.h" />
     <ClInclude Include="Source\Include\PlayerInput.h" />
+    <ClInclude Include="Source\Include\PointLight.h" />
     <ClInclude Include="Source\Include\QuatCamera.h" />
     <ClInclude Include="Source\Include\Render.h" />
     <ClInclude Include="Source\Include\RenderMessages.h" />
@@ -90,8 +97,12 @@
     <ClInclude Include="Source\Include\SceneLoader.h" />
     <ClInclude Include="Source\Include\SceneManager.h" />
     <ClInclude Include="Source\Include\SceneMessages.h" />
+    <ClInclude Include="Source\Include\sol.hpp" />
+    <ClInclude Include="Source\Include\Sound.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
     <ClInclude Include="Source\Include\SplashScene.h" />
+    <ClInclude Include="Source\Include\Spotlight.h" />
+    <ClInclude Include="Source\Include\SpriteRender.h" />
     <ClInclude Include="Source\Include\stb_image.h" />
     <ClInclude Include="Source\Include\stdafx.h" />
     <ClInclude Include="Source\Include\System.h" />
@@ -102,6 +113,7 @@
     <ClInclude Include="Source\Include\tinyxml2.h" />
     <ClInclude Include="Source\Include\TransformableOLD.h" />
     <ClInclude Include="Source\Include\Transformable.h" />
+    <ClInclude Include="Source\Include\UniqueID.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\AABB.cpp" />
@@ -109,18 +121,26 @@
     <ClCompile Include="Source\Common\AIController.cpp" />
     <ClCompile Include="Source\Common\aModel.cpp" />
     <ClCompile Include="Source\Common\AssimpMesh.cpp" />
+    <ClCompile Include="Source\Common\Audio.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
     <ClCompile Include="Source\Common\Camera.cpp" />
     <ClCompile Include="Source\Common\CameraController.cpp" />
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\Destroyable.cpp" />
+    <ClCompile Include="Source\Common\DirectionalLight.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
+    <ClCompile Include="Source\Common\GUIButton.cpp" />
+    <ClCompile Include="Source\Common\Light.cpp" />
+    <ClCompile Include="Source\Common\LuaEntity.cpp" />
+    <ClCompile Include="Source\Common\LuaHelper.cpp" />
+    <ClCompile Include="Source\Common\LuaScripting.cpp" />
     <ClCompile Include="Source\Common\Math3D.cpp" />
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
+    <ClCompile Include="Source\Common\Name.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
     <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Engine.cpp" />
@@ -144,6 +164,7 @@
     <ClCompile Include="Source\Common\Pickup.cpp" />
     <ClCompile Include="Source\Common\PlayerController.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
+    <ClCompile Include="Source\Common\PointLight.cpp" />
     <ClCompile Include="Source\Common\QuatCamera.cpp" />
     <ClCompile Include="Source\Common\Render.cpp" />
     <ClCompile Include="Source\Common\ResourceManager.cpp" />
@@ -151,8 +172,10 @@
     <ClCompile Include="Source\Common\SceneComponent.cpp" />
     <ClCompile Include="Source\Common\SceneLoader.cpp" />
     <ClCompile Include="Source\Common\SceneManager.cpp" />
+    <ClCompile Include="Source\Common\Sound.cpp" />
     <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />
+    <ClCompile Include="Source\Common\SpriteRender.cpp" />
     <ClCompile Include="Source\Common\stdafx.cpp" />
     <ClCompile Include="Source\Common\TestScene.cpp" />
     <ClCompile Include="Source\Common\Text.cpp" />
@@ -161,6 +184,8 @@
     <ClCompile Include="Source\Common\tinyxml2.cpp" />
     <ClCompile Include="Source\Common\Transformable.cpp" />
     <ClCompile Include="Source\Common\TransformableOld.cpp" />
+    <ClCompile Include="Source\Common\UniqueID.cpp" />
+    <ClCompile Include="Source\Include\Spotlight.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5189E8BA-F4EE-426F-AA59-E3CA4757AD1F}</ProjectGuid>
@@ -216,26 +241,26 @@
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(VC_LibraryPath_x86)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(VC_LibraryPath_x86)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration)\;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(VC_LibraryPath_x64)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)Source\Include\$(Platform)\;$(SolutionDir)Source\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Platforms\Windows\$(Platform)\;$(SolutionDir)Platforms\Windows\$(Platform)\$(Configuration)\;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(VC_LibraryPath_x64)</LibraryPath>
     <OutDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Builds\$(Platform)\$(ProjectName)\$(Configuration)\Intermediates\</IntDir>
+    <IntDir>$(SolutionDir)Builds\$(Platform)\Intermediates\$(ProjectName)\$(Configuration)\</IntDir>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -244,10 +269,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\sol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -256,10 +281,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\sol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -270,12 +295,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\sol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glfw3.lib;opengl32.lib;freetype.lib;lua53.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -287,12 +312,12 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\LuaBridge;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Include\lua;$(SolutionDir)Source\Include\irrKlang;$(SolutionDir)Source\Include\sol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;assimp.lib;%(AdditionalDependencies);lua53.lib</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

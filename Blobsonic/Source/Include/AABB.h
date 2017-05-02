@@ -32,7 +32,6 @@ public:
 	glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
 
 	bool testAxis[3];
-
 };
 
 

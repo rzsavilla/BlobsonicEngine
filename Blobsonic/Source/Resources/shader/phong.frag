@@ -49,8 +49,8 @@ struct PointLight {
 };
 
 //Spot Light parameters
-struct SpotLight {
-vec3 ambient;
+struct Spotlight {
+	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
 	vec3 position;
@@ -64,7 +64,7 @@ vec3 ambient;
 
 uniform DirLight dirLights[DIR_LIGHT_COUNT];		//Array of directional lights
 uniform PointLight pointLights[POINT_LIGHT_COUNT];	//Array of point lights
-uniform PointLight spotLights[SPOT_LIGHT_COUNT];	//Array of point lights
+uniform Spotlight spotlights[SPOT_LIGHT_COUNT];	//Array of point lights
 
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDirection) {
 	//Calculate light direction to current vertex
@@ -113,12 +113,10 @@ vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragmentPosition, vec3 v
 	return ambient + diffuse + specular;
 }
 
-vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragmentPosition, vec3 viewDirection) {
+vec3 calcSpotlight(Spotlight light, vec3 normal, vec3 fragmentPosition, vec3 viewDirection) {
 	vec3 lightDirection = normalize(light.position - fragmentPosition); //Light Direction to the current vertex;
 	vec3 targetDirection = normalize(-light.direction);					//Light direction to spotlight target
 	float angle = dot(lightDirection,targetDirection);
-
-	
 
 	//--Attenuation--------------------------
 	float distance = length(light.position - fragmentPosition);
@@ -163,9 +161,9 @@ vec4 applyLights(vec3 fragmentPos,vec3 fragmentNormal, vec3 viewDirection) {
 	for (int i = 0; i < POINT_LIGHT_COUNT; i++) {
 		result += vec4(calcPointLight(pointLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
 	}
-
+	
 	for (int i = 0; i < SPOT_LIGHT_COUNT; i++) {
-		result += vec4(calcPointLight(spotLights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
+		result += vec4(calcSpotlight(spotlights[i], fragmentNormal,fragmentPos, viewDirection),1.0f);
 	}
 	return result;
 }
@@ -182,9 +180,8 @@ void main() {
 	lights = applyLights(fragVert,fragNormal,viewDir);
 	//------------//
 
-
-	Colour = texture(tex, texCoord);	//Just Textures
-	//Colour = texture(tex, texCoord) * lights;	//Textures + lighting
+	//Colour = texture(tex, texCoord);	//Just Textures
+	Colour = texture(tex, texCoord) * lights;	//Textures + lighting
 	//Colour = vec4(1.0f,0.0f,1.0,0.1f);
 }
 //------------------------------------------------------------------------------------------//

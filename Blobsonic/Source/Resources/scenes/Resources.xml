@@ -7,7 +7,7 @@
 	</Mesh>
 	<Mesh> 
 		<ID>sphere_mesh</ID>
-		<File>Source\Resources\models\Animated_Ball_noText.fbx</File>
+		<File>Source\Resources\models\Minotaur_noText.fbx</File>
 	</Mesh>
 
 	<Mesh> 
@@ -57,6 +57,16 @@
 	<Texture> 
 		<ID>skybox_texture</ID>
 		<File>Source\Resources\textures\skybox_water.bmp</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>button_texture</ID>
+		<File>Source\Resources\textures\button.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>sprite_texture</ID>
+		<File>Source\Resources\textures\sprite.png</File>
 	</Texture>
 	
 	<Material> 

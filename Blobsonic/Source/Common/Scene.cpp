@@ -1,12 +1,19 @@
 #include "stdafx.h"
 #include "Scene.h"
 
-//void Scene::setCharacters(std::map<GLchar, Character>* characters)
-//{
-//	m_ptrCharacters = characters;
-//}
+#include "ResourceManager.h"
 
-void Scene::setResources(ResourceManager * res)
+Scene::Scene()
 {
-	m_ptrResources = res;
+	m_ptrResources = ResourceManager::getInstance();
+}
+
+Scene::~Scene()
+{
+	clearScene();
+}
+
+void Scene::clearScene()
+{
+	m_entities.destroyAll();
 }

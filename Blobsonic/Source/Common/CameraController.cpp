@@ -55,6 +55,8 @@ void System::CameraController::update(float dt)
 
 		//std::cout << "Orientation: " << camera->getYaw() << " " << camera->getPitch() << " " << camera->getRoll() << std::endl;
 
+		GLFWwindow* window = glfwGetCurrentContext();
+
 		//------Camera movement -- key press-------------
 		if (m_bAction[0]) {	//Zoom in
 			camera->zoom(-camera->getMoveSpeed());
@@ -80,11 +82,6 @@ void System::CameraController::update(float dt)
 		if (m_bAction[7]) {	//Pedestal down
 			camera->pedestal(-camera->getMoveSpeed());
 		}
-
-		//Reset Camera Actions
-		for (int i = 0; i < kiCameraActions; i++) {
-			m_bAction[i] = false;
-		}
 	}
 }
 
@@ -99,30 +96,30 @@ void System::CameraController::processMessages(const std::vector<std::shared_ptr
 				auto camera = m_ActiveCamera->get<Component::Camera>();
 				//Get data key data from message
 				auto data = static_cast<InputMessage::KeyPress*>(msgs->at(i).get());
-				if (data->m_iAction == GLFW_PRESS || data->m_iAction == GLFW_REPEAT) {	//Key is pressed or held down
+				if (true) {	//Key is pressed or held down
 					if (data->m_iKey == GLFW_KEY_W) {
-						m_bAction[0] = true;
+						m_bAction[0] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_S) {
-						m_bAction[1] = true;
+						m_bAction[1] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_A) {
-						m_bAction[2] = true;
+						m_bAction[2] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_D) {
-						m_bAction[3] = true;
+						m_bAction[3] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_Q) {
-						m_bAction[4] = true;
+						m_bAction[4] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_E) {
-						m_bAction[5] = true;
+						m_bAction[5] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_Z) {
-						m_bAction[6] = true;
+						m_bAction[6] = data->m_iAction;
 					}
 					else if (data->m_iKey == GLFW_KEY_X) {
-						m_bAction[7] = true;
+						m_bAction[7] = data->m_iAction;
 					}
 
 					else if (data->m_iKey == GLFW_KEY_R) {
