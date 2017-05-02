@@ -47,7 +47,7 @@ System::Audio::Audio()
 {
 	m_ptrActiveCamera = NULL;
 	engine = createIrrKlangDevice();
-	
+	MessageHandler::getInstance()->attachReceiver(this);
 }
 
 System::Audio::~Audio()
@@ -74,9 +74,14 @@ void System::Audio::update(float dt)
 		//Find and set active camera
 		if ((*it)->has<Component::Sound>()) {
 			auto sound = (*it)->get<Component::Sound>();
-			if (sound->getPlaying()) {
-				engine->play2D(sound->getFile().c_str(), sound->getLooping());
-				sound->setPlaying(false);
+			if (sound->getInitialized()) {
+				if (!sound->getPlaying()) {
+					sound->setInitialized(false);
+					sound->startPlaying(engine);
+				}
+			}
+			if (sound->getFinished() && !sound->getLooping()) {
+				sound->stopPlaying(engine);
 			}
 		}
 	}
@@ -91,6 +96,9 @@ void System::Audio::processMessages(const std::vector<std::shared_ptr<Message>>*
 			//Get data key data from message
 			auto data = static_cast<CameraMessage::SetActiveCamera*>((*it).get());
 			m_ptrActiveCamera = data->entity->get<Component::Camera>();
+		}
+		if ((*it)->sID == "Scene_Reload") {
+			engine->stopAllSounds();
 		}
 	}
 }

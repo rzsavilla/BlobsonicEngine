@@ -330,15 +330,23 @@
 		<Quadratic>0.0032f</Quadratic>
 	</Light>
 	
-	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
-		<isPlaying>true</isPlaying>
+		<isInitialized>true</isInitialized>
+		<isPlaying>false</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	-->
+
+	<Audio>
+		<ID>bell</ID>
+		<File>Source\Resources\audio\bell.wav</File>
+		<isInitialized>true</isInitialized>
+		<isPlaying>false</isPlaying>
+		<isLooping>false</isLooping>
+		<startsPaused>false</startsPaused>
+	</Audio>
 	
 	<Camera> <ID>cam1</ID>
 		<Position>
