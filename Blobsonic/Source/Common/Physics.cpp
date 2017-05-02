@@ -433,33 +433,39 @@ bool System::Physics::CheckShereSphereCollision(std::shared_ptr<Entity> sphere1,
 
 	//subtract the radius 
 	magDist = magDist - sph1->m_fRadius;
-
 	if (magDist <= sph2->m_fRadius)
 	{
-		// find penetration
-		//find collison normal
-		glm::vec3 Normal = sph1->m_vCenter - sph2->m_vCenter;
-		glm::vec3 newVector = Normal;
-		newVector = glm::normalize(newVector);
-		newVector *= sph1->m_fRadius;
-		newVector *= sph2->m_fRadius;
-		Normal = Normal - newVector;
+		if (sphere1->has<Physical>() && sphere2->has<Physical>())
+		{
+			// find penetration
+
+			glm::vec3 Normal = sph1->m_vCenter - sph2->m_vCenter;
+			glm::vec3 newVector = Normal;
+			newVector = glm::normalize(newVector);
+			newVector *= sph1->m_fRadius;
+			newVector *= sph2->m_fRadius;
+			Normal = Normal - newVector;
 
 
-		float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+			//find collison normal
+			Normal = glm::normalize(Normal);
+			Normal = -Normal;
 
-		Normal = glm::normalize(Normal);
-		Normal = -Normal;
+			//find the penetration depth
+			float PenetrationDepth = (sph1->m_fRadius + sph2->m_fRadius) - d;
+			resolveCollision(sphere1, sphere2, Normal);
+			PositionalCorrection(sphere1, sphere2, PenetrationDepth, Normal);
 
-		//find the penetration depth
-		float PenetrationDepth = (sph1->m_fRadius + sph2->m_fRadius) - d;
-		resolveCollision(sphere1, sphere2, Normal);
-		PositionalCorrection(sphere1, sphere2, PenetrationDepth, Normal);
+		}
 
 		return true;
-	}
-	else  return false;
 
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std::shared_ptr<Entity> eSphere)
@@ -482,11 +488,11 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	localSphere.m_vCenter = localSphere.m_vCenter - tBox->getPosition();
 
 	//rotate sphere by inverse box rotation
-	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
-	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
-	localSphere.m_Rotation = glm::rotate(localSphere.m_Rotation, -tBox->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
+	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -tBox->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
+	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -tBox->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
+	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -tBox->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
 
-	localSphere.m_vCenter = localSphere.m_vCenter * mat3(localSphere.m_Rotation);
+	localSphere.m_vCenter = localSphere.m_vCenter * mat3(localSphere.m_mRotation);
 
 	//find the distance from center to center
 	glm::vec3 overAllDistance = glm::vec3(0, 0, 0) + localSphere.m_vCenter;
@@ -641,7 +647,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	if (fDist <= 0)
 	{
 		//check for physical component on sphere
-		if (eSphere->has<Physical>())
+		if (eSphere->has<Physical>() && eBox->has<Physical>())
 		{
 			//find collison normal
 			glm::vec3 Normal = localSphere.m_vCenter - clamp;
