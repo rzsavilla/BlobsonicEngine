@@ -389,6 +389,19 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 		else if (obb2Max >= obb1Min && obb2Max <= obb1Max)
 		{
 			testAxis[axisTest] = true; // There is a collision along this axis
+			
+			//find overlap amount
+			float fPen = obb2Max - obb1Min;
+
+			// find normal
+			glm::vec3 normal = obox1->m_obbNormals[axisTest];
+
+			//resolve
+			resolveCollision(obb1, obb2, normal);
+
+			//position
+			PositionalCorrection(obb1, obb2, fPen, normal);
+		
 		}
 		else
 		{
