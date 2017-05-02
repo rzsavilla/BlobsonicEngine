@@ -293,9 +293,6 @@
     <ClInclude Include="Source\Include\tinyxml2.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\Button.h">
-      <Filter>Header Files\OLDUnused</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Include\ID.h">
       <Filter>Header Files\OLDUnused</Filter>
     </ClInclude>
@@ -400,6 +397,12 @@
     </ClInclude>
     <ClInclude Include="Source\Include\LuaHelper.h">
       <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Button.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\GUI.h">
+      <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -535,9 +538,6 @@
     <ClCompile Include="Source\Common\GLSLProgram.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Button.cpp">
-      <Filter>Source Files\OLDUnused</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\TestScene.cpp">
       <Filter>Source Files\OLDUnused</Filter>
     </ClCompile>
@@ -589,9 +589,6 @@
     <ClCompile Include="Source\Include\Spotlight.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\GUIButton.cpp">
-      <Filter>Source Files\Engine\Component\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\SpriteRender.cpp">
       <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
@@ -612,6 +609,12 @@
     </ClCompile>
     <ClCompile Include="Source\Common\LuaHelper.cpp">
       <Filter>Source Files\Engine\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Button.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\GUI.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

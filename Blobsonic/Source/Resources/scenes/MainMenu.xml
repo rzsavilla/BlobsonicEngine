@@ -33,12 +33,12 @@
 		</Origin>
 	</Model>
 	
-	<Sprite> <ID>sprite1</ID>
+	<Button> <ID>start_button</ID>
 		<Shader>button_shader</Shader>
 		<Texture>button_texture</Texture>
 		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
+			<X>412.0f</X>
+			<Y>100</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -53,17 +53,42 @@
 		</Scale>
 		<Colour>
 			<X>1.0f</X> 	
-			<Y>1.0f</Y>
+			<Y>0.5f</Y>
 			<Z>0.0f</Z>
 		</Colour>
-	</Sprite>
+	</Button>
 	
-	<Sprite> <ID>sprite2</ID>
+	<Button> <ID>settings_button</ID>
 		<Shader>button_shader</Shader>
-		<Texture>sprite_texture</Texture>
+		<Texture>button_texture</Texture>
 		<Position>
-			<X>804.0f</X>
-			<Y>20.0f</Y>
+			<X>412.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>0.5f</Z>
+		</Colour>
+	</Button>
+	
+	<Button> <ID>exit_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>button_texture</Texture>
+		<Position>
+			<X>412.0f</X>
+			<Y>500.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -78,10 +103,10 @@
 		</Scale>
 		<Colour>
 			<X>0.5f</X> 	
-			<Y>0.5f</Y>
+			<Y>0.0f</Y>
 			<Z>1.0f</Z>
 		</Colour>
-	</Sprite>
+	</Button>
 
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
@@ -186,12 +211,12 @@
 			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
-		<FOV>45.0f</FOV>
+		<FOV>90.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>1000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>0.8f</MoveSpeed>
+		<RotSpeed>0.0f</RotSpeed>
+		<MoveSpeed>0.0f</MoveSpeed>
 	</Camera>
 </Scene>
 

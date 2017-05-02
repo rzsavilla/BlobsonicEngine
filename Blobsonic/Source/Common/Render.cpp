@@ -8,6 +8,7 @@
 #include "Text.h"
 #include "PointLight.h"
 #include "SpriteRender.h"
+#include "Button.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"

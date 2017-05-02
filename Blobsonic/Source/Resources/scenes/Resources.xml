@@ -69,6 +69,11 @@
 		<File>Source\Resources\textures\sprite.png</File>
 	</Texture>
 	
+	<Texture> 
+		<ID>loading_texture</ID>
+		<File>Source\Resources\textures\loading.png</File>
+	</Texture>
+	
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>

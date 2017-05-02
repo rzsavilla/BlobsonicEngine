@@ -12,6 +12,7 @@
 #include "Sound.h"
 #include "SpriteRender.h"
 #include "Transformable.h"
+#include "Button.h"
 
 EntityFactory::EntityFactory()
 {
@@ -95,9 +96,24 @@ std::shared_ptr<Entity> EntityFactory::createSprite()
 	return entity;
 }
 
+std::shared_ptr<Entity> EntityFactory::createButton()
+{
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+
+	//////Attach components
+	//entity->attach<Component::Transformable>();
+	entity->attach<Component::Button>();
+	return entity;
+}
+
 void EntityFactory::attachSprite(std::shared_ptr<Entity> entity)
 {
 	entity->attach<Component::SpriteRenderer>();
+}
+
+void EntityFactory::attachButton(std::shared_ptr<Entity> entity)
+{
+	entity->attach<Component::Button>();
 }
 
 

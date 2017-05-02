@@ -39,6 +39,7 @@
     <ClInclude Include="Source\Include\aModel.h" />
     <ClInclude Include="Source\Include\AssimpMesh.h" />
     <ClInclude Include="Source\Include\Bitmap.h" />
+    <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Camera.h" />
     <ClInclude Include="Source\Include\CameraMessages.h" />
     <ClInclude Include="Source\Include\CameraSystem.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="Source\Include\EntityLoader.h" />
     <ClInclude Include="Source\Include\EntityManager.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
+    <ClInclude Include="Source\Include\GUI.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
     <ClInclude Include="Source\Include\Light.h" />
     <ClInclude Include="Source\Include\LuaEntity.h" />
@@ -61,7 +63,6 @@
     <ClInclude Include="Source\Include\Model.h" />
     <ClInclude Include="Source\Include\Name.h" />
     <ClInclude Include="Source\Include\OBB.h" />
-    <ClInclude Include="Source\Include\Button.h" />
     <ClInclude Include="Source\Include\Component.h" />
     <ClInclude Include="Source\Include\Drawable.h" />
     <ClInclude Include="Source\Include\Engine.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Source\Common\AssimpMesh.cpp" />
     <ClCompile Include="Source\Common\Audio.cpp" />
     <ClCompile Include="Source\Common\Bitmap.cpp" />
+    <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Camera.cpp" />
     <ClCompile Include="Source\Common\CameraController.cpp" />
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
@@ -133,7 +135,7 @@
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
-    <ClCompile Include="Source\Common\GUIButton.cpp" />
+    <ClCompile Include="Source\Common\GUI.cpp" />
     <ClCompile Include="Source\Common\Light.cpp" />
     <ClCompile Include="Source\Common\LuaEntity.cpp" />
     <ClCompile Include="Source\Common\LuaHelper.cpp" />
@@ -142,7 +144,6 @@
     <ClCompile Include="Source\Common\MessageHandler.cpp" />
     <ClCompile Include="Source\Common\Name.cpp" />
     <ClCompile Include="Source\Common\OBB.cpp" />
-    <ClCompile Include="Source\Common\Button.cpp" />
     <ClCompile Include="Source\Common\Engine.cpp" />
     <ClCompile Include="Source\Common\GameObject.cpp" />
     <ClCompile Include="Source\Common\GameScene.cpp" />

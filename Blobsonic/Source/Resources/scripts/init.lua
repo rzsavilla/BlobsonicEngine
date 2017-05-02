@@ -1,5 +1,5 @@
 setLoadingScene("Loading.xml")
-changeScene("WorldTest.xml")
+changeScene("MainMenu.xml")
 
 root = {
 	Entity = {
