@@ -49,9 +49,9 @@ void System::Audio::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entiti
 	//Remove entity from array
 	int size = entities->size();
 	if (!entities->empty()) {
-		for (int i = 0; i < size; i++) {
-			if (entities->at(0)->isDestroyed()) {
-				entities->erase(entities->begin());
+		for (int i = entities->size() - 1; i > -1; i--) {
+			if (entities->at(i)->isDestroyed()) {
+				entities->erase(entities->begin() + i);
 			}
 		}
 	}
