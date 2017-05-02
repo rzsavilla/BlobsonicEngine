@@ -10,7 +10,7 @@ using namespace irrklang;
 namespace System {
 	class Audio : public System {
 	private:
-		Component::Camera* m_ptrActiveCamera;
+		std::shared_ptr<Entity> m_ptrActiveCamera;
 
 		std::vector<std::shared_ptr<Entity>> m_soundEntities;
 

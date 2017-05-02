@@ -1,7 +1,7 @@
 setLoadingScene("Loading.xml")
 changeScene("Chris.xml")
 
-root = {
+ root = {
 	Entity = {
 		Name = "Player",
 		Transformable = {

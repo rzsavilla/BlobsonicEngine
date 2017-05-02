@@ -17,11 +17,14 @@ namespace Component {
 		bool startsPaused;
 		bool isFinished;
 		irrklang::ISound* snd;
+		vec3df position;
+		bool sound3D;
 
 	public:
 		Sound();
 
 		std::string getFile();
+		vec3df getPos();
 		bool getInitialized();
 		bool getPlaying();
 		bool getLooping();
@@ -33,11 +36,20 @@ namespace Component {
 		void setInitialized(bool state);
 		void setPlaying(bool state);
 
-		void startPlaying(ISoundEngine* engine);
+		void startPlaying2D(ISoundEngine* engine);
+		void startPlaying3D(ISoundEngine* engine);
 		void stopPlaying(ISoundEngine* engine);
 		void setPause();
 
+		void setSoundEmitterPosition(vec3df pos);
+		
+
+		void setPos(vec3df pos);
 		void setLooping(bool state);
 		void setPaused(bool state);
+
+		bool getsound3D();
+
+		void setSound3D(bool state);
 	};
 }
