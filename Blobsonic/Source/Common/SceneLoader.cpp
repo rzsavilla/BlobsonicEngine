@@ -727,7 +727,7 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 				else if (strcmp(c, "true") == 0)
 					sound->setInitialized(true);
 			}
-			if (m_bDebug) std::cout << "isPlaying Set : " << atof(c) << "\n  ";
+			if (m_bDebug) std::cout << "isInitialized Set : " << atof(c) << "\n  ";
 		}
 		else if (strcmp(childValue, "isLooping") == 0) {
 			if (readElementText(child, c)) {
@@ -759,7 +759,19 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 
 				entity->attach<Component::Transformable>();
 			}
-			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
+			if (m_bDebug) std::cout << "3D sound set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "Volume") == 0) {
+			if (readElementText(child, c)) {
+				sound->setVolume(atof(c));
+			}
+			if (m_bDebug) std::cout << "Volume set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "MinDistance") == 0) {
+			if (readElementText(child, c)) {
+				sound->setMinDist(atof(c));
+			}
+			if (m_bDebug) std::cout << "Minimum distance set: " << c << "\n  ";
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			v = parseVec3(child);

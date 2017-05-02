@@ -343,6 +343,8 @@
 			<Y>1.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
+		<MinDistance>30.0f</MinDistance>
+		<Volume>1.0f</Volume>
 
 	</Audio>
 
