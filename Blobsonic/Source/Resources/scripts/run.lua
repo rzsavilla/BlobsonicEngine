@@ -1,6 +1,3 @@
+require "Source/Resources/scripts/player"
+require "Source/Resources/scripts/SceneManagement"
 
-if isKeyDown("p") == true then
-	reloadScene()
-elseif isKeyDown("o") == true then
-	forceReloadScene()
-end
