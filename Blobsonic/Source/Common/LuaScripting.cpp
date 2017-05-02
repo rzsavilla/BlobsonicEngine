@@ -29,7 +29,8 @@ void System::Scripting::LuaScripting::attachFunctions(lua_State * L)
 	lua.set_function("reloadScene", &Scripting::reloadScene);
 	lua.set_function("forceReloadScene", &Scripting::forceReloadScene);
 }
-
+
+
 void System::Scripting::LuaScripting::attachClasses(lua_State * L)
 {
 }
@@ -132,7 +133,7 @@ void System::Scripting::LuaScripting::update(float dt)
 			//Look for root table
 			sol::table rootTable = lua["root"];
 
-			readRootTable(L);
+			//readRootTable(L);
 		}
 		else {
 			if (m_bDebug) std::cout << "Failed to load script\n";
