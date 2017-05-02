@@ -11,6 +11,7 @@
 
 void Engine::Engine::initScene(bool forceReloadRes)
 {
+	m_bMainMenu = true;
 	//Now Managed by lua script look at the init.lua file in scripts
 }
 
@@ -145,7 +146,8 @@ void Engine::Engine::init(int width, int height)
 	glfwMakeContextCurrent(m_window);
 	glfwSetKeyCallback(m_window, key_callback);
 
-	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_HAND_CURSOR); /// Sets the mouse to be enabled
 	
 	//Tell systems a window has been set
 	MessageHandler::getInstance()->sendMessage(std::make_shared<EngineMessage::SetWindow>(m_window));
@@ -172,7 +174,8 @@ void Engine::Engine::init(int width, int height)
 
 	initScene(true);
 
-	glfwSetCursorPos(m_window, 0.0, 0.0);
+	glfwSetCursorPos(m_window, 0, 0); /// Sets the Cursor position to be the middle of the screen.
+
 	glfwSwapInterval(1);
 }
 

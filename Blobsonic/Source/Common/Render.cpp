@@ -180,28 +180,15 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 
 void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 {
-	//GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color)
-	//auto modelS = entity->get<Component::Model>();
-	// Prepare transformations
 	std::shared_ptr<Texture> texture = NULL;
 	auto spriteRender = entity->get <Component::SpriteRenderer>();
 	auto t = entity->get <Component::Transformable>();
 
 	spriteRender->getShader()->use();
 
-	//glm::mat4 model;
-	//model = glm::translate(model, glm::vec3(spriteRender->getPosition(), 0.0f));
-
-	//model = glm::translate(model, glm::vec3(0.5f * spriteRender->getSize().x, 0.5f * spriteRender->getSize().y, 0.0f));
-	//model = glm::rotate(model, spriteRender->getRotate(), glm::vec3(0.0f, 0.0f, 1.0f));
-	//model = glm::translate(model, glm::vec3(-0.5f * spriteRender->getSize().x, -0.5f * spriteRender->getSize().y, 0.0f));
-
-	//model = glm::scale(model, glm::vec3(spriteRender->getSize(), 1.0f));
-
-	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
-	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::perspective(45.0f, 1.33333f, 0.1f, 1000.0f);
-
 
 	spriteRender->getShader()->setUniform("projection", projection);
 	spriteRender->getShader()->setUniform("spriteColor", spriteRender->getColor());

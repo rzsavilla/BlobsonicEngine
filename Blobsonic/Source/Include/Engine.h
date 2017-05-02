@@ -28,6 +28,7 @@ namespace Engine {
 	private:
 		bool m_bReloadScene;	//!< Flag for xml scene intialization
 		bool m_bForceReload;	//!< Flag for xml scene loading forcing resources to be reloaded
+		bool m_bMainMenu;	//!< Flag for if the main menu is loaded
 		
 		SceneLoader m_sceneLoader;		//!< Responsible for loading scene/xml files
 		std::shared_ptr<SceneManager> m_SceneManager;	//!< Manages all scenes
