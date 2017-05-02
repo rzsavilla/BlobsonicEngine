@@ -115,13 +115,9 @@ void Component::Sound::setSoundEmitterPosition(vec3df pos)
 	position = pos;
 }
 
-void Component::Sound::setSoundListenerPosition(ISoundEngine* engine, vec3df pos, vec3df lookDirection, vec3df velPerSecond, vec3df upVector)
-{
-	engine->setListenerPosition(pos, lookDirection, velPerSecond, upVector);
-}
-
 void Component::Sound::setPos(vec3df pos)
 {
+
 	position = pos;
 }
 

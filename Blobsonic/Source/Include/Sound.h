@@ -42,7 +42,7 @@ namespace Component {
 		void setPause();
 
 		void setSoundEmitterPosition(vec3df pos);
-		void setSoundListenerPosition(ISoundEngine* engine, vec3df pos, vec3df lookDirection, vec3df velPerSecond, vec3df upVector);
+		
 
 		void setPos(vec3df pos);
 		void setLooping(bool state);

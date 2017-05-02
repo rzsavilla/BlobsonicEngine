@@ -691,6 +691,7 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 	std::string s;
 	char * c;
 	std::string sID;
+	glm::vec3 v;
 
 	//Look at Model Element
 	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
@@ -755,15 +756,19 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 					sound->setSound3D(false);
 				else if (strcmp(c, "true") == 0)
 					sound->setSound3D(true);
+
+				entity->attach<Component::Transformable>();
 			}
 			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
 		}
-		/*else if (strcmp(childValue, "Position") == 0) {
-			glm::vec3 v = parseVec3(child);
-			irrklang::vec3df pos(v.x, v.y, v.z);
-			sound->setPos(pos);
+		else if (strcmp(childValue, "Position") == 0) {
+			v = parseVec3(child);
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
-		}*/
+		}
+	}
+	if (entity->has<Component::Transformable>()) {
+		auto t = entity->get<Component::Transformable>();
+		t->setPosition(v);
 	}
 	return entity;
 }

@@ -17,6 +17,8 @@ Component::Camera::Camera()
 	m_vPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	m_fMoveSpeed = 5.0f;
+	m_vUp = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
+	m_vLookAt = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
 };
 
 void Component::Camera::setProjectionAtt(float FOV, float AspectRatio, float Near, float Far)
@@ -183,8 +185,14 @@ void Component::Camera::setPerspective(bool isPerspective)
 
 glm::mat4 Component::Camera::getView()
 {
+	glm::vec4 intUp = glm::vec4(0, 1, 0, 0);
+	glm::vec4 lookAt = glm::vec4(0, 0, 1,0);
+
 	//Rotation Matrix
 	glm::mat4 mRotation = glm::mat4_cast(getQuatRotation());
+	
+	m_vUp = mRotation*intUp;
+	m_vLookAt = mRotation*lookAt;
 
 	//Translation matrix
 	glm::mat4 mTranslation = glm::mat4(1.0f);
@@ -226,6 +234,16 @@ glm::quat Component::Camera::getQuatRotation()
 	qOrientation = glm::normalize(qOrientation);
 
 	return qOrientation;
+}
+
+glm::vec4 Component::Camera::getUp()
+{
+	return m_vUp;
+}
+
+glm::vec4 Component::Camera::getLookAt()
+{
+	return m_vLookAt;
 }
 
 void Component::Camera::reset()

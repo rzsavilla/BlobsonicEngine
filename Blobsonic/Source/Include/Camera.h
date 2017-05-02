@@ -26,6 +26,8 @@ namespace Component {
 		float m_fRoll;			//!< Z axis rotation
 
 		glm::vec3 m_vPosition;	//!< World position
+		glm::vec4 m_vUp;
+		glm::vec4 m_vLookAt;
 
 		bool m_bUsePerspective;	//!< Use perspective projection if true else use othorgraphic
 		float m_fMoveSpeed;		//!< Camera world movement speed
@@ -95,5 +97,8 @@ namespace Component {
 		glm::mat4 getProjection();			//!< Return projection matrix
 
 		glm::quat getQuatRotation();		//!< Returns quaternion rotation
+
+		glm::vec4 getUp();
+		glm::vec4 getLookAt();
 	};
 }

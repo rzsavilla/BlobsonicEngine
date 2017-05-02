@@ -346,14 +346,6 @@
 
 	</Audio>
 
-	<Audio>
-		<ID>bell</ID>
-		<File>Source\Resources\audio\bell.wav</File>
-		<isInitialized>true</isInitialized>
-		<isPlaying>false</isPlaying>
-		<isLooping>true</isLooping>
-		<startsPaused>false</startsPaused>
-	</Audio>
 	
 	<Camera> <ID>cam1</ID>
 		<Position>
