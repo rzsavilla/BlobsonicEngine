@@ -803,7 +803,7 @@ bool SceneLoader::readResourceFile(tinyxml2::XMLNode * node, bool forceReloadRes
 	std::string sFile = node->FirstChildElement()->GetText();
 
 	//Check if resources need to be loaded
-	if (!m_res->isResFileLoaded(sFile) || forceReloadRes) {
+	if (!m_res->isResFileLoaded(sFile)) {
 		XMLDocument doc;
 		if (doc.LoadFile(sFile.c_str()) != XML_SUCCESS) {
 			//Failed to load

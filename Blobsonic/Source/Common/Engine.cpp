@@ -11,14 +11,7 @@
 
 void Engine::Engine::initScene(bool forceReloadRes)
 {
-	std::cout << "\n----------Initialize Scene----------\n\n";
- 
-	//m_SceneManager->addActiveScene(m_sceneLoader.fastLoadScene("WorldTest.xml", forceReloadRes));
-	m_SceneManager->setLoadingScene("Loading.xml");
-	m_SceneManager->changeScene("WorldTest.xml");
-	std::cout << "\n----------Scene Initialized----------\n\n";
-	m_bReloadScene = false;
-	m_bForceReload = false;
+	//Now Managed by lua script look at the init.lua file in scripts
 }
 
 void Engine::Engine::loop()
@@ -81,20 +74,20 @@ void Engine::Engine::update(float dt)
 {
 	//Get Active Scene
 	std::shared_ptr<Scene> m_activeScene = m_SceneManager->getActiveScene();
-	if (m_activeScene) {
-		//Pass scene entities to systems
-		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
-			if (it->first != typeid(System::Render)) {	//Do not process render systems
-				//--System process entities--//
+	//Pass scene entities to systems
+	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+		if (it->first != typeid(System::Render)) {	//Do not process render systems
+			//--System process entities--//
+			if (m_activeScene) {
 				(*it).second->process(m_activeScene->getEntities());
 			}
 		}
+	}
 
-		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
-			if (it->first != typeid(System::Render)) {	//Do not process render systems
-				//Update Systems
-				(*it).second->update(dt);
-			}
+	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+		if (it->first != typeid(System::Render)) {	//Do not process render systems
+			//Update Systems
+			(*it).second->update(dt);
 		}
 	}
 }
@@ -107,14 +100,15 @@ void Engine::Engine::render()
 	//Get Active Scene
 	std::shared_ptr<Scene> m_activeScene = m_SceneManager->getActiveScene();
 	//Render systems process
-	if (m_activeScene) {
-		for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
-			if (it->first == typeid(System::Render)) {	//Only process render systems
-				//Render entities
+	
+	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
+		if (it->first == typeid(System::Render)) {	//Only process render systems
+			//Render entities
+			if (m_activeScene) {
 				(*it).second->process(m_activeScene->getEntities());
-				//Update Render System
-				(*it).second->update(0.0f);	
 			}
+			//Update Render System
+			(*it).second->update(0.0f);	
 		}
 	}
 }
@@ -204,14 +198,6 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 				case GLFW_KEY_ESCAPE:
 					m_bRunning = false;	//End game loop
 					break;
-				case GLFW_KEY_P:
-					m_bReloadScene = true;	//Reload scene objects
-					break;
-				case GLFW_KEY_O:
-					m_bForceReload = true;	//Reload entire scene including resources
-				case GLFW_KEY_I:			//Reload scene and scripts
-					m_bReloadScene = true;
-					MessageHandler::getInstance()->sendMessage<SceneMessage::Reload>();
 				default:
 					break;
 				}
@@ -221,9 +207,16 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 			//Add Entity to active scene
 			auto data = static_cast<SceneMessage::AddEntity*>(msgs->at(i).get());
 			auto activeScene = m_SceneManager->getActiveScene();
-			if (activeScene) {
+			if (!activeScene) {
 				activeScene->getEntityManager()->addEntity(data->entity);
 			}
+		}
+		else if (s == "ChangeScene") {
+			auto data = static_cast<SceneMessage::ChangeScene*>(msgs->at(i).get());
+			m_SceneManager->changeScene(data->sNewScene);
+
+			//Scene has changed
+			MessageHandler::getInstance()->sendMessage<SceneMessage::SceneChanged>();
 		}
 	}
 }

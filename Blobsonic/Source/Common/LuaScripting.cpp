@@ -15,9 +15,24 @@
 
 void System::Scripting::LuaScripting::attachFunctions(lua_State * L)
 {
+	sol::state_view lua(L);
 
+	//lua.set_function("changeScene", &Scripting::changeScene);
+	lua.set_function("sayHello", &sayHello);
+
+	lua.set_function("isKeyDown", &Scripting::isKeyDown);
+	lua.set_function("isMouseDown", &Scripting::isMouseDown);
+
+	lua.set_function("changeScene", &Scripting::changeScene);
+	lua.set_function("setLoadingScene", &setLoadingScene);
+
+	lua.set_function("reloadScene", &Scripting::reloadScene);
+	lua.set_function("forceReloadScene", &Scripting::forceReloadScene);
 }
-
+
+void System::Scripting::LuaScripting::attachClasses(lua_State * L)
+{
+}
 void System::Scripting::LuaScripting::readRootTable(lua_State * L)
 {
 	std::cout << "-------Reading Root--------\n";
@@ -104,6 +119,9 @@ void System::Scripting::LuaScripting::update(float dt)
 	if (!m_bLoaded && (m_SceneManager->getState() == Active)) {
 		lua_State* L = luaL_newstate();
 
+		attachClasses(L);
+		attachFunctions(L);
+
 		sol::state_view lua(L);
 		LuaHelper::loadScriptFile(L, (m_scriptsDir + "init.lua"));
 		sol::load_result script = lua.load("a = 'test'");
@@ -119,8 +137,15 @@ void System::Scripting::LuaScripting::update(float dt)
 		else {
 			if (m_bDebug) std::cout << "Failed to load script\n";
 		}
-
 		m_bLoaded = true;
+	}
+	else if ((m_SceneManager->getState() == Active)) {
+		//Use Run script
+		m_RunState = luaL_newstate();
+		LuaHelper::loadLibraries(m_RunState);
+		attachClasses(m_RunState);
+		attachFunctions(m_RunState);
+		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
 	}
 }
 
@@ -151,6 +176,16 @@ bool System::Scripting::isKeyDown(const std::string & key)
 	else if (key == "d" || key == "D") {
 		iKey = GLFW_KEY_D;
 	}
+	else if (key == "p" || key == "P") {
+		iKey = GLFW_KEY_P;
+	}
+	else if (key == "o" || key == "O") {
+		iKey = GLFW_KEY_I;
+	}
+	else if (key == "i" || key == "I") {
+		iKey = GLFW_KEY_I;
+	}
+
 	else if (key == "up") iKey = GLFW_KEY_UP;
 	else if (key == "down")	iKey = GLFW_KEY_DOWN;
 	else if (key == "left")	iKey = GLFW_KEY_LEFT;
@@ -170,10 +205,10 @@ bool System::Scripting::isMouseDown(const std::string & button)
 {
 	int iButton = -1;
 	if (button == "Left") {
-
+		iButton == GLFW_MOUSE_BUTTON_1;
 	}
 	else if (button == "Right") {
-
+		iButton == GLFW_MOUSE_BUTTON_2;
 	}
 
 	if (iButton != -1) {
@@ -186,5 +221,20 @@ bool System::Scripting::isMouseDown(const std::string & button)
 
 void System::Scripting::changeScene(std::string sceneFile)
 {
-	MessageHandler::getInstance()->sendMessage<SceneMessage::ChangeScene>(sceneFile);
+	SceneManager::getInstance()->changeScene(sceneFile,true);
+}
+
+void System::Scripting::setLoadingScene(std::string sceneFile)
+{
+	SceneManager::getInstance()->setLoadingScene(sceneFile);
+}
+
+void System::Scripting::reloadScene()
+{
+	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),false);
+}
+
+void System::Scripting::forceReloadScene()
+{
+	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),true);
 }
