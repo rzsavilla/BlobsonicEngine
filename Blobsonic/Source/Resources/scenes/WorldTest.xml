@@ -337,6 +337,9 @@
 		<isPlaying>false</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
+		<sound3D>true</sound3D>
+
+
 	</Audio>
 
 	<Audio>
@@ -344,7 +347,7 @@
 		<File>Source\Resources\audio\bell.wav</File>
 		<isInitialized>true</isInitialized>
 		<isPlaying>false</isPlaying>
-		<isLooping>false</isLooping>
+		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
 	

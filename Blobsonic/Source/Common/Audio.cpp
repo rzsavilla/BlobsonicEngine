@@ -36,13 +36,23 @@ void System::Audio::addEntity(std::shared_ptr<Entity> entity, std::vector<std::s
 
 void System::Audio::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
 {
+	//Stop destroyed audio
 	for (int i = 0; i < entities->size(); i++) {
 		if (entities->at(i)->isDestroyed()) {
 			auto s = entities->at(i)->get<Component::Sound>();
 			irrklang::ISound* snd = s->getSound();
 			snd->stop();
 			snd->drop();
-			entities->erase(entities->begin() + i);
+		}
+	}
+
+	//Remove entity from array
+	int size = entities->size();
+	if (!entities->empty()) {
+		for (int i = 0; i < size; i++) {
+			if (entities->at(0)->isDestroyed()) {
+				entities->erase(entities->begin());
+			}
 		}
 	}
 }
@@ -81,8 +91,10 @@ void System::Audio::update(float dt)
 			if (sound->getInitialized()) {
 				if (!sound->getPlaying()) {
 					sound->setInitialized(false);
-					sound->startPlaying(engine);
-					
+					if (!sound->getsound3D())
+						sound->startPlaying2D(engine);
+					else if (sound->getsound3D())
+						sound->startPlaying3D(engine);
 				}
 			}
 			if (sound->getFinished() && !sound->getLooping()) {

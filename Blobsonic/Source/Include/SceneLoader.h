@@ -18,6 +18,14 @@
 #include "ResourceManager.h"
 #include "Scene.h"
 
+//Audio engine
+#include <irrKlang\irrKlang.h>
+
+// include console I/O methods (conio.h for windows, our wrapper in linux)
+#if defined(WIN32)
+#include <conio.h>
+#endif
+
 class SceneLoader {
 private:
 	//Scene file location

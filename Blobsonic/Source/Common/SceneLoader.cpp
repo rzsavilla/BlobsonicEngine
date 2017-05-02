@@ -14,6 +14,14 @@
 #include "Sound.h"
 #include "SpriteRender.h"
 
+//Audio engine
+#include <irrKlang\irrKlang.h>
+
+// include console I/O methods (conio.h for windows, our wrapper in linux)
+#if defined(WIN32)
+#include <conio.h>
+#endif
+
 void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -740,6 +748,22 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 			}
 			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
 		}
+		else if (strcmp(childValue, "sound3D") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setSound3D(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setSound3D(true);
+			}
+			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
+		}
+		/*else if (strcmp(childValue, "Position") == 0) {
+			glm::vec3 v = parseVec3(child);
+			irrklang::vec3df pos(v.x, v.y, v.z);
+			sound->setPos(pos);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}*/
 	}
 	return entity;
 }
