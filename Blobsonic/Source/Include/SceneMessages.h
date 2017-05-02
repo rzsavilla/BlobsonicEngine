@@ -2,17 +2,26 @@
 
 #include "Message.h"
 
+#include "Entity.h"
+
 namespace SceneMessage {
-	struct SceneSplash : public Message {
-		SceneSplash() { sID = "Scene_Splash"; }
+	//!< Adds entity to current scene
+	struct AddEntity : public Message {
+		AddEntity(std::shared_ptr<Entity> newEntity):
+			entity(newEntity)
+		{
+			sID = "AddEntity";
+		}
+		std::shared_ptr<Entity> entity;
 	};
 
-	struct StartScene : public Message {
-		StartScene() { sID = "Scene_Start"; }
-	};
-
-	struct GameScene : public Message {
-		GameScene() { sID = "Scene_Game"; }
+	struct DestroyEntity : public Message {
+		DestroyEntity(unsigned int id):
+			ID(id)
+		{
+			sID = "DestroyEntity";
+		}
+		unsigned int ID;
 	};
 
 	struct Reload : public Message {
@@ -21,5 +30,15 @@ namespace SceneMessage {
 
 	struct Exit : public Message {
 		Exit() { sID = "Scene_Exit"; }
+	};
+
+	struct SceneChanged : public Message {
+		SceneChanged() { sID = "SceneChanged"; }
+	};
+
+	struct ChangeScene :public Message {
+		ChangeScene(std::string NewScene) {
+			sID = "ChangeScene";
+		}
 	};
 }

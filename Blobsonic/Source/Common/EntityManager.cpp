@@ -14,7 +14,7 @@ void EntityManager::destroy(std::shared_ptr<Entity> entity)
 {
 	for (auto it = m_entities.begin(); it != m_entities.end(); ++it) {
 		//Find entity to destroy
-		if ((*it)->getID() == entity->getID()) {
+		if ((*it)->getUID() == entity->getUID()) {
 			(*it)->destroy();		//Call destroy to set entity as destroyed
 			m_entities.erase(it);	//Remove entity from manager
 			return;

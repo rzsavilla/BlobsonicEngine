@@ -7,6 +7,21 @@ ResourceManager::ResourceManager()
 
 }
 
+ResourceManager::~ResourceManager()
+{
+
+}
+
+std::shared_ptr<ResourceManager> ResourceManager::getInstance()
+{
+	static std::shared_ptr<ResourceManager> instance = nullptr;
+
+	if (!instance) {
+		instance.reset(new ResourceManager);
+	}
+	return instance;
+}
+
 void ResourceManager::addMesh(std::string name, std::shared_ptr<Mesh> mesh) {
 	m_meshes.emplace(name, mesh);
 }
@@ -94,6 +109,7 @@ bool ResourceManager::isResFileLoaded(std::string file)
 
 void ResourceManager::ClearResources()
 {
+	m_vsLoadedResFiles.clear();
 	m_meshes.clear();
 	m_vAssimpMeshes.clear();
 	m_textures.clear();

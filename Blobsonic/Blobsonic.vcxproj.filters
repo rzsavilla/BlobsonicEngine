@@ -112,6 +112,12 @@
     <Filter Include="Source Files\Engine\Component\Lights">
       <UniqueIdentifier>{4d2d1688-e5b4-4b71-a979-a9e0148f8ed6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\LUA">
+      <UniqueIdentifier>{418fbe27-e4e7-46e2-9c20-8801c7e63a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\LUA">
+      <UniqueIdentifier>{f0fe5e03-4fe4-4802-857e-97189fdba37f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\shader\basic.frag">
@@ -144,7 +150,9 @@
     <None Include="Source\Resources\shader\button.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Source\Resources\shader\singlePhong.frag" />
+    <None Include="Source\Resources\shader\singlePhong.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\stdafx.h">
@@ -369,16 +377,29 @@
     <ClInclude Include="Source\Include\Spotlight.h">
       <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Include\Audio.h">
-      <Filter>Header Files\Engine\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Include\Sound.h">
-      <Filter>Header Files\Engine\Entity\Components</Filter>
     <ClInclude Include="Source\Include\LuaScripting.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\UniqueID.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\LuaEntity.h">
+      <Filter>Header Files\Engine\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Name.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\Sound.h">
+      <Filter>Header Files\Engine\Entity\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Include\SpriteRender.h">
       <Filter>Header Files\Engine\Entity\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\sol.hpp">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\LuaHelper.h">
+      <Filter>Header Files\Engine\LUA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -565,17 +586,32 @@
     <ClCompile Include="Source\Common\LuaScripting.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\SpriteRender.cpp">
-      <Filter>Source Files\Engine\Component\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Include\Spotlight.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\GUIButton.cpp">
+      <Filter>Source Files\Engine\Component\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\SpriteRender.cpp">
+      <Filter>Source Files\Engine\Component\GUI</Filter>
     </ClCompile>
     <ClCompile Include="Source\Common\Audio.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\UniqueID.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\LuaEntity.cpp">
+      <Filter>Source Files\Engine\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Name.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Common\Sound.cpp">
       <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\LuaHelper.cpp">
+      <Filter>Source Files\Engine\LUA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

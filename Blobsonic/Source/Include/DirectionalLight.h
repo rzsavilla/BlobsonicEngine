@@ -19,6 +19,6 @@ namespace Component {
 
 		void setDirection(glm::vec3 dir);
 
-		glm::vec3 getDirection();
+		glm::vec3 getDirection();;
 	};
 }

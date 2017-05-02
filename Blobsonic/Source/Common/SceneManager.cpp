@@ -3,36 +3,79 @@
 
 SceneManager::SceneManager()
 {
-
+	m_State = Active;
+	m_bHasLoadingScreen = false;
+	m_bForceReloadResouces = false;
 }
 
-bool SceneManager::setActiveScene(std::string name)
+SceneManager::~SceneManager()
 {
-	if (this->hasScene(name)) {
-		m_sActiveScene = name;
-		return true;
+	m_ActiveScene->destroy();
+	m_LoadingScene->destroy();
+}
+
+std::shared_ptr<SceneManager> SceneManager::getInstance()
+{
+	static std::shared_ptr<SceneManager> instance = nullptr;
+
+	if (!instance) {
+		instance.reset(new SceneManager);
 	}
-	else {
-		return false;
+	return instance;
+}
+
+void SceneManager::setLoadingScene(std::string filename)
+{
+	m_bHasLoadingScreen = true;
+	m_sLoadingScene = filename;
+}
+
+void SceneManager::changeScene(std::string filename, bool reloadResources)
+{
+	if (m_State == Active) {
+		m_bForceReloadResouces = reloadResources;
+		m_transitionTimer.reset();
+		m_sActiveScene = filename;
+		if (m_ActiveScene)	m_ActiveScene->clearScene();
+		if (m_LoadingScene) m_LoadingScene->clearScene();
+		m_ActiveScene = std::make_shared<Scene>();
+		
+		if (!m_sLoadingScene.empty()) m_LoadingScene = m_loader.fastLoadScene(m_sLoadingScene);
+
+		m_State = Loading;
 	}
-}
-
-bool SceneManager::hasScene(std::string name)
-{
-	return m_scenes.find(name) != m_scenes.end();
-}
-
-void SceneManager::addScene(std::string name, std::shared_ptr<Scene> scene)
-{
-	m_scenes.emplace(name, scene);
-}
-
-void SceneManager::removeScene(std::string name)
-{
-	m_scenes.erase(name);
 }
 
 std::shared_ptr<Scene> SceneManager::getActiveScene()
 {
-	return m_scenes.find(m_sActiveScene)->second;
+	if (m_State == Active) {
+		if (m_ActiveScene) {
+			return m_ActiveScene;
+		}
+	}
+	else if (m_State == Loading) {
+		if (!m_loader.loadScene(m_ActiveScene, m_sActiveScene, m_bForceReloadResouces)) {
+			//Scene is still being loaded
+			if (m_LoadingScene && !m_bForceReloadResouces) return m_LoadingScene;
+			return NULL;
+		}
+		else {
+			m_State = Loaded;
+		}
+	}
+	else if (m_State == Loaded) {
+		std::cout << "Loaded\n";
+		//State has finished Loading
+		if ((m_transitionTimer.getElapsed() > m_fTransitionDelay)) {
+			std::cout << m_transitionTimer.getElapsed() << "\n";
+			m_State = Active;
+		}
+		if (m_LoadingScene) return m_LoadingScene;
+	}
+	return NULL; //No Scene
+}
+
+SceneManagerState SceneManager::getState()
+{
+	return m_State;
 }

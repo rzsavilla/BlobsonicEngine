@@ -31,5 +31,10 @@ public:
 
 	void sendMessage(std::shared_ptr<Message> msg);
 
+	template<typename T, typename... Args>
+	void sendMessage(Args &&...args) {
+		m_vMessages.push_back(std::make_shared<T>(std::forward<Args>(args)...));
+	}
+
 	void notify();	//!< Notify all receivers
 };

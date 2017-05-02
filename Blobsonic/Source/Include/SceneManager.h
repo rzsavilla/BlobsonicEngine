@@ -2,26 +2,52 @@
 * @class	Scene
 * @brief	Storage for scenes and determines active scene
 * @author	Rozen Savilla
-* Storage for loaded scenes ready to be activated
+* Prepares/loads scene stores them and determines active scene
 */
 
 #pragma once
 
 #include "Scene.h"
+#include "SceneLoader.h"
+#include "MyTimer.h"
+
+//! Scene Manager States
+enum SceneManagerState {
+	Loading,
+	Active,
+	Loaded
+};
 
 class SceneManager {
 private:
-	std::string m_sActiveScene;									//<! ID/Name of active scene
-	std::map<std::string, std::shared_ptr<Scene>> m_scenes;		//!< Store scenes
+
+	const float m_fTransitionDelay = 0.0f;			//!< Minimum time elapsed before transitioning to the next scene
+	bool m_bForceReloadResouces;		//!< Flag to reload scene resourcefile
+private:
+	std::string m_sActiveScene;						//!< ID/Name of active scene
+	std::shared_ptr<Scene> m_ActiveScene;			//!< Loaded active Scene
+	std::shared_ptr<Scene> m_LoadingScene;			//!< Loading Scene
+
+	SceneLoader m_loader;	//!< Loads scene files
+	SceneManagerState m_State;	//!< Current scene state
+
+	//---Loading-----Scene
+	bool m_bHasLoadingScreen;		//!< Flag to determine if scene manager has a loading screen
+	std::string m_sLoadingScene;	//!< Scene file for loading scene
+
+	SceneManager();	//!< Private default constructor Singleton
+	
+	MyTimer m_transitionTimer;	//!< Counts delay when changing scen
 public:
-	SceneManager();	//!< Defualt constructor
+	~SceneManager();	//!< Destructor
 
-	bool setActiveScene(std::string name);		//!< Set active scene
+	static std::shared_ptr<SceneManager> getInstance();		//!< Return class instance
 
-	bool hasScene(std::string name);			//!<Returns true if scene os stored within the manager
+	void setLoadingScene(std::string filename);	//!< Set the filename of the loading scene
 
-	void addScene(std::string name, std::shared_ptr<Scene> scene);	//!< Add a scene into the scene manager
-	void removeScene(std::string name);								//!< Remove scene from scene manager/Destroys
+	void changeScene(std::string filename, bool reloadResources = false /* default false Force reload all resources */);
 
 	std::shared_ptr<Scene> getActiveScene();						//!< Returns active scene
+
+	SceneManagerState getState();	//!< Return current scene manager state
 };

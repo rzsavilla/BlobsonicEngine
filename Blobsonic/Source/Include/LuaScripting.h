@@ -1,43 +1,45 @@
 /*
 *	@class LuaScripting
 *	@brief System handles lua scripts.
+*	@author Rozen Savilla
+*	Handles loading and using lua scripts acts as an interface to lua to call C++ functions/class
 */
 
 #pragma once
 
 #include "System.h"
-
-#include <LuaBridge.h>
 #include <iostream>
 
-extern "C" {
-	# include "lua.h"
-	# include "lauxlib.h"
-	# include "lualib.h"
-}
+#include "LuaHelper.h"
 
-using namespace luabridge;
+#include "SceneManager.h"
 
 namespace System {
-	class LuaScripting: public System {
-	private:
-		lua_State* m_luaState;	//!< Lua State, stores loaded script
+	namespace Scripting {
+		static bool isKeyDown(const std::string& key);		//!< Check if a key is pressed
+		static bool isMouseDown(const std::string& button);	//!< Check if a mouse button is down
+		static void changeScene(std::string sceneFile);		//!< Create a message to change the scene
 
-		void loadScript(std::string luaFile);		//!< Load .lua script file store into state
-	
-		void addFunctions();
+		class LuaScripting : public System {
+		private:
+			std::shared_ptr<SceneManager> m_SceneManager;
 
-		void helloWorld();
+			const bool m_bDebug = true;	//For couts
+			const std::string m_scriptsDir = "Source/Resources/scripts/";
+		private: //Temp
+			bool m_bLoaded = false;
+			void attachFunctions(lua_State * L);
+		private:
+			void readRootTable(lua_State* L);	//!< Read the root table
+			std::shared_ptr<Entity> readEntity(sol::table t);
+		public:
+			LuaScripting();
 
-	private:	//Functions that can be called by lua
+			void process(std::vector<std::shared_ptr<Entity>>* entity);
+			void update(float dt) override;
 
-	public:
-		LuaScripting();
-		
-		void process(std::vector<std::shared_ptr<Entity>>* entity) override;
-		void update(float dt) override;
-
-		//---Message Receiver--//
-		void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
-	};
+			//---Message Receiver--//
+			void processMessages(const std::vector<std::shared_ptr<Message>>* msgs);
+		};
+	}
 };

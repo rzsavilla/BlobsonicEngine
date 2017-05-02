@@ -18,14 +18,7 @@
 #include <memory>
 #include <map>
 
-#include <LuaBridge.h>
 #include <iostream>
-
-extern "C" {
-# include "lua.h"
-# include "lauxlib.h"
-# include "lualib.h"
-}
 
 #include "Scene.h"
 #include "Destroyable.h"

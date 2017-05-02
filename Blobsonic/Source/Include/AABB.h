@@ -28,7 +28,6 @@ public:
 	glm::vec3 m_vCenter;
 
 	bool testAxis[3];
-
 };
 
 

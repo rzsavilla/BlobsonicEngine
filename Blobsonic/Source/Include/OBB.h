@@ -17,11 +17,6 @@ public:
 
 	glm::vec3 m_vDimensions;	//Plz move to different component
 	glm::vec3 m_vCenter;
-	
-
-
-	
-	
 };
 
 
