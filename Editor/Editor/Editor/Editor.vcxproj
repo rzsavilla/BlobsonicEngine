@@ -124,6 +124,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Overlay.cpp" />
     <ClCompile Include="src\TextBox.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.h" />
@@ -131,6 +132,7 @@
     <ClInclude Include="include\Hoverable.h" />
     <ClInclude Include="include\Overlay.h" />
     <ClInclude Include="include\TextBox.h" />
+    <ClInclude Include="include\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

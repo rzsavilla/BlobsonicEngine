@@ -19,6 +19,12 @@
     <Filter Include="Header Files\UI">
       <UniqueIdentifier>{fca0644c-c936-4601-bbf3-d0e1f4fa4bce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{48dfed2f-d7cb-40dd-9ebf-b637e0d573b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{4c5472bc-189a-4d1b-9842-8f359d325aea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -39,6 +45,9 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\tinyxml2.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.h">
@@ -55,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="include\TextBox.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tinyxml2.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,9 @@
 	<Location>Source\Resources\Scenes\Resources.xml</Location> 
 </ResourceFile>
 
-<Scene> <Type>Game</Type> <ID>game_scene</ID>
+<Scene> 
+	<Type>Game</Type> 
+	<ID>game_scene</ID>
 
 	<Model> <ID>deer</ID>
 		<Mesh>deer_mesh</Mesh>
@@ -33,7 +35,8 @@
 		</Origin>
 	</Model>
 	 
-	<Model> <ID>floor</ID>
+	<Model> 
+	<ID>floor</ID>
 		<Mesh>plane_mesh</Mesh>
 		<Material>default_material</Material>
 		<Shader>phong_shader</Shader>
@@ -348,7 +351,8 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	
-	<Camera> <ID>cam1</ID>
+	<Camera> 
+	<ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
 			<Y>30.0f</Y>
