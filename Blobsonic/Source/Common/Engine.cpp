@@ -15,10 +15,11 @@ void Engine::Engine::initScene(bool forceReloadRes)
  
 	m_SceneManager->destroyActiveScene();
 	m_SceneManager->addActiveScene(
-		m_sceneLoader.fastLoadScene("Source\\Resources\\scenes\\WorldTest.xml", forceReloadRes));
+		m_sceneLoader.fastLoadScene("Source\\Resources\\scenes\\MainMenu.xml", forceReloadRes));
 	std::cout << "\n----------Scene Initialized----------\n\n";
 	m_bReloadScene = false;
 	m_bForceReload = false;
+	m_bMainMenu = true;
 }
 
 void Engine::Engine::loop()
@@ -151,7 +152,8 @@ void Engine::Engine::init(int width, int height)
 	glfwMakeContextCurrent(m_window);
 	glfwSetKeyCallback(m_window, key_callback);
 
-	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_HAND_CURSOR); /// Sets the mouse to be enabled
 	
 	//Tell systems a window has been set
 	MessageHandler::getInstance()->sendMessage(std::make_shared<EngineMessage::SetWindow>(m_window));
@@ -178,7 +180,8 @@ void Engine::Engine::init(int width, int height)
 
 	initScene(true);
 
-	glfwSetCursorPos(m_window, 0.0, 0.0);
+	glfwSetCursorPos(m_window, m_iWindowWidth/2, m_iWindowHeight/2); /// Sets the Cursor position to be the middle of the screen.
+
 	glfwSwapInterval(1);
 }
 
@@ -194,6 +197,9 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 	//Create Input Messages
 	for (int i = 0; i < msgs->size(); i++) {
 		std::string s = msgs->at(i)->sID;
+
+		double xpos, ypos;
+		glfwGetCursorPos(m_window, &xpos, &ypos);
 
 		if (s == "Input_KeyPress") {
 			//Get data key data from message
@@ -212,6 +218,27 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 				case GLFW_KEY_I:			//Reload scene and scripts
 					m_bReloadScene = true;
 					MessageHandler::getInstance()->sendMessage<SceneMessage::Reload>();
+				case GLFW_KEY_1:
+					if (m_bMainMenu == true)
+					{
+						/// Gets the Cursor position
+						bool inBounds(int value, int low, int high);
+						if (xpos >= 20 && xpos <= 220 && ypos >= 20 && ypos <= 120)
+						{
+							std::cout << "Button Pressed: " << xpos << ", " << ypos << "\n";
+							m_SceneManager->destroyActiveScene();
+							m_SceneManager->addActiveScene(m_sceneLoader.fastLoadScene("Source\\Resources\\scenes\\WorldTest.xml", false));
+							std::cout << "\n----------Scene Initialized----------\n\n";
+							m_bReloadScene = false;
+							m_bForceReload = false;
+							m_bMainMenu = false;
+						}
+						else
+						{
+						std::cout << "Button Not Pressed " << "\n";
+						}
+					}	
+					break;
 				default:
 					break;
 				}
