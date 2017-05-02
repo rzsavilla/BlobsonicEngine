@@ -421,7 +421,30 @@ bool System::Physics::CheckShereSphereCollision(std::shared_ptr<Entity> sphere1,
 	//subtract the radius 
 	magDist = magDist - sph1->m_fRadius;
 
-	if (magDist <= sph2->m_fRadius)return true;
+	if (magDist <= sph2->m_fRadius)
+	{
+		// find penetration
+		//find collison normal
+		glm::vec3 Normal = sph1->m_vCenter - sph2->m_vCenter;
+		glm::vec3 newVector = Normal;
+		newVector = glm::normalize(newVector);
+		newVector *= sph1->m_fRadius;
+		newVector *= sph2->m_fRadius;
+		Normal = Normal - newVector;
+
+
+		float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
+
+		Normal = glm::normalize(Normal);
+		Normal = -Normal;
+
+		//find the penetration depth
+		float PenetrationDepth = (sph1->m_fRadius + sph2->m_fRadius) - d;
+		resolveCollision(sphere1, sphere2, Normal);
+		PositionalCorrection(sphere1, sphere2, PenetrationDepth, Normal);
+
+		return true;
+	}
 	else  return false;
 
 }
@@ -746,6 +769,10 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 		phys->m_vVelocity += phys->m_vAcceleration * dt;
 		trans->m_vPosition += phys->m_vVelocity * dt;
 
+		if (phys->m_vVelocity.x < EPSILON) phys->m_vVelocity.x = 0;
+		if (phys->m_vVelocity.y < EPSILON) phys->m_vVelocity.y = 0;
+		if (phys->m_vVelocity.z < EPSILON) phys->m_vVelocity.z = 0;
+
 	
 	}
 
@@ -810,8 +837,8 @@ void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std:
 	auto phys2 = object2->get<Physical>();
 
 	//reduces rounding errors in the hardware
-	float percent = 0.0025f; 
-	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * percent * CollisionNormal;
+	
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * EPSILON * CollisionNormal;
 	trans1->m_vPosition -= phys1->m_fINVMass * correction;
 	trans2->m_vPosition += phys2->m_fINVMass * correction;
 
@@ -930,4 +957,21 @@ void System::Physics::narrowPhase(float dt)
 		}
 
 	}
+}
+
+void System::Physics::applyImpulse(glm::vec3 Normal, float force, std::shared_ptr<Entity> object)
+{
+
+	//get physicals and transformables
+	auto trans = object->get<Component::Transformable>();
+	auto phys = object->get<Physical>();
+
+	// find the acceleration
+	//f = ma
+
+	float Acceleration = force / phys->m_fMass;
+
+	//multiply normal my accerlation
+	phys->m_vAcceleration =  Normal * Acceleration;
+
 }
