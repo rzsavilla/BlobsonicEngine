@@ -27,6 +27,7 @@ namespace Component {
 		bool getLooping();
 		bool getPaused();
 		bool getFinished();
+		irrklang::ISound* getSound();
 
 		void setFile(std::string f);
 		void setInitialized(bool state);

@@ -50,6 +50,11 @@ bool Component::Sound::getFinished()
 	return isFinished;
 }
 
+irrklang::ISound * Component::Sound::getSound()
+{
+	return snd;
+}
+
 void Component::Sound::setFile(std::string f)
 {
 	file = f;

@@ -38,6 +38,10 @@ void System::Audio::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entiti
 {
 	for (int i = 0; i < entities->size(); i++) {
 		if (entities->at(i)->isDestroyed()) {
+			auto s = entities->at(i)->get<Component::Sound>();
+			irrklang::ISound* snd = s->getSound();
+			snd->stop();
+			snd->drop();
 			entities->erase(entities->begin() + i);
 		}
 	}
@@ -78,6 +82,7 @@ void System::Audio::update(float dt)
 				if (!sound->getPlaying()) {
 					sound->setInitialized(false);
 					sound->startPlaying(engine);
+					
 				}
 			}
 			if (sound->getFinished() && !sound->getLooping()) {
@@ -98,7 +103,7 @@ void System::Audio::processMessages(const std::vector<std::shared_ptr<Message>>*
 			m_ptrActiveCamera = data->entity->get<Component::Camera>();
 		}
 		if ((*it)->sID == "Scene_Reload") {
-			engine->stopAllSounds();
+			//engine->stopAllSounds();
 		}
 	}
 }
