@@ -24,6 +24,7 @@ private:
 private:	//Component functions
 	void setTransformable(sol::table t);	//Attaches and sets Transformable component
 	void setModel(sol::table t);			//Attaches and sets Model component
+	void setPhysical(sol::table t);			//Attaches and sets Physical component
 public:
 	LuaEntity();	//!< Default Constructor
 	/*!
@@ -39,6 +40,11 @@ public:
 	void tSetRotation(float x, float y, float z);	//!< Set transformable components rotation
 	void tSetScale(float x, float y, float z);		//!< Set transformable components scale
 	void tSetOrigin(float x, float y, float z);		//!< Set transformable components origin
+	//----------------Physical component Functions-----------------------
+	void pSetMass(float newMass);
+	void pSetInvMass(float newInvMass);
+	void pSetRestitution(float newRestituion);
+	void pSetVelocity(float x, float y, float z);
 
 	/*! Register this C++ class as a lua class
 		Allows lua access to member functions

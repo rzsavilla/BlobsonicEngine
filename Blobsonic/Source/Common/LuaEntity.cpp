@@ -9,6 +9,7 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 #include "Transformable.h"
+#include "Physical.h"
 
 #include "LuaScripting.h"
 
@@ -87,6 +88,34 @@ void LuaEntity::setModel(sol::table t)
 	}
 }
 
+void LuaEntity::setPhysical(sol::table t)
+{
+	if (!m_entity->has<Physical>()) {
+		m_entity->attach<Physical>();	//Attach component
+	}
+	auto physical = m_entity->get<Physical>();	//Get Component
+	//Read variables from lua table
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			auto value = (*it).second;
+			//Set Component variables
+			if (value.get_type() == sol::type::number) {
+				if (s == "Mass") {
+					physical->setMass(value.as<float>());
+				}
+				else if (s == "INVMass") {
+					physical->setfINVMass(value.as<float>());
+				}
+				else if (s == "Restitution") {
+					physical->setRestitution(value.as<float>());
+				}
+			}
+		}
+	}
+}
+
 void LuaEntity::setComponents(sol::table t)
 {
 	lua_pushnil(m_activeScript);  // first key
@@ -96,15 +125,20 @@ void LuaEntity::setComponents(sol::table t)
 		if (key.get_type() == sol::type::string) {
 			//Only process string keys
 			std::string s = key.as<std::string>();		//Get key value
-			auto value = (*it).second;					//Get value
+			auto value = (*it).second;					//Get value this should be a table
 			//Read table data
 			if (key.get_type() == sol::type::string) {
-				//Set variables
-				if (s == "Transformable") {
-					setTransformable(value);
-				}
-				else if (s == "Model") {
-					setModel(value);
+				if (value.is<sol::table>()) {
+					//Set variables
+					if (s == "Transformable") {
+						setTransformable(value);
+					}
+					else if (s == "Model") {
+						setModel(value);
+					}
+					else if (s == "Physical") {
+						setPhysical(value);
+					}
 				}
 			}
 		}
@@ -154,6 +188,38 @@ void LuaEntity::tSetOrigin(float x, float y, float z)
 	}
 }
 
+void LuaEntity::pSetMass(float newMass)
+{
+	if (m_entity->has<Physical>()) {
+		auto p = m_entity->get<Physical>();
+		p->setMass(newMass);
+	}
+}
+
+void LuaEntity::pSetInvMass(float newInvMass)
+{
+	if (m_entity->has<Physical>()) {
+		auto p = m_entity->get<Physical>();
+		p->setMass(newInvMass);
+	}
+}
+
+void LuaEntity::pSetRestitution(float newRestituion)
+{
+	if (m_entity->has<Physical>()) {
+		auto p = m_entity->get<Physical>();
+		p->setMass(newRestituion);
+	}
+}
+
+void LuaEntity::pSetVelocity(float x, float y, float z)
+{
+	if (m_entity->has<Physical>()) {
+		auto p = m_entity->get<Physical>();
+		p->setVelocity(glm::vec3(x, y, z));
+	}
+}
+
 void LuaEntity::destroy()
 {
 	m_entity->destroy();
@@ -175,6 +241,11 @@ void LuaEntity::register_lua(lua_State* L)
 		"tSetPosition", &LuaEntity::tSetPosition,
 		"tSetRotation", &LuaEntity::tSetRotation,
 		"tSetScale", &LuaEntity::tSetScale,
-		"tSetOrigin", &LuaEntity::tSetOrigin
+		"tSetOrigin", &LuaEntity::tSetOrigin,
+		//Physical
+		"pSetMass", &LuaEntity::pSetMass,
+		"pSetInvMass", &LuaEntity::pSetInvMass,
+		"pSetRestitution", &LuaEntity::pSetRestitution,
+		"pSetVelocity", &LuaEntity::pSetVelocity
 	);
 }

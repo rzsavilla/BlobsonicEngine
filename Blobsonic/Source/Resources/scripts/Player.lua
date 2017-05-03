@@ -12,6 +12,11 @@ playerAtt = {
 		Material = "default_material",
 		Shader = "phong_shader",
 		Texture = "floor_texture"
+	},
+	Physical = {
+		Mass = 1.0,
+		INVMass = 1.0,
+		Restitution = 0.1
 	}
 }
 
