@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 #include <tinyxml2.h>
+#include "Scene.h"
 
 using namespace std;
 using namespace sf;
@@ -54,14 +55,26 @@ int main()
 
 void OpenLevel(string name)
 {
+	string path = "../../../Blobsonic/Source/Resources/scenes/" + name + ".xml";
 
-	//load xml file
-	XMLDocument xmlDoc;
-	xmlDoc.LoadFile(("../../../Blobsonic/Source/Resources/scenes/" + name + ".xml").c_str());;
+	Scene scene(path);
 
 	//create an sfml window
-	RenderWindow window(VideoMode(1024, 720), "Editor - " + name + ".xml");
+	RenderWindow window(VideoMode(1280, 720), "Editor - " + name + ".xml");
 	window.setFramerateLimit(60);
+
+	//create a view to fill the windowfor game render
+	View gameView;
+	gameView.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f));
+	gameView.setCenter(sf::Vector2f(1280 / 2, 720 / 2));
+	gameView.setSize(sf::Vector2f(1280, 720));
+
+	//create a view to fill the windowfor game render
+	View hudView;
+	hudView.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f));
+	hudView.setCenter(sf::Vector2f(1280 / 2, 720 / 2));
+	hudView.setSize(sf::Vector2f(1280, 720));
+
 
 
 	//window loop
@@ -70,14 +83,69 @@ void OpenLevel(string name)
 
 		// Event processing
 		Event event;
+		int iMouseWheel;
+
 		while (window.pollEvent(event))
 		{
 			// Request for closing the window
 			if (event.type == Event::Closed)
+			{
 				window.close();
+			}
+			//move camera
+			float fMoveSpeed = 10;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+			{
+				fMoveSpeed *= 3;
+			}
+			//key presses
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+			{
+				gameView.move(Vector2f(0.0f, -fMoveSpeed));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			{
+				gameView.move(Vector2f(0.0f, fMoveSpeed));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+			{
+				gameView.move(Vector2f(-fMoveSpeed, 0.0f));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			{
+				gameView.move(Vector2f(fMoveSpeed, 0.0f));
+			}
+
+			if (event.type == Event::MouseWheelMoved)
+			{
+				iMouseWheel = event.mouseWheel.delta;
+				if (iMouseWheel > 0)
+				{
+					//zoom in
+					gameView.zoom(0.9);
+				}
+				if (iMouseWheel < 0)
+				{
+					//zoom out
+					gameView.zoom(1.1);
+				}
+			}
 		}
 
+
 		//if(Keyboard::Escape == Keyboard)
+
+		window.clear(Color::Black);
+
+		//draw the game 
+		window.setView(gameView);
+
+		window.draw(scene);
+
+		//draw the hud
+		window.setView(hudView);
+		
+		window.display();
 
 
 	}
@@ -177,6 +245,21 @@ void NewLevel()
 	XMLElement * pLevelSize = xmlDoc.NewElement("GridSize");
 	pLevelSize->SetText(fGrid);
 	pScene->InsertEndChild(pLevelSize);
+
+	//saving the size of the level
+	XMLElement * pLevelDimensions = xmlDoc.NewElement("Dimensions");
+	pScene->InsertFirstChild(pLevelDimensions);
+		XMLElement * xCol = xmlDoc.NewElement("X");
+		pLevelDimensions->InsertFirstChild(xCol);
+		xCol->SetText(fXDimension);
+		pLevelDimensions->InsertEndChild(xCol);
+
+		XMLElement * zCol = xmlDoc.NewElement("Z");
+		pLevelDimensions->InsertFirstChild(zCol);
+		zCol->SetText(fZDimension);
+		pLevelDimensions->InsertEndChild(zCol);
+
+	pScene->InsertEndChild(pLevelDimensions);
 
 	//create the default floor
 	for (int x = 0; x < fXDimension; x++)

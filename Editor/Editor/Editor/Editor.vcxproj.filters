@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{4c5472bc-189a-4d1b-9842-8f359d325aea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{b73549d2-f7a3-4bb1-846a-1be2fd224575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{38620fc1-932e-425b-9f37-0370d89d5adb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -48,6 +54,9 @@
     <ClCompile Include="src\tinyxml2.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.h">
@@ -67,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="include\tinyxml2.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scene.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
