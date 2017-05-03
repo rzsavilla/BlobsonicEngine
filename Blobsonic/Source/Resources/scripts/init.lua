@@ -8,5 +8,4 @@
 
 
 setLoadingScene("Loading.xml")
-
 changeScene("WorldTest.xml")	-- Change to this scene

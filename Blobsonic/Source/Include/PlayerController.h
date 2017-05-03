@@ -7,6 +7,8 @@ namespace System {
 	class PlayerController : public System {
 	private:
 		std::shared_ptr<Entity> m_vPlayer;	//Player entities
+		std::shared_ptr<Entity> m_vSkyBox; // the skybox
+		std::shared_ptr<Entity> m_Camera; // the camera
 		static const int m_kiActions = 6;
 		bool m_bAction[m_kiActions];
 	public:

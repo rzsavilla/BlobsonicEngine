@@ -6,6 +6,7 @@
 
 #include "Player.h"
 #include "Transformable.h"
+#include "Camera.h"
 
 System::PlayerController::PlayerController() {
 	//Reset actions
@@ -22,35 +23,57 @@ void System::PlayerController::process(std::vector<std::shared_ptr<Entity>>* ent
 			m_vPlayer = (*it);
 			return;
 		}
+		if ((*it)->has<Component::Transformable>()) 
+		{
+			if ((*it)->getName() == "skybox")
+			{
+				m_vSkyBox = (*it);
+			}
+		}
+		if ((*it)->has<Component::Camera>())
+		{
+			m_Camera = (*it);
+		}
 	}
 }
 
 void System::PlayerController::update(float dt) {
-	if (m_vPlayer) {
-		if (m_vPlayer->has<Component::Transformable>()) {
-			auto t = m_vPlayer->get<Component::Transformable>();
-			auto p = m_vPlayer->get<Component::Player>();
+	if (m_Camera) {
+		if (m_Camera->has<Component::Transformable>()) {
+			auto t = m_Camera->get<Component::Camera>();
+			//auto p = m_Camera->get<Component::Player>();
 			glm::vec3 pos = t->getPosition();
-			float fSpeed = p->m_fMoveSpeed;
-			if (m_bAction[0]) {		//Move Forward
-				pos.z += fSpeed;
+			//float fSpeed = p->m_fMoveSpeed;
+
+			//set the pos of skybox
+			if (m_vSkyBox)
+			{
+				auto skytrans = m_vSkyBox->get<Component::Transformable>();
+
+				skytrans->setPosition(t->getPosition());//- glm::vec3(250, 250, 250));
+
+
 			}
-			if (m_bAction[1]) {		//Move Backwards
-				pos.z -= fSpeed;
-			}
-			if (m_bAction[2]) {		//Move Left
-				pos.x -= fSpeed;
-			}
-			if (m_bAction[3]) {		//Move Right
-				pos.x += fSpeed;
-			}
-			if (m_bAction[4]) {		//Move Up/Ascend
-				pos.y += fSpeed;
-			}
-			if (m_bAction[5]) {		//Move Down/Descend
-				pos.y -= fSpeed;
-			}
-			t->setPosition(pos);	//Set new position
+
+			//if (m_bAction[0]) {		//Move Forward
+			//	pos.z += fSpeed;
+			//}
+			//if (m_bAction[1]) {		//Move Backwards
+			//	pos.z -= fSpeed;
+			//}
+			//if (m_bAction[2]) {		//Move Left
+			//	pos.x -= fSpeed;
+			//}
+			//if (m_bAction[3]) {		//Move Right
+			//	pos.x += fSpeed;
+			//}
+			//if (m_bAction[4]) {		//Move Up/Ascend
+			//	pos.y += fSpeed;
+			//}
+			//if (m_bAction[5]) {		//Move Down/Descend
+			//	pos.y -= fSpeed;
+			//}
+			//t->setPosition(pos);	//Set new position
 		}
 		for (int i = 0; i < m_kiActions; i++) {
 			m_bAction[i] = false;

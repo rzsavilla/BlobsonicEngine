@@ -4,7 +4,9 @@
 	<Location>Source\Resources\Scenes\Resources.xml</Location> 
 </ResourceFile>
 
-<Scene> <Type>Game</Type> <ID>game_scene</ID>
+<Scene> 
+	<Type>Game</Type> 
+	<ID>game_scene</ID>
 
 	<Model> <ID>deer</ID>
 		<Mesh>deer_mesh</Mesh>
@@ -33,7 +35,8 @@
 		</Origin>
 	</Model>
 	 
-	<Model> <ID>floor</ID>
+	<Model> 
+	<ID>floor</ID>
 		<Mesh>plane_mesh</Mesh>
 		<Material>default_material</Material>
 		<Shader>phong_shader</Shader>
@@ -337,18 +340,20 @@
 		<isPlaying>false</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
+		<sound3D>true</sound3D>
+		<Position>
+			<X>-1.0f</X>
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<MinDistance>30.0f</MinDistance>
+		<Volume>1.0f</Volume>
+
 	</Audio>
 
-	<Audio>
-		<ID>bell</ID>
-		<File>Source\Resources\audio\bell.wav</File>
-		<isInitialized>true</isInitialized>
-		<isPlaying>false</isPlaying>
-		<isLooping>false</isLooping>
-		<startsPaused>false</startsPaused>
-	</Audio>
 	
-	<Camera> <ID>cam1</ID>
+	<Camera> 
+	<ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
 			<Y>30.0f</Y>
