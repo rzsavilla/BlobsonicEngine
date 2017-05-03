@@ -74,6 +74,11 @@
 		<File>Source\Resources\textures\loading.png</File>
 	</Texture>
 	
+	<Texture> 
+		<ID>menu_texture</ID>
+		<File>Source\Resources\textures\menu.png</File>
+	</Texture>
+	
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>

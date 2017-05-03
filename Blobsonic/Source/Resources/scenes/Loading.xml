@@ -29,24 +29,5 @@
 			<Z>1.0f</Z>
 		</Colour>
 	</Sprite>
-	
-	<Camera> <ID>cam1</ID>
-		<Position>
-			<X>0.0f</X>
-			<Y>30.0f</Y>
-			<Z>70.0f</Z>
-		</Position>
-		<Orientation>
-			<X>0.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Orientation>
-		<FOV>45.0f</FOV>
-		<AspectRatio>1.33333</AspectRatio>
-		<FarPlane>1000.0f</FarPlane>
-		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>0.8f</MoveSpeed>
-	</Camera>
 </Scene>
 

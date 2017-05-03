@@ -367,16 +367,19 @@ std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
 			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
-			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			transform->setScale(v);
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Colour") == 0) {
-			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			sprite->setColor(v);
 			if (m_bDebug) std::cout << "Colour Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "ID") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			sprite->setID(v);
+			if (m_bDebug) std::cout << "ID : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 	}
 	return entity;
@@ -386,11 +389,12 @@ std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
-	if (m_bDebug) std::cout << "\nLoading Sprite \n  ";
+	if (m_bDebug) std::cout << "\nLoading Button \n  ";
 	std::shared_ptr<Entity> entity = m_factory.createSprite();
 	entity->attach<Component::Button>();
 	auto sprite = entity->get<Component::SpriteRenderer>();
 	auto transform = entity->get<Component::Transformable>();
+	auto button = entity->get<Component::Button>();
 
 	std::string sID;
 	//Look at Model Element
@@ -419,22 +423,24 @@ std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Rotation") == 0) {
-			//Set model rotation
 			glm::vec3 v = parseVec3(modelChild);
 			transform->setRotation(v);
 			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
-			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			transform->setScale(v);
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Colour") == 0) {
-			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			sprite->setColor(v);
 			if (m_bDebug) std::cout << "Colour Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "sID") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			button->setButtonID(v.x);
+			if (m_bDebug) std::cout << "ID : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 	}
 	return entity;

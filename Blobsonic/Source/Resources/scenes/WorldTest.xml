@@ -198,9 +198,9 @@
 		</Origin>
 	</Model>
 	
-	<Sprite> <ID>sprite1</ID>
+	<Button> <ID>MainMenuButton</ID>
 		<Shader>button_shader</Shader>
-		<Texture>button_texture</Texture>
+		<Texture>menu_texture</Texture>
 		<Position>
 			<X>20.0f</X>
 			<Y>20.0f</Y>
@@ -221,7 +221,12 @@
 			<Y>1.0f</Y>
 			<Z>0.0f</Z>
 		</Colour>
-	</Sprite>
+		<sID>
+			<X>4.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
 	
 	<Sprite> <ID>sprite2</ID>
 		<Shader>button_shader</Shader>

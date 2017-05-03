@@ -3,12 +3,12 @@
 #include "SpriteRender.h"
 #include "GUI.h"
 #include "Transformable.h"
-#include "LuaScripting.h"
+#include "Message.h"
+#include "SceneManager.h"
+#include "Text.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
-
-using namespace System::Scripting;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Cursor callback functions
@@ -87,7 +87,6 @@ void System::GUI::update(float dt)
 			auto s = (*it)->get <Component::SpriteRenderer>();
 			
 			double xpos, ypos, width, height;
-			bool m_bBright = false;
 
 			xpos = t->getPosition().x;
 			ypos = t->getPosition().y;
@@ -95,39 +94,98 @@ void System::GUI::update(float dt)
 			width = t->getScale().x;
 			height = t->getScale().y;
 
+			int tt;
+			tt = b->getButtonID();
+
 			/// If inside of the buttons
 			if (x >= xpos && x <= xpos + width &&
 				y >= ypos && y <= ypos + height)
 			{
 				if (glfwGetMouseButton(glfwGetCurrentContext(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 				{
-					if ((*it)->getUID() == 10)
+					/// Main menu
+					if (tt == 1) /// Start button
 					{
 						cout << "Start Button\n\n";
-						string changeScene("TestScene");
+						SceneManager::getInstance()->setLoadingScene("Loading.xml");
+						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
 					}
-					else if ((*it)->getUID() == 14)
+					if (tt == 2) /// Settings button
 					{
 						cout << "Settings Button\n\n";
+						SceneManager::getInstance()->setLoadingScene("Loading.xml");
+						SceneManager::getInstance()->changeScene("Settings.xml", true);
 					}
-					if ((*it)->getUID() == 18)
+					if (tt == 3) /// Exit button
 					{
 						cout << "Exit Button\n\n";
+						SceneManager::getInstance()->setLoadingScene("Loading.xml");
+						SceneManager::getInstance()->changeScene("Exit.xml", true);
+					}
+					/// World test
+					if (tt == 4) /// Main menu button
+					{
+						cout << "Main Menu Button \n\n";
+						SceneManager::getInstance()->setLoadingScene("Loading.xml");
+						SceneManager::getInstance()->changeScene("MainMenu.xml", true);
+					}
+					/// Settings
+					if (tt == 5) /// Option - set screen size to 1024, 768.
+					{
+						glfwSetWindowSize(glfwGetCurrentContext(), 1024, 768);
+						glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
+					}
+
+					if (tt == 6) /// Option - set screen size to 800, 600.
+					{
+						glfwSetWindowSize(glfwGetCurrentContext(), 1280, 800);
+						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
+						
+					}
+					/// Exit
+					if (tt == 7) /// Exit
+					{
 						exit(0);
 					}
 				}
-				else if (m_bBright == false)
+				else
 				{
-					s->setColor(vec3(s->getColor().x / 0.7, s->getColor().y / 0.7, s->getColor().z / 0.7));
-					m_bBright = true;
+					if (tt == 3 || tt == 7)
+					{
+						/// Visual effects
+						/// Colour manipulation
+						s->setColor(vec3(s->getColor().x * 0.99, s->getColor().y * 0.99, s->getColor().z * 0.99));
+						/// Size manipulation
+						//t->setScale(vec3(t->getScale().x * 0.99, t->getScale().y * 0.99, 0.0));
+						//t->setPosition(vec3(t->getPosition().x / 0.998, t->getPosition().y / 0.998, 0.0));
+						
+					}
+					else
+					{
+						s->setColor(vec3(s->getColor().x / 0.99, s->getColor().y / 0.99, s->getColor().z / 0.99));/// Brightens the button if moused over
+					}
 				}
 			}
 			/// If outside of the buttons
-			if (x >=! xpos && x <=! xpos + width &&
-				y >=! ypos && y <=! ypos + height)
+			else
 			{
-				
+				/// Resets the values of the buttons
+				if (tt == 1)
+				{
+					s->setColor(vec3(1.0f, 0.5f, 0.0f));
+				}
+				if (tt == 2)
+				{
+					s->setColor(vec3(0.0f, 1.0f, 0.5f));
+				}
+				if (tt == 3)
+				{
+					s->setColor(vec3(0.5f, 0.0f, 1.0f));
+					t->setScale(vec3(200.0f, 100.0f, 0.0f));
+					t->setPosition(vec3(412.0f, 500.0f, 0.0f));
+				}
 			}
+			
 		}
 	}
 	//Remove Destroyed Entities
