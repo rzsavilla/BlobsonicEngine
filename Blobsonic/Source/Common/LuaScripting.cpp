@@ -12,156 +12,72 @@
 #include "Player.h"
 #include "LuaEntity.h"
 
+#include "sol.hpp"
 
-void System::Scripting::LuaScripting::attachFunctions(lua_State * L)
+//Default values
+bool System::Scripting::LuaScripting::m_bReloadScene = true;
+bool System::Scripting::LuaScripting::m_bReloadScripts = true;
+
+System::Scripting::LuaScripting::LuaScripting()
+{
+	m_SceneManager = SceneManager::getInstance();
+}
+
+void System::Scripting::LuaScripting::registerFunctions(lua_State * L)
 {
 	sol::state_view lua(L);
 
 	//lua.set_function("changeScene", &Scripting::changeScene);
-	lua.set_function("sayHello", &sayHello);
-
-	lua.set_function("isKeyDown", &Scripting::isKeyDown);
-	lua.set_function("isMouseDown", &Scripting::isMouseDown);
-
-	lua.set_function("changeScene", &Scripting::changeScene);
-	lua.set_function("setLoadingScene", &setLoadingScene);
-
-	lua.set_function("reloadScene", &Scripting::reloadScene);
-	lua.set_function("forceReloadScene", &Scripting::forceReloadScene);
 }
 
-
-void System::Scripting::LuaScripting::attachClasses(lua_State * L)
+void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 {
+	sol::state_view lua(L);
+
+	//Lua Scripting system functions
+	lua.set("LuaScripting", LuaScripting());
+	//-----Scene Management-----
+	lua.set_function("setLoadingScene", &LuaScripting::setLoadingScene,LuaScripting());
+	lua.set_function("reloadScene", &LuaScripting::reloadScene, LuaScripting());
+	lua.set_function("changeScene", &LuaScripting::changeScene, LuaScripting());
+	lua.set_function("forceReloadScene", &LuaScripting::forceReloadScene, LuaScripting());
+	//-----Inputs-----
+	lua.set_function("isKeyDown", &LuaScripting::isKeyDown, LuaScripting());
+	lua.set_function("isMouseDown", &LuaScripting::isMouseDown, LuaScripting());
+	lua.set_function("hideCursor", &LuaScripting::hideCursor,LuaScripting());
+	//-----Misc------
+	lua.set_function("printString", &LuaScripting::printString, LuaScripting());
+
+	//Register LuaEntity class
+	LuaEntity::register_lua(lua);
 }
-void System::Scripting::LuaScripting::readRootTable(lua_State * L)
+
+void System::Scripting::LuaScripting::setLoadingScene(std::string sceneFile)
 {
-	std::cout << "-------Reading Root--------\n";
-	sol::state_view lua(L);	//Convert to sol state
-	sol::table root = lua["root"];
-
-	lua_pushnil(L);  // first key
-	//Iterate through tables elements --Looks at keys--
-	for (auto it = root.begin(); it != root.end(); ++it) {
-		auto key = (*it).first;
-		//--Process only string keys--
-		if (key.get_type() == sol::type::string) {
-			std::string s = key.as<std::string>();
-			if (m_bDebug) std::cout << "Key: " << s << " = ";
-
-			//--Get value of table element--
-			auto value = (*it).second;
-			switch (value.get_type())
-			{
-			case sol::type::string: {
-				std::string sValue = value.as<std::string>();
-				if (m_bDebug) std::cout << sValue << "-----\n";
-				break;
-			}
-			case sol::type::function: {
-				break;
-			}
-			case sol::type::boolean: {
-				//if (m_bDebug) std::cout << "-----Boolean-----\n";
-				break;
-			}
-			case sol::type::table: {
-				if (m_bDebug) std::cout << "Table\n";
-				if (s == "Entity") {
-					sol::table t = value.as<sol::table>();
-					//Create entity and pass message to add entity to the active scene
-					MessageHandler::getInstance()->sendMessage(std::make_shared<SceneMessage::AddEntity>(readEntity(t)));
-				}
-				break;
-			}
-			default:
-				std::cout << "\n";
-				break;
-			}
-		}
-	}
+	SceneManager::getInstance()->setLoadingScene(sceneFile);
 }
 
-std::shared_ptr<Entity> System::Scripting::LuaScripting::readEntity(sol::table t)
+void System::Scripting::LuaScripting::changeScene(std::string sceneFile)
 {
-	std::shared_ptr<Entity> e = std::make_shared<Entity>();
-	for (auto it = t.begin(); it != t.end(); ++it) {
-		auto key = (*it).first;	//Get element key
-		//Processes ony strings
-		if (key.get_type() == sol::type::string) {
-			std::string s = key.as<std::string>();		//Get element value
-			std::cout << " " << s << "\n";
-			sol::table table = (*it).second.as<sol::table>();
-			//Attach Components
-			if (s == "Transformable") {
-				e->attach<Component::Transformable>(table);	
-			}
-			else if (s == "Model") {
-				e->attach<Component::Model>(table);
-			}
-		}
-	}
-	return e;
+	SceneManager::getInstance()->changeScene(sceneFile, true);
 }
 
-System::Scripting::LuaScripting::LuaScripting()
+void System::Scripting::LuaScripting::reloadScene()
 {
-	MessageHandler::getInstance()->attachReceiver(this);
-	m_SceneManager = SceneManager::getInstance();
+	m_bReloadScene = true;
+	m_bReloadScripts = true;
+	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), false);
 }
 
-void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
+void System::Scripting::LuaScripting::forceReloadScene()
 {
-
+	m_bReloadScene = true;
+	m_bReloadScripts = true;
+	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), true);
 }
 
-void System::Scripting::LuaScripting::update(float dt)
-{
-	if (!m_bLoaded && (m_SceneManager->getState() == Active)) {
-		lua_State* L = luaL_newstate();
 
-		attachClasses(L);
-		attachFunctions(L);
-
-		sol::state_view lua(L);
-		LuaHelper::loadScriptFile(L, (m_scriptsDir + "init.lua"));
-		sol::load_result script = lua.load("a = 'test'");
-
-		//Check if script is value
-		if (script.valid()) {
-			if (m_bDebug) std::cout << "Script Loaded\n";
-			//Look for root table
-			sol::table rootTable = lua["root"];
-
-			//readRootTable(L);
-		}
-		else {
-			if (m_bDebug) std::cout << "Failed to load script\n";
-		}
-		m_bLoaded = true;
-	}
-	else if ((m_SceneManager->getState() == Active)) {
-		//Use Run script
-		m_RunState = luaL_newstate();
-		LuaHelper::loadLibraries(m_RunState);
-		attachClasses(m_RunState);
-		attachFunctions(m_RunState);
-		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-	}
-}
-
-void System::Scripting::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
-{
-	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
-		if ((*it)->sID == "Scene_Reload") {
-			//Reload scripts
-			std::cout << "Reload Scripts\n";
-			if (m_bLoaded) m_bLoaded = false;
-		}
-	}
-}
-
-bool System::Scripting::isKeyDown(const std::string & key)
+bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)
 {
 	int iKey = -1;
 
@@ -181,7 +97,7 @@ bool System::Scripting::isKeyDown(const std::string & key)
 		iKey = GLFW_KEY_P;
 	}
 	else if (key == "o" || key == "O") {
-		iKey = GLFW_KEY_I;
+		iKey = GLFW_KEY_O;
 	}
 	else if (key == "i" || key == "I") {
 		iKey = GLFW_KEY_I;
@@ -202,7 +118,7 @@ bool System::Scripting::isKeyDown(const std::string & key)
 	return false;
 }
 
-bool System::Scripting::isMouseDown(const std::string & button)
+bool System::Scripting::LuaScripting::isMouseDown(const std::string & button)
 {
 	int iButton = -1;
 	if (button == "Left") {
@@ -220,22 +136,143 @@ bool System::Scripting::isMouseDown(const std::string & button)
 	return false;
 }
 
-void System::Scripting::changeScene(std::string sceneFile)
+void System::Scripting::LuaScripting::hideCursor(bool hide)
 {
-	SceneManager::getInstance()->changeScene(sceneFile,true);
+	if (hide) glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);	//Hide mouse
+	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_HAND_CURSOR);		//Show Mouse
 }
 
-void System::Scripting::setLoadingScene(std::string sceneFile)
+void System::Scripting::LuaScripting::printString(const std::string & s)
 {
-	SceneManager::getInstance()->setLoadingScene(sceneFile);
+	std::cout << s << "\n";
 }
 
-void System::Scripting::reloadScene()
+void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
 {
-	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),false);
+
 }
 
-void System::Scripting::forceReloadScene()
+void System::Scripting::LuaScripting::update(float dt)
 {
-	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()),true);
+	//-----Initial load/setup-------------------------------
+	if (m_bReloadScene && (m_SceneManager->getState() == Active)) {
+		
+		lua_State* L = luaL_newstate();
+
+		registerFunctions(L);
+		registerClasses(L);
+		
+		sol::state_view lua(L);
+		LuaHelper::loadScriptFile(L, (m_scriptsDir + "init.lua"));
+		sol::load_result script = lua.load("a = 'test'");
+
+		//Check if script is value
+		if (!script.valid()) {
+			if (m_bDebug) std::cout << "Failed to load script\n";
+		}
+		m_bReloadScene = false;
+	}
+	//-----Game loop/run-------------------------------
+	else if ((m_SceneManager->getState() == Active)) {
+		//Use Run script
+		if (m_bReloadScripts) {
+			std::cout << "\n-----Initializing Scripts-----\n";
+			m_RunState = luaL_newstate();
+			LuaHelper::loadLibraries(m_RunState);
+
+			registerClasses(m_RunState);
+			registerFunctions(m_RunState);
+
+			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
+			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+			m_bReloadScripts = false;
+		}
+		else {
+			if (m_RunState) {
+				LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+			}
+		}
+	}
 }
+
+void System::Scripting::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
+{
+	/*for (auto it = msgs->begin(); it != msgs->end(); ++it) {
+
+	}*/
+}
+
+
+/*
+void System::Scripting::LuaScripting::readRootTable(lua_State * L)
+{
+std::cout << "-------Reading Root--------\n";
+sol::state_view lua(L);	//Convert to sol state
+sol::table root = lua["root"];
+
+lua_pushnil(L);  // first key
+//Iterate through tables elements --Looks at keys--
+for (auto it = root.begin(); it != root.end(); ++it) {
+auto key = (*it).first;
+//--Process only string keys--
+if (key.get_type() == sol::type::string) {
+std::string s = key.as<std::string>();
+if (m_bDebug) std::cout << "Key: " << s << " = ";
+
+//--Get value of table element--
+auto value = (*it).second;
+switch (value.get_type())
+{
+case sol::type::string: {
+std::string sValue = value.as<std::string>();
+if (m_bDebug) std::cout << sValue << "-----\n";
+break;
+}
+case sol::type::function: {
+break;
+}
+case sol::type::boolean: {
+//if (m_bDebug) std::cout << "-----Boolean-----\n";
+break;
+}
+case sol::type::table: {
+if (m_bDebug) std::cout << "Table\n";
+if (s == "Entity") {
+sol::table t = value.as<sol::table>();
+//Create entity and pass message to add entity to the active scene
+MessageHandler::getInstance()->sendMessage(std::make_shared<SceneMessage::AddEntity>(readEntity(t)));
+}
+break;
+}
+default:
+std::cout << "\n";
+break;
+}
+}
+}
+}
+*/
+
+/*
+std::shared_ptr<Entity> System::Scripting::LuaScripting::readEntity(sol::table t)
+{
+std::shared_ptr<Entity> e = std::make_shared<Entity>();
+for (auto it = t.begin(); it != t.end(); ++it) {
+auto key = (*it).first;	//Get element key
+//Processes ony strings
+if (key.get_type() == sol::type::string) {
+std::string s = key.as<std::string>();		//Get element value
+std::cout << " " << s << "\n";
+sol::table table = (*it).second.as<sol::table>();
+//Attach Components
+if (s == "Transformable") {
+e->attach<Component::Transformable>(table);
+}
+else if (s == "Model") {
+e->attach<Component::Model>(table);
+}
+}
+}
+return e;
+}
+*/

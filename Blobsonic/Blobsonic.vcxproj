@@ -129,6 +129,7 @@
     <ClCompile Include="Source\Common\Capsule.cpp" />
     <ClCompile Include="Source\Common\Destroyable.cpp" />
     <ClCompile Include="Source\Common\DirectionalLight.cpp" />
+    <ClCompile Include="Source\Common\Entity.cpp" />
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
