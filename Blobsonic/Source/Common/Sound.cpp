@@ -25,6 +25,11 @@ Component::Sound::Sound()
 	position.Z = 0.0f;
 
 	sound3D = false;
+	hasVolume = false;
+	hasMinDist = false;
+
+	volume = 1.0f;
+	minDist = 1.0f;
 
 
 }
@@ -70,6 +75,26 @@ irrklang::ISound * Component::Sound::getSound()
 	return snd;
 }
 
+float Component::Sound::getVolume()
+{
+	return volume;
+}
+
+float Component::Sound::getMinDist()
+{
+	return minDist;
+}
+
+bool Component::Sound::getHasVolume()
+{
+	return hasVolume;
+}
+
+bool Component::Sound::getHasMinDist()
+{
+	return hasMinDist;
+}
+
 void Component::Sound::setFile(std::string f)
 {
 	file = f;
@@ -85,16 +110,42 @@ void Component::Sound::setPlaying(bool state)
 	isPlaying = state;
 }
 
+void Component::Sound::setVolume(float vol)
+{
+	if (vol > 1.0f)
+		vol = 1.0f;
+	if (vol < 0.0f)
+		vol = 0.0f;
+	volume = vol;
+	hasVolume = true;
+}
+
+void Component::Sound::setMinDist(float dist)
+{
+	minDist = dist;
+	hasMinDist = true;
+}
+
 void Component::Sound::startPlaying2D(ISoundEngine* engine)
 {
 	isPlaying = true;
 	snd = engine->play2D(this->getFile().c_str(), this->getLooping(),startsPaused, true);
+	if (this->getHasVolume()) {
+		snd->setVolume(volume);
+	}
 }
 
 void Component::Sound::startPlaying3D(ISoundEngine* engine)
 {
 	isPlaying = true;
 	snd = engine->play3D(this->getFile().c_str(), position, this->getLooping(), startsPaused, true);
+	
+	if (this->getHasVolume()) {
+		snd->setVolume(volume);
+	}
+	if (this->getHasMinDist()) {
+		snd->setMinDistance(minDist);
+	}
 }
 
 void Component::Sound::stopPlaying(ISoundEngine* engine)
