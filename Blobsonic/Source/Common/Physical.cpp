@@ -9,3 +9,23 @@ Physical::Physical()
 	m_vVelocity = glm::vec3(0, 0, 0);
 	m_fRestitution = 0.1f;
 }
+
+void Physical::setMass(float newMass)
+{
+	m_fMass = newMass;
+}
+
+void Physical::setRestitution(float newRestitution)
+{
+	m_fINVMass = newRestitution;
+}
+
+float Physical::getMass()
+{
+	return m_fMass;
+}
+
+float Physical::getRestitition()
+{
+	return m_fRestitution;
+}

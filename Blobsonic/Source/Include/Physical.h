@@ -20,6 +20,12 @@ public:
 	glm::vec3 m_fForce;	//<! Force of object in newtons
 	glm::vec3 m_vVelocity; //<! Vel of object in m/s
 	glm::vec3 m_vAcceleration; //<! Accel of object in m/s/s
+
+	void setMass(float newMass);
+	void setRestitution(float newRestitution);
+
+	float getMass();			//!< Return mass in kg
+	float getRestitition();		//!< Return collision restitution
 };
 
 
