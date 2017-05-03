@@ -6,12 +6,11 @@ require "Source/Resources/scripts/SceneManagement"	-- Debugging purposes fast sc
 hideCursor(true)
 
 
-player:setPosition(0,0,0)
-
 if isKeyDown("p") == true then
 	reloadScene()
 elseif isKeyDown("o") == true then
 	forceReloadScene()
 end
 
-player:setPosition(0,25,0)
+player:tSetPosition(0,0,0)
+player:tSetScale(2,2,2)
