@@ -11,7 +11,6 @@
 
 #include "stdafx.h"
 #include "Component.h"
-
 #include "sol.hpp"
 
 namespace Component {
@@ -32,9 +31,9 @@ namespace Component {
 		void translate(float x, float y, float z);	//!< Increase current position by parameter values
 		void rotate(float x, float y, float z);		//!< Increase current rotation by parameter values
 		void scale(float x, float y, float z);		//!< Increase current scale by parameter values
-		void translate(glm::vec3 translation);		//!< Increase current position by parameter values
-		void rotate(glm::vec3 rotation);			//!< Increase current rotation by parameter values
-		void scale(glm::vec3 scale);				//!< Increase current scale by parameter values
+		void translateV(glm::vec3 translation);		//!< Increase current position by parameter values
+		void rotateV(glm::vec3 rotation);			//!< Increase current rotation by parameter values
+		void scaleV(glm::vec3 scale);				//!< Increase current scale by parameter values
 
 		void setPosition(glm::vec3 position);	//!< Set Position
 		void setRotation(glm::vec3 degrees);	//!< Set Rotation
@@ -47,5 +46,12 @@ namespace Component {
 		glm::vec3 getOrigin();		//!< Returns origin
 
 		glm::mat4 getTransform();	//!< Returns transformation matrix
+
+		/*! Register this C++ class as a lua class
+			Allows lua access to member functions
+		*/
+		static void register_lua(sol::state_view L);
+
+		sol::object getTable(sol::state_view L);
 	};
 }

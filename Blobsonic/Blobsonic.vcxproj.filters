@@ -613,5 +613,8 @@
     <ClCompile Include="Source\Common\LuaHelper.cpp">
       <Filter>Source Files\Engine\LUA</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\Entity.cpp">
+      <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

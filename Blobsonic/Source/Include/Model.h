@@ -17,6 +17,9 @@
 
 namespace Component {
 	struct Model : public Component {
+
+		const bool m_bDebug = true;		//!< Prints couts to console
+
 		Model() {}
 
 		Model(sol::table t) {
@@ -51,16 +54,20 @@ namespace Component {
 		std::shared_ptr<GLSLProgram> m_shader;
 
 		void addMesh(std::shared_ptr<AssimpMesh> mesh) {
-			m_aMeshes.push_back(mesh);
+			if (mesh) m_aMeshes.push_back(mesh);
+			else if (m_bDebug) std::cout << "Could not add mesh\n";
 		}
 		void addTexture(std::shared_ptr<Texture> texture) {
-			m_textures.push_back(texture);
+			if (texture) m_textures.push_back(texture);
+			else if (m_bDebug) std::cout << "Could not add texture\n";
 		}
 		void addMaterial(std::shared_ptr<Material> material) {
-			m_materials.push_back(material);
+			if (material) m_materials.push_back(material);
+			else if (m_bDebug) std::cout << "Could not add material\n";
 		}
 		void setShader(std::shared_ptr<GLSLProgram> shader) {
-			m_shader = shader;
+			if (shader) m_shader = shader;
+			else if (m_bDebug) std::cout << "Could not add shader\n";
 		}
 	};
 }

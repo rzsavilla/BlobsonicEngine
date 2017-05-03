@@ -10,6 +10,11 @@
 #include "SpotLight.h"
 #include "Transformable.h"
 
+#include "LuaScripting.h"
+
+#include "Model.h"
+
+
 static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityFactory>();
 
 LuaEntity::LuaEntity()
@@ -18,31 +23,158 @@ LuaEntity::LuaEntity()
 	MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
 }
 
-void LuaEntity::attachComponent(const std::string& sComponent)
+void LuaEntity::setTransformable(sol::table t)
 {
-	if (m_bDebug) std::cout << "LuaEntity:" << getID() << " ";
-	if (sComponent == "Transformable") {
+	//Set Default variables
+	glm::vec3 vPosition = glm::vec3(0.0f);
+	glm::vec3 vRotation = glm::vec3(0.0f);
+	glm::vec3 vScale = glm::vec3(1.0f);
+	glm::vec3 vOrigin = glm::vec3(0.0f);
+
+	if (!m_entity->has<Component::Transformable>()) {
+		//Attach component
 		m_entity->attach<Component::Transformable>();
-		if (m_bDebug) std::cout << " - Transformable\n";
 	}
-	else if (sComponent == "Player") {
-		m_entity->destroy();
-		m_entity = m_EntityFactory->createPlayer(glm::vec3 (0.0f,0.0f,0.0f));
-		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
-		if (m_bDebug) std::cout << " - Player\n";
+	//Get Component
+	auto transform = m_entity->get<Component::Transformable>();
+
+	//Read variables from lua table
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			//Set Component variables
+			if (s == "Position")
+				transform->setPosition(LuaHelper::readVec3((*it).second));
+			else if (s == "Rotation")
+				transform->setRotation(LuaHelper::readVec3((*it).second));
+			else if (s == "Scale")
+				transform->setScale(LuaHelper::readVec3((*it).second));
+			else if (s == "Origin")
+				transform->setOrigin(LuaHelper::readVec3((*it).second));
+		}
 	}
-	else if (sComponent == "DirectionalLight") {
-		m_entity->attach<Component::DirectionalLight>();
-		if (m_bDebug) std::cout << " - DirectionalLight\n";
+}
+
+void LuaEntity::setModel(sol::table t)
+{
+	if (!m_entity->has<Component::Model>()) {
+		m_entity->attach<Component::Model>();	//Attach component
 	}
+	auto model = m_entity->get<Component::Model>();	//Get Component
+
+	auto res = ResourceManager::getInstance();
+
+	//Read variables from lua table
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			auto value = (*it).second;
+			if (value.get_type() == sol::type::string) {
+				std::string sValue = value.as<std::string>();
+				//Set Component variables
+				if (s == "Mesh")
+					model->addMesh(res->getAssimpMesh((sValue)));
+				else if (s == "Material")
+					model->addMaterial(res->getMaterial((sValue)));
+				else if (s == "Texture")
+					model->addTexture(res->getTexture((sValue)));
+				else if (s == "Shader")
+					model->setShader(res->getShader((sValue)));
+			}
+		}
+	}
+}
+
+void LuaEntity::setComponents(sol::table t)
+{
+	lua_pushnil(m_activeScript);  // first key
+	//Iterate through table elements
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		if (key.get_type() == sol::type::string) {
+			//Only process string keys
+			std::string s = key.as<std::string>();		//Get key value
+			auto value = (*it).second;					//Get value
+			//Read table data
+			if (key.get_type() == sol::type::string) {
+				//Set variables
+				if (s == "Transformable") {
+					setTransformable(value);
+				}
+				else if (s == "Model") {
+					setModel(value);
+				}
+			}
+		}
+	}
+}
+
+bool LuaEntity::hasComponent(const std::string & sComponent)
+{
+	if (sComponent == "Transformable") return m_entity->has<Component::Transformable>();
+	else if (sComponent == "Model") return m_entity->has<Component::Model>();;
 }
 
 unsigned int LuaEntity::getID()
 {
-	return m_entity->getUID();
+	return this->m_entity->getUID();
 }
 
-void LuaEntity::lua_get(sol::table t)
+void LuaEntity::tSetPosition(float x, float y, float z)
 {
+	if (m_entity->has<Component::Transformable>()) {
+		auto t = m_entity->get<Component::Transformable>();
+		t->setPosition(glm::vec3(x,y,z));
+	}
+}
 
+void LuaEntity::tSetRotation(float x, float y, float z)
+{
+	if (m_entity->has<Component::Transformable>()) {
+		auto t = m_entity->get<Component::Transformable>();
+		t->setRotation(glm::vec3(x, y, z));
+	}
+}
+
+void LuaEntity::tSetScale(float x, float y, float z)
+{
+	if (m_entity->has<Component::Transformable>()) {
+		auto t = m_entity->get<Component::Transformable>();
+		t->setScale(glm::vec3(x, y, z));
+	}
+}
+
+void LuaEntity::tSetOrigin(float x, float y, float z)
+{
+	if (m_entity->has<Component::Transformable>()) {
+		auto t = m_entity->get<Component::Transformable>();
+		t->setOrigin(glm::vec3(x, y, z));
+	}
+}
+
+void LuaEntity::destroy()
+{
+	m_entity->destroy();
+	m_entity = NULL;
+}
+
+void LuaEntity::register_lua(lua_State* L)
+{
+	//if (!m_lua_state) m_lua_state = L;
+	if (!m_activeScript) m_activeScript = L;
+	sol::state_view state(L);
+
+	state.new_usertype<LuaEntity>("Entity",
+		//Entity
+		"setComponents", &LuaEntity::setComponents,
+		"getID", &LuaEntity::getID,
+		"destroy", &LuaEntity::destroy,
+		//Transformable
+		"tSetPosition", &LuaEntity::tSetPosition,
+		"tSetRotation", &LuaEntity::tSetRotation,
+		"tSetScale", &LuaEntity::tSetScale,
+		"tSetOrigin", &LuaEntity::tSetOrigin
+	);
 }
