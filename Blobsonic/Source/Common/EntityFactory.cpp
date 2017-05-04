@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "EntityFactory.h"
+
+//Components
 #include "Player.h"
 #include "Movable.h"
 #include "Model.h"
@@ -17,6 +19,24 @@
 EntityFactory::EntityFactory()
 {
 	m_ptrResources = ResourceManager::getInstance();	//!< Set pointer to resource manager
+}
+
+EntityFactory::~EntityFactory()
+{
+
+}
+
+std::shared_ptr<EntityFactory> EntityFactory::getInstance()
+{
+	static std::shared_ptr<EntityFactory> instance = nullptr;
+
+	if (!instance)
+	{
+		if (!instance) {
+			instance.reset(new EntityFactory());
+		}
+	}
+	return instance;
 }
 
 std::shared_ptr<Entity> EntityFactory::create(std::string entity)

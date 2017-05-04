@@ -19,7 +19,7 @@
 #include "Model.h"
 
 
-static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityFactory>();
+static std::shared_ptr<EntityFactory> m_EntityFactory = EntityFactory::getInstance();
 
 LuaEntity::LuaEntity()
 {
@@ -121,21 +121,31 @@ void LuaEntity::setPhysical(sol::table t)
 void LuaEntity::setAABB(sol::table t)
 {
 	if (!m_entity->has<AABB>()) {
-		m_entity->attach<AABB>();	//Attach component
-	}
-	auto aabb = m_entity->get<AABB>();	//Get Component
-												//Read variables from lua table
-	for (auto it = t.begin(); it != t.end(); ++it) {
-		auto key = (*it).first;	//Get element key
-		std::string s = key.as<std::string>();		//Get element value
-		if (key.get_type() == sol::type::string) {
-			auto value = (*it).second;
-			//Set Component variables
-			if (value.get_type() == sol::type::table) {
-				if (s == "Dimensions") {
-					aabb->m_vDimensions = LuaHelper::readVec3((*it).second);
+		glm::vec3 vPos;
+		glm::vec3 vDimenstions;
+		glm::vec3 vScale = glm::vec3(1.0f);
+		glm::vec3 vCenter = glm::vec3(0.0f);
+
+		//Read variables from lua table
+		for (auto it = t.begin(); it != t.end(); ++it) {
+			auto key = (*it).first;	//Get element key
+			std::string s = key.as<std::string>();		//Get element value
+			if (key.get_type() == sol::type::string) {
+				auto value = (*it).second;
+				//Set Component variables
+				if (value.get_type() == sol::type::table) {
+
 				}
 			}
+		}
+
+		//Attach component
+		if (!m_entity->has<AABB>()) {
+			m_EntityFactory->attachAABB(m_entity, vPos, vDimenstions, vScale);
+		}
+		else {
+			//Set Component variables
+			auto aabb = m_entity->get<AABB>();	//Get Component
 		}
 	}
 }
@@ -211,7 +221,7 @@ void LuaEntity::setOBB(sol::table t)
 
 void LuaEntity::setComponents(sol::table t)
 {
-	if (!m_entity) {
+	if (true) {
 		//Create and add entity into the scene
 		m_entity = std::make_shared<Entity>();	//Pointer to handled entity
 		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
@@ -241,18 +251,16 @@ void LuaEntity::setComponents(sol::table t)
 	}
 }
 
+
+void LuaEntity::handleEntity(const std::string & name)
+{
+	m_entity = SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
+}
+
 bool LuaEntity::hasComponent(const std::string & sComponent)
 {
 	if (sComponent == "Transformable") return m_entity->has<Component::Transformable>();
 	else if (sComponent == "Model") return m_entity->has<Component::Model>();;
-}
-
-void LuaEntity::handleEntity(const std::string & name)
-{
-	if (!m_entity) {
-		m_entity =
-		SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
-	}
 }
 
 unsigned int LuaEntity::getID()

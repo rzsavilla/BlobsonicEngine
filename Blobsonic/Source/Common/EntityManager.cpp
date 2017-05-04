@@ -16,7 +16,6 @@ void EntityManager::destroy(std::shared_ptr<Entity> entity)
 		//Find entity to destroy
 		if ((*it)->getUID() == entity->getUID()) {
 			(*it)->destroy();		//Call destroy to set entity as destroyed
-			m_entities.erase(it);	//Remove entity from manager
 			return;
 		}
 	}
@@ -33,9 +32,15 @@ void EntityManager::destroyAll()
 
 void EntityManager::updateEntityManager()
 {
-	for (int i = 0; i < m_entities.size(); i++) {
-		if (m_entities.at(i)->isDestroyed()) {
-			m_entities.erase(m_entities.begin() + i);	//Remove Destroyed entity
+	//Remove destroyed entities
+	if (!m_entities.empty()) {
+		for (int i = 0; i < m_entities.size();) {
+			if (m_entities.at(i)->isDestroyed()) {
+				m_entities.erase(m_entities.begin() + i);
+			}
+			else {
+				i++;
+			}
 		}
 	}
 }

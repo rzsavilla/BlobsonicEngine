@@ -38,7 +38,7 @@ private:
 	std::string m_sMaterialDir;		//!< File location for materials
 
 	std::shared_ptr<ResourceManager> m_res;		//!< Pointer to Resource manager where loaded resources will be stored
-	EntityFactory m_factory;					//!< Create preset entities
+	std::shared_ptr<EntityFactory> m_factory;	//!< Create preset entities
 
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
 				//!< Parse file to load sprites

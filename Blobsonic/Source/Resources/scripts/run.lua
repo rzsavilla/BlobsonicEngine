@@ -28,9 +28,11 @@ if isMouseDown("Right") == true then
 	boxes[#boxes + 1] = bb
 end
 
-if (player:tGetPosY() < 100) then
+if (player:tGetPosY() < -1000) then
 	player:tSetPosition(0,5000,0)
 end
+
+player:tSetPosition(0,5000,0)
 
 --Loop Through array entities
 for i, entity in ipairs(boxes) do

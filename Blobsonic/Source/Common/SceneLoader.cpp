@@ -14,6 +14,7 @@
 
 #include "Sound.h"
 #include "SpriteRender.h"
+#include "EntityFactory.h"
 
 //Audio engine
 #include <irrKlang\irrKlang.h>
@@ -167,7 +168,7 @@ std::shared_ptr<Entity> SceneLoader::loadEntity(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
 	if (m_bDebug) std::cout << "\nLoading Model \n  ";
-	std::shared_ptr<Entity> entity = m_factory.createActor();
+	std::shared_ptr<Entity> entity = m_factory->createActor();
 
 	//model
 	auto model = entity->get<Component::Model>();
@@ -226,7 +227,7 @@ std::shared_ptr<Entity> SceneLoader::loadEntity(tinyxml2::XMLElement * e)
 								if (m_bDebug) std::cout << "Dimensions Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 							}
 
-							m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+							m_factory->attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
 						}
 						if (sID == "Sphere")
 						{
@@ -324,11 +325,11 @@ std::shared_ptr<Entity> SceneLoader::loadEntity(tinyxml2::XMLElement * e)
 	////attach components
 	//for (int i = 0; i < components.size(); i++)
 	//{
-	//	if (components[i] == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
-	//	else if (components[i] == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-	//	else if (components[i] == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
-	//	else if (components[i] == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-	//	else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass, restitution);
+	//	if (components[i] == "AABB")m_factory->attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
+	//	else if (components[i] == "OBB")m_factory->attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	//	else if (components[i] == "Sphere")m_factory->attachSphere(entity, transform->m_vPosition);
+	//	else if (components[i] == "Capsule")m_factory->attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
+	//	else if (components[i] == "Physical")m_factory->attachPhysical(entity, mass, restitution);
 	}
 	return entity;
 }
@@ -338,7 +339,7 @@ std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
 	if (m_bDebug) std::cout << "\nLoading Sprite \n  ";
-	std::shared_ptr<Entity> entity = m_factory.createSprite();
+	std::shared_ptr<Entity> entity = m_factory->createSprite();
 	auto sprite = entity->get<Component::SpriteRenderer>();
 	auto transform = entity->get<Component::Transformable>();
 
@@ -398,7 +399,7 @@ std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
 	if (m_bDebug) std::cout << "\nLoading Button \n  ";
-	std::shared_ptr<Entity> entity = m_factory.createSprite();
+	std::shared_ptr<Entity> entity = m_factory->createSprite();
 	entity->attach<Component::Button>();
 	auto sprite = entity->get<Component::SpriteRenderer>();
 	auto transform = entity->get<Component::Transformable>();
@@ -459,7 +460,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
 	if (m_bDebug) std::cout << "\nLoading Model \n  ";
-	std::shared_ptr<Entity> entity = m_factory.createActor();
+	std::shared_ptr<Entity> entity = m_factory->createActor();
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
 	glm::vec3 Dimensions;
@@ -700,7 +701,7 @@ std::shared_ptr<Entity> SceneLoader::loadCamera(tinyxml2::XMLElement * e)
 
 	if (m_bDebug) std::cout << "\nLoading Camera \n  ";
 
-	std::shared_ptr<Entity> entity = m_factory.createCamera(glm::vec3(0.0f));
+	std::shared_ptr<Entity> entity = m_factory->createCamera(glm::vec3(0.0f));
 
 	auto camera = entity->get<Component::Camera>();
 
@@ -770,7 +771,7 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 
 	if (m_bDebug) std::cout << "\nLoading Audio \n  ";
 
-	std::shared_ptr<Entity> entity = m_factory.createSound();
+	std::shared_ptr<Entity> entity = m_factory->createSound();
 	auto sound = entity->get<Component::Sound>();
 
 	std::string s;
@@ -1033,6 +1034,7 @@ glm::vec3 SceneLoader::parseVec3(tinyxml2::XMLElement * e)
 
 SceneLoader::SceneLoader()
 {
+	m_factory = EntityFactory::getInstance();
 	m_res = ResourceManager::getInstance();		//Pointer to Resource manager
 	m_LoadingState = Idle;
 	m_node = NULL;

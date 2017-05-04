@@ -195,7 +195,7 @@ void System::Scripting::LuaScripting::update(float dt)
 			registerFunctions(m_RunState);
 
 			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
-			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+			//LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
 			m_bReloadScripts = false;
 		}
 		else {

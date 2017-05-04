@@ -47,6 +47,8 @@ public:
 
 	void changeScene(std::string filename, bool reloadResources = false /* default false Force reload all resources */);
 
+	void update();	//!< Update scene manager
+
 	std::shared_ptr<Scene> getActiveScene();						//!< Returns active scene
 	std::string getActiveSceneName();		//!< Return file name of active scene
 

@@ -8,6 +8,12 @@
 namespace System {
 	class Physics : public System {
 	private:
+		/*!
+		*	@brief Function Adds new entities to the vector of entities.
+		*	Function compares UID of entity and stored entities if not found will add to the vector.
+		*/
+		void addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities);
+		void removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities);
 
 		std::vector<std::shared_ptr <Entity>> m_vAABBS; // !< AABB for the scene
 		std::vector<std::shared_ptr <Entity>> m_vOBBS; // !< OBB for the scene

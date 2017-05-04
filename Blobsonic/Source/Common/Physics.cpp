@@ -14,36 +14,47 @@ System::Physics::Physics()
 
 void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 {
-	m_vAABBS.clear();
-	m_vOBBS.clear();
-	m_vSpheres.clear();
-	m_vCapsules.clear();
-	m_vPhysicals.clear();
+	//m_vAABBS.clear();
+	//m_vOBBS.clear();
+	//m_vSpheres.clear();
+	//m_vCapsules.clear();
+	//m_vPhysicals.clear();
 
 	for (auto it = entities->begin(); it != entities->end(); ++it)
 	{
 		if ((*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
-			m_vCapsules.push_back((*it));
+			//m_vCapsules.push_back((*it));
+			addEntity((*it), &m_vCapsules);	// Will add entity if it has not yet been added
 		}
 		if ((*it)->has<AABB>() && (*it)->has<Component::Transformable>()) {
-			m_vAABBS.push_back((*it));
+			//m_vAABBS.push_back((*it));
+			addEntity((*it), &m_vAABBS);
 
 		}
 		if ((*it)->has<OBB>() && !(*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
-			m_vOBBS.push_back((*it));
+			//m_vOBBS.push_back((*it));
+			addEntity((*it), &m_vOBBS);
 
 		}
 		if ((*it)->has<Sphere>() && !(*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
-			m_vSpheres.push_back((*it));
+			//m_vSpheres.push_back((*it));
+			addEntity((*it), &m_vSpheres);
 
 		}
 		if ((*it)->has<Physical>() && (*it)->has<Component::Transformable>()) {
-			m_vPhysicals.push_back((*it));
+			//m_vPhysicals.push_back((*it));
+			addEntity((*it), &m_vPhysicals);
 		}
 	}
+}
 
-	
-
+void System::Physics::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (int i = 0; i < entities->size(); i++) {
+		if (entities->at(i)->isDestroyed()) {
+			entities->erase(entities->begin() + i);
+		}
+	}
 }
 
 void System::Physics::update(float dt)
@@ -75,15 +86,84 @@ void System::Physics::update(float dt)
 
 	broadPhase(dt);
 	narrowPhase(dt);
-
-	
-
-
 }
 
 void System::Physics::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
 
+}
+
+void System::Physics::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
+{
+	for (auto it = entities->begin(); it != entities->end(); ++it) {
+		if ((*it)->getUID() == entity->getUID()) {
+			return;	//Entity already stored
+		}
+	}
+	if (!entity->isDestroyed()) {
+		if (entity->has<Component::Transformable>()) {
+			auto t = entity->get<Component::Transformable>();
+
+			if (entity->has<OBB>()) {
+				auto b = entity->get<OBB>();
+				//Get component Properties
+				auto t = entity->get<Component::Transformable>();
+				auto o = entity->get<OBB>();
+
+				o->m_vDimensions = o->m_vDimensions * t->getScale();
+
+				o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
+				o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
+				o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
+
+				o->m_vCenter = glm::mat3(o->m_Rotation) * (t->getPosition() + (o->m_vDimensions * t->getScale()) / 2.0f);
+			}
+			if (entity->has<AABB>()) {
+				auto b = entity->get<AABB>();
+
+				//Set component Properties
+				auto t = entity->get<Component::Transformable>();
+				auto a = entity->get<AABB>();
+
+				//find the longest side of the whole object , so as the bounding box ebcases all orientation
+				float fSize = std::max(a->m_vDimensions.x * t->getScale().x, a->m_vDimensions.y * t->getScale().y);
+				fSize = std::max(fSize, a->m_vDimensions.z * t->getScale().z);
+
+				a->m_vCenter = t->m_vPosition + (a->m_vDimensions * a->m_vScale) / 2.0f;
+			}
+			if (entity->has<Sphere>()) {
+				auto b = entity->get<Sphere>();
+				//Set component Properties
+				auto t = entity->get<Component::Transformable>();
+				auto s = entity->get<Sphere>();
+
+				if (entity->has<OBB>())
+				{
+					auto O = entity->get<OBB>();
+					s->m_vCenter = O->m_vCenter;
+				}
+				else if (entity->has<AABB>())
+				{
+					auto AA = entity->get<AABB>();
+					s->m_vCenter = AA->m_vCenter;
+				}
+				else
+				{
+					s->m_vCenter = t->getPosition();
+				}
+
+				//find the largest scale of the sphere
+				float fSize = std::max(t->m_vScale.x, t->m_vScale.y);
+				fSize = std::max(fSize, t->m_vScale.z);
+				s->m_fRadius = fSize;
+			}
+			if (entity->has<Physical>()) {
+				auto p = entity->get<Physical>();
+				p->setfINVMass(1 / p->getMass());
+			}
+		}
+		entities->push_back(entity);	//Store entity
+	}
 }
 
 bool System::Physics::CheckAABBAABBCollision(std::shared_ptr<Entity> aabb1, std::shared_ptr<Entity> aabb2)
