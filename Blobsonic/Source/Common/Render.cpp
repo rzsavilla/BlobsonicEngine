@@ -9,6 +9,7 @@
 #include "PointLight.h"
 #include "SpriteRender.h"
 #include "Button.h"
+#include "Particle.h"
 //Messages
 #include "RenderMessages.h"
 #include "CameraMessages.h"
@@ -208,6 +209,98 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 	gl::DrawArrays(gl::TRIANGLES, 0, 6);
 }
 
+void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
+{
+	//Get pointer to model component
+	auto particle = entity->get<Component::Particle>();
+
+	std::shared_ptr<GLSLProgram> m_shader = particle->getShader();
+	std::shared_ptr<Texture> m_textures = particle->getTexture();
+	std::shared_ptr<Material> m_mat = particle->getMaterial();
+	std::shared_ptr<AssimpMesh> m_aMesh = particle->getMesh();
+
+	if (m_shader != NULL) {
+		m_shader->use();	//Set shader
+
+		passLightUniforms(m_shader);
+
+		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
+			Component::Transformable* transformable = entity->get<Component::Transformable>();
+
+			m_shader->setUniform("mModel", transformable->getTransform());
+		}
+		else {
+			//Pass default transform
+			if (m_shader != NULL) m_shader->setUniform("mModel", glm::mat4(1.0f));
+		}
+
+		//Pass Camera uniforms
+		if (m_ptrActiveCamera != NULL) {
+			m_shader->setUniform("mView", m_ptrActiveCamera->getView());				//View matrix
+			m_shader->setUniform("mProjection", m_ptrActiveCamera->getProjection());	//Projection matrix
+			m_shader->setUniform("viewPos", m_ptrActiveCamera->getPosition());		//Camera/Eye position
+		}
+	}
+	m_fDeltaTime = 0.001;
+
+	//Draw model Assimp meshes
+	if (m_aMesh != NULL) {
+
+			//std::shared_ptr<Texture> texture = NULL;
+			//std::shared_ptr<AssimpMesh> aMesh = particle->getMesh();	//Get pointer to amesh
+
+																		//Pass material uniforms to shader
+			if (m_shader != NULL) {
+				//Material reflectivity
+				m_shader->setUniform("Ka", m_mat->getAmbient());			//Ambient material reflection
+				m_shader->setUniform("Kd", m_mat->getDiffuse());			//Diffuse
+				m_shader->setUniform("Ks", m_mat->getSpecular());			//Specular
+				m_shader->setUniform("shininess", m_mat->getShininess());	//Shininess
+
+			}
+
+			gl::BindVertexArray(m_aMesh->getVAO());		//Bind VAO
+
+														//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
+														//	int index = 3;
+														//	gl::DrawElementsBaseVertex(gl::TRIANGLES,
+														//		aMesh->m_Entries[k].NumIndices,
+														//		gl::UNSIGNED_INT,
+														//		(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+														//		aMesh->m_Entries[k].BaseVertex);
+														//}
+														//for (int k = 0; k < 1; k++) {
+														//Has Texture
+			if ((!m_aMesh->meshes[0].getPosition().empty() && !m_textures == NULL)) {
+				gl::BindTexture(gl::TEXTURE_2D, m_textures->object());							//Bind Texture
+				gl::GenerateMipmap(gl::TEXTURE_2D);
+				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR_MIPMAP_LINEAR);
+				gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+
+				//gl::DrawElementsBaseVertex(gl::TRIANGLES,
+				//	aMesh->m_Entries[k].NumIndices,
+				//	gl::UNSIGNED_INT,
+				//	(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
+				//	aMesh->m_Entries[k].BaseVertex);
+				//
+
+				gl::DrawArrays(gl::TRIANGLES, 0, m_aMesh->meshes[0].getVertex().size());
+				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
+			}
+			//Has expanded normals
+			else if (!m_aMesh->meshes[0].getNormal().empty()) {
+				gl::DrawArrays(gl::TRIANGLES, 0, m_aMesh->meshes[0].getVertex().size());
+			}
+			//No Texture and No expanded normals
+			else {
+				gl::DrawElements(gl::TRIANGLES, m_aMesh->meshes[0].getIndices().size(), gl::UNSIGNED_INT, 0);
+			}
+			//}
+			gl::BindVertexArray(0);	//Unbind VAO
+		
+	}
+}
+
 void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 {
 	int iDirCount = 0;
@@ -319,6 +412,9 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Spotlight>()) {
 			addEntity((*it), &m_spotlights);				//Spotlight
 		}
+		if ((*it)->has<Component::Particle>()) {
+			addEntity((*it), &m_particleSystem);
+		}
 	}
 }
 
@@ -329,12 +425,17 @@ void System::Render::update(float dt)
 	for (auto it = m_modelEntities.begin(); it != m_modelEntities.end(); ++it) {
 		renderModel(*it);
 	}
+	for (auto it = m_particleSystem.begin(); it != m_particleSystem.end(); ++it) {
+		renderParticleSystem(*it);
+	}
+
 	//std::cout << "Render Model Count:" << m_modelEntities.size() << "\n";
 	//Remove Destroyed Entities
 	removeDestroyed(&m_modelEntities);
 	removeDestroyed(&m_directionalLights);
 	removeDestroyed(&m_pointLights);
 	removeDestroyed(&m_spotlights);
+	removeDestroyed(&m_particleSystem);
 }
 
 void System::Render::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)

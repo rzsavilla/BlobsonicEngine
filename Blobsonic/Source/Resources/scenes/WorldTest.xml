@@ -6,33 +6,6 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 
-	<Model> <ID>deer</ID>
-		<Mesh>deer_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>deer_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>500.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>100.0f</X>
-			<Y>100.0f</Y>
-			<Z>100.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-
 	<Model> <ID>skybox</ID>
 		<Mesh>skybox_mesh</Mesh>
 		<Material>default_material</Material>
@@ -217,11 +190,20 @@
 	
 	<ParticleSystem>
 		<ID>particle_system</ID>
+		<Mesh>deer_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>deer_texture</Texture>
 		<Position>
-			<X>0.0f</X>
+			<X>3.0f</X>
 			<Y>0.0f</Y>
-			<Z>0.0f</Z>
+			<Z>3.0f</Z>
 		</Position>
+		<Scale>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
+		</Scale>
 		<LookAt>
 			<X>1.0f</X>
 			<Y>0.0f</Y>
@@ -241,6 +223,7 @@
 		<Mass>1.0f</Mass>
 		<MinScale>1.0f</MinScale>
 		<MaxScale>1.0f</MaxScale>
+		<MaxNumParticles>1000</MaxNumParticles>
 	</ParticleSystem>
 	
 	<Camera> <ID>cam1</ID>

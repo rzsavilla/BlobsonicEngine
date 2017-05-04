@@ -80,8 +80,7 @@ std::shared_ptr<Entity> EntityFactory::createParticle()
 
 	//////Attach components
 	entity->attach<Component::Particle>();
-	//Set component Properties
-	auto particle = entity->get<Component::Particle>();
+	entity->attach<Component::Transformable>();
 
 	return entity;
 }

@@ -499,7 +499,6 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(modelChild, cData)) {
-		
 				model->m_aMeshes.push_back(m_res->getAssimpMesh(std::string(cData, strlen(cData))));
 			}
 		}
@@ -882,10 +881,10 @@ std::shared_ptr<Entity> SceneLoader::loadParticleSystem(tinyxml2::XMLElement * e
 
 	std::shared_ptr<Entity> entity = m_factory.createParticle();
 	auto particle = entity->get<Component::Particle>();
-
+	auto t = entity->get<Component::Transformable>();
 	std::string s;
 	char * c;
-	std::string sID;
+	std::string sID, sMeshName, sTexName, sMatName, sShader;
 	glm::vec3 v;
 
 	//Look at Model Element
@@ -898,8 +897,42 @@ std::shared_ptr<Entity> SceneLoader::loadParticleSystem(tinyxml2::XMLElement * e
 		}
 		else if (strcmp(childValue, "Position") == 0) {
 			v = parseVec3(child);
-			particle->setPosition(v);
+			t->setPosition(v);
 			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Offset") == 0) {
+			v = parseVec3(child);
+			particle->setPosition(v);
+			if (m_bDebug) std::cout << "Particle Offset Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Scale") == 0) {
+			v = parseVec3(child);
+			t->setScale(v);
+			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Mesh") == 0) {
+			if (readElementText(child, cData)) {
+				sMeshName = std::string(cData, strlen(cData));
+			}
+			particle->setMesh(m_res->getAssimpMesh(sMeshName));
+		}
+		else if (strcmp(childValue, "Texture") == 0) {
+			if (readElementText(child, cData)) {
+				sTexName = std::string(cData, strlen(cData));
+			}
+			particle->setTexture(m_res->getTexture(sTexName));
+		}
+		else if (strcmp(childValue, "Material") == 0) {
+			if (readElementText(child, cData)) {
+				sMatName = std::string(cData, strlen(cData));
+			}
+			particle->setMaterial(m_res->getMaterial(sMatName));
+		}
+		else if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(child, cData)) {
+				sShader = std::string(cData, strlen(cData));
+			}
+			particle->setShader(m_res->getShader(sShader));
 		}
 		else if (strcmp(childValue, "LookAt") == 0) {
 			 v = parseVec3(child);

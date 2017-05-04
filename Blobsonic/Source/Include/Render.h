@@ -15,6 +15,7 @@ namespace System {
 		std::vector<std::shared_ptr<Entity>> m_directionalLights;	//!< Store all directional lights
 		std::vector<std::shared_ptr<Entity>> m_pointLights;			//!< Store all point lights
 		std::vector<std::shared_ptr<Entity>> m_spotlights;			//!< Store all spotlights
+		std::vector<std::shared_ptr<Entity>> m_particleSystem;		//!<Store all particle systems
 	private:
 		/*!
 		*	@brief Function Adds new entities to the vector of entities.
@@ -25,6 +26,7 @@ namespace System {
 		void renderModel(std::shared_ptr<Entity> entity);
 		void renderText(std::shared_ptr<Entity> entity);
 		void renderSprite(std::shared_ptr<Entity> entity);
+		void renderParticleSystem(std::shared_ptr<Entity> entity);
     
 		void passLightUniforms(std::shared_ptr<GLSLProgram> shader);
 		//! Removed destroyed entities from vector
