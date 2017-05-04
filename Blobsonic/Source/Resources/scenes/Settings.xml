@@ -41,7 +41,7 @@
 		<Texture>settings_XL_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>150.0f</Y>
+			<Y>100.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -71,7 +71,7 @@
 		<Texture>menu_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>300</Y>
+			<Y>250</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -101,7 +101,7 @@
 		<Texture>1024_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>450.0f</Y>
+			<Y>400.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -131,7 +131,7 @@
 		<Texture>1280_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>600.0f</Y>
+			<Y>550.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>

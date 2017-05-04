@@ -111,8 +111,6 @@ void System::GUI::update(float dt)
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
-						//SetViewportExtEx()
-						//SetViewportOrgEx()
 					}
 					if (bID == 2) /// Settings button
 					{
@@ -141,10 +139,10 @@ void System::GUI::update(float dt)
 						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
 					}
 
-					if (bID == 6) /// Option - set screen size to 1280, 800.
+					if (bID == 6) /// Option - set screen size to 1600, 1024.
 					{
-						glfwSetWindowSize(glfwGetCurrentContext(), 1280, 800);
-						gl::Viewport(0, 0, 1280, 800);
+						glfwSetWindowSize(glfwGetCurrentContext(), 1600, 900);
+						gl::Viewport(0, 0, 1600, 900);
 						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
 						
 					}

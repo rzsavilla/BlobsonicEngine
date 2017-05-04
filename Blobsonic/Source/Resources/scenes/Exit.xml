@@ -40,8 +40,8 @@
 		<Shader>button_shader</Shader>
 		<Texture>quit_texture</Texture>
 		<Position>
-			<X>262.0f</X>
-			<Y>150.0f</Y>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -70,7 +70,7 @@
 		<Shader>button_shader</Shader>
 		<Texture>menu_texture</Texture>
 		<Position>
-			<X>262.0f</X>
+			<X>100.0f</X>
 			<Y>300.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
@@ -100,8 +100,8 @@
 		<Shader>button_shader</Shader>
 		<Texture>exit_texture</Texture>
 		<Position>
-			<X>562.0f</X>
-			<Y>300.0f</Y>
+			<X>100.0f</X>
+			<Y>500.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
