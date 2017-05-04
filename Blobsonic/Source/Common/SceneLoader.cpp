@@ -10,6 +10,7 @@
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "Spotlight.h"
+#include "Button.h"
 
 #include "Sound.h"
 #include "SpriteRender.h"
@@ -374,31 +375,80 @@ std::shared_ptr<Entity> SceneLoader::loadSprite(tinyxml2::XMLElement * e)
 			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
-			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			transform->setScale(v);
 			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 		else if (strcmp(childValue, "Colour") == 0) {
-			//Set model scale
 			glm::vec3 v = parseVec3(modelChild);
 			sprite->setColor(v);
 			if (m_bDebug) std::cout << "Colour Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
-
-
-		else if (strcmp(childValue, "Size") == 0) {
-			//Set model size
+		else if (strcmp(childValue, "ID") == 0) {
 			glm::vec3 v = parseVec3(modelChild);
-			sprite->setSize(vec2(v));
-			if (m_bDebug) std::cout << "Size Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+			sprite->setID(v);
+			if (m_bDebug) std::cout << "ID : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+	}
+	return entity;
+}
+
+std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
+{
+	using namespace tinyxml2;
+	char* cData = "";			//Temporary storage for element data
+	if (m_bDebug) std::cout << "\nLoading Button \n  ";
+	std::shared_ptr<Entity> entity = m_factory.createSprite();
+	entity->attach<Component::Button>();
+	auto sprite = entity->get<Component::SpriteRenderer>();
+	auto transform = entity->get<Component::Transformable>();
+	auto button = entity->get<Component::Button>();
+
+	std::string sID;
+	//Look at Model Element
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
+		const char* childValue = modelChild->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sID = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		else if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sprite->setShader((m_res->getShader(std::string(cData, strlen(cData)))));
+			}
 		}
 
-		else if (strcmp(childValue, "Origin") == 0) {
-			//Set model origin
+		else if (strcmp(childValue, "Texture") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sprite->setTexture(m_res->getTexture(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(modelChild);
-			transform->m_vOrigin = v;
-			if (m_bDebug) std::cout << "Origin Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+			transform->setPosition(v);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Rotation") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setRotation(v);
+			if (m_bDebug) std::cout << "Rotation Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Scale") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setScale(v);
+			if (m_bDebug) std::cout << "Scale Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Colour") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			sprite->setColor(v);
+			if (m_bDebug) std::cout << "Colour Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "sID") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			button->setButtonID(v.x);
+			if (m_bDebug) std::cout << "ID : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 	}
 	return entity;
@@ -864,6 +914,9 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			}
 			else if (strcmp(element->Value(), "Sprite") == 0) {
 				entities->addEntity(loadSprite(element));
+			}
+			else if (strcmp(element->Value(), "Button") == 0) {
+				entities->addEntity(loadButton(element));
 			}
 		}
 	}

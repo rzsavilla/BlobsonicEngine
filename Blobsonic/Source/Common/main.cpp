@@ -10,6 +10,7 @@
 #include "Gameplay.h"
 #include "Audio.h"
 #include "LuaScripting.h"
+#include "GUI.h"
 
 int main() {
 	//Attach systems to the engine
@@ -24,6 +25,7 @@ int main() {
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();
 	engine.attachSystem<System::Scripting::LuaScripting>();
+	engine.attachSystem<System::GUI>();
 	engine.run();
 	return 0;
 }
