@@ -13,6 +13,7 @@
 #include "Button.h"
 
 #include "Sound.h"
+#include "Particle.h"
 #include "SpriteRender.h"
 
 //Audio engine
@@ -870,6 +871,83 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 	return entity;
 }
 
+
+std::shared_ptr<Entity> SceneLoader::loadParticleSystem(tinyxml2::XMLElement * e)
+{
+	using namespace tinyxml2;
+
+	char* cData = "";			//Temporary storage for element data
+
+	if (m_bDebug) std::cout << "\nLoading Particle System \n  ";
+
+	std::shared_ptr<Entity> entity = m_factory.createParticle();
+	auto particle = entity->get<Component::Particle>();
+
+	std::string s;
+	char * c;
+	std::string sID;
+	glm::vec3 v;
+
+	//Look at Model Element
+	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
+		const char* childValue = child->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(child, cData)) {
+				sID = std::string(cData, strlen(cData));
+			}
+		}
+		else if (strcmp(childValue, "Position") == 0) {
+			v = parseVec3(child);
+			particle->setPosition(v);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "LookAt") == 0) {
+			 v = parseVec3(child);
+			particle->setLookAt(v);
+			if (m_bDebug) std::cout << "LookAt Vector Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Velocity") == 0) {
+			v = parseVec3(child);
+			particle->setVelocity(v);
+			if (m_bDebug) std::cout << "Velocity Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Acceleration") == 0) {
+			v = parseVec3(child);
+			particle->setAcceleration(v);
+			if (m_bDebug) std::cout << "Acceleration Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "hasCollisions") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					particle->setHasCollisions(false);
+				else if (strcmp(c, "true") == 0)
+					particle->setHasCollisions(true);
+			}
+			if (m_bDebug) std::cout << "hasCollisions Set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "Mass") == 0) {
+			if (readElementText(child, c)) {
+				particle->setMass(atof(c));
+			}
+			if (m_bDebug) std::cout << "Mass Set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "MinScale") == 0) {
+			if (readElementText(child, c)) {
+				particle->setMinScale(atof(c));
+			}
+			if (m_bDebug) std::cout << "Minimum Scale Set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "MaxScale") == 0) {
+			if (readElementText(child, c)) {
+				particle->setMaxScale(atof(c));
+			}
+			if (m_bDebug) std::cout << "Maximum Scale Set: " << c << "\n  ";
+		}
+	}
+	return entity;
+}
+
 void SceneLoader::readScene(tinyxml2::XMLNode * node)
 {
 	bool bTypeFound = false;
@@ -911,6 +989,9 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			}
 			else if (strcmp(element->Value(), "Audio") == 0) {
 				entities->addEntity(loadAudio(element));
+			}
+			else if (strcmp(element->Value(), "ParticleSystem") == 0) {
+				entities->addEntity(loadParticleSystem(element));
 			}
 			else if (strcmp(element->Value(), "Sprite") == 0) {
 				entities->addEntity(loadSprite(element));

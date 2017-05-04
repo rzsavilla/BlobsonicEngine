@@ -11,6 +11,7 @@
 #include "Audio.h"
 #include "LuaScripting.h"
 #include "GUI.h"
+#include "ParticleSystem.h"
 
 int main() {
 	//Attach systems to the engine
@@ -21,6 +22,7 @@ int main() {
 	//engine.attachSystem<System::CameraSystem>();		//Control active camera
 	engine.attachSystem<System::Physics>();				//Do physics check on scene
 	engine.attachSystem<System::Audio>();				//Start audio objects
+	engine.attachSystem<System::ParticleSystem>();				//Start audio objects
 	engine.attachSystem<System::PlayerController>();	//Control player character
 	engine.attachSystem<System::CameraController>();
 	engine.attachSystem<System::Gameplay>();

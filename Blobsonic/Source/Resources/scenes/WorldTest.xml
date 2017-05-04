@@ -215,6 +215,34 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	
+	<ParticleSystem>
+		<ID>particle_system</ID>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<LookAt>
+			<X>1.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</LookAt>
+		<Velocity>
+			<X>1.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Velocity>
+		<Acceleration>
+			<X>1.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Acceleration>
+		<hasCollisions>true</hasCollisions>
+		<Mass>1.0f</Mass>
+		<MinScale>1.0f</MinScale>
+		<MaxScale>1.0f</MaxScale>
+	</ParticleSystem>
+	
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>

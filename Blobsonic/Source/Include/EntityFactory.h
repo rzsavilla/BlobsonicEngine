@@ -16,16 +16,16 @@ public:
 	std::shared_ptr<Entity> createCamera(glm::vec3 position);
 
 	std::shared_ptr<Entity> createSound();
-  
-	std::shared_ptr<Entity> createSprite();
 
-	std::shared_ptr<Entity> createButton();
+	std::shared_ptr<Entity> createParticle();
+
+	std::shared_ptr<Entity> createSprite();
 
 	std::shared_ptr<Entity> createActor();
 
 	//Phsyics
 	void attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale);//Use for "early out" collision testing
-	
+
 	void attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale, glm::vec3 Rot);// Use for precicse box collision testing
 
 	void attachSphere(std::shared_ptr<Entity> entity, glm::vec3 position); // becarefull when resizing entity
@@ -33,8 +33,6 @@ public:
 	void attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 dimensions, glm::vec3 scale, glm::vec3 Rot);
 
 	void attachSprite(std::shared_ptr<Entity> entity);
-
-	void attachButton(std::shared_ptr<Entity> entity);
 
 	void attachPhysical(std::shared_ptr<Entity> entity, float mass, float restitution);
 };

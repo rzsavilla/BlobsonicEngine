@@ -82,6 +82,8 @@
     <ClInclude Include="Source\Include\MyRobot.h" />
     <ClInclude Include="Source\Include\MyTimer.h" />
     <ClInclude Include="Source\Include\ObjectComponent.h" />
+    <ClInclude Include="Source\Include\Particle.h" />
+    <ClInclude Include="Source\Include\ParticleSystem.h" />
     <ClInclude Include="Source\Include\Physical.h" />
     <ClInclude Include="Source\Include\Physics.h" />
     <ClInclude Include="Source\Include\Pickup.h" />
@@ -161,6 +163,8 @@
     <ClCompile Include="Source\Common\MyRobot.cpp" />
     <ClCompile Include="Source\Common\MyTimer.cpp" />
     <ClCompile Include="Source\Common\ObjectComponent.cpp" />
+    <ClCompile Include="Source\Common\Particle.cpp" />
+    <ClCompile Include="Source\Common\ParticleSystem.cpp" />
     <ClCompile Include="Source\Common\Physical.cpp" />
     <ClCompile Include="Source\Common\Physics.cpp" />
     <ClCompile Include="Source\Common\Pickup.cpp" />

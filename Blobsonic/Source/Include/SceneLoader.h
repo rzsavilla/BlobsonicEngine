@@ -47,6 +47,7 @@ private:
 	void loadShader(tinyxml2::XMLElement* e);			//!< Parse file to load shader
 	
 	std::shared_ptr<Entity> loadAudio(tinyxml2::XMLElement* e); //!< Parse file to load audio
+	std::shared_ptr<Entity> loadParticleSystem(tinyxml2::XMLElement* e); //!< Parse file to create particle system
 	std::shared_ptr<Entity> loadEntity(tinyxml2::XMLElement* e);			//!< Parse and create model
 	std::shared_ptr<Entity> loadModel(tinyxml2::XMLElement* e);			//!< Parse and create model
  
