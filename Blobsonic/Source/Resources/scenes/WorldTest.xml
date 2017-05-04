@@ -4,9 +4,7 @@
 	<Location>Source\Resources\Scenes\Resources.xml</Location> 
 </ResourceFile>
 
-<Scene> 
-	<Type>Game</Type> 
-	<ID>game_scene</ID>
+<Scene> <Type>Game</Type> <ID>game_scene</ID>
 
 	<Model> <ID>deer</ID>
 		<Mesh>deer_mesh</Mesh>
@@ -24,9 +22,9 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -35,8 +33,7 @@
 		</Origin>
 	</Model>
 	 
-	<Model> 
-	<ID>floor</ID>
+	<Model> <ID>floor</ID>
 		<Mesh>plane_mesh</Mesh>
 		<Material>default_material</Material>
 		<Shader>phong_shader</Shader>
@@ -52,9 +49,9 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>50.0f</X>
+			<X>5000.0f</X>
 			<Y>1.0f</Y>
-			<Z>50.0f</Z>
+			<Z>5000.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -79,9 +76,9 @@
 			<Z>180.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -96,8 +93,8 @@
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>-20.0f</X>
-			<Y>2.0f</Y>
+			<X>-2000.0f</X>
+			<Y>200.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -106,9 +103,9 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -133,9 +130,9 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -175,8 +172,8 @@
 		<Shader>phong_shader</Shader>
 		<Texture>red_texture</Texture>
 		<Position>
-			<X>200.0f</X>
-			<Y>200.0f</Y>
+			<X>20.0f</X>
+			<Y>2.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Size>
@@ -190,9 +187,9 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -340,36 +337,34 @@
 		<isPlaying>false</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
-		<sound3D>true</sound3D>
-		<Position>
-			<X>-1.0f</X>
-			<Y>1.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<MinDistance>30.0f</MinDistance>
-		<Volume>1.0f</Volume>
-
 	</Audio>
 
+	<Audio>
+		<ID>bell</ID>
+		<File>Source\Resources\audio\bell.wav</File>
+		<isInitialized>true</isInitialized>
+		<isPlaying>false</isPlaying>
+		<isLooping>false</isLooping>
+		<startsPaused>false</startsPaused>
+	</Audio>
 	
-	<Camera> 
-	<ID>cam1</ID>
+	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
-			<Y>30.0f</Y>
-			<Z>70.0f</Z>
+			<Y>3000.0f</Y>
+			<Z>7000.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>
 			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
-		<FOV>45.0f</FOV>
+		<FOV>90.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
-		<FarPlane>1000.0f</FarPlane>
+		<FarPlane>100000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>0.8f</MoveSpeed>
+		<MoveSpeed>100.0f</MoveSpeed>
 	</Camera>
 </Scene>
 

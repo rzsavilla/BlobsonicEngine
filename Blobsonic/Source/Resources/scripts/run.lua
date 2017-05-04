@@ -12,5 +12,4 @@ elseif isKeyDown("o") == true then
 	forceReloadScene()
 end
 
-player:tSetScale(2,2,2)
-player:pSetVelocity(0,0,0)
+player:tSetScale(100,100,100)
