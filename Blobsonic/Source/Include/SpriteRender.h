@@ -22,6 +22,7 @@ class SpriteRenderer : public Component
 		glm::vec2 size;
 		GLfloat rotate;
 		glm::vec3 color;
+		glm::vec3 sID;
 
 	public:
 		SpriteRenderer();
@@ -36,6 +37,7 @@ class SpriteRenderer : public Component
 		glm::vec2 getSize();
 		GLfloat getRotate();
 		glm::vec3 getColor();
+		glm::vec3 getID();
 
 		void setVAO(GLint VAO);
 		void setProjection(glm::mat4 proj);
@@ -45,6 +47,7 @@ class SpriteRenderer : public Component
 		void setSize(glm::vec2 siz);
 		void setRotate(GLfloat rot);
 		void setColor(glm::vec3 colour);
+		void setID(glm::vec3 id);
 
 		//void DrawSprite(GLSLProgram &shader, Texture &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color);
 	};

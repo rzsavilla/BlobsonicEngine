@@ -11,7 +11,6 @@
 
 void Engine::Engine::initScene(bool forceReloadRes)
 {
-	m_bMainMenu = true;
 	//Now Managed by lua script look at the init.lua file in scripts
 }
 

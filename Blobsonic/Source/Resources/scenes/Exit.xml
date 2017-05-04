@@ -1,37 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ResourceFile> 
-	<Location>Source\Resources\Scenes\Resources.xml</Location> 
+	<Location>Source\Resources\Scenes\MenuResources.xml</Location> 
 </ResourceFile>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
-
-	<Model> <ID>deer</ID>
-		<Mesh>deer_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>deer_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>500.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>100.0f</X>
-			<Y>100.0f</Y>
-			<Z>100.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
 
 	<Model> <ID>skybox</ID>
 		<Mesh>skybox_mesh</Mesh>
@@ -49,23 +22,26 @@
 			<Z>180.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>100.0f</X>
-			<Y>100.0f</Y>
-			<Z>100.0f</Z>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</Origin>
+		<ID>
+			<X>1.0f</X>
+		</ID>
 	</Model>
 	
-	<Button> <ID>MainMenuButton</ID>
+	<Sprite> <ID>quit</ID>
 		<Shader>button_shader</Shader>
-		<Texture>menu_texture</Texture>
+		<Texture>quit_texture</Texture>
 		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
+			<X>262.0f</X>
+			<Y>150.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -74,46 +50,81 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>0.0f</Z>
-		</Colour>
-		<sID>
-			<X>4.0f</X> 
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
-		</sID>
-	</Button>
-	
-	<Sprite> <ID>sprite2</ID>
-		<Shader>button_shader</Shader>
-		<Texture>sprite_texture</Texture>
-		<Position>
-			<X>804.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>200.0f</X> 	
+			<X>500.0f</X> 	
 			<Y>100.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
 			<X>0.5f</X> 	
 			<Y>0.5f</Y>
-			<Z>1.0f</Z>
+			<Z>0.5f</Z>
 		</Colour>
+		<sID>
+			<X>4.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
 	</Sprite>
+	
+	<Button> <ID>menu_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>menu_texture</Texture>
+		<Position>
+			<X>262.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.8f</X> 	
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
+	</Button>
+	
+	<Button> <ID>exit_application_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>exit_texture</Texture>
+		<Position>
+			<X>562.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.2f</X> 	
+			<Y>0.2f</Y>
+			<Z>0.2f</Z>
+		</Colour>
+		<sID>
+			<X>7.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
 
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
@@ -197,29 +208,21 @@
 		<Quadratic>0.0032f</Quadratic>
 	</Light>
 	
+	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
-		<isInitialized>true</isInitialized>
-		<isPlaying>false</isPlaying>
+		<isPlaying>true</isPlaying>
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-
-	<Audio>
-		<ID>bell</ID>
-		<File>Source\Resources\audio\bell.wav</File>
-		<isInitialized>true</isInitialized>
-		<isPlaying>false</isPlaying>
-		<isLooping>false</isLooping>
-		<startsPaused>false</startsPaused>
-	</Audio>
+	-->
 	
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
-			<Y>3000.0f</Y>
-			<Z>7000.0f</Z>
+			<Y>30.0f</Y>
+			<Z>70.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>
@@ -228,10 +231,10 @@
 		</Orientation>
 		<FOV>90.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
-		<FarPlane>100000.0f</FarPlane>
+		<FarPlane>1000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>100.0f</MoveSpeed>
+		<RotSpeed>0.0f</RotSpeed>
+		<MoveSpeed>0.0f</MoveSpeed>
 	</Camera>
 </Scene>
 

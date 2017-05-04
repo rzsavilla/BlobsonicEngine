@@ -41,6 +41,7 @@ namespace System {
 
 			//-----------------Misc------------------------------
 			void printString(const std::string& s);	//!< Function simply prints string into console
+			int print(lua_State* L);				//! Replace lua print function
 		public:
 			LuaScripting();	//!< Default constructor
 			//Scene management

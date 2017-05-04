@@ -78,6 +78,11 @@ glm::vec3 Component::SpriteRenderer::getColor()
 	return color;
 }
 
+glm::vec3 Component::SpriteRenderer::getID()
+{
+	return sID;
+}
+
 void Component::SpriteRenderer::setVAO(GLint VAO)
 {
 	quadVAO = VAO;
@@ -117,6 +122,11 @@ void Component::SpriteRenderer::setColor(glm::vec3 colour)
 {
 	color = colour;
 }
+void Component::SpriteRenderer::setID(glm::vec3 id)
+{
+	sID = id;
+}
+
 /*
 void Component::SpriteRenderer::DrawSprite(GLSLProgram &shader, Texture &texture, glm::vec2 position,
 	glm::vec2 size, GLfloat rotate, glm::vec3 color)

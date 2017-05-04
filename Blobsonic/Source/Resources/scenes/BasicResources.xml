@@ -17,6 +17,10 @@
 		<ID>white_texture</ID>
 		<File>Source\Resources\textures\white.png</File>
 	</Texture>
+	<Texture> 
+		<ID>loading_texture</ID>
+		<File>Source\Resources\textures\loading.png</File>
+	</Texture>
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>
