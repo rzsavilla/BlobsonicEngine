@@ -15,6 +15,7 @@ namespace System
 		*/
 		void addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities);
 		GLFWwindow *m_window;
+		int width, height;
 	public:
 		GUI();
 		void clickAreaTest(std::shared_ptr<Entity> entity);
