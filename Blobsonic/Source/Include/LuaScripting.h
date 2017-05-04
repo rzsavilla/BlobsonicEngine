@@ -14,42 +14,47 @@
 
 #include "SceneManager.h"
 
-static void sayHello() {
-	std::cout << "\n\n HELLO WORLD \n\n";
-}
-
 namespace System {
 	namespace Scripting {
-		static bool isKeyDown(const std::string& key);		//!< Check if a key is pressed
-		static bool isMouseDown(const std::string& button);	//!< Check if a mouse button is down
-		static void changeScene(std::string sceneFile);			//!< Change to scene
-		static void setLoadingScene(std::string sceneFile);		//!< Set loading scene
-		static void reloadScene();		//!< Set loading scene
-		static void forceReloadScene();		//!< Set loading scene
-
 		class LuaScripting : public System {
 		private:
-			std::shared_ptr<SceneManager> m_SceneManager;
-
-			const bool m_bDebug = true;	//For couts
-			const std::string m_scriptsDir = "Source/Resources/scripts/";
-		private: //Temp
-			bool m_bLoaded = false;
-			void attachFunctions(lua_State * L);
-			void attachClasses(lua_State* L);
+			const bool m_bDebug = true;	//!< For couts to the console 
+			std::shared_ptr<SceneManager> m_SceneManager;	//!< Pointer so scene manager
+			const std::string m_scriptsDir = "Source/Resources/scripts/";	//!< Location of script files
 		private:
-			void readRootTable(lua_State* L);	//!< Read the root table
-			std::shared_ptr<Entity> readEntity(sol::table t);
-
 			lua_State* m_RunState;	//!< Script for lua game loop
-		public:
-			LuaScripting();
+		private:
+			//-----------------Register----------------------------
+			void registerFunctions(lua_State * L);	//!< register functions to lua state
+			void registerClasses(lua_State* L);		//!< Register classes and member functions/variables to lua state
+			
+			//-----------------Scene Management--------------------
+			void setLoadingScene(std::string sceneFile);	//!< Set scene shown when loading next scene
+			void changeScene(std::string sceneFile);		//!< Load and change to a specified scene
+			void reloadScene();				//!< Set loading scene
+			void forceReloadScene();		//!< Reload scene including all resources
 
-			void process(std::vector<std::shared_ptr<Entity>>* entity);
+			//-----------------Inputs------------------------------
+			bool isKeyDown(const std::string& key);		//!< Check if a key is pressed
+			bool isMouseDown(const std::string& button);	//!< Check if a mouse button is down
+			void hideCursor(bool hide);
+
+			//-----------------Misc------------------------------
+			void printString(const std::string& s);	//!< Function simply prints string into console
+			int print(lua_State* L);				//! Replace lua print function
+		public:
+			LuaScripting();	//!< Default constructor
+			//Scene management
+			static bool m_bReloadScene;			//!< Flag Reload scene xml and all objects
+			static bool m_bReloadScripts;		//!< Flag Reload scripts
+		
+			//! Process all entities
+			void process(std::vector<std::shared_ptr<Entity>>* entity) override;
+			//! Update system
 			void update(float dt) override;
 
-			//---Message Receiver--//
-			void processMessages(const std::vector<std::shared_ptr<Message>>* msgs);
+			//! Process messages//
+			void processMessages(const std::vector<std::shared_ptr<Message>>* msgs) override;
 		};
 	}
 };

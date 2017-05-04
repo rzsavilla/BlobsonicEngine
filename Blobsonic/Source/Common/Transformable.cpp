@@ -59,17 +59,17 @@ void Component::Transformable::scale(float x, float y, float z)
 	m_vScale.z += z;
 }
 
-void Component::Transformable::translate(glm::vec3 translation)
+void Component::Transformable::translateV(glm::vec3 translation)
 {
 	m_vPosition += translation;
 }
 
-void Component::Transformable::rotate(glm::vec3 rotation)
+void Component::Transformable::rotateV(glm::vec3 rotation)
 {
 	m_vRotation += rotation;
 }
 
-void Component::Transformable::scale(glm::vec3 scale)
+void Component::Transformable::scaleV(glm::vec3 scale)
 {
 	m_vScale += scale;
 }
@@ -129,4 +129,54 @@ glm::mat4 Component::Transformable::getTransform()
 	o = glm::translate(glm::mat4(1.0f), getOrigin());
 
 	return t * r * o * s;
+}
+
+void Component::Transformable::register_lua(sol::state_view L)
+{
+	using namespace Component;
+
+	L.new_usertype<Transformable>("Transformable",
+		"translate", &Transformable::translate,
+		"rotate", &Transformable::rotate,
+		"scale", &Transformable::scale,
+		"setPosition", &Transformable::setPosition,
+		"setRotation", &Transformable::setRotation,
+		"setScale", &Transformable::setScale,
+		"setOrigin", &Transformable::setOrigin,
+		"getPosition", &Transformable::getPosition
+	);
+}
+
+sol::object Component::Transformable::getTable(sol::state_view L)
+{
+	sol::table obj_table = L.create_named_table("object");
+
+	sol::table obj_metatable = L.create_table_with();
+	//L.createT
+	//obj_metatable.set_function(
+	//	"translate", &Transformable::translate
+	////	"rotate", &Transformable::rotate,
+	////	"scale", &Transformable::scale,
+	////	"setPosition", &Transformable::setPosition,
+	////	"setRotation", &Transformable::setRotation,
+	////	"setScale", &Transformable::setScale,
+	////	"setOrigin", &Transformable::setOrigin,
+	////	"getPosition", &Transformable::getPosition
+	//);
+
+	////// Set it on the actual table
+	//obj_table[sol::metatable_key] = obj_metatable;
+
+	sol::usertype<Transformable> transform(
+		"translate", &Transformable::translate,
+		"rotate", &Transformable::rotate,
+		"scale", &Transformable::scale,
+		"setPosition", &Transformable::setPosition,
+		"setRotation", &Transformable::setRotation,
+		"setScale", &Transformable::setScale,
+		"setOrigin", &Transformable::setOrigin,
+		"getPosition", &Transformable::getPosition
+	);
+
+	return sol::make_object<sol::usertype<Transformable>>(L, transform);
 }

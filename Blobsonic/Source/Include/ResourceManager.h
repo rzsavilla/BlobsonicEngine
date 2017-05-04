@@ -17,6 +17,8 @@
 
 class ResourceManager {
 private:
+	const bool m_bDebug = true;	//!< Enables couts to console
+
 	std::map<std::string, std::shared_ptr<Mesh>> m_meshes;
 	std::map<std::string, std::shared_ptr<AssimpMesh>> m_vAssimpMeshes;
 	std::map<std::string, std::shared_ptr<Texture>> m_textures;

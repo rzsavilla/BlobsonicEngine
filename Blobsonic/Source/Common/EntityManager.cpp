@@ -39,3 +39,23 @@ void EntityManager::updateEntityManager()
 		}
 	}
 }
+
+std::shared_ptr<Entity> EntityManager::getEntityByName(std::string name)
+{
+	for (auto it = m_entities.begin(); it != m_entities.end(); ++it) {
+		if ((*it)->getName() == name) {
+			return (*it);		//Entity found
+		}
+	}
+	return NULL;	//Entity not found
+}
+
+std::shared_ptr<Entity> EntityManager::getEntityByID(unsigned int ID)
+{
+	for (auto it = m_entities.begin(); it != m_entities.end(); ++it) {
+		if ((*it)->getUID() == ID) {
+			return (*it);		//Entity found
+		}
+	}
+	return NULL;	//Entity not found
+}

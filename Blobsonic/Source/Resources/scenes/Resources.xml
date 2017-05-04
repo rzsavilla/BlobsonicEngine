@@ -6,11 +6,6 @@
 		<File>Source\Resources\models\cube.obj</File>
 	</Mesh>
 	<Mesh> 
-		<ID>sphere_mesh</ID>
-		<File>Source\Resources\models\Minotaur_noText.fbx</File>
-	</Mesh>
-
-	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
 	</Mesh>

@@ -15,6 +15,14 @@
 #include "Sound.h"
 #include "SpriteRender.h"
 
+//Audio engine
+#include <irrKlang\irrKlang.h>
+
+// include console I/O methods (conio.h for windows, our wrapper in linux)
+#if defined(WIN32)
+#include <conio.h>
+#endif
+
 void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
@@ -450,7 +458,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
-	if (m_bDebug) std::cout << "\nLoading Sprite \n  ";
+	if (m_bDebug) std::cout << "\nLoading Model \n  ";
 	std::shared_ptr<Entity> entity = m_factory.createActor();
 	auto model = entity->get<Component::Model>();
 	auto transform = entity->get<Component::Transformable>();
@@ -471,6 +479,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			if (readElementText(modelChild, cData)) {
 				sID = std::string(cData, strlen(cData));
 				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+				entity->setName(sID);
 			}
 		}
 		if (strcmp(childValue, "Component") == 0) {
@@ -489,7 +498,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(modelChild, cData)) {
-				//model->m_meshes.push_back(m_res->getMesh(std::string(cData, strlen(cData))));
+		
 				model->m_aMeshes.push_back(m_res->getAssimpMesh(std::string(cData, strlen(cData))));
 			}
 		}
@@ -556,17 +565,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 
 	}
 
-	//attach components
-	for (int i = 0; i < components.size(); i++)
-	{
-		if (components[i] == "AABB")m_factory.attachAABB(entity, transform->m_vPosition, Dimensions, transform->m_vScale);
-		else if (components[i] == "OBB")m_factory.attachOBB(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-		else if (components[i] == "Sphere")m_factory.attachSphere(entity, transform->m_vPosition);
-		else if (components[i] == "Capsule")m_factory.attachCapsule(entity, transform->m_vPosition, Dimensions, transform->m_vScale, transform->getRotation());
-		else if (components[i] == "Physical")m_factory.attachPhysical(entity, mass, restitution);
-	}
 	return entity;
-
 }
 
 std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
@@ -777,6 +776,7 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 	std::string s;
 	char * c;
 	std::string sID;
+	glm::vec3 v;
 
 	//Look at Model Element
 	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
@@ -812,7 +812,7 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 				else if (strcmp(c, "true") == 0)
 					sound->setInitialized(true);
 			}
-			if (m_bDebug) std::cout << "isPlaying Set : " << atof(c) << "\n  ";
+			if (m_bDebug) std::cout << "isInitialized Set : " << atof(c) << "\n  ";
 		}
 		else if (strcmp(childValue, "isLooping") == 0) {
 			if (readElementText(child, c)) {
@@ -834,6 +834,38 @@ std::shared_ptr<Entity> SceneLoader::loadAudio(tinyxml2::XMLElement* e)
 			}
 			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
 		}
+		else if (strcmp(childValue, "sound3D") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setSound3D(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setSound3D(true);
+
+				entity->attach<Component::Transformable>();
+			}
+			if (m_bDebug) std::cout << "3D sound set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "Volume") == 0) {
+			if (readElementText(child, c)) {
+				sound->setVolume(atof(c));
+			}
+			if (m_bDebug) std::cout << "Volume set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "MinDistance") == 0) {
+			if (readElementText(child, c)) {
+				sound->setMinDist(atof(c));
+			}
+			if (m_bDebug) std::cout << "Minimum distance set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "Position") == 0) {
+			v = parseVec3(child);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+	}
+	if (entity->has<Component::Transformable>()) {
+		auto t = entity->get<Component::Transformable>();
+		t->setPosition(v);
 	}
 	return entity;
 }

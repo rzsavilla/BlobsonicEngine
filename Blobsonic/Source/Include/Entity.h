@@ -13,6 +13,7 @@
 
 #include "Destroyable.h"
 #include "UniqueID.h"
+#include "Name.h"
 
 #include "Component.h"
 
@@ -20,20 +21,15 @@ static void LuaLoaded() {
 	std::cout << "Lua is working\n";
 }
 
-class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> {
+class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> , public Name {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 
 	const bool m_bDebug = true;	//!< Flag for Couts
 public:
-	Entity() {
-		this->setUID();
-		if (m_bDebug) std::cout << "Entity Created: " << this->getUID() << "\n";
-	}
+	Entity();
 	
-	~Entity() { 
-		m_components.clear();	//Remove all attached components
-	}
+	~Entity();
 
 	template<typename T, typename... Args>
 	T &attach(Args &&...args) {

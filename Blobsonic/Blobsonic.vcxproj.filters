@@ -616,5 +616,8 @@
     <ClCompile Include="Source\Common\GUI.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\Entity.cpp">
+      <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

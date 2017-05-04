@@ -16,9 +16,9 @@ int main() {
 	//Attach systems to the engine
 	Engine::Engine engine;
 
-	engine.init(1024, 768);
+	engine.init(1600, 1024);
 	engine.attachSystem<System::Render>();				//Render objects
-	engine.attachSystem<System::CameraSystem>();		//Control active camera
+	//engine.attachSystem<System::CameraSystem>();		//Control active camera
 	engine.attachSystem<System::Physics>();				//Do physics check on scene
 	engine.attachSystem<System::Audio>();				//Start audio objects
 	engine.attachSystem<System::PlayerController>();	//Control player character

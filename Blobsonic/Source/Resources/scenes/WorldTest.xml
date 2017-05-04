@@ -13,7 +13,7 @@
 		<Texture>deer_texture</Texture>
 		<Position>
 			<X>0.0f</X>
-			<Y>0.5f</Y>
+			<Y>500.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -22,36 +22,9 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	 
-	<Model> <ID>floor</ID>
-		<Mesh>plane_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>floor_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>50.0f</X>
-			<Y>1.0f</Y>
-			<Z>50.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -76,120 +49,9 @@
 			<Z>180.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	
-	<Model> <ID>cube1</ID>
-		<Mesh>soccer_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>red_texture</Texture>
-		<Position>
-			<X>-20.0f</X>
-			<Y>2.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-		
-	</Model>
-	<Model> <ID>cube2</ID>
-		<Mesh>soccer_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>red_texture</Texture>
-		<Position>
-			<X>20.0f</X>
-			<Y>2.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	<Model> <ID>cube3</ID>
-		<Mesh>cube_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>white_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>2.0f</Y>
-			<Z>-20.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
-	<Model> <ID>cube4</ID>
-		<Mesh>cube_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>red_texture</Texture>
-		<Position>
-			<X>200.0f</X>
-			<Y>200.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Size>
-			<X>400.0f</X>
-			<Y>300.0f</Y>
-			<Z>0.0f</Z>
-		</Size>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
 		</Scale>
 		<Origin>
 			<X>0.0f</X>
@@ -356,20 +218,20 @@
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
-			<Y>30.0f</Y>
-			<Z>70.0f</Z>
+			<Y>3000.0f</Y>
+			<Z>7000.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>
 			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
-		<FOV>45.0f</FOV>
+		<FOV>90.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
-		<FarPlane>1000.0f</FarPlane>
+		<FarPlane>100000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>0.8f</MoveSpeed>
+		<MoveSpeed>100.0f</MoveSpeed>
 	</Camera>
 </Scene>
 

@@ -209,7 +209,7 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 			//Add Entity to active scene
 			auto data = static_cast<SceneMessage::AddEntity*>(msgs->at(i).get());
 			auto activeScene = m_SceneManager->getActiveScene();
-			if (!activeScene) {
+			if (activeScene != NULL) {
 				activeScene->getEntityManager()->addEntity(data->entity);
 			}
 		}

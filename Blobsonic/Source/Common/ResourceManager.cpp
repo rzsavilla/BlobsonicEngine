@@ -63,9 +63,8 @@ std::shared_ptr<Mesh> ResourceManager::getMesh(const std::string& name) {
 	if (mesh != m_meshes.end()) {
 		return mesh->second;
 	}
-
-	std::cout << "Mesh Could Not be Found \n";
-	return std::make_shared<Mesh>();
+	if (m_bDebug) std::cout << "Mesh Could Not be Found: " + name << "\n";
+	return NULL;
 }
 
 std::shared_ptr<AssimpMesh> ResourceManager::getAssimpMesh(const std::string& name)
@@ -74,6 +73,8 @@ std::shared_ptr<AssimpMesh> ResourceManager::getAssimpMesh(const std::string& na
 	if(aMesh != m_vAssimpMeshes.end()) {
 		return aMesh->second;
 	}
+	if (m_bDebug) std::cout << "AssimpMesh Could Not be Found: " + name << "\n";
+	return NULL;
 }
 
 std::shared_ptr<Texture> ResourceManager::getTexture(const std::string& name) {
@@ -81,6 +82,8 @@ std::shared_ptr<Texture> ResourceManager::getTexture(const std::string& name) {
 	if (texture != m_textures.end()) {
 		return texture->second;
 	}
+	if (m_bDebug) std::cout << "Texture Could Not be Found: " + name << "\n";
+	return NULL;
 }
 
 std::shared_ptr<Material> ResourceManager::getMaterial(const std::string& name) {
@@ -88,6 +91,8 @@ std::shared_ptr<Material> ResourceManager::getMaterial(const std::string& name) 
 	if (material != m_materials.end()) {
 		return material->second;
 	}
+	if (m_bDebug) std::cout << "Material Could Not be Found: " + name << "\n";
+	return NULL;
 }
 
 std::shared_ptr<GLSLProgram> ResourceManager::getShader(const std::string& name) {
