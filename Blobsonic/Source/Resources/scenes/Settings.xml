@@ -36,12 +36,12 @@
 		</ID>
 	</Model>
 	
-	<Button> <ID>start_button</ID>
+	<Sprite> <ID>settings_sprite</ID>
 		<Shader>button_shader</Shader>
-		<Texture>play_texture</Texture>
+		<Texture>settings_XL_texture</Texture>
 		<Position>
-			<X>412.0f</X>
-			<Y>100</Y>
+			<X>100.0f</X>
+			<Y>150.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -50,58 +50,28 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>0.5f</Y>
-			<Z>0.0f</Z>
-		</Colour>
-		<sID>
-			<X>1.0f</X> 	
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</sID>
-	</Button>
-	
-	<Button> <ID>settings_button</ID>
-		<Shader>button_shader</Shader>
-		<Texture>settings_texture</Texture>
-		<Position>
-			<X>412.0f</X>
-			<Y>300.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>200.0f</X> 	
+			<X>500.0f</X> 	
 			<Y>100.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
 			<X>0.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>0.5f</Z>
+			<Y>0.5f</Y>
+			<Z>0.0f</Z>
 		</Colour>
 		<sID>
-			<X>2.0f</X> 	
+			<X>4.0f</X> 	
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>
 		</sID>
-	</Button>
+	</Sprite>
 	
-	<Button> <ID>exit_button</ID>
+	<Button> <ID>main_menu_button</ID>
 		<Shader>button_shader</Shader>
-		<Texture>exit_texture</Texture>
+		<Texture>menu_texture</Texture>
 		<Position>
-			<X>412.0f</X>
-			<Y>500.0f</Y>
+			<X>100.0f</X>
+			<Y>300</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -117,12 +87,72 @@
 		<Colour>
 			<X>0.5f</X> 	
 			<Y>0.0f</Y>
-			<Z>1.0f</Z>
+			<Z>0.0f</Z>
 		</Colour>
 		<sID>
-			<X>3.0f</X> 
+			<X>4.0f</X> 	
 			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
+			<Z>0.0f</Z>
+		</sID>
+	</Button>
+	
+	<Button> <ID>small_window</ID>
+		<Shader>button_shader</Shader>
+		<Texture>1024_texture</Texture>
+		<Position>
+			<X>100.0f</X>
+			<Y>450.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.0f</X> 	
+			<Y>0.5f</Y>
+			<Z>0.0f</Z>
+		</Colour>
+		<sID>
+			<X>5.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
+	</Button>
+	
+	<Button> <ID>large_window</ID>
+		<Shader>button_shader</Shader>
+		<Texture>1280_texture</Texture>
+		<Position>
+			<X>100.0f</X>
+			<Y>600.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.5f</Z>
+		</Colour>
+		<sID>
+			<X>6.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
 		</sID>
 	</Button>
 
