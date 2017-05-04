@@ -77,7 +77,6 @@ void System::Scripting::LuaScripting::forceReloadScene()
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), true);
 }
 
-
 bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)
 {
 	int iKey = -1;

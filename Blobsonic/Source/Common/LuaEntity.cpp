@@ -23,8 +23,7 @@ static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityF
 
 LuaEntity::LuaEntity()
 {
-	m_entity = std::make_shared<Entity>();	//Pointer to handled entity
-	MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
+
 }
 
 void LuaEntity::setTransformable(sol::table t)
@@ -212,24 +211,30 @@ void LuaEntity::setOBB(sol::table t)
 
 void LuaEntity::setComponents(sol::table t)
 {
-	lua_pushnil(m_activeScript);  // first key
-	//Iterate through table elements
-	for (auto it = t.begin(); it != t.end(); ++it) {
-		auto key = (*it).first;	//Get element key
-		if (key.get_type() == sol::type::string) {
-			//Only process string keys
-			std::string s = key.as<std::string>();		//Get key value
-			auto value = (*it).second;					//Get value this should be a table
-			//Read table data
+	if (!m_entity) {
+		//Create and add entity into the scene
+		m_entity = std::make_shared<Entity>();	//Pointer to handled entity
+		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
+
+		lua_pushnil(m_activeScript);  // first key
+		//Iterate through table elements
+		for (auto it = t.begin(); it != t.end(); ++it) {
+			auto key = (*it).first;	//Get element key
 			if (key.get_type() == sol::type::string) {
-				if (value.is<sol::table>()) {
-					//Set variables
-					if (s == "Transformable") { setTransformable(value); }
-					else if (s == "Model") { setModel(value); }
-					else if (s == "Physical") { setPhysical(value); }
-					else if (s == "AABB") { setAABB(value); }
-					else if (s == "Sphere") { setSphere(value); }
-					else if (s == "OBB") { setOBB(value); }
+				//Only process string keys
+				std::string s = key.as<std::string>();		//Get key value
+				auto value = (*it).second;					//Get value this should be a table
+				//Read table data
+				if (key.get_type() == sol::type::string) {
+					if (value.is<sol::table>()) {
+						//Set variables
+						if (s == "Transformable") { setTransformable(value); }
+						else if (s == "Model") { setModel(value); }
+						else if (s == "Physical") { setPhysical(value); }
+						else if (s == "AABB") { setAABB(value); }
+						else if (s == "Sphere") { setSphere(value); }
+						else if (s == "OBB") { setOBB(value); }
+					}
 				}
 			}
 		}
@@ -240,6 +245,14 @@ bool LuaEntity::hasComponent(const std::string & sComponent)
 {
 	if (sComponent == "Transformable") return m_entity->has<Component::Transformable>();
 	else if (sComponent == "Model") return m_entity->has<Component::Model>();;
+}
+
+void LuaEntity::handleEntity(const std::string & name)
+{
+	if (!m_entity) {
+		m_entity =
+		SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
+	}
 }
 
 unsigned int LuaEntity::getID()
@@ -381,6 +394,7 @@ void LuaEntity::register_lua(lua_State* L)
 	state.new_usertype<LuaEntity>("Entity",
 		//Entity
 		"setComponents", &LuaEntity::setComponents,
+		"handleEntity",&LuaEntity::handleEntity,
 		"getID", &LuaEntity::getID,
 		"destroy", &LuaEntity::destroy,
 		"isDestroyed",&LuaEntity::isDestroyed,
