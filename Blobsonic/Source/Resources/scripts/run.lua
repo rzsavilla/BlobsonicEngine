@@ -3,8 +3,6 @@
 
 require "Source/Resources/scripts/SceneManagement"	-- Debugging purposes fast scene reload
 
-hideCursor(true)
-
 
 if isKeyDown("p") == true then
 	reloadScene()
@@ -24,7 +22,7 @@ elseif isKeyDown("right") == true then
 	player:pSetVelocity(fSpeed,0,0)
 end
 
-if isMouseDown("Left") == true then
+if isMouseDown("Right") == true then
 	local bb = Entity.new()
 	bb:setComponents(boxAtt)
 	boxes[#boxes + 1] = bb
