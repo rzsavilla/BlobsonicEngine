@@ -249,71 +249,127 @@ unsigned int LuaEntity::getID()
 
 void LuaEntity::tSetPosition(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setPosition(glm::vec3(x,y,z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setPosition(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::tSetRotation(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setRotation(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setRotation(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::tSetScale(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setScale(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setScale(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::tSetOrigin(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setOrigin(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setOrigin(glm::vec3(x, y, z));
+		}
 	}
+}
+
+float LuaEntity::tGetPosX()
+{
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			return t->getPosition().x;
+		}
+	}
+	else return 0;
+}
+
+float LuaEntity::tGetPosY()
+{
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			return t->getPosition().y;
+		}
+	}
+	else return 0;
+}
+
+float LuaEntity::tGetPosZ()
+{
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			return t->getPosition().z;
+		}
+	}
+	else return 0;
 }
 
 void LuaEntity::pSetMass(float newMass)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setMass(newMass);
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setMass(newMass);
+		}
 	}
 }
 
 void LuaEntity::pSetInvMass(float newInvMass)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setMass(newInvMass);
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setMass(newInvMass);
+		}
 	}
 }
 
 void LuaEntity::pSetRestitution(float newRestituion)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setMass(newRestituion);
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setMass(newRestituion);
+		}
 	}
 }
 
 void LuaEntity::pSetVelocity(float x, float y, float z)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setVelocity(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setVelocity(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::destroy()
 {
+	if (m_bDebug) std::cout << "Destroyed: " << m_entity->getUID() << "\n";
 	if (m_entity)(m_entity->destroy());
+	m_bDestroyed = true;
+}
+
+bool LuaEntity::isDestroyed()
+{
+	return m_bDestroyed;
 }
 
 void LuaEntity::register_lua(lua_State* L)
@@ -327,16 +383,19 @@ void LuaEntity::register_lua(lua_State* L)
 		"setComponents", &LuaEntity::setComponents,
 		"getID", &LuaEntity::getID,
 		"destroy", &LuaEntity::destroy,
+		"isDestroyed",&LuaEntity::isDestroyed,
 		//Transformable
 		"tSetPosition", &LuaEntity::tSetPosition,
 		"tSetRotation", &LuaEntity::tSetRotation,
 		"tSetScale", &LuaEntity::tSetScale,
 		"tSetOrigin", &LuaEntity::tSetOrigin,
+		"tGetPosX", &LuaEntity::tGetPosX,
+		"tGetPosY", &LuaEntity::tGetPosY,
+		"tGetPosZ", &LuaEntity::tGetPosZ,
 		//Physical
 		"pSetMass", &LuaEntity::pSetMass,
 		"pSetInvMass", &LuaEntity::pSetInvMass,
 		"pSetRestitution", &LuaEntity::pSetRestitution,
 		"pSetVelocity", &LuaEntity::pSetVelocity
-
 	);
 }

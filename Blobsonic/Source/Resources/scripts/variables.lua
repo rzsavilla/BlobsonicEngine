@@ -8,3 +8,4 @@ sScriptDir = "Source/Resources/scripts/"
 
 require "Source/Resources/scripts/Player"
 
+require "Source/Resources/scripts/Entities"

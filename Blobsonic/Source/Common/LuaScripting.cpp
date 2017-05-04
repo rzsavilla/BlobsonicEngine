@@ -123,14 +123,14 @@ bool System::Scripting::LuaScripting::isMouseDown(const std::string & button)
 {
 	int iButton = -1;
 	if (button == "Left") {
-		iButton == GLFW_MOUSE_BUTTON_LEFT;
+		iButton = GLFW_MOUSE_BUTTON_LEFT;
 	}
 	else if (button == "Right") {
-		iButton == GLFW_MOUSE_BUTTON_RIGHT;
+		iButton = GLFW_MOUSE_BUTTON_RIGHT;
 	}
 
 	if (iButton != -1) {
-		if (glfwGetKey(glfwGetCurrentContext(), iButton)) {
+		if (glfwGetMouseButton(glfwGetCurrentContext(), iButton)) {
 			return true;
 		}
 	}
