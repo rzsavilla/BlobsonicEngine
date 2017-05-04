@@ -785,14 +785,12 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
 	{
 		phys->m_vAcceleration = glm::vec3(phys->m_vAcceleration.x, GRAVITYCOEFFICENT, phys->m_vAcceleration.z);
-		phys->m_vVelocity += phys->m_vAcceleration * dt;
-		trans->m_vPosition += phys->m_vVelocity * dt;
+		phys->m_vVelocity += phys->m_vAcceleration;
+		trans->m_vPosition += phys->m_vVelocity;
 
 		if (phys->m_vVelocity.x < EPSILON) phys->m_vVelocity.x = 0;
 		if (phys->m_vVelocity.y < EPSILON) phys->m_vVelocity.y = 0;
 		if (phys->m_vVelocity.z < EPSILON) phys->m_vVelocity.z = 0;
-
-	
 	}
 
 
