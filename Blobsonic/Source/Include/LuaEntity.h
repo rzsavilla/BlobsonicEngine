@@ -25,6 +25,7 @@ private:	//Component functions
 	void setTransformable(sol::table t);	//Attaches and sets Transformable component
 	void setModel(sol::table t);			//Attaches and sets Model component
 	void setPhysical(sol::table t);			//Attaches and sets Physical component
+	void setAABB(sol::table t);				//Attaches and sets AABB Component
 public:
 	LuaEntity();	//!< Default Constructor
 	/*!

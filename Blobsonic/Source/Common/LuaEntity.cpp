@@ -10,6 +10,7 @@
 #include "SpotLight.h"
 #include "Transformable.h"
 #include "Physical.h"
+#include "AABB.h"
 
 #include "LuaScripting.h"
 
@@ -116,6 +117,28 @@ void LuaEntity::setPhysical(sol::table t)
 	}
 }
 
+void LuaEntity::setAABB(sol::table t)
+{
+	if (!m_entity->has<AABB>()) {
+		m_entity->attach<AABB>();	//Attach component
+	}
+	auto aabb = m_entity->get<AABB>();	//Get Component
+												//Read variables from lua table
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			auto value = (*it).second;
+			//Set Component variables
+			if (value.get_type() == sol::type::table) {
+				if (s == "Dimensions") {
+					aabb->m_vDimensions = LuaHelper::readVec3((*it).second);
+				}
+			}
+		}
+	}
+}
+
 void LuaEntity::setComponents(sol::table t)
 {
 	lua_pushnil(m_activeScript);  // first key
@@ -138,6 +161,9 @@ void LuaEntity::setComponents(sol::table t)
 					}
 					else if (s == "Physical") {
 						setPhysical(value);
+					}
+					else if (s == "AABB") {
+						setAABB(value);
 					}
 				}
 			}
@@ -247,5 +273,6 @@ void LuaEntity::register_lua(lua_State* L)
 		"pSetInvMass", &LuaEntity::pSetInvMass,
 		"pSetRestitution", &LuaEntity::pSetRestitution,
 		"pSetVelocity", &LuaEntity::pSetVelocity
+
 	);
 }
