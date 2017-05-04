@@ -8,7 +8,7 @@
 #include "Text.h"
 //Messages
 #include "RenderMessages.h"
-#include "CameraMessages.h"
+#include "EngineMessages.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Cursor callback functions
@@ -94,8 +94,9 @@ void System::GUI::update(float dt)
 			width = t->getScale().x;
 			height = t->getScale().y;
 
-			int tt;
-			tt = b->getButtonID();
+			/// Button ID getter
+			int bID; 
+			bID = b->getButtonID();
 
 			/// If inside of the buttons
 			if (x >= xpos && x <= xpos + width &&
@@ -103,54 +104,59 @@ void System::GUI::update(float dt)
 			{
 				if (glfwGetMouseButton(glfwGetCurrentContext(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 				{
+					b->setIsClicked(true);
 					/// Main menu
-					if (tt == 1) /// Start button
+					if (bID == 1) /// Start button
 					{
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
+						//SetViewportExtEx()
+						//SetViewportOrgEx()
 					}
-					if (tt == 2) /// Settings button
+					if (bID == 2) /// Settings button
 					{
 						cout << "Settings Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("Settings.xml", true);
 					}
-					if (tt == 3) /// Exit button
+					if (bID == 3) /// Exit button
 					{
 						cout << "Exit Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("Exit.xml", true);
 					}
 					/// World test
-					if (tt == 4) /// Main menu button
+					if (bID == 4) /// Main menu button
 					{
 						cout << "Main Menu Button \n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("MainMenu.xml", true);
 					}
 					/// Settings
-					if (tt == 5) /// Option - set screen size to 1024, 768.
+					if (bID == 5) /// Option - set screen size to 1024, 768.
 					{
 						glfwSetWindowSize(glfwGetCurrentContext(), 1024, 768);
-						glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
+						gl::Viewport(0, 0, 1024, 768);
+						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
 					}
 
-					if (tt == 6) /// Option - set screen size to 800, 600.
+					if (bID == 6) /// Option - set screen size to 1280, 800.
 					{
 						glfwSetWindowSize(glfwGetCurrentContext(), 1280, 800);
+						gl::Viewport(0, 0, 1280, 800);
 						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
 						
 					}
 					/// Exit
-					if (tt == 7) /// Exit
+					if (bID == 7) /// Exit
 					{
 						exit(0);
 					}
 				}
 				else
 				{
-					if (tt == 3 || tt == 7)
+					if (bID == 3 || bID == 7)
 					{
 						/// Visual effects
 						/// Colour manipulation
@@ -170,19 +176,19 @@ void System::GUI::update(float dt)
 			else
 			{
 				/// Resets the values of the buttons
-				if (tt == 1)
+				if (bID == 1)
 				{
-					s->setColor(vec3(1.0f, 0.5f, 0.0f));
+					s->setColor(vec3(0.8f, 0.8f, 0.6f));
 				}
-				if (tt == 2)
+				if (bID == 2)
 				{
-					s->setColor(vec3(0.0f, 1.0f, 0.5f));
+					s->setColor(vec3(0.7f, 0.4f, 0.0f));
 				}
-				if (tt == 3)
+				if (bID == 3)
 				{
-					s->setColor(vec3(0.5f, 0.0f, 1.0f));
-					t->setScale(vec3(200.0f, 100.0f, 0.0f));
-					t->setPosition(vec3(412.0f, 500.0f, 0.0f));
+					s->setColor(vec3(0.0f, 0.3f, 0.7f));
+					//t->setScale(vec3(200.0f, 100.0f, 0.0f));
+					//t->setPosition(vec3(412.0f, 500.0f, 0.0f));
 				}
 			}
 			
@@ -194,11 +200,13 @@ void System::GUI::update(float dt)
 
 void System::GUI::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
-	/*
 	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
-		
+		if ((*it)->sID == "WindowResize")
+		{
+			auto data = static_cast<EngineMessage::WindowResize*>((*it).get());
+		}
 	}
-	*/
+	
 }
 
 void System::GUI::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
