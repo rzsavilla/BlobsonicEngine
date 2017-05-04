@@ -23,8 +23,7 @@ static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityF
 
 LuaEntity::LuaEntity()
 {
-	m_entity = std::make_shared<Entity>();	//Pointer to handled entity
-	MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
+
 }
 
 void LuaEntity::setTransformable(sol::table t)
@@ -212,24 +211,30 @@ void LuaEntity::setOBB(sol::table t)
 
 void LuaEntity::setComponents(sol::table t)
 {
-	lua_pushnil(m_activeScript);  // first key
-	//Iterate through table elements
-	for (auto it = t.begin(); it != t.end(); ++it) {
-		auto key = (*it).first;	//Get element key
-		if (key.get_type() == sol::type::string) {
-			//Only process string keys
-			std::string s = key.as<std::string>();		//Get key value
-			auto value = (*it).second;					//Get value this should be a table
-			//Read table data
+	if (!m_entity) {
+		//Create and add entity into the scene
+		m_entity = std::make_shared<Entity>();	//Pointer to handled entity
+		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
+
+		lua_pushnil(m_activeScript);  // first key
+		//Iterate through table elements
+		for (auto it = t.begin(); it != t.end(); ++it) {
+			auto key = (*it).first;	//Get element key
 			if (key.get_type() == sol::type::string) {
-				if (value.is<sol::table>()) {
-					//Set variables
-					if (s == "Transformable") { setTransformable(value); }
-					else if (s == "Model") { setModel(value); }
-					else if (s == "Physical") { setPhysical(value); }
-					else if (s == "AABB") { setAABB(value); }
-					else if (s == "Sphere") { setSphere(value); }
-					else if (s == "OBB") { setOBB(value); }
+				//Only process string keys
+				std::string s = key.as<std::string>();		//Get key value
+				auto value = (*it).second;					//Get value this should be a table
+				//Read table data
+				if (key.get_type() == sol::type::string) {
+					if (value.is<sol::table>()) {
+						//Set variables
+						if (s == "Transformable") { setTransformable(value); }
+						else if (s == "Model") { setModel(value); }
+						else if (s == "Physical") { setPhysical(value); }
+						else if (s == "AABB") { setAABB(value); }
+						else if (s == "Sphere") { setSphere(value); }
+						else if (s == "OBB") { setOBB(value); }
+					}
 				}
 			}
 		}
@@ -242,6 +247,14 @@ bool LuaEntity::hasComponent(const std::string & sComponent)
 	else if (sComponent == "Model") return m_entity->has<Component::Model>();;
 }
 
+void LuaEntity::handleEntity(const std::string & name)
+{
+	if (!m_entity) {
+		m_entity =
+		SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
+	}
+}
+
 unsigned int LuaEntity::getID()
 {
 	return this->m_entity->getUID();
@@ -249,71 +262,127 @@ unsigned int LuaEntity::getID()
 
 void LuaEntity::tSetPosition(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setPosition(glm::vec3(x,y,z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setPosition(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::tSetRotation(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setRotation(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setRotation(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::tSetScale(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setScale(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setScale(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::tSetOrigin(float x, float y, float z)
 {
-	if (m_entity->has<Component::Transformable>()) {
-		auto t = m_entity->get<Component::Transformable>();
-		t->setOrigin(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			t->setOrigin(glm::vec3(x, y, z));
+		}
 	}
+}
+
+float LuaEntity::tGetPosX()
+{
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			return t->getPosition().x;
+		}
+	}
+	else return 0;
+}
+
+float LuaEntity::tGetPosY()
+{
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			return t->getPosition().y;
+		}
+	}
+	else return 0;
+}
+
+float LuaEntity::tGetPosZ()
+{
+	if (m_entity) {
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			return t->getPosition().z;
+		}
+	}
+	else return 0;
 }
 
 void LuaEntity::pSetMass(float newMass)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setMass(newMass);
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setMass(newMass);
+		}
 	}
 }
 
 void LuaEntity::pSetInvMass(float newInvMass)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setMass(newInvMass);
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setMass(newInvMass);
+		}
 	}
 }
 
 void LuaEntity::pSetRestitution(float newRestituion)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setMass(newRestituion);
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setMass(newRestituion);
+		}
 	}
 }
 
 void LuaEntity::pSetVelocity(float x, float y, float z)
 {
-	if (m_entity->has<Physical>()) {
-		auto p = m_entity->get<Physical>();
-		p->setVelocity(glm::vec3(x, y, z));
+	if (m_entity) {
+		if (m_entity->has<Physical>()) {
+			auto p = m_entity->get<Physical>();
+			p->setVelocity(glm::vec3(x, y, z));
+		}
 	}
 }
 
 void LuaEntity::destroy()
 {
+	if (m_bDebug) std::cout << "Destroyed: " << m_entity->getUID() << "\n";
 	if (m_entity)(m_entity->destroy());
+	m_bDestroyed = true;
+}
+
+bool LuaEntity::isDestroyed()
+{
+	return m_bDestroyed;
 }
 
 void LuaEntity::register_lua(lua_State* L)
@@ -325,18 +394,22 @@ void LuaEntity::register_lua(lua_State* L)
 	state.new_usertype<LuaEntity>("Entity",
 		//Entity
 		"setComponents", &LuaEntity::setComponents,
+		"handleEntity",&LuaEntity::handleEntity,
 		"getID", &LuaEntity::getID,
 		"destroy", &LuaEntity::destroy,
+		"isDestroyed",&LuaEntity::isDestroyed,
 		//Transformable
 		"tSetPosition", &LuaEntity::tSetPosition,
 		"tSetRotation", &LuaEntity::tSetRotation,
 		"tSetScale", &LuaEntity::tSetScale,
 		"tSetOrigin", &LuaEntity::tSetOrigin,
+		"tGetPosX", &LuaEntity::tGetPosX,
+		"tGetPosY", &LuaEntity::tGetPosY,
+		"tGetPosZ", &LuaEntity::tGetPosZ,
 		//Physical
 		"pSetMass", &LuaEntity::pSetMass,
 		"pSetInvMass", &LuaEntity::pSetInvMass,
 		"pSetRestitution", &LuaEntity::pSetRestitution,
 		"pSetVelocity", &LuaEntity::pSetVelocity
-
 	);
 }

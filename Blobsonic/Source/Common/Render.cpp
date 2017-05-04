@@ -17,10 +17,11 @@ void System::Render::addEntity(std::shared_ptr<Entity> entity, std::vector<std::
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
 
 		if ((*it)->getUID() == entity->getUID()) {
+			
 			return;	//Entity already stored
 		}
 	}
-	entities->push_back(entity);	//Store entity
+	if (!entity->isDestroyed()) entities->push_back(entity);	//Store entity
 }
 
 void System::Render::renderModel(std::shared_ptr<Entity> entity)
@@ -298,7 +299,7 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		}
 		//Find Model Component
 		if ((*it)->has<Component::Model>()) {
-			renderModel((*it));	//Render Model
+			addEntity((*it), &m_modelEntities);
 		}
 		//Find Text Component
 		if ((*it)->has<Component::Text>()) {
@@ -317,14 +318,19 @@ void System::Render::process(std::vector<std::shared_ptr<Entity>>* entities)
 		if ((*it)->has<Component::Spotlight>()) {
 			addEntity((*it), &m_spotlights);				//Spotlight
 		}
-		
 	}
 }
 
 void System::Render::update(float dt)
 {
-
+	//Render Models
+	//Find Model Component
+	for (auto it = m_modelEntities.begin(); it != m_modelEntities.end(); ++it) {
+		renderModel(*it);
+	}
+	//std::cout << "Render Model Count:" << m_modelEntities.size() << "\n";
 	//Remove Destroyed Entities
+	removeDestroyed(&m_modelEntities);
 	removeDestroyed(&m_directionalLights);
 	removeDestroyed(&m_pointLights);
 	removeDestroyed(&m_spotlights);

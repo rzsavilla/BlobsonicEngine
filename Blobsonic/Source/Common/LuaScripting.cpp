@@ -47,6 +47,7 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 	lua.set_function("hideCursor", &LuaScripting::hideCursor,LuaScripting());
 	//-----Misc------
 	lua.set_function("printString", &LuaScripting::printString, LuaScripting());
+	lua.set_function("print", &LuaScripting::print, LuaScripting());
 
 	//Register LuaEntity class
 	LuaEntity::register_lua(lua);
@@ -75,7 +76,6 @@ void System::Scripting::LuaScripting::forceReloadScene()
 	m_bReloadScripts = true;
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), true);
 }
-
 
 bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)
 {
@@ -122,14 +122,14 @@ bool System::Scripting::LuaScripting::isMouseDown(const std::string & button)
 {
 	int iButton = -1;
 	if (button == "Left") {
-		iButton == GLFW_MOUSE_BUTTON_1;
+		iButton = GLFW_MOUSE_BUTTON_LEFT;
 	}
 	else if (button == "Right") {
-		iButton == GLFW_MOUSE_BUTTON_2;
+		iButton = GLFW_MOUSE_BUTTON_RIGHT;
 	}
 
 	if (iButton != -1) {
-		if (glfwGetKey(glfwGetCurrentContext(), iButton)) {
+		if (glfwGetMouseButton(glfwGetCurrentContext(), iButton)) {
 			return true;
 		}
 	}
@@ -145,6 +145,17 @@ void System::Scripting::LuaScripting::hideCursor(bool hide)
 void System::Scripting::LuaScripting::printString(const std::string & s)
 {
 	std::cout << s << "\n";
+}
+
+int System::Scripting::LuaScripting::print(lua_State * L)
+{
+	int nargs = lua_gettop(L);
+	for (int i = 1; i <= nargs; ++i) {
+		std::cout << lua_tostring(L, i);
+	}
+	std::cout << std::endl;
+
+	return 0;
 }
 
 void System::Scripting::LuaScripting::process(std::vector<std::shared_ptr<Entity>>* entity)
