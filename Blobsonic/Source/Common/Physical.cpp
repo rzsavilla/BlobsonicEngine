@@ -8,6 +8,8 @@ Physical::Physical()
 	m_vAcceleration = glm::vec3(0, 0, 0);
 	m_vVelocity = glm::vec3(0, 0, 0);
 	m_fRestitution = 0.1f;
+
+	m_bEnableGravitiy = true;
 }
 
 void Physical::setMass(float newMass)

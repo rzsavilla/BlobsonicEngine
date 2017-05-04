@@ -22,10 +22,12 @@ private:
 	std::shared_ptr<Entity> m_entity;		//!< Pointer to entity being handled/Created upon construction
 	bool m_bDebug = false;					//!< Enables couts to console
 private:	//Component functions
-	void setTransformable(sol::table t);	//Attaches and sets Transformable component
-	void setModel(sol::table t);			//Attaches and sets Model component
-	void setPhysical(sol::table t);			//Attaches and sets Physical component
-	void setAABB(sol::table t);				//Attaches and sets AABB Component
+	void setTransformable(sol::table t);	//!< Attaches and sets Transformable component
+	void setModel(sol::table t);			//!< Attaches and sets Model component
+	void setPhysical(sol::table t);			//!< Attaches and sets Physical component
+	void setAABB(sol::table t);				//!< Attaches and sets AABB Component
+	void setSphere(sol::table t);			//!< Attaches and sets Sphere collider component
+	void setOBB(sol::table t);				//!< Attaches and sets OBB (Oriented Bounding Box) component
 public:
 	LuaEntity();	//!< Default Constructor
 	/*!

@@ -11,6 +11,8 @@
 #include "Transformable.h"
 #include "Physical.h"
 #include "AABB.h"
+#include "Sphere.h"
+#include "OBB.h"
 
 #include "LuaScripting.h"
 
@@ -139,6 +141,75 @@ void LuaEntity::setAABB(sol::table t)
 	}
 }
 
+void LuaEntity::setSphere(sol::table t)
+{
+	if (!m_entity->has<Sphere>()) {
+		m_entity->attach<Sphere>();	//Attach component
+	}
+	auto sphere = m_entity->get<Sphere>();	//Get Component
+										//Read variables from lua table
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			auto value = (*it).second;
+			//Set Component variables
+			if (value.get_type() == sol::type::number) {
+				if (s == "Radius") {
+					sphere->m_fRadius = (*it).second.as<float>();
+				}
+			}
+			else if (value.get_type() == sol::type::table) {
+				if (s == "Center") {
+					sphere->m_vCenter = LuaHelper::readVec3((*it).second);
+				}
+			}
+		}
+	}
+}
+
+void LuaEntity::setOBB(sol::table t)
+{
+	if (!m_entity->has<OBB>()) {
+		m_entity->attach<OBB>();	//Attach component
+	}
+	auto obb = m_entity->get<OBB>();	//Get Component
+	//Read variables from lua table
+	for (auto it = t.begin(); it != t.end(); ++it) {
+		auto key = (*it).first;	//Get element key
+		std::string s = key.as<std::string>();		//Get element value
+		if (key.get_type() == sol::type::string) {
+			auto value = (*it).second;
+			//Set Component variables
+			if (value.get_type() == sol::type::number) {
+				if (s == "Dimensions") {
+					obb->m_vDimensions = LuaHelper::readVec3((*it).second);
+				}
+			}
+			else if (value.get_type() == sol::type::table) {
+				if (s == "Center") {
+					obb->m_vCenter = LuaHelper::readVec3((*it).second);
+				}
+			}
+			else if (value.get_type() == sol::type::table) {
+				if (s == "Position") {
+					obb->m_vPosition = LuaHelper::readVec3((*it).second);
+				}
+			}
+			else if (value.get_type() == sol::type::table) {
+				if (s == "Scale") {
+					obb->m_vScale = LuaHelper::readVec3((*it).second);
+				}
+			}
+			else if (value.get_type() == sol::type::table) {
+				if (s == "Rotation") {
+					obb->m_vPosition = LuaHelper::readVec3((*it).second);
+				}
+			}
+		}
+	}
+}
+
 void LuaEntity::setComponents(sol::table t)
 {
 	lua_pushnil(m_activeScript);  // first key
@@ -153,18 +224,12 @@ void LuaEntity::setComponents(sol::table t)
 			if (key.get_type() == sol::type::string) {
 				if (value.is<sol::table>()) {
 					//Set variables
-					if (s == "Transformable") {
-						setTransformable(value);
-					}
-					else if (s == "Model") {
-						setModel(value);
-					}
-					else if (s == "Physical") {
-						setPhysical(value);
-					}
-					else if (s == "AABB") {
-						setAABB(value);
-					}
+					if (s == "Transformable") { setTransformable(value); }
+					else if (s == "Model") { setModel(value); }
+					else if (s == "Physical") { setPhysical(value); }
+					else if (s == "AABB") { setAABB(value); }
+					else if (s == "Sphere") { setSphere(value); }
+					else if (s == "OBB") { setOBB(value); }
 				}
 			}
 		}
@@ -248,8 +313,7 @@ void LuaEntity::pSetVelocity(float x, float y, float z)
 
 void LuaEntity::destroy()
 {
-	m_entity->destroy();
-	m_entity = NULL;
+	if (m_entity)(m_entity->destroy());
 }
 
 void LuaEntity::register_lua(lua_State* L)

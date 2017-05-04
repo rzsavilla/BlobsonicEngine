@@ -20,8 +20,6 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 	m_vCapsules.clear();
 	m_vPhysicals.clear();
 
-
-
 	for (auto it = entities->begin(); it != entities->end(); ++it)
 	{
 		if ((*it)->has<Capsule>() && (*it)->has<Component::Transformable>()) {
@@ -759,8 +757,6 @@ void System::Physics::updateOBB(std::shared_ptr<Entity> eBox)
 	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.z, glm::vec3(0.0f, 0.0, 1.0f));
 
 	box->m_vCenter = glm::mat3(box->m_Rotation) * (tBox->m_vPosition + (box->m_vDimensions / 2.0f));
-
-
 }
 
 void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
@@ -777,7 +773,6 @@ void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
 
 void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 {
-	
 	//get transformable and physical
 	auto trans = e->get<Component::Transformable>();
 	auto phys = e->get<Physical>();
@@ -792,9 +787,6 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 		if (phys->m_vVelocity.y < EPSILON) phys->m_vVelocity.y = 0;
 		if (phys->m_vVelocity.z < EPSILON) phys->m_vVelocity.z = 0;
 	}
-
-
-
 }
 
 void System::Physics::updateSphere(std::shared_ptr<Entity> eSphere)

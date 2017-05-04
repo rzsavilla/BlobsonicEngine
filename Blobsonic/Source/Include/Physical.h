@@ -9,6 +9,8 @@
 
 class Physical : public Component::Component
 {
+private:
+	bool m_bEnableGravitiy;
 public:
 	
 	Physical(); // <! Default Contructor for physical Object
