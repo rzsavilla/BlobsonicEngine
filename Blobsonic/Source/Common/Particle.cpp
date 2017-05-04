@@ -67,6 +67,7 @@ void Component::Particle::setMaxScale(float maxS)
 void Component::Particle::setNumMax(float numM)
 {
 	numParticles = numM;
+	modelMatrices = new glm::mat4[numM];
 }
 
 void Component::Particle::setDead(bool state)
@@ -112,6 +113,11 @@ glm::vec3 Component::Particle::getVelocity()
 glm::vec3 Component::Particle::getAcceleration()
 {
 	return acceleration;
+}
+
+glm::mat4* Component::Particle::getMatrix()
+{
+	return modelMatrices;
 }
 
 bool Component::Particle::getHasCollisions()

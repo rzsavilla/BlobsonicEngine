@@ -259,7 +259,31 @@ void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
 
 			}
 
+			GLuint buffer;
+			gl::GenBuffers(1, &buffer);
+			gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
+			glm::mat4* matrix = particle->getMatrix();
+			gl::BufferData(gl::ARRAY_BUFFER, particle->getNumMax() * sizeof(glm::mat4), &matrix[0], gl::STATIC_DRAW);
+
 			gl::BindVertexArray(m_aMesh->getVAO());		//Bind VAO
+			gl::EnableVertexAttribArray(5);
+			gl::VertexAttribPointer(5, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)0);
+			gl::EnableVertexAttribArray(6);
+			gl::VertexAttribPointer(6, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(sizeof(glm::vec4)));
+			gl::EnableVertexAttribArray(7);
+			gl::VertexAttribPointer(7, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(2 * sizeof(glm::vec4)));
+			gl::EnableVertexAttribArray(8);
+			gl::VertexAttribPointer(8, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(3 * sizeof(glm::vec4)));
+			
+			gl::VertexAttribDivisor(5, 1);
+			gl::VertexAttribDivisor(6, 1);
+			gl::VertexAttribDivisor(7, 1);
+			gl::VertexAttribDivisor(8, 1);
+
+
+
+
+			
 
 														//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
 														//	int index = 3;
@@ -271,6 +295,9 @@ void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
 														//}
 														//for (int k = 0; k < 1; k++) {
 														//Has Texture
+
+
+
 			if ((!m_aMesh->meshes[0].getPosition().empty() && !m_textures == NULL)) {
 				gl::BindTexture(gl::TEXTURE_2D, m_textures->object());							//Bind Texture
 				gl::GenerateMipmap(gl::TEXTURE_2D);
@@ -283,8 +310,10 @@ void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
 				//	(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
 				//	aMesh->m_Entries[k].BaseVertex);
 				//
-
-				gl::DrawArrays(gl::TRIANGLES, 0, m_aMesh->meshes[0].getVertex().size());
+				
+				gl::BindVertexArray(m_aMesh->getVAO());
+				gl::DrawElementsInstanced(gl::TRIANGLES, m_aMesh->meshes[0].getIndices().size(), gl::UNSIGNED_INT, 0, particle->getNumMax());
+				//gl::DrawArrays(gl::TRIANGLES, 0, m_aMesh->meshes[0].getVertex().size());
 				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
 			}
 			//Has expanded normals

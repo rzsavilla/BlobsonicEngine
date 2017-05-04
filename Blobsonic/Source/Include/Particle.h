@@ -15,19 +15,23 @@ namespace Component {
 		glm::vec3 lookAt;
 		glm::vec3 velocity;
 		glm::vec3 acceleration;
+
 		std::string file;
+
 		std::shared_ptr<AssimpMesh> m_particleMesh;
 		std::shared_ptr<Material> m_material;
 		std::shared_ptr<Texture> m_texture;
 		std::shared_ptr<GLSLProgram> m_shader;
 
 		bool hasCollisions;
+		bool isDead;
+
 		float mass;
 		float minScale;
 		float maxScale;
 		float numParticles;
 
-		bool isDead;
+		glm::mat4* modelMatrices;
 		
 
 	public:
@@ -55,12 +59,17 @@ namespace Component {
 		glm::vec3 getLookAt();
 		glm::vec3 getVelocity();
 		glm::vec3 getAcceleration();
+
+		glm::mat4* getMatrix();
+
 		bool getHasCollisions();
+		bool getDead();
+
 		float getMass();
 		float getMinScale();
 		float getMaxScale();
 		float getNumMax();
-		bool getDead();
+
 		std::shared_ptr<AssimpMesh> getMesh();
 		std::shared_ptr<GLSLProgram> getShader();
 		std::shared_ptr<Texture> getTexture();

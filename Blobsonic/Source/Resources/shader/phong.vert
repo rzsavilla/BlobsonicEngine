@@ -7,6 +7,8 @@ layout (location=2) in vec2 VertexUV;
 layout (location=3) in ivec4 BoneIDs; // Stream of vertex bone IDs
 layout (location=4) in vec4 Weights; // Stream of vertex weights
 
+layout (location=5) in mat4 instanceMatrix;
+
 uniform mat3 NormalMatrix;
 
 uniform mat4 mModel;			//Model Matrix
@@ -49,5 +51,5 @@ void main()
 	texCoord = VertexUV;
 
 	//Vertex position with Model, View and Projection transformations
-	gl_Position = mProjection * mView * mModel  * vec4(VertexPosition,1.0);
+	gl_Position = mProjection * mView * mModel * instanceMatrix * vec4(VertexPosition,1.0);
 }
