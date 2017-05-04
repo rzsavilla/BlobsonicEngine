@@ -8,6 +8,6 @@
 
 
 setLoadingScene("Loading.xml")
-changeScene("WorldTest.xml")	-- Change to this scene
+changeScene("MainMenu.xml")	-- Change to this scene
 
 hideCursor(false)

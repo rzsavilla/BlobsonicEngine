@@ -177,7 +177,55 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 void System::Render::renderText(std::shared_ptr<Entity> entity)
 {
+	/*
+	std::shared_ptr<Texture> texture = NULL;
+	auto text = entity->get <Component::Text>();
+	auto t = entity->get <Component::Transformable>();
+	// Activate corresponding render state	
+	text->getShader()->use();
 
+	
+
+	gl::Uniform3f(gl::GetUniformLocation(text->getShader()->program(), "textColor"), color.x, color.y, color.z);
+	gl::ActiveTexture(gl::TEXTURE0);
+	gl::BindVertexArray(text->getVAO());
+	
+	// Iterate through all characters
+	std::string::const_iterator c;
+	for (c = text.begin(); c != text.end(); c++)
+	{
+		Character ch = Characters[*c];
+
+		GLfloat xpos = x + ch.Bearing.x * scale;
+		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+
+		GLfloat w = ch.Size.x * scale;
+		GLfloat h = ch.Size.y * scale;
+		// Update VBO for each character
+		GLfloat vertices[6][4] = {
+			{ xpos,     ypos + h,   0.0, 0.0 },
+			{ xpos,     ypos,       0.0, 1.0 },
+			{ xpos + w, ypos,       1.0, 1.0 },
+
+			{ xpos,     ypos + h,   0.0, 0.0 },
+			{ xpos + w, ypos,       1.0, 1.0 },
+			{ xpos + w, ypos + h,   1.0, 0.0 }
+		};
+		// Render glyph texture over quad
+		//gl::BindTexture(gl::TEXTURE_2D, ch.textureID);
+		gl::BindTexture(gl::TEXTURE_2D, texture->object());
+		// Update content of VBO memory
+		gl::BindBuffer(gl::ARRAY_BUFFER, text->getVAO());
+		gl::BufferSubData(gl::ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+		gl::BindBuffer(gl::ARRAY_BUFFER, 0);
+		// Render quad
+		gl::DrawArrays(gl::TRIANGLES, 0, 6);
+		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+		x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64)
+	}
+	gl::BindVertexArray(0);
+	gl::BindTexture(gl::TEXTURE_2D, 0);
+	*/
 }
 
 void System::Render::renderSprite(std::shared_ptr<Entity> entity)
@@ -188,7 +236,15 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 
 	spriteRender->getShader()->use();
 
-	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	/// Gets the current width and height of the window.
+	int x, y;
+	float width, height;
+	glfwGetWindowSize(glfwGetCurrentContext(), &x, &y);
+	width = x;
+	height = y;
+
+	glm::mat4 projection = glm::ortho(0.0f, width, height + 0.0f, 0.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::ortho(0.0f, 1600.0f, 1024.0f, 0.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::perspective(45.0f, 1.33333f, 0.1f, 1000.0f);
 
