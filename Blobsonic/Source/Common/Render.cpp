@@ -275,7 +275,7 @@ void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
 				//
 				
 				gl::BindVertexArray(m_aMesh->getVAO());
-				gl::DrawElementsInstanced(gl::TRIANGLES, m_aMesh->meshes[0].getIndices().size(), gl::UNSIGNED_INT, 0, particle->getNumMax());
+				gl::DrawElementsInstanced(gl::TRIANGLES, m_aMesh->meshes[0].getVertex().size(), gl::UNSIGNED_INT, 0, particle->getNumMax());
 				//gl::DrawArrays(gl::TRIANGLES, 0, m_aMesh->meshes[0].getVertex().size());
 				gl::BindTexture(gl::TEXTURE_2D, 0);										//Unbind Texture	
 			}

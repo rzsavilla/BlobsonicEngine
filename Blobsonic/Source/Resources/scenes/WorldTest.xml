@@ -223,7 +223,7 @@
 		<Mass>1.0f</Mass>
 		<MinScale>1.0f</MinScale>
 		<MaxScale>1.0f</MaxScale>
-		<MaxNumParticles>3</MaxNumParticles> <!-- Must always be the last --> 
+		<MaxNumParticles>3000</MaxNumParticles> <!-- Must always be the last --> 
 	</ParticleSystem>
 	
 	<Camera> <ID>cam1</ID>
