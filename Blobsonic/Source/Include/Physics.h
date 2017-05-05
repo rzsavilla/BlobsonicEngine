@@ -2,6 +2,7 @@
 
 #define GRAVITYCOEFFICENT -9.81 // m/s/s
 #define EPSILON 0.0025f
+#define DRAG 0.85f
 
 #include "System.h"
 

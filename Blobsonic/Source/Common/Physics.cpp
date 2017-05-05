@@ -111,59 +111,33 @@ void System::Physics::addEntity(std::shared_ptr<Entity> entity, std::vector<std:
 		if (entity->has<Component::Transformable>()) {
 			auto t = entity->get<Component::Transformable>();
 
-			if (entity->has<OBB>()) {
-				auto b = entity->get<OBB>();
-				//Get component Properties
-				auto t = entity->get<Component::Transformable>();
-				auto o = entity->get<OBB>();
+			//if (entity->has<OBB>()) {
+			//	auto b = entity->get<OBB>();
+			//	//Get component Properties
+			//	auto t = entity->get<Component::Transformable>();
+			//	auto o = entity->get<OBB>();
 
-				o->m_vDimensions = o->m_vDimensions * t->getScale();
+			//	o->m_vDimensions = o->m_vDimensions * t->getScale();
 
-				o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
-				o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
-				o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
+			//	o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
+			//	o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
+			//	o->m_Rotation = glm::rotate(o->m_Rotation, t->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
 
-				o->m_vCenter = glm::mat3(o->m_Rotation) * (t->getPosition() + (o->m_vDimensions * t->getScale()) / 2.0f);
-			}
-			if (entity->has<AABB>()) {
-				auto b = entity->get<AABB>();
+			//	o->m_vCenter = glm::mat3(o->m_Rotation) * (t->getPosition() + (o->m_vDimensions * t->getScale()) / 2.0f);
+			//}
+			//if (entity->has<AABB>()) {
+			//	auto b = entity->get<AABB>();
 
-				//Set component Properties
-				auto t = entity->get<Component::Transformable>();
-				auto a = entity->get<AABB>();
+			//	//Set component Properties
+			//	auto t = entity->get<Component::Transformable>();
+			//	auto a = entity->get<AABB>();
 
-				//find the longest side of the whole object , so as the bounding box ebcases all orientation
-				float fSize = std::max(a->m_vDimensions.x * t->getScale().x, a->m_vDimensions.y * t->getScale().y);
-				fSize = std::max(fSize, a->m_vDimensions.z * t->getScale().z);
+			//	//find the longest side of the whole object , so as the bounding box ebcases all orientation
+			//	float fSize = std::max(a->m_vDimensions.x * t->getScale().x, a->m_vDimensions.y * t->getScale().y);
+			//	fSize = std::max(fSize, a->m_vDimensions.z * t->getScale().z);
 
-				a->m_vCenter = t->m_vPosition + (a->m_vDimensions * a->m_vScale) / 2.0f;
-			}
-			if (entity->has<Sphere>()) {
-				auto b = entity->get<Sphere>();
-				//Set component Properties
-				auto t = entity->get<Component::Transformable>();
-				auto s = entity->get<Sphere>();
-
-				if (entity->has<OBB>())
-				{
-					auto O = entity->get<OBB>();
-					s->m_vCenter = O->m_vCenter;
-				}
-				else if (entity->has<AABB>())
-				{
-					auto AA = entity->get<AABB>();
-					s->m_vCenter = AA->m_vCenter;
-				}
-				else
-				{
-					s->m_vCenter = t->getPosition();
-				}
-
-				//find the largest scale of the sphere
-				float fSize = std::max(t->m_vScale.x, t->m_vScale.y);
-				fSize = std::max(fSize, t->m_vScale.z);
-				s->m_fRadius = fSize;
-			}
+			//	a->m_vCenter = t->m_vPosition + (a->m_vDimensions * a->m_vScale) / 2.0f;
+			//}
 			if (entity->has<Physical>()) {
 				auto p = entity->get<Physical>();
 				if (p->m_fMass == 0) {
@@ -563,23 +537,20 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	auto sphere = eSphere->get<Sphere>();
 	auto box = eBox->get<OBB>();
 
-	auto tSphere = eSphere->get<Component::Transformable>();
-	auto tBox = eBox->get<Component::Transformable>();
-
 	//local version
 	Sphere localSphere = *sphere;
-	Component::Transformable localTransSphere = *tSphere;
+
 
 	bool bExtremeClamp = true;
 
 
 	//translate sphere by inverse box position
-	localSphere.m_vCenter = localSphere.m_vCenter - tBox->getPosition();
+	localSphere.m_vCenter = localSphere.m_vCenter - box->m_vPosition;
 
 	//rotate sphere by inverse box rotation
-	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -tBox->getRotation().x, glm::vec3(1.0f, 0.0, 0.0f));
-	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -tBox->getRotation().y, glm::vec3(0.0f, 1.0, 0.0f));
-	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -tBox->getRotation().z, glm::vec3(0.0f, 0.0, 1.0f));
+	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -box->m_vPosition.x, glm::vec3(1.0f, 0.0, 0.0f));
+	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -box->m_vPosition.y, glm::vec3(0.0f, 1.0, 0.0f));
+	localSphere.m_mRotation = glm::rotate(localSphere.m_mRotation, -box->m_vPosition.z, glm::vec3(0.0f, 0.0, 1.0f));
 
 	localSphere.m_vCenter = localSphere.m_vCenter * mat3(localSphere.m_mRotation);
 
@@ -730,7 +701,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 	if (sphere->m_vCenter.x == 20 && fDist < 50)
 	{
-		std:cout << fDist << std::endl;
+	std:cout << fDist << std::endl;
 	}
 
 	if (fDist <= 0)
@@ -756,7 +727,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 			resolveCollision(eBox, eSphere, Normal);
 			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
 		}
-		
+
 		return true;
 	}
 	else
@@ -845,7 +816,7 @@ void System::Physics::updateOBB(std::shared_ptr<Entity> eBox)
 	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.x, glm::vec3(1.0f, 0.0, 0.0f));
 	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.y, glm::vec3(0.0f, 1.0, 0.0f));
 	box->m_Rotation = glm::rotate(box->m_Rotation, tBox->m_vRotation.z, glm::vec3(0.0f, 0.0, 1.0f));
-
+	box->m_vPosition = tBox->getPosition() - box->m_vLocalPos;
 	box->m_vCenter = glm::mat3(box->m_Rotation) * (tBox->m_vPosition + (box->m_vDimensions / 2.0f));
 }
 
@@ -855,8 +826,8 @@ void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
 	auto box = eBox->get<AABB>();
 	auto tBox = eBox->get<Component::Transformable>();
 
-
-	box->m_vCenter = tBox->m_vPosition + (box->m_vDimensions / 2.0f);
+	box->m_vPosition = tBox->getPosition() - box->m_vLocalTransform;
+	box->m_vCenter = box->m_vPosition + (box->m_vDimensions / 2.0f);
 
 
 }
@@ -869,8 +840,15 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 
 	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
 	{
-		phys->m_vAcceleration = glm::vec3(phys->m_vAcceleration.x, GRAVITYCOEFFICENT, phys->m_vAcceleration.z);
-		phys->m_vVelocity += phys->m_vAcceleration;
+
+		//apply gravity
+		phys->m_vVelocity.y += GRAVITYCOEFFICENT;
+
+		//apply drag
+		phys->m_vAcceleration *= DRAG;
+
+		//update velocity
+		phys->m_vVelocity += phys->getAcceleration();
 		trans->m_vPosition += phys->m_vVelocity;
 
 		if (phys->m_vVelocity.x < EPSILON) phys->m_vVelocity.x = 0;
@@ -884,8 +862,7 @@ void System::Physics::updateSphere(std::shared_ptr<Entity> eSphere)
 	auto trans1 = eSphere->get<Component::Transformable>();
 	auto sphere = eSphere->get<Sphere>();
 
-	sphere->m_vCenter = trans1->getPosition();
-
+	sphere->m_vCenter = trans1->getPosition() - sphere->m_localCenter;
 }
 
 void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, glm::vec3 CollisionNormal)

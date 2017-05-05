@@ -815,10 +815,8 @@ void SceneLoader::attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElemen
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			a->m_vPosition = v;		//Set
-		}
-		else if (strcmp(childValue, "Rotation") == 0) {
-			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
-			a->m_vRotation;					//Set
+			auto t = entity->get<Component::Transformable>();
+			a->m_vLocalTransform =  t->getPosition() - v;		//Set
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
@@ -844,6 +842,10 @@ void SceneLoader::attachSphere(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 		if (strcmp(childValue, "Center") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			sphere->m_vCenter = v;		//Set
+			if (entity->has<Component::Transformable>()) {
+				auto t = entity->get<Component::Transformable>();
+				sphere->m_localCenter = t->getPosition() - v;
+			}
 		}
 		else if (strcmp(childValue, "Radius") == 0) {
 			sphere->m_fRadius = stof(parent->ToElement()->GetText());//Set
@@ -864,6 +866,10 @@ void SceneLoader::attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			b->m_vPosition = v;		//Set
+			if (entity->has<Component::Transformable>()) {
+				auto t = entity->get<Component::Transformable>();
+				b->m_vLocalPos = t->getPosition() - v;
+			}
 		}
 		else if (strcmp(childValue, "Rotation") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data

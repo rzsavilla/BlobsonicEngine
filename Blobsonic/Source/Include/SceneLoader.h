@@ -57,7 +57,6 @@ private:
 	void attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachSphere(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
-
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	std::shared_ptr<Entity> loadButton(tinyxml2::XMLElement* e);
 
