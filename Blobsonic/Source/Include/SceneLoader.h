@@ -47,9 +47,17 @@ private:
 	void loadShader(tinyxml2::XMLElement* e);			//!< Parse file to load shader
 	
 	std::shared_ptr<Entity> loadAudio(tinyxml2::XMLElement* e); //!< Parse file to load audio
-	std::shared_ptr<Entity> loadEntity(tinyxml2::XMLElement* e);			//!< Parse and create model
-	std::shared_ptr<Entity> loadModel(tinyxml2::XMLElement* e);			//!< Parse and create model
+	std::shared_ptr<Entity> loadEntity(tinyxml2::XMLElement* e);	//!< Parse and create model
+	std::shared_ptr<Entity> loadModel(tinyxml2::XMLElement* e);		//!< Parse and create model
  
+	std::shared_ptr<Entity> createEntity(tinyxml2::XMLElement* e);	//!< Parse and create entity from xml
+	void attachTransformable(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachModel(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachPhysical(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachSphere(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	std::shared_ptr<Entity> loadButton(tinyxml2::XMLElement* e);
 
