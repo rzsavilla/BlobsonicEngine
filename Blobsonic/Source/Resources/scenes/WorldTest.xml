@@ -42,7 +42,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>.0f</Y>
+				<Y>10000.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
@@ -59,7 +59,7 @@
 		<Sphere>
 			<Center>
 				<X>0.0f</X>
-				<Y>0.0f</Y>
+				<Y>10000.0f</Y>
 				<Z>0.0f</Z>
 			</Center>
 			<Radius>100.0f</Radius>
@@ -80,9 +80,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>10000.0f</X>
+				<X>1000.0f</X>
 				<Y>1000.0f</Y>
-				<Z>10000.0f</Z>
+				<Z>1000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -103,7 +103,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>.0f</Y>
+				<Y>0.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>

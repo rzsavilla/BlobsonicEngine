@@ -817,6 +817,7 @@ void SceneLoader::attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElemen
 			a->m_vPosition = v;		//Set
 			auto t = entity->get<Component::Transformable>();
 			a->m_vLocalTransform =  t->getPosition() - v;		//Set
+			std::cout << "TEsting" << std::endl;
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
