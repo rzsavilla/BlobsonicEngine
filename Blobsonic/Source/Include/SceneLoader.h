@@ -61,6 +61,7 @@ private:
 	void attachDirLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachPointLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachSpotLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachSound(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	std::shared_ptr<Entity> loadButton(tinyxml2::XMLElement* e);

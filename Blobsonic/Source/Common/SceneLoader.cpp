@@ -980,7 +980,7 @@ void SceneLoader::attachDirLight(std::shared_ptr<Entity> entity, tinyxml2::XMLEl
 void SceneLoader::attachPointLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
-	if (m_bDebug) std::cout << "DirectionalLight Component Attached\n";
+	if (m_bDebug) std::cout << "Point Component Attached\n";
 	char* cData = "";			//Temporary storage for element data
 
 	entity->attach<Component::PointLight>();
@@ -1019,7 +1019,7 @@ void SceneLoader::attachPointLight(std::shared_ptr<Entity> entity, tinyxml2::XML
 void SceneLoader::attachSpotLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
-	if (m_bDebug) std::cout << "DirectionalLight Component Attached\n";
+	if (m_bDebug) std::cout << "SpotLight Component Attached\n";
 	char* cData = "";			//Temporary storage for element data
 
 	entity->attach<Component::Spotlight>();
@@ -1079,6 +1079,93 @@ void SceneLoader::attachSpotLight(std::shared_ptr<Entity> entity, tinyxml2::XMLE
 				light->setLinear(f);
 				if (m_bDebug) std::cout << "Quadratic: " << f << "\n  ";
 			}
+		}
+	}
+}
+
+void SceneLoader::attachSound(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e)
+{
+	using namespace tinyxml2;
+	
+	if (m_bDebug) std::cout <<  "Audio Component Attached\n  ";
+	auto sound = entity->get<Component::Sound>();
+	
+	char* cData = "";			//Temporary storage for element data
+	std::string s;
+	char * c;
+	glm::vec3 v;
+	//Look at Model Element
+	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
+		const char* childValue = child->Value();
+		if (strcmp(childValue, "File") == 0) {
+			//Load file
+			if (readElementText(child, c)) {
+				std::string sFile(c, strlen(c));
+				sound->setFile(sFile);
+				if (m_bDebug) std::cout << "File Set : " << sFile << "\n  ";
+			}
+		}
+		else if (strcmp(childValue, "isPlaying") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setPlaying(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setPlaying(true);
+			}
+			if (m_bDebug) std::cout << "isPlaying Set : " << atof(c) << "\n  ";
+		}
+		else if (strcmp(childValue, "isInitialized") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setInitialized(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setInitialized(true);
+			}
+			if (m_bDebug) std::cout << "isInitialized Set : " << atof(c) << "\n  ";
+		}
+		else if (strcmp(childValue, "isLooping") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setLooping(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setLooping(true);
+			}
+			if (m_bDebug) std::cout << "isLooping set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "startsPaused") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setPaused(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setPaused(true);
+			}
+			if (m_bDebug) std::cout << "startsPaused set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "sound3D") == 0) {
+			if (readElementText(child, c)) {
+				std::string var(c, strlen(c));
+				if (strcmp(c, "false") == 0)
+					sound->setSound3D(false);
+				else if (strcmp(c, "true") == 0)
+					sound->setSound3D(true);
+			}
+			if (m_bDebug) std::cout << "3D sound set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "Volume") == 0) {
+			if (readElementText(child, c)) {
+				sound->setVolume(atof(c));
+			}
+			if (m_bDebug) std::cout << "Volume set: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "MinDistance") == 0) {
+			if (readElementText(child, c)) {
+				sound->setMinDist(atof(c));
+			}
+			if (m_bDebug) std::cout << "Minimum distance set: " << c << "\n  ";
 		}
 	}
 }
