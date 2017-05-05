@@ -747,7 +747,7 @@ void SceneLoader::attachTransformable(std::shared_ptr<Entity> entity, tinyxml2::
 void SceneLoader::attachModel(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
 {
 	using namespace tinyxml2;
-	entity->attach<Component::Model>();	//Attach component
+	entity->attach<Component::Model>();			//Attach component
 	auto m = entity->get<Component::Model>();	//Get pointer to attached component
 	if (m_bDebug) std::cout << "Model Component Attached\n";
 	
@@ -1168,6 +1168,50 @@ void SceneLoader::attachSound(std::shared_ptr<Entity> entity, tinyxml2::XMLEleme
 			if (m_bDebug) std::cout << "Minimum distance set: " << c << "\n  ";
 		}
 	}
+
+}
+
+void SceneLoader::attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
+{
+	using namespace tinyxml2;
+
+	if (m_bDebug) std::cout << "Sprite Component Attached\n  ";
+	auto sprite = entity->get<Component::SpriteRenderer>();
+
+	char* cData = "";			//Temporary storage for element data
+	std::string s;
+	char * c;
+	glm::vec3 v;
+	//Look at Model Element
+	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
+		const char* childValue = child->Value();
+		if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(child, c)) {
+				std::string sFile(c, strlen(c));
+				if (readElementText(child, cData)) {
+					sprite->setShader(m_res->getShader(sFile));
+				}
+				if (m_bDebug) std::cout << "Shader Set : " << sFile << "\n  ";
+			}
+		}
+		else if (strcmp(childValue, "Texture") == 0) {
+			if (readElementText(child, c)) {
+				std::string sFile(c, strlen(c));
+				if (readElementText(child, cData)) {
+					sprite->setTexture(m_res->getTexture(sFile));
+				}
+				if (m_bDebug) std::cout << "Texture Set : " << sFile << "\n  ";
+			}
+		}
+		else if (strcmp(childValue, "Color") == 0) {
+			if (readElementText(child, c)) {
+				glm::vec3 v = parseVec3(child);	//Parse vec3 data
+				sprite->setColor(v);			//Set
+				if (m_bDebug) std::cout << "Colour: " << v.x << " " << v.y << " " << v.z << "\n";
+			}
+		}
+	}
+
 }
 
 std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
