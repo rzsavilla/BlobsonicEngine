@@ -58,10 +58,13 @@ void Engine::Engine::loop()
 
 		//Reset every second
 		if (glfwGetTime() - dTimer > 1.0) {
-			//std::cout << "FPS:" << iFrames << "\n";
+			std::cout << "FPS:" << iFrames << "\n";
 			dTimer++;
 			iUpdates = 0;
 			iFrames = 0;
+			if (SceneManager::getInstance()->getActiveScene()) {
+				//std::cout << "Entity Count: " << SceneManager::getInstance()->getActiveScene()->getEntityManager()->m_entities.size() << "\n";
+			}
 		}
 		m_deltaTimer.reset();
 	}
@@ -74,6 +77,7 @@ void Engine::Engine::update(float dt)
 {
 	//Get Active Scene
 	std::shared_ptr<Scene> m_activeScene = m_SceneManager->getActiveScene();
+
 	//Pass scene entities to systems
 	for (auto it = m_ptrSystems.begin(); it != m_ptrSystems.end(); ++it) {
 		if (it->first != typeid(System::Render)) {	//Do not process render systems
@@ -90,6 +94,8 @@ void Engine::Engine::update(float dt)
 			(*it).second->update(dt);
 		}
 	}
+
+	m_SceneManager->update();	//Upate Scene manager
 }
 
 void Engine::Engine::render()

@@ -15,7 +15,7 @@
 enum SceneManagerState {
 	Loading,
 	Active,
-	Loaded
+	Loaded,
 };
 
 class SceneManager {
@@ -37,7 +37,9 @@ private:
 
 	SceneManager();	//!< Private default constructor Singleton
 	
-	MyTimer m_transitionTimer;	//!< Counts delay when changing scen
+	MyTimer m_transitionTimer;	//!< Counts delay when changing scene
+
+	bool m_bLock;	//!< If true scene will not automatically switch to changed scene. (To allow scripts to intialize first)
 public:
 	~SceneManager();	//!< Destructor
 
@@ -46,6 +48,13 @@ public:
 	void setLoadingScene(std::string filename);	//!< Set the filename of the loading scene
 
 	void changeScene(std::string filename, bool reloadResources = false /* default false Force reload all resources */);
+
+	/*! Lock, true - stops the scene switch from loading to activescene automatically
+	*	Lock, false - stops allows scene to switch to active scene from loading scene
+	*/
+	void lock(bool state);	
+
+	void update();	//!< Update scene manager
 
 	std::shared_ptr<Scene> getActiveScene();						//!< Returns active scene
 	std::string getActiveSceneName();		//!< Return file name of active scene

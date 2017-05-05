@@ -1,7 +1,7 @@
 /**
-* @class	Scene
-* @brief	Class stores scene objects
-* Abstract class for creating different types of scenes and storing them all as a single scene type (Polymorphism)
+*	@class	Scene
+*	@brief	Storage for scene
+*	Abstract class for creating different types of scenes and storing them all as a single scene type (Polymorphism)
 */
 
 #pragma once
@@ -22,17 +22,8 @@ protected:
 	*/
 	EntityManager m_entities;	
 
-	/*! Pointer to instance of the resource manager
-		Allows scenes to access loaded resources
-	*/
-	std::shared_ptr<ResourceManager> m_ptrResources;
-
-	/*!	Factory pattern entity generation
-	*	Used to generate premade entities or attach new components to entities
-	*/
-	EntityFactory m_factory;
 public:
-	Scene();
+	Scene();	//!< Default constructor
 	~Scene();	//!< Destructor
 	/**
 		Scene loader replaces majority of what this function would do.

@@ -13,6 +13,12 @@ planeAtt= {
 		Material = "default_material",
 		Shader = "phong_shader",
 		Texture = "floor_texture"
+	},
+	AABB = {
+
+	},
+	Sphere = {
+		Radius = 1.0
 	}
 }
 
@@ -30,14 +36,7 @@ boxAtt = {
 		Texture = "white_texture"
 	},
 	Physical = {
-		Mass = 1.0,
-		INVMass = 1.0,
+		Mass = 0.0,
 		Restitution = 0.1
 	}
 }
-
---Create Entity of player
-plane = Entity.new()
-plane:setComponents(planeAtt)
-
-boxes = {}	-- Array to store box entities

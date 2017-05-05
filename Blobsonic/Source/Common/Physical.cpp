@@ -69,5 +69,6 @@ glm::vec3 Physical::getVelocity()
 
 glm::vec3 Physical::getAcceleration()
 {
-	return m_vAcceleration;
+	glm::vec3 accel(m_vAcceleration.x, m_vAcceleration.y - 9.81, m_vAcceleration.z);
+	return accel;
 }

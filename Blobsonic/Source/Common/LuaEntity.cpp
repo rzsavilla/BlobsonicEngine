@@ -19,11 +19,11 @@
 #include "Model.h"
 
 
-static std::shared_ptr<EntityFactory> m_EntityFactory = std::make_shared<EntityFactory>();
+static std::shared_ptr<EntityFactory> m_EntityFactory = EntityFactory::getInstance();
 
 LuaEntity::LuaEntity()
 {
-
+	m_entity = NULL;
 }
 
 void LuaEntity::setTransformable(sol::table t)
@@ -121,21 +121,31 @@ void LuaEntity::setPhysical(sol::table t)
 void LuaEntity::setAABB(sol::table t)
 {
 	if (!m_entity->has<AABB>()) {
-		m_entity->attach<AABB>();	//Attach component
-	}
-	auto aabb = m_entity->get<AABB>();	//Get Component
-												//Read variables from lua table
-	for (auto it = t.begin(); it != t.end(); ++it) {
-		auto key = (*it).first;	//Get element key
-		std::string s = key.as<std::string>();		//Get element value
-		if (key.get_type() == sol::type::string) {
-			auto value = (*it).second;
-			//Set Component variables
-			if (value.get_type() == sol::type::table) {
-				if (s == "Dimensions") {
-					aabb->m_vDimensions = LuaHelper::readVec3((*it).second);
+		glm::vec3 vPos;
+		glm::vec3 vDimenstions;
+		glm::vec3 vScale = glm::vec3(1.0f);
+		glm::vec3 vCenter = glm::vec3(0.0f);
+
+		//Read variables from lua table
+		for (auto it = t.begin(); it != t.end(); ++it) {
+			auto key = (*it).first;	//Get element key
+			std::string s = key.as<std::string>();		//Get element value
+			if (key.get_type() == sol::type::string) {
+				auto value = (*it).second;
+				//Set Component variables
+				if (value.get_type() == sol::type::table) {
+
 				}
 			}
+		}
+
+		//Attach component
+		if (!m_entity->has<AABB>()) {
+			m_EntityFactory->attachAABB(m_entity, vPos, vDimenstions, vScale);
+		}
+		else {
+			//Set Component variables
+			auto aabb = m_entity->get<AABB>();	//Get Component
 		}
 	}
 }
@@ -214,6 +224,7 @@ void LuaEntity::setComponents(sol::table t)
 	if (!m_entity) {
 		//Create and add entity into the scene
 		m_entity = std::make_shared<Entity>();	//Pointer to handled entity
+		m_bDestroyed = false;
 		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
 
 		lua_pushnil(m_activeScript);  // first key
@@ -234,6 +245,13 @@ void LuaEntity::setComponents(sol::table t)
 						else if (s == "AABB") { setAABB(value); }
 						else if (s == "Sphere") { setSphere(value); }
 						else if (s == "OBB") { setOBB(value); }
+						
+					}
+					else if (value.is<std::string>()) {
+						if (s == "Name") {
+							//std::cout << "Name: " << value.as<std::string>() << "\n";
+							m_entity->setName(value.as<std::string>());
+						}
 					}
 				}
 			}
@@ -241,18 +259,15 @@ void LuaEntity::setComponents(sol::table t)
 	}
 }
 
+void LuaEntity::handleEntity(const std::string & name)
+{
+	m_entity = SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
+}
+
 bool LuaEntity::hasComponent(const std::string & sComponent)
 {
 	if (sComponent == "Transformable") return m_entity->has<Component::Transformable>();
 	else if (sComponent == "Model") return m_entity->has<Component::Model>();;
-}
-
-void LuaEntity::handleEntity(const std::string & name)
-{
-	if (!m_entity) {
-		m_entity =
-		SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
-	}
 }
 
 unsigned int LuaEntity::getID()
@@ -375,14 +390,29 @@ void LuaEntity::pSetVelocity(float x, float y, float z)
 
 void LuaEntity::destroy()
 {
-	if (m_bDebug) std::cout << "Destroyed: " << m_entity->getUID() << "\n";
-	if (m_entity)(m_entity->destroy());
+	if (m_entity) {
+		m_entity->destroy();
+		m_entity = nullptr;
+	}
 	m_bDestroyed = true;
 }
 
 bool LuaEntity::isDestroyed()
 {
 	return m_bDestroyed;
+}
+
+void LuaEntity::log()
+{
+	if (!m_entity) {
+		//std::cout << "Entity: " << m_entity->getName() << "\n";
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			std::cout << "- Pos: x:" << t->getPosition().x << " y:" << t->getPosition().y << " z:" << t->getPosition().z << std::endl;
+			std::cout << "- Rot: x:" << t->getRotation().x << " y:" << t->getRotation().y << " z:" << t->getRotation().z << std::endl;
+		}
+		std::cout << "- Destroyed: " << m_entity->isDestroyed() << "\n";
+	}
 }
 
 void LuaEntity::register_lua(lua_State* L)
@@ -398,6 +428,7 @@ void LuaEntity::register_lua(lua_State* L)
 		"getID", &LuaEntity::getID,
 		"destroy", &LuaEntity::destroy,
 		"isDestroyed",&LuaEntity::isDestroyed,
+		"log",&LuaEntity::log,
 		//Transformable
 		"tSetPosition", &LuaEntity::tSetPosition,
 		"tSetRotation", &LuaEntity::tSetRotation,

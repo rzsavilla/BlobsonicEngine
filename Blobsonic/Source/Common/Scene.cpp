@@ -5,7 +5,7 @@
 
 Scene::Scene()
 {
-	m_ptrResources = ResourceManager::getInstance();
+
 }
 
 Scene::~Scene()
