@@ -404,7 +404,7 @@ bool LuaEntity::isDestroyed()
 
 void LuaEntity::log()
 {
-	if (!m_entity) {
+	if (m_entity) {
 		//std::cout << "Entity: " << m_entity->getName() << "\n";
 		if (m_entity->has<Component::Transformable>()) {
 			auto t = m_entity->get<Component::Transformable>();
