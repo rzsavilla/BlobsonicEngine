@@ -33,7 +33,7 @@
 			<Mesh>deer_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>skybox_texture</Texture>
+			<Texture>deer_texture</Texture>
 		</Model>
 		<Physical>
 			<Mass>1.0</Mass>

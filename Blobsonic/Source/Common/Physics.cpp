@@ -696,10 +696,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	//subract the radius
 	fDist = fDist - localSphere.m_fRadius;
 
-	if (sphere->m_vCenter.x == 20 && fDist < 50)
-	{
-	std:cout << fDist << std::endl;
-	}
 
 	if (fDist <= 0)
 	{
@@ -713,7 +709,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 			newVector *= localSphere.m_fRadius;
 			Normal = Normal - newVector;
 
-
 			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
 
 			Normal = glm::normalize(Normal);
@@ -721,6 +716,8 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 			//find the penetration depth
 			float PenetrationDepth = localSphere.m_fRadius - d;
+
+
 			resolveCollision(eBox, eSphere, Normal);
 			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
 		}
@@ -838,20 +835,16 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 
 	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
 	{
-
-		//apply gravity
-		phys->m_vVelocity.y += GRAVITYCOEFFICENT;
-
-		//apply drag
-		phys->m_vAcceleration *= DRAG;
-
-		//update velocity
-		phys->m_vVelocity += phys->getAcceleration();
+		//update velocity//apply drag //apply gravity
+		phys->m_vVelocity += phys->getAcceleration() * dt * DRAG;
 		trans->m_vPosition += phys->m_vVelocity;
 
-		if (phys->m_vVelocity.x < EPSILON) phys->m_vVelocity.x = 0;
-		if (phys->m_vVelocity.y < EPSILON) phys->m_vVelocity.y = 0;
-		if (phys->m_vVelocity.z < EPSILON) phys->m_vVelocity.z = 0;
+		//check for epsilon movement
+		if (abs(phys->m_vVelocity.x) < EPSILON) phys->m_vVelocity.x = 0;
+		if (abs(phys->m_vVelocity.y) < EPSILON) phys->m_vVelocity.y = 0;
+		if (abs(phys->m_vVelocity.z) < EPSILON) phys->m_vVelocity.z = 0;
+
+		std::cout << phys->m_vVelocity.x << " " << phys->m_vVelocity.y << " " << phys->m_vVelocity.z << std::endl;
 	}
 }
 
@@ -939,36 +932,82 @@ void System::Physics::broadPhase(float dt)
 					if (m_vAABBS.at(i)->has<Sphere>())
 					{
 						std::cout << "Sphere" << std::endl;
-						m_vCheckSpheres.push_back(m_vAABBS.at(i));
+						if ((find(m_vCheckSpheres.begin(), m_vCheckSpheres.end(), m_vAABBS.at(i))) != m_vCheckSpheres.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckSpheres.push_back(m_vAABBS.at(i));
+							auto sphere = m_vAABBS.at(i)->get<Physical>();
+						
+						}
 					}
 						
 					if (m_vAABBS.at(x)->has<Sphere>())
 					{
 						std::cout << "Sphere" << std::endl;
-						m_vCheckSpheres.push_back(m_vAABBS.at(x));
+						if ((find(m_vCheckSpheres.begin(), m_vCheckSpheres.end(), m_vAABBS.at(x))) != m_vCheckSpheres.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckSpheres.push_back(m_vAABBS.at(x));
+						}
 					}
 
 					if (m_vAABBS.at(i)->has<OBB>())
 					{
 						std::cout << "BOX" << std::endl;
-						m_vCheckOBBS.push_back(m_vAABBS.at(i));
+						if ((find(m_vCheckOBBS.begin(), m_vCheckOBBS.end(), m_vAABBS.at(i))) != m_vCheckOBBS.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckOBBS.push_back(m_vAABBS.at(i));
+						}
 					}
 					if (m_vAABBS.at(x)->has<OBB>())
 					{
 						std::cout << "BOX" << std::endl;
-						m_vCheckOBBS.push_back(m_vAABBS.at(x));
+						if ((find(m_vCheckOBBS.begin(), m_vCheckOBBS.end(), m_vAABBS.at(x))) != m_vCheckOBBS.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckOBBS.push_back(m_vAABBS.at(x));
+						}
 					}
 				
 					if (m_vAABBS.at(i)->has<Capsule>())
 					{
 						std::cout << "Capsule" << std::endl;
-						m_vCheckCapsule.push_back(m_vAABBS.at(i));
+						
+						if ((find(m_vCheckCapsule.begin(), m_vCheckCapsule.end(), m_vAABBS.at(i))) != m_vCheckCapsule.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckCapsule.push_back(m_vAABBS.at(i));
+						}
 					}
 					
 					if (m_vAABBS.at(x)->has<Capsule>())
 					{
 						std::cout << "Capsule" << std::endl;
-						m_vCheckCapsule.push_back(m_vAABBS.at(x));
+						
+						if ((find(m_vCheckCapsule.begin(), m_vCheckCapsule.end(), m_vAABBS.at(x))) != m_vCheckCapsule.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckCapsule.push_back(m_vAABBS.at(x));
+						}
 					}
 
 				}
@@ -1013,6 +1052,10 @@ void System::Physics::narrowPhase(float dt)
 	{
 		for (int x = 0; x < m_vCheckOBBS.size(); x++)
 		{
+
+			auto sphere = m_vCheckSpheres.at(i)->get<Physical>();
+			auto box = m_vCheckOBBS.at(x)->get<Physical>();
+
 			CheckOBBSphereCollision(m_vCheckOBBS.at(x), m_vCheckSpheres.at(i));
 
 
