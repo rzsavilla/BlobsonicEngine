@@ -57,6 +57,11 @@ private:
 	void attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachSphere(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachCamera(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachDirLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachPointLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachSpotLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	std::shared_ptr<Entity> loadButton(tinyxml2::XMLElement* e);
 
@@ -87,7 +92,7 @@ private:	//Staggered Loading functions and variables
 	tinyxml2::XMLNode* m_node;			//!< Current xml node
 public:
 	//! Default constructor
-	SceneLoader();							//!< Default constructor
+	SceneLoader();		//!< Default constructor
 	~SceneLoader();		//!< Destructor
 
 	/*!
