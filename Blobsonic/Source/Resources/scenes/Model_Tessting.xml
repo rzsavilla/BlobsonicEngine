@@ -10,7 +10,7 @@
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>10000.0f</Y>
+				<Y>500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -30,40 +30,11 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>pine1_mesh</Mesh>
+			<Mesh>pine2Group_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>skybox_texture</Texture>
+			<Texture>pine1_texture</Texture>
 		</Model>
-		<Physical>
-			<Mass>1.0</Mass>
-			<Restitution>0.5</Restitution>
-		</Physical>
-		<AABB>
-			<Position>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</AABB>
-		<Sphere>
-			<Center>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
-				<Z>0.0f</Z>
-			</Center>
-			<Radius>100.0f</Radius>
-		</Sphere>
 	</Entity>
 	
 	<Entity>
@@ -80,9 +51,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>1000.0f</X>
+				<X>10000.0f</X>
 				<Y>1000.0f</Y>
-				<Z>1000.0f</Z>
+				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -103,7 +74,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>0.0f</Y>
+				<Y>.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>

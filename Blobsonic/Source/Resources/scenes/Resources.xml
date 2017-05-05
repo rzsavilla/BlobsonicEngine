@@ -6,6 +6,14 @@
 		<File>Source\Resources\models\cube.obj</File>
 	</Mesh>
 	<Mesh> 
+		<ID>pine2_mesh</ID>
+		<File>Source\Resources\models\pine_Tree2.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>pine2Group_mesh</ID>
+		<File>Source\Resources\models\leaf.obj</File>
+	</Mesh>
+	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
 	</Mesh>
@@ -26,6 +34,10 @@
 		<File>Source\Resources\models\skybox.obj</File>
 	</Mesh>
 	
+	<Texture> 
+		<ID>pine1_texture</ID>
+		<File>Source\Resources\textures\pine1_uv.png</File>
+	</Texture>
 	<Texture> 
 		<ID>room_texture</ID>
 		<File>Source\Resources\textures\room.png</File>
