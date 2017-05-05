@@ -41,6 +41,7 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 	lua.set_function("reloadScene", &LuaScripting::reloadScene, LuaScripting());
 	lua.set_function("changeScene", &LuaScripting::changeScene, LuaScripting());
 	lua.set_function("forceReloadScene", &LuaScripting::forceReloadScene, LuaScripting());
+	lua.set_function("getActiveScene", &LuaScripting::getActiveScene, LuaScripting());
 	//-----Inputs-----
 	lua.set_function("isKeyDown", &LuaScripting::isKeyDown, LuaScripting());
 	lua.set_function("isMouseDown", &LuaScripting::isMouseDown, LuaScripting());
@@ -79,6 +80,12 @@ void System::Scripting::LuaScripting::forceReloadScene()
 	m_bReloadScene = true;
 	m_bReloadScripts = true;
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), true);
+}
+
+int System::Scripting::LuaScripting::getActiveScene()
+{
+	lua_pushstring(m_activeScript, m_SceneManager->getActiveSceneName().c_str());
+	return 1;
 }
 
 bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)

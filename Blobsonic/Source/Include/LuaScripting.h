@@ -34,11 +34,12 @@ namespace System {
 			void changeScene(std::string sceneFile);		//!< Load and change to a specified scene
 			void reloadScene();				//!< Set loading scene
 			void forceReloadScene();		//!< Reload scene including all resources
+			int getActiveScene();	//!< Retun the name of the active scene
 
 			//-----------------Inputs------------------------------
-			bool isKeyDown(const std::string& key);		//!< Check if a key is pressed
+			bool isKeyDown(const std::string& key);			//!< Check if a key is pressed
 			bool isMouseDown(const std::string& button);	//!< Check if a mouse button is down
-			void hideCursor(bool hide);
+			void hideCursor(bool hide);						//!< Enable or disable mouse cursor
 
 			//-----------------Misc------------------------------
 			void printString(const std::string& s);	//!< Function simply prints string into console
