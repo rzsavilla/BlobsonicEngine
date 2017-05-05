@@ -350,9 +350,11 @@ std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
 	if (m_bDebug) std::cout << "\nLoading Button \n  ";
 	std::shared_ptr<Entity> entity = m_factory->createSprite();
 	entity->attach<Component::Button>();
+	//entity->attach<Component::Text>();
 	auto sprite = entity->get<Component::SpriteRenderer>();
 	auto transform = entity->get<Component::Transformable>();
 	auto button = entity->get<Component::Button>();
+	//auto Text = entity->get<Component::Text>();
 
 	std::string sID;
 	//Look at Model Element
@@ -366,7 +368,7 @@ std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
 		}
 		else if (strcmp(childValue, "Shader") == 0) {
 			if (readElementText(modelChild, cData)) {
-				sprite->setShader((m_res->getShader(std::string(cData, strlen(cData)))));
+				sprite->setShader(m_res->getShader(std::string(cData, strlen(cData))));
 			}
 		}
 
@@ -399,6 +401,54 @@ std::shared_ptr<Entity> SceneLoader::loadButton(tinyxml2::XMLElement * e)
 			glm::vec3 v = parseVec3(modelChild);
 			button->setButtonID(v.x);
 			if (m_bDebug) std::cout << "ID : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+	}
+	return entity;
+}
+
+std::shared_ptr<Entity> SceneLoader::loadText(tinyxml2::XMLElement * e)
+{
+	using namespace tinyxml2;
+	char* cData = "";			//Temporary storage for element data
+	if (m_bDebug) std::cout << "\nLoading Text \n  ";
+	std::shared_ptr<Entity> entity = m_factory.createText();
+	entity->attach<Component::Text>();
+	auto text = entity->get<Component::Text>();
+	auto transform = entity->get<Component::Transformable>();
+	//auto button = entity->get<Component::Button>();
+	//auto Text = entity->get<Component::Text>();
+
+	std::string sID;
+	//Look at Model Element
+	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
+		const char* childValue = modelChild->Value();
+		if (strcmp(childValue, "ID") == 0) {
+			if (readElementText(modelChild, cData)) {
+				sID = std::string(cData, strlen(cData));
+				if (m_bDebug) std::cout << "ID: " << sID << "\n";
+			}
+		}
+		else if (strcmp(childValue, "Shader") == 0) {
+			if (readElementText(modelChild, cData)) {
+				text->setShader(m_res->getShader(std::string(cData, strlen(cData))));
+			}
+		}
+		else if (strcmp(childValue, "String") == 0) {
+			if (readElementText(modelChild, cData)) {
+				string sString = std::string(cData, strlen(cData));
+				text->setString(sString);
+			}
+			//if (m_bDebug) std::cout << "String : " << sString << "\n  ";
+		}
+		else if (strcmp(childValue, "Position") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			transform->setPosition(v);
+			if (m_bDebug) std::cout << "Position Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
+		}
+		else if (strcmp(childValue, "Colour") == 0) {
+			glm::vec3 v = parseVec3(modelChild);
+			text->setColour(vec4(v, 1.0f));
+			if (m_bDebug) std::cout << "Colour Set : " << v.x << ", " << v.y << ", " << v.z << "\n  ";
 		}
 	}
 	return entity;
@@ -1427,12 +1477,16 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			else if (strcmp(element->Value(), "Audio") == 0) {
 				entities->addEntity(loadAudio(element));
 			}
+			else if (strcmp(element->Value(), "Text") == 0) {
+				entities->addEntity(loadText(element));
+			}
 			else if (strcmp(element->Value(), "Sprite") == 0) {
 				entities->addEntity(loadSprite(element));
 			}
 			else if (strcmp(element->Value(), "Button") == 0) {
 				entities->addEntity(loadButton(element));
 			}
+			
 		}
 	}
 }
