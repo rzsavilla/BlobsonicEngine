@@ -139,7 +139,7 @@ bool System::Scripting::LuaScripting::isMouseDown(const std::string & button)
 void System::Scripting::LuaScripting::hideCursor(bool hide)
 {
 	if (hide) glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);	//Hide mouse
-	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_HAND_CURSOR);		//Show Mouse
+	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CROSSHAIR_CURSOR);		//Show Mouse
 }
 
 void System::Scripting::LuaScripting::printString(const std::string & s)
