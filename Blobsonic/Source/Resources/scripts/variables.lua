@@ -3,9 +3,7 @@
 	Attach other variables/scripts here using "require"
 --]]
 
-
-sScriptDir = "Source/Resources/scripts/"
-
 require "Source/Resources/scripts/Player"
 
 require "Source/Resources/scripts/Entities"
+

@@ -15,7 +15,7 @@ planeAtt= {
 		Texture = "floor_texture"
 	},
 	AABB = {
-		
+
 	},
 	Sphere = {
 		Radius = 1.0
@@ -44,5 +44,3 @@ boxAtt = {
 --Create Entity of player
 plane = Entity.new()
 plane:setComponents(planeAtt)
-
-boxes = {}	-- Array to store box entities

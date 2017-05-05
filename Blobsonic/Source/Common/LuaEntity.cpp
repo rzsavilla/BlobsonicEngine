@@ -23,7 +23,7 @@ static std::shared_ptr<EntityFactory> m_EntityFactory = EntityFactory::getInstan
 
 LuaEntity::LuaEntity()
 {
-
+	m_entity = NULL;
 }
 
 void LuaEntity::setTransformable(sol::table t)
@@ -221,9 +221,10 @@ void LuaEntity::setOBB(sol::table t)
 
 void LuaEntity::setComponents(sol::table t)
 {
-	if (true) {
+	if (!m_entity) {
 		//Create and add entity into the scene
 		m_entity = std::make_shared<Entity>();	//Pointer to handled entity
+		m_bDestroyed = false;
 		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
 
 		lua_pushnil(m_activeScript);  // first key
@@ -244,13 +245,19 @@ void LuaEntity::setComponents(sol::table t)
 						else if (s == "AABB") { setAABB(value); }
 						else if (s == "Sphere") { setSphere(value); }
 						else if (s == "OBB") { setOBB(value); }
+						
+					}
+					else if (value.is<std::string>()) {
+						if (s == "Name") {
+							//std::cout << "Name: " << value.as<std::string>() << "\n";
+							m_entity->setName(value.as<std::string>());
+						}
 					}
 				}
 			}
 		}
 	}
 }
-
 
 void LuaEntity::handleEntity(const std::string & name)
 {
@@ -383,14 +390,29 @@ void LuaEntity::pSetVelocity(float x, float y, float z)
 
 void LuaEntity::destroy()
 {
-	if (m_bDebug) std::cout << "Destroyed: " << m_entity->getUID() << "\n";
-	if (m_entity)(m_entity->destroy());
+	if (m_entity) {
+		m_entity->destroy();
+		m_entity = nullptr;
+	}
 	m_bDestroyed = true;
 }
 
 bool LuaEntity::isDestroyed()
 {
 	return m_bDestroyed;
+}
+
+void LuaEntity::log()
+{
+	if (!m_entity) {
+		//std::cout << "Entity: " << m_entity->getName() << "\n";
+		if (m_entity->has<Component::Transformable>()) {
+			auto t = m_entity->get<Component::Transformable>();
+			std::cout << "- Pos: x:" << t->getPosition().x << " y:" << t->getPosition().y << " z:" << t->getPosition().z << std::endl;
+			std::cout << "- Rot: x:" << t->getRotation().x << " y:" << t->getRotation().y << " z:" << t->getRotation().z << std::endl;
+		}
+		std::cout << "- Destroyed: " << m_entity->isDestroyed() << "\n";
+	}
 }
 
 void LuaEntity::register_lua(lua_State* L)
@@ -406,6 +428,7 @@ void LuaEntity::register_lua(lua_State* L)
 		"getID", &LuaEntity::getID,
 		"destroy", &LuaEntity::destroy,
 		"isDestroyed",&LuaEntity::isDestroyed,
+		"log",&LuaEntity::log,
 		//Transformable
 		"tSetPosition", &LuaEntity::tSetPosition,
 		"tSetRotation", &LuaEntity::tSetRotation,

@@ -6,6 +6,7 @@ SceneManager::SceneManager()
 	m_State = Active;
 	m_bHasLoadingScreen = false;
 	m_bForceReloadResouces = false;
+	m_bLock = false;
 }
 
 SceneManager::~SceneManager()
@@ -49,6 +50,11 @@ void SceneManager::changeScene(std::string filename, bool reloadResources)
 	}
 }
 
+void SceneManager::lock(bool state)
+{
+	m_bLock = state;
+}
+
 void SceneManager::update()
 {
 	if (m_State == Loading) {
@@ -61,26 +67,25 @@ void SceneManager::update()
 		std::cout << "Loaded\n";
 		//State has finished Loading
 		if ((m_transitionTimer.getElapsed() > m_fTransitionDelay)) {
-			std::cout << m_transitionTimer.getElapsed() << "\n";
 			m_State = Active;
+			std::cout << "Transition Timer: " << m_transitionTimer.getElapsed() << "\n";
 		}
 	}
 
 	//Remove Destoyed entities
 	if (m_ActiveScene) m_ActiveScene->getEntityManager()->updateEntityManager();
 	if (m_LoadingScene) m_LoadingScene->getEntityManager()->updateEntityManager();
-
 }
 
 std::shared_ptr<Scene> SceneManager::getActiveScene()
 {
 	if (m_State == Active) {
-		if (m_ActiveScene) return m_ActiveScene;
+		if (!m_bLock) {
+			if (m_ActiveScene) return m_ActiveScene;
+		}
 	}
-	else if (m_State == Loading) {
-		if (m_LoadingScene) return m_LoadingScene;
-	}
-	return NULL; //No Scene
+	if (m_LoadingScene) return m_LoadingScene;
+	else  return NULL; //No Scene
 }
 
 std::string SceneManager::getActiveSceneName()

@@ -60,6 +60,9 @@ void System::Scripting::LuaScripting::setLoadingScene(std::string sceneFile)
 
 void System::Scripting::LuaScripting::changeScene(std::string sceneFile)
 {
+	//Stop scene from automatically switching to the loaded active scene
+	//This is to allow the variables.lua file to initialize
+	//SceneManager::getInstance()->lock(true);
 	SceneManager::getInstance()->changeScene(sceneFile, true);
 }
 
@@ -67,6 +70,7 @@ void System::Scripting::LuaScripting::reloadScene()
 {
 	m_bReloadScene = true;
 	m_bReloadScripts = true;
+	//SceneManager::getInstance()->lock(true);
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), false);
 }
 
@@ -181,28 +185,37 @@ void System::Scripting::LuaScripting::update(float dt)
 		if (!script.valid()) {
 			if (m_bDebug) std::cout << "Failed to load script\n";
 		}
+		std::cout << "---Initial Script Loaded\n";
 		m_bReloadScene = false;
 	}
 	//-----Game loop/run-------------------------------
-	else if ((m_SceneManager->getState() == Active)) {
-		//Use Run script
-		if (m_bReloadScripts) {
-			std::cout << "\n-----Initializing Scripts-----\n";
-			m_RunState = luaL_newstate();
-			LuaHelper::loadLibraries(m_RunState);
+	else if (m_SceneManager->getState() == Active) {
+		lua_State* m_RunState;	//!< Script for lua game loop
+		m_RunState = luaL_newstate();
+		LuaHelper::loadLibraries(m_RunState);
+		registerClasses(m_RunState);
+		registerFunctions(m_RunState);
 
-			registerClasses(m_RunState);
-			registerFunctions(m_RunState);
+		sol::state_view L(m_RunState);
 
-			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
-			//LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-			m_bReloadScripts = false;
-		}
-		else {
-			if (m_RunState) {
-				LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-			}
-		}
+		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+
+		L.collect_garbage();
+		////Use Run script
+		//if (m_bReloadScripts) {
+		//	std::cout << "\n-----Initializing Scripts-----\n";
+		//	m_RunState = NULL;
+		//	LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
+
+		//	std::cout << "---Variables Script Loaded\n";
+		//	SceneManager::getInstance()->lock(false);
+		//	m_bReloadScripts = false;
+		//}
+		//else {
+		//	if (m_RunState) {
+		//		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+		//	}
+		//}
 	}
 }
 

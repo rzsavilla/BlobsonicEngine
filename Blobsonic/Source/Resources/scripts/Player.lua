@@ -1,8 +1,9 @@
 -- Used to create the player entity
 -- Components required to create player
-local playerAtt = {
+playerAtt = {
+	Name = "Player",
 	Transformable = {
-		Position = {x = 0, y = 0, z = 0 },
+		Position = {x = 0, y = 5000, z = 0 },
 		Rotation = {x = 0, y = 0, z = 0},
 		Scale = {x = 1000, y = 1000, z = 1000},
 		Origin = {x = 0, y = 0, z = 0}

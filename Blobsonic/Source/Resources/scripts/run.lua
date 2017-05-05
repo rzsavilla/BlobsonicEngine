@@ -1,16 +1,15 @@
 -- This is where the game logic is updated and is run every game update
 
+local player = Entity.new()
+player:handleEntity("deer")
 
-require "Source/Resources/scripts/SceneManagement"	-- Debugging purposes fast scene reload
 
 
-if isKeyDown("p") == true then
-	reloadScene()
-elseif isKeyDown("o") == true then
-	player:destroy()
-end
+fSpeed = 1000
 
-fSpeed = 100
+
+--[[
+
 
 if isKeyDown("up") == true then
 	player:pSetVelocity(0,fSpeed,0)
@@ -40,4 +39,11 @@ for i, entity in ipairs(boxes) do
 		entity:destroy()
 		entity = nil
 	end
+end
+--]]
+
+if isKeyDown("p") == true then
+	reloadScene()
+elseif isKeyDown("o") == true then
+	player:destroy()
 end

@@ -20,7 +20,7 @@ static lua_State* m_activeScript = NULL;
 class LuaEntity {
 private:
 	std::shared_ptr<Entity> m_entity;		//!< Pointer to entity being handled/Created upon construction
-	bool m_bDebug = false;					//!< Enables couts to console
+	bool m_bDebug = true;					//!< Enables couts to console
 private:	//Component functions
 	void setTransformable(sol::table t);	//!< Attaches and sets Transformable component
 	void setModel(sol::table t);			//!< Attaches and sets Model component
@@ -46,6 +46,7 @@ public:
 	unsigned int getID();	//!< Return entities unique ID
 	void destroy();			//!< Destroy this entity
 	bool isDestroyed();		//!< Returns true if entityhandler is destroyed
+	void log();				//!< Prints entity variables in console
 
 	//----------------Transformable component Functions-----------------------
 	void tSetPosition(float x, float y, float z);	//!< Set transformable components position

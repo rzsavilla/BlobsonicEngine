@@ -22,7 +22,7 @@ namespace System {
 			std::shared_ptr<SceneManager> m_SceneManager;	//!< Pointer so scene manager
 			const std::string m_scriptsDir = "Source/Resources/scripts/";	//!< Location of script files
 		private:
-			lua_State* m_RunState;	//!< Script for lua game loop
+			//lua_State* m_RunState;
 		private:
 			//-----------------Register----------------------------
 			void registerFunctions(lua_State * L);	//!< register functions to lua state
