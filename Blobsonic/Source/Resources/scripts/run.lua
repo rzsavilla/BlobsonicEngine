@@ -17,6 +17,8 @@ elseif isKeyDown("right") == true then
 	player:pSetVelocity(fSpeed,0,0)
 end
 
+player:log()
+
 --[[
 if isMouseDown("Right") == true then
 	local bb = Entity.new()
@@ -42,5 +44,5 @@ end
 if isKeyDown("p") == true then
 	reloadScene()
 elseif isKeyDown("o") == true then
-	player:destroy()
+
 end
