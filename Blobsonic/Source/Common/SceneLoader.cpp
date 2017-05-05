@@ -977,6 +977,12 @@ std::shared_ptr<Entity> SceneLoader::loadParticleSystem(tinyxml2::XMLElement * e
 			}
 			if (m_bDebug) std::cout << "Maximum Scale Set: " << c << "\n  ";
 		}
+		else if (strcmp(childValue, "MaxNumParticles") == 0) {
+			if (readElementText(child, c)) {
+				particle->setNumMax(atof(c));
+			}
+			if (m_bDebug) std::cout << "Number of paticles Set: " << c << "\n  ";
+		}
 	}
 	return entity;
 }

@@ -11,7 +11,7 @@ namespace Component {
 
 	private:
 
-		glm::vec3 relPosition;
+		glm::vec3 position;
 		glm::vec3 lookAt;
 		glm::vec3 velocity;
 		glm::vec3 acceleration;
@@ -31,8 +31,8 @@ namespace Component {
 		float maxScale;
 		float numParticles;
 
-		glm::mat4* modelMatrices;
-		
+		glm::mat4 modelMatrix;
+		glm::mat4* particleMatrices;
 
 	public:
 		
@@ -54,6 +54,8 @@ namespace Component {
 		void setShader(std::shared_ptr<GLSLProgram> shad);
 		void setTexture(std::shared_ptr<Texture> tex);
 		void setMaterial(std::shared_ptr<Material> mat);
+		void setBuffers();
+		void setMatrix(glm::mat4* mat);
 
 		glm::vec3 getPosition();
 		glm::vec3 getLookAt();

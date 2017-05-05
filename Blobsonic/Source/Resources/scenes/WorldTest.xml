@@ -190,7 +190,7 @@
 	
 	<ParticleSystem>
 		<ID>particle_system</ID>
-		<Mesh>deer_mesh</Mesh>
+		<Mesh>cube_mesh</Mesh>
 		<Material>default_material</Material>
 		<Shader>phong_shader</Shader>
 		<Texture>deer_texture</Texture>
@@ -223,7 +223,7 @@
 		<Mass>1.0f</Mass>
 		<MinScale>1.0f</MinScale>
 		<MaxScale>1.0f</MaxScale>
-		<MaxNumParticles>1000</MaxNumParticles>
+		<MaxNumParticles>3</MaxNumParticles> <!-- Must always be the last --> 
 	</ParticleSystem>
 	
 	<Camera> <ID>cam1</ID>

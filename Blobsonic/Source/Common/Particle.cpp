@@ -3,9 +3,9 @@
 
 Component::Particle::Particle()
 {
-	relPosition.x = 0.0f;
-	relPosition.y = 0.0f;
-	relPosition.z = 0.0f;
+	position.x = 0.0f;
+	position.y = 0.0f;
+	position.z = 0.0f;
 	lookAt.x = 0.0f;
 	lookAt.y = 0.0f;
 	lookAt.z = 0.0f;
@@ -22,11 +22,13 @@ Component::Particle::Particle()
 	maxScale = 1.0f;
 
 	isDead = false;
+
+	
 }
 
 void Component::Particle::setPosition(glm::vec3 pos)
 {
-	relPosition = pos;
+	position = pos;
 }
 
 void Component::Particle::setLookAt(glm::vec3 lkat)
@@ -67,7 +69,8 @@ void Component::Particle::setMaxScale(float maxS)
 void Component::Particle::setNumMax(float numM)
 {
 	numParticles = numM;
-	modelMatrices = new glm::mat4[numM];
+	particleMatrices = new glm::mat4[numM];
+	
 }
 
 void Component::Particle::setDead(bool state)
@@ -95,9 +98,40 @@ void Component::Particle::setMaterial(std::shared_ptr<Material> mat)
 	m_material = mat;
 }
 
+void Component::Particle::setBuffers()
+{
+	GLuint buffer;
+	std::shared_ptr<AssimpMesh> m_aMesh = this->getMesh();
+
+	gl::GenBuffers(1, &buffer);
+	gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
+	glm::mat4* matrix = this->getMatrix();
+	gl::BufferData(gl::ARRAY_BUFFER, this->getNumMax() * sizeof(glm::mat4), &matrix[0], gl::STATIC_DRAW);
+
+	gl::BindVertexArray(m_aMesh->getVAO());		//Bind VAO
+	gl::EnableVertexAttribArray(5);
+	gl::VertexAttribPointer(5, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)0);
+	gl::EnableVertexAttribArray(6);
+	gl::VertexAttribPointer(6, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(sizeof(glm::vec4)));
+	gl::EnableVertexAttribArray(7);
+	gl::VertexAttribPointer(7, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(2 * sizeof(glm::vec4)));
+	gl::EnableVertexAttribArray(8);
+	gl::VertexAttribPointer(8, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(3 * sizeof(glm::vec4)));
+
+	gl::VertexAttribDivisor(5, 1);
+	gl::VertexAttribDivisor(6, 1);
+	gl::VertexAttribDivisor(7, 1);
+	gl::VertexAttribDivisor(8, 1);
+}
+
+void Component::Particle::setMatrix(glm::mat4 * mat)
+{
+	particleMatrices = mat;
+}
+
 glm::vec3 Component::Particle::getPosition()
 {
-	return relPosition;
+	return position;
 }
 
 glm::vec3 Component::Particle::getLookAt()
@@ -117,7 +151,7 @@ glm::vec3 Component::Particle::getAcceleration()
 
 glm::mat4* Component::Particle::getMatrix()
 {
-	return modelMatrices;
+	return particleMatrices;
 }
 
 bool Component::Particle::getHasCollisions()

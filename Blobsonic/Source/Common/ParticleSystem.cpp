@@ -54,6 +54,9 @@ void System::ParticleSystem::process(std::vector<std::shared_ptr<Entity>>* entit
 		if ((*it)->has<Component::Particle>()) {
 			auto particle = (*it)->get<Component::Particle>();
 			addEntity((*it), &m_particleSystemEntity);
+			
+			int numM = particle->getNumMax();
+			particleMatrices = new glm::mat4[numM];
 		}
 		if ((*it)->has<Component::Camera>()) {
 			m_ptrActiveCamera = (*it);
@@ -63,7 +66,24 @@ void System::ParticleSystem::process(std::vector<std::shared_ptr<Entity>>* entit
 
 void System::ParticleSystem::update(float dt)
 {
+	for (auto it = 0; it != m_particleSystemEntity.size(); it++) {
+		if (m_particleSystemEntity.at(it)->has<Component::Particle>()) {
+			auto particle = m_particleSystemEntity.at(it)->get<Component::Particle>();
+			for (GLuint i = 0; i < particle->getNumMax(); i++) {
+				glm::mat4 pMat;
+				glm::mat4* particleMatr = particle->getMatrix();
+				glm::vec3 vel = particle->getVelocity();
+				glm::vec3 pos = particle->getPosition();
+				glm::vec3 interVel = vel*dt;
+				pos += glm::vec3(1*i, 0, 1*i);
+				pMat = glm::translate(pMat, pos);
+				particleMatr[i] = pMat;
+				particle->setMatrix(particleMatr);
+			}
+			particle->setBuffers();
+		}
 
+	}
 	removeDestroyed(&m_particleSystemEntity);
 }
 

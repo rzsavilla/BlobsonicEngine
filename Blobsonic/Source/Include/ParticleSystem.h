@@ -10,6 +10,8 @@ namespace System {
 
 		std::vector<std::shared_ptr<Entity>> m_particleSystemEntity;
 
+		glm::mat4* particleMatrices;
+
 	private:
 		/*!
 		*	@brief Function Adds new entities to the vector of entities.

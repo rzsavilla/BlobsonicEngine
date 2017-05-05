@@ -227,7 +227,7 @@ void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
 		if (entity->has<Component::Transformable>()) {	//Apply transformations to model	//Pass model matrix as uniform
 			Component::Transformable* transformable = entity->get<Component::Transformable>();
 
-			m_shader->setUniform("mModel", transformable->getTransform());
+			m_shader->setUniform("mModel", particle->getMatrix());
 		}
 		else {
 			//Pass default transform
@@ -258,43 +258,6 @@ void System::Render::renderParticleSystem(std::shared_ptr<Entity> entity)
 				m_shader->setUniform("shininess", m_mat->getShininess());	//Shininess
 
 			}
-
-			GLuint buffer;
-			gl::GenBuffers(1, &buffer);
-			gl::BindBuffer(gl::ARRAY_BUFFER, buffer);
-			glm::mat4* matrix = particle->getMatrix();
-			gl::BufferData(gl::ARRAY_BUFFER, particle->getNumMax() * sizeof(glm::mat4), &matrix[0], gl::STATIC_DRAW);
-
-			gl::BindVertexArray(m_aMesh->getVAO());		//Bind VAO
-			gl::EnableVertexAttribArray(5);
-			gl::VertexAttribPointer(5, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)0);
-			gl::EnableVertexAttribArray(6);
-			gl::VertexAttribPointer(6, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(sizeof(glm::vec4)));
-			gl::EnableVertexAttribArray(7);
-			gl::VertexAttribPointer(7, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(2 * sizeof(glm::vec4)));
-			gl::EnableVertexAttribArray(8);
-			gl::VertexAttribPointer(8, 4, gl::FLOAT, FALSE, sizeof(glm::mat4), (GLvoid*)(3 * sizeof(glm::vec4)));
-			
-			gl::VertexAttribDivisor(5, 1);
-			gl::VertexAttribDivisor(6, 1);
-			gl::VertexAttribDivisor(7, 1);
-			gl::VertexAttribDivisor(8, 1);
-
-
-
-
-			
-
-														//for (unsigned int k = 0; k < aMesh->m_Entries.size(); k++) {
-														//	int index = 3;
-														//	gl::DrawElementsBaseVertex(gl::TRIANGLES,
-														//		aMesh->m_Entries[k].NumIndices,
-														//		gl::UNSIGNED_INT,
-														//		(void*)(sizeof(unsigned int) * aMesh->m_Entries[k].BaseIndex),
-														//		aMesh->m_Entries[k].BaseVertex);
-														//}
-														//for (int k = 0; k < 1; k++) {
-														//Has Texture
 
 
 
