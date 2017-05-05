@@ -1,15 +1,11 @@
 -- This is where the game logic is updated and is run every game update
 
+require "Source/Resources/scripts/Entities"
+
 local player = Entity.new()
 player:handleEntity("deer")
 
-
-
 fSpeed = 1000
-
-
---[[
-
 
 if isKeyDown("up") == true then
 	player:pSetVelocity(0,fSpeed,0)
@@ -21,6 +17,7 @@ elseif isKeyDown("right") == true then
 	player:pSetVelocity(fSpeed,0,0)
 end
 
+--[[
 if isMouseDown("Right") == true then
 	local bb = Entity.new()
 	bb:setComponents(boxAtt)

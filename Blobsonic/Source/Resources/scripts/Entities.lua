@@ -40,7 +40,3 @@ boxAtt = {
 		Restitution = 0.1
 	}
 }
-
---Create Entity of player
-plane = Entity.new()
-plane:setComponents(planeAtt)

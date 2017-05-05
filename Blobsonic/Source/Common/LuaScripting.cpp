@@ -188,34 +188,14 @@ void System::Scripting::LuaScripting::update(float dt)
 		std::cout << "---Initial Script Loaded\n";
 		m_bReloadScene = false;
 	}
-	//-----Game loop/run-------------------------------
+	//-----Run script-------------------------------
 	else if (m_SceneManager->getState() == Active) {
-		lua_State* m_RunState;	//!< Script for lua game loop
 		m_RunState = luaL_newstate();
 		LuaHelper::loadLibraries(m_RunState);
 		registerClasses(m_RunState);
 		registerFunctions(m_RunState);
-
 		sol::state_view L(m_RunState);
-
 		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-
-		L.collect_garbage();
-		////Use Run script
-		//if (m_bReloadScripts) {
-		//	std::cout << "\n-----Initializing Scripts-----\n";
-		//	m_RunState = NULL;
-		//	LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
-
-		//	std::cout << "---Variables Script Loaded\n";
-		//	SceneManager::getInstance()->lock(false);
-		//	m_bReloadScripts = false;
-		//}
-		//else {
-		//	if (m_RunState) {
-		//		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-		//	}
-		//}
 	}
 }
 

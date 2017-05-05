@@ -58,12 +58,13 @@ void Engine::Engine::loop()
 
 		//Reset every second
 		if (glfwGetTime() - dTimer > 1.0) {
-			//std::cout << "FPS:" << iFrames << "\n";
+			std::cout << "FPS:" << iFrames << "\n";
 			dTimer++;
 			iUpdates = 0;
 			iFrames = 0;
-			if (SceneManager::getInstance()->getActiveScene())
-				std::cout << "Entity Count: " << SceneManager::getInstance()->getActiveScene()->getEntityManager()->m_entities.size() << "\n";
+			if (SceneManager::getInstance()->getActiveScene()) {
+				//std::cout << "Entity Count: " << SceneManager::getInstance()->getActiveScene()->getEntityManager()->m_entities.size() << "\n";
+			}
 		}
 		m_deltaTimer.reset();
 	}
