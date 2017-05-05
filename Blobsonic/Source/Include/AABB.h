@@ -31,6 +31,8 @@ public:
 	glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in degrees
 	glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
 
+	glm::vec3 m_vLocalTransform;	//!< the position of the abb relative to the transform
+
 	bool testAxis[3];
 };
 

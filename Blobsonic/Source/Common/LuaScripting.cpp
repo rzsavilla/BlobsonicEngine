@@ -41,6 +41,7 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 	lua.set_function("reloadScene", &LuaScripting::reloadScene, LuaScripting());
 	lua.set_function("changeScene", &LuaScripting::changeScene, LuaScripting());
 	lua.set_function("forceReloadScene", &LuaScripting::forceReloadScene, LuaScripting());
+	lua.set_function("getActiveScene", &LuaScripting::getActiveScene, LuaScripting());
 	//-----Inputs-----
 	lua.set_function("isKeyDown", &LuaScripting::isKeyDown, LuaScripting());
 	lua.set_function("isMouseDown", &LuaScripting::isMouseDown, LuaScripting());
@@ -60,6 +61,9 @@ void System::Scripting::LuaScripting::setLoadingScene(std::string sceneFile)
 
 void System::Scripting::LuaScripting::changeScene(std::string sceneFile)
 {
+	//Stop scene from automatically switching to the loaded active scene
+	//This is to allow the variables.lua file to initialize
+	//SceneManager::getInstance()->lock(true);
 	SceneManager::getInstance()->changeScene(sceneFile, true);
 }
 
@@ -67,6 +71,7 @@ void System::Scripting::LuaScripting::reloadScene()
 {
 	m_bReloadScene = true;
 	m_bReloadScripts = true;
+	//SceneManager::getInstance()->lock(true);
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), false);
 }
 
@@ -75,6 +80,12 @@ void System::Scripting::LuaScripting::forceReloadScene()
 	m_bReloadScene = true;
 	m_bReloadScripts = true;
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), true);
+}
+
+int System::Scripting::LuaScripting::getActiveScene()
+{
+	lua_pushstring(m_activeScript, m_SceneManager->getActiveSceneName().c_str());
+	return 1;
 }
 
 bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)
@@ -139,7 +150,7 @@ bool System::Scripting::LuaScripting::isMouseDown(const std::string & button)
 void System::Scripting::LuaScripting::hideCursor(bool hide)
 {
 	if (hide) glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);	//Hide mouse
-	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_HAND_CURSOR);		//Show Mouse
+	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CROSSHAIR_CURSOR);		//Show Mouse
 }
 
 void System::Scripting::LuaScripting::printString(const std::string & s)
@@ -181,28 +192,17 @@ void System::Scripting::LuaScripting::update(float dt)
 		if (!script.valid()) {
 			if (m_bDebug) std::cout << "Failed to load script\n";
 		}
+		std::cout << "---Initial Script Loaded\n";
 		m_bReloadScene = false;
 	}
-	//-----Game loop/run-------------------------------
-	else if ((m_SceneManager->getState() == Active)) {
-		//Use Run script
-		if (m_bReloadScripts) {
-			std::cout << "\n-----Initializing Scripts-----\n";
-			m_RunState = luaL_newstate();
-			LuaHelper::loadLibraries(m_RunState);
-
-			registerClasses(m_RunState);
-			registerFunctions(m_RunState);
-
-			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
-			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-			m_bReloadScripts = false;
-		}
-		else {
-			if (m_RunState) {
-				LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
-			}
-		}
+	//-----Run script-------------------------------
+	else if (m_SceneManager->getState() == Active) {
+		m_RunState = luaL_newstate();
+		LuaHelper::loadLibraries(m_RunState);
+		registerClasses(m_RunState);
+		registerFunctions(m_RunState);
+		sol::state_view L(m_RunState);
+		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
 	}
 }
 

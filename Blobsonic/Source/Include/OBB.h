@@ -22,6 +22,8 @@ public:
 	glm::vec3 m_vScale;		//!< Entity scale x,y,z
 	glm::vec3 m_vRotation;	//!< x,y,z rotation in stored in degrees
 	glm::vec3 m_vOrigin;	//!< x,y,z origin currently not applied
+	
+	glm::vec3 m_vLocalPos;	//!< Vector diff between this and transformable
 };
 
 

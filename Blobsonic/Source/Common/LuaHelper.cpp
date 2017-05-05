@@ -11,6 +11,7 @@ void LuaHelper::loadScriptFile(lua_State * L, std::string filename)
 {
 	sol::state_view lua(L);
 	lua.script_file(filename);
+	lua_pcall(L, 0, 0, 0);             // call the script
 }
 
 glm::vec2 LuaHelper::readVec2(sol::object o)

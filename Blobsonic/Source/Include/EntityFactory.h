@@ -1,3 +1,5 @@
+
+
 #pragma once
 
 #include "stdafx.h"
@@ -6,8 +8,12 @@
 class EntityFactory {
 private:
 	std::shared_ptr<ResourceManager> m_ptrResources;	//!< Pointer to resourcemanager
+
+	EntityFactory();	//!< Private Default constructor Singleton 
 public:
-	EntityFactory();	//!< Default Constructor
+	~EntityFactory();	//!< Destructor
+
+	static std::shared_ptr<EntityFactory> getInstance();		//!< Return instance
 
 	std::shared_ptr<Entity> create(std::string entity);
 

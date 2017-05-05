@@ -6,11 +6,11 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	<Entity>
-		<Name>deer</Name>
+		<Name>Player</Name>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>10000.0f</Y>
+				<Y>500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -30,73 +30,13 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>deer_mesh</Mesh>
+			<Mesh>pine2Group_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>skybox_texture</Texture>
+			<Texture>pine1_texture</Texture>
 		</Model>
-		<Physical>
-			<Mass>1.0</Mass>
-			<Restitution>0.5</Restitution>
-		</Physical>
-		<AABB>
-			<Position>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</AABB>
-		<Sphere>
-			<Center>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
-				<Z>0.0f</Z>
-			</Center>
-			<Radius>100.0f</Radius>
-		</Sphere>
 	</Entity>
 	
-
-	<Button> <ID>MainMenuButton</ID>
-		<Shader>button_shader</Shader>
-		<Texture>menu_texture</Texture>
-		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>4.0f</X> 
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
-		</sID>
-	</Button>
-
 	<Entity>
 		<Name>Floor</Name>
 		<Transformable>
@@ -112,7 +52,7 @@
 			</Rotation>
 			<Scale>
 				<X>10000.0f</X>
-				<Y>100.0f</Y>
+				<Y>1000.0f</Y>
 				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
@@ -134,7 +74,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>0.0f</Y>
+				<Y>.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
@@ -171,65 +111,88 @@
 			</Origin>
 		</OBB>
 	</Entity>
+	<Model> <ID>skybox</ID>
+		<Mesh>skybox_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>skybox_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>180.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>100.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+	</Model>
 	
-	<Entity>
-		<Name>skybox</Name>
-		<Transformable>
-			<Position>
-					<X>0.0f</X>
-					<Y>0.0f</Y>
-					<Z>0.0f</Z>
-			</Position>
-				<Rotation>
-					<X>0.0f</X>
-					<Y>0.0f</Y>
-					<Z>180.0f</Z>
-			</Rotation>
-			<Scale>
-					<X>100.0f</X>
-					<Y>100.0f</Y>
-					<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-					<X>0.0f</X>
-					<Y>0.0f</Y>
-					<Z>0.0f</Z>
-			</Origin>
-		</Transformable>
-		<Model> <ID>skybox</ID>
-				<Mesh>skybox_mesh</Mesh>
-				<Material>default_material</Material>
-				<Shader>phong_shader</Shader>
-				<Texture>skybox_texture</Texture>
-		</Model>
-	</Entity>
+	<Button> <ID>MainMenuButton</ID>
+		<Shader>button_shader</Shader>
+		<Texture>menu_texture</Texture>
+		<Position>
+			<X>20.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>0.0f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
 	
-	<Entity>
-		<Name>dirLight_Main</Name>
-		<DirLight>
-			<Direction>
-				<X>0.0f</X>
-				<Y>-1.0f</Y>
-				<Z>0.0f</Z>
-			</Direction>
-			<Ambient>
-				<X>1.0f</X>
-				<Y>1.0f</Y>
-				<Z>1.0f</Z>
-			</Ambient>
-			<Diffuse>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Diffuse>	
-			<Specular>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Specular>
-		</DirLight>
-	</Entity>
-	<!--
+	<Sprite> <ID>sprite2</ID>
+		<Shader>button_shader</Shader>
+		<Texture>sprite_texture</Texture>
+		<Position>
+			<X>804.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>200.0f</X> 	
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.5f</X> 	
+			<Y>0.5f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+	</Sprite>
+
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>
@@ -248,13 +211,12 @@
 			<Z>0.0f</Z>
 		</Diffuse>	
 		<Specular>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</Specular>
 	</Light>
-	-->
-	<!--
+	
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
@@ -272,7 +234,7 @@
 		<isLooping>false</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	-->
+	
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
