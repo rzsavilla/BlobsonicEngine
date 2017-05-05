@@ -153,6 +153,12 @@
     <None Include="Source\Resources\shader\singlePhong.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Source\Resources\shader\shadowmap.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Source\Resources\shader\shadowmap.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\stdafx.h">
@@ -404,6 +410,9 @@
     <ClInclude Include="Source\Include\GUI.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\ShadowMap.h">
+      <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -618,6 +627,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Entity.cpp">
       <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\ShadowMap.cpp">
+      <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

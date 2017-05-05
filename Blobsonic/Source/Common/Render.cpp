@@ -13,6 +13,7 @@
 #include "RenderMessages.h"
 #include "CameraMessages.h"
 
+
 void System::Render::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
 {
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
@@ -177,30 +178,40 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 void System::Render::renderText(std::shared_ptr<Entity> entity)
 {
-	/*
+	
 	std::shared_ptr<Texture> texture = NULL;
 	auto text = entity->get <Component::Text>();
 	auto t = entity->get <Component::Transformable>();
 	// Activate corresponding render state	
+
 	text->getShader()->use();
 
-	
+	text->getShader()->setUniform("textColor", vec3(0.0f));
+	text->getString();
+	t->getPosition();
+	text->getColour();
 
-	gl::Uniform3f(gl::GetUniformLocation(text->getShader()->program(), "textColor"), color.x, color.y, color.z);
 	gl::ActiveTexture(gl::TEXTURE0);
 	gl::BindVertexArray(text->getVAO());
-	
+	string sText = text->getString();
+
+	GLuint gTextureID;  // ID handle of the glyph texture
+	glm::ivec2 vSize;       // Size of glyph
+	vSize = vec2(20.0f, 20.0f);
+	gTextureID = 1;
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Iterate through all characters
 	std::string::const_iterator c;
-	for (c = text.begin(); c != text.end(); c++)
+	for (c = sText.begin(); c != sText.end(); c++)
 	{
-		Character ch = Characters[*c];
+		Character ch;
+		ch = text->getCharactersPtr().at(*c);
+		text->getCharactersPtr().find('Size')->first;
+		GLfloat xpos = text->getPosition().x + ch.Bearing.x * vSize.x;
+		GLfloat ypos = text->getPosition().y - (ch.Size.y - ch.Bearing.y) * vSize.y;
 
-		GLfloat xpos = x + ch.Bearing.x * scale;
-		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-
-		GLfloat w = ch.Size.x * scale;
-		GLfloat h = ch.Size.y * scale;
+		GLfloat w = ch.Size.x * vSize.x;
+		GLfloat h = ch.Size.y * vSize.y;
 		// Update VBO for each character
 		GLfloat vertices[6][4] = {
 			{ xpos,     ypos + h,   0.0, 0.0 },
@@ -213,7 +224,7 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 		};
 		// Render glyph texture over quad
 		//gl::BindTexture(gl::TEXTURE_2D, ch.textureID);
-		gl::BindTexture(gl::TEXTURE_2D, texture->object());
+		gl::BindTexture(gl::TEXTURE_2D, gTextureID);
 		// Update content of VBO memory
 		gl::BindBuffer(gl::ARRAY_BUFFER, text->getVAO());
 		gl::BufferSubData(gl::ARRAY_BUFFER, 0, sizeof(vertices), vertices);
@@ -221,11 +232,14 @@ void System::Render::renderText(std::shared_ptr<Entity> entity)
 		// Render quad
 		gl::DrawArrays(gl::TRIANGLES, 0, 6);
 		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-		x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64)
+		float x;
+		x = text->getPosition().x;
+		x += (ch.Advance >> 6) * text->getCharactersPtr().find('Size')->first; // Bitshift by 6 to get value in pixels (2^6 = 64)
+		text->setPosition(vec3(x, text->getPosition().y, text->getPosition().x));
 	}
 	gl::BindVertexArray(0);
 	gl::BindTexture(gl::TEXTURE_2D, 0);
-	*/
+	
 }
 
 void System::Render::renderSprite(std::shared_ptr<Entity> entity)
@@ -325,6 +339,19 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 			t = m_spotlights.at(i)->get<Component::Transformable>();
 			shader->setUniform((sSpotLight + "position").data(), t->getPosition());
 		}
+	}
+	for (int i = 0; i < m_shadowmaps.size(); i++) {	//Iterate through all lights
+															//Get Light Component
+		auto dirLight = m_shadowmaps.at(i)->get<Component::DirectionalLight>();
+
+		//Pass uniforms
+		std::string sShadowMap = "ShadowLights[" + std::to_string(i) + "].";
+		shader->setUniform((sShadowMap + "ambient").data(), dirLight->getAmbient());
+		shader->setUniform((sShadowMap + "diffuse").data(), dirLight->getDiffuse());
+		shader->setUniform((sShadowMap + "specular").data(), dirLight->getSpecular());
+		shader->setUniform((sShadowMap + "direction").data(), dirLight->getDirection());
+
+
 	}
 }
 

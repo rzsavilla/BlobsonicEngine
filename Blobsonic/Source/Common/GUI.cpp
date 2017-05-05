@@ -85,6 +85,7 @@ void System::GUI::update(float dt)
 			auto t = (*it)->get <Component::Transformable>();
 			auto b = (*it)->get <Component::Button>();
 			auto s = (*it)->get <Component::SpriteRenderer>();
+			//auto txt = (*it)->get <Component::Text>();
 			
 			double xpos, ypos, width, height;
 
@@ -108,6 +109,10 @@ void System::GUI::update(float dt)
 					/// Main menu
 					if (bID == 1) /// Start button
 					{
+						//txt->setString("Hello");
+						//txt->setPosition(vec3(10.0f));
+						//txt->setColour(vec4(1.0f));
+
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
@@ -139,12 +144,27 @@ void System::GUI::update(float dt)
 						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
 					}
 
-					if (bID == 6) /// Option - set screen size to 1600, 1024.
+					if (bID == 6) /// Option - set screen size to 1280, 800.
+					{
+						glfwSetWindowSize(glfwGetCurrentContext(), 1280, 800);
+						gl::Viewport(0, 0, 1280, 800);
+						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
+						
+					}
+					if (bID == 8) /// Option - set screen size to 1600, 900.
 					{
 						glfwSetWindowSize(glfwGetCurrentContext(), 1600, 900);
 						gl::Viewport(0, 0, 1600, 900);
 						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
-						
+
+					}
+
+					if (bID == 9) /// Option - set screen size to 1920, 1080.
+					{
+						glfwSetWindowSize(glfwGetCurrentContext(), 1920, 1080);
+						gl::Viewport(0, 0, 1920, 1080);
+						//glfwSetWindowAspectRatio(glfwGetCurrentContext(), 1, 1.33);
+
 					}
 					/// Exit
 					if (bID == 7) /// Exit
@@ -176,15 +196,15 @@ void System::GUI::update(float dt)
 				/// Resets the values of the buttons
 				if (bID == 1)
 				{
-					s->setColor(vec3(0.8f, 0.8f, 0.6f));
+					s->setColor(vec3(1.0f));
 				}
 				if (bID == 2)
 				{
-					s->setColor(vec3(0.7f, 0.4f, 0.0f));
+					s->setColor(vec3(1.0f));
 				}
 				if (bID == 3)
 				{
-					s->setColor(vec3(0.0f, 0.3f, 0.7f));
+					s->setColor(vec3(1.0f));
 					//t->setScale(vec3(200.0f, 100.0f, 0.0f));
 					//t->setPosition(vec3(412.0f, 500.0f, 0.0f));
 				}

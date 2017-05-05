@@ -27,6 +27,8 @@
     <None Include="Source\Resources\shader\colour.vert" />
     <None Include="Source\Resources\shader\phong.frag" />
     <None Include="Source\Resources\shader\phong.vert" />
+    <None Include="Source\Resources\shader\shadowmap.frag" />
+    <None Include="Source\Resources\shader\shadowmap.vert" />
     <None Include="Source\Resources\shader\singlePhong.frag" />
     <None Include="Source\Resources\shader\text.frag" />
     <None Include="Source\Resources\shader\text.vert" />
@@ -98,6 +100,7 @@
     <ClInclude Include="Source\Include\SceneLoader.h" />
     <ClInclude Include="Source\Include\SceneManager.h" />
     <ClInclude Include="Source\Include\SceneMessages.h" />
+    <ClInclude Include="Source\Include\ShadowMap.h" />
     <ClInclude Include="Source\Include\sol.hpp" />
     <ClInclude Include="Source\Include\Sound.h" />
     <ClInclude Include="Source\Include\Sphere.h" />
@@ -174,6 +177,7 @@
     <ClCompile Include="Source\Common\SceneComponent.cpp" />
     <ClCompile Include="Source\Common\SceneLoader.cpp" />
     <ClCompile Include="Source\Common\SceneManager.cpp" />
+    <ClCompile Include="Source\Common\ShadowMap.cpp" />
     <ClCompile Include="Source\Common\Sound.cpp" />
     <ClCompile Include="Source\Common\Sphere.cpp" />
     <ClCompile Include="Source\Common\SplashScene.cpp" />

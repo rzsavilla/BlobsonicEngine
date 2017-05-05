@@ -23,6 +23,8 @@ public:
 
 	std::shared_ptr<Entity> createActor();
 
+	std::shared_ptr<Entity> createText();
+
 	//Phsyics
 	void attachAABB(std::shared_ptr<Entity> entity, glm::vec3 position, glm::vec3 Dimensions, glm::vec3 Scale);//Use for "early out" collision testing
 	
@@ -37,4 +39,6 @@ public:
 	void attachButton(std::shared_ptr<Entity> entity);
 
 	void attachPhysical(std::shared_ptr<Entity> entity, float mass, float restitution);
+
+	void attachText(std::shared_ptr<Entity> entity);
 };
