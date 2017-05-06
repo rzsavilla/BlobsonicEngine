@@ -8,9 +8,6 @@ if isKeyDown("p") == true then
 end
 
 if getActiveScene() == "WorldTest.xml" then
-
-
-
 	if isKeyDown("w") == true then
 		player:pSetVelocity(0,0,-fSpeed)
 	elseif isKeyDown("s") == true then

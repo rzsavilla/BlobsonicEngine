@@ -13,7 +13,7 @@
 namespace System {
 	class Gameplay : public System {
 	private:
-		std::vector<std::shared_ptr<Entity>> m_Player;
+		std::shared_ptr<Entity> m_Player;
 		std::vector<std::shared_ptr<Entity>> m_Pickups;
 	public:
 		Gameplay();

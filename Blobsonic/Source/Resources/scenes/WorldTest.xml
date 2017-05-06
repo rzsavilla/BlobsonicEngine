@@ -19,9 +19,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+				<X>1000.0f</X>
+				<Y>1000.0f</Y>
+				<Z>1000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -30,10 +30,10 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>deer_mesh</Mesh>
+			<Mesh>cube_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>skybox_texture</Texture>
+			<Texture>red_texture</Texture>
 		</Model>
 		<Physical>
 			<Mass>1.0</Mass>
@@ -64,7 +64,7 @@
 			</Center>
 			<Radius>100.0f</Radius>
 		</Sphere>
-		<!--
+		
 		<Camera> <ID>cam1</ID>
 			<Position>
 				<X>0.0f</X>
@@ -83,7 +83,6 @@
 			<RotSpeed>0.5f</RotSpeed>
 			<MoveSpeed>100.0f</MoveSpeed>
 		</Camera>
-		-->
 		<Player></Player>
 	</Entity>
 	
@@ -92,7 +91,7 @@
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>0.0f</Y>
+				<Y>-1000.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -102,7 +101,7 @@
 			</Rotation>
 			<Scale>
 				<X>10000.0f</X>
-				<Y>100.0f</Y>
+				<Y>10000.0f</Y>
 				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
@@ -167,7 +166,7 @@
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>1000.0f</Y>
+				<Y>0.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -192,6 +191,10 @@
 			<Shader>phong_shader</Shader>
 			<Texture>red_texture</Texture>
 		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
 		<AABB>
 			<Position>
 				<X>0.0f</X>
@@ -199,9 +202,9 @@
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
-				<X>1000.0f</X>
-				<Y>1000.0f</Y>
-				<Z>1000.0f</Z>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -209,6 +212,28 @@
 				<Z>0.0f</Z>
 			</Origin>
 		</AABB>
+		<OBB>
+			<Position>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
 	</Entity>
 	
 	<Button> <ID>MainMenuButton</ID>
@@ -342,7 +367,7 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	-->
-	
+	<!--
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
@@ -361,5 +386,6 @@
 		<RotSpeed>0.5f</RotSpeed>
 		<MoveSpeed>100.0f</MoveSpeed>
 	</Camera>
+	-->
 </Scene>
 
