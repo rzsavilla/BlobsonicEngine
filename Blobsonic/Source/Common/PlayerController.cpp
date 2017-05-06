@@ -40,17 +40,19 @@ void System::PlayerController::process(std::vector<std::shared_ptr<Entity>>* ent
 void System::PlayerController::update(float dt) {
 	if (m_Camera) {
 		if (m_Camera->has<Component::Transformable>()) {
-			auto t = m_Camera->get<Component::Camera>();
-			auto p = m_Camera->get<Component::Player>();
-			glm::vec3 pos = t->getPosition();
-			float fSpeed = p->m_fMoveSpeed;
+			if (m_Camera->has<Component::Player>()) {
+				auto t = m_Camera->get<Component::Camera>();
+				auto p = m_Camera->get<Component::Player>();
+				glm::vec3 pos = t->getPosition();
+				float fSpeed = p->m_fMoveSpeed;
 
-			//set the pos of skybox
-			if (m_vSkyBox)
-			{
-				auto skytrans = m_vSkyBox->get<Component::Transformable>();
+				//set the pos of skybox
+				if (m_vSkyBox)
+				{
+					auto skytrans = m_vSkyBox->get<Component::Transformable>();
 
-				skytrans->setPosition(t->getPosition());//- glm::vec3(250, 250, 250));
+					skytrans->setPosition(t->getPosition());//- glm::vec3(250, 250, 250));
+				}
 			}
 		}
 		for (int i = 0; i < m_kiActions; i++) {
