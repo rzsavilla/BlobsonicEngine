@@ -172,7 +172,7 @@ void EntityFactory::attachOBB(std::shared_ptr<Entity> entity, glm::vec3 position
 	auto o = entity->get<OBB>();
 
 	t->m_vPosition = position;
-	o->m_vDimensions = Dimensions * Scale;
+	o->m_vScale =  Scale;
 	t->m_vScale = Scale;
 
 	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.x, glm::vec3(1.0f, 0.0, 0.0f));
@@ -249,7 +249,7 @@ void EntityFactory::attachCapsule(std::shared_ptr<Entity> entity, glm::vec3 posi
 	auto o = entity->get<OBB>();
 
 	t->m_vPosition = position;
-	o->m_vDimensions = dimensions * scale;
+	o->m_vScale = scale;
 	t->m_vScale = scale;
 
 	o->m_Rotation = glm::rotate(o->m_Rotation, Rot.x, glm::vec3(1.0f, 0.0, 0.0f));

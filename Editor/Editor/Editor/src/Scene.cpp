@@ -138,7 +138,7 @@ void Scene::draw(RenderTarget & target, RenderStates states) const
 {
 	for (int i = 0; i < m_vRectFloorTiles.size(); i++)
 	{
-		target.draw(m_vRectFloorTiles.at(i));
+		target.draw(m_vRectFloorTiles.at(i).first);
 	}
 
 	for (int i = 0; i < m_vSpriteFloorTiles.size(); i++)
@@ -168,7 +168,7 @@ void Scene::processClickEvent(Vector2f mousepos)
 			m_sfSelectedRect = m_vRectFloorTiles[i].first;
 			m_sfSelectedRect.setFillColor(Color(0, 255, 0, 125));
 			m_sfSelectedSprite = m_vSpriteFloorTiles[i];
-			m_sfSelectedRect = m_sfSelectedSprite.getTexture;
+			m_sfSelectedTexture = *m_sfSelectedSprite.getTexture();
 		}
 
 	}

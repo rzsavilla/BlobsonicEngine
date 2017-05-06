@@ -15,7 +15,6 @@ public:
 	glm::vec3 m_obbNormals[6];
 	glm::mat4 m_Rotation;
 
-	glm::vec3 m_vDimensions;	//Plz move to different component
 	glm::vec3 m_vCenter;
 
 	glm::vec3 m_vPosition;	//!< Camera World/Relative Position

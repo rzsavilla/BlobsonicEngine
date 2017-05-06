@@ -736,13 +736,17 @@ void SceneLoader::attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElemen
 		const char* childValue = parent->Value();
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
-			a->m_vPosition = v;		//Set
+			a->m_vCenter = v;
 			auto t = entity->get<Component::Transformable>();
-			a->m_vLocalTransform =  t->getPosition() - v;		//Set
+			a->m_vLocalTransform =  t->getPosition() - v ;		//Set
+			
 		}
 		else if (strcmp(childValue, "Scale") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
-			a->m_vScale = v;			//Set
+			float max = std::max(v.x, v.y);
+			max = std::max(max, v.z);
+
+			a->m_vScale = glm::vec3(max, max, max);			//Set
 		}
 		else if (strcmp(childValue, "Origin") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
@@ -787,10 +791,11 @@ void SceneLoader::attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement
 		const char* childValue = parent->Value();
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
-			b->m_vPosition = v;		//Set
+			b->m_vCenter = v;
 			if (entity->has<Component::Transformable>()) {
 				auto t = entity->get<Component::Transformable>();
-				b->m_vLocalPos = t->getPosition() - v;
+				b->m_vLocalPos = t->getPosition() - v ;
+				
 			}
 		}
 		else if (strcmp(childValue, "Rotation") == 0) {
