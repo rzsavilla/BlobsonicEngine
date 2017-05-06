@@ -728,6 +728,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 			//find the penetration depth
 			float PenetrationDepth = localSphere.m_fRadius - d;
 
+			std::cout << "Colliding " << std::endl;
 
 			resolveCollision(eBox, eSphere, Normal);
 			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
@@ -843,6 +844,16 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 	//get transformable and physical
 	auto trans = e->get<Component::Transformable>();
 	auto phys = e->get<Physical>();
+
+	if (e->has<Sphere>())
+	{
+		auto sphere = e->get<Sphere>();
+		//std::cout << sphere->m_vCenter.x << " " << sphere->m_vCenter.y << " " << sphere->m_vCenter.z << std::endl;
+	}
+	
+
+	
+
 
 	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
 	{

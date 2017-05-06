@@ -80,3 +80,6 @@ void Physical::applyImpulse(glm::vec3 Normal, float force)
 	//multiply normal my accerlation
 	m_vAcceleration = Normal * Acceleration;
 }
+
+
+

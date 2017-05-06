@@ -114,7 +114,13 @@ Scene::Scene(string path)
 					//tempSprite.setOrigin(tempSize.x / 2.0f, tempSize.y / 2.0f);
 					tempSprite.setRotation(tempRotation);
 
-					m_vRectFloorTiles.push_back(tempRect);
+					Clickable tempClickable;
+					tempClickable.m_sfVTopLeftPos = tempPosition;
+					tempClickable.m_sfVSize = tempSize;
+					pair<RectangleShape, Clickable > floor;
+					floor.first = tempRect;
+					floor.second = tempClickable;
+					m_vRectFloorTiles.push_back(floor);
 					m_vSpriteFloorTiles.push_back(tempSprite);
 				}
 			}
@@ -140,6 +146,34 @@ void Scene::draw(RenderTarget & target, RenderStates states) const
 		target.draw(m_vSpriteFloorTiles.at(i));
 	}
 	
+}
+
+void Scene::checkForHovering(Vector2f mousepos)
+{
+}
+
+void Scene::deselect()
+{
+	m_bSelected = false;
+}
+
+void Scene::processClickEvent(Vector2f mousepos)
+{
+	//check the floor
+	for (int i = 0; i < m_vRectFloorTiles.size(); i++)
+	{
+		if (m_vRectFloorTiles[i].second.m_bClicked(mousepos))
+		{
+			m_bSelected = true;
+			m_sfSelectedRect = m_vRectFloorTiles[i].first;
+			m_sfSelectedRect.setFillColor(Color(0, 255, 0, 125));
+			m_sfSelectedSprite = m_vSpriteFloorTiles[i];
+			m_sfSelectedRect = m_sfSelectedSprite.getTexture;
+		}
+
+	}
+
+
 }
 
 void Scene::loadTextures()

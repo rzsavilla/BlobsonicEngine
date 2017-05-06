@@ -4,6 +4,9 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 #include "tinyxml2.h"
+#include <utility>
+#include "Clickable.h"
+
 
 using namespace std;
 using namespace sf;
@@ -21,7 +24,7 @@ public:
 
 private:
 
-	vector<RectangleShape> m_vRectFloorTiles; //<! floor tile rects
+	vector<pair<RectangleShape,Clickable>> m_vRectFloorTiles; //<! floor tile rects
 	vector<Sprite> m_vSpriteFloorTiles; //<! floor tile sprite
 	Texture m_vTextureStoneFloorTiles; //<! floor tile Texture
 
