@@ -623,6 +623,9 @@ std::shared_ptr<Entity> SceneLoader::createEntity(tinyxml2::XMLElement * e)
 		else if (strcmp(childValue, "Sprite") == 0) {
 			attachSprite(entity, parent);
 		}
+		else if (strcmp(childValue, "Player") == 0) {
+			attachPlayer(entity, parent);
+		}
 	}
 
 	return entity;
@@ -1132,6 +1135,11 @@ void SceneLoader::attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 
 }
 
+void SceneLoader::attachPlayer(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
+{
+	entity->attach<Component::Player>();
+}
+
 std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
 {
 	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
@@ -1486,7 +1494,6 @@ void SceneLoader::readScene(tinyxml2::XMLNode * node)
 			else if (strcmp(element->Value(), "Button") == 0) {
 				entities->addEntity(loadButton(element));
 			}
-			
 		}
 	}
 }

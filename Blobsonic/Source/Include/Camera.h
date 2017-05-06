@@ -31,6 +31,15 @@ namespace Component {
 
 		bool m_bUsePerspective;	//!< Use perspective projection if true else use othorgraphic
 		float m_fMoveSpeed;		//!< Camera world movement speed
+
+		std::string m_sType;	//!< Determines how camera is controlled two types static and follow
+
+		bool m_bLocalPosSet;	//!< A local position has been set
+		glm::vec3 m_vLocalPos;	//!< Local position in world space
+
+		//Camera has a target to look at
+		glm::vec3 m_vLooktarget;
+		bool m_bHasTarget;
 	public:
 		Camera();				//!< Default contructor
 
@@ -79,6 +88,7 @@ namespace Component {
 		void setPosition(glm::vec3 newPosition);		//!< Set camera position
 		void setPosition(float x, float y, float z);	//!< Set camera position
 		void setMoveSpeed(float speed);					//!< Set Camera movement speed
+		void setLocalPosition(glm::vec3 local);			//!< Position relative to transformable
 
 		/*!
 			Determines perspective or orthographic projection.
@@ -90,6 +100,7 @@ namespace Component {
 		float getYaw();			//!< Return yaw angle	(Y axis rotation)
 		float getRoll();		//!< Return roll angle	(Z axis rotation)
 		glm::vec3 getPosition();	//!< Return Camera position/eye
+		glm::vec3 getLocalPos();	//!< Return cameras local position
 
 		float getMoveSpeed();	//!< Return camera movement speed
 

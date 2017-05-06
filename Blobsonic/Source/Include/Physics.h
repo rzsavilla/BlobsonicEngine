@@ -1,6 +1,6 @@
 #pragma once
 
-#define GRAVITYCOEFFICENT -9.81 // m/s/s
+#define GRAVITYCOEFFICENT -50.81 // m/s/s
 #define EPSILON 0.0025f
 #define DRAG 0.85f
 
@@ -21,7 +21,6 @@ namespace System {
 		std::vector<std::shared_ptr <Entity>> m_vSpheres; // !< Spheres for the scene
 		std::vector<std::shared_ptr <Entity>> m_vCapsules; // !< Capsules for the scene
 		std::vector<std::shared_ptr <Entity>> m_vPhysicals; // !< Physicals for the scene
-
 
 		std::vector<std::shared_ptr <Entity>> m_vCheckSpheres; // !< Spheres for the scene
 		std::vector<std::shared_ptr <Entity>> m_vCheckOBBS; // !< OBBs for the scene

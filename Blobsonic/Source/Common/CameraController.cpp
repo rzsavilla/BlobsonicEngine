@@ -4,6 +4,8 @@
 #include "MessageHandler.h"
 
 #include "Camera.h"
+#include "Transformable.h"
+#include "Player.h"
 
 System::CameraController::CameraController()
 {
