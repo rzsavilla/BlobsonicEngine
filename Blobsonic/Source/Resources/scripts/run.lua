@@ -1,7 +1,7 @@
 -- This is where the game logic is updated and is run every game update
 
 
-fSpeed = 500
+fSpeed = 5
 
 if isKeyDown("p") == true then
 		reloadScene()
@@ -9,19 +9,19 @@ end
 
 if getActiveScene() == "WorldTest.xml" then
 	if isKeyDown("w") == true then
-		player:pSetVelocity(0,0,-fSpeed)
+		player:pApplyImpulse(0,0,-1,fSpeed)
 	elseif isKeyDown("s") == true then
-		player:pSetVelocity(0,0,fSpeed)
+		player:pApplyImpulse(0,0,1,fSpeed)
 	elseif isKeyDown("a") == true then
-		player:pSetVelocity(-fSpeed,0,0)
+		player:pApplyImpulse(-1,0,0,fSpeed)
 	elseif isKeyDown("d") == true then
-		player:pSetVelocity(fSpeed,0,0)
+		player:pApplyImpulse(1,0,-1,fSpeed)
 	elseif isKeyDown("space") == true then
-		player:pSetVelocity(0,fSpeed,0)
+		player:pApplyImpulse(0,1,0,fSpeed)
 	end
 
 	if player:tGetPosY() < 0 then
-		player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
+		--player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
 	end
 
 	if player:pHasCollidedByName(floorHandle:getName()) == true then
@@ -29,8 +29,7 @@ if getActiveScene() == "WorldTest.xml" then
 	end
 
 	if player:pHasCollidedByName("pickup") == true then
-		reloadScene()
-		player:log()
+		--reloadScene()
 	end
 
 end

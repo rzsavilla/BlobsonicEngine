@@ -9,8 +9,8 @@
 		<Name>deer</Name>
 		<Transformable>
 			<Position>
-				<X>0.0f</X>
-				<Y>1000.0f</Y>
+				<X>1000.0f</X>
+				<Y>5000.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -42,7 +42,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>10000.0f</Y>
+				<Y>5000.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
@@ -59,7 +59,7 @@
 		<Sphere>
 			<Center>
 				<X>0.0f</X>
-				<Y>10000.0f</Y>
+				<Y>5000.0f</Y>
 				<Z>0.0f</Z>
 			</Center>
 			<Radius>100.0f</Radius>
@@ -101,7 +101,7 @@
 			</Rotation>
 			<Scale>
 				<X>10000.0f</X>
-				<Y>10000.0f</Y>
+				<Y>100.0f</Y>
 				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
@@ -127,9 +127,9 @@
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
-				<X>100.0f</X>
+				<X>10000.0f</X>
 				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -149,9 +149,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>100.0f</X>
+				<X>10000.0f</X>
 				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
