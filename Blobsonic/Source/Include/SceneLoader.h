@@ -41,7 +41,7 @@ private:
 	std::shared_ptr<EntityFactory> m_factory;	//!< Create preset entities
 
 	void loadMesh(tinyxml2::XMLElement* e);				//!< Parse file to load mesh
-				//!< Parse file to load sprites
+	//!< Parse file to load sprites
 	void loadTexture(tinyxml2::XMLElement* e);			//!< Parse file to load texture
 	void loadMaterial(tinyxml2::XMLElement* e);			//!< Parse file to load material
 	void loadShader(tinyxml2::XMLElement* e);			//!< Parse file to load shader
@@ -64,6 +64,7 @@ private:
 	void attachSound(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachPlayer(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachPickup(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	std::shared_ptr<Entity> loadButton(tinyxml2::XMLElement* e);

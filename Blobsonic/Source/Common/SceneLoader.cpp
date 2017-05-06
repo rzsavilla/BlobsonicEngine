@@ -17,6 +17,7 @@
 #include "Sphere.h"
 #include "Sound.h"
 #include "SpriteRender.h"
+#include "Pickup.h"
 
 #include "EntityFactory.h"
 
@@ -1138,6 +1139,11 @@ void SceneLoader::attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 void SceneLoader::attachPlayer(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
 {
 	entity->attach<Component::Player>();
+}
+
+void SceneLoader::attachPickup(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
+{
+	entity->attach<Component::Pickup>();
 }
 
 std::shared_ptr<Entity> SceneLoader::loadLight(tinyxml2::XMLElement * e)
