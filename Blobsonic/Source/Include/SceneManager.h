@@ -56,6 +56,8 @@ public:
 
 	void update();	//!< Update scene manager
 
+	void reload();	//!< Reload current active scene
+
 	std::shared_ptr<Scene> getActiveScene();						//!< Returns active scene
 	std::string getActiveSceneName();		//!< Return file name of active scene
 
