@@ -61,5 +61,12 @@
 		<Vertex>Source\Resources\shader\button.vert</Vertex>
 		<Fragment>Source\Resources\shader\button.frag</Fragment>
 	</Shader>
+	<!--
+	<Shader> 
+		<ID>shadow_shader</ID>
+		<Vertex>Source\Resources\shader\shadowmap.vert</Vertex>
+		<Fragment>Source\Resources\shader\shadowmap.frag</Fragment>
+	</Shader>
+	-->
 </Resources>
 

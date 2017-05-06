@@ -153,6 +153,12 @@
     <None Include="Source\Resources\shader\singlePhong.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Source\Resources\shader\shadowmap.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Source\Resources\shader\shadowmap.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Include\stdafx.h">
@@ -410,6 +416,9 @@
     <ClInclude Include="Source\Include\CollisionReceiver.h">
       <Filter>Header Files\Engine\Messages</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\ShadowMap.h">
+      <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -627,6 +636,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\CollisionReporter.cpp">
       <Filter>Source Files\Engine\System</Filter>
+	</ClCompile>
+    <ClCompile Include="Source\Common\ShadowMap.cpp">
+      <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

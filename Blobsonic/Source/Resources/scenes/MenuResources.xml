@@ -71,6 +71,16 @@
 		<File>Source\Resources\textures\1280res.png</File>
 	</Texture>
 	
+	<Texture> 
+		<ID>1600_texture</ID>
+		<File>Source\Resources\textures\1600res.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>1920_texture</ID>
+		<File>Source\Resources\textures\1920res.png</File>
+	</Texture>
+	
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>

@@ -15,6 +15,7 @@
 #include "SpriteRender.h"
 #include "Transformable.h"
 #include "Button.h"
+#include "Text.h"
 
 EntityFactory::EntityFactory()
 {
@@ -121,19 +122,19 @@ std::shared_ptr<Entity> EntityFactory::createButton()
 	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
 
 	//////Attach components
-	//entity->attach<Component::Transformable>();
+	entity->attach<Component::Text>();
 	entity->attach<Component::Button>();
 	return entity;
 }
 
-void EntityFactory::attachSprite(std::shared_ptr<Entity> entity)
+std::shared_ptr<Entity> EntityFactory::createText()
 {
-	entity->attach<Component::SpriteRenderer>();
-}
+	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
 
-void EntityFactory::attachButton(std::shared_ptr<Entity> entity)
-{
-	entity->attach<Component::Button>();
+	//////Attach components
+	auto t = entity->attach<Component::Transformable>();
+	auto txt = entity->attach<Component::Text>();
+	return entity;
 }
 
 
@@ -307,4 +308,19 @@ void EntityFactory::attachPhysical(std::shared_ptr<Entity> entity, float mass, f
 	//set restitution
 	physical->m_fRestitution = restitution;
 
+}
+
+void EntityFactory::attachSprite(std::shared_ptr<Entity> entity)
+{
+	entity->attach<Component::SpriteRenderer>();
+}
+
+void EntityFactory::attachButton(std::shared_ptr<Entity> entity)
+{
+	entity->attach<Component::Button>();
+}
+
+void EntityFactory::attachText(std::shared_ptr<Entity> entity)
+{
+	entity->attach<Component::Text>();
 }
