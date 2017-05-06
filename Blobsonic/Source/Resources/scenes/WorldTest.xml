@@ -19,9 +19,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>1000.0f</X>
-				<Y>1000.0f</Y>
-				<Z>1000.0f</Z>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -30,10 +30,10 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>cube_mesh</Mesh>
+			<Mesh>deer_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>red_texture</Texture>
+			<Texture>skybox_texture</Texture>
 		</Model>
 		<Physical>
 			<Mass>1.0</Mass>
@@ -64,34 +64,45 @@
 			</Center>
 			<Radius>100.0f</Radius>
 		</Sphere>
-		
-		<Camera> <ID>cam1</ID>
-			<Position>
-				<X>0.0f</X>
-				<Y>1000.0f</Y>
-				<Z>5000.0f</Z>
-			</Position>
-			<Orientation>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Orientation>
-			<FOV>90.0f</FOV>
-			<AspectRatio>1.33333</AspectRatio>
-			<FarPlane>100000.0f</FarPlane>
-			<NearPlane>0.1f</NearPlane>
-			<RotSpeed>0.5f</RotSpeed>
-			<MoveSpeed>100.0f</MoveSpeed>
-		</Camera>
-		<Player></Player>
 	</Entity>
 	
+
+	<Button> <ID>MainMenuButton</ID>
+		<Shader>button_shader</Shader>
+		<Texture>menu_texture</Texture>
+		<Position>
+			<X>20.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
+
 	<Entity>
 		<Name>floor</Name>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>-1000.0f</Y>
+				<Y>0.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -161,111 +172,6 @@
 		</OBB>
 	</Entity>
 	
-	<Entity>
-		<Name>pickup</Name>
-		<Transformable>
-			<Position>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Rotation>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Rotation>
-			<Scale>
-				<X>1000.0f</X>
-				<Y>1000.0f</Y>
-				<Z>1000.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</Transformable>
-		<Model>
-			<Mesh>cube_mesh</Mesh>
-			<Material>default_material</Material>
-			<Shader>phong_shader</Shader>
-			<Texture>red_texture</Texture>
-		</Model>
-		<Physical>
-			<Mass>0.0</Mass>
-			<Restitution>0.5</Restitution>
-		</Physical>
-		<AABB>
-			<Position>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</AABB>
-		<OBB>
-			<Position>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Rotation>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Rotation>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</OBB>
-	</Entity>
-	
-	<Button> <ID>MainMenuButton</ID>
-		<Shader>button_shader</Shader>
-		<Texture>menu_texture</Texture>
-		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>4.0f</X> 
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
-		</sID>
-	</Button>
-
 	<Entity>
 		<Name>skybox</Name>
 		<Transformable>
@@ -367,16 +273,15 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	-->
-	<!--
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
 			<Y>3000.0f</Y>
-			<Z>5000.0f</Z>
+			<Z>7000.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>
-			<Y>0.0f</Y>
+			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
 		<FOV>90.0f</FOV>
@@ -386,6 +291,5 @@
 		<RotSpeed>0.5f</RotSpeed>
 		<MoveSpeed>100.0f</MoveSpeed>
 	</Camera>
-	-->
 </Scene>
 
