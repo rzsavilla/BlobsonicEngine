@@ -13,6 +13,7 @@
 #include "RenderMessages.h"
 #include "CameraMessages.h"
 
+
 void System::Render::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
 {
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
@@ -177,7 +178,68 @@ void System::Render::renderModel(std::shared_ptr<Entity> entity)
 
 void System::Render::renderText(std::shared_ptr<Entity> entity)
 {
+	
+	std::shared_ptr<Texture> texture = NULL;
+	auto text = entity->get <Component::Text>();
+	auto t = entity->get <Component::Transformable>();
+	// Activate corresponding render state	
 
+	text->getShader()->use();
+
+	text->getShader()->setUniform("textColor", vec3(0.0f));
+	text->getString();
+	t->getPosition();
+	text->getColour();
+
+	gl::ActiveTexture(gl::TEXTURE0);
+	gl::BindVertexArray(text->getVAO());
+	string sText = text->getString();
+
+	GLuint gTextureID;  // ID handle of the glyph texture
+	glm::ivec2 vSize;       // Size of glyph
+	vSize = vec2(20.0f, 20.0f);
+	gTextureID = 1;
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Iterate through all characters
+	std::string::const_iterator c;
+	for (c = sText.begin(); c != sText.end(); c++)
+	{
+		Character ch;
+		ch = text->getCharactersPtr().at(*c);
+		text->getCharactersPtr().find('Size')->first;
+		GLfloat xpos = text->getPosition().x + ch.Bearing.x * vSize.x;
+		GLfloat ypos = text->getPosition().y - (ch.Size.y - ch.Bearing.y) * vSize.y;
+
+		GLfloat w = ch.Size.x * vSize.x;
+		GLfloat h = ch.Size.y * vSize.y;
+		// Update VBO for each character
+		GLfloat vertices[6][4] = {
+			{ xpos,     ypos + h,   0.0, 0.0 },
+			{ xpos,     ypos,       0.0, 1.0 },
+			{ xpos + w, ypos,       1.0, 1.0 },
+
+			{ xpos,     ypos + h,   0.0, 0.0 },
+			{ xpos + w, ypos,       1.0, 1.0 },
+			{ xpos + w, ypos + h,   1.0, 0.0 }
+		};
+		// Render glyph texture over quad
+		//gl::BindTexture(gl::TEXTURE_2D, ch.textureID);
+		gl::BindTexture(gl::TEXTURE_2D, gTextureID);
+		// Update content of VBO memory
+		gl::BindBuffer(gl::ARRAY_BUFFER, text->getVAO());
+		gl::BufferSubData(gl::ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+		gl::BindBuffer(gl::ARRAY_BUFFER, 0);
+		// Render quad
+		gl::DrawArrays(gl::TRIANGLES, 0, 6);
+		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+		float x;
+		x = text->getPosition().x;
+		x += (ch.Advance >> 6) * text->getCharactersPtr().find('Size')->first; // Bitshift by 6 to get value in pixels (2^6 = 64)
+		text->setPosition(vec3(x, text->getPosition().y, text->getPosition().x));
+	}
+	gl::BindVertexArray(0);
+	gl::BindTexture(gl::TEXTURE_2D, 0);
+	
 }
 
 void System::Render::renderSprite(std::shared_ptr<Entity> entity)
@@ -188,7 +250,15 @@ void System::Render::renderSprite(std::shared_ptr<Entity> entity)
 
 	spriteRender->getShader()->use();
 
-	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 768.0f, 0.0f, -1.0f, 1.0f);
+	/// Gets the current width and height of the window.
+	int x, y;
+	float width, height;
+	glfwGetWindowSize(glfwGetCurrentContext(), &x, &y);
+	width = x;
+	height = y;
+
+	glm::mat4 projection = glm::ortho(0.0f, width, height + 0.0f, 0.0f, -1.0f, 1.0f);
+	//glm::mat4 projection = glm::ortho(0.0f, 1600.0f, 1024.0f, 0.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
 	//glm::mat4 projection = glm::perspective(45.0f, 1.33333f, 0.1f, 1000.0f);
 
@@ -269,6 +339,19 @@ void System::Render::passLightUniforms(std::shared_ptr<GLSLProgram> shader)
 			t = m_spotlights.at(i)->get<Component::Transformable>();
 			shader->setUniform((sSpotLight + "position").data(), t->getPosition());
 		}
+	}
+	for (int i = 0; i < m_shadowmaps.size(); i++) {	//Iterate through all lights
+															//Get Light Component
+		auto dirLight = m_shadowmaps.at(i)->get<Component::DirectionalLight>();
+
+		//Pass uniforms
+		std::string sShadowMap = "ShadowLights[" + std::to_string(i) + "].";
+		shader->setUniform((sShadowMap + "ambient").data(), dirLight->getAmbient());
+		shader->setUniform((sShadowMap + "diffuse").data(), dirLight->getDiffuse());
+		shader->setUniform((sShadowMap + "specular").data(), dirLight->getSpecular());
+		shader->setUniform((sShadowMap + "direction").data(), dirLight->getDirection());
+
+
 	}
 }
 

@@ -6,11 +6,11 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	<Entity>
-		<Name>Player</Name>
+		<Name>deer</Name>
 		<Transformable>
 			<Position>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
+				<X>1000.0f</X>
+				<Y>5000.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -42,7 +42,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>.0f</Y>
+				<Y>5000.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
@@ -59,15 +59,15 @@
 		<Sphere>
 			<Center>
 				<X>0.0f</X>
-				<Y>0.0f</Y>
+				<Y>5000.0f</Y>
 				<Z>0.0f</Z>
 			</Center>
 			<Radius>100.0f</Radius>
 		</Sphere>
 	</Entity>
-	
+
 	<Entity>
-		<Name>Floor</Name>
+		<Name>floor</Name>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
@@ -81,7 +81,7 @@
 			</Rotation>
 			<Scale>
 				<X>10000.0f</X>
-				<Y>1000.0f</Y>
+				<Y>100.0f</Y>
 				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
@@ -103,13 +103,13 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>.0f</Y>
+				<Y>0.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
-				<X>100.0f</X>
+				<X>10000.0f</X>
 				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -129,9 +129,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>100.0f</X>
+				<X>10000.0f</X>
 				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+				<Z>10000.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -140,34 +140,66 @@
 			</Origin>
 		</OBB>
 	</Entity>
-	<Model> <ID>skybox</ID>
-		<Mesh>skybox_mesh</Mesh>
-		<Material>default_material</Material>
-		<Shader>phong_shader</Shader>
-		<Texture>skybox_texture</Texture>
-		<Position>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>180.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>100.0f</X>
-			<Y>100.0f</Y>
-			<Z>100.0f</Z>
-		</Scale>
-		<Origin>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Origin>
-	</Model>
 	
-	<Button> <ID>MainMenuButton</ID>
+	<Entity>
+		<Name>skybox</Name>
+		<Transformable>
+			<Position>
+					<X>0.0f</X>
+					<Y>0.0f</Y>
+					<Z>0.0f</Z>
+			</Position>
+				<Rotation>
+					<X>0.0f</X>
+					<Y>0.0f</Y>
+					<Z>180.0f</Z>
+			</Rotation>
+			<Scale>
+					<X>100.0f</X>
+					<Y>100.0f</Y>
+					<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+					<X>0.0f</X>
+					<Y>0.0f</Y>
+					<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model> <ID>skybox</ID>
+				<Mesh>skybox_mesh</Mesh>
+				<Material>default_material</Material>
+				<Shader>phong_shader</Shader>
+				<Texture>skybox_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>dirLight_Main</Name>
+		<DirLight>
+			<Direction>
+				<X>0.0f</X>
+				<Y>-1.0f</Y>
+				<Z>0.0f</Z>
+			</Direction>
+			<Ambient>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Ambient>
+			<Diffuse>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Diffuse>	
+			<Specular>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Specular>
+		</DirLight>
+	</Entity>
+	
+		<Button> <ID>MainMenuButton</ID>
 		<Shader>button_shader</Shader>
 		<Texture>menu_texture</Texture>
 		<Position>
@@ -181,14 +213,14 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
 			<X>1.0f</X> 	
 			<Y>1.0f</Y>
-			<Z>0.0f</Z>
+			<Z>1.0f</Z>
 		</Colour>
 		<sID>
 			<X>4.0f</X> 
@@ -197,31 +229,7 @@
 		</sID>
 	</Button>
 	
-	<Sprite> <ID>sprite2</ID>
-		<Shader>button_shader</Shader>
-		<Texture>sprite_texture</Texture>
-		<Position>
-			<X>804.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>0.5f</X> 	
-			<Y>0.5f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-	</Sprite>
-
+	<!--
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>
@@ -240,12 +248,13 @@
 			<Z>0.0f</Z>
 		</Diffuse>	
 		<Specular>
-			<X>1.0f</X>
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
 		</Specular>
 	</Light>
-	
+	-->
+	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
@@ -263,7 +272,7 @@
 		<isLooping>false</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	
+	-->
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>

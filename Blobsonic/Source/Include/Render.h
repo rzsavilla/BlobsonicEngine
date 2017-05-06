@@ -15,6 +15,7 @@ namespace System {
 		std::vector<std::shared_ptr<Entity>> m_directionalLights;	//!< Store all directional lights
 		std::vector<std::shared_ptr<Entity>> m_pointLights;			//!< Store all point lights
 		std::vector<std::shared_ptr<Entity>> m_spotlights;			//!< Store all spotlights
+		std::vector<std::shared_ptr<Entity>> m_shadowmaps;			//!< Store all shadowmaps
 	private:
 		/*!
 		*	@brief Function Adds new entities to the vector of entities.

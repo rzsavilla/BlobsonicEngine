@@ -38,6 +38,8 @@ public:
 	glm::vec3 getForce();		//!< returns current force being applied
 	glm::vec3 getVelocity();	//!< return current velocity
 	glm::vec3 getAcceleration();	//!< return current acceleration m/s/s
+	void applyImpulse(glm::vec3 Normal, float force);
+
 };
 
 

@@ -26,4 +26,21 @@ namespace EngineMessage {
 			sID = "Exit";
 		};
 	};
+
+	struct WindowResize : public Message {
+		WindowResize(unsigned int w, unsigned int h) {
+			sID = "WindowResize";
+			uiWidth = w;
+			uiHeight = h;
+		};
+		unsigned uiWidth, uiHeight;
+	};
+
+	struct FullScreenToggle : public Message {
+		FullScreenToggle(bool fullscreen) {
+			sID = "FullScreenToggle";
+			bFullScreen = fullscreen;
+		}
+		bool bFullScreen;
+	};
 }

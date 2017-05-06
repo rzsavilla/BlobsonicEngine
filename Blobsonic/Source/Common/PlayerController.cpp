@@ -40,43 +40,34 @@ void System::PlayerController::process(std::vector<std::shared_ptr<Entity>>* ent
 void System::PlayerController::update(float dt) {
 	if (m_Camera) {
 		if (m_Camera->has<Component::Transformable>()) {
-			auto t = m_Camera->get<Component::Camera>();
-			//auto p = m_Camera->get<Component::Player>();
-			glm::vec3 pos = t->getPosition();
-			//float fSpeed = p->m_fMoveSpeed;
+			if (m_Camera->has<Component::Player>()) {
+				auto t = m_Camera->get<Component::Camera>();
+				auto p = m_Camera->get<Component::Player>();
+				glm::vec3 pos = t->getPosition();
+				float fSpeed = p->m_fMoveSpeed;
 
-			//set the pos of skybox
-			if (m_vSkyBox)
-			{
-				auto skytrans = m_vSkyBox->get<Component::Transformable>();
+				//set the pos of skybox
+				if (m_vSkyBox)
+				{
+					auto skytrans = m_vSkyBox->get<Component::Transformable>();
 
-				skytrans->setPosition(t->getPosition());//- glm::vec3(250, 250, 250));
-
-
+					skytrans->setPosition(t->getPosition());//- glm::vec3(250, 250, 250));
+				}
 			}
-
-			//if (m_bAction[0]) {		//Move Forward
-			//	pos.z += fSpeed;
-			//}
-			//if (m_bAction[1]) {		//Move Backwards
-			//	pos.z -= fSpeed;
-			//}
-			//if (m_bAction[2]) {		//Move Left
-			//	pos.x -= fSpeed;
-			//}
-			//if (m_bAction[3]) {		//Move Right
-			//	pos.x += fSpeed;
-			//}
-			//if (m_bAction[4]) {		//Move Up/Ascend
-			//	pos.y += fSpeed;
-			//}
-			//if (m_bAction[5]) {		//Move Down/Descend
-			//	pos.y -= fSpeed;
-			//}
-			//t->setPosition(pos);	//Set new position
 		}
 		for (int i = 0; i < m_kiActions; i++) {
 			m_bAction[i] = false;
+		}
+	}
+
+	if (m_vPlayer) {	//Check for null
+		if (m_vPlayer->has<Component::Camera>()) {
+			if (m_vPlayer->has<Component::Transformable>()) {
+				auto cam = m_vPlayer->get<Component::Camera>();
+				auto t = m_vPlayer->get<Component::Transformable>();
+				cam->setPosition(t->getPosition() + cam->getLocalPos());
+				std::cout << "cam: POs " << cam->getPosition().x << " " << cam->getPosition().y << " " << cam->getPosition().z << "\n";
+			}
 		}
 	}
 }

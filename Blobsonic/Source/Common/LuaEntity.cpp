@@ -24,6 +24,13 @@ static std::shared_ptr<EntityFactory> m_EntityFactory = EntityFactory::getInstan
 LuaEntity::LuaEntity()
 {
 	m_entity = NULL;
+	CollisionReporter::getInstance()->attachReceiver(this);
+}
+
+LuaEntity::~LuaEntity()
+{
+	m_entity = NULL;
+	CollisionReporter::getInstance()->dettachReceiver(this);
 }
 
 void LuaEntity::setTransformable(sol::table t)
@@ -221,42 +228,42 @@ void LuaEntity::setOBB(sol::table t)
 
 void LuaEntity::setComponents(sol::table t)
 {
-	if (!m_entity) {
-		//Create and add entity into the scene
-		m_entity = std::make_shared<Entity>();	//Pointer to handled entity
-		m_bDestroyed = false;
-		MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
+	//if (!m_entity) {
+	//	//Create and add entity into the scene
+	//	m_entity = std::make_shared<Entity>();	//Pointer to handled entity
+	//	m_bDestroyed = false;
+	//	MessageHandler::getInstance()->sendMessage<SceneMessage::AddEntity>(m_entity);
 
-		lua_pushnil(m_activeScript);  // first key
-		//Iterate through table elements
-		for (auto it = t.begin(); it != t.end(); ++it) {
-			auto key = (*it).first;	//Get element key
-			if (key.get_type() == sol::type::string) {
-				//Only process string keys
-				std::string s = key.as<std::string>();		//Get key value
-				auto value = (*it).second;					//Get value this should be a table
-				//Read table data
-				if (key.get_type() == sol::type::string) {
-					if (value.is<sol::table>()) {
-						//Set variables
-						if (s == "Transformable") { setTransformable(value); }
-						else if (s == "Model") { setModel(value); }
-						else if (s == "Physical") { setPhysical(value); }
-						else if (s == "AABB") { setAABB(value); }
-						else if (s == "Sphere") { setSphere(value); }
-						else if (s == "OBB") { setOBB(value); }
-						
-					}
-					else if (value.is<std::string>()) {
-						if (s == "Name") {
-							//std::cout << "Name: " << value.as<std::string>() << "\n";
-							m_entity->setName(value.as<std::string>());
-						}
-					}
-				}
-			}
-		}
-	}
+	//	lua_pushnil(m_activeScript);  // first key
+	//	//Iterate through table elements
+	//	for (auto it = t.begin(); it != t.end(); ++it) {
+	//		auto key = (*it).first;	//Get element key
+	//		if (key.get_type() == sol::type::string) {
+	//			//Only process string keys
+	//			std::string s = key.as<std::string>();		//Get key value
+	//			auto value = (*it).second;					//Get value this should be a table
+	//			//Read table data
+	//			if (key.get_type() == sol::type::string) {
+	//				if (value.is<sol::table>()) {
+	//					//Set variables
+	//					if (s == "Transformable") { setTransformable(value); }
+	//					else if (s == "Model") { setModel(value); }
+	//					else if (s == "Physical") { setPhysical(value); }
+	//					else if (s == "AABB") { setAABB(value); }
+	//					else if (s == "Sphere") { setSphere(value); }
+	//					else if (s == "OBB") { setOBB(value); }
+	//					
+	//				}
+	//				else if (value.is<std::string>()) {
+	//					if (s == "Name") {
+	//						//std::cout << "Name: " << value.as<std::string>() << "\n";
+	//						m_entity->setName(value.as<std::string>());
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 void LuaEntity::handleEntity(const std::string & name)
@@ -272,7 +279,16 @@ bool LuaEntity::hasComponent(const std::string & sComponent)
 
 unsigned int LuaEntity::getID()
 {
-	return this->m_entity->getUID();
+	if (m_entity) {
+		return this->m_entity->getUID();
+	}
+}
+
+std::string LuaEntity::getName()
+{
+	if (m_entity) {
+		return this->m_entity->getName();
+	}
 }
 
 void LuaEntity::tSetPosition(float x, float y, float z)
@@ -388,13 +404,47 @@ void LuaEntity::pSetVelocity(float x, float y, float z)
 	}
 }
 
+void LuaEntity::pCollisionListen()
+{
+
+}
+
+bool LuaEntity::pHasCollidedByID(int entityID)
+{
+	if (m_entity) {
+		for (auto it = m_entity->m_vCollidedWith.begin(); it != m_entity->m_vCollidedWith.end(); ++it) {
+			if ((*it)->getUID() == entityID) return true;
+		}
+	}
+	return false;
+}
+
+bool LuaEntity::pHasCollidedByName(std::string entityName)
+{
+	if (m_entity) {
+		for (auto it = m_entity->m_vCollidedWith.begin(); it != m_entity->m_vCollidedWith.end(); ++it) {
+			if ((*it)->getName() == entityName) return true;
+		}
+	}
+	return false;
+}
+
+void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)
+{
+	if (m_entity) {
+		auto p = m_entity->get<Physical>();
+		p->applyImpulse(glm::vec3(nx, ny, nz), force);
+	}
+}
+
 void LuaEntity::destroy()
 {
 	if (m_entity) {
 		m_entity->destroy();
-		m_entity = nullptr;
+		m_entity = NULL;
 	}
 	m_bDestroyed = true;
+	CollisionReporter::getInstance()->dettachReceiver(this);
 }
 
 bool LuaEntity::isDestroyed()
@@ -404,7 +454,7 @@ bool LuaEntity::isDestroyed()
 
 void LuaEntity::log()
 {
-	if (!m_entity) {
+	if (m_entity) {
 		//std::cout << "Entity: " << m_entity->getName() << "\n";
 		if (m_entity->has<Component::Transformable>()) {
 			auto t = m_entity->get<Component::Transformable>();
@@ -418,7 +468,7 @@ void LuaEntity::log()
 void LuaEntity::register_lua(lua_State* L)
 {
 	//if (!m_lua_state) m_lua_state = L;
-	if (!m_activeScript) m_activeScript = L;
+	//if (!m_activeScript) m_activeScript = L;
 	sol::state_view state(L);
 
 	state.new_usertype<LuaEntity>("Entity",
@@ -426,6 +476,7 @@ void LuaEntity::register_lua(lua_State* L)
 		"setComponents", &LuaEntity::setComponents,
 		"handleEntity",&LuaEntity::handleEntity,
 		"getID", &LuaEntity::getID,
+		"getName", &LuaEntity::getName,
 		"destroy", &LuaEntity::destroy,
 		"isDestroyed",&LuaEntity::isDestroyed,
 		"log",&LuaEntity::log,
@@ -441,6 +492,18 @@ void LuaEntity::register_lua(lua_State* L)
 		"pSetMass", &LuaEntity::pSetMass,
 		"pSetInvMass", &LuaEntity::pSetInvMass,
 		"pSetRestitution", &LuaEntity::pSetRestitution,
-		"pSetVelocity", &LuaEntity::pSetVelocity
+		"pSetVelocity", &LuaEntity::pSetVelocity,
+		"pHasCollidedByID",&LuaEntity::pHasCollidedByID,
+		"pHasCollidedByName", &LuaEntity::pHasCollidedByName,
+		"pApplyImpulse", &LuaEntity::pApplyImpulse
 	);
+}
+
+void LuaEntity::registerCollision(std::shared_ptr<Entity> entity1, std::shared_ptr<Entity> entity2)
+{
+	//Check if this entity has collided
+	if (entity1->getUID() == m_entity->getUID()) {
+		//Record entity has collided with
+		m_entity->m_vCollidedWith.push_back(entity2);
+	}
 }

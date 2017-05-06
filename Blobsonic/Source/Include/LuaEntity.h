@@ -2,22 +2,19 @@
 *	@class LuaEntity
 *	@brief Handle for a C++ Entity
 *	@author Rozen Savilla
-*	Stores variables and functions that
+*	An interface that handles an engine entity
 */
 
 #pragma once
-
+#include <unordered_map>
 #include "MessageHandler.h"
+#include "CollisionReporter.h"
+#include "CollisionReceiver.h"
 
 #include "Entity.h"
-
 #include "sol.hpp"
 
-#include <unordered_map>
-
-static lua_State* m_activeScript = NULL;
-
-class LuaEntity {
+class LuaEntity : public CollisionReceiver {
 private:
 	std::shared_ptr<Entity> m_entity;		//!< Pointer to entity being handled/Created upon construction
 	bool m_bDebug = true;					//!< Enables couts to console
@@ -31,6 +28,7 @@ private:	//Component functions
 	bool m_bDestroyed;						//!< Check to see if this handler is destroyed
 public:
 	LuaEntity();	//!< Default Constructor
+	~LuaEntity();
 	/*!
 		Creates new entity and attaches components to it this LuaEntity
 		Attaches components to entity by reading from lua table
@@ -44,6 +42,7 @@ public:
 
 	bool hasComponent(const std::string& sComponent);	//!< Returns true if entity has component
 	unsigned int getID();	//!< Return entities unique ID
+	std::string getName();	//!< Return entity name
 	void destroy();			//!< Destroy this entity
 	bool isDestroyed();		//!< Returns true if entityhandler is destroyed
 	void log();				//!< Prints entity variables in console
@@ -61,9 +60,15 @@ public:
 	void pSetInvMass(float newInvMass);
 	void pSetRestitution(float newRestituion);
 	void pSetVelocity(float x, float y, float z);
+	void pCollisionListen();							//!< Messages physics system to report collisions that occur for this entity
+	bool pHasCollidedByID(int entityID);		//!< Returns true if a collision report between this entity has occured
+	bool pHasCollidedByName(std::string entityName);	//!< Returns true if a collision report between this entity has occured
+	void pApplyImpulse(float nx, float ny, float nz, float force);
 
 	/*! Register this C++ class as a lua class
 		Allows lua access to member functions
 	*/
 	static void register_lua(lua_State* L);
+
+	void registerCollision(std::shared_ptr<Entity> entity1, std::shared_ptr<Entity> entity2);
 };

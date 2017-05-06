@@ -14,7 +14,7 @@ void System::Gameplay::process(std::vector<std::shared_ptr<Entity>>* entities)
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
 		//Sort all entities;
 		if ((*it)->has<Component::Player>()) {
-			m_Player.push_back((*it));
+			m_Player = (*it);
 		}
 		else if ((*it)->has<Component::Pickup>()) {
 			m_Pickups.push_back((*it));
@@ -28,8 +28,15 @@ void System::Gameplay::update(float dt)
 		Gameplay updates here
 	*/
 
+	if (m_Player) {
+		//Player collision with pickups
+		if (m_Player->getUID()) {
+			for (auto it = m_Player->m_vCollidedWith.begin(); it != m_Player->m_vCollidedWith.end(); ++it) {
 
-	m_Player.clear();
+			}
+		}
+	}
+
 	m_Pickups.clear();
 }
 

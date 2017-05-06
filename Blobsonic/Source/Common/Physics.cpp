@@ -7,6 +7,9 @@
 #include "Physical.h"
 #include "Transformable.h"
 
+#include "SceneMessages.h"
+#include "CollisionReporter.h"
+
 System::Physics::Physics()
 {
 
@@ -46,6 +49,9 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 			addEntity((*it), &m_vPhysicals);
 		}
 	}
+
+	
+
 }
 
 void System::Physics::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
@@ -97,7 +103,12 @@ void System::Physics::update(float dt)
 
 void System::Physics::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
-
+	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
+		if ((*it)->sID == "ListenCollision") {
+			auto data = static_cast<SceneMessage::ListenToCollision*>((*it).get());
+			m_vListenToCollision.push_back(data->entityID);	//Record entity ID, will report collision events that occur with this entity
+		}
+	}
 }
 
 void System::Physics::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
@@ -157,31 +168,28 @@ bool System::Physics::CheckAABBAABBCollision(std::shared_ptr<Entity> aabb1, std:
 	auto aabox1 = aabb1->get<AABB>();
 	auto aabox2 = aabb2->get<AABB>();
 
-	auto box1 = aabb1->get<Component::Transformable>();
-	auto box2 = aabb2->get<Component::Transformable>();
-
-	aabox1->m_vCenter = box1->m_vPosition + aabox1->m_vDimensions / 2.0f;
-	aabox2->m_vCenter = box2->m_vPosition + aabox2->m_vDimensions / 2.0f;
+	aabox1->m_vCenter = aabox1->m_vPosition + aabox1->m_vScale / 2.0f;
+	aabox2->m_vCenter = aabox2->m_vPosition + aabox2->m_vScale / 2.0f;
 
 	//create positions of all vertecies
-	aabox1->obbLocalPoints[0] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Top left
-	aabox1->obbLocalPoints[1] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Top Right
-	aabox1->obbLocalPoints[2] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Bottom Right
-	aabox1->obbLocalPoints[3] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z + aabox1->m_vDimensions.z / 2);	//Front - Bottom left
-	aabox1->obbLocalPoints[4] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Top left
-	aabox1->obbLocalPoints[5] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y + aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Top Right
-	aabox1->obbLocalPoints[6] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Bottom Right
-	aabox1->obbLocalPoints[7] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vDimensions.x / 2, aabox1->m_vCenter.y - aabox1->m_vDimensions.y / 2, aabox1->m_vCenter.z - aabox1->m_vDimensions.z / 2);	//Back - Bottom left
+	aabox1->obbLocalPoints[0] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vScale.x / 2, aabox1->m_vCenter.y + aabox1->m_vScale.y / 2, aabox1->m_vCenter.z + aabox1->m_vScale.z / 2);	//Front - Top left
+	aabox1->obbLocalPoints[1] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vScale.x / 2, aabox1->m_vCenter.y + aabox1->m_vScale.y / 2, aabox1->m_vCenter.z + aabox1->m_vScale.z / 2);	//Front - Top Right
+	aabox1->obbLocalPoints[2] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vScale.x / 2, aabox1->m_vCenter.y - aabox1->m_vScale.y / 2, aabox1->m_vCenter.z + aabox1->m_vScale.z / 2);	//Front - Bottom Right
+	aabox1->obbLocalPoints[3] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vScale.x / 2, aabox1->m_vCenter.y - aabox1->m_vScale.y / 2, aabox1->m_vCenter.z + aabox1->m_vScale.z / 2);	//Front - Bottom left
+	aabox1->obbLocalPoints[4] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vScale.x / 2, aabox1->m_vCenter.y + aabox1->m_vScale.y / 2, aabox1->m_vCenter.z - aabox1->m_vScale.z / 2);	//Back - Top left
+	aabox1->obbLocalPoints[5] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vScale.x / 2, aabox1->m_vCenter.y + aabox1->m_vScale.y / 2, aabox1->m_vCenter.z - aabox1->m_vScale.z / 2);	//Back - Top Right
+	aabox1->obbLocalPoints[6] = glm::vec3(aabox1->m_vCenter.x + aabox1->m_vScale.x / 2, aabox1->m_vCenter.y - aabox1->m_vScale.y / 2, aabox1->m_vCenter.z - aabox1->m_vScale.z / 2);	//Back - Bottom Right
+	aabox1->obbLocalPoints[7] = glm::vec3(aabox1->m_vCenter.x - aabox1->m_vScale.x / 2, aabox1->m_vCenter.y - aabox1->m_vScale.y / 2, aabox1->m_vCenter.z - aabox1->m_vScale.z / 2);	//Back - Bottom left
 
 
-	aabox2->obbLocalPoints[0] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Top left
-	aabox2->obbLocalPoints[1] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Top Right
-	aabox2->obbLocalPoints[2] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Bottom Right
-	aabox2->obbLocalPoints[3] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z + aabox2->m_vDimensions.z / 2);	//Front - Bottom left
-	aabox2->obbLocalPoints[4] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Top left
-	aabox2->obbLocalPoints[5] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y + aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Top Right
-	aabox2->obbLocalPoints[6] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Bottom Right
-	aabox2->obbLocalPoints[7] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vDimensions.x / 2, aabox2->m_vCenter.y - aabox2->m_vDimensions.y / 2, aabox2->m_vCenter.z - aabox2->m_vDimensions.z / 2);	//Back - Bottom left
+	aabox2->obbLocalPoints[0] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vScale.x / 2, aabox2->m_vCenter.y + aabox2->m_vScale.y / 2, aabox2->m_vCenter.z + aabox2->m_vScale.z / 2);	//Front - Top left
+	aabox2->obbLocalPoints[1] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vScale.x / 2, aabox2->m_vCenter.y + aabox2->m_vScale.y / 2, aabox2->m_vCenter.z + aabox2->m_vScale.z / 2);	//Front - Top Right
+	aabox2->obbLocalPoints[2] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vScale.x / 2, aabox2->m_vCenter.y - aabox2->m_vScale.y / 2, aabox2->m_vCenter.z + aabox2->m_vScale.z / 2);	//Front - Bottom Right
+	aabox2->obbLocalPoints[3] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vScale.x / 2, aabox2->m_vCenter.y - aabox2->m_vScale.y / 2, aabox2->m_vCenter.z + aabox2->m_vScale.z / 2);	//Front - Bottom left
+	aabox2->obbLocalPoints[4] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vScale.x / 2, aabox2->m_vCenter.y + aabox2->m_vScale.y / 2, aabox2->m_vCenter.z - aabox2->m_vScale.z / 2);	//Back - Top left
+	aabox2->obbLocalPoints[5] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vScale.x / 2, aabox2->m_vCenter.y + aabox2->m_vScale.y / 2, aabox2->m_vCenter.z - aabox2->m_vScale.z / 2);	//Back - Top Right
+	aabox2->obbLocalPoints[6] = glm::vec3(aabox2->m_vCenter.x + aabox2->m_vScale.x / 2, aabox2->m_vCenter.y - aabox2->m_vScale.y / 2, aabox2->m_vCenter.z - aabox2->m_vScale.z / 2);	//Back - Bottom Right
+	aabox2->obbLocalPoints[7] = glm::vec3(aabox2->m_vCenter.x - aabox2->m_vScale.x / 2, aabox2->m_vCenter.y - aabox2->m_vScale.y / 2, aabox2->m_vCenter.z - aabox2->m_vScale.z / 2);	//Back - Bottom left
 
 
 																																																	//set up the mins and maxs
@@ -699,10 +707,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	//subract the radius
 	fDist = fDist - localSphere.m_fRadius;
 
-	if (sphere->m_vCenter.x == 20 && fDist < 50)
-	{
-	std:cout << fDist << std::endl;
-	}
 
 	if (fDist <= 0)
 	{
@@ -716,7 +720,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 			newVector *= localSphere.m_fRadius;
 			Normal = Normal - newVector;
 
-
 			float d = abs(sqrt((Normal.x * Normal.x) + (Normal.y * Normal.y) + (Normal.z * Normal.z)));
 
 			Normal = glm::normalize(Normal);
@@ -724,6 +727,9 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 			//find the penetration depth
 			float PenetrationDepth = localSphere.m_fRadius - d;
+
+			std::cout << "Colliding " << std::endl;
+
 			resolveCollision(eBox, eSphere, Normal);
 			PositionalCorrection(eBox, eSphere, PenetrationDepth, Normal);
 		}
@@ -827,8 +833,9 @@ void System::Physics::updateAABB(std::shared_ptr<Entity> eBox)
 	auto tBox = eBox->get<Component::Transformable>();
 
 	box->m_vPosition = tBox->getPosition() - box->m_vLocalTransform;
-	box->m_vCenter = box->m_vPosition + (box->m_vDimensions / 2.0f);
+	//box->m_vCenter = box->m_vPosition + (box->m_vDimensions / 2.0f);
 
+	
 
 }
 
@@ -838,22 +845,27 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 	auto trans = e->get<Component::Transformable>();
 	auto phys = e->get<Physical>();
 
+	if (e->has<Sphere>())
+	{
+		auto sphere = e->get<Sphere>();
+		//std::cout << sphere->m_vCenter.x << " " << sphere->m_vCenter.y << " " << sphere->m_vCenter.z << std::endl;
+	}
+	
+
+	
+
+
 	if (phys->m_fINVMass != 0) // infinit mass , do not apply forces to it
 	{
-
-		//apply gravity
-		phys->m_vVelocity.y += GRAVITYCOEFFICENT;
-
-		//apply drag
-		phys->m_vAcceleration *= DRAG;
-
-		//update velocity
-		phys->m_vVelocity += phys->getAcceleration();
+		//update velocity//apply drag //apply gravity
+		phys->m_vVelocity += phys->getAcceleration() * dt * DRAG;
 		trans->m_vPosition += phys->m_vVelocity;
 
-		if (phys->m_vVelocity.x < EPSILON) phys->m_vVelocity.x = 0;
-		if (phys->m_vVelocity.y < EPSILON) phys->m_vVelocity.y = 0;
-		if (phys->m_vVelocity.z < EPSILON) phys->m_vVelocity.z = 0;
+		//check for epsilon movement
+		if (abs(phys->m_vVelocity.x) < EPSILON) phys->m_vVelocity.x = 0;
+		if (abs(phys->m_vVelocity.y) < EPSILON) phys->m_vVelocity.y = 0;
+		if (abs(phys->m_vVelocity.z) < EPSILON) phys->m_vVelocity.z = 0;
+
 	}
 }
 
@@ -925,28 +937,104 @@ void System::Physics::broadPhase(float dt)
 	m_vCheckSpheres.clear();
 	m_vCheckOBBS.clear();
 	m_vCheckCapsule.clear();
+
+	//Reset recorded collision - previous entities this has collided with
+	for (int i = 0; i < m_vAABBS.size(); i++) {
+		m_vAABBS.at(i)->m_vCollidedWith.clear();
+	}
 	
 	//process AABB
 	for (int i = 0; i < m_vAABBS.size(); i++)
 	{
-
 		for (int x = 0; x < m_vAABBS.size(); x++)
 		{
 			if (i != x)
 			{
 				if (CheckAABBAABBCollision(m_vAABBS.at(i), m_vAABBS.at(x)))
 				{
+					CollisionReporter::getInstance()->notify(m_vAABBS.at(i), m_vAABBS.at(x));
+
 					// these 2 entities need to be checked
-					if (m_vAABBS.at(i)->has<Sphere>())m_vCheckSpheres.push_back(m_vAABBS.at(i));
-					if (m_vAABBS.at(x)->has<Sphere>())m_vCheckSpheres.push_back(m_vAABBS.at(x));
+					if (m_vAABBS.at(i)->has<Sphere>())
+					{
+						
+						if ((find(m_vCheckSpheres.begin(), m_vCheckSpheres.end(), m_vAABBS.at(i))) != m_vCheckSpheres.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckSpheres.push_back(m_vAABBS.at(i));
+							auto sphere = m_vAABBS.at(i)->get<Physical>();
+						
+						}
+					}
+						
+					if (m_vAABBS.at(x)->has<Sphere>())
+					{
+						
+						if ((find(m_vCheckSpheres.begin(), m_vCheckSpheres.end(), m_vAABBS.at(x))) != m_vCheckSpheres.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckSpheres.push_back(m_vAABBS.at(x));
+						}
+					}
 
-					if (m_vAABBS.at(i)->has<OBB>())m_vCheckOBBS.push_back(m_vAABBS.at(i));
-					if (m_vAABBS.at(x)->has<OBB>())m_vCheckOBBS.push_back(m_vAABBS.at(x));
-
-					if (m_vAABBS.at(i)->has<Capsule>())m_vCheckCapsule.push_back(m_vAABBS.at(i));
-					if (m_vAABBS.at(x)->has<Capsule>())m_vCheckCapsule.push_back(m_vAABBS.at(x));
-
-
+					if (m_vAABBS.at(i)->has<OBB>())
+					{
+						
+						if ((find(m_vCheckOBBS.begin(), m_vCheckOBBS.end(), m_vAABBS.at(i))) != m_vCheckOBBS.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckOBBS.push_back(m_vAABBS.at(i));
+						}
+					}
+					if (m_vAABBS.at(x)->has<OBB>())
+					{
+					
+						if ((find(m_vCheckOBBS.begin(), m_vCheckOBBS.end(), m_vAABBS.at(x))) != m_vCheckOBBS.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckOBBS.push_back(m_vAABBS.at(x));
+						}
+					}
+				
+					if (m_vAABBS.at(i)->has<Capsule>())
+					{
+					
+						
+						if ((find(m_vCheckCapsule.begin(), m_vCheckCapsule.end(), m_vAABBS.at(i))) != m_vCheckCapsule.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckCapsule.push_back(m_vAABBS.at(i));
+						}
+					}
+					
+					if (m_vAABBS.at(x)->has<Capsule>())
+					{
+				
+						
+						if ((find(m_vCheckCapsule.begin(), m_vCheckCapsule.end(), m_vAABBS.at(x))) != m_vCheckCapsule.end())
+						{
+							//dont add
+						}
+						else
+						{
+							m_vCheckCapsule.push_back(m_vAABBS.at(x));
+						}
+					}
 				}
 			}
 		}
@@ -958,7 +1046,6 @@ void System::Physics::narrowPhase(float dt)
 {
 	
 	//process OBB
-
 	for (int i = 0; i < m_vCheckOBBS.size(); i++)
 	{
 		for (int x = 0; x < m_vCheckOBBS.size(); x++)
@@ -968,7 +1055,6 @@ void System::Physics::narrowPhase(float dt)
 				CheckOBBOBBCollision(m_vCheckOBBS.at(i), m_vCheckOBBS.at(x));
 			}
 		}
-
 	}
 
 	//process Sphere
@@ -989,6 +1075,9 @@ void System::Physics::narrowPhase(float dt)
 	{
 		for (int x = 0; x < m_vCheckOBBS.size(); x++)
 		{
+
+			auto sphere = m_vCheckSpheres.at(i)->get<Physical>();
+			auto box = m_vCheckOBBS.at(x)->get<Physical>();
 
 			CheckOBBSphereCollision(m_vCheckOBBS.at(x), m_vCheckSpheres.at(i));
 
@@ -1037,7 +1126,6 @@ void System::Physics::narrowPhase(float dt)
 
 void System::Physics::applyImpulse(glm::vec3 Normal, float force, std::shared_ptr<Entity> object)
 {
-
 	//get physicals and transformables
 	auto trans = object->get<Component::Transformable>();
 	auto phys = object->get<Physical>();
@@ -1049,5 +1137,4 @@ void System::Physics::applyImpulse(glm::vec3 Normal, float force, std::shared_pt
 
 	//multiply normal my accerlation
 	phys->m_vAcceleration =  Normal * Acceleration;
-
 }

@@ -21,15 +21,21 @@ static void LuaLoaded() {
 	std::cout << "Lua is working\n";
 }
 
+class Entity;
+
 class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> , public Name {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 
 	const bool m_bDebug = true;	//!< Flag for Couts
+
+	
 public:
 	Entity();
 	
 	~Entity();
+
+	std::vector<std::shared_ptr<Entity>> m_vCollidedWith;	//!< Entities this has collided with cleared every tick
 
 	template<typename T, typename... Args>
 	T &attach(Args &&...args) {
