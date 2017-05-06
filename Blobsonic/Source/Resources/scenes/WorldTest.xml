@@ -65,37 +65,6 @@
 			<Radius>100.0f</Radius>
 		</Sphere>
 	</Entity>
-	
-
-	<Button> <ID>MainMenuButton</ID>
-		<Shader>button_shader</Shader>
-		<Texture>menu_texture</Texture>
-		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>4.0f</X> 
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
-		</sID>
-	</Button>
 
 	<Entity>
 		<Name>floor</Name>
@@ -229,6 +198,37 @@
 			</Specular>
 		</DirLight>
 	</Entity>
+	
+		<Button> <ID>MainMenuButton</ID>
+		<Shader>button_shader</Shader>
+		<Texture>menu_texture</Texture>
+		<Position>
+			<X>20.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
+	
 	<!--
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>

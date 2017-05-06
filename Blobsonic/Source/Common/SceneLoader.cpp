@@ -18,6 +18,7 @@
 #include "Sound.h"
 #include "SpriteRender.h"
 #include "Pickup.h"
+#include "Text.h"
 
 #include "EntityFactory.h"
 

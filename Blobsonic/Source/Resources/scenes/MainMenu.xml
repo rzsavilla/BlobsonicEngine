@@ -41,7 +41,7 @@
 		<Texture>play_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>100</Y>
+			<Y>100.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
