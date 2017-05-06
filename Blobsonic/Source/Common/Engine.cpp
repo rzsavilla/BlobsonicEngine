@@ -8,6 +8,9 @@
 
 #include "InputMessages.h"
 #include "SceneMessages.h"
+#include "EngineMessages.h"
+
+#include "CollisionReporter.h"
 
 void Engine::Engine::initScene(bool forceReloadRes)
 {
@@ -206,6 +209,12 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 				case GLFW_KEY_ESCAPE:
 					m_bRunning = false;	//End game loop
 					break;
+				case GLFW_KEY_9:
+					MessageHandler::getInstance()->sendMessage<EngineMessage::FullScreenToggle>(true);
+					break;
+				case GLFW_KEY_0:
+					MessageHandler::getInstance()->sendMessage<EngineMessage::FullScreenToggle>(false);
+					break;
 				default:
 					break;
 				}
@@ -225,6 +234,34 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 
 			//Scene has changed
 			MessageHandler::getInstance()->sendMessage<SceneMessage::SceneChanged>();
+		}
+		else if (s == "FullScreenToggle") {
+			//------------------BROKEN--------------------------------------
+			//Toggle between windows and full screen
+			auto data = static_cast<EngineMessage::FullScreenToggle*>(msgs->at(i).get());
+			if (data->bFullScreen && !m_bIsFullScreen) {	//Switch to full screen
+				GLFWmonitor* primary = glfwGetPrimaryMonitor();		//Get pointer to primary monitor
+				const GLFWvidmode* mode = glfwGetVideoMode(primary);
+				glfwSetWindowMonitor(m_window, primary, 0, 0, mode->width, mode->height, mode->refreshRate);
+				//glfwSetWindowMonitor(m_window, primary, 0, 0, m_iWindowWidth, m_iWindowHeight, mode->refreshRate);
+				m_bIsFullScreen = true;
+			}
+			else if (!data->bFullScreen && m_bIsFullScreen) {	//Switch to windowed
+				GLFWwindow* newWindow = glfwCreateWindow(m_iWindowWidth, m_iWindowHeight, m_sWindowTitle.c_str(), NULL, NULL);
+				//Swap windows
+				GLFWwindow* originalWindow = m_window;	//Old window to destroy
+				m_window = newWindow;					//new window to use
+				glfwDestroyWindow(originalWindow);
+				glfwMakeContextCurrent(newWindow);
+				
+				SceneManager::getInstance()->reload();	//Reload current scene
+				m_bIsFullScreen = false;
+			}
+		}
+		else if (s == "WindowResize") {
+			auto data = static_cast<EngineMessage::WindowResize*>(msgs->at(i).get());
+			m_iWindowWidth = data->uiWidth;
+			m_iWindowHeight = data->uiHeight;
 		}
 	}
 }

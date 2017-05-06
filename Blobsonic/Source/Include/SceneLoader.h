@@ -4,7 +4,7 @@
 * @author Rozen Savilla
 * Parses XML scene file using tinyxml2, creating and storing objects into a scene class.
 * Also loads and stores resouces such as textures and meshes.
-* XML Parser :http://www.grinninglizard.com/tinyxml2/
+* XML Parser :(tinyxml2)http://www.grinninglizard.com/tinyxml2/
 */
 
 #pragma once
@@ -57,8 +57,17 @@ private:
 	void attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachSphere(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
 	void attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachCamera(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachDirLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachPointLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachSpotLight(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachSound(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+	void attachPlayer(std::shared_ptr<Entity> entity, tinyxml2::XMLElement* e);
+
 	std::shared_ptr<Entity> loadSprite(tinyxml2::XMLElement* e);
 	std::shared_ptr<Entity> loadButton(tinyxml2::XMLElement* e);
+	std::shared_ptr<Entity> loadText(tinyxml2::XMLElement* e);
 
 	std::shared_ptr<Entity> loadLight(tinyxml2::XMLElement* e);		//!< Parse and create light
 	std::shared_ptr<Entity> loadCamera(tinyxml2::XMLElement* e);		//!< Parse and create camera
@@ -87,7 +96,7 @@ private:	//Staggered Loading functions and variables
 	tinyxml2::XMLNode* m_node;			//!< Current xml node
 public:
 	//! Default constructor
-	SceneLoader();							//!< Default constructor
+	SceneLoader();		//!< Default constructor
 	~SceneLoader();		//!< Destructor
 
 	/*!

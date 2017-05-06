@@ -77,6 +77,11 @@ void SceneManager::update()
 	if (m_LoadingScene) m_LoadingScene->getEntityManager()->updateEntityManager();
 }
 
+void SceneManager::reload()
+{
+	changeScene(m_sActiveScene);
+}
+
 std::shared_ptr<Scene> SceneManager::getActiveScene()
 {
 	if (m_State == Active) {

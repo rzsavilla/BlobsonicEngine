@@ -38,6 +38,7 @@ namespace Engine {
 		int m_iWindowHeight;
 		std::string m_sWindowTitle;
 		GLFWwindow* m_window;		//!< GLFW Window
+		bool m_bIsFullScreen;		//!< Flag to determine if window is fullscreen or windowed
 	private:
 		bool m_bIsInitialized;
 

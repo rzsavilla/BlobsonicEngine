@@ -19,6 +19,8 @@ Component::Camera::Camera()
 	m_fMoveSpeed = 5.0f;
 	m_vUp = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
 	m_vLookAt = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
+
+	m_bLocalPosSet = false;
 };
 
 void Component::Camera::setProjectionAtt(float FOV, float AspectRatio, float Near, float Far)
@@ -82,17 +84,27 @@ void Component::Camera::setRoll(float roll)
 
 void Component::Camera::setPosition(glm::vec3 newPosition)
 {
+	setLocalPosition(newPosition);
 	m_vPosition = newPosition;
 }
 
 void Component::Camera::setPosition(float x, float y, float z)
 {
+	setLocalPosition(glm::vec3(x,y,z));
 	m_vPosition = glm::vec3(x, y, z);
 }
 
 void Component::Camera::setMoveSpeed(float speed)
 {
 	m_fMoveSpeed = speed;
+}
+
+void Component::Camera::setLocalPosition(glm::vec3 local)
+{
+	if (!m_bLocalPosSet) {
+		m_vLocalPos = local;
+		m_bLocalPosSet = true;
+	}
 }
 
 void Component::Camera::zoom(float zoom)
@@ -173,6 +185,11 @@ glm::vec3 Component::Camera::getPosition()
 	return m_vPosition;
 }
 
+glm::vec3 Component::Camera::getLocalPos()
+{
+	return m_vLocalPos;
+}
+
 float Component::Camera::getMoveSpeed()
 {
 	return m_fMoveSpeed;
@@ -223,6 +240,7 @@ glm::mat4 Component::Camera::getProjection()
 
 glm::quat Component::Camera::getQuatRotation()
 {
+
 	//Get quaternion rotations for x,y,z axis
 	glm::quat qPitch = glm::angleAxis(m_fPitch, glm::vec3(1.0f, 0.0f, 0.0f));	//Rotation around X axis
 	glm::quat qYaw = glm::angleAxis(m_fYaw, glm::vec3(0.0f, 1.0f, 0.0f));		//Rotation around Y axis

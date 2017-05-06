@@ -35,4 +35,12 @@ namespace EngineMessage {
 		};
 		unsigned uiWidth, uiHeight;
 	};
+
+	struct FullScreenToggle : public Message {
+		FullScreenToggle(bool fullscreen) {
+			sID = "FullScreenToggle";
+			bFullScreen = fullscreen;
+		}
+		bool bFullScreen;
+	};
 }

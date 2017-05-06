@@ -1,46 +1,39 @@
 -- This is where the game logic is updated and is run every game update
 
-require "Source/Resources/scripts/Entities"
 
-local player = Entity.new()
-player:handleEntity("deer")
-
-fSpeed = 1000
-
-if isKeyDown("up") == true then
-	player:pSetVelocity(0,fSpeed,0)
-elseif isKeyDown("down") == true then
-	player:pSetVelocity(0,-fSpeed,0)
-elseif isKeyDown("left") == true then
-	player:pSetVelocity(-fSpeed,0,0)
-elseif isKeyDown("right") == true then
-	player:pSetVelocity(fSpeed,0,0)
-end
-
---[[
-if isMouseDown("Right") == true then
-	local bb = Entity.new()
-	bb:setComponents(boxAtt)
-	boxes[#boxes + 1] = bb
-end
-
-if (player:tGetPosY() < -1000) then
-	player:tSetPosition(0,5000,0)
-end
-
-player:tSetPosition(0,5000,0)
-
---Loop Through array entities
-for i, entity in ipairs(boxes) do
-	if entity:tGetPosY() < 200 then
-		entity:destroy()
-		entity = nil
-	end
-end
---]]
+fSpeed = 500
 
 if isKeyDown("p") == true then
-	reloadScene()
-elseif isKeyDown("o") == true then
-	player:destroy()
+		reloadScene()
+end
+
+if getActiveScene() == "WorldTest.xml" then
+
+
+
+	if isKeyDown("w") == true then
+		player:pSetVelocity(0,0,-fSpeed)
+	elseif isKeyDown("s") == true then
+		player:pSetVelocity(0,0,fSpeed)
+	elseif isKeyDown("a") == true then
+		player:pSetVelocity(-fSpeed,0,0)
+	elseif isKeyDown("d") == true then
+		player:pSetVelocity(fSpeed,0,0)
+	elseif isKeyDown("space") == true then
+		player:pSetVelocity(0,fSpeed,0)
+	end
+
+	if player:tGetPosY() < 0 then
+		player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
+	end
+
+	if player:pHasCollidedByName(floorHandle:getName()) == true then
+
+	end
+
+	if player:pHasCollidedByName("pickup") == true then
+		reloadScene()
+		player:log()
+	end
+
 end
