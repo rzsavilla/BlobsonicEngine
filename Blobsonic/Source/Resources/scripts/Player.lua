@@ -1,5 +1,7 @@
--- Used to create the player entity
--- Components required to create player
+-- Used to create the player entity handle
+--[[
+Creating entities within lua is currently disabled
+Must handle entities already created in the scene by XML
 playerAtt = {
 	Name = "Player",
 	Transformable = {
@@ -26,7 +28,7 @@ playerAtt = {
 		Radius = 1.0
 	}
 }
+--]]
 
---Create Entity of player
 player = Entity.new()
-player:setComponents(playerAtt)
+player:handleEntity("deer")

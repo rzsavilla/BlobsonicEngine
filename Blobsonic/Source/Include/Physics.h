@@ -50,6 +50,11 @@ namespace System {
 
 		void applyImpulse(glm::vec3 Normal, float force, std::shared_ptr <Entity> object);
 
+		/*!< 
+			Stores entity ID's that we want to report upon a collision.
+			If a collision with this entity ID occurs then a collision report is sent
+		*/
+		std::vector<int> m_vListenToCollision;	
 	public:
 		Physics();
 		//! Process all entities

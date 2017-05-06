@@ -67,7 +67,7 @@
 	</Entity>
 	
 	<Entity>
-		<Name>Floor</Name>
+		<Name>floor</Name>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>

@@ -43,4 +43,24 @@ namespace SceneMessage {
 		}
 		std::string sNewScene;
 	};
+
+	//! Report to sytems to create a collision message for this entity
+	struct ListenToCollision : public Message {
+		ListenToCollision(unsigned int entityID) {
+			sID = "ListenToCollision";
+		}
+		unsigned int entityID;
+	};
+
+	//! Message to report that a collision has occured between two entities
+	struct CollisionReport : public Message {
+		CollisionReport(std::shared_ptr<Entity> entity1, std::shared_ptr<Entity> entity2):
+			entity1(entity1),
+			entity2(entity2)
+		{
+			sID = "CollisionReport";
+		}
+		const std::shared_ptr<Entity> entity1;
+		const std::shared_ptr<Entity> entity2;
+	};
 }

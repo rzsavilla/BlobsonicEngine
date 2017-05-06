@@ -404,6 +404,12 @@
     <ClInclude Include="Source\Include\GUI.h">
       <Filter>Header Files\Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\CollisionReporter.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Include\CollisionReceiver.h">
+      <Filter>Header Files\Engine\Messages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -618,6 +624,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Entity.cpp">
       <Filter>Source Files\Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\CollisionReporter.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

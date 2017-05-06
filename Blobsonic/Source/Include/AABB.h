@@ -8,8 +8,6 @@ class AABB : public Component::Component
 {
 public:
 	AABB(); // <! Default Constructor for a box/cube physics
-
-
 public:
 
 	//collision detection variables

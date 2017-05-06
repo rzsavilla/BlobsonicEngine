@@ -82,10 +82,10 @@ void System::Scripting::LuaScripting::forceReloadScene()
 	SceneManager::getInstance()->changeScene((SceneManager::getInstance()->getActiveSceneName()), true);
 }
 
-int System::Scripting::LuaScripting::getActiveScene()
+std::string System::Scripting::LuaScripting::getActiveScene()
 {
-	lua_pushstring(m_activeScript, m_SceneManager->getActiveSceneName().c_str());
-	return 1;
+	std::string s = SceneManager::getInstance()->getActiveSceneName();
+	return s;
 }
 
 bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)
@@ -197,12 +197,24 @@ void System::Scripting::LuaScripting::update(float dt)
 	}
 	//-----Run script-------------------------------
 	else if (m_SceneManager->getState() == Active) {
-		m_RunState = luaL_newstate();
-		LuaHelper::loadLibraries(m_RunState);
-		registerClasses(m_RunState);
-		registerFunctions(m_RunState);
-		sol::state_view L(m_RunState);
-		LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+		if (m_bReloadScripts) {
+			m_RunState = luaL_newstate();
+			LuaHelper::loadLibraries(m_RunState);
+			registerClasses(m_RunState);
+			registerFunctions(m_RunState);
+			sol::state_view L(m_RunState);
+			L.collect_garbage();
+			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "variables.lua"));
+			m_bReloadScripts = false;
+		}
+		else {
+			registerClasses(m_RunState);
+			registerFunctions(m_RunState);
+			sol::state_view L(m_RunState);
+			L.collect_garbage();
+			LuaHelper::loadScriptFile(m_RunState, (m_scriptsDir + "run.lua"));
+		}
+		
 	}
 }
 

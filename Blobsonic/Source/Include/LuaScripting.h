@@ -34,7 +34,7 @@ namespace System {
 			void changeScene(std::string sceneFile);		//!< Load and change to a specified scene
 			void reloadScene();				//!< Set loading scene
 			void forceReloadScene();		//!< Reload scene including all resources
-			int getActiveScene();	//!< Retun the name of the active scene
+			std::string getActiveScene();	//!< Retun the name of the active scene
 
 			//-----------------Inputs------------------------------
 			bool isKeyDown(const std::string& key);			//!< Check if a key is pressed

@@ -7,6 +7,9 @@
 #include "Physical.h"
 #include "Transformable.h"
 
+#include "SceneMessages.h"
+#include "CollisionReporter.h"
+
 System::Physics::Physics()
 {
 
@@ -97,7 +100,12 @@ void System::Physics::update(float dt)
 
 void System::Physics::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
-
+	for (auto it = msgs->begin(); it != msgs->end(); ++it) {
+		if ((*it)->sID == "ListenCollision") {
+			auto data = static_cast<SceneMessage::ListenToCollision*>((*it).get());
+			m_vListenToCollision.push_back(data->entityID);	//Record entity ID, will report collision events that occur with this entity
+		}
+	}
 }
 
 void System::Physics::addEntity(std::shared_ptr<Entity> entity, std::vector<std::shared_ptr<Entity>>* entities)
@@ -923,6 +931,11 @@ void System::Physics::broadPhase(float dt)
 	m_vCheckSpheres.clear();
 	m_vCheckOBBS.clear();
 	m_vCheckCapsule.clear();
+
+	//Reset recorded collision - previous entities this has collided with
+	for (int i = 0; i < m_vAABBS.size(); i++) {
+		m_vAABBS.at(i)->m_vCollidedWith.clear();
+	}
 	
 	//process AABB
 	for (int i = 0; i < m_vAABBS.size(); i++)
@@ -933,7 +946,7 @@ void System::Physics::broadPhase(float dt)
 			{
 				if (CheckAABBAABBCollision(m_vAABBS.at(i), m_vAABBS.at(x)))
 				{
-
+					CollisionReporter::getInstance()->notify(m_vAABBS.at(i), m_vAABBS.at(x));
 
 					// these 2 entities need to be checked
 					if (m_vAABBS.at(i)->has<Sphere>())
@@ -970,7 +983,6 @@ void System::Physics::broadPhase(float dt)
 						std::cout << "Capsule" << std::endl;
 						m_vCheckCapsule.push_back(m_vAABBS.at(x));
 					}
-
 				}
 			}
 		}
@@ -982,7 +994,6 @@ void System::Physics::narrowPhase(float dt)
 {
 	
 	//process OBB
-
 	for (int i = 0; i < m_vCheckOBBS.size(); i++)
 	{
 		for (int x = 0; x < m_vCheckOBBS.size(); x++)
@@ -992,7 +1003,6 @@ void System::Physics::narrowPhase(float dt)
 				CheckOBBOBBCollision(m_vCheckOBBS.at(i), m_vCheckOBBS.at(x));
 			}
 		}
-
 	}
 
 	//process Sphere
@@ -1060,7 +1070,6 @@ void System::Physics::narrowPhase(float dt)
 
 void System::Physics::applyImpulse(glm::vec3 Normal, float force, std::shared_ptr<Entity> object)
 {
-
 	//get physicals and transformables
 	auto trans = object->get<Component::Transformable>();
 	auto phys = object->get<Physical>();
@@ -1072,5 +1081,4 @@ void System::Physics::applyImpulse(glm::vec3 Normal, float force, std::shared_pt
 
 	//multiply normal my accerlation
 	phys->m_vAcceleration =  Normal * Acceleration;
-
 }

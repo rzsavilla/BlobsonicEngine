@@ -44,6 +44,8 @@
     <ClInclude Include="Source\Include\CameraMessages.h" />
     <ClInclude Include="Source\Include\CameraSystem.h" />
     <ClInclude Include="Source\Include\Capsule.h" />
+    <ClInclude Include="Source\Include\CollisionReceiver.h" />
+    <ClInclude Include="Source\Include\CollisionReporter.h" />
     <ClInclude Include="Source\Include\Destroyable.h" />
     <ClInclude Include="Source\Include\DirectionalLight.h" />
     <ClInclude Include="Source\Include\EngineMessages.h" />
@@ -129,6 +131,7 @@
     <ClCompile Include="Source\Common\CameraController.cpp" />
     <ClCompile Include="Source\Common\CameraSystem.cpp" />
     <ClCompile Include="Source\Common\Capsule.cpp" />
+    <ClCompile Include="Source\Common\CollisionReporter.cpp" />
     <ClCompile Include="Source\Common\Destroyable.cpp" />
     <ClCompile Include="Source\Common\DirectionalLight.cpp" />
     <ClCompile Include="Source\Common\Entity.cpp" />

@@ -4,7 +4,7 @@
 * @author Rozen Savilla
 * Parses XML scene file using tinyxml2, creating and storing objects into a scene class.
 * Also loads and stores resouces such as textures and meshes.
-* XML Parser :http://www.grinninglizard.com/tinyxml2/
+* XML Parser :(tinyxml2)http://www.grinninglizard.com/tinyxml2/
 */
 
 #pragma once

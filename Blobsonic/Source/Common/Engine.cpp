@@ -8,6 +8,7 @@
 
 #include "InputMessages.h"
 #include "SceneMessages.h"
+#include "CollisionReporter.h"
 
 void Engine::Engine::initScene(bool forceReloadRes)
 {
