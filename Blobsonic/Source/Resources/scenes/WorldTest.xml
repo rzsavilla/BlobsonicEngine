@@ -9,8 +9,8 @@
 		<Name>deer</Name>
 		<Transformable>
 			<Position>
-				<X>1000.0f</X>
-				<Y>5000.0f</Y>
+				<X>0.0f</X>
+				<Y>2500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -19,9 +19,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -30,25 +30,25 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>deer_mesh</Mesh>
+			<Mesh>soccer_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>skybox_texture</Texture>
+			<Texture>red_texture</Texture>
 		</Model>
 		<Physical>
-			<Mass>1.0</Mass>
-			<Restitution>0.5</Restitution>
+			<Mass>55.0</Mass>
+			<Restitution>0.2</Restitution>
 		</Physical>
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>5000.0f</Y>
+				<Y>2500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -59,10 +59,10 @@
 		<Sphere>
 			<Center>
 				<X>0.0f</X>
-				<Y>5000.0f</Y>
+				<Y>2500.0f</Y>
 				<Z>0.0f</Z>
 			</Center>
-			<Radius>100.0f</Radius>
+			<Radius>25.0f</Radius>
 		</Sphere>
 	</Entity>
 
@@ -80,9 +80,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>10000.0f</X>
+				<X>100.0f</X>
 				<Y>100.0f</Y>
-				<Z>10000.0f</Z>
+				<Z>100.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -107,9 +107,9 @@
 				<Z>0.0f</Z>
 			</Position>
 			<Scale>
-				<X>10000.0f</X>
+				<X>100.0f</X>
 				<Y>100.0f</Y>
-				<Z>10000.0f</Z>
+				<Z>100.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -129,9 +129,233 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>10000.0f</X>
+				<X>100.0f</X>
 				<Y>100.0f</Y>
-				<Z>10000.0f</Z>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+	</Entity>
+	
+	<Entity>
+		<Name>floor2</Name>
+		<Transformable>
+			<Position>
+				<X>100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>cube_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>floor_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale>
+				<X>200.0f</X>
+				<Y>200.0f</Y>
+				<Z>200.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+	</Entity>
+		<Entity>
+		<Name>floor3</Name>
+		<Transformable>
+			<Position>
+				<X>-100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>cube_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>floor_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>-100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale>
+				<X>200.0f</X>
+				<Y>200.0f</Y>
+				<Z>200.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>-100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+	</Entity>
+	
+	<Entity>
+		<Name>floor4</Name>
+		<Transformable>
+			<Position>
+				<X>0.0f</X>
+				<Y>100.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>cube_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>floor_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>0.0f</X>
+				<Y>100.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale>
+				<X>200.0f</X>
+				<Y>200.0f</Y>
+				<Z>200.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>0.0f</X>
+				<Y>100.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -276,20 +500,20 @@
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
-			<Y>3000.0f</Y>
-			<Z>7000.0f</Z>
+			<Y>30.0f</Y>
+			<Z>70.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>
 			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
-		<FOV>90.0f</FOV>
+		<FOV>70.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>100000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>100.0f</MoveSpeed>
+		<MoveSpeed>5.0f</MoveSpeed>
 	</Camera>
 </Scene>
 

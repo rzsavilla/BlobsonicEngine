@@ -197,12 +197,8 @@ void LuaEntity::setOBB(sol::table t)
 		if (key.get_type() == sol::type::string) {
 			auto value = (*it).second;
 			//Set Component variables
-			if (value.get_type() == sol::type::number) {
-				if (s == "Dimensions") {
-					obb->m_vDimensions = LuaHelper::readVec3((*it).second);
-				}
-			}
-			else if (value.get_type() == sol::type::table) {
+			
+			if (value.get_type() == sol::type::table) {
 				if (s == "Center") {
 					obb->m_vCenter = LuaHelper::readVec3((*it).second);
 				}

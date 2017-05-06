@@ -7,15 +7,15 @@ if isKeyDown("p") == true then
 end
 
 if getActiveScene() == "WorldTest.xml" then
-	if isKeyDown("w") == true then
+	if isKeyDown("up") == true then
 		player:pApplyImpulse(0,0,-1,fSpeed)
-	elseif isKeyDown("s") == true then
+	elseif isKeyDown("down") == true then
 		player:pApplyImpulse(0,0,1,fSpeed)
-	elseif isKeyDown("a") == true then
+	elseif isKeyDown("left") == true then
 		player:pApplyImpulse(-1,0,0,fSpeed)
-	elseif isKeyDown("d") == true then
-		player:pApplyImpulse(1,0,-1,fSpeed)
+	elseif isKeyDown("right") == true then
+		player:pApplyImpulse(1,0,0,fSpeed)
 	elseif isKeyDown("space") == true then
-		player:pApplyImpulse(0,1,0,fSpeed)
+		player:pApplyImpulse(0,1,0,fSpeed*50)
 	end
 end
