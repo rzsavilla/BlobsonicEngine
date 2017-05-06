@@ -429,6 +429,11 @@ bool LuaEntity::pHasCollidedByName(std::string entityName)
 	return false;
 }
 
+void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)
+{
+
+}
+
 void LuaEntity::destroy()
 {
 	if (m_entity) {
@@ -486,7 +491,8 @@ void LuaEntity::register_lua(lua_State* L)
 		"pSetRestitution", &LuaEntity::pSetRestitution,
 		"pSetVelocity", &LuaEntity::pSetVelocity,
 		"pHasCollidedByID",&LuaEntity::pHasCollidedByID,
-		"pHasCollidedByName", &LuaEntity::pHasCollidedByName
+		"pHasCollidedByName", &LuaEntity::pHasCollidedByName,
+		"pApplyImpulse", &LuaEntity::pApplyImpulse
 	);
 }
 
