@@ -636,7 +636,7 @@
     </ClCompile>
     <ClCompile Include="Source\Common\CollisionReporter.cpp">
       <Filter>Source Files\Engine\System</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Source\Common\ShadowMap.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>

@@ -109,10 +109,6 @@ void System::GUI::update(float dt)
 					/// Main menu
 					if (bID == 1) /// Start button
 					{
-						//txt->setString("Hello");
-						//txt->setPosition(vec3(10.0f));
-						//txt->setColour(vec4(1.0f));
-
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
@@ -194,20 +190,7 @@ void System::GUI::update(float dt)
 			else
 			{
 				/// Resets the values of the buttons
-				if (bID == 1)
-				{
-					s->setColor(vec3(1.0f));
-				}
-				if (bID == 2)
-				{
-					s->setColor(vec3(1.0f));
-				}
-				if (bID == 3)
-				{
-					s->setColor(vec3(1.0f));
-					//t->setScale(vec3(200.0f, 100.0f, 0.0f));
-					//t->setPosition(vec3(412.0f, 500.0f, 0.0f));
-				}
+				s->setColor(vec3(1.0f));
 			}
 			
 		}
