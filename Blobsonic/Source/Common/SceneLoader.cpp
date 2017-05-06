@@ -411,7 +411,7 @@ std::shared_ptr<Entity> SceneLoader::loadText(tinyxml2::XMLElement * e)
 	using namespace tinyxml2;
 	char* cData = "";			//Temporary storage for element data
 	if (m_bDebug) std::cout << "\nLoading Text \n  ";
-	std::shared_ptr<Entity> entity = m_factory.createText();
+	std::shared_ptr<Entity> entity = m_factory->createText();
 	entity->attach<Component::Text>();
 	auto text = entity->get<Component::Text>();
 	auto transform = entity->get<Component::Transformable>();
