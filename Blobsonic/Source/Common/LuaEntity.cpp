@@ -431,7 +431,10 @@ bool LuaEntity::pHasCollidedByName(std::string entityName)
 
 void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)
 {
-
+	if (m_entity) {
+		auto p = m_entity->get<Physical>();
+		p->applyImpulse(glm::vec3(nx, ny, nz), force);
+	}
 }
 
 void LuaEntity::destroy()
