@@ -11,7 +11,7 @@
 	</Mesh>
 	<Mesh> 
 		<ID>pine2Group_mesh</ID>
-		<File>Source\Resources\models\leaf.obj</File>
+		<File>Source\Resources\models\wasp_enemy.obj</File>
 	</Mesh>
 	<Mesh> 
 		<ID>soccer_mesh</ID>
