@@ -6,16 +6,40 @@
 		<File>Source\Resources\models\cube.obj</File>
 	</Mesh>
 	<Mesh> 
+		<ID>pine_mesh</ID>
+		<File>Source\Resources\models\pine_Tree.obj</File>
+	</Mesh>
+	<Mesh> 
 		<ID>pine2_mesh</ID>
 		<File>Source\Resources\models\pine_Tree2.obj</File>
 	</Mesh>
 	<Mesh> 
-		<ID>pine2Group_mesh</ID>
-		<File>Source\Resources\models\wasp_enemy.obj</File>
+		<ID>pineGroup_mesh</ID>
+		<File>Source\Resources\models\pine_TreeGroup.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>rockGroup1_mesh</ID>
+		<File>Source\Resources\models\rock_Group_1.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>beeHive_mesh</ID>
+		<File>Source\Resources\models\bee_hive.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>beeModel_mesh</ID>
+		<File>Source\Resources\models\bee_model.obj</File>
 	</Mesh>
 	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>mountain1_mesh</ID>
+		<File>Source\Resources\models\mountain1.obj</File>
+	</Mesh>
+		<Mesh> 
+		<ID>mountain2_mesh</ID>
+		<File>Source\Resources\models\mountain2.obj</File>
 	</Mesh>
 	<Mesh> 
 		<ID>room_mesh</ID>
@@ -36,7 +60,31 @@
 	
 	<Texture> 
 		<ID>pine1_texture</ID>
-		<File>Source\Resources\textures\pine1_uv.png</File>
+		<File>Source\Resources\textures\pine_tree.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>beeHive_texture</ID>
+		<File>Source\Resources\textures\bee_hive_1.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>beeModel_texture</ID>
+		<File>Source\Resources\textures\bee_model.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>floorB_texture</ID>
+		<File>Source\Resources\textures\floor (2).jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>rock1_texture</ID>
+		<File>Source\Resources\textures\rock1.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>rock2_texture</ID>
+		<File>Source\Resources\textures\rock2.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>rock3_texture</ID>
+		<File>Source\Resources\textures\rock3.jpg</File>
 	</Texture>
 	<Texture> 
 		<ID>room_texture</ID>
