@@ -46,6 +46,9 @@ void System::Physics::process(std::vector<std::shared_ptr<Entity>>* entities)
 			addEntity((*it), &m_vPhysicals);
 		}
 	}
+
+	
+
 }
 
 void System::Physics::removeDestroyed(std::vector<std::shared_ptr<Entity>>* entities)
@@ -844,7 +847,6 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 		if (abs(phys->m_vVelocity.y) < EPSILON) phys->m_vVelocity.y = 0;
 		if (abs(phys->m_vVelocity.z) < EPSILON) phys->m_vVelocity.z = 0;
 
-		std::cout << phys->m_vVelocity.x << " " << phys->m_vVelocity.y << " " << phys->m_vVelocity.z << std::endl;
 	}
 }
 
@@ -931,7 +933,7 @@ void System::Physics::broadPhase(float dt)
 					// these 2 entities need to be checked
 					if (m_vAABBS.at(i)->has<Sphere>())
 					{
-						std::cout << "Sphere" << std::endl;
+						
 						if ((find(m_vCheckSpheres.begin(), m_vCheckSpheres.end(), m_vAABBS.at(i))) != m_vCheckSpheres.end())
 						{
 							//dont add
@@ -946,7 +948,7 @@ void System::Physics::broadPhase(float dt)
 						
 					if (m_vAABBS.at(x)->has<Sphere>())
 					{
-						std::cout << "Sphere" << std::endl;
+						
 						if ((find(m_vCheckSpheres.begin(), m_vCheckSpheres.end(), m_vAABBS.at(x))) != m_vCheckSpheres.end())
 						{
 							//dont add
@@ -959,7 +961,7 @@ void System::Physics::broadPhase(float dt)
 
 					if (m_vAABBS.at(i)->has<OBB>())
 					{
-						std::cout << "BOX" << std::endl;
+						
 						if ((find(m_vCheckOBBS.begin(), m_vCheckOBBS.end(), m_vAABBS.at(i))) != m_vCheckOBBS.end())
 						{
 							//dont add
@@ -971,7 +973,7 @@ void System::Physics::broadPhase(float dt)
 					}
 					if (m_vAABBS.at(x)->has<OBB>())
 					{
-						std::cout << "BOX" << std::endl;
+					
 						if ((find(m_vCheckOBBS.begin(), m_vCheckOBBS.end(), m_vAABBS.at(x))) != m_vCheckOBBS.end())
 						{
 							//dont add
@@ -984,7 +986,7 @@ void System::Physics::broadPhase(float dt)
 				
 					if (m_vAABBS.at(i)->has<Capsule>())
 					{
-						std::cout << "Capsule" << std::endl;
+					
 						
 						if ((find(m_vCheckCapsule.begin(), m_vCheckCapsule.end(), m_vAABBS.at(i))) != m_vCheckCapsule.end())
 						{
@@ -998,7 +1000,7 @@ void System::Physics::broadPhase(float dt)
 					
 					if (m_vAABBS.at(x)->has<Capsule>())
 					{
-						std::cout << "Capsule" << std::endl;
+				
 						
 						if ((find(m_vCheckCapsule.begin(), m_vCheckCapsule.end(), m_vAABBS.at(x))) != m_vCheckCapsule.end())
 						{
