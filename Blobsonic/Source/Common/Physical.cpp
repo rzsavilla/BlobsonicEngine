@@ -72,3 +72,11 @@ glm::vec3 Physical::getAcceleration()
 	glm::vec3 accel(m_vAcceleration.x, m_vAcceleration.y - 9.81, m_vAcceleration.z);
 	return accel;
 }
+
+void Physical::applyImpulse(glm::vec3 Normal, float force)
+{
+	float Acceleration = force / m_fMass;
+
+	//multiply normal my accerlation
+	m_vAcceleration = Normal * Acceleration;
+}
