@@ -194,8 +194,58 @@
 	</Texture>
 	
 	<Texture> 
+		<ID>play_texture</ID>
+		<File>Source\Resources\textures\play.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>settings_texture</ID>
+		<File>Source\Resources\textures\settings.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>settings_XL_texture</ID>
+		<File>Source\Resources\textures\settingsXL.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>exit_texture</ID>
+		<File>Source\Resources\textures\exit.png</File>
+	</Texture>
+	
+	<Texture> 
 		<ID>menu_texture</ID>
 		<File>Source\Resources\textures\menu.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>quit_texture</ID>
+		<File>Source\Resources\textures\quitXL.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>gameoverXL_texture</ID>
+		<File>Source\Resources\textures\gameoverXL.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>1024_texture</ID>
+		<File>Source\Resources\textures\1024res.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>1280_texture</ID>
+		<File>Source\Resources\textures\1280res.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>1600_texture</ID>
+		<File>Source\Resources\textures\1600res.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>1920_texture</ID>
+		<File>Source\Resources\textures\1920res.png</File>
 	</Texture>
 	
 	<Material> 
