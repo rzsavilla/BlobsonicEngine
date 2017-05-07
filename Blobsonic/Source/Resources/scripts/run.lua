@@ -7,7 +7,7 @@ elseif isKeyDown("esc") == true then
 	changeScene("Main_Menu_Scene.xml")
 end
 	
-if getActiveScene() == "WorldTest.xml" then
+if getActiveScene() == "Scene1.xml" then
 	hideCursor(true)
 	-- Player Controls
 	if isKeyDown("w") == true then

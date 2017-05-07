@@ -70,12 +70,12 @@
 	</Entity>
 	
 	<Entity>
-		<Name>Mountain2</Name>
+		<Name>TreeGroup1</Name>
 		<Transformable>
 			<Position>
-				<X>-320.0f</X>
-				<Y>0.0f</Y>
-				<Z>218.0f</Z>
+				<X>71.236f</X>
+				<Y>6.049f</Y>
+				<Z>-104.856f</Z>
 			</Position>
 			<Rotation>
 				<X>0.0f</X>
@@ -86,6 +86,133 @@
 				<X>1.81f</X>
 				<Y>1.61f</Y>
 				<Z>1.61f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>pineGroup_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>pineTreeGroup_texture</Texture>
+		</Model>
+	</Entity>
+	<Entity>
+		<Name>TreeGroup2</Name>
+		<Transformable>
+			<Position>
+				<X>-51.442f</X>
+				<Y>6.049f</Y>
+				<Z>58.213f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>46.104f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>pineGroup_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>pineTreeGroup_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>Tree1</Name>
+		<Transformable>
+			<Position>
+				<X>18.245f</X>
+				<Y>0.0f</Y>
+				<Z>165.802f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>pine_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>pine1_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>Tree2</Name>
+		<Transformable>
+			<Position>
+				<X>59.084f</X>
+				<Y>0.0f</Y>
+				<Z>194.831f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>90.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>pine_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>pine1_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>Mountain2</Name>
+		<Transformable>
+			<Position>
+				<X>-877.952f</X>
+				<Y>0.0f</Y>
+				<Z>1030.361f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>90.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>3.828f</X>
+				<Y>3.403f</Y>
+				<Z>3.403f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -105,13 +232,13 @@
 		<Name>Mountain3</Name>
 		<Transformable>
 			<Position>
-				<X>-270.0f</X>
+				<X>-924.165f</X>
 				<Y>0.0f</Y>
-				<Z>-264.431f</Z>
+				<Z>-581.431f</Z>
 			</Position>
 			<Rotation>
 				<X>0.0f</X>
-				<Y>0.0f</Y>
+				<Y>90.0f</Y>
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
@@ -133,6 +260,134 @@
 		</Model>
 	</Entity>
 	
+	<Entity>
+		<Name>Tree3</Name>
+		<Transformable>
+			<Position>
+				<X>-166.818f</X>
+				<Y>0.0f</Y>
+				<Z>-169.488f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>pine_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>pine1_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>Tree4</Name>
+		<Transformable>
+			<Position>
+				<X>-196.970f</X>
+				<Y>0.0f</Y>
+				<Z>-16.553f</Z>
+			</Position>
+			<Rotation>
+				<X>2.563f</X>
+				<Y>90.0f</Y>
+				<Z>-0.536f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>pine_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>pine1_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>RockGroup1</Name>
+		<Transformable>
+			<Position>
+				<X>59.125f</X>
+				<Y>1.330f</Y>
+				<Z>127.855f</Z>
+			</Position>
+			<Rotation>
+				<X>-0.133f</X>
+				<Y>212.908f</Y>
+				<Z>-0.484f</Z>
+			</Rotation>
+			<Scale>
+				<X>0.155f</X>
+				<Y>0.155f</Y>
+				<Z>0.155f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>rockGroup1_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>rock1_texture</Texture>
+		</Model>
+	</Entity>
+	
+	<Entity>
+		<Name>RockGroup2</Name>
+		<Transformable>
+			<Position>
+				<X>-5.876f</X>
+				<Y>2.388f</Y>
+				<Z>51.304f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>143.458f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>rockGroup1_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>rock2_texture</Texture>
+		</Model>
+	</Entity>
+	<!--
 	<Entity>
 		<Name>Mountain1</Name>
 		<Transformable>
@@ -325,69 +580,7 @@
 		</Model>
 	</Entity>
 	
-	<Entity>
-		<Name>RockGroup1</Name>
-		<Transformable>
-			<Position>
-				<X>59.125f</X>
-				<Y>1.330f</Y>
-				<Z>127.855f</Z>
-			</Position>
-			<Rotation>
-				<X>-0.133f</X>
-				<Y>212.908f</Y>
-				<Z>-0.484f</Z>
-			</Rotation>
-			<Scale>
-				<X>0.155f</X>
-				<Y>0.155f</Y>
-				<Z>0.155f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</Transformable>
-		<Model>
-			<Mesh>rockGroup1_mesh</Mesh>
-			<Material>default_material</Material>
-			<Shader>phong_shader</Shader>
-			<Texture>rock1_texture</Texture>
-		</Model>
-	</Entity>
 	
-	<Entity>
-		<Name>RockGroup1</Name>
-		<Transformable>
-			<Position>
-				<X>-5.876f</X>
-				<Y>2.388f</Y>
-				<Z>51.304f</Z>
-			</Position>
-			<Rotation>
-				<X>0.0f</X>
-				<Y>143.458f</Y>
-				<Z>0.0f</Z>
-			</Rotation>
-			<Scale>
-				<X>1.0f</X>
-				<Y>1.0f</Y>
-				<Z>1.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</Transformable>
-		<Model>
-			<Mesh>rockGroup2_mesh</Mesh>
-			<Material>default_material</Material>
-			<Shader>phong_shader</Shader>
-			<Texture>rock1_texture</Texture>
-		</Model>
-	</Entity>
 	
 	<Entity>
 		<Name>BeeHive</Name>
@@ -549,6 +742,83 @@
 		</Model>
 	</Entity>
 	
+	-->
+	
+	<Entity>
+		<Name>player</Name>
+		<Player>
+			<MoveSpeed>10.0f</MoveSpeed>
+		</Player>
+		<Transformable>
+			<Position>
+				<X>0.0f</X>
+				<Y>3500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>beeModel_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>red_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>55.0</Mass>
+			<Restitution>0.2</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>0.0f</X>
+				<Y>3500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<Sphere>
+			<Center>
+				<X>0.0f</X>
+				<Y>3500.0f</Y>
+				<Z>0.0f</Z>
+			</Center>
+			<Radius>25.0f</Radius>
+		</Sphere>
+		<Camera>
+			<Orientation>
+				<X>0.0f</X>
+				<Y>45.0f</Y>
+				<Z>0.0f</Z>
+			</Orientation>
+			<FOV>70.0f</FOV>
+			<AspectRatio>1.33333</AspectRatio>
+			<FarPlane>100000.0f</FarPlane>
+			<NearPlane>0.1f</NearPlane>
+		</Camera>
+	</Entity>
+	
 	<Model> <ID>skybox</ID>
 		<Mesh>skybox_mesh</Mesh>
 		<Material>default_material</Material>
@@ -672,7 +942,7 @@
 		<isLooping>false</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	-->
+	
 	<Entity>
 		<Camera> 
 			<Position>
@@ -689,8 +959,9 @@
 			<AspectRatio>1.33333</AspectRatio>
 			<FarPlane>100000.0f</FarPlane>
 			<NearPlane>0.1f</NearPlane>
-			<EnableRotation>0</EnableRotation>
+			<EnableRotation>1</EnableRotation>
 		</Camera>
 	</Entity>
+	-->
 </Scene>
 
