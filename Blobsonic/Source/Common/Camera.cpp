@@ -42,6 +42,8 @@ Component::Camera::Camera()
 	m_bLocalPosSet = false;
 
 	m_fReach = 1000.0f;
+
+	m_bEnableRotate = true;
 };
 
 void Component::Camera::setProjectionAtt(float FOV, float AspectRatio, float Near, float Far)
@@ -295,6 +297,16 @@ glm::vec4 Component::Camera::getUp()
 glm::vec4 Component::Camera::getLookAt()
 {
 	return m_vLookAt;
+}
+
+void Component::Camera::enableRotation(bool enable)
+{
+	m_bEnableRotate = enable;
+}
+
+bool Component::Camera::isRotationEnabled()
+{
+	return m_bEnableRotate;
 }
 
 void Component::Camera::reset()
