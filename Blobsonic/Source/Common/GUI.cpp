@@ -111,7 +111,7 @@ void System::GUI::update(float dt)
 					{
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
-						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
+						SceneManager::getInstance()->changeScene("PlayerWorld.xml", true);
 					}
 					if (bID == 2) /// Settings button
 					{
