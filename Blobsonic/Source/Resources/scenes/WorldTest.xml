@@ -13,7 +13,7 @@
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>2500.0f</Y>
+				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -22,9 +22,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>25.0f</X>
-				<Y>25.0f</Y>
-				<Z>25.0f</Z>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -33,7 +33,7 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>soccer_mesh</Mesh>
+			<Mesh>beeModel_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
 			<Texture>red_texture</Texture>
@@ -45,7 +45,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>2500.0f</Y>
+				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale> 
@@ -62,7 +62,7 @@
 		<Sphere>
 			<Center>
 				<X>0.0f</X>
-				<Y>2500.0f</Y>
+				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
 			</Center>
 			<Radius>25.0f</Radius>
