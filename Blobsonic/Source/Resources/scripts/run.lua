@@ -15,7 +15,8 @@ if getActiveScene() == "WorldTest.xml" then
 		player:pMove(1,0,0,fSpeed)
 	elseif isKeyDown("d") == true then
 		player:pMove(-1,0,0,fSpeed)
-	elseif isKeyDown("space") == true then
+	end
+	if isKeyDown("space") == true then
 		if jumpTimer:getElapsed() > 0.6 then
 			player:pMove(0,1,0,fSpeed * 25)
 			jumpTimer:reset()
@@ -26,5 +27,9 @@ if getActiveScene() == "WorldTest.xml" then
 		--player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
 	end
 	
+	--Collect pickup
+	if player:pHasCollidedByName("pickup1") then
+		--pickup1:destroy()
+	end
 	
 end

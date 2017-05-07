@@ -546,7 +546,7 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 	//local version
 	Sphere localSphere = *sphere;
 
-	std::cout << localSphere.m_vCenter.x << " " << localSphere.m_vCenter.y << " " << localSphere.m_vCenter.z << std::endl;
+	//std::cout << localSphere.m_vCenter.x << " " << localSphere.m_vCenter.y << " " << localSphere.m_vCenter.z << std::endl;
 
 	bool bExtremeClamp = true;
 
@@ -927,7 +927,7 @@ void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std:
 
 	//reduces rounding errors in the hardware
 	
-	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * scale * CollisionNormal;
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * 0.025f * CollisionNormal;
 	trans1->m_vPosition -= phys1->m_fINVMass * correction;
 	trans2->m_vPosition += phys2->m_fINVMass * correction;
 

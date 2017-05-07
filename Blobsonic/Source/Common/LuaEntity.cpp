@@ -269,8 +269,12 @@ void LuaEntity::handleEntity(const std::string & name)
 
 bool LuaEntity::hasEntity()
 {
-	if (m_entity) return true;
-	else return false;
+	if (m_entity) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool LuaEntity::hasComponent(const std::string & sComponent)
