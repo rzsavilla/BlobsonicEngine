@@ -8,7 +8,7 @@ elseif isKeyDown("esc") == true then
 end
 	
 if getActiveScene() == "WorldTest.xml" then
-
+	hideCursor(true)
 	-- Player Controls
 	if isKeyDown("w") == true then
 		player:pMove(0,0,1,playerSpeed)		-- Move Forwards
