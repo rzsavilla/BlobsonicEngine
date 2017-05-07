@@ -10,7 +10,96 @@
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>10000.0f</Y>
+				<Y>3500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>beeModel_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>red_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>55.0</Mass>
+			<Restitution>0.2</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>0.0f</X>
+				<Y>3500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>0.0f</X>
+				<Y>3500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+			</Center>
+			<Radius>25.0f</Radius>
+		</Sphere>
+		<Camera>
+			<Orientation>
+				<X>0.0f</X>
+				<Y>45.0f</Y>
+				<Z>0.0f</Z>
+			</Orientation>
+			<FOV>70.0f</FOV>
+			<AspectRatio>1.33333</AspectRatio>
+			<FarPlane>100000.0f</FarPlane>
+			<NearPlane>0.1f</NearPlane>
+		</Camera>
+	</Entity>
+
+	<Entity>
+		<Name>floor</Name>
+		<Transformable>
+			<Position>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -200,7 +289,7 @@
 				<Mesh>skybox_mesh</Mesh>
 				<Material>default_material</Material>
 				<Shader>phong_shader</Shader>
-				<Texture>skybox_texture</Texture>
+				<Texture>skybox_sunny_texture</Texture>
 		</Model>
 	</Entity>
 	
