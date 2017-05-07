@@ -454,6 +454,15 @@ void LuaEntity::pMove(float forwardX, float forwardY, float forwardZ, float spee
 	}
 }
 
+void LuaEntity::sPlay()
+{
+	if (m_entity->has<Component::Sound>() && m_entity->has<Component::Transformable>()) {
+		auto p = m_entity->get<Physical>();
+		auto s = m_entity->get<Component::Sound>();
+		s->setPlaying(true);
+	}
+}
+
 void LuaEntity::destroy()
 {
 	if (m_entity) {
@@ -514,7 +523,9 @@ void LuaEntity::register_lua(lua_State* L)
 		"pHasCollidedByID", &LuaEntity::pHasCollidedByID,
 		"pHasCollidedByName", &LuaEntity::pHasCollidedByName,
 		"pApplyImpulse", &LuaEntity::pApplyImpulse,
-		"pMove", &LuaEntity::pMove
+		"pMove", &LuaEntity::pMove,
+		//Sound
+		"sPlay",&LuaEntity::sPlay
 	);
 }
 

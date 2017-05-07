@@ -13,6 +13,7 @@
 
 #include "Entity.h"
 #include "sol.hpp"
+#include "Sound.h"
 
 class LuaEntity : public CollisionReceiver {
 private:
@@ -65,6 +66,9 @@ public:
 	bool pHasCollidedByName(std::string entityName);	//!< Returns true if a collision report between this entity has occured
 	void pApplyImpulse(float nx, float ny, float nz, float force);
 	void pMove(float forwardX, float forwardY, float forwardZ, float speed);
+	//----------------Sound Component Functions-------------------------
+	void sPlay();
+
 
 	/*! Register this C++ class as a lua class
 		Allows lua access to member functions
