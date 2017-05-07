@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Transformable.h"
 #include "Camera.h"
+#include "Physical.h"
 
 System::PlayerController::PlayerController() {
 	//Reset actions
@@ -38,36 +39,32 @@ void System::PlayerController::process(std::vector<std::shared_ptr<Entity>>* ent
 }
 
 void System::PlayerController::update(float dt) {
-	if (m_Camera) {
-		if (m_Camera->has<Component::Transformable>()) {
-			if (m_Camera->has<Component::Player>()) {
-				auto t = m_Camera->get<Component::Camera>();
-				auto p = m_Camera->get<Component::Player>();
-				glm::vec3 pos = t->getPosition();
-				float fSpeed = p->m_fMoveSpeed;
-
-				//set the pos of skybox
-				if (m_vSkyBox)
-				{
-					auto skytrans = m_vSkyBox->get<Component::Transformable>();
-
-					skytrans->setPosition(t->getPosition());//- glm::vec3(250, 250, 250));
-				}
-			}
-		}
-		for (int i = 0; i < m_kiActions; i++) {
-			m_bAction[i] = false;
-		}
-	}
-
 	if (m_vPlayer) {	//Check for null
-		if (m_vPlayer->has<Component::Camera>()) {
-			if (m_vPlayer->has<Component::Transformable>()) {
+		if (m_vPlayer->has<Component::Transformable>()) {
+			//Player has a camera attached set camera to follow player
+			auto player = m_vPlayer->get<Component::Player>();
+			auto t = m_vPlayer->get<Component::Transformable>();
+			if (m_vPlayer->has<Component::Camera>()) {
 				auto cam = m_vPlayer->get<Component::Camera>();
-				auto t = m_vPlayer->get<Component::Transformable>();
-				cam->setPosition(t->getPosition() + cam->getLocalPos());
-				std::cout << "cam: POs " << cam->getPosition().x << " " << cam->getPosition().y << " " << cam->getPosition().z << "\n";
+				cam->setLookAtTarget(m_vPlayer);
+				if (m_vSkyBox) {
+					//Set skybox pos to follow player
+					if (m_vSkyBox->has<Component::Transformable>()) {
+						m_vSkyBox->get<Component::Transformable>()->setPosition(t->getPosition());
+					}
+				}
+
+				//////Move player
+				//if (m_vPlayer->has<Physical>()) {
+				//	auto p = m_vPlayer->get<Physical>();
+				//	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_T) > 0) {
+				//		glm::vec4 vForward(0.0f, 0.0f, 1.0f, 0.0f);
+				//		vForward = t->getTransform() * vForward;			//Rotate forward vector
+				//		p->applyImpulse(glm::vec3(vForward), player->getMoveSpeed());
+				//	}
+				//}
 			}
+			
 		}
 	}
 }
@@ -84,22 +81,22 @@ void System::PlayerController::processMessages(const std::vector<std::shared_ptr
 				switch (data->m_iKey)
 				{
 				case GLFW_KEY_UP:
-					m_bAction[0] = true;
+					m_bAction[0] = data->m_iAction;
 					break;
 				case GLFW_KEY_DOWN:
-					m_bAction[1] = true;
+					m_bAction[1] = data->m_iAction;
 					break;
 				case GLFW_KEY_LEFT:
-					m_bAction[2] = true;
+					m_bAction[2] = data->m_iAction;
 					break;
 				case GLFW_KEY_RIGHT:
-					m_bAction[3] = true;
+					m_bAction[3] = data->m_iAction;
 					break;
 				case GLFW_KEY_J:
-					m_bAction[4] = true;
+					m_bAction[4] = data->m_iAction;
 					break;
 				case GLFW_KEY_K:
-					m_bAction[5] = true;
+					m_bAction[5] = data->m_iAction;
 					break;
 				default:
 					break;

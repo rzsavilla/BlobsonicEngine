@@ -167,6 +167,13 @@ void System::GUI::update(float dt)
 					{
 						exit(0);
 					}
+					if (bID == 10) /// Credits - takes the player to the credits.
+					{
+						cout << "Credits Button \n\n";
+						SceneManager::getInstance()->setLoadingScene("Loading.xml");
+						SceneManager::getInstance()->changeScene("Credits.xml", true);
+
+					}
 				}
 				else
 				{

@@ -34,6 +34,13 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 {
 	sol::state_view lua(L);
 
+	//Timer Class
+	lua.new_usertype<MyTimer>("Timer",
+		"reset", &MyTimer::reset,
+		"getElapsed",&MyTimer::getElapsed
+	);
+
+
 	//Lua Scripting system functions
 	lua.set("LuaScripting", LuaScripting());
 	//-----Scene Management-----
@@ -49,7 +56,6 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 	//-----Misc------
 	lua.set_function("printString", &LuaScripting::printString, LuaScripting());
 	lua.set_function("print", &LuaScripting::print, LuaScripting());
-
 	//Register LuaEntity class
 	LuaEntity::register_lua(lua);
 }

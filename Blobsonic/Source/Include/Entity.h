@@ -21,15 +21,11 @@ static void LuaLoaded() {
 	std::cout << "Lua is working\n";
 }
 
-class Entity;
-
 class Entity: public Destroyable, public UniqueID, public std::enable_shared_from_this<Entity> , public Name {
 private:
 	std::map<std::type_index, std::shared_ptr<void>> m_components;
 
 	const bool m_bDebug = true;	//!< Flag for Couts
-
-	
 public:
 	Entity();
 	
@@ -58,7 +54,7 @@ public:
 			return std::static_pointer_cast<T>(m_components[typeid(T)]).get();
 		}
 		else {
-			std::cout << "Could Not find Component\n";
+			std::cout << "ERROR Could Not find Component\n";
 			terminate();
 		}
 	}
@@ -70,7 +66,7 @@ public:
 				Component::Component* comp = std::static_pointer_cast<Component::Component>((*it).second).get();
 
 				if (comp->getUID() == id) {	//Component found
-					if (m_bDebug) std::cout << "ComponentFound\n";
+					if (m_bDebug) std::cout << "Component Found\n";
 					return std::static_pointer_cast<T>(m_components[typeid(T)]).get();
 				}
 			}

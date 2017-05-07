@@ -170,6 +170,7 @@
     <ClCompile Include="Source\Common\Physical.cpp" />
     <ClCompile Include="Source\Common\Physics.cpp" />
     <ClCompile Include="Source\Common\Pickup.cpp" />
+    <ClCompile Include="Source\Common\Player.cpp" />
     <ClCompile Include="Source\Common\PlayerController.cpp" />
     <ClCompile Include="Source\Common\PlayerInput.cpp" />
     <ClCompile Include="Source\Common\PointLight.cpp" />
