@@ -68,32 +68,6 @@ void System::CameraController::update(float dt)
 		//std::cout << "Orientation: " << camera->getYaw() << " " << camera->getPitch() << " " << camera->getRoll() << std::endl;
 
 		GLFWwindow* window = glfwGetCurrentContext();
-
-		//------Camera movement -- key press-------------
-		if (m_bAction[0]) {	//Zoom in
-			camera->zoom(-camera->getMoveSpeed());
-		}
-		if (m_bAction[1]) {	//Zoom out
-			camera->zoom(camera->getMoveSpeed());
-		}
-		if (m_bAction[2]) {	//Strafe left
-			camera->strafe(-camera->getMoveSpeed());
-		}
-		if (m_bAction[3]) {	//Strafe right
-			camera->strafe(camera->getMoveSpeed());
-		}
-		if (m_bAction[4]) {	//Roll left
-			camera->roll(-camera->getMoveSpeed());
-		}
-		if (m_bAction[5]) {	//Roll right
-			camera->roll(camera->getMoveSpeed());
-		}
-		if (m_bAction[6]) {	//Pedestal up
-			camera->pedestal(camera->getMoveSpeed());
-		}
-		if (m_bAction[7]) {	//Pedestal down
-			camera->pedestal(-camera->getMoveSpeed());
-		}
 	}
 }
 
