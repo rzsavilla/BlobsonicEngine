@@ -878,6 +878,12 @@ void SceneLoader::attachCamera(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 			}
 			if (m_bDebug) std::cout << "Reach: " << c << "\n  ";
 		}
+		else if (strcmp(childValue, "EnableRotation") == 0) {
+			if (readElementText(child, c)) {
+				camera->enableRotation(atoi(c));
+			}
+			if (m_bDebug) std::cout << "EnableRotation: " << c << "\n  ";
+		}
 	}
 }
 

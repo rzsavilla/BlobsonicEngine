@@ -41,27 +41,29 @@ void System::CameraController::update(float dt)
 		auto camera = m_ActiveCamera->get<Component::Camera>();
 
 		//------Camera Mouse Rotation---------------------
-		//Get current mouse position
-		glfwGetCursorPos(glfwGetCurrentContext(), &m_vMousePos.x, &m_vMousePos.y);
-		double dX, dY;	//Mouse move difference
-		dX = m_vMousePos.x - m_vPrevMousePos.x;
-		dY = m_vMousePos.y - m_vPrevMousePos.y;
+		if (camera->isRotationEnabled()) {
+			//Get current mouse position
+			glfwGetCursorPos(glfwGetCurrentContext(), &m_vMousePos.x, &m_vMousePos.y);
+			double dX, dY;	//Mouse move difference
+			dX = m_vMousePos.x - m_vPrevMousePos.x;
+			dY = m_vMousePos.y - m_vPrevMousePos.y;
 
-		//Apply Mouse Sensitivity Settings
-		dX *= m_vMouseSensitivity.x;
-		dY *= m_vMouseSensitivity.y;
+			//Apply Mouse Sensitivity Settings
+			dX *= m_vMouseSensitivity.x;
+			dY *= m_vMouseSensitivity.y;
 
-		//Apply rotation based on mouse movement
-		camera->rotate(glm::radians((float)dY), glm::radians((float)dX));
-		//Rotate player entity
-		if (m_ActiveCamera->has<Component::Player>() && m_ActiveCamera->has<Component::Transformable>()) {
-			auto t = m_ActiveCamera->get<Component::Transformable>();
-			t->rotate(0.0f,glm::radians(dX * 0.1),0.0f);
+			//Apply rotation based on mouse movement
+			camera->rotate(glm::radians((float)dY), glm::radians((float)dX));
+			//Rotate player entity
+			if (m_ActiveCamera->has<Component::Player>() && m_ActiveCamera->has<Component::Transformable>()) {
+				auto t = m_ActiveCamera->get<Component::Transformable>();
+				t->rotate(0.0f, glm::radians(dX * 0.1), 0.0f);
+			}
+
+			//Set previous mouse position;
+			m_vPrevMousePos.x = m_vMousePos.x;
+			m_vPrevMousePos.y = m_vMousePos.y;
 		}
-
-		//Set previous mouse position;
-		m_vPrevMousePos.x = m_vMousePos.x;
-		m_vPrevMousePos.y = m_vMousePos.y;
 
 		//std::cout << "Orientation: " << camera->getYaw() << " " << camera->getPitch() << " " << camera->getRoll() << std::endl;
 

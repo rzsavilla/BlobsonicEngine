@@ -641,23 +641,24 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	
-	<Camera> <ID>cam1</ID>
-		<Position>
-			<X>180.0f</X>
-			<Y>50.0f</Y>
-			<Z>66.167f</Z>
-		</Position>
-		<Orientation>
-			<X>-92.738f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Orientation>
-		<FOV>90.0f</FOV>
-		<AspectRatio>1.33333</AspectRatio>
-		<FarPlane>100000.0f</FarPlane>
-		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>1.0f</MoveSpeed>
-	</Camera>
+	<Entity>
+		<Camera>
+			<Position>
+				<X>180.0f</X>
+				<Y>50.0f</Y>
+				<Z>66.167f</Z>
+			</Position>
+			<Orientation>
+				<X>-90.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Orientation>
+			<FOV>90.0f</FOV>
+			<AspectRatio>1.33333</AspectRatio>
+			<FarPlane>100000.0f</FarPlane>
+			<NearPlane>0.1f</NearPlane>
+			<EnableRotation>0</EnableRotation>
+		</Camera>
+	</Entity>
 </Scene>
 

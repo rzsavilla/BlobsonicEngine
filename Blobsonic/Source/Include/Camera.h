@@ -42,6 +42,8 @@ namespace Component {
 		std::shared_ptr<Entity> m_LookAtTarget;	//!< If not null camera will lookat this entity
 		float m_fReach;			//!< Distance between camera and follow target
 		glm::mat4 thirdPerson();	//!< Calculate position/rotation of the camera in order to follow lookAtTarget
+		
+		bool m_bEnableRotate;	//!< Enable mouse movement to rotate this camera
 	public:
 		Camera();				//!< Default contructor
 
@@ -116,5 +118,8 @@ namespace Component {
 
 		glm::vec4 getUp();
 		glm::vec4 getLookAt();
+
+		void enableRotation(bool enable);	//!< Allow camera mouse rotation
+		bool isRotationEnabled();
 	};
 }
