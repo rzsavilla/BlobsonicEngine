@@ -155,8 +155,9 @@ bool System::Scripting::LuaScripting::isMouseDown(const std::string & button)
 
 void System::Scripting::LuaScripting::hideCursor(bool hide)
 {
+	
 	if (hide) glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);	//Hide mouse
-	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CROSSHAIR_CURSOR);		//Show Mouse
+	else glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);		//Show Mouse
 }
 
 void System::Scripting::LuaScripting::printString(const std::string & s)
@@ -226,82 +227,5 @@ void System::Scripting::LuaScripting::update(float dt)
 
 void System::Scripting::LuaScripting::processMessages(const std::vector<std::shared_ptr<Message>>* msgs)
 {
-	/*for (auto it = msgs->begin(); it != msgs->end(); ++it) {
 
-	}*/
 }
-
-
-/*
-void System::Scripting::LuaScripting::readRootTable(lua_State * L)
-{
-std::cout << "-------Reading Root--------\n";
-sol::state_view lua(L);	//Convert to sol state
-sol::table root = lua["root"];
-
-lua_pushnil(L);  // first key
-//Iterate through tables elements --Looks at keys--
-for (auto it = root.begin(); it != root.end(); ++it) {
-auto key = (*it).first;
-//--Process only string keys--
-if (key.get_type() == sol::type::string) {
-std::string s = key.as<std::string>();
-if (m_bDebug) std::cout << "Key: " << s << " = ";
-
-//--Get value of table element--
-auto value = (*it).second;
-switch (value.get_type())
-{
-case sol::type::string: {
-std::string sValue = value.as<std::string>();
-if (m_bDebug) std::cout << sValue << "-----\n";
-break;
-}
-case sol::type::function: {
-break;
-}
-case sol::type::boolean: {
-//if (m_bDebug) std::cout << "-----Boolean-----\n";
-break;
-}
-case sol::type::table: {
-if (m_bDebug) std::cout << "Table\n";
-if (s == "Entity") {
-sol::table t = value.as<sol::table>();
-//Create entity and pass message to add entity to the active scene
-MessageHandler::getInstance()->sendMessage(std::make_shared<SceneMessage::AddEntity>(readEntity(t)));
-}
-break;
-}
-default:
-std::cout << "\n";
-break;
-}
-}
-}
-}
-*/
-
-/*
-std::shared_ptr<Entity> System::Scripting::LuaScripting::readEntity(sol::table t)
-{
-std::shared_ptr<Entity> e = std::make_shared<Entity>();
-for (auto it = t.begin(); it != t.end(); ++it) {
-auto key = (*it).first;	//Get element key
-//Processes ony strings
-if (key.get_type() == sol::type::string) {
-std::string s = key.as<std::string>();		//Get element value
-std::cout << " " << s << "\n";
-sol::table table = (*it).second.as<sol::table>();
-//Attach Components
-if (s == "Transformable") {
-e->attach<Component::Transformable>(table);
-}
-else if (s == "Model") {
-e->attach<Component::Model>(table);
-}
-}
-}
-return e;
-}
-*/

@@ -6,7 +6,7 @@ if isKeyDown("p") == true then
 elseif isKeyDown("esc") == true then
 	changeScene("Main_Menu_Scene.xml")
 end
-	
+
 if getActiveScene() == "WorldTest.xml" then
 	hideCursor(true)
 	-- Player Controls
@@ -29,4 +29,6 @@ if getActiveScene() == "WorldTest.xml" then
 		pickup1:destroy()
 		iCollected = iCollected + 1
 	end
+else
+	hideCursor(false)
 end
