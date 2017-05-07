@@ -1,3 +1,11 @@
+/**
+*	@file Button.h
+*	@class Button
+*	@author Max Spencer-Hughes
+*	@brief Button component
+*	Button component responsible for containing the the ID and click status of buttons
+*/
+
 #pragma once
 
 #include <GLSLProgram.h>

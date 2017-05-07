@@ -43,26 +43,6 @@ System::GUI::GUI()
 
 }
 
-
-void System::GUI::clickAreaTest(std::shared_ptr<Entity> entity)
-{
-	auto sr = entity->get <Component::SpriteRenderer>();
-	auto b = entity->get <Component::Button>();
-
-	GLFWwindow* m_window;
-	double x, y;
-
-	b->setPosition();
-
-	/*
-	if (x >= xpos && x <= xpos + width &&
-		y >= ypos && y <= ypos + height)
-	{
-		cout << "Button testing \n";
-	}
-	*/
-}
-
 void System::GUI::process(std::vector<std::shared_ptr<Entity>>* entities)
 {
 	//Iterate through all entities
@@ -77,6 +57,7 @@ void System::GUI::update(float dt)
 {
 	double x, y;
 
+	/// Gets the x & y position of the cursor relative to the current window.
 	glfwGetCursorPos(glfwGetCurrentContext(), &x, &y);
 	//cursorPositionCallback(glfwGetCurrentContext(), x, y);
 
@@ -89,20 +70,23 @@ void System::GUI::update(float dt)
 			
 			double xpos, ypos, width, height;
 
+			/// Gets the x & y postion of the button
 			xpos = t->getPosition().x;
 			ypos = t->getPosition().y;
 
+			/// Gets the width and height of the button
 			width = t->getScale().x;
 			height = t->getScale().y;
 
-			/// Button ID getter
+			/// gets the ID of the button
 			int bID; 
 			bID = b->getButtonID();
 
-			/// If inside of the buttons
+			/// Defines a range inside of the buttons
 			if (x >= xpos && x <= xpos + width &&
 				y >= ypos && y <= ypos + height)
 			{
+				/// If the left mouse button is presseds
 				if (glfwGetMouseButton(glfwGetCurrentContext(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 				{
 					b->setIsClicked(true);
@@ -125,7 +109,7 @@ void System::GUI::update(float dt)
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
 						SceneManager::getInstance()->changeScene("Exit.xml", true);
 					}
-					/// World test
+					
 					if (bID == 4) /// Main menu button
 					{
 						cout << "Main Menu Button \n\n";
@@ -163,8 +147,9 @@ void System::GUI::update(float dt)
 
 					}
 					/// Exit
-					if (bID == 7) /// Exit
+					if (bID == 7) 
 					{
+						/// Closes the program
 						exit(0);
 					}
 					if (bID == 10) /// Credits - takes the player to the credits.
@@ -177,11 +162,11 @@ void System::GUI::update(float dt)
 				}
 				else
 				{
-					if (bID == 3 || bID == 7)
+					if (bID == 3 || bID == 7) /// Exit and Quit buttons
 					{
 						/// Visual effects
 						/// Colour manipulation
-						s->setColor(vec3(s->getColor().x * 0.99, s->getColor().y * 0.99, s->getColor().z * 0.99));
+						s->setColor(vec3(s->getColor().x * 0.99, s->getColor().y * 0.99, s->getColor().z * 0.99)); /// Darkens the button if moused over.
 						/// Size manipulation
 						//t->setScale(vec3(t->getScale().x * 0.99, t->getScale().y * 0.99, 0.0));
 						//t->setPosition(vec3(t->getPosition().x / 0.998, t->getPosition().y / 0.998, 0.0));
@@ -189,20 +174,20 @@ void System::GUI::update(float dt)
 					}
 					else
 					{
-						s->setColor(vec3(s->getColor().x / 0.99, s->getColor().y / 0.99, s->getColor().z / 0.99));/// Brightens the button if moused over
+						s->setColor(vec3(s->getColor().x / 0.99, s->getColor().y / 0.99, s->getColor().z / 0.99));/// Brightens the button if moused over.
 					}
 				}
 			}
 			/// If outside of the buttons
 			else
 			{
-				/// Resets the values of the buttons
+				/// Sets the colour of the buttons to white (default values).
 				s->setColor(vec3(1.0f));
 			}
 			
 		}
 	}
-	//Remove Destroyed Entities
+	///Remove Destroyed Entities
 	removeDestroyed(&m_entities);
 }
 

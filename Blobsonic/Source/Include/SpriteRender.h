@@ -1,6 +1,12 @@
-#pragma once
+/**
+*	@file SpriteRender.h
+*	@class SpriteRender
+*	@author Max Spencer-Hughes
+*	@brief Sprite component
+*	Sprite component used to contain the data (position, colour, rotation etc.) of sprites and buttons in the scene
+*/
 
-//#include <stdafx.h>
+#pragma once
 
 #include <Texture.h>
 #include <GLSLProgram.h>

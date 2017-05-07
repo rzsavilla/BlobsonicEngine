@@ -1,3 +1,11 @@
+/**
+*	@file GUI.h
+*	@class GUI
+*	@author Max Spencer-Hughes
+*	@brief GUI component
+*	System containing the data for handling the graphical user interface (GUI).
+*/
+
 #pragma once
 
 #include "System.h"
@@ -18,7 +26,6 @@ namespace System
 		int width, height;
 	public:
 		GUI();
-		void clickAreaTest(std::shared_ptr<Entity> entity);
 
 		void process(std::vector<std::shared_ptr<Entity>>* entity) override;
 		void update(float dt) override;
