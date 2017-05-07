@@ -130,7 +130,7 @@ void System::GUI::update(float dt)
 					{
 						cout << "Main Menu Button \n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
-						SceneManager::getInstance()->changeScene("MainMenu.xml", true);
+						SceneManager::getInstance()->changeScene("Main_Menu_Scene.xml", true);
 					}
 					/// Settings
 					if (bID == 5) /// Option - set screen size to 1024, 768.
