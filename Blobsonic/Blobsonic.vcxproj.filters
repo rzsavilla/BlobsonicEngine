@@ -419,6 +419,9 @@
     <ClInclude Include="Source\Include\ShadowMap.h">
       <Filter>Header Files\Engine\Entity\Components\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Include\Gameover.h">
+      <Filter>Header Files\Engine\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\stdafx.cpp">
@@ -642,6 +645,9 @@
     </ClCompile>
     <ClCompile Include="Source\Common\Player.cpp">
       <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Gameover.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

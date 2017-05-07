@@ -55,6 +55,7 @@
     <ClInclude Include="Source\Include\EntityFactory.h" />
     <ClInclude Include="Source\Include\EntityLoader.h" />
     <ClInclude Include="Source\Include\EntityManager.h" />
+    <ClInclude Include="Source\Include\Gameover.h" />
     <ClInclude Include="Source\Include\Gameplay.h" />
     <ClInclude Include="Source\Include\GUI.h" />
     <ClInclude Include="Source\Include\InputMessages.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="Source\Common\EntityFactory.cpp" />
     <ClCompile Include="Source\Common\EntityLoader.cpp" />
     <ClCompile Include="Source\Common\EntityManager.cpp" />
+    <ClCompile Include="Source\Common\Gameover.cpp" />
     <ClCompile Include="Source\Common\Gameplay.cpp" />
     <ClCompile Include="Source\Common\GUI.cpp" />
     <ClCompile Include="Source\Common\Light.cpp" />

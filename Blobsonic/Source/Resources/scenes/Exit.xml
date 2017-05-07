@@ -235,6 +235,7 @@
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.0f</RotSpeed>
 		<MoveSpeed>0.0f</MoveSpeed>
+		<EnableRotation>0</EnableRotation>
 	</Camera>
 </Scene>
 
