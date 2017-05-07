@@ -35,9 +35,11 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 	sol::state_view lua(L);
 
 	//Timer Class
-	lua.set("Timer", MyTimer());
-	lua.set_function("reset", &MyTimer::reset);
-	lua.set_function("getElapsed", &MyTimer::getElapsed);
+	lua.new_usertype<MyTimer>("Timer",
+		"reset", &MyTimer::reset,
+		"getElapsed",&MyTimer::getElapsed
+	);
+
 
 	//Lua Scripting system functions
 	lua.set("LuaScripting", LuaScripting());
