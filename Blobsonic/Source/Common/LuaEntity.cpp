@@ -425,14 +425,14 @@ bool LuaEntity::pHasCollidedByID(int entityID)
 	return false;
 }
 
-bool LuaEntity::pHasCollidedByName(std::string entityName)
+int LuaEntity::pHasCollidedByName(std::string entityName)
 {
 	if (m_entity) {
 		for (auto it = m_entity->m_vCollidedWith.begin(); it != m_entity->m_vCollidedWith.end(); ++it) {
-			if ((*it)->getName() == entityName) return true;
+			if ((*it)->getName() == entityName) return (*it)->getUID();
 		}
 	}
-	return false;
+	return -1;	//No Collision
 }
 
 void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)
@@ -451,6 +451,15 @@ void LuaEntity::pMove(float forwardX, float forwardY, float forwardZ, float spee
 		glm::vec4 vForward(forwardX, forwardY, forwardZ, 0.0f);
 		vForward = t->getTransform() * vForward;			//Rotate forward vector
 		p->applyImpulse(glm::vec3(vForward),speed);
+	}
+}
+
+void LuaEntity::sPlay()
+{
+	if (m_entity->has<Component::Sound>() && m_entity->has<Component::Transformable>()) {
+		auto p = m_entity->get<Physical>();
+		auto s = m_entity->get<Component::Sound>();
+		s->setPlaying(true);
 	}
 }
 
@@ -514,7 +523,9 @@ void LuaEntity::register_lua(lua_State* L)
 		"pHasCollidedByID", &LuaEntity::pHasCollidedByID,
 		"pHasCollidedByName", &LuaEntity::pHasCollidedByName,
 		"pApplyImpulse", &LuaEntity::pApplyImpulse,
-		"pMove", &LuaEntity::pMove
+		"pMove", &LuaEntity::pMove,
+		//Sound
+		"sPlay",&LuaEntity::sPlay
 	);
 }
 

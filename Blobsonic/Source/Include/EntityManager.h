@@ -13,6 +13,8 @@ public:
 
 	void destroy(std::shared_ptr<Entity> entity);	//!< Destroy this entity
 
+	void destroy(unsigned int UID);	//!< Destroy Entity by UID
+
 	void destroyAll();	//!< Destroy all entities stored in the manager;
 
 	void updateEntityManager();	//!< Updates entities removing all destroyed entities from its vector

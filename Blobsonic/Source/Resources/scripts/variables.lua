@@ -4,9 +4,5 @@
 --]]
 
 
-if getActiveScene() == "WorldTest.xml" then
-
 require "Source/Resources/scripts/Player"
 require "Source/Resources/scripts/Entities"
-
-end

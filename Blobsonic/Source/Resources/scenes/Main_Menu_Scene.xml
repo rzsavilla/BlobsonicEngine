@@ -499,9 +499,9 @@
 				<Z>-17.62f</Z>
 			</Rotation>
 			<Scale>
-				<X>2.386f</X>
-				<Y>2.386f</Y>
-				<Z>2.386f</Z>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -510,10 +510,10 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>wasp_mesh</Mesh>
+			<Mesh>beeModel_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>wasp_texture</Texture>
+			<Texture>beeModel_texture</Texture>
 		</Model>
 	</Entity>
 	

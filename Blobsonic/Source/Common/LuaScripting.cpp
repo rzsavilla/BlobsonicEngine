@@ -49,6 +49,7 @@ void System::Scripting::LuaScripting::registerClasses(lua_State * L)
 	lua.set_function("changeScene", &LuaScripting::changeScene, LuaScripting());
 	lua.set_function("forceReloadScene", &LuaScripting::forceReloadScene, LuaScripting());
 	lua.set_function("getActiveScene", &LuaScripting::getActiveScene, LuaScripting());
+	lua.set_function("destroyEntity", &LuaScripting::destroyEntity, LuaScripting());
 	//-----Inputs-----
 	lua.set_function("isKeyDown", &LuaScripting::isKeyDown, LuaScripting());
 	lua.set_function("isMouseDown", &LuaScripting::isMouseDown, LuaScripting());
@@ -92,6 +93,11 @@ std::string System::Scripting::LuaScripting::getActiveScene()
 {
 	std::string s = SceneManager::getInstance()->getActiveSceneName();
 	return s;
+}
+
+void System::Scripting::LuaScripting::destroyEntity(unsigned int ID)
+{
+	SceneManager::getInstance()->getActiveScene()->getEntityManager()->destroy(ID);	//Destroy entity by ID
 }
 
 bool System::Scripting::LuaScripting::isKeyDown(const std::string & key)

@@ -7,8 +7,8 @@
 -- Player jump delay prevent multiple jumps
 jumpTimer = Timer.new()
 jumpTimer:reset()
-player = Entity.new()
 
+player = Entity.new()
 player:handleEntity("player")
 
 playerSpeed = 50
