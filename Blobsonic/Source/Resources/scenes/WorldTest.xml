@@ -81,6 +81,55 @@
 	</Entity>
 	
 	<Entity>
+		<Name>pickup1</Name>
+		<Transformable>
+			<Position>
+				<X>0.0f</X>
+				<Y>500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>soccer_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>white_texture</Texture>
+		</Model>
+		<AABB>
+			<Position>
+				<X>0.0f</X>
+				<Y>500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+	</Entity>
+	
+	<Entity>
 		<Name>floor</Name>
 		<Transformable>
 			<Position>
