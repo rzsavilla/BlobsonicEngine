@@ -7,9 +7,9 @@
         <Name>Goal</Name>
         <Transformable>
             <Position>
-                <X>1728.063</X>
+                <X>1874.6743</X>
                 <Y>600</Y>
-                <Z>1304.7502</Z>
+                <Z>793.64838</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -30,9 +30,9 @@
         </Model>
         <AABB>
             <Position>
-                <X>1831.8127</X>
+                <X>2008.1409</X>
                 <Y>600</Y>
-                <Z>2136.1882</Z>
+                <Z>1813.7183</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -50,9 +50,9 @@
         <Name>pickup</Name>
         <Transformable>
             <Position>
-                <X>1831.8127</X>
+                <X>2008.1409</X>
                 <Y>600</Y>
-                <Z>2136.1882</Z>
+                <Z>1813.7183</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -73,9 +73,9 @@
         </Model>
         <AABB>
             <Position>
-                <X>1831.8127</X>
+                <X>2008.1409</X>
                 <Y>600</Y>
-                <Z>2136.1882</Z>
+                <Z>1813.7183</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -186,9 +186,9 @@
         <Name>Obsticle</Name>
         <Transformable>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>500</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>100</X>
@@ -218,9 +218,9 @@
         </Model>
         <AABB>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>600</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -240,9 +240,9 @@
                 <Z>0</Z>
             </Rotation>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>600</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>100</X>
@@ -260,9 +260,9 @@
         <Name>Obsticle</Name>
         <Transformable>
             <Position>
-                <X>1826.6252</X>
+                <X>2009.3424</X>
                 <Y>500</Y>
-                <Z>2142.4382</Z>
+                <Z>1814.7338</Z>
             </Position>
             <Scale>
                 <X>100</X>
@@ -292,9 +292,9 @@
         </Model>
         <AABB>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>600</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -314,9 +314,9 @@
                 <Z>0</Z>
             </Rotation>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>600</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>100</X>
@@ -334,9 +334,9 @@
         <Name>Obsticle</Name>
         <Transformable>
             <Position>
-                <X>1735.8444</X>
+                <X>1874.4728</X>
                 <Y>500</Y>
-                <Z>1300.0645</Z>
+                <Z>795.11938</Z>
             </Position>
             <Scale>
                 <X>100</X>
@@ -366,9 +366,9 @@
         </Model>
         <AABB>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>600</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -388,83 +388,9 @@
                 <Z>0</Z>
             </Rotation>
             <Position>
-                <X>1795.5004</X>
+                <X>1944.6052</X>
                 <Y>600</Y>
-                <Z>2963.8115</Z>
-            </Position>
-            <Scale>
-                <X>100</X>
-                <Y>100</Y>
-                <Z>100</Z>
-            </Scale>
-            <Origin>
-                <X>0</X>
-                <Y>0</Y>
-                <Z>0</Z>
-            </Origin>
-        </OBB>
-    </Entity>
-    <Entity>
-        <Name>Obsticle</Name>
-        <Transformable>
-            <Position>
-                <X>1831.8127</X>
-                <Y>500</Y>
-                <Z>2138.782</Z>
-            </Position>
-            <Scale>
-                <X>100</X>
-                <Y>100</Y>
-                <Z>100</Z>
-            </Scale>
-            <Rotation>
-                <X>0</X>
-                <Y>0</Y>
-                <Z>0</Z>
-            </Rotation>
-            <Origin>
-                <X>0</X>
-                <Y>0</Y>
-                <Z>0</Z>
-            </Origin>
-        </Transformable>
-        <Physical>
-            <Mass>0</Mass>
-            <Restitution>0.1</Restitution>
-        </Physical>
-        <Model>
-            <Mesh>cube_mesh</Mesh>
-            <Material>default_material</Material>
-            <Shader>phong_shader</Shader>
-            <Texture>floor_grass_texture</Texture>
-        </Model>
-        <AABB>
-            <Position>
-                <X>1795.5004</X>
-                <Y>600</Y>
-                <Z>2963.8115</Z>
-            </Position>
-            <Scale>
-                <X>1</X>
-                <Y>1</Y>
-                <Z>1</Z>
-            </Scale>
-            <Origin>
-                <X>0</X>
-                <Y>0</Y>
-                <Z>0</Z>
-            </Origin>
-        </AABB>
-        <OBB>
-            <Rotation>
-                <X>0</X>
-                <Y>0</Y>
-                <Z>0</Z>
-            </Rotation>
-            <Position>
-                <X>1795.5004</X>
-                <Y>600</Y>
-                <Z>2963.8115</Z>
+                <Z>2812.769</Z>
             </Position>
             <Scale>
                 <X>100</X>
@@ -482,9 +408,9 @@
         <ID>light</ID>
         <Type>Point</Type>
         <Position>
-            <X>1637.282</X>
+            <X>1802.1476</X>
             <Y>650</Y>
-            <Z>1904.4375</Z>
+            <Z>1609.2262</Z>
         </Position>
         <Ambient>
             <X>1</X>
@@ -510,9 +436,9 @@
         </Player>
         <Transformable>
             <Position>
-                <X>1821.4377</X>
+                <X>1982.1658</X>
                 <Y>600</Y>
-                <Z>3001.624</Z>
+                <Z>2853.6191</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -537,9 +463,9 @@
         </Physical>
         <AABB>
             <Position>
-                <X>1821.4377</X>
+                <X>1982.1658</X>
                 <Y>600</Y>
-                <Z>3001.624</Z>
+                <Z>2853.6191</Z>
             </Position>
             <Scale>
                 <X>1</X>
@@ -553,9 +479,9 @@
             </Origin>
         </AABB>
         <Center>
-            <X>1833.937744140625</X>
+            <X>1994.665771484375</X>
             <Y>612.5</Y>
-            <Z>3014.1240234375</Z>
+            <Z>2866.119140625</Z>
         </Center>
         <Radius>25</Radius>
         <Sphere/>

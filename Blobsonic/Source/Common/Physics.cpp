@@ -925,20 +925,10 @@ void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std:
 	auto trans2 = object2->get<Component::Transformable>();
 	auto phys2 = object2->get<Physical>();
 
-	//find the smallest scale
-	float scale1 = min(trans1->m_vScale.x, trans1->m_vScale.y);
-	scale1 = min(scale1, trans1->m_vScale.z);
-
-	float scale2 = min(trans2->m_vScale.x, trans2->m_vScale.y);
-	scale2 = min(scale2, trans2->m_vScale.z);
-
-	float scale = 1/min(scale1, scale2) ;
-	if (scale > 0.8f) scale = 0.8f;
-	if (scale < 0.01) scale = 0.01f;
 
 	//reduces rounding errors in the hardware
 	
-	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * 0.025f * CollisionNormal;
+	glm::vec3 correction = Depth / (phys1->m_fINVMass + phys2->m_fINVMass) * 0.2f * CollisionNormal;
 	trans1->m_vPosition -= phys1->m_fINVMass * correction;
 	trans2->m_vPosition += phys2->m_fINVMass * correction;
 
