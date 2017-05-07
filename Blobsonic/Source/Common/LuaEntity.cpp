@@ -267,6 +267,16 @@ void LuaEntity::handleEntity(const std::string & name)
 	m_entity = SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
 }
 
+bool LuaEntity::hasEntity()
+{
+	if (m_entity) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 bool LuaEntity::hasComponent(const std::string & sComponent)
 {
 	if (sComponent == "Transformable") return m_entity->has<Component::Transformable>();
@@ -448,10 +458,10 @@ void LuaEntity::destroy()
 {
 	if (m_entity) {
 		m_entity->destroy();
-		m_entity = NULL;
+		//m_entity = NULL;
 	}
-	m_bDestroyed = true;
-	CollisionReporter::getInstance()->dettachReceiver(this);
+	//m_bDestroyed = true;
+	//CollisionReporter::getInstance()->dettachReceiver(this);
 }
 
 bool LuaEntity::isDestroyed()
@@ -482,6 +492,7 @@ void LuaEntity::register_lua(lua_State* L)
 		//Entity
 		"setComponents", &LuaEntity::setComponents,
 		"handleEntity", &LuaEntity::handleEntity,
+		"hasEntity", &LuaEntity::hasEntity,
 		"getID", &LuaEntity::getID,
 		"getName", &LuaEntity::getName,
 		"destroy", &LuaEntity::destroy,
