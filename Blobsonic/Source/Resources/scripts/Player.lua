@@ -10,3 +10,7 @@ jumpTimer:reset()
 player = Entity.new()
 player:handleEntity("player")
 
+playerSpeed = 50
+playerJumpForce = 50
+playerJumpDelay = 0.6
+

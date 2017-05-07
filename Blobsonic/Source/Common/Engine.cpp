@@ -206,9 +206,6 @@ void Engine::Engine::processMessages(const std::vector<std::shared_ptr<Message>>
 			if (data->m_iAction == GLFW_PRESS || data->m_iAction == GLFW_REPEAT) {	//Key is pressed
 				switch (data->m_iKey)
 				{
-				case GLFW_KEY_ESCAPE:
-					m_bRunning = false;	//End game loop
-					break;
 				case GLFW_KEY_9:
 					MessageHandler::getInstance()->sendMessage<EngineMessage::FullScreenToggle>(true);
 					break;
