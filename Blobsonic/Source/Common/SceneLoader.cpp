@@ -495,7 +495,7 @@ std::shared_ptr<Entity> SceneLoader::loadModel(tinyxml2::XMLElement * e)
 			//Attach player component
 			entity->attach<Component::Player>();
 			if (readElementText(modelChild, cData)) {
-				entity->get<Component::Player>()->m_fMoveSpeed = atof(cData);
+				entity->get<Component::Player>()->setMoveSpeed(atof(cData));
 			}
 		}
 		else if (strcmp(childValue, "Mesh") == 0) {
@@ -644,6 +644,7 @@ void SceneLoader::attachTransformable(std::shared_ptr<Entity> entity, tinyxml2::
 	//Set component variables
 	for (XMLElement* parent = e->FirstChildElement(); parent != NULL; parent = parent->NextSiblingElement()) {
 		const char* childValue = parent->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			t->setPosition(v);			//Set
@@ -678,6 +679,7 @@ void SceneLoader::attachModel(std::shared_ptr<Entity> entity, tinyxml2::XMLEleme
 	std::string sTemp;	//Temporary string
 	for (XMLElement* parent = e->FirstChildElement(); parent != NULL; parent = parent->NextSiblingElement()) {
 		const char* childValue = parent->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Mesh") == 0) {
 			if (readElementText(parent, cData)) {
 				m->addMesh(m_res->getAssimpMesh(std::string(std::string(cData, strlen(cData)))));
@@ -712,6 +714,7 @@ void SceneLoader::attachPhysical(std::shared_ptr<Entity> entity, tinyxml2::XMLEl
 	std::string sTemp;	//Temporary string
 	for (XMLElement* parent = e->FirstChildElement(); parent != NULL; parent = parent->NextSiblingElement()) {
 		const char* childValue = parent->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Mass") == 0) {
 			if (readElementText(parent, cData)) {
 				p->m_fMass = stof(parent->ToElement()->GetText());//Set
@@ -735,6 +738,7 @@ void SceneLoader::attachAABB(std::shared_ptr<Entity> entity, tinyxml2::XMLElemen
 	//Set component variables
 	for (XMLElement* parent = e->FirstChildElement(); parent != NULL; parent = parent->NextSiblingElement()) {
 		const char* childValue = parent->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			a->m_vCenter = v;
@@ -766,6 +770,7 @@ void SceneLoader::attachSphere(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 	//Set component variables
 	for (XMLElement* parent = e->FirstChildElement(); parent != NULL; parent = parent->NextSiblingElement()) {
 		const char* childValue = parent->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Center") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			sphere->m_vCenter = v;		//Set
@@ -790,6 +795,7 @@ void SceneLoader::attachOBB(std::shared_ptr<Entity> entity, tinyxml2::XMLElement
 	//Set component variables
 	for (XMLElement* parent = e->FirstChildElement(); parent != NULL; parent = parent->NextSiblingElement()) {
 		const char* childValue = parent->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(parent);	//Parse vec3 data
 			b->m_vCenter = v;
@@ -818,20 +824,19 @@ void SceneLoader::attachCamera(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 {
 	using namespace tinyxml2;
 	//Attach component
-	if (m_bDebug) std::cout << "Sphere Component Attached\n";
+	if (m_bDebug) std::cout << "Camera Component Attached\n";
 
 	entity->attach<Component::Camera>();
 	auto camera = entity->get<Component::Camera>();	//Get handle to component
 	
 	char* cData = "";			//Temporary storage for element data
-	if (m_bDebug) std::cout << "OBB Component Attached\n";
-
 	std::string s;
 	char * c;
 	std::string sID;
 	//Look at Model Element
 	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		const char* childValue = child->Value();
+		std::cout << " ";
 		if (strcmp(childValue, "Position") == 0) {
 			glm::vec3 v = parseVec3(child);
 			camera->setPosition(v);
@@ -872,6 +877,12 @@ void SceneLoader::attachCamera(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 			}
 			if (m_bDebug) std::cout << "MoveSpeed Speed: " << c << "\n  ";
 		}
+		else if (strcmp(childValue, "Reach") == 0) {
+			if (readElementText(child, c)) {
+				camera->setReach(atof(c));
+			}
+			if (m_bDebug) std::cout << "Reach: " << c << "\n  ";
+		}
 	}
 }
 
@@ -888,6 +899,7 @@ void SceneLoader::attachDirLight(std::shared_ptr<Entity> entity, tinyxml2::XMLEl
 	glm::vec3 v;
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
 		const char* childValue = modelChild->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Ambient") == 0) {
 			v = parseVec3(modelChild);
 			dir->setAmbient(v);
@@ -918,6 +930,7 @@ void SceneLoader::attachPointLight(std::shared_ptr<Entity> entity, tinyxml2::XML
 	float f;
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
 		const char* childValue = modelChild->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Ambient") == 0) {
 			v = parseVec3(modelChild);
 			dir->setAmbient(v);
@@ -957,6 +970,7 @@ void SceneLoader::attachSpotLight(std::shared_ptr<Entity> entity, tinyxml2::XMLE
 	float f;
 	for (XMLElement* modelChild = e->FirstChildElement(); modelChild != NULL; modelChild = modelChild->NextSiblingElement()) {
 		const char* childValue = modelChild->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Ambient") == 0) {
 			v = parseVec3(modelChild);
 			light->setAmbient(v);
@@ -1024,6 +1038,7 @@ void SceneLoader::attachSound(std::shared_ptr<Entity> entity, tinyxml2::XMLEleme
 	//Look at Model Element
 	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		const char* childValue = child->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "File") == 0) {
 			//Load file
 			if (readElementText(child, c)) {
@@ -1112,6 +1127,7 @@ void SceneLoader::attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 	//Look at Model Element
 	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		const char* childValue = child->Value();
+		if (m_bDebug) std::cout << " ";
 		if (strcmp(childValue, "Shader") == 0) {
 			if (readElementText(child, c)) {
 				std::string sFile(c, strlen(c));
@@ -1143,7 +1159,33 @@ void SceneLoader::attachSprite(std::shared_ptr<Entity> entity, tinyxml2::XMLElem
 
 void SceneLoader::attachPlayer(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)
 {
+	using namespace tinyxml2;
 	entity->attach<Component::Player>();
+	auto p = entity->get<Component::Player>();
+	
+	if (m_bDebug) std::cout << "Player Component Attached\n  ";
+
+	char* cData = "";			//Temporary storage for element data
+	std::string s;
+	char * c;
+	glm::vec3 v;
+	//Look at Model Element
+	for (XMLElement* child = e->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
+		const char* childValue = child->Value();
+		if (m_bDebug) std::cout << " ";
+		if (strcmp(childValue, "MoveSpeed") == 0) {
+			if (readElementText(child, c)) {
+				p->setMoveSpeed(atof(c));
+			}
+			if (m_bDebug) std::cout << "MoveSpeed: " << c << "\n  ";
+		}
+		else if (strcmp(childValue, "TurnSpeed") == 0) {
+			if (readElementText(child, c)) {
+				p->setTurnSpeed(atof(c));
+			}
+			if (m_bDebug) std::cout << "TurnSpeed: " << c << "\n  ";
+		}
+	}
 }
 
 void SceneLoader::attachPickup(std::shared_ptr<Entity> entity, tinyxml2::XMLElement * e)

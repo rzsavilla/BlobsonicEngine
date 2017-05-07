@@ -7,6 +7,9 @@
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	<Entity>
 		<Name>deer</Name>
+		<Player>
+			<MoveSpeed>10.0f</MoveSpeed>
+		</Player>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
@@ -215,7 +218,8 @@
 			</Origin>
 		</OBB>
 	</Entity>
-		<Entity>
+	
+	<Entity>
 		<Name>floor3</Name>
 		<Transformable>
 			<Position>
@@ -423,7 +427,7 @@
 		</DirLight>
 	</Entity>
 	
-		<Button> <ID>MainMenuButton</ID>
+	<Button> <ID>MainMenuButton</ID>
 		<Shader>button_shader</Shader>
 		<Texture>menu_texture</Texture>
 		<Position>
@@ -497,6 +501,7 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	-->
+	<!--
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
@@ -515,5 +520,6 @@
 		<RotSpeed>0.5f</RotSpeed>
 		<MoveSpeed>5.0f</MoveSpeed>
 	</Camera>
+	-->
 </Scene>
 

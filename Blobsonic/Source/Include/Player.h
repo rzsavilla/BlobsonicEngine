@@ -6,8 +6,16 @@
 #include "Component.h"
 
 namespace Component {
-	struct Player : public Component {
-		Player() {}
-		float m_fMoveSpeed = 10;
+	class Player : public Component {
+	private:
+		float m_fMoveSpeed;
+		float m_fTurnSpeed;
+	public:
+		Player();	//!< Constructor
+		void setMoveSpeed(float newSpeed);		//!< Set value for movement speed
+		void setTurnSpeed(float newTurnSpeed);	//!< Set value for turning speed
+
+		float getMoveSpeed();
+		float getTurnSpeed();
 	};
 }
