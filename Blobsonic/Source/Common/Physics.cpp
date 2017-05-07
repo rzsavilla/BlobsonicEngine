@@ -408,9 +408,9 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 	obox2->m_obbNormals[4] = glm::mat3(obox2->m_Rotation) * glm::vec3(0, 1, 0); // Top face
 	obox2->m_obbNormals[5] = glm::mat3(obox2->m_Rotation) * glm::vec3(0, -1, 0); // bottom face
 
+	 
 
-
-																				 //project 6 axis 
+	//project 6 axis 
 	for (int axisTest = 0; axisTest < 6; axisTest++)
 	{
 		//values for min box2->and max
@@ -459,17 +459,6 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 		{
 			testAxis[axisTest] = true; // There is a collision along this axis
 			
-			//find overlap amount
-			float fPen = obb2Max - obb1Min;
-
-			// find normal
-			glm::vec3 normal = obox1->m_obbNormals[axisTest];
-
-			//resolve
-			resolveCollision(obb1, obb2, normal);
-
-			//position
-			PositionalCorrection(obb1, obb2, fPen, normal);
 		
 		}
 		else
@@ -480,7 +469,28 @@ bool System::Physics::CheckOBBOBBCollision(std::shared_ptr<Entity> obb1, std::sh
 		}
 
 	}
-	return true;
+
+	if (testAxis[0] == true && testAxis[1] == true && testAxis[2] == true && testAxis[3] == true && testAxis[4] == true && testAxis[5] == true)
+	{
+
+		// find normal
+		glm::vec3 normal = obox2->m_vCenter - obox1->m_vCenter;
+		
+
+		//find overlap amount
+		glm::vec3 pen;
+		float fPen = abs(sqrt((pen.x * pen.x) + (pen.y * pen.y) + (pen.z * pen.z)));
+
+		normal = glm::normalize(normal);
+		//resolve
+		resolveCollision(obb1, obb2, normal);
+
+		//position
+		PositionalCorrection(obb1, obb2, fPen, normal);
+
+		return true;
+	}
+	
 
 }
 
@@ -545,8 +555,6 @@ bool System::Physics::CheckOBBSphereCollision(std::shared_ptr<Entity> eBox, std:
 
 	//local version
 	Sphere localSphere = *sphere;
-
-	//std::cout << localSphere.m_vCenter.x << " " << localSphere.m_vCenter.y << " " << localSphere.m_vCenter.z << std::endl;
 
 	bool bExtremeClamp = true;
 
@@ -857,6 +865,11 @@ void System::Physics::updatePhysicals(std::shared_ptr<Entity> e, float dt)
 
 
 	}
+	else
+	{
+		phys->m_vVelocity = glm::vec3(0, 0, 0);
+		phys->m_vAcceleration = glm::vec3(0, 0, 0);
+	}
 }
 
 void System::Physics::updateSphere(std::shared_ptr<Entity> eSphere)
@@ -896,8 +909,8 @@ void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::sha
 
 	//Apply the impluse
 	glm::vec3 impulse = j * CollisionNormal;
-	phys1->m_vVelocity -= phys1->m_fINVMass * impulse;
-	phys2->m_vVelocity += phys2->m_fINVMass * impulse;
+	phys1->m_vVelocity -= phys1->m_fINVMass * impulse ;
+	phys2->m_vVelocity += phys2->m_fINVMass * impulse ;
 
 
 }
@@ -905,8 +918,6 @@ void System::Physics::resolveCollision(std::shared_ptr<Entity> object1, std::sha
 void System::Physics::PositionalCorrection(std::shared_ptr<Entity> object1, std::shared_ptr<Entity> object2, float Depth, glm::vec3 CollisionNormal)
 {
 	
-
-
 	//get physicals and transformables
 	auto trans1 = object1->get<Component::Transformable>();
 	auto phys1 = object1->get<Physical>();

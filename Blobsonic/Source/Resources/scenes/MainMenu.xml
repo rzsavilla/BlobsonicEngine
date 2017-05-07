@@ -41,7 +41,7 @@
 		<Texture>play_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>100.0f</Y>
+			<Y>100</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -96,42 +96,12 @@
 		</sID>
 	</Button>
 	
-	<Button> <ID>credits_button</ID>
-		<Shader>button_shader</Shader>
-		<Texture>credits_texture</Texture>
-		<Position>
-			<X>100.0f</X>
-			<Y>500.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>10.0f</X> 
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
-		</sID>
-	</Button>
-	
 	<Button> <ID>exit_button</ID>
 		<Shader>button_shader</Shader>
 		<Texture>exit_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>696.0f</Y>
+			<Y>500.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>

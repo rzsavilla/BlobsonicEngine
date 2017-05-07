@@ -79,7 +79,7 @@
 			<NearPlane>0.1f</NearPlane>
 		</Camera>
 	</Entity>
-
+	
 	<Entity>
 		<Name>pickup1</Name>
 		<Transformable>
@@ -440,7 +440,7 @@
 				<Rotation>
 					<X>0.0f</X>
 					<Y>0.0f</Y>
-					<Z>180.0f</Z>
+					<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
 					<X>100.0f</X>
@@ -454,10 +454,10 @@
 			</Origin>
 		</Transformable>
 		<Model> <ID>skybox</ID>
-				<Mesh>skybox_mesh</Mesh>
+				<Mesh>skybox_sunny_mesh</Mesh>
 				<Material>default_material</Material>
 				<Shader>phong_shader</Shader>
-				<Texture>skybox_texture</Texture>
+				<Texture>skybox_sunny_texture</Texture>
 		</Model>
 	</Entity>
 	

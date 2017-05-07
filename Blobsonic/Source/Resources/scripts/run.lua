@@ -1,11 +1,10 @@
 -- This is where the game logic is updated and is run every game update
 
 fSpeed = 50
-
 if isKeyDown("p") == true then
 		reloadScene()
-end
-
+	end
+	
 if getActiveScene() == "WorldTest.xml" then
 	if isKeyDown("w") == true then
 		player:pMove(0,0,1,fSpeed)
@@ -22,14 +21,9 @@ if getActiveScene() == "WorldTest.xml" then
 			jumpTimer:reset()
 		end
 	end
-
-	if player:tGetPosY() < 0.0 then
-		--player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
-	end
-	
+  
 	--Collect pickup
 	if player:pHasCollidedByName("pickup1") then
 		--pickup1:destroy()
 	end
-	
 end
