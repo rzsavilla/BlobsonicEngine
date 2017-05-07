@@ -36,9 +36,9 @@
 		</ID>
 	</Model>
 	
-	<Sprite> <ID>settings_sprite</ID>
+	<Sprite> <ID>gameover</ID>
 		<Shader>button_shader</Shader>
-		<Texture>settings_XL_texture</Texture>
+		<Texture>gameoverXL_texture</Texture>
 		<Position>
 			<X>100.0f</X>
 			<Y>100.0f</Y>
@@ -66,12 +66,12 @@
 		</sID>
 	</Sprite>
 	
-	<Button> <ID>main_menu_button</ID>
+	<Button> <ID>menu_button</ID>
 		<Shader>button_shader</Shader>
 		<Texture>menu_texture</Texture>
 		<Position>
 			<X>100.0f</X>
-			<Y>588</Y>
+			<Y>300.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -85,9 +85,9 @@
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>0.8f</X> 	
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
 		</Colour>
 		<sID>
 			<X>4.0f</X> 	
@@ -96,12 +96,12 @@
 		</sID>
 	</Button>
 	
-	<Button> <ID>1280_window</ID>
+	<Button> <ID>exit_application_button</ID>
 		<Shader>button_shader</Shader>
-		<Texture>1280_texture</Texture>
+		<Texture>exit_texture</Texture>
 		<Position>
-			<X>100.0f</X>
-			<Y>338.0f</Y>
+			<X>369.0f</X>
+			<Y>300.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -115,77 +115,17 @@
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
+			<X>0.2f</X> 	
+			<Y>0.2f</Y>
+			<Z>0.2f</Z>
 		</Colour>
 		<sID>
-			<X>6.0f</X> 	
+			<X>7.0f</X> 
 			<Y>0.0f</Y>
-			<Z>0.0f</Z>
+			<Z>0.0f</Z>			
 		</sID>
 	</Button>
-	
-	<Button> <ID>1600_window</ID>
-		<Shader>button_shader</Shader>
-		<Texture>1600_texture</Texture>
-		<Position>
-			<X>384.0f</X>
-			<Y>338.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>8.0f</X> 	
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</sID>
-	</Button>
-	
-	<Button> <ID>1920_window</ID>
-		<Shader>button_shader</Shader>
-		<Texture>1920_texture</Texture>
-		<Position>
-			<X>668.0f</X>
-			<Y>338.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>9.0f</X> 	
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</sID>
-	</Button>
-	
+
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>
@@ -209,6 +149,74 @@
 			<Z>1.0f</Z>
 		</Specular>
 	</Light>
+	<Light> <ID>light2</ID>
+		<Type>Point</Type>
+		<Position>
+			<X>0.0f</X>
+			<Y>10.0f</Y>
+			<Z>-20.0f</Z>
+		</Position>
+		<Radius>50.0f</Radius>
+		<Ambient>
+			<X>0.1f</X>
+			<Y>0.1f</Y>
+			<Z>0.1f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>0.0f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</Diffuse>	
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+	</Light>
+	
+	<Light> <ID>light2</ID>
+		<Type>Spotlight</Type>
+		<Position>
+			<X>-20.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Direction>
+			<X>0.5f</X>
+			<Y>-0.5f</Y>
+			<Z>0.0f</Z>
+		</Direction>
+		<Ambient>
+			<X>0.1f</X>
+			<Y>0.1f</Y>
+			<Z>0.1f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Diffuse>	
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+		<CutOff>50.0f</CutOff>
+		<OuterCutOff>50.0f</OuterCutOff>
+		<Constant>1.0f</Constant>
+		<Linear>0.009f</Linear>
+		<Quadratic>0.0032f</Quadratic>
+	</Light>
+	
+	<!--
+	<Audio>
+		<ID>main_theme</ID>
+		<File>Source\Resources\audio\getout.ogg</File>
+		<isPlaying>true</isPlaying>
+		<isLooping>true</isLooping>
+		<startsPaused>false</startsPaused>
+	</Audio>
+	-->
 	
 	<Camera> <ID>cam1</ID>
 		<Position>
