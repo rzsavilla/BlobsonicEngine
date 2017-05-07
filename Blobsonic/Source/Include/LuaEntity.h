@@ -63,7 +63,7 @@ public:
 	void pSetVelocity(float x, float y, float z);
 	void pCollisionListen();							//!< Messages physics system to report collisions that occur for this entity
 	bool pHasCollidedByID(int entityID);		//!< Returns true if a collision report between this entity has occured
-	bool pHasCollidedByName(std::string entityName);	//!< Returns true if a collision report between this entity has occured
+	int pHasCollidedByName(std::string entityName);	//!< Returns ID of entity collided with returns -1 if no collision has 
 	void pApplyImpulse(float nx, float ny, float nz, float force);
 	void pMove(float forwardX, float forwardY, float forwardZ, float speed);
 	//----------------Sound Component Functions-------------------------

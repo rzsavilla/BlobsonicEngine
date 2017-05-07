@@ -425,14 +425,14 @@ bool LuaEntity::pHasCollidedByID(int entityID)
 	return false;
 }
 
-bool LuaEntity::pHasCollidedByName(std::string entityName)
+int LuaEntity::pHasCollidedByName(std::string entityName)
 {
 	if (m_entity) {
 		for (auto it = m_entity->m_vCollidedWith.begin(); it != m_entity->m_vCollidedWith.end(); ++it) {
-			if ((*it)->getName() == entityName) return true;
+			if ((*it)->getName() == entityName) return (*it)->getUID();
 		}
 	}
-	return false;
+	return -1;	//No Collision
 }
 
 void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)

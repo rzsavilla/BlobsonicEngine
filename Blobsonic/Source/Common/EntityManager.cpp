@@ -21,6 +21,17 @@ void EntityManager::destroy(std::shared_ptr<Entity> entity)
 	}
 }
 
+void EntityManager::destroy(unsigned int UID)
+{
+	for (auto it = m_entities.begin(); it != m_entities.end(); ++it) {
+		if ((*it)->getUID() == UID) {
+			(*it)->destroy();			//Call destroy
+			m_entities.erase(it);		//Remove entity
+			return;
+		}
+	}
+}
+
 void EntityManager::destroyAll()
 {
 	for (auto it = m_entities.begin(); it != m_entities.end(); ++it) {

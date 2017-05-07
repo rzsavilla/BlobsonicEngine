@@ -36,7 +36,7 @@
 			<Mesh>beeModel_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>red_texture</Texture>
+			<Texture>beeModel_texture</Texture>
 		</Model>
 		<Physical>
 			<Mass>55.0</Mass>
@@ -81,10 +81,10 @@
 	</Entity>
 	
 	<Entity>
-		<Name>pickup1</Name>
+		<Name>pickup</Name>
 		<Transformable>
 			<Position>
-				<X>0.0f</X>
+				<X>-1000.0f</X>
 				<Y>500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
@@ -112,7 +112,56 @@
 		</Model>
 		<AABB>
 			<Position>
+				<X>-1000.0f</X>
+				<Y>500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
 				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+	</Entity>
+	
+	<Entity>
+		<Name>pickup</Name>
+		<Transformable>
+			<Position>
+				<X>1000.0f</X>
+				<Y>500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>soccer_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>red_texture</Texture>
+		</Model>
+		<AABB>
+			<Position>
+				<X>1000.0f</X>
 				<Y>500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
