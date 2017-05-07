@@ -11,7 +11,7 @@ System::CameraController::CameraController()
 {
 	MessageHandler::getInstance()->attachReceiver(this);
 
-	m_vMouseSensitivity = glm::vec2(1.0f, 1.0f);
+	m_vMouseSensitivity = glm::vec2(10.0f, 10.0f);
 	m_vMousePos = glm::dvec2(0.0, 0.0);
 	m_vPrevMousePos = glm::dvec2(0.0, 0.0);
 
@@ -26,6 +26,9 @@ void System::CameraController::process(std::vector<std::shared_ptr<Entity>>* ent
 	//Iterate through all entities
 	for (auto it = entities->begin(); it != entities->end(); ++it) {
 		if ((*it)->has<Component::Camera>()) {
+			m_ActiveCamera = (*it);		//Set Active camera
+		}
+		else if ((*it)->has<Component::Player>()) {
 			m_ActiveCamera = (*it);		//Set Active camera
 		}
 	}
@@ -50,6 +53,11 @@ void System::CameraController::update(float dt)
 
 		//Apply rotation based on mouse movement
 		camera->rotate(glm::radians((float)dY), glm::radians((float)dX));
+		//Rotate player entity
+		if (m_ActiveCamera->has<Component::Player>() && m_ActiveCamera->has<Component::Transformable>()) {
+			auto t = m_ActiveCamera->get<Component::Transformable>();
+			t->rotate(0.0f,glm::radians(dX * 0.1),0.0f);
+		}
 
 		//Set previous mouse position;
 		m_vPrevMousePos.x = m_vMousePos.x;
@@ -125,7 +133,7 @@ void System::CameraController::processMessages(const std::vector<std::shared_ptr
 					}
 
 					else if (data->m_iKey == GLFW_KEY_R) {
-						camera->reset();
+						//camera->reset();
 					}
 				}
 			}

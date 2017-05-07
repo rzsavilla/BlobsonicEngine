@@ -3,6 +3,13 @@
 #include "stdafx.h"
 #include "System.h"
 
+enum Action {
+	Forward,
+	Backward,
+	Left,
+	Right
+};
+
 namespace System {
 	class PlayerController : public System {
 	private:

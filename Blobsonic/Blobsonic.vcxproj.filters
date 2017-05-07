@@ -640,5 +640,8 @@
     <ClCompile Include="Source\Common\ShadowMap.cpp">
       <Filter>Source Files\Engine\Component\Lights</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\Player.cpp">
+      <Filter>Source Files\Engine\Component</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

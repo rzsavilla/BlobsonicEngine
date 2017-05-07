@@ -1,6 +1,25 @@
 #include "stdafx.h"
 #include "Camera.h"
 
+glm::mat4 Component::Camera::thirdPerson()
+{
+	if (m_LookAtTarget->has<Transformable>()) {
+		auto t = m_LookAtTarget->get<Transformable>();
+		glm::vec3 v = t->getPosition();	//Target position
+		float fHorizontalDist = m_fReach * glm::cos(glm::radians(m_fPitch));
+		float fVerticalDist = m_fReach * glm::sin(glm::radians(m_fPitch));
+		float theta = t->getRotation().y;
+		float fOffsetX = (float)fHorizontalDist * glm::sin(glm::radians(theta));
+		float fOffsetZ = (float)fHorizontalDist * glm::cos(glm::radians(theta));
+		float posx = t->getPosition().x - fOffsetX;
+		float posy = t->getPosition().y + fVerticalDist;
+		float posz = t->getPosition().z - fOffsetZ;
+
+		m_fYaw = 180 - ((t->getRotation().y));
+		return glm::lookAt(glm::vec3(posx, posy, posz), v, glm::vec3(0, 1, 0));
+	}
+}
+
 Component::Camera::Camera()
 {
 	m_bUsePerspective = true;		//Default perspective view
@@ -21,6 +40,8 @@ Component::Camera::Camera()
 	m_vLookAt = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
 
 	m_bLocalPosSet = false;
+
+	m_fReach = 1000.0f;
 };
 
 void Component::Camera::setProjectionAtt(float FOV, float AspectRatio, float Near, float Far)
@@ -107,6 +128,16 @@ void Component::Camera::setLocalPosition(glm::vec3 local)
 	}
 }
 
+void Component::Camera::setLookAtTarget(std::shared_ptr<Entity> entity)
+{
+	m_LookAtTarget = entity;
+}
+
+void Component::Camera::setReach(float reach)
+{
+	m_fReach = reach;
+}
+
 void Component::Camera::zoom(float zoom)
 {
 	//Forward vector
@@ -137,6 +168,8 @@ void Component::Camera::pedestal(float pedestal)
 void Component::Camera::pitch(float pitch)
 {
 	m_fPitch += glm::radians(pitch);
+	if (m_fPitch < 0.0f) m_fPitch = 0.0f;
+	else if (m_fPitch > 89.0f) m_fPitch = 89.0f;
 }
 
 void Component::Camera::yaw(float yaw)
@@ -214,7 +247,11 @@ glm::mat4 Component::Camera::getView()
 	//Translation matrix
 	glm::mat4 mTranslation = glm::mat4(1.0f);
 	mTranslation = glm::translate(mTranslation, -m_vPosition);
-
+	glm::vec3 v;
+	if (m_LookAtTarget) {
+		return thirdPerson();
+	}
+	
 	return mRotation * mTranslation;	//Return view matrix
 }
 
@@ -231,16 +268,12 @@ glm::mat4 Component::Camera::getProjection()
 		//Orthographic projection	//Currently broken
 		glm::ivec2 windowSize;
 		glfwGetWindowSize(glfwGetCurrentContext(), &windowSize.x, &windowSize.y);
-		//return glm::ortho(0.0f, (float)windowSize.x, 0.0f, (float)windowSize.y, m_fNearPlane, m_fFarPlane);
-		//return glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, 0.1f, 1000.0f);
-		//return glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, -1.0f, 1.0f);
 		return glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f, 0.1f, 100.0f);
 	}
 }
 
 glm::quat Component::Camera::getQuatRotation()
 {
-
 	//Get quaternion rotations for x,y,z axis
 	glm::quat qPitch = glm::angleAxis(m_fPitch, glm::vec3(1.0f, 0.0f, 0.0f));	//Rotation around X axis
 	glm::quat qYaw = glm::angleAxis(m_fYaw, glm::vec3(0.0f, 1.0f, 0.0f));		//Rotation around Y axis
@@ -248,7 +281,7 @@ glm::quat Component::Camera::getQuatRotation()
 
 	//Rotation matrix
 	glm::quat qOrientation = qPitch * qYaw;
-	qOrientation = qRoll * qOrientation;
+	//qOrientation = qRoll * qOrientation;	//Roll disabled
 	qOrientation = glm::normalize(qOrientation);
 
 	return qOrientation;
@@ -270,5 +303,4 @@ void Component::Camera::reset()
 	m_fPitch = 0.0f;
 	m_fYaw = 0.0f;
 	m_fRoll = 0.0f;
-
 }
