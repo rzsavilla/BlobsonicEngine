@@ -39,7 +39,7 @@ public:
 		Find entity in the active scene and handle that entity
 	*/
 	void handleEntity(const std::string& name);			//!< This becomes handler to an already existing entity within the scene
-
+	bool hasEntity();	//!< Has a handle to an entity
 	bool hasComponent(const std::string& sComponent);	//!< Returns true if entity has component
 	unsigned int getID();	//!< Return entities unique ID
 	std::string getName();	//!< Return entity name
