@@ -25,7 +25,10 @@
 		<ID>beeHive_mesh</ID>
 		<File>Source\Resources\models\bee_hive.obj</File>
 	</Mesh>
-
+	<Mesh> 
+		<ID>beeModel_mesh</ID>
+		<File>Source\Resources\models\bee_model.obj</File>
+	</Mesh>
 	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
@@ -54,6 +57,46 @@
 		<ID>skybox_mesh</ID>
 		<File>Source\Resources\models\skybox.obj</File>
 	</Mesh>
+	<Mesh> 
+		<ID>leaf1_mesh</ID>
+		<File>Source\Resources\models\leaf.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>leaf2_mesh</ID>
+		<File>Source\Resources\models\leaf3.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>leafGroup1_mesh</ID>
+		<File>Source\Resources\models\leaf_Group1.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>leafGroup2_mesh</ID>
+		<File>Source\Resources\models\leaf_Group2.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>leafGroup3_mesh</ID>
+		<File>Source\Resources\models\leaf_Group4.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>rock_mesh</ID>
+		<File>Source\Resources\models\rock1.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>rock2_mesh</ID>
+		<File>Source\Resources\models\rock2.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>rock3_mesh</ID>
+		<File>Source\Resources\models\rock3.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>wasp_mesh</ID>
+		<File>Source\Resources\models\wasp_enemy.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>windBlower_mesh</ID>
+		<File>Source\Resources\models\wind_blower.obj</File>
+	</Mesh>
 	
 	<Texture> 
 		<ID>pine1_texture</ID>
@@ -69,7 +112,31 @@
 	</Texture>
 	<Texture> 
 		<ID>floorB_texture</ID>
-		<File>Source\Resources\textures\floor (2).jpg</File>
+		<File>Source\Resources\textures\floor_grass.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>floorB_texture</ID>
+		<File>Source\Resources\textures\floor2_grass.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>leaf1_texture</ID>
+		<File>Source\Resources\textures\leaf.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>leaf2_texture</ID>
+		<File>Source\Resources\textures\leaf2.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>pineTreeGroup_texture</ID>
+		<File>Source\Resources\textures\pine_TreeGroup.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>wasp_texture</ID>
+		<File>Source\Resources\textures\wasp2.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>windBlower_texture</ID>
+		<File>Source\Resources\textures\wind_blower.jpg</File>
 	</Texture>
 	<Texture> 
 		<ID>rock1_texture</ID>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ResourceFile> 
-	<Location>Source\Resources\Scenes\Resources.xml</Location> 
+	<Location>Source\Resources\Scenes\Resources_MainMenu.xml</Location> 
 </ResourceFile>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
@@ -161,7 +161,7 @@
 			<Mesh>pineGroup_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>pine1_texture</Texture>
+			<Texture>pineTreeGroup_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -193,7 +193,7 @@
 			<Mesh>pineGroup_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>pine1_texture</Texture>
+			<Texture>pineTreeGroup_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -229,7 +229,7 @@
 		</Model>
 	</Entity>
 	
-		<Entity>
+	<Entity>
 		<Name>Pine2</Name>
 		<Transformable>
 			<Position>
@@ -510,10 +510,10 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>beeModel_mesh</Mesh>
+			<Mesh>wasp_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>beeModel_texture</Texture>
+			<Texture>wasp_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -622,7 +622,7 @@
 			<Z>1.0f</Z>
 		</Specular>
 	</Light>
-	
+	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
@@ -640,16 +640,16 @@
 		<isLooping>false</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	
+	-->
 	<Entity>
-		<Camera>
+		<Camera> 
 			<Position>
 				<X>180.0f</X>
 				<Y>50.0f</Y>
 				<Z>66.167f</Z>
 			</Position>
 			<Orientation>
-				<X>-90.0f</X>
+				<X>-92.738f</X>
 				<Y>0.0f</Y>
 				<Z>0.0f</Z>
 			</Orientation>
