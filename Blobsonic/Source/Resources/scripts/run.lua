@@ -19,11 +19,13 @@ if getActiveScene() == "WorldTest.xml" then
 		if jumpTimer:getElapsed() > 0.6 then
 			player:pMove(0,1,0,fSpeed * 25)
 			jumpTimer:reset()
+			
 		end
 	end
-  
+
 	--Collect pickup
 	if player:pHasCollidedByName("pickup1") then
-		--pickup1:destroy()
+		pickup1:destroy()
+		iCollected = iCollected + 1
 	end
 end

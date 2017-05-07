@@ -458,10 +458,10 @@ void LuaEntity::destroy()
 {
 	if (m_entity) {
 		m_entity->destroy();
-		m_entity = NULL;
+		//m_entity = NULL;
 	}
-	m_bDestroyed = true;
-	CollisionReporter::getInstance()->dettachReceiver(this);
+	//m_bDestroyed = true;
+	//CollisionReporter::getInstance()->dettachReceiver(this);
 }
 
 bool LuaEntity::isDestroyed()
