@@ -84,6 +84,22 @@ void OpenLevel(string name)
 		// Event processing
 		Event event;
 		int iMouseWheel;
+		Vector2f sfMousePos;
+		Vector2f sfPlacingPos;
+
+
+		sfPlacingPos = window.mapPixelToCoords(Mouse::getPosition(window), gameView);
+		
+		if (sf::Event::MouseButtonPressed)
+		{
+			if (Mouse::isButtonPressed(sf::Mouse::Right))
+			{
+			}
+			if (Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+			}
+		}
+
 
 		while (window.pollEvent(event))
 		{
