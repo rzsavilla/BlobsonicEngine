@@ -168,40 +168,64 @@ Scene::Scene(string path)
 
 void Scene::draw(RenderTarget & target, RenderStates states) const
 {
+	//draw sky
 
-
+	//draw floor
 	for (int i = 0; i < m_vSpriteFloorTiles.size(); i++)
 	{
 		target.draw(m_vSpriteFloorTiles.at(i));
 	}
-	
+	//obsticles
+
+	//pickups
+	for (int i = 0; i < m_vPickupSprites.size(); i++)
+	{
+		target.draw(m_vPickupSprites[i]);
+	}
+
+	//lights
+
+	//start/end
+
+	//placing
+	if (m_bPlacing)
+	{
+		target.draw(m_sfTempRect);
+	}
+
 }
 
-void Scene::checkForHovering(Vector2f mousepos)
-{
-}
 
-void Scene::deselect()
-{
-	m_bSelected = false;
-}
+
+
 
 void Scene::processClickEvent(Vector2f mousepos)
 {
-	////check the floor
-	//for (int i = 0; i < m_vRectFloorTiles.size(); i++)
-	//{
-	//	if (m_vRectFloorTiles[i].second.m_bClicked(mousepos))
-	//	{
-	//		m_bSelected = true;
-	//		m_sfSelectedRect = m_vRectFloorTiles[i].first;
-	//		m_sfSelectedRect.setFillColor(Color(0, 255, 0, 125));
-	//		m_sfSelectedSprite = m_vSpriteFloorTiles[i];
-	//		m_sfSelectedTexture = *m_sfSelectedSprite.getTexture();
-	//	}
+	if (!m_bPlacing)
+	{
+	}
+}
 
-	//}
+void Scene::tempObject(Vector2f pos, Vector2f size)
+{
+	m_sfTempRect.setPosition(pos);
+	m_sfTempRect.setSize(size);
+	m_sfTempRect.setFillColor(Color(0, 255, 0, 125));
 
+}
+
+void Scene::addPickup(Vector2f pos)
+{
+	RectangleShape tempRect;
+	Sprite tempSprite;
+
+	tempRect.setPosition(pos);
+	tempRect.setSize(Vector2f(100, 100));
+
+	tempSprite.setPosition(pos);
+	tempSprite.setTexture(m_vTexturePickups);
+
+	m_vPickupSprites.push_back(tempSprite);
 
 }
 
@@ -215,4 +239,9 @@ void Scene::loadTextures()
 	{
 		cout << "../../../Blobsonic/Source/Resources/textures/floor_grass.bmp - Failed to load" << endl;
 	}
+	if (!m_vTexturePickups.loadFromFile("../../../Blobsonic/Source/Resources/textures/pickupForEditor.png"))
+	{
+		cout << "../../../Blobsonic/Source/Resources/textures/pickupForEditor.png - Failed to load" << endl;
+	}
+	
 }

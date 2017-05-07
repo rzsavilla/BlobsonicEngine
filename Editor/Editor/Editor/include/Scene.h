@@ -21,10 +21,11 @@ public:
 
 	void draw(RenderTarget& target, RenderStates states) const; // <! Renders the scene
 
+	bool m_bPlacing = false;
 
-	void checkForHovering(Vector2f mousepos);
-	void deselect();
 	void processClickEvent(Vector2f mousepos);
+	void tempObject(Vector2f pos, Vector2f size);
+	void addPickup(Vector2f pos);
 
 private:
 
@@ -33,6 +34,8 @@ private:
 
 	RectangleShape m_SkyboxRect;
 	Sprite m_SkyboxSprite;
+
+	vector<Sprite>m_vPickupSprites;
 	
 
 	//Textures
@@ -42,12 +45,12 @@ private:
 	Texture m_vTextureBrownFloorTiles; //<! floor tile Texture
 	Texture m_vTextureGreenFloorTiles; //<! floor tile Texture
 
+	Texture m_vTexturePickups;
 
-	bool m_bSelected = false;
-	RectangleShape m_sfSelectedRect;
-	Sprite m_sfSelectedSprite;
-	Texture m_sfSelectedTexture;
 
+	
+	RectangleShape m_sfTempRect;
+	
 	void loadTextures(); //<! Loads in the required textures to the scene
 
 
