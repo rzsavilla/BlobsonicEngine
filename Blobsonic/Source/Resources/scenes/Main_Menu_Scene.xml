@@ -633,31 +633,6 @@
 			<Z>0.0f</Z>			
 		</sID>
 	</Button>
-	
-	<Sprite> <ID>sprite2</ID>
-		<Shader>button_shader</Shader>
-		<Texture>sprite_texture</Texture>
-		<Position>
-			<X>804.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>0.5f</X> 	
-			<Y>0.5f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-	</Sprite>
 
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
