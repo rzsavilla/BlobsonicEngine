@@ -1,3 +1,11 @@
+/**
+*	@file ShadowMap.h
+*	@class ShadowMap
+*	@author Max Spencer-Hughes
+*	@brief ShadowMap component
+*	Shadow map light used to create shadows in the scene, not currently used
+*/
+
 #pragma once
 
 #include "Light.h"

@@ -41,69 +41,105 @@ Scene::Scene(string path)
 						}
 					}
 				}
-				
-				else if (strcmp(Value, "Model") == 0)
+				else if (strcmp(Value, "Entity") == 0)
 				{
+					Value = child2->Value();
+
 					RectangleShape tempRect;
 					Sprite tempSprite;
 					Vector2f tempPosition;
 					Vector2f tempSize;
 					float tempRotation;
 
-					for (tinyxml2::XMLNode* Model = child2->FirstChild(); Model != NULL; Model = Model->NextSibling())
+					for (tinyxml2::XMLNode* entity = child2->FirstChild(); entity != NULL; entity = entity->NextSibling())
 					{
-						
-						Value = Model->Value();
-						if (strcmp(Value, "Position") == 0)
-						{
-							for (tinyxml2::XMLNode* Position = Model->FirstChild(); Position != NULL; Position = Position->NextSibling())
-							{
-								Value = Position->Value();
-								if (strcmp(Value, "X") == 0)
-								{
-									tempPosition.x = stof(Position->ToElement()->GetText());
-								}
-								if (strcmp(Value, "Z") == 0)
-								{
-									tempPosition.y = stof(Position->ToElement()->GetText());
-								}
-							}
-						}
-						else if (strcmp(Value, "Scale") == 0)
-						{
-							for (tinyxml2::XMLNode* Scale = Model->FirstChild(); Scale != NULL; Scale = Scale->NextSibling())
-							{
-								Value = Scale->Value();
-								if (strcmp(Value, "X") == 0)
-								{
-									tempSize.x = stof(Scale->ToElement()->GetText());
-								}
-								if (strcmp(Value, "Z") == 0)
-								{
-									tempSize.y = stof(Scale->ToElement()->GetText());
-								}
-							}
-						}
-						else if (strcmp(Value, "Texture") == 0)
-						{
-							string texture = Model->ToElement()->GetText();
-							if (texture == "floor_texture")tempSprite.setTexture(m_vTextureStoneFloorTiles);
-							if (texture == "skybox_texture")tempSprite.setTexture(m_vTextureStoneFloorTiles);
-						}
-						else if (strcmp(Value, "Rotation") == 0)
-						{
-							for (tinyxml2::XMLNode* Rotation = Model->FirstChild(); Rotation != NULL; Rotation = Rotation->NextSibling())
-							{
-								Value = Rotation->Value();
-								if (strcmp(Value, "Y") == 0)
-								{
-									tempRotation = stof(Rotation->ToElement()->GetText());
-								}
-								
-							}
-						}
 
+						Value = entity->Value();
+						if (strcmp(Value, "Transformable") == 0)
+						{
+						
+
+							for (tinyxml2::XMLNode* Model = entity->FirstChild(); Model != NULL; Model = Model->NextSibling())
+							{
+
+								Value = Model->Value();
+								if (strcmp(Value, "Position") == 0)
+								{
+									for (tinyxml2::XMLNode* Position = Model->FirstChild(); Position != NULL; Position = Position->NextSibling())
+									{
+										Value = Position->Value();
+										if (strcmp(Value, "X") == 0)
+										{
+											tempPosition.x = stof(Position->ToElement()->GetText());
+										}
+										if (strcmp(Value, "Z") == 0)
+										{
+											tempPosition.y = stof(Position->ToElement()->GetText());
+										}
+									}
+								}
+								else if (strcmp(Value, "Scale") == 0)
+								{
+									for (tinyxml2::XMLNode* Scale = Model->FirstChild(); Scale != NULL; Scale = Scale->NextSibling())
+									{
+										Value = Scale->Value();
+										if (strcmp(Value, "X") == 0)
+										{
+											tempSize.x = stof(Scale->ToElement()->GetText());
+										}
+										if (strcmp(Value, "Z") == 0)
+										{
+											tempSize.y = stof(Scale->ToElement()->GetText());
+										}
+									}
+								}
+								else if (strcmp(Value, "Texture") == 0)
+								{
+									string texture = Model->ToElement()->GetText();
+									if (texture == "floor_texture")tempSprite.setTexture(m_vTextureStoneFloorTiles);
+									else if (texture == "floor_grass_texture")tempSprite.setTexture(m_vTextureGrassFloorTiles);
+								}
+								else if (strcmp(Value, "Rotation") == 0)
+								{
+									for (tinyxml2::XMLNode* Rotation = Model->FirstChild(); Rotation != NULL; Rotation = Rotation->NextSibling())
+									{
+										Value = Rotation->Value();
+										if (strcmp(Value, "Y") == 0)
+										{
+											tempRotation = stof(Rotation->ToElement()->GetText());
+										}
+
+									}
+								}
+								else if (strcmp(Value, "Origin") == 0)
+								{
+									//do nothing
+								}
+
+							}
+							
+							
+						}
+						else if (strcmp(Value, "Model") == 0)
+						{
+						
+							for (tinyxml2::XMLNode* Model = entity->FirstChild(); Model != NULL; Model = Model->NextSibling())
+							{
+
+								Value = Model->Value();
+								if (strcmp(Value, "Texture") == 0)
+								{
+									string texture = Model->ToElement()->GetText();
+									if (texture == "floor_texture")tempSprite.setTexture(m_vTextureStoneFloorTiles);
+									else if (texture == "floor_grass_texture")tempSprite.setTexture(m_vTextureGrassFloorTiles);
+								}
+							
+
+							}
+
+						}
 					}
+					
 					tempRect.setPosition(tempPosition);
 					tempRect.setSize(tempSize);
 					tempRect.setRotation(tempRotation);
@@ -114,15 +150,11 @@ Scene::Scene(string path)
 					//tempSprite.setOrigin(tempSize.x / 2.0f, tempSize.y / 2.0f);
 					tempSprite.setRotation(tempRotation);
 
-					Clickable tempClickable;
-					tempClickable.m_sfVTopLeftPos = tempPosition;
-					tempClickable.m_sfVSize = tempSize;
-					pair<RectangleShape, Clickable > floor;
-					floor.first = tempRect;
-					floor.second = tempClickable;
-					m_vRectFloorTiles.push_back(floor);
+					m_vRectFloorTiles.push_back(tempRect);
 					m_vSpriteFloorTiles.push_back(tempSprite);
+				
 				}
+				
 			}
 
 		}
@@ -136,10 +168,7 @@ Scene::Scene(string path)
 
 void Scene::draw(RenderTarget & target, RenderStates states) const
 {
-	for (int i = 0; i < m_vRectFloorTiles.size(); i++)
-	{
-		target.draw(m_vRectFloorTiles.at(i).first);
-	}
+
 
 	for (int i = 0; i < m_vSpriteFloorTiles.size(); i++)
 	{
@@ -159,19 +188,19 @@ void Scene::deselect()
 
 void Scene::processClickEvent(Vector2f mousepos)
 {
-	//check the floor
-	for (int i = 0; i < m_vRectFloorTiles.size(); i++)
-	{
-		if (m_vRectFloorTiles[i].second.m_bClicked(mousepos))
-		{
-			m_bSelected = true;
-			m_sfSelectedRect = m_vRectFloorTiles[i].first;
-			m_sfSelectedRect.setFillColor(Color(0, 255, 0, 125));
-			m_sfSelectedSprite = m_vSpriteFloorTiles[i];
-			m_sfSelectedTexture = *m_sfSelectedSprite.getTexture();
-		}
+	////check the floor
+	//for (int i = 0; i < m_vRectFloorTiles.size(); i++)
+	//{
+	//	if (m_vRectFloorTiles[i].second.m_bClicked(mousepos))
+	//	{
+	//		m_bSelected = true;
+	//		m_sfSelectedRect = m_vRectFloorTiles[i].first;
+	//		m_sfSelectedRect.setFillColor(Color(0, 255, 0, 125));
+	//		m_sfSelectedSprite = m_vSpriteFloorTiles[i];
+	//		m_sfSelectedTexture = *m_sfSelectedSprite.getTexture();
+	//	}
 
-	}
+	//}
 
 
 }
@@ -181,5 +210,9 @@ void Scene::loadTextures()
 	if (!m_vTextureStoneFloorTiles.loadFromFile("../../../Blobsonic/Source/Resources/textures/floor.jpg"))
 	{
 		cout << "../../../Blobsonic/Source/Resources/textures/floor.jpg - Failed to load" << endl;
+	}
+	if (!m_vTextureGrassFloorTiles.loadFromFile("../../../Blobsonic/Source/Resources/textures/floor_grass.bmp"))
+	{
+		cout << "../../../Blobsonic/Source/Resources/textures/floor_grass.bmp - Failed to load" << endl;
 	}
 }
