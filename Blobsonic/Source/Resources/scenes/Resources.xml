@@ -62,6 +62,14 @@
 		<ID>beeModel_mesh</ID>
 		<File>Source\Resources\models\bee_model.obj</File>
 	</Mesh>
+	<Mesh> 
+		<ID>skybox_water_mesh</ID>
+		<File>Source\Resources\models\skybox_water.obj</File>
+	</Mesh>
+		<Mesh> 
+		<ID>skybox_sunny_mesh</ID>
+		<File>Source\Resources\models\skybox_sunny.obj</File>
+	</Mesh>
 	
 	<Texture> 
 		<ID>pine1_texture</ID>
@@ -74,10 +82,6 @@
 	<Texture> 
 		<ID>beeModel_texture</ID>
 		<File>Source\Resources\textures\bee_model.jpg</File>
-	</Texture>
-	<Texture> 
-		<ID>floorB_texture</ID>
-		<File>Source\Resources\textures\floor (2).jpg</File>
 	</Texture>
 	<Texture> 
 		<ID>rock1_texture</ID>
@@ -108,6 +112,33 @@
 		<ID>floor_texture</ID>
 		<File>Source\Resources\textures\floor.jpg</File>
 	</Texture>
+	<Texture> 
+		<ID>floor_blue_texture</ID>
+		<File>Source\Resources\textures\floor_blue.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>floor_brown_texture</ID>
+		<File>Source\Resources\textures\floor2_grass.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>floor_green_texture</ID>
+		<File>Source\Resources\textures\floor3_grass.jpg</File>
+	</Texture>
+	<Texture> 
+		<ID>floor_grass_texture</ID>
+		<File>Source\Resources\textures\floor_grass.bmp</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>skybox_water_texture</ID>
+		<File>Source\Resources\textures\skybox_water.bmp</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>skybox_sunny_texture</ID>
+		<File>Source\Resources\textures\skybox_sunny.bmp</File>
+	</Texture>
+	
 	
 	<Texture> 
 		<ID>deer_texture</ID>

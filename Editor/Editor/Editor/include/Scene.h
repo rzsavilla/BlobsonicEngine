@@ -28,9 +28,20 @@ public:
 
 private:
 
-	vector<pair<RectangleShape,Clickable>> m_vRectFloorTiles; //<! floor tile rects
+	vector<RectangleShape> m_vRectFloorTiles; //<! floor tile rects
 	vector<Sprite> m_vSpriteFloorTiles; //<! floor tile sprite
+
+	RectangleShape m_SkyboxRect;
+	Sprite m_SkyboxSprite;
+	
+
+	//Textures
 	Texture m_vTextureStoneFloorTiles; //<! floor tile Texture
+	Texture m_vTextureGrassFloorTiles; //<! floor tile Texture
+	Texture m_vTextureBlueFloorTiles; //<! floor tile Texture
+	Texture m_vTextureBrownFloorTiles; //<! floor tile Texture
+	Texture m_vTextureGreenFloorTiles; //<! floor tile Texture
+
 
 	bool m_bSelected = false;
 	RectangleShape m_sfSelectedRect;
