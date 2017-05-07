@@ -186,22 +186,6 @@ void NewLevel()
 	cin >> sLevelName;
 
 
-	////check if level allready exists
-	//XMLDocument tempDoc;
-	//XMLError fileTest = tempDoc.LoadFile(("../../../Blobsonic/Source/Resources/scenes/" + sLevelName + ".xml").c_str());
-	//
-	//if(fileTest == XML_SUCCESS)
-	//{
-	//	//file allready exists
-
-	//	cout << sLevelName << ".xml - Allready exists , Overighting Level ...." << endl;
-	//	system("pause");
-	//	tempDoc.SaveFile(("../../../Blobsonic/Source/Resources/scenes/" + sLevelName + ".xml").c_str());
-	//	cout << endl;
-	//	
-	//}
-
-
 	//grid size
 	//take the levels size
 	cout << "- " << endl;
@@ -224,6 +208,25 @@ void NewLevel()
 	cout << "- Depth of level (units) : ";
 	float fZDimension;
 	cin >> fZDimension;
+
+	//Skybox type
+	cout << "- " << endl;
+	cout << "- Skybox type : " << endl;
+	cout << "- 1) Water" << endl;
+	cout << "- 2) Sunny" << endl;
+	int iSkybox;
+	cin >> iSkybox;
+
+	//Floor type
+	cout << "- " << endl;
+	cout << "- Floor type : " << endl;
+	cout << "- 1) Rock" << endl;
+	cout << "- 2) Grass" << endl;
+	cout << "- 3) Blue" << endl;
+	cout << "- 4) Brown" << endl;
+	cout << "- 5) Green" << endl;
+	int iFloor;
+	cin >> iFloor;
 
 	//take these parameters and create a blank level with them
 
@@ -282,119 +285,205 @@ void NewLevel()
 	{
 		for (int z = 0; z < fZDimension; z++)
 		{
-			//Model
-			XMLElement * Model = xmlDoc.NewElement("Model");
-			pScene->InsertFirstChild(Model);
 
-				//ID
-				XMLElement * ID = xmlDoc.NewElement("ID");
-				Model->InsertFirstChild(ID);
-				ID->SetText("floor");
-				Model->InsertEndChild(ID);
+			//Entity
+			XMLElement * Entity = xmlDoc.NewElement("Entity");
+			pScene->InsertFirstChild(Entity);
 
-				//mesh
-				XMLElement * Mesh = xmlDoc.NewElement("Mesh");
-				Model->InsertFirstChild(Mesh);
-				Mesh->SetText("plane_mesh");
-				Model->InsertEndChild(Mesh);
+			//ID
+			XMLElement * ID = xmlDoc.NewElement("Name");
+			Entity->InsertFirstChild(ID);
+			ID->SetText("floor");
+			Entity->InsertEndChild(ID);
 
-				//Material
-				XMLElement * Material = xmlDoc.NewElement("Material");
-				Model->InsertFirstChild(Material);
-				Material->SetText("default_material");
-				Model->InsertEndChild(Material);
+			//Transformable
+			XMLElement * Transformable = xmlDoc.NewElement("Transformable");
+			Entity->InsertFirstChild(Transformable);
 
-				//Shader
-				XMLElement * Shader = xmlDoc.NewElement("Shader");
-				Model->InsertFirstChild(Shader);
-				Shader->SetText("phong_shader");
-				Model->InsertEndChild(Shader);
+			//Position
+			XMLElement * Position = xmlDoc.NewElement("Position");
+			Transformable->InsertFirstChild(Position);
 
-				//texture
-				XMLElement * Texture = xmlDoc.NewElement("Texture");
-				Model->InsertFirstChild(Shader);
-				Texture->SetText("floor_texture");
-				Model->InsertEndChild(Texture);
+			XMLElement * posx = xmlDoc.NewElement("X");
+			XMLElement * posy = xmlDoc.NewElement("Y");
+			XMLElement * posz = xmlDoc.NewElement("Z");
 
+			//x
+			Position->InsertFirstChild(posx);
+			posx->SetText(fGrid * x);
+			Position->InsertEndChild(posx);
+
+			//y
+			Position->InsertFirstChild(posy);
+			posy->SetText(0);
+			Position->InsertEndChild(posy);
+
+			//z
+			Position->InsertFirstChild(posz);
+			posz->SetText(fGrid * z);
+			Position->InsertEndChild(posz);
+
+
+			Transformable->InsertEndChild(Position);
+
+			//Scale
+			XMLElement * Scale = xmlDoc.NewElement("Scale");
+			Transformable->InsertFirstChild(Scale);
+			XMLElement * ScaleX = xmlDoc.NewElement("X");
+			XMLElement * Scaley = xmlDoc.NewElement("Y");
+			XMLElement * ScaleZ = xmlDoc.NewElement("Z");
+
+			//x
+			Scale->InsertFirstChild(ScaleX);
+			ScaleX->SetText(fGrid);
+			Scale->InsertEndChild(ScaleX);
+
+			//y
+			Scale->InsertFirstChild(Scaley);
+			Scaley->SetText(1.0f);
+			Scale->InsertEndChild(Scaley);
+
+			//z
+			Scale->InsertFirstChild(ScaleZ);
+			ScaleZ->SetText(fGrid);
+			Scale->InsertEndChild(ScaleZ);
+
+
+			Transformable->InsertEndChild(Scale);
+
+			//Rotation
+			XMLElement * Rotation = xmlDoc.NewElement("Rotation");
+			Transformable->InsertFirstChild(Rotation);
+			XMLElement * RotationX = xmlDoc.NewElement("X");
+			XMLElement * Rotationy = xmlDoc.NewElement("Y");
+			XMLElement * RotationZ = xmlDoc.NewElement("Z");
+
+			//x
+			Rotation->InsertFirstChild(RotationX);
+			RotationX->SetText(0);
+			Rotation->InsertEndChild(RotationX);
+
+			//y
+			Rotation->InsertFirstChild(Rotationy);
+			Rotationy->SetText(0);
+			Rotation->InsertEndChild(Rotationy);
+
+			//z
+			Rotation->InsertFirstChild(RotationZ);
+			RotationZ->SetText(0);
+			Rotation->InsertEndChild(RotationZ);
+
+
+			Transformable->InsertEndChild(Rotation);
+
+			//Origin
+			XMLElement * Origin = xmlDoc.NewElement("Origin");
+			Transformable->InsertFirstChild(Origin);
+			XMLElement * OriginX = xmlDoc.NewElement("X");
+			XMLElement * Originy = xmlDoc.NewElement("Y");
+			XMLElement * OriginZ = xmlDoc.NewElement("Z");
+
+			//x
+			Origin->InsertFirstChild(OriginX);
+			OriginX->SetText(0);
+			Origin->InsertEndChild(OriginX);
+
+			//y
+			Origin->InsertFirstChild(Originy);
+			Originy->SetText(0);
+			Origin->InsertEndChild(Originy);
+
+			//z
+			Origin->InsertFirstChild(OriginZ);
+			OriginZ->SetText(0);
+			Origin->InsertEndChild(OriginZ);
+
+
+			Transformable->InsertEndChild(Origin);
+
+
+			Entity->InsertEndChild(Transformable);
+
+
+			//Physical
+			XMLElement * Physical = xmlDoc.NewElement("Physical");
+			Entity->InsertFirstChild(Physical);
+
+			//Mass
+			XMLElement * Mass = xmlDoc.NewElement("Mass");
+			Physical->InsertFirstChild(Mass);
+			Mass->SetText(0.0f);
+			Physical->InsertEndChild(Mass);
+
+			//Restitution
+			XMLElement * Restitution = xmlDoc.NewElement("Restitution");
+			Physical->InsertFirstChild(Restitution);
+			Restitution->SetText(0.1f);
+			Physical->InsertEndChild(Restitution);
+
+			Entity->InsertEndChild(Physical);
+
+			
+
+			//AABB
+			for (int i = 0; i < 1; i++)
+			{
+				XMLElement * AABB = xmlDoc.NewElement("AABB");
+				Entity->InsertFirstChild(AABB);
 				//Position
 				XMLElement * Position = xmlDoc.NewElement("Position");
-				Model->InsertFirstChild(Position);
+				AABB->InsertFirstChild(Position);
 
 				XMLElement * posx = xmlDoc.NewElement("X");
 				XMLElement * posy = xmlDoc.NewElement("Y");
 				XMLElement * posz = xmlDoc.NewElement("Z");
 
-					//x
-					Position->InsertFirstChild(posx);
-					posx->SetText(fGrid * x);
-					Position->InsertEndChild(posx);
+				//x
+				Position->InsertFirstChild(posx);
+				posx->SetText(fGrid * x);
+				Position->InsertEndChild(posx);
 
-					//y
-					Position->InsertFirstChild(posy);
-					posy->SetText(0);
-					Position->InsertEndChild(posy);
+				//y
+				Position->InsertFirstChild(posy);
+				posy->SetText(0);
+				Position->InsertEndChild(posy);
 
-					//z
-					Position->InsertFirstChild(posz);
-					posz->SetText(fGrid * z);
-					Position->InsertEndChild(posz);
+				//z
+				Position->InsertFirstChild(posz);
+				posz->SetText(fGrid * z);
+				Position->InsertEndChild(posz);
 
 
-				Model->InsertEndChild(Position);
+				AABB->InsertEndChild(Position);
 
 				//Scale
 				XMLElement * Scale = xmlDoc.NewElement("Scale");
-				Model->InsertFirstChild(Scale);
+				AABB->InsertFirstChild(Scale);
 				XMLElement * ScaleX = xmlDoc.NewElement("X");
 				XMLElement * Scaley = xmlDoc.NewElement("Y");
 				XMLElement * ScaleZ = xmlDoc.NewElement("Z");
 
-					//x
-					Scale->InsertFirstChild(ScaleX);
-					ScaleX->SetText(fGrid );
-					Scale->InsertEndChild(ScaleX);
-
-					//y
-					Scale->InsertFirstChild(Scaley);
-					Scaley->SetText(1.0f);
-					Scale->InsertEndChild(Scaley);
-
-					//z
-					Scale->InsertFirstChild(ScaleZ);
-					ScaleZ->SetText(fGrid );
-					Scale->InsertEndChild(ScaleZ);
-
-
-				Model->InsertEndChild(Scale);
-
-				//Rotation
-				XMLElement * Rotation = xmlDoc.NewElement("Rotation");
-				Model->InsertFirstChild(Rotation);
-				XMLElement * RotationX = xmlDoc.NewElement("X");
-				XMLElement * Rotationy = xmlDoc.NewElement("Y");
-				XMLElement * RotationZ = xmlDoc.NewElement("Z");
-
 				//x
-				Rotation->InsertFirstChild(RotationX);
-				RotationX->SetText(0);
-				Rotation->InsertEndChild(RotationX);
+				Scale->InsertFirstChild(ScaleX);
+				ScaleX->SetText(fGrid);
+				Scale->InsertEndChild(ScaleX);
 
 				//y
-				Rotation->InsertFirstChild(Rotationy);
-				Rotationy->SetText(0);
-				Rotation->InsertEndChild(Rotationy);
+				Scale->InsertFirstChild(Scaley);
+				Scaley->SetText(1.0f);
+				Scale->InsertEndChild(Scaley);
 
 				//z
-				Rotation->InsertFirstChild(RotationZ);
-				RotationZ->SetText(0);
-				Rotation->InsertEndChild(RotationZ);
+				Scale->InsertFirstChild(ScaleZ);
+				ScaleZ->SetText(fGrid);
+				Scale->InsertEndChild(ScaleZ);
 
 
-				Model->InsertEndChild(Rotation);
+				AABB->InsertEndChild(Scale);
 
 				//Origin
 				XMLElement * Origin = xmlDoc.NewElement("Origin");
-				Model->InsertFirstChild(Origin);
+				AABB->InsertFirstChild(Origin);
 				XMLElement * OriginX = xmlDoc.NewElement("X");
 				XMLElement * Originy = xmlDoc.NewElement("Y");
 				XMLElement * OriginZ = xmlDoc.NewElement("Z");
@@ -415,10 +504,157 @@ void NewLevel()
 				Origin->InsertEndChild(OriginZ);
 
 
-				Model->InsertEndChild(Origin);
+				AABB->InsertEndChild(Origin);
+				Entity->InsertEndChild(AABB);
+			}
+
+			//OBB
+			for (int i = 0; i < 1; i++)
+			{
+				XMLElement * OBB = xmlDoc.NewElement("OBB");
+				Entity->InsertFirstChild(OBB);
+
+				//Position
+				XMLElement * Position = xmlDoc.NewElement("Position");
+				OBB->InsertFirstChild(Position);
+
+				XMLElement * posx = xmlDoc.NewElement("X");
+				XMLElement * posy = xmlDoc.NewElement("Y");
+				XMLElement * posz = xmlDoc.NewElement("Z");
+
+				//x
+				Position->InsertFirstChild(posx);
+				posx->SetText(fGrid * x);
+				Position->InsertEndChild(posx);
+
+				//y
+				Position->InsertFirstChild(posy);
+				posy->SetText(0);
+				Position->InsertEndChild(posy);
+
+				//z
+				Position->InsertFirstChild(posz);
+				posz->SetText(fGrid * z);
+				Position->InsertEndChild(posz);
 
 
-			pScene->InsertEndChild(Model);
+				OBB->InsertEndChild(Position);
+
+				//Scale
+				XMLElement * Scale = xmlDoc.NewElement("Scale");
+				OBB->InsertFirstChild(Scale);
+				XMLElement * ScaleX = xmlDoc.NewElement("X");
+				XMLElement * Scaley = xmlDoc.NewElement("Y");
+				XMLElement * ScaleZ = xmlDoc.NewElement("Z");
+
+				//x
+				Scale->InsertFirstChild(ScaleX);
+				ScaleX->SetText(fGrid);
+				Scale->InsertEndChild(ScaleX);
+
+				//y
+				Scale->InsertFirstChild(Scaley);
+				Scaley->SetText(1.0f);
+				Scale->InsertEndChild(Scaley);
+
+				//z
+				Scale->InsertFirstChild(ScaleZ);
+				ScaleZ->SetText(fGrid);
+				Scale->InsertEndChild(ScaleZ);
+
+
+				OBB->InsertEndChild(Scale);
+
+				//Rotation
+				XMLElement * Rotation = xmlDoc.NewElement("Rotation");
+				OBB->InsertFirstChild(Rotation);
+				XMLElement * RotationX = xmlDoc.NewElement("X");
+				XMLElement * Rotationy = xmlDoc.NewElement("Y");
+				XMLElement * RotationZ = xmlDoc.NewElement("Z");
+
+				//x
+				Rotation->InsertFirstChild(RotationX);
+				RotationX->SetText(0);
+				Rotation->InsertEndChild(RotationX);
+
+				//y
+				Rotation->InsertFirstChild(Rotationy);
+				Rotationy->SetText(0);
+				Rotation->InsertEndChild(Rotationy);
+
+				//z
+				Rotation->InsertFirstChild(RotationZ);
+				RotationZ->SetText(0);
+				Rotation->InsertEndChild(RotationZ);
+
+
+				OBB->InsertEndChild(Rotation);
+
+
+				//Origin
+				XMLElement * Origin = xmlDoc.NewElement("Origin");
+				OBB->InsertFirstChild(Origin);
+				XMLElement * OriginX = xmlDoc.NewElement("X");
+				XMLElement * Originy = xmlDoc.NewElement("Y");
+				XMLElement * OriginZ = xmlDoc.NewElement("Z");
+
+				//x
+				Origin->InsertFirstChild(OriginX);
+				OriginX->SetText(0);
+				Origin->InsertEndChild(OriginX);
+
+				//y
+				Origin->InsertFirstChild(Originy);
+				Originy->SetText(0);
+				Origin->InsertEndChild(Originy);
+
+				//z
+				Origin->InsertFirstChild(OriginZ);
+				OriginZ->SetText(0);
+				Origin->InsertEndChild(OriginZ);
+
+
+				OBB->InsertEndChild(Origin);
+				Entity->InsertEndChild(OBB);
+			}
+
+			//Model
+			XMLElement * Model = xmlDoc.NewElement("Model");
+			Entity->InsertFirstChild(Model);
+
+				//mesh
+
+				XMLElement * Mesh = xmlDoc.NewElement("Mesh");
+				Model->InsertFirstChild(Mesh);
+				Mesh->SetText("plane_mesh");
+				Model->InsertEndChild(Mesh);
+
+				//Material
+				XMLElement * Material = xmlDoc.NewElement("Material");
+				Model->InsertFirstChild(Material);
+				Material->SetText("default_material");
+				Model->InsertEndChild(Material);
+
+				//Shader
+				XMLElement * Shader = xmlDoc.NewElement("Shader");
+				Model->InsertFirstChild(Shader);
+				Shader->SetText("phong_shader");
+				Model->InsertEndChild(Shader);
+
+				//texture
+				XMLElement * Texture = xmlDoc.NewElement("Texture");
+				Model->InsertFirstChild(Texture);
+				if (iFloor == 1)Texture->SetText("floor_texture");
+				if (iFloor == 2)Texture->SetText("floor_grass_texture");
+				if (iFloor == 3)Texture->SetText("floor_blue_texture");
+				if (iFloor == 4)Texture->SetText("floor_brown_texture");
+				if (iFloor == 5)Texture->SetText("floor_green_texture");
+				Model->InsertEndChild(Texture);
+			Entity->InsertEndChild(Model);
+
+	
+
+			pScene->InsertEndChild(Entity);
 		}
 	}
 
@@ -429,43 +665,25 @@ void NewLevel()
 	//create the default skybox
 	for (int i = 0; i < 1; i++)
 	{
-		//Model
-		XMLElement * Model = xmlDoc.NewElement("Model");
-		pScene->InsertFirstChild(Model);
+
+		//Entity
+		XMLElement * Entity = xmlDoc.NewElement("Entity");
+		pScene->InsertFirstChild(Entity);
 
 		//ID
-		XMLElement * ID = xmlDoc.NewElement("ID");
-		Model->InsertFirstChild(ID);
+		XMLElement * ID = xmlDoc.NewElement("Name");
+		Entity->InsertFirstChild(ID);
 		ID->SetText("skybox");
-		Model->InsertEndChild(ID);
+		Entity->InsertEndChild(ID);
 
-		//mesh
-		XMLElement * Mesh = xmlDoc.NewElement("Mesh");
-		Model->InsertFirstChild(Mesh);
-		Mesh->SetText("skybox_mesh");
-		Model->InsertEndChild(Mesh);
 
-		//Material
-		XMLElement * Material = xmlDoc.NewElement("Material");
-		Model->InsertFirstChild(Material);
-		Material->SetText("default_material");
-		Model->InsertEndChild(Material);
-
-		//Shader
-		XMLElement * Shader = xmlDoc.NewElement("Shader");
-		Model->InsertFirstChild(Shader);
-		Shader->SetText("phong_shader");
-		Model->InsertEndChild(Shader);
-
-		//texture
-		XMLElement * Texture = xmlDoc.NewElement("Texture");
-		Model->InsertFirstChild(Shader);
-		Texture->SetText("skybox_texture");
-		Model->InsertEndChild(Texture);
+		//Transformable
+		XMLElement * Transformable = xmlDoc.NewElement("Transformable");
+		Entity->InsertFirstChild(Transformable);
 
 		//Position
 		XMLElement * Position = xmlDoc.NewElement("Position");
-		Model->InsertFirstChild(Position);
+		Transformable->InsertFirstChild(Position);
 		XMLElement * posx = xmlDoc.NewElement("X");
 		XMLElement * posy = xmlDoc.NewElement("Y");
 		XMLElement * posz = xmlDoc.NewElement("Z");
@@ -486,36 +704,36 @@ void NewLevel()
 		Position->InsertEndChild(posz);
 
 
-		Model->InsertEndChild(Position);
+		Transformable->InsertEndChild(Position);
 
 		//Scale
 		XMLElement * Scale = xmlDoc.NewElement("Scale");
-		Model->InsertFirstChild(Scale);
+		Transformable->InsertFirstChild(Scale);
 		XMLElement * ScaleX = xmlDoc.NewElement("X");
 		XMLElement * Scaley = xmlDoc.NewElement("Y");
 		XMLElement * ScaleZ = xmlDoc.NewElement("Z");
 
 		//x
 		Scale->InsertFirstChild(ScaleX);
-		ScaleX->SetText(1.0f * fXDimension);
+		ScaleX->SetText(fGrid * fXDimension);
 		Scale->InsertEndChild(ScaleX);
 
 		//y
 		Scale->InsertFirstChild(Scaley);
-		Scaley->SetText(1.0f * max(fXDimension, fZDimension));
+		Scaley->SetText(fGrid * max(fXDimension, fZDimension));
 		Scale->InsertEndChild(Scaley);
 
 		//z
 		Scale->InsertFirstChild(ScaleZ);
-		ScaleZ->SetText(1.0f * fZDimension);
+		ScaleZ->SetText(fGrid * fZDimension);
 		Scale->InsertEndChild(ScaleZ);
 
 
-		Model->InsertEndChild(Scale);
+		Transformable->InsertEndChild(Scale);
 
 		//Rotation
 		XMLElement * Rotation = xmlDoc.NewElement("Rotation");
-		Model->InsertFirstChild(Rotation);
+		Transformable->InsertFirstChild(Rotation);
 		XMLElement * RotX = xmlDoc.NewElement("X");
 		XMLElement * RotY = xmlDoc.NewElement("Y");
 		XMLElement * RotZ = xmlDoc.NewElement("Z");
@@ -534,9 +752,45 @@ void NewLevel()
 		Rotation->InsertFirstChild(RotZ);
 		RotZ->SetText(180.0f);
 		Rotation->InsertEndChild(RotZ);
-		Model->InsertEndChild(Rotation);
+		Transformable->InsertEndChild(Rotation);
 
-		pScene->InsertEndChild(Model);
+		Entity->InsertEndChild(Transformable);
+
+		//Model
+		XMLElement * Model = xmlDoc.NewElement("Model");
+		Entity->InsertFirstChild(Model);
+
+		
+
+		//mesh
+		XMLElement * Mesh = xmlDoc.NewElement("Mesh");
+		Model->InsertFirstChild(Mesh);
+		if (iSkybox == 1)Mesh->SetText("skybox_water_mesh");
+		if (iSkybox == 2)Mesh->SetText("skybox_sunny_mesh");
+		Model->InsertEndChild(Mesh);
+
+		//Material
+		XMLElement * Material = xmlDoc.NewElement("Material");
+		Model->InsertFirstChild(Material);
+		Material->SetText("default_material");
+		Model->InsertEndChild(Material);
+
+		//Shader
+		XMLElement * Shader = xmlDoc.NewElement("Shader");
+		Model->InsertFirstChild(Shader);
+		Shader->SetText("phong_shader");
+		Model->InsertEndChild(Shader);
+
+		//texture
+		XMLElement * Texture = xmlDoc.NewElement("Texture");
+		Model->InsertFirstChild(Texture);
+		if (iSkybox == 1)Texture->SetText("skybox_water_texture");
+		if (iSkybox == 2)Texture->SetText("skybox_sunny_texture");
+		
+
+		Entity->InsertEndChild(Model);
+
+		pScene->InsertEndChild(Entity);
 	}
 
 	
