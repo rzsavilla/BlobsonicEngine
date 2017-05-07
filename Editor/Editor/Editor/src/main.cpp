@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 #include <tinyxml2.h>
+#include "Button.h"
 #include "Scene.h"
 
 using namespace std;
@@ -11,11 +12,12 @@ void OpenLevel(string name); // <! Function that opens the desired level in the 
 void NewLevel();// <! Function that creates the basis of the level
 void loadLevel();
 void deleteLevel();
+bool bMainValid = true;
 
 int main()
 {
 
-	bool bMainValid = true;
+	
 
 	do
 	{
@@ -59,6 +61,9 @@ void OpenLevel(string name)
 
 	Scene scene(path);
 
+	bool bplacing = false;
+	string sPlacing = "";
+
 	//create an sfml window
 	RenderWindow window(VideoMode(1280, 720), "Editor - " + name + ".xml");
 	window.setFramerateLimit(60);
@@ -75,7 +80,54 @@ void OpenLevel(string name)
 	hudView.setCenter(sf::Vector2f(1280 / 2, 720 / 2));
 	hudView.setSize(sf::Vector2f(1280, 720));
 
+	//create Buttons for the editor---------------------------------
+	Button PickupsButton
+	("Pickup",
+		Vector2f(0, 0),
+		Vector2f(300 ,88.5f),
+		Vector2f(1,1),
+		"Button_Green"
+	);
+	Button LightButton
+	("Light",
+		Vector2f(0, 90),
+		Vector2f(300, 88.5f),
+		Vector2f(1, 1),
+		"Button_Green"
+	);
+	Button ObsticleButton
+	("Obstical",
+		Vector2f(0, 180),
+		Vector2f(300, 88.5f),
+		Vector2f(1, 1),
+		"Button_Green"
+	);
+	Button PlayerButton
+	("Start Position",
+		Vector2f(0, 270),
+		Vector2f(300, 88.5f),
+		Vector2f(1, 1),
+		"Button_Green"
+	);
+	Button EndButton
+	("Finish Position",
+		Vector2f(0, 360),
+		Vector2f(300, 88.5f),
+		Vector2f(1, 1),
+		"Button_Green"
+	);
 
+	Button SaveButton
+	("Save & Quit",
+		Vector2f(0, 630),
+		Vector2f(300, 88.5f),
+		Vector2f(1, 1),
+		"Button_Green"
+	);
+
+
+	Clock inputClock;
+	Time inputTime;
 
 	//window loop
 	while (window.isOpen())
@@ -89,25 +141,18 @@ void OpenLevel(string name)
 
 
 		sfPlacingPos = window.mapPixelToCoords(Mouse::getPosition(window), gameView);
-		
-		if (sf::Event::MouseButtonPressed)
-		{
-			if (Mouse::isButtonPressed(sf::Mouse::Right))
-			{
-			}
-			if (Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-			}
-		}
-
+		sfMousePos = window.mapPixelToCoords(Mouse::getPosition(window), hudView);
 
 		while (window.pollEvent(event))
 		{
-			// Request for closing the window
-			if (event.type == Event::Closed)
+
+
+			if (bplacing)
 			{
-				window.close();
+				//show the temp object
+				if (sPlacing == "Pickup")scene.tempObject(sfPlacingPos, Vector2f(100, 100));
 			}
+
 			//move camera
 			float fMoveSpeed = 10;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
@@ -149,6 +194,66 @@ void OpenLevel(string name)
 		}
 
 
+		if (sf::Event::MouseButtonPressed)
+		{
+
+			if (Mouse::isButtonPressed(sf::Mouse::Right))
+			{
+				bplacing = false;
+				scene.m_bPlacing = false;
+			}
+			if (Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+
+				if (bplacing)
+				{
+					inputTime = inputClock.getElapsedTime();
+					if (inputTime.asSeconds() > 1.0f)
+					{
+						//place the object
+						if (sPlacing == "Pickup")
+						{
+							scene.addPickup(sfPlacingPos);
+							scene.m_bPlacing = false;
+							bplacing = false;
+						}
+					}
+					
+				}
+				if (!bplacing)
+				{
+					//check buttons
+
+					if (PickupsButton.m_bClicked(sfMousePos))
+					{
+						sPlacing = "Pickup";
+						scene.m_bPlacing = true;
+						bplacing = true;
+						inputClock.restart();
+
+					}
+
+					else if (SaveButton.m_bClicked(sfMousePos))
+					{
+						//save and close
+						window.close();
+						bMainValid = false;
+						return;
+					}
+
+					else
+					{
+						scene.processClickEvent(sfPlacingPos);
+					}
+
+				}
+				
+			}
+		}
+
+
+	
+
 		//if(Keyboard::Escape == Keyboard)
 
 		window.clear(Color::Black);
@@ -160,6 +265,16 @@ void OpenLevel(string name)
 
 		//draw the hud
 		window.setView(hudView);
+		if (!bplacing)
+		{
+			window.draw(PickupsButton);
+			window.draw(LightButton);
+			window.draw(PlayerButton);
+			window.draw(ObsticleButton);
+			window.draw(EndButton);
+			window.draw(SaveButton);
+		}
+
 		
 		window.display();
 
@@ -859,7 +974,7 @@ void NewLevel()
 		//FOV
 		XMLElement * FOV = xmlDoc.NewElement("FOV");
 		Camera->InsertFirstChild(FOV);
-		FOV->SetText(45.0f);
+		FOV->SetText(70.0f);
 		Camera->InsertEndChild(FOV);
 
 		//AspectRatio
@@ -871,13 +986,13 @@ void NewLevel()
 		//FarPlane
 		XMLElement * FarPlane = xmlDoc.NewElement("FarPlane");
 		Camera->InsertFirstChild(FarPlane);
-		FarPlane->SetText(1000 * max(fXDimension, fZDimension));
+		FarPlane->SetText(100000 * fGrid * max(fXDimension, fZDimension));
 		Camera->InsertEndChild(FarPlane);
 
 		//NearPlane
 		XMLElement * NearPlane = xmlDoc.NewElement("NearPlane");
 		Camera->InsertFirstChild(NearPlane);
-		NearPlane->SetText(0.05f);
+		NearPlane->SetText(0.1f);
 		Camera->InsertEndChild(NearPlane);
 
 		//RotSpeed

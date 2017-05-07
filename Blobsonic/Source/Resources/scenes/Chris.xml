@@ -6,7 +6,7 @@
     <LevelName>Chris</LevelName>
     <Type>Game</Type>
     <ID>game_scene</ID>
-    <GridSize>100</GridSize>
+    <GridSize>1000</GridSize>
     <Dimensions>
         <X>2</X>
         <Z>2</Z>
@@ -20,9 +20,9 @@
                 <Z>0</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -46,9 +46,9 @@
                 <Z>0</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Origin>
                 <X>0</X>
@@ -63,9 +63,9 @@
                 <Z>0</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -82,7 +82,7 @@
             <Mesh>plane_mesh</Mesh>
             <Material>default_material</Material>
             <Shader>phong_shader</Shader>
-            <Texture>floor_grass_texture</Texture>
+            <Texture>floor_texture</Texture>
         </Model>
     </Entity>
     <Entity>
@@ -91,12 +91,12 @@
             <Position>
                 <X>0</X>
                 <Y>0</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -117,12 +117,12 @@
             <Position>
                 <X>0</X>
                 <Y>0</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Origin>
                 <X>0</X>
@@ -134,12 +134,12 @@
             <Position>
                 <X>0</X>
                 <Y>0</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -156,21 +156,21 @@
             <Mesh>plane_mesh</Mesh>
             <Material>default_material</Material>
             <Shader>phong_shader</Shader>
-            <Texture>floor_grass_texture</Texture>
+            <Texture>floor_texture</Texture>
         </Model>
     </Entity>
     <Entity>
         <Name>floor</Name>
         <Transformable>
             <Position>
-                <X>100</X>
+                <X>1000</X>
                 <Y>0</Y>
                 <Z>0</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -189,14 +189,14 @@
         </Physical>
         <AABB>
             <Position>
-                <X>100</X>
+                <X>1000</X>
                 <Y>0</Y>
                 <Z>0</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Origin>
                 <X>0</X>
@@ -206,14 +206,14 @@
         </AABB>
         <OBB>
             <Position>
-                <X>100</X>
+                <X>1000</X>
                 <Y>0</Y>
                 <Z>0</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -230,21 +230,21 @@
             <Mesh>plane_mesh</Mesh>
             <Material>default_material</Material>
             <Shader>phong_shader</Shader>
-            <Texture>floor_grass_texture</Texture>
+            <Texture>floor_texture</Texture>
         </Model>
     </Entity>
     <Entity>
         <Name>floor</Name>
         <Transformable>
             <Position>
-                <X>100</X>
+                <X>1000</X>
                 <Y>0</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -263,14 +263,14 @@
         </Physical>
         <AABB>
             <Position>
-                <X>100</X>
+                <X>1000</X>
                 <Y>0</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Origin>
                 <X>0</X>
@@ -280,14 +280,14 @@
         </AABB>
         <OBB>
             <Position>
-                <X>100</X>
+                <X>1000</X>
                 <Y>0</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Position>
             <Scale>
-                <X>100</X>
+                <X>1000</X>
                 <Y>1</Y>
-                <Z>100</Z>
+                <Z>1000</Z>
             </Scale>
             <Rotation>
                 <X>0</X>
@@ -304,57 +304,51 @@
             <Mesh>plane_mesh</Mesh>
             <Material>default_material</Material>
             <Shader>phong_shader</Shader>
-            <Texture>floor_grass_texture</Texture>
+            <Texture>floor_texture</Texture>
         </Model>
     </Entity>
-   	<Entity>
-		<Name>skybox</Name>
-		<Transformable>
-			<Position>
-					<X>0.0f</X>
-					<Y>0.0f</Y>
-					<Z>0.0f</Z>
-			</Position>
-				<Rotation>
-					<X>0.0f</X>
-					<Y>0.0f</Y>
-					<Z>0.0f</Z>
-			</Rotation>
-			<Scale>
-					<X>100.0f</X>
-					<Y>100.0f</Y>
-					<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-					<X>0.0f</X>
-					<Y>0.0f</Y>
-					<Z>0.0f</Z>
-			</Origin>
-		</Transformable>
-		<Model> <ID>skybox</ID>
-				<Mesh>skybox_sunny_mesh</Mesh>
-				<Material>default_material</Material>
-				<Shader>phong_shader</Shader>
-				<Texture>skybox_sunny_texture</Texture>
-		</Model>
-	</Entity>
-	
+    <Entity>
+        <Name>skybox</Name>
+        <Transformable>
+            <Position>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Position>
+            <Scale>
+                <X>2000</X>
+                <Y>2000</Y>
+                <Z>2000</Z>
+            </Scale>
+            <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>180</Z>
+            </Rotation>
+        </Transformable>
+        <Model>
+            <Texture>skybox_sunny_texture</Texture>
+            <Mesh>skybox_sunny_mesh</Mesh>
+            <Material>default_material</Material>
+            <Shader>phong_shader</Shader>
+        </Model>
+    </Entity>
     <Camera>
         <ID>cam1</ID>
         <Position>
-            <X>100</X>
-            <Y>100</Y>
-            <Z>100</Z>
+            <X>1000</X>
+            <Y>1000</Y>
+            <Z>1000</Z>
         </Position>
         <Orientation>
             <x>0</x>
             <Y>45</Y>
             <Z>0</Z>
         </Orientation>
-        <FOV>45</FOV>
+        <FOV>70</FOV>
         <AspectRatio>1.3333</AspectRatio>
-        <FarPlane>2000</FarPlane>
-        <NearPlane>0.050000001</NearPlane>
+        <FarPlane>2e+08</FarPlane>
+        <NearPlane>0.1</NearPlane>
         <RotSpeed>0.5</RotSpeed>
         <MoveSpeed>0.80000001</MoveSpeed>
     </Camera>

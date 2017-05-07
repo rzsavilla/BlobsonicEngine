@@ -8,7 +8,7 @@
 
 
 setLoadingScene("Loading.xml")
-changeScene("Main_Menu_Scene.xml")	-- Change to this scene
+changeScene("Chris.xml")	-- Change to this scene
 --changeScene("WorldTest.xml")
 hideCursor(false)
 
