@@ -30,7 +30,7 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>soccer_mesh</Mesh>
+			<Mesh>cube_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
 			<Texture>red_texture</Texture>
@@ -56,14 +56,28 @@
 				<Z>0.0f</Z>
 			</Origin>
 		</AABB>
-		<Sphere>
-			<Center>
+		<OBB>
+			<Position>
 				<X>0.0f</X>
 				<Y>2500.0f</Y>
 				<Z>0.0f</Z>
-			</Center>
-			<Radius>25.0f</Radius>
-		</Sphere>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
 	</Entity>
 
 	<Entity>
@@ -393,7 +407,7 @@
 				<Mesh>skybox_mesh</Mesh>
 				<Material>default_material</Material>
 				<Shader>phong_shader</Shader>
-				<Texture>skybox_texture</Texture>
+				<Texture>skybox_sunny_texture</Texture>
 		</Model>
 	</Entity>
 	
