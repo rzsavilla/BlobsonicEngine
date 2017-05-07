@@ -10,28 +10,3 @@ jumpTimer:reset()
 player = Entity.new()
 player:handleEntity("player")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> origin/master

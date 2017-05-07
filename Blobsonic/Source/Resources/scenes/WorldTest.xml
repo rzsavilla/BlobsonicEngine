@@ -6,7 +6,10 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	<Entity>
-		<Name>deer</Name>
+		<Name>player</Name>
+		<Player>
+			<MoveSpeed>10.0f</MoveSpeed>
+		</Player>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
@@ -56,28 +59,11 @@
 				<Z>0.0f</Z>
 			</Origin>
 		</AABB>
-		<OBB>
-			<Position>
+		<Sphere>
+			<Center>
 				<X>0.0f</X>
 				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
-			</Position>
-			<Rotation>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Rotation>
-			<Scale>
-				<X>25.0f</X>
-				<Y>25.0f</Y>
-				<Z>25.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</OBB>
 			</Center>
 			<Radius>25.0f</Radius>
 		</Sphere>
@@ -93,99 +79,7 @@
 			<NearPlane>0.1f</NearPlane>
 		</Camera>
 	</Entity>
-
-	<Entity>
-		<Name>floor</Name>
-		<Transformable>
-			<Position>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Rotation>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Rotation>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</Transformable>
-		<Model>
-			<Mesh>deer_mesh</Mesh>
-			<Material>default_material</Material>
-			<Shader>phong_shader</Shader>
-			<Texture>skybox_texture</Texture>
-		</Model>
-		<Physical>
-			<Mass>1.0</Mass>
-			<Restitution>0.5</Restitution>
-		</Physical>
-		<AABB>
-			<Position>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
-				<Z>0.0f</Z>
-			</Position>
-			<Scale>
-				<X>100.0f</X>
-				<Y>100.0f</Y>
-				<Z>100.0f</Z>
-			</Scale>
-			<Origin>
-				<X>0.0f</X>
-				<Y>0.0f</Y>
-				<Z>0.0f</Z>
-			</Origin>
-		</AABB>
-		<Sphere>
-			<Center>
-				<X>0.0f</X>
-				<Y>10000.0f</Y>
-				<Z>0.0f</Z>
-			</Center>
-			<Radius>100.0f</Radius>
-		</Sphere>
-	</Entity>
 	
-
-	<Button> <ID>MainMenuButton</ID>
-		<Shader>button_shader</Shader>
-		<Texture>menu_texture</Texture>
-		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>4.0f</X> 
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>			
-		</sID>
-	</Button>
-
 	<Entity>
 		<Name>floor</Name>
 		<Transformable>
@@ -200,9 +94,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>10000.0f</X>
+				<X>100.0f</X>
 				<Y>100.0f</Y>
-				<Z>10000.0f</Z>
+				<Z>100.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -262,6 +156,231 @@
 	</Entity>
 	
 	<Entity>
+		<Name>floor2</Name>
+		<Transformable>
+			<Position>
+				<X>100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>cube_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>floor_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale>
+				<X>200.0f</X>
+				<Y>200.0f</Y>
+				<Z>200.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+	</Entity>
+	
+	<Entity>
+		<Name>floor3</Name>
+		<Transformable>
+			<Position>
+				<X>-100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>cube_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>floor_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>-100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale>
+				<X>200.0f</X>
+				<Y>200.0f</Y>
+				<Z>200.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>-100.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+	</Entity>
+	
+	<Entity>
+		<Name>floor4</Name>
+		<Transformable>
+			<Position>
+				<X>0.0f</X>
+				<Y>100.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>cube_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>floor_texture</Texture>
+		</Model>
+		<Physical>
+			<Mass>0.0</Mass>
+			<Restitution>0.5</Restitution>
+		</Physical>
+		<AABB>
+			<Position>
+				<X>0.0f</X>
+				<Y>100.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale>
+				<X>200.0f</X>
+				<Y>200.0f</Y>
+				<Z>200.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+		<OBB>
+			<Position>
+				<X>0.0f</X>
+				<Y>100.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</OBB>
+	</Entity>
+	
+	<Entity>
 		<Name>skybox</Name>
 		<Transformable>
 			<Position>
@@ -272,7 +391,7 @@
 				<Rotation>
 					<X>0.0f</X>
 					<Y>0.0f</Y>
-					<Z>180.0f</Z>
+					<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
 					<X>100.0f</X>
@@ -286,7 +405,7 @@
 			</Origin>
 		</Transformable>
 		<Model> <ID>skybox</ID>
-				<Mesh>skybox_mesh</Mesh>
+				<Mesh>skybox_sunny_mesh</Mesh>
 				<Material>default_material</Material>
 				<Shader>phong_shader</Shader>
 				<Texture>skybox_sunny_texture</Texture>
@@ -318,6 +437,37 @@
 			</Specular>
 		</DirLight>
 	</Entity>
+	
+	<Button> <ID>MainMenuButton</ID>
+		<Shader>button_shader</Shader>
+		<Texture>menu_texture</Texture>
+		<Position>
+			<X>20.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
+	
 	<!--
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
@@ -362,23 +512,25 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	-->
+	<!--
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
-			<Y>3000.0f</Y>
-			<Z>7000.0f</Z>
+			<Y>30.0f</Y>
+			<Z>70.0f</Z>
 		</Position>
 		<Orientation>
 			<X>0.0f</X>
 			<Y>20.0f</Y>
 			<Z>0.0f</Z>
 		</Orientation>
-		<FOV>90.0f</FOV>
+		<FOV>70.0f</FOV>
 		<AspectRatio>1.33333</AspectRatio>
 		<FarPlane>100000.0f</FarPlane>
 		<NearPlane>0.1f</NearPlane>
 		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>100.0f</MoveSpeed>
+		<MoveSpeed>5.0f</MoveSpeed>
 	</Camera>
+	-->
 </Scene>
 
