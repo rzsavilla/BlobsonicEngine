@@ -13,9 +13,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Transformable.h"
+
 namespace Component {
 	class Camera: public Component{
 	private:
+		std::string m_sType;	//!< Camera Type Either "FirstPerson" or "ThirdPerson"
 		float m_fFieldOfView;	//!< Field of View degrees
 		float m_fNearPlane;		//!< Closest render distance
 		float m_fFarPlane;		//!< Furthest render distance
@@ -26,35 +29,36 @@ namespace Component {
 		float m_fRoll;			//!< Z axis rotation
 
 		glm::vec3 m_vPosition;	//!< World position
-		glm::vec4 m_vUp;
-		glm::vec4 m_vLookAt;
+		glm::vec4 m_vUp;		//!< Camera up vector
+		glm::vec4 m_vLookAt;	//!< Camera target lookat
 
 		bool m_bUsePerspective;	//!< Use perspective projection if true else use othorgraphic
 		float m_fMoveSpeed;		//!< Camera world movement speed
 
-		std::string m_sType;	//!< Determines how camera is controlled two types static and follow
-
 		bool m_bLocalPosSet;	//!< A local position has been set
 		glm::vec3 m_vLocalPos;	//!< Local position in world space
 
-		//Camera has a target to look at
-		glm::vec3 m_vLooktarget;
-		bool m_bHasTarget;
+		//Third Person Camera
+		std::shared_ptr<Entity> m_LookAtTarget;	//!< If not null camera will lookat this entity
+		float m_fReach;			//!< Distance between camera and follow target
+		glm::mat4 thirdPerson();	//!< Calculate position/rotation of the camera in order to follow lookAtTarget
+		
+		bool m_bEnableRotate;	//!< Enable mouse movement to rotate this camera
 	public:
 		Camera();				//!< Default contructor
 
-		void zoom(float zoom);						//!< Move camera forward based on rotation
-		void strafe(float strafe);					//!< Move camera horizontally based on rotation
-		void pedestal(float pedestal);				//!< Move camera vertically based on rotation
-		void pitch(float pitch);					//!< Pith camera or X axis rotation
-		void yaw(float yaw);						//!< Yaw camera or Y axis rotation
-		void roll(float roll);						//!< Roll camera or Z axis rotation
+		void zoom(float zoom);					//!< Move camera forward based on rotation
+		void strafe(float strafe);				//!< Move camera horizontally based on rotation
+		void pedestal(float pedestal);			//!< Move camera vertically based on rotation
+		void pitch(float pitch);				//!< Pith camera or X axis rotation
+		void yaw(float yaw);					//!< Yaw camera or Y axis rotation
+		void roll(float roll);					//!< Roll camera or Z axis rotation
 		void rotate(float pitch,float yaw);		//!< Apply pitch and yaw rotation
 
 		void translate(glm::vec3 translation);		//!< Translate camera position				
 		void translate(float x, float y, float z);	//!< Translate camera position
 
-		void reset();						//!< Reset camera attributes
+		void reset();			//!< Reset camera attributes
 
 		/*!
 			Set camera projection attributes
@@ -90,6 +94,9 @@ namespace Component {
 		void setMoveSpeed(float speed);					//!< Set Camera movement speed
 		void setLocalPosition(glm::vec3 local);			//!< Position relative to transformable
 
+		void setLookAtTarget(std::shared_ptr<Entity> entity);	//!< Set camera lookat target, if set camera will always look at the targets position
+		void setReach(float reach);		//Set the distance between the camera and the LookAtTarget
+
 		/*!
 			Determines perspective or orthographic projection.
 			@param isPerspective Sets camera projection to perspective if true, if false camera uses orthographic perspective
@@ -111,5 +118,8 @@ namespace Component {
 
 		glm::vec4 getUp();
 		glm::vec4 getLookAt();
+
+		void enableRotation(bool enable);	//!< Allow camera mouse rotation
+		bool isRotationEnabled();
 	};
 }

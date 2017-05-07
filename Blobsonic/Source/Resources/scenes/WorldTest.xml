@@ -6,11 +6,14 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	<Entity>
-		<Name>deer</Name>
+		<Name>player</Name>
+		<Player>
+			<MoveSpeed>10.0f</MoveSpeed>
+		</Player>
 		<Transformable>
 			<Position>
 				<X>0.0f</X>
-				<Y>2500.0f</Y>
+				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Rotation>
@@ -19,9 +22,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>25.0f</X>
-				<Y>25.0f</Y>
-				<Z>25.0f</Z>
+				<X>1.0f</X>
+				<Y>1.0f</Y>
+				<Z>1.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -30,7 +33,7 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>soccer_mesh</Mesh>
+			<Mesh>beeModel_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
 			<Texture>red_texture</Texture>
@@ -42,7 +45,7 @@
 		<AABB>
 			<Position>
 				<X>0.0f</X>
-				<Y>2500.0f</Y>
+				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
 			</Position>
 			<Scale> 
@@ -59,13 +62,73 @@
 		<Sphere>
 			<Center>
 				<X>0.0f</X>
-				<Y>2500.0f</Y>
+				<Y>3500.0f</Y>
 				<Z>0.0f</Z>
 			</Center>
 			<Radius>25.0f</Radius>
 		</Sphere>
+		<Camera>
+			<Orientation>
+				<X>0.0f</X>
+				<Y>45.0f</Y>
+				<Z>0.0f</Z>
+			</Orientation>
+			<FOV>70.0f</FOV>
+			<AspectRatio>1.33333</AspectRatio>
+			<FarPlane>100000.0f</FarPlane>
+			<NearPlane>0.1f</NearPlane>
+		</Camera>
 	</Entity>
-
+	
+	<Entity>
+		<Name>pickup1</Name>
+		<Transformable>
+			<Position>
+				<X>0.0f</X>
+				<Y>500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Rotation>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Rotation>
+			<Scale>
+				<X>100.0f</X>
+				<Y>100.0f</Y>
+				<Z>100.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</Transformable>
+		<Model>
+			<Mesh>soccer_mesh</Mesh>
+			<Material>default_material</Material>
+			<Shader>phong_shader</Shader>
+			<Texture>white_texture</Texture>
+		</Model>
+		<AABB>
+			<Position>
+				<X>0.0f</X>
+				<Y>500.0f</Y>
+				<Z>0.0f</Z>
+			</Position>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
+	</Entity>
+	
 	<Entity>
 		<Name>floor</Name>
 		<Transformable>
@@ -215,7 +278,8 @@
 			</Origin>
 		</OBB>
 	</Entity>
-		<Entity>
+	
+	<Entity>
 		<Name>floor3</Name>
 		<Transformable>
 			<Position>
@@ -376,7 +440,7 @@
 				<Rotation>
 					<X>0.0f</X>
 					<Y>0.0f</Y>
-					<Z>180.0f</Z>
+					<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
 					<X>100.0f</X>
@@ -390,10 +454,10 @@
 			</Origin>
 		</Transformable>
 		<Model> <ID>skybox</ID>
-				<Mesh>skybox_mesh</Mesh>
+				<Mesh>skybox_sunny_mesh</Mesh>
 				<Material>default_material</Material>
 				<Shader>phong_shader</Shader>
-				<Texture>skybox_texture</Texture>
+				<Texture>skybox_sunny_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -423,7 +487,7 @@
 		</DirLight>
 	</Entity>
 	
-		<Button> <ID>MainMenuButton</ID>
+	<Button> <ID>MainMenuButton</ID>
 		<Shader>button_shader</Shader>
 		<Texture>menu_texture</Texture>
 		<Position>
@@ -497,6 +561,7 @@
 		<startsPaused>false</startsPaused>
 	</Audio>
 	-->
+	<!--
 	<Camera> <ID>cam1</ID>
 		<Position>
 			<X>0.0f</X>
@@ -515,5 +580,6 @@
 		<RotSpeed>0.5f</RotSpeed>
 		<MoveSpeed>5.0f</MoveSpeed>
 	</Camera>
+	-->
 </Scene>
 

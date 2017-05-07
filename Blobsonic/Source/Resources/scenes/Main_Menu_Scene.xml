@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ResourceFile> 
-	<Location>Source\Resources\Scenes\Resources.xml</Location> 
+	<Location>Source\Resources\Scenes\Resources_MainMenu.xml</Location> 
 </ResourceFile>
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
@@ -161,7 +161,7 @@
 			<Mesh>pineGroup_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>pine1_texture</Texture>
+			<Texture>pineTreeGroup_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -193,7 +193,7 @@
 			<Mesh>pineGroup_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>pine1_texture</Texture>
+			<Texture>pineTreeGroup_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -211,9 +211,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>1.0f</X>
-				<Y>1.0f</Y>
-				<Z>1.0f</Z>
+				<X>10.0f</X>
+				<Y>10.0f</Y>
+				<Z>10.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -229,7 +229,7 @@
 		</Model>
 	</Entity>
 	
-		<Entity>
+	<Entity>
 		<Name>Pine2</Name>
 		<Transformable>
 			<Position>
@@ -243,9 +243,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.889f</X>
-				<Y>0.889f</Y>
-				<Z>0.889f</Z>
+				<X>10.889f</X>
+				<Y>10.889f</Y>
+				<Z>10.889f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -275,9 +275,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.646f</X>
-				<Y>0.646f</Y>
-				<Z>0.646f</Z>
+				<X>10.646f</X>
+				<Y>10.646f</Y>
+				<Z>10.646f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -307,9 +307,9 @@
 				<Z>-0.484f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.155f</X>
-				<Y>0.155f</Y>
-				<Z>0.155f</Z>
+				<X>2.155f</X>
+				<Y>2.155f</Y>
+				<Z>2.155f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -499,9 +499,9 @@
 				<Z>-17.62f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.386f</X>
-				<Y>0.386f</Y>
-				<Z>0.386f</Z>
+				<X>2.386f</X>
+				<Y>2.386f</Y>
+				<Z>2.386f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -510,10 +510,10 @@
 			</Origin>
 		</Transformable>
 		<Model>
-			<Mesh>beeModel_mesh</Mesh>
+			<Mesh>wasp_mesh</Mesh>
 			<Material>default_material</Material>
 			<Shader>phong_shader</Shader>
-			<Texture>beeModel_texture</Texture>
+			<Texture>wasp_texture</Texture>
 		</Model>
 	</Entity>
 	
@@ -544,12 +544,12 @@
 		</Origin>
 	</Model>
 	
-	<Button> <ID>MainMenuButton</ID>
+		<Button> <ID>start_button</ID>
 		<Shader>button_shader</Shader>
-		<Texture>menu_texture</Texture>
+		<Texture>play_texture</Texture>
 		<Position>
-			<X>20.0f</X>
-			<Y>20.0f</Y>
+			<X>100.0f</X>
+			<Y>100</Y>
 			<Z>0.0f</Z>
 		</Position>
 		<Rotation>
@@ -558,17 +558,77 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
 			<X>1.0f</X> 	
 			<Y>1.0f</Y>
-			<Z>0.0f</Z>
+			<Z>1.0f</Z>
 		</Colour>
 		<sID>
-			<X>4.0f</X> 
+			<X>1.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
+	</Button>
+	
+	<Button> <ID>settings_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>settings_texture</Texture>
+		<Position>
+			<X>100.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+		<sID>
+			<X>2.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
+	</Button>
+	
+	<Button> <ID>exit_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>exit_texture</Texture>
+		<Position>
+			<X>100.0f</X>
+			<Y>500.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+		<sID>
+			<X>3.0f</X> 
 			<Y>0.0f</Y>
 			<Z>0.0f</Z>			
 		</sID>
@@ -622,7 +682,7 @@
 			<Z>1.0f</Z>
 		</Specular>
 	</Light>
-	
+	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
@@ -640,24 +700,25 @@
 		<isLooping>false</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-	
-	<Camera> <ID>cam1</ID>
-		<Position>
-			<X>180.0f</X>
-			<Y>50.0f</Y>
-			<Z>66.167f</Z>
-		</Position>
-		<Orientation>
-			<X>-92.738f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Orientation>
-		<FOV>90.0f</FOV>
-		<AspectRatio>1.33333</AspectRatio>
-		<FarPlane>100000.0f</FarPlane>
-		<NearPlane>0.1f</NearPlane>
-		<RotSpeed>0.5f</RotSpeed>
-		<MoveSpeed>1.0f</MoveSpeed>
-	</Camera>
+	-->
+	<Entity>
+		<Camera> 
+			<Position>
+				<X>180.0f</X>
+				<Y>50.0f</Y>
+				<Z>66.167f</Z>
+			</Position>
+			<Orientation>
+				<X>-92.738f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Orientation>
+			<FOV>90.0f</FOV>
+			<AspectRatio>1.33333</AspectRatio>
+			<FarPlane>100000.0f</FarPlane>
+			<NearPlane>0.1f</NearPlane>
+			<EnableRotation>0</EnableRotation>
+		</Camera>
+	</Entity>
 </Scene>
 

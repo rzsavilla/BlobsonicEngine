@@ -11,7 +11,7 @@ System::CameraController::CameraController()
 {
 	MessageHandler::getInstance()->attachReceiver(this);
 
-	m_vMouseSensitivity = glm::vec2(1.0f, 1.0f);
+	m_vMouseSensitivity = glm::vec2(10.0f, 10.0f);
 	m_vMousePos = glm::dvec2(0.0, 0.0);
 	m_vPrevMousePos = glm::dvec2(0.0, 0.0);
 
@@ -28,6 +28,9 @@ void System::CameraController::process(std::vector<std::shared_ptr<Entity>>* ent
 		if ((*it)->has<Component::Camera>()) {
 			m_ActiveCamera = (*it);		//Set Active camera
 		}
+		else if ((*it)->has<Component::Player>()) {
+			m_ActiveCamera = (*it);		//Set Active camera
+		}
 	}
 }
 
@@ -38,52 +41,33 @@ void System::CameraController::update(float dt)
 		auto camera = m_ActiveCamera->get<Component::Camera>();
 
 		//------Camera Mouse Rotation---------------------
-		//Get current mouse position
-		glfwGetCursorPos(glfwGetCurrentContext(), &m_vMousePos.x, &m_vMousePos.y);
-		double dX, dY;	//Mouse move difference
-		dX = m_vMousePos.x - m_vPrevMousePos.x;
-		dY = m_vMousePos.y - m_vPrevMousePos.y;
+		if (camera->isRotationEnabled()) {
+			//Get current mouse position
+			glfwGetCursorPos(glfwGetCurrentContext(), &m_vMousePos.x, &m_vMousePos.y);
+			double dX, dY;	//Mouse move difference
+			dX = m_vMousePos.x - m_vPrevMousePos.x;
+			dY = m_vMousePos.y - m_vPrevMousePos.y;
 
-		//Apply Mouse Sensitivity Settings
-		dX *= m_vMouseSensitivity.x;
-		dY *= m_vMouseSensitivity.y;
+			//Apply Mouse Sensitivity Settings
+			dX *= m_vMouseSensitivity.x;
+			dY *= m_vMouseSensitivity.y;
 
-		//Apply rotation based on mouse movement
-		camera->rotate(glm::radians((float)dY), glm::radians((float)dX));
+			//Apply rotation based on mouse movement
+			camera->rotate(glm::radians((float)dY), glm::radians((float)dX));
+			//Rotate player entity
+			if (m_ActiveCamera->has<Component::Player>() && m_ActiveCamera->has<Component::Transformable>()) {
+				auto t = m_ActiveCamera->get<Component::Transformable>();
+				t->rotate(0.0f, glm::radians(dX * 0.1), 0.0f);
+			}
 
-		//Set previous mouse position;
-		m_vPrevMousePos.x = m_vMousePos.x;
-		m_vPrevMousePos.y = m_vMousePos.y;
+			//Set previous mouse position;
+			m_vPrevMousePos.x = m_vMousePos.x;
+			m_vPrevMousePos.y = m_vMousePos.y;
+		}
 
 		//std::cout << "Orientation: " << camera->getYaw() << " " << camera->getPitch() << " " << camera->getRoll() << std::endl;
 
 		GLFWwindow* window = glfwGetCurrentContext();
-
-		//------Camera movement -- key press-------------
-		if (m_bAction[0]) {	//Zoom in
-			camera->zoom(-camera->getMoveSpeed());
-		}
-		if (m_bAction[1]) {	//Zoom out
-			camera->zoom(camera->getMoveSpeed());
-		}
-		if (m_bAction[2]) {	//Strafe left
-			camera->strafe(-camera->getMoveSpeed());
-		}
-		if (m_bAction[3]) {	//Strafe right
-			camera->strafe(camera->getMoveSpeed());
-		}
-		if (m_bAction[4]) {	//Roll left
-			camera->roll(-camera->getMoveSpeed());
-		}
-		if (m_bAction[5]) {	//Roll right
-			camera->roll(camera->getMoveSpeed());
-		}
-		if (m_bAction[6]) {	//Pedestal up
-			camera->pedestal(camera->getMoveSpeed());
-		}
-		if (m_bAction[7]) {	//Pedestal down
-			camera->pedestal(-camera->getMoveSpeed());
-		}
 	}
 }
 
@@ -125,7 +109,7 @@ void System::CameraController::processMessages(const std::vector<std::shared_ptr
 					}
 
 					else if (data->m_iKey == GLFW_KEY_R) {
-						camera->reset();
+						//camera->reset();
 					}
 				}
 			}

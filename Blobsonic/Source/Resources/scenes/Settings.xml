@@ -96,41 +96,11 @@
 		</sID>
 	</Button>
 	
-	<Button> <ID>small_window</ID>
-		<Shader>button_shader</Shader>
-		<Texture>1024_texture</Texture>
-		<Position>
-			<X>100.0f</X>
-			<Y>338.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>234.0f</X> 	
-			<Y>188.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>1.0f</X> 	
-			<Y>1.0f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-		<sID>
-			<X>5.0f</X> 	
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</sID>
-	</Button>
-	
-	<Button> <ID>large_window</ID>
+	<Button> <ID>1280_window</ID>
 		<Shader>button_shader</Shader>
 		<Texture>1280_texture</Texture>
 		<Position>
-			<X>384.0f</X>
+			<X>100.0f</X>
 			<Y>338.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
@@ -156,11 +126,11 @@
 		</sID>
 	</Button>
 	
-	<Button> <ID>normal_window</ID>
+	<Button> <ID>1600_window</ID>
 		<Shader>button_shader</Shader>
 		<Texture>1600_texture</Texture>
 		<Position>
-			<X>668.0f</X>
+			<X>384.0f</X>
 			<Y>338.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
@@ -190,7 +160,7 @@
 		<Shader>button_shader</Shader>
 		<Texture>1920_texture</Texture>
 		<Position>
-			<X>952.0f</X>
+			<X>668.0f</X>
 			<Y>338.0f</Y>
 			<Z>0.0f</Z>
 		</Position>
@@ -215,7 +185,7 @@
 			<Z>0.0f</Z>
 		</sID>
 	</Button>
-
+	
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>

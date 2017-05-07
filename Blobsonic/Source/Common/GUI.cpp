@@ -111,7 +111,7 @@ void System::GUI::update(float dt)
 					{
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
-						SceneManager::getInstance()->changeScene("WorldTest.xml", true);
+						SceneManager::getInstance()->changeScene("Main_Menu_Scene.xml", true);
 					}
 					if (bID == 2) /// Settings button
 					{
@@ -130,7 +130,7 @@ void System::GUI::update(float dt)
 					{
 						cout << "Main Menu Button \n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
-						SceneManager::getInstance()->changeScene("MainMenu.xml", true);
+						SceneManager::getInstance()->changeScene("Main_Menu_Scene.xml", true);
 					}
 					/// Settings
 					if (bID == 5) /// Option - set screen size to 1024, 768.
@@ -166,6 +166,13 @@ void System::GUI::update(float dt)
 					if (bID == 7) /// Exit
 					{
 						exit(0);
+					}
+					if (bID == 10) /// Credits - takes the player to the credits.
+					{
+						cout << "Credits Button \n\n";
+						SceneManager::getInstance()->setLoadingScene("Loading.xml");
+						SceneManager::getInstance()->changeScene("Credits.xml", true);
+
 					}
 				}
 				else

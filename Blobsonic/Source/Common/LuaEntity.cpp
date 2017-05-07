@@ -267,6 +267,16 @@ void LuaEntity::handleEntity(const std::string & name)
 	m_entity = SceneManager::getInstance()->getActiveScene()->getEntityManager()->getEntityByName(name);
 }
 
+bool LuaEntity::hasEntity()
+{
+	if (m_entity) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 bool LuaEntity::hasComponent(const std::string & sComponent)
 {
 	if (sComponent == "Transformable") return m_entity->has<Component::Transformable>();
@@ -433,14 +443,25 @@ void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)
 	}
 }
 
+void LuaEntity::pMove(float forwardX, float forwardY, float forwardZ, float speed)
+{
+	if (m_entity->has<Physical>()  && m_entity->has<Component::Transformable>()) {
+		auto p = m_entity->get<Physical>();
+		auto t = m_entity->get<Component::Transformable>();
+		glm::vec4 vForward(forwardX, forwardY, forwardZ, 0.0f);
+		vForward = t->getTransform() * vForward;			//Rotate forward vector
+		p->applyImpulse(glm::vec3(vForward),speed);
+	}
+}
+
 void LuaEntity::destroy()
 {
 	if (m_entity) {
 		m_entity->destroy();
-		m_entity = NULL;
+		//m_entity = NULL;
 	}
-	m_bDestroyed = true;
-	CollisionReporter::getInstance()->dettachReceiver(this);
+	//m_bDestroyed = true;
+	//CollisionReporter::getInstance()->dettachReceiver(this);
 }
 
 bool LuaEntity::isDestroyed()
@@ -470,12 +491,13 @@ void LuaEntity::register_lua(lua_State* L)
 	state.new_usertype<LuaEntity>("Entity",
 		//Entity
 		"setComponents", &LuaEntity::setComponents,
-		"handleEntity",&LuaEntity::handleEntity,
+		"handleEntity", &LuaEntity::handleEntity,
+		"hasEntity", &LuaEntity::hasEntity,
 		"getID", &LuaEntity::getID,
 		"getName", &LuaEntity::getName,
 		"destroy", &LuaEntity::destroy,
-		"isDestroyed",&LuaEntity::isDestroyed,
-		"log",&LuaEntity::log,
+		"isDestroyed", &LuaEntity::isDestroyed,
+		"log", &LuaEntity::log,
 		//Transformable
 		"tSetPosition", &LuaEntity::tSetPosition,
 		"tSetRotation", &LuaEntity::tSetRotation,
@@ -489,9 +511,10 @@ void LuaEntity::register_lua(lua_State* L)
 		"pSetInvMass", &LuaEntity::pSetInvMass,
 		"pSetRestitution", &LuaEntity::pSetRestitution,
 		"pSetVelocity", &LuaEntity::pSetVelocity,
-		"pHasCollidedByID",&LuaEntity::pHasCollidedByID,
+		"pHasCollidedByID", &LuaEntity::pHasCollidedByID,
 		"pHasCollidedByName", &LuaEntity::pHasCollidedByName,
-		"pApplyImpulse", &LuaEntity::pApplyImpulse
+		"pApplyImpulse", &LuaEntity::pApplyImpulse,
+		"pMove", &LuaEntity::pMove
 	);
 }
 

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ResourceFile> 
+	<Location>Source\Resources\Scenes\MenuResources.xml</Location> 
+</ResourceFile>
+
+<Scene> <Type>Game</Type> <ID>game_scene</ID>
+
+	<Model> <ID>skybox</ID>
+		<Mesh>skybox_mesh</Mesh>
+		<Material>default_material</Material>
+		<Shader>phong_shader</Shader>
+		<Texture>skybox_texture</Texture>
+		<Position>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>180.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Scale>
+		<Origin>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Origin>
+		<ID>
+			<X>1.0f</X>
+		</ID>
+	</Model>
+	
+	<Sprite> <ID>gameover</ID>
+		<Shader>button_shader</Shader>
+		<Texture>gameoverXL_texture</Texture>
+		<Position>
+			<X>100.0f</X>
+			<Y>100.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>515.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
+	</Sprite>
+	
+	<Button> <ID>menu_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>menu_texture</Texture>
+		<Position>
+			<X>100.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.8f</X> 	
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</Colour>
+		<sID>
+			<X>4.0f</X> 	
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</sID>
+	</Button>
+	
+	<Button> <ID>exit_application_button</ID>
+		<Shader>button_shader</Shader>
+		<Texture>exit_texture</Texture>
+		<Position>
+			<X>369.0f</X>
+			<Y>300.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Rotation>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Rotation>
+		<Scale>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
+			<Z>0.0f</Z>
+		</Scale>
+		<Colour>
+			<X>0.2f</X> 	
+			<Y>0.2f</Y>
+			<Z>0.2f</Z>
+		</Colour>
+		<sID>
+			<X>7.0f</X> 
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>			
+		</sID>
+	</Button>
+
+	<Light> <ID>light1</ID>
+		<Type>Directional</Type>
+		<Direction>
+			<X>0.0f</X>
+			<Y>-1.0f</Y>
+			<Z>0.0f</Z>
+		</Direction>
+		<Ambient>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>0.0f</X>
+			<Y>0.0f</Y>
+			<Z>0.0f</Z>
+		</Diffuse>	
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+	</Light>
+	<Light> <ID>light2</ID>
+		<Type>Point</Type>
+		<Position>
+			<X>0.0f</X>
+			<Y>10.0f</Y>
+			<Z>-20.0f</Z>
+		</Position>
+		<Radius>50.0f</Radius>
+		<Ambient>
+			<X>0.1f</X>
+			<Y>0.1f</Y>
+			<Z>0.1f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>0.0f</X>
+			<Y>0.8f</Y>
+			<Z>0.8f</Z>
+		</Diffuse>	
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+	</Light>
+	
+	<Light> <ID>light2</ID>
+		<Type>Spotlight</Type>
+		<Position>
+			<X>-20.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Position>
+		<Direction>
+			<X>0.5f</X>
+			<Y>-0.5f</Y>
+			<Z>0.0f</Z>
+		</Direction>
+		<Ambient>
+			<X>0.1f</X>
+			<Y>0.1f</Y>
+			<Z>0.1f</Z>
+		</Ambient>
+		<Diffuse>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Diffuse>	
+		<Specular>
+			<X>1.0f</X>
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
+		</Specular>
+		<CutOff>50.0f</CutOff>
+		<OuterCutOff>50.0f</OuterCutOff>
+		<Constant>1.0f</Constant>
+		<Linear>0.009f</Linear>
+		<Quadratic>0.0032f</Quadratic>
+	</Light>
+	
+	<!--
+	<Audio>
+		<ID>main_theme</ID>
+		<File>Source\Resources\audio\getout.ogg</File>
+		<isPlaying>true</isPlaying>
+		<isLooping>true</isLooping>
+		<startsPaused>false</startsPaused>
+	</Audio>
+	-->
+	
+	<Camera> <ID>cam1</ID>
+		<Position>
+			<X>0.0f</X>
+			<Y>30.0f</Y>
+			<Z>70.0f</Z>
+		</Position>
+		<Orientation>
+			<X>0.0f</X>
+			<Y>20.0f</Y>
+			<Z>0.0f</Z>
+		</Orientation>
+		<FOV>90.0f</FOV>
+		<AspectRatio>1.33333</AspectRatio>
+		<FarPlane>1000.0f</FarPlane>
+		<NearPlane>0.1f</NearPlane>
+		<RotSpeed>0.0f</RotSpeed>
+		<MoveSpeed>0.0f</MoveSpeed>
+	</Camera>
+</Scene>
+

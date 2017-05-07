@@ -25,10 +25,7 @@
 		<ID>beeHive_mesh</ID>
 		<File>Source\Resources\models\bee_hive.obj</File>
 	</Mesh>
-	<Mesh> 
-		<ID>beeModel_mesh</ID>
-		<File>Source\Resources\models\bee_model.obj</File>
-	</Mesh>
+
 	<Mesh> 
 		<ID>soccer_mesh</ID>
 		<File>Source\Resources\models\soccer.obj</File>
@@ -37,7 +34,7 @@
 		<ID>mountain1_mesh</ID>
 		<File>Source\Resources\models\mountain1.obj</File>
 	</Mesh>
-		<Mesh> 
+	<Mesh> 
 		<ID>mountain2_mesh</ID>
 		<File>Source\Resources\models\mountain2.obj</File>
 	</Mesh>
@@ -54,8 +51,16 @@
 		<File>Source\Resources\models\deer.obj</File>
 	</Mesh>
 	<Mesh> 
-		<ID>skybox_mesh</ID>
-		<File>Source\Resources\models\skybox.obj</File>
+		<ID>skybox_water_mesh</ID>
+		<File>Source\Resources\models\skybox_water.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>skybox_sunny_mesh</ID>
+		<File>Source\Resources\models\skybox_sunny.obj</File>
+	</Mesh>
+	<Mesh> 
+		<ID>beeModel_mesh</ID>
+		<File>Source\Resources\models\bee_model.obj</File>
 	</Mesh>
 	<Mesh> 
 		<ID>skybox_water_mesh</ID>
@@ -141,8 +146,12 @@
 	</Texture>
 	
 	<Texture> 
-		<ID>skybox_texture</ID>
+		<ID>skybox_water_texture</ID>
 		<File>Source\Resources\textures\skybox_water.bmp</File>
+	</Texture>
+	<Texture> 
+		<ID>skybox_sunny_texture</ID>
+		<File>Source\Resources\textures\skybox_sunny.bmp</File>
 	</Texture>
 	
 	<Texture> 
