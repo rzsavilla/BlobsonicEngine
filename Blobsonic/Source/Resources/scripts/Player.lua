@@ -31,4 +31,4 @@ playerAtt = {
 --]]
 
 player = Entity.new()
-player:handleEntity("deer")
+player:handleEntity("player")

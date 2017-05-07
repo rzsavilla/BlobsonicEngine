@@ -6,7 +6,7 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 	<Entity>
-		<Name>deer</Name>
+		<Name>player</Name>
 		<Player>
 			<MoveSpeed>10.0f</MoveSpeed>
 		</Player>
@@ -67,6 +67,17 @@
 			</Center>
 			<Radius>25.0f</Radius>
 		</Sphere>
+		<Camera>
+			<Orientation>
+				<X>0.0f</X>
+				<Y>45.0f</Y>
+				<Z>0.0f</Z>
+			</Orientation>
+			<FOV>70.0f</FOV>
+			<AspectRatio>1.33333</AspectRatio>
+			<FarPlane>100000.0f</FarPlane>
+			<NearPlane>0.1f</NearPlane>
+		</Camera>
 	</Entity>
 
 	<Entity>

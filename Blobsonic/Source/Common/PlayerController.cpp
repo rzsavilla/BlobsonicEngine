@@ -54,19 +54,15 @@ void System::PlayerController::update(float dt) {
 					}
 				}
 
-				////Move player
-				if (m_vPlayer->has<Physical>()) {
-					auto p = m_vPlayer->get<Physical>();
-					if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_T) > 0) {
-						glm::vec4 vForward(0.0f, 0.0f, 1.0f, 0.0f);
-						vForward = t->getTransform() * vForward;			//Rotate forward vector
-						
-						t->setPosition(t->getPosition() + glm::vec3(vForward));
-						//p->applyImpulse(glm::vec3(vForward), player->getMoveSpeed());
-
-						//std::cout << "Forward: " << vForward.x << " " << vForward.y << " " << vForward.z << "\n";
-					}
-				}
+				//////Move player
+				//if (m_vPlayer->has<Physical>()) {
+				//	auto p = m_vPlayer->get<Physical>();
+				//	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_T) > 0) {
+				//		glm::vec4 vForward(0.0f, 0.0f, 1.0f, 0.0f);
+				//		vForward = t->getTransform() * vForward;			//Rotate forward vector
+				//		p->applyImpulse(glm::vec3(vForward), player->getMoveSpeed());
+				//	}
+				//}
 			}
 			
 		}
