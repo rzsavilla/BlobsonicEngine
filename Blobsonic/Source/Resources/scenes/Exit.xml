@@ -50,14 +50,14 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>500.0f</X> 	
-			<Y>100.0f</Y>
+			<X>515.0f</X> 	
+			<Y>188.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
-			<X>0.5f</X> 	
-			<Y>0.5f</Y>
-			<Z>0.5f</Z>
+			<X>1.0f</X> 	
+			<Y>1.0f</Y>
+			<Z>1.0f</Z>
 		</Colour>
 		<sID>
 			<X>4.0f</X> 	
@@ -80,8 +80,8 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
@@ -110,8 +110,8 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>

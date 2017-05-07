@@ -62,6 +62,11 @@
 	</Texture>
 	
 	<Texture> 
+		<ID>gameoverXL_texture</ID>
+		<File>Source\Resources\textures\gameoverXL.png</File>
+	</Texture>
+	
+	<Texture> 
 		<ID>1024_texture</ID>
 		<File>Source\Resources\textures\1024res.png</File>
 	</Texture>
