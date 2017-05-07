@@ -39,15 +39,6 @@
     <ClCompile Include="src\Clickable.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hoverable.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Overlay.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TextBox.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,15 +54,6 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\Clickable.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Hoverable.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Overlay.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TextBox.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\tinyxml2.h">

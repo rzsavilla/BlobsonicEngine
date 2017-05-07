@@ -248,6 +248,16 @@
 		<File>Source\Resources\textures\1920res.png</File>
 	</Texture>
 	
+	<Texture> 
+		<ID>energy_texture</ID>
+		<File>Source\Resources\textures\energy.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>energyBG_texture</ID>
+		<File>Source\Resources\textures\energyBG.png</File>
+	</Texture>
+	
 	<Material> 
 		<ID>default_material</ID>
 		<AmbientReflect>

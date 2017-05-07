@@ -21,18 +21,39 @@ public:
 
 	void draw(RenderTarget& target, RenderStates states) const; // <! Renders the scene
 
+	bool m_bPlacing = false;
 
-	void checkForHovering(Vector2f mousepos);
-	void deselect();
 	void processClickEvent(Vector2f mousepos);
+	void tempObject(Vector2f pos, Vector2f size);
+	void addPickup(Vector2f pos);
+	void addObsticle(Vector2f pos);
+	void addLight(Vector2f pos);
+	void movePlayer(Vector2f pos);
+	void moveGoal(Vector2f pos);
 
-private:
+	//grid varibles
+	float m_fGridSize; //<! size of each grid length
+	float m_fXDimensions; //<! number of grids in  x
+	float m_fYDimensions; //<! number of grids in  z (y)
+	string LevelName; //<! LevelName
+
+
+	RectangleShape m_SkyboxRect;
+	Sprite m_SkyboxSprite;
+
+	Sprite m_Player;
+	Sprite m_Goal;
+
+	vector<Sprite>m_vPickupSprites;
+	vector<Sprite>m_vObsticleSprites;
+	vector<Sprite>m_vLightSprites;
 
 	vector<RectangleShape> m_vRectFloorTiles; //<! floor tile rects
 	vector<Sprite> m_vSpriteFloorTiles; //<! floor tile sprite
 
-	RectangleShape m_SkyboxRect;
-	Sprite m_SkyboxSprite;
+private:
+
+	
 	
 
 	//Textures
@@ -42,19 +63,20 @@ private:
 	Texture m_vTextureBrownFloorTiles; //<! floor tile Texture
 	Texture m_vTextureGreenFloorTiles; //<! floor tile Texture
 
+	Texture m_vTextureWaterSkybox;
+	Texture m_vTextureSunnySkybox;
 
-	bool m_bSelected = false;
-	RectangleShape m_sfSelectedRect;
-	Sprite m_sfSelectedSprite;
-	Texture m_sfSelectedTexture;
+	Texture m_vTexturePickups;
+	Texture m_vTextureObsticle;
+	Texture m_vTextureLight;
 
+	Texture m_vTexturePlayer;
+	Texture m_vTextureFinish;
+	
+	RectangleShape m_sfTempRect;
+	
 	void loadTextures(); //<! Loads in the required textures to the scene
 
-
-	//grid varibles
-	float m_fGridSize; //<! size of each grid length
-	float m_fXDimensions; //<! number of grids in  x
-	float m_fYDimensions; //<! number of grids in  z (y)
 
 
 

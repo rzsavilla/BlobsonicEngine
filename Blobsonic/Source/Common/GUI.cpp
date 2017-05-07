@@ -172,11 +172,19 @@ void System::GUI::update(float dt)
 						//t->setPosition(vec3(t->getPosition().x / 0.998, t->getPosition().y / 0.998, 0.0));
 						
 					}
+					else if (bID == 11)
+					{
+
+					}
 					else
 					{
 						s->setColor(vec3(s->getColor().x / 0.99, s->getColor().y / 0.99, s->getColor().z / 0.99));/// Brightens the button if moused over.
 					}
 				}
+			}
+			else if (bID == 11)
+			{
+				s->setColor(vec3(s->getColor().x * 0.999, s->getColor().y * 0.999, s->getColor().z * 0.999));
 			}
 			/// If outside of the buttons
 			else

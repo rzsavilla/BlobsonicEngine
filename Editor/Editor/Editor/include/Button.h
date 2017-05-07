@@ -7,14 +7,13 @@
 #define BUTTON_H
 #include <SFML/Graphics.hpp>
 #include "Clickable.h"
-#include "Hoverable.h"
 #include <iostream>
 
 using namespace std;
 using namespace sf;
 
 
-class Button : public Drawable ,public Clickable , public Hoverable 
+class Button : public Drawable ,public Clickable 
 {
 public:
 	////////////////////////////////////////////////////////////
