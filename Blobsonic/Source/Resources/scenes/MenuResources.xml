@@ -62,6 +62,16 @@
 	</Texture>
 	
 	<Texture> 
+		<ID>credits_texture</ID>
+		<File>Source\Resources\textures\credits.png</File>
+	</Texture>
+	
+	<Texture> 
+		<ID>creditsXL_texture</ID>
+		<File>Source\Resources\textures\creditsXL.png</File>
+	</Texture>
+	
+	<Texture> 
 		<ID>1024_texture</ID>
 		<File>Source\Resources\textures\1024res.png</File>
 	</Texture>
