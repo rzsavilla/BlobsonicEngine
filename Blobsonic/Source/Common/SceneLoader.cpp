@@ -54,6 +54,16 @@ void SceneLoader::loadTexture(tinyxml2::XMLElement * e)
 				texture = std::make_shared<Texture>(bmp);
 			};
 		}
+		else if (strcmp(childValue, "Instancing") == 0) {
+
+			if (readElementText(Child, c)) {
+				std::string sInstance(c, strlen(c));
+				//Load image
+				Bitmap bmp = Bitmap::bitmapFromFile(sInstance);
+				//Create texture
+				texture = std::make_shared<Texture>(bmp);
+			};
+		}
 	}
 	m_res->addTexture(s, texture);
 	if (m_bDebug) std::cout << " Texture Loaded: " << s << "\n";

@@ -211,9 +211,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>1.0f</X>
-				<Y>1.0f</Y>
-				<Z>1.0f</Z>
+				<X>10.0f</X>
+				<Y>10.0f</Y>
+				<Z>10.0f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -243,9 +243,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.889f</X>
-				<Y>0.889f</Y>
-				<Z>0.889f</Z>
+				<X>10.889f</X>
+				<Y>10.889f</Y>
+				<Z>10.889f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -275,9 +275,9 @@
 				<Z>0.0f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.646f</X>
-				<Y>0.646f</Y>
-				<Z>0.646f</Z>
+				<X>10.646f</X>
+				<Y>10.646f</Y>
+				<Z>10.646f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -307,9 +307,9 @@
 				<Z>-0.484f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.155f</X>
-				<Y>0.155f</Y>
-				<Z>0.155f</Z>
+				<X>2.155f</X>
+				<Y>2.155f</Y>
+				<Z>2.155f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -499,9 +499,9 @@
 				<Z>-17.62f</Z>
 			</Rotation>
 			<Scale>
-				<X>0.386f</X>
-				<Y>0.386f</Y>
-				<Z>0.386f</Z>
+				<X>2.386f</X>
+				<Y>2.386f</Y>
+				<Z>2.386f</Z>
 			</Scale>
 			<Origin>
 				<X>0.0f</X>
@@ -558,8 +558,8 @@
 			<Z>0.0f</Z>
 		</Rotation>
 		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
+			<X>234.0f</X> 	
+			<Y>188.0f</Y>
 			<Z>0.0f</Z>
 		</Scale>
 		<Colour>
