@@ -7,7 +7,7 @@ elseif isKeyDown("esc") == true then
 	changeScene("Main_Menu_Scene.xml")
 end
 
-if getActiveScene() == "Chris.xml" then
+if getActiveScene() == "Level1.xml" then
 	hideCursor(true)
 	-- Player Controls
 	if isKeyDown("w") == true then
@@ -35,15 +35,14 @@ if getActiveScene() == "Chris.xml" then
 	--Collect Pickup
 	iCollision = player:pHasCollidedByName("Goal")
 	if iCollision > -1 then
-		changeScene("Main_Menu_Scene.xml")
-		player:log()
+
 	end
 
 
 	--Player Death plane
 	if player:tGetPosY() < 0 then
-		--changeScene("Gameover.xml")
-		player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
+		changeScene("Gameover.xml")
+		--player:tSetPosition(player:tGetPosX(),0,player:tGetPosZ())
 	end
 
 else

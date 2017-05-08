@@ -634,6 +634,7 @@
 		</sID>
 	</Button>
 	
+	<!--
 	<Button> <ID>energy_button</ID>
 		<Shader>button_shader</Shader>
 		<Texture>energy_texture</Texture>
@@ -688,7 +689,7 @@
 			<Z>1.0f</Z>
 		</Colour>
 	</Sprite>
-
+-->
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
 		<Direction>

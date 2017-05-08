@@ -95,7 +95,7 @@ void System::GUI::update(float dt)
 					{
 						cout << "Start Button\n\n";
 						SceneManager::getInstance()->setLoadingScene("Loading.xml");
-						SceneManager::getInstance()->changeScene("Main_Menu_Scene.xml", true);
+						SceneManager::getInstance()->changeScene("Level1.xml", true);
 					}
 					if (bID == 2) /// Settings button
 					{

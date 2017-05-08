@@ -6,7 +6,7 @@
 
 <Scene> <Type>Game</Type> <ID>game_scene</ID>
 
-<Entity>
+	<Entity>
 		<Name>player</Name>
 		<Player>
 			<MoveSpeed>10.0f</MoveSpeed>
@@ -74,10 +74,11 @@
 				<Y>20.0f</Y>
 				<Z>0.0f</Z>
 			</Orientation>
-			<FOV>70.0f</FOV>
+			<FOV>45.0f</FOV>
 			<AspectRatio>1.33333</AspectRatio>
 			<FarPlane>100000.0f</FarPlane>
 			<NearPlane>0.1f</NearPlane>
+			<Reach>500</Reach>
 		</Camera>
 	</Entity>
 	
@@ -2060,6 +2061,23 @@
             <Shader>phong_shader</Shader>
             <Texture>beeHive_texture</Texture>
         </Model>
+		<AABB>
+			<Position>
+                <X>-1039.107f</X>
+                <Y>59.979f</Y>
+                <Z>-900.328f</Z>
+            </Position>
+			<Scale> 
+				<X>25.0f</X>
+				<Y>25.0f</Y>
+				<Z>25.0f</Z>
+			</Scale>
+			<Origin>
+				<X>0.0f</X>
+				<Y>0.0f</Y>
+				<Z>0.0f</Z>
+			</Origin>
+		</AABB>
     </Entity>
     
     <Entity>
@@ -2958,31 +2976,6 @@
 			<Z>0.0f</Z>			
 		</sID>
 	</Button>
-	
-	<Sprite> <ID>sprite2</ID>
-		<Shader>button_shader</Shader>
-		<Texture>sprite_texture</Texture>
-		<Position>
-			<X>804.0f</X>
-			<Y>20.0f</Y>
-			<Z>0.0f</Z>
-		</Position>
-		<Rotation>
-			<X>0.0f</X>
-			<Y>0.0f</Y>
-			<Z>0.0f</Z>
-		</Rotation>
-		<Scale>
-			<X>200.0f</X> 	
-			<Y>100.0f</Y>
-			<Z>0.0f</Z>
-		</Scale>
-		<Colour>
-			<X>0.5f</X> 	
-			<Y>0.5f</Y>
-			<Z>1.0f</Z>
-		</Colour>
-	</Sprite>
 
 	<Light> <ID>light1</ID>
 		<Type>Directional</Type>
@@ -3007,7 +3000,6 @@
 			<Z>1.0f</Z>
 		</Specular>
 	</Light>
-	<!--
 	<Audio>
 		<ID>main_theme</ID>
 		<File>Source\Resources\audio\getout.ogg</File>
@@ -3016,16 +3008,6 @@
 		<isLooping>true</isLooping>
 		<startsPaused>false</startsPaused>
 	</Audio>
-
-	<Audio>
-		<ID>bell</ID>
-		<File>Source\Resources\audio\bell.wav</File>
-		<isInitialized>true</isInitialized>
-		<isPlaying>false</isPlaying>
-		<isLooping>false</isLooping>
-		<startsPaused>false</startsPaused>
-	</Audio>
--->
 	
 </Scene>
 

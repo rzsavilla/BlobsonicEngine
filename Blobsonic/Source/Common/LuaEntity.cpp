@@ -445,12 +445,14 @@ void LuaEntity::pApplyImpulse(float nx, float ny, float nz, float force)
 
 void LuaEntity::pMove(float forwardX, float forwardY, float forwardZ, float speed)
 {
-	if (m_entity->has<Physical>()  && m_entity->has<Component::Transformable>()) {
-		auto p = m_entity->get<Physical>();
-		auto t = m_entity->get<Component::Transformable>();
-		glm::vec4 vForward(forwardX, forwardY, forwardZ, 0.0f);
-		vForward = t->getTransform() * vForward;			//Rotate forward vector
-		p->applyImpulse(glm::vec3(vForward),speed);
+	if (m_entity) {
+		if (m_entity->has<Physical>() && m_entity->has<Component::Transformable>()) {
+			auto p = m_entity->get<Physical>();
+			auto t = m_entity->get<Component::Transformable>();
+			glm::vec4 vForward(forwardX, forwardY, forwardZ, 0.0f);
+			vForward = t->getTransform() * vForward;			//Rotate forward vector
+			p->applyImpulse(glm::vec3(vForward), speed);
+		}
 	}
 }
 

@@ -9,5 +9,5 @@
 
 setLoadingScene("Loading.xml")
 --changeScene("Main_Menu_Scene.xml")	-- Change to this scene
---changeScene("Level1.xml")
-changeScene("Main_Menu_Scene.xml")
+changeScene("Level1.xml")
+--changeScene("Main_Menu_Scene.xml")
